@@ -1,0 +1,6 @@
+# bin and obj directories
+[Bb]in/
+[Oo]bj/
+
+# VisualStudio's *.suo files
+*.suo
