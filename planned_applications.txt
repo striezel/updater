@@ -1,0 +1,29 @@
+Applications:
+=============
+
+7-Zip
+Adobe Acrobat Reader
+Adobe AIR
+Adobe Shockwave
+Audacity
+CCleaner
+CDBurnerXP
+FileZilla
+GIMP
+Google Chrome
+Inkscape
+IrfanView
+Java Development Kit
+Java Runtime Environment
+KeePass 2
+LibreOffice
+Mozilla Firefox
+Mozilla Thunderbird
+Notepad++
+OpenOffice
+Opera
+Pidgin
+Putty
+Skype
+VLC
+WinSCP
