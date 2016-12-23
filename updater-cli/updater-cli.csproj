@@ -44,6 +44,7 @@
     <Compile Include="detection\DetectorMSI.cs" />
     <Compile Include="detection\Entry.cs" />
     <Compile Include="detection\DetectorRegistry.cs" />
+    <Compile Include="io\CSVWriter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

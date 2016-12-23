@@ -14,6 +14,7 @@ namespace updater_cli
                 Console.WriteLine("   Install: \"" + item.installPath + "\"");
                 Console.WriteLine();
             }
+            io.CSVWriter.toCSV(listReg, "installed_reg.csv");
             Console.WriteLine("Hit Enter to continue...");
             Console.ReadLine();
 
@@ -25,6 +26,7 @@ namespace updater_cli
                 Console.WriteLine("   Install: \"" + item.installPath + "\"");
                 Console.WriteLine();
             }
+            io.CSVWriter.toCSV(listMSI, "installed_msi.csv");
             Console.WriteLine("Hit Enter to continue...");
             Console.ReadLine();
 
