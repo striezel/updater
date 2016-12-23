@@ -1,11 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
 
 namespace updater_cli.detection
 {
     /// <summary>
     /// struct that represents a detected software
     /// </summary>
-    public struct Entry
+    public struct Entry: IComparable<Entry>
     {
         /// <summary>
         /// default constructor
@@ -29,7 +29,52 @@ namespace updater_cli.detection
 
 
         /// <summary>
-        /// the displayed name of the software
+        /// comparison method for IComparable interface
+        /// </summary>
+        /// <param name="other">the other entry</param>
+        /// <returns></returns>
+        public int CompareTo(Entry other)
+        {
+            if (ReferenceEquals(this, other))
+                return 0;
+            //First compare by display name.
+            if (null == displayName)
+            {
+                if (null != other.displayName)
+                    return 1;
+            }
+            else
+            {
+                int rc = displayName.CompareTo(other.displayName);
+                if (rc != 0)
+                    return rc;
+            }
+            //Compare by display version, if display names are equal.
+            if (null == displayVersion)
+            {
+                if (null != other.displayVersion)
+                    return 1;
+            }
+            else
+            {
+                int rc = displayVersion.CompareTo(other.displayVersion);
+                if (rc != 0)
+                    return rc;
+            }
+            //Finally compare by install path.
+            if (null == installPath)
+            {
+                if (null != other.installPath)
+                    return 1;
+                else
+                    return 0;
+            }   
+            return installPath.CompareTo(other.installPath);
+        }
+
+
+        /// <summary>
+        /// displayed name of the software
         /// </summary>
         public string displayName;
 

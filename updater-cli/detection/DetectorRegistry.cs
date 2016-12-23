@@ -4,6 +4,9 @@ using Microsoft.Win32;
 
 namespace updater_cli.detection
 {
+    /// <summary>
+    /// class to detect installed software via registry
+    /// </summary>
     public class DetectorRegistry
     {
         /// <summary>

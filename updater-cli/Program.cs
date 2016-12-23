@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace updater_cli
 {
@@ -7,21 +6,28 @@ namespace updater_cli
     {
         static void Main(string[] args)
         {
-            var list = detection.DetectorRegistry.detect();
-            foreach (var item in list)
+            var listReg = detection.DetectorRegistry.detect();
+            listReg.Sort();
+            foreach (var item in listReg)
             {
                 Console.WriteLine("\"" + item.displayName + "\", version \"" + item.displayVersion + "\"");
                 Console.WriteLine("   Install: \"" + item.installPath + "\"");
                 Console.WriteLine();
             }
+            Console.WriteLine("Hit Enter to continue...");
+            Console.ReadLine();
 
-            list = detection.DetectorMSI.detect();
-            foreach (var item in list)
+            var listMSI = detection.DetectorMSI.detect();
+            listMSI.Sort();
+            foreach (var item in listMSI)
             {
                 Console.WriteLine("\"" + item.displayName + "\", version \"" + item.displayVersion + "\"");
                 Console.WriteLine("   Install: \"" + item.installPath + "\"");
                 Console.WriteLine();
             }
+            Console.WriteLine("Hit Enter to continue...");
+            Console.ReadLine();
+
         } //Main
     } //class
 } //namespace

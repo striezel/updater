@@ -5,6 +5,9 @@ using System.Text;
 
 namespace updater_cli.detection
 {
+    /// <summary>
+    /// class to detect installed software via MSI.dll
+    /// </summary>
     public class DetectorMSI
     {
         [DllImport("msi.dll", CharSet = CharSet.Unicode)]
