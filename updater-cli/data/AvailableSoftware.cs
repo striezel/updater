@@ -1,0 +1,97 @@
+﻿/*
+    updater, command line interface
+    Copyright (C) 2016  Dirk Stolle
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
+using System;
+using System.Text.RegularExpressions;
+using System.Xml;
+using System.Xml.Serialization;
+
+namespace updater_cli.data
+{
+    /// <summary>
+    /// holds information about an available piece of software
+    /// </summary>
+    [XmlRoot(ElementName = "available_software")]
+    public class AvailableSoftware : IComparable<AvailableSoftware>
+    {
+        /// <summary>
+        /// generic name of the software
+        /// </summary>
+        [XmlElement(ElementName = "name", IsNullable = false)]
+        public string Name;
+
+
+        /// <summary>
+        /// newest version of the software
+        /// </summary>
+        [XmlElement(ElementName = "newest", IsNullable = false)]
+        public string newestVersion;
+
+
+        /// <summary>
+        /// regular expression to match for the 32 bit version
+        /// </summary>
+        [XmlElement(ElementName = "regex32", IsNullable = false)]
+        public Regex match32Bit;
+
+
+        /// <summary>
+        /// regular expression to match for the 64 bit version
+        /// </summary>
+        [XmlElement(ElementName = "regex64", IsNullable = false)]
+        public Regex match64Bit;
+
+
+        /// <summary>
+        /// comparison method for IComparable interface
+        /// </summary>
+        /// <param name="other">the other entry</param>
+        /// <returns>Returns zero, i both instances are equal.
+        /// Returns a value less than zero, if this comes before other.
+        /// Returns a value greater than zero, if this comes after other.</returns>
+        public int CompareTo(AvailableSoftware other)
+        {
+            if (ReferenceEquals(this, other))
+                return 0;
+            //First compare by name.
+            if (null == Name)
+            {
+                if (null != other.Name)
+                    return 1;
+            }
+            else
+            {
+                var rc = Name.CompareTo(other.Name);
+                if (rc != 0)
+                    return rc;
+            }
+            //Now compare by version.
+            if (null == newestVersion)
+            {
+                if (null != other.newestVersion)
+                    return 1;
+                else
+                    return 0;
+            }
+            else
+            {
+                return newestVersion.CompareTo(other.newestVersion);
+            }
+        }
+    } //class
+} //namespace

@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="data\AvailableSoftware.cs" />
     <Compile Include="detection\DetectorMSI.cs" />
     <Compile Include="data\DetectedSoftware.cs" />
     <Compile Include="detection\DetectorRegistry.cs" />
