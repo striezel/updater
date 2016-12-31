@@ -40,7 +40,7 @@ namespace updater_cli.io
         /// <param name="separator">separator character in CSV, defaults to ';'</param>
         /// <returns>Returns true, if the file could be written.
         /// Returns false, if an error occurred.</returns>
-        public static bool toCSV(IEnumerable<detection.Entry> entries, string fileName, char separator = defaultSeparator)
+        public static bool toCSV(IEnumerable<data.DetectedSoftware> entries, string fileName, char separator = defaultSeparator)
         {
             if (string.IsNullOrWhiteSpace(fileName) || (null == entries))
                 return false;

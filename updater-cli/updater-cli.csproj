@@ -42,7 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="detection\DetectorMSI.cs" />
-    <Compile Include="detection\Entry.cs" />
+    <Compile Include="data\DetectedSoftware.cs" />
     <Compile Include="detection\DetectorRegistry.cs" />
     <Compile Include="io\CSVWriter.cs" />
     <Compile Include="Program.cs" />

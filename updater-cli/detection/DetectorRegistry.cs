@@ -31,21 +31,21 @@ namespace updater_cli.detection
         /// tries to get a list of installed software from the registry
         /// </summary>
         /// <returns>Returns a list of installed software.</returns>
-        public static List<Entry> detect()
+        public static List<data.DetectedSoftware> detect()
         {
             string keyName = "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall";
             RegistryKey rKey = Registry.LocalMachine.OpenSubKey(keyName);
             if (null == rKey)
                 return null;
 
-            List<Entry> entries = new List<Entry>();
+            List<data.DetectedSoftware> entries = new List<data.DetectedSoftware>();
             var subKeys = rKey.GetSubKeyNames();
             foreach (var subName in subKeys)
             {
                 RegistryKey subKey = rKey.OpenSubKey(subName);
                 if (null != subKey)
                 {
-                    Entry e = new Entry();
+                    data.DetectedSoftware e = new data.DetectedSoftware();
                     object dnObj = subKey.GetValue("DisplayName");
                     if (null != dnObj)
                         e.displayName = dnObj.ToString().Trim();

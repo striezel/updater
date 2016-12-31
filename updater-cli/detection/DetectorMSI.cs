@@ -41,9 +41,9 @@ namespace updater_cli.detection
         /// tries to get a list of installed software from the MSI cache
         /// </summary>
         /// <returns>Returns a list of installed software.</returns>
-        public static List<Entry> detect()
+        public static List<data.DetectedSoftware> detect()
         {
-            List<Entry> entries = new List<Entry>();
+            List<data.DetectedSoftware> entries = new List<data.DetectedSoftware>();
             StringBuilder sbProductCode = new StringBuilder(39);
             int iIdx = 0;
             while (0 == MsiEnumProducts(iIdx++, sbProductCode))
@@ -54,7 +54,7 @@ namespace updater_cli.detection
                 Int32 installDirLen = 1024;
                 StringBuilder sbInstallDir = new StringBuilder(installDirLen);
                 MsiGetProductInfo(sbProductCode.ToString(), "InstallLocation", sbInstallDir, ref installDirLen);
-                var e = new Entry(sbProductName.ToString(), null, sbInstallDir.ToString());
+                var e = new data.DetectedSoftware(sbProductName.ToString(), null, sbInstallDir.ToString());
                 if (e.containsInformation())
                     entries.Add(e);
             } //while
