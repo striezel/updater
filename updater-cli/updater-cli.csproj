@@ -45,6 +45,7 @@
     <Compile Include="detection\DetectorMSI.cs" />
     <Compile Include="data\DetectedSoftware.cs" />
     <Compile Include="detection\DetectorRegistry.cs" />
+    <Compile Include="io\AvailableSoftwareReaderXML.cs" />
     <Compile Include="io\CSVWriter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
