@@ -17,7 +17,6 @@
 */
 
 using System;
-using System.Text.RegularExpressions;
 using System.Xml;
 using System.Xml.Serialization;
 
@@ -46,15 +45,15 @@ namespace updater_cli.data
         /// <summary>
         /// regular expression to match for the 32 bit version
         /// </summary>
-        [XmlElement(ElementName = "regex32", IsNullable = false)]
-        public Regex match32Bit;
+        [XmlElement(ElementName = "regex32", IsNullable = true)]
+        public string match32Bit;
 
 
         /// <summary>
         /// regular expression to match for the 64 bit version
         /// </summary>
-        [XmlElement(ElementName = "regex64", IsNullable = false)]
-        public Regex match64Bit;
+        [XmlElement(ElementName = "regex64", IsNullable = true)]
+        public string match64Bit;
 
 
         /// <summary>
