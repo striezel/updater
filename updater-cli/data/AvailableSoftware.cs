@@ -1,6 +1,6 @@
 ﻿/*
-    updater, command line interface
-    Copyright (C) 2016  Dirk Stolle
+    This file is part of the updater command line interface.
+    Copyright (C) 2016, 2017  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -39,6 +39,28 @@ namespace updater_cli.data
             match64Bit = null;
             install32Bit = null;
             install64Bit = null;
+        }
+
+
+        /// <summary>
+        /// constructor with initial values
+        /// </summary>
+        /// <param name="_name">name of the software</param>
+        /// <param name="_newestVersion">newest version</param>
+        /// <param name="_regex32">regular expression to match for the 32 bit version</param>
+        /// <param name="_regex64">regular expression to match for the 64 bit version</param>
+        /// <param name="_install32">installer information for the 32 bit variant of the software</param>
+        /// <param name="_install64">installer information for the 64 bit variant of the software</param>
+        public AvailableSoftware(string _name, string _newestVersion,
+            string _regex32 = null, string _regex64 = null,
+            InstallInfo _install32 = null, InstallInfo _install64 = null)
+        {
+            Name = _name;
+            newestVersion = _newestVersion;
+            match32Bit = _regex32;
+            match64Bit = _regex64;
+            install32Bit = _install32;
+            install64Bit = _install64;
         }
         
         /// <summary>
