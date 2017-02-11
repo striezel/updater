@@ -17,12 +17,14 @@
 */
 
 using System;
+using System.Xml.Serialization;
 
 namespace updater_cli.data
 {
     /// <summary>
     /// struct that represents a detected software
     /// </summary>
+    [XmlRoot(ElementName = "detected_software")]
     public struct DetectedSoftware: IComparable<DetectedSoftware>
     {
         /// <summary>
@@ -96,18 +98,21 @@ namespace updater_cli.data
         /// <summary>
         /// displayed name of the software
         /// </summary>
+        [XmlElement(ElementName = "name", IsNullable = true)]
         public string displayName;
 
 
         /// <summary>
         /// displayed version of the software
         /// </summary>
+        [XmlElement(ElementName = "version", IsNullable = true)]
         public string displayVersion;
 
 
         /// <summary>
         /// path where the software is installed
         /// </summary>
+        [XmlElement(ElementName = "path", IsNullable = true)]
         public string installPath;
     } //struct
 } //namespace

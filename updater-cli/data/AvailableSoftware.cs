@@ -17,7 +17,6 @@
 */
 
 using System;
-using System.Xml;
 using System.Xml.Serialization;
 
 namespace updater_cli.data

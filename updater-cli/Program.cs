@@ -1,6 +1,6 @@
 ﻿/*
     updater, command line interface
-    Copyright (C) 2016  Dirk Stolle
+    Copyright (C) 2016, 2017  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -26,28 +26,15 @@ namespace updater_cli
         {
             var listReg = detection.DetectorRegistry.detect();
             listReg.Sort();
-            foreach (var item in listReg)
-            {
-                Console.WriteLine("\"" + item.displayName + "\", version \"" + item.displayVersion + "\"");
-                Console.WriteLine("   Install: \"" + item.installPath + "\"");
-                Console.WriteLine();
-            }
             io.CSVWriter.toCSV(listReg, "installed_reg.csv");
-            Console.WriteLine("Hit Enter to continue...");
-            Console.ReadLine();
 
             var listMSI = detection.DetectorMSI.detect();
             listMSI.Sort();
-            foreach (var item in listMSI)
-            {
-                Console.WriteLine("\"" + item.displayName + "\", version \"" + item.displayVersion + "\"");
-                Console.WriteLine("   Install: \"" + item.installPath + "\"");
-                Console.WriteLine();
-            }
             io.CSVWriter.toCSV(listMSI, "installed_msi.csv");
-            Console.WriteLine("Hit Enter to continue...");
-            Console.ReadLine();
-
+            //get software status
+            var status = algorithm.SoftwareStatus.query();
+            string output = algorithm.SoftwareStatus.toConsoleOutput(status);
+            Console.Write(output);
         } //Main
     } //class
 } //namespace
