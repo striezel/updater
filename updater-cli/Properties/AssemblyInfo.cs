@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("updater-cli")]
-[assembly: AssemblyCopyright("Copyright © 2016 Dirk Stolle")]
+[assembly: AssemblyCopyright("Copyright © 2016, 2017 Dirk Stolle")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
