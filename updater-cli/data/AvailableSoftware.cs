@@ -29,6 +29,19 @@ namespace updater_cli.data
     public class AvailableSoftware : IComparable<AvailableSoftware>
     {
         /// <summary>
+        /// default constructor
+        /// </summary>
+        public AvailableSoftware()
+        {
+            Name = null;
+            newestVersion = null;
+            match32Bit = null;
+            match64Bit = null;
+            install32Bit = null;
+            install64Bit = null;
+        }
+        
+        /// <summary>
         /// generic name of the software
         /// </summary>
         [XmlElement(ElementName = "name", IsNullable = false)]
@@ -54,6 +67,23 @@ namespace updater_cli.data
         /// </summary>
         [XmlElement(ElementName = "regex64", IsNullable = true)]
         public string match64Bit;
+
+
+        /// <summary>
+        /// installer information for the 32 bit variant of the software
+        /// (Might be null, if there is no 32 bit variant.)
+        /// </summary>
+        [XmlElement(ElementName = "install32", IsNullable = true)]
+        public InstallInfo install32Bit;
+
+
+        /// <summary>
+        /// installer information for the 64 bit variant of the software
+        /// (Might be null, if there is no 64 bit variant.)
+        /// </summary>
+        [XmlElement(ElementName = "install64", IsNullable = true)]
+        public InstallInfo install64Bit;
+
 
 
         /// <summary>
