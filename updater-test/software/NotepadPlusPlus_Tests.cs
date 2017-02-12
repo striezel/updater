@@ -22,10 +22,10 @@ using updater_cli.software;
 namespace updater_test.software
 {
     /// <summary>
-    /// unit tests for software.KeePass class
+    /// unit test class for software.NotepadPlusPlus class
     /// </summary>
     [TestClass]
-    public class KeePass_Tests : BasicSoftwareTests
+    public class NotepadPlusPlus_Tests : BasicSoftwareTests
     {
         /// <summary>
         /// checks whether info() returns some meaningful data
@@ -33,7 +33,7 @@ namespace updater_test.software
         [TestMethod]
         public void Test_info()
         {
-            _info(new KeePass());
+            _info(new NotepadPlusPlus());
         }
 
 
@@ -43,7 +43,7 @@ namespace updater_test.software
         [TestMethod]
         public void Test_implementsSearchForNewer()
         {
-            var kp = new KeePass();
+            var kp = new NotepadPlusPlus();
             Assert.IsTrue(kp.implementsSearchForNewer());
         }
 
@@ -54,7 +54,7 @@ namespace updater_test.software
         [TestMethod]
         public void Test_searchForNewer()
         {
-            _searchForNewer(new KeePass());
+            _searchForNewer(new NotepadPlusPlus());
         }
 
 
@@ -64,7 +64,7 @@ namespace updater_test.software
         [TestMethod]
         public void Test_upToDate_info()
         {
-            _upToDate_info(new KeePass());
+            _upToDate_info(new NotepadPlusPlus());
         }
     } //class
 } //namespace

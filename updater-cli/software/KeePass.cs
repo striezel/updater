@@ -91,6 +91,8 @@ namespace updater_cli.software
                 return null;
             //extract new version number
             string newVersion = matchExe.Value.Replace("&lt;KeePass-", "").Replace("-Setup.exe&gt;", "");
+            if (string.Compare(newVersion, info().newestVersion) < 0)
+                return null;
             //version number should match usual scheme, e.g. 2.xx, where xx are two digits
             Regex version = new Regex("^[2-9]\\.[0-9]{2}$");
             if (!version.IsMatch(newVersion))

@@ -31,6 +31,7 @@ namespace updater_cli.software
         {
             var result = new List<ISoftware>();
             result.Add(new KeePass());
+            result.Add(new NotepadPlusPlus());
             return result;
         }
     } //class
