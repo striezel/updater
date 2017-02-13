@@ -62,6 +62,7 @@
     <Compile Include="software\BasicSoftwareTests.cs" />
     <Compile Include="software\KeePass_Tests.cs" />
     <Compile Include="software\NotepadPlusPlus_Tests.cs" />
+    <Compile Include="software\Thunderbird_Tests.cs" />
     <Compile Include="utility\Strings_Tests.cs" />
   </ItemGroup>
   <ItemGroup>

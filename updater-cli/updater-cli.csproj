@@ -57,6 +57,7 @@
     <Compile Include="software\ISoftware.cs" />
     <Compile Include="software\NotepadPlusPlus.cs" />
     <Compile Include="software\KeePass.cs" />
+    <Compile Include="software\Thunderbird.cs" />
     <Compile Include="utility\Strings.cs" />
   </ItemGroup>
   <ItemGroup>
