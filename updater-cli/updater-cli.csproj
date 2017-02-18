@@ -60,6 +60,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="algorithm\SoftwareStatus.cs" />
+    <Compile Include="algorithm\Update.cs" />
+    <Compile Include="data\ApplicationType.cs" />
     <Compile Include="data\AvailableSoftware.cs" />
     <Compile Include="data\HashAlgorithm.cs" />
     <Compile Include="data\InstallInfo.cs" />
@@ -77,6 +79,7 @@
     <Compile Include="software\KeePass.cs" />
     <Compile Include="software\SevenZip.cs" />
     <Compile Include="software\Thunderbird.cs" />
+    <Compile Include="utility\Checksum.cs" />
     <Compile Include="utility\Strings.cs" />
   </ItemGroup>
   <ItemGroup>

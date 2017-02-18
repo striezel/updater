@@ -25,6 +25,9 @@ using System.Text.RegularExpressions;
 
 namespace updater_cli.algorithm
 {
+    /// <summary>
+    /// class to query the status of installed software
+    /// </summary>
     public class SoftwareStatus
     {
         /// <summary>
@@ -52,7 +55,7 @@ namespace updater_cli.algorithm
                     {
                         //found it
                         bool needsUpdate = (string.Compare(detected[idx].displayVersion, info.newestVersion, true) < 0);
-                        result.Add(new QueryEntry(item, detected[idx], needsUpdate));
+                        result.Add(new QueryEntry(item, detected[idx], needsUpdate, ApplicationType.Bit64));
                     } //if match was found
                 } //if 64 bit expression does exist and we are on a 64 bit system
                 if (!string.IsNullOrWhiteSpace(info.match32Bit))
@@ -63,7 +66,7 @@ namespace updater_cli.algorithm
                     {
                         //found it
                         bool needsUpdate = (string.Compare(detected[idx].displayVersion, info.newestVersion, true) < 0);
-                        result.Add(new QueryEntry(item, detected[idx], needsUpdate));
+                        result.Add(new QueryEntry(item, detected[idx], needsUpdate, ApplicationType.Bit32));
                     } //if match was found
                 } //if 32 bit expression does exist
             } //foreach

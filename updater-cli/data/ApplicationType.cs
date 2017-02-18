@@ -16,48 +16,31 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-using updater_cli.software;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 
 namespace updater_cli.data
 {
     /// <summary>
-    /// represents an entry in a status query
+    /// enumeration to indicate whether 32 bit or 64 bit application was detected
     /// </summary>
-    public class QueryEntry
+    public enum ApplicationType
     {
         /// <summary>
-        /// constructor
+        /// application type is unknown
         /// </summary>
-        public QueryEntry(ISoftware sw, DetectedSoftware _detected, bool _needsUpdate, ApplicationType _type)
-        {
-            software = sw;
-            detected = _detected;
-            needsUpdate = _needsUpdate;
-            type = _type;
-        }
-
+        Unknown,
 
         /// <summary>
-        /// the corresponding software instance
+        /// 32 bit application
         /// </summary>
-        public ISoftware software;
-
+        Bit32,
 
         /// <summary>
-        /// detected software entry
+        /// 64 bit application
         /// </summary>
-        public DetectedSoftware detected;
-
-
-        /// <summary>
-        /// whether the software can be updated
-        /// </summary>
-        public bool needsUpdate;
-
-
-        /// <summary>
-        /// application type (32 or 64 bit)
-        /// </summary>
-        public ApplicationType type;
-    } //class
-}
+        Bit64
+    } //enum
+} //namespace
