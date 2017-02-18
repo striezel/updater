@@ -59,8 +59,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="algorithm\SoftwareStatus.cs" />
-    <Compile Include="algorithm\Update.cs" />
+    <Compile Include="operations\IOperation.cs" />
+    <Compile Include="operations\Operation.cs" />
+    <Compile Include="operations\OperationDetect.cs" />
+    <Compile Include="operations\SoftwareStatus.cs" />
+    <Compile Include="operations\Update.cs" />
     <Compile Include="data\ApplicationType.cs" />
     <Compile Include="data\AvailableSoftware.cs" />
     <Compile Include="data\HashAlgorithm.cs" />
@@ -73,6 +76,7 @@
     <Compile Include="io\CSVWriter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReturnCodes.cs" />
     <Compile Include="software\All.cs" />
     <Compile Include="software\ISoftware.cs" />
     <Compile Include="software\NotepadPlusPlus.cs" />

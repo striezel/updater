@@ -23,12 +23,12 @@ using updater_cli.detection;
 using updater_cli.software;
 using System.Text.RegularExpressions;
 
-namespace updater_cli.algorithm
+namespace updater_cli.operations
 {
     /// <summary>
     /// class to query the status of installed software
     /// </summary>
-    public class SoftwareStatus
+    public class SoftwareStatus : IOperation
     {
         /// <summary>
         /// queries the software status
@@ -151,6 +151,16 @@ namespace updater_cli.algorithm
             } //foreach
             output = fullLine + header + fullLine + output + fullLine;
             return output;
+        }
+
+
+        public int perform()
+        {
+            //get software status
+            var status = query();
+            string output = toConsoleOutput(status);
+            Console.Write(output);
+            return 0;
         }
     } //class
 } //namespace

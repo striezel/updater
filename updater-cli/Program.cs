@@ -22,19 +22,57 @@ namespace updater_cli
 {
     class Program
     {
-        static void Main(string[] args)
+        static int Main(string[] args)
         {
-            var listReg = detection.DetectorRegistry.detect();
-            listReg.Sort();
-            io.CSVWriter.toCSV(listReg, "installed_reg.csv");
+            if (args.Length >1)
+            {
+                Console.WriteLine("Error: No more than one command line argument is allowed!");
+                return ReturnCodes.rcInvalidParameter;
+            }
 
-            var listMSI = detection.DetectorMSI.detect();
-            listMSI.Sort();
-            io.CSVWriter.toCSV(listMSI, "installed_msi.csv");
-            //get software status
-            var status = algorithm.SoftwareStatus.query();
-            string output = algorithm.SoftwareStatus.toConsoleOutput(status);
-            Console.Write(output);
+            operations.Operation op = operations.Operation.Unknown;
+            if (args.Length == 1)
+            {
+                string command = args[0].ToLower();
+                switch (command)
+                {
+                    case "check":
+                    case "query":
+                        op = operations.Operation.Check;
+                        break;
+                    case "detect":
+                        op = operations.Operation.Detect;
+                        break;
+                    case "update":
+                        op = operations.Operation.Update;
+                        break;
+                    default:
+                        Console.WriteLine("Error: " + command + " is not a valid operation!");
+                        return ReturnCodes.rcInvalidParameter;
+                } //switch
+            } //if parameter is given
+
+            if (op == operations.Operation.Unknown)
+                op = operations.Operation.Check;
+
+            operations.IOperation operation = null;
+            switch (op)
+            {
+                case operations.Operation.Detect:
+                    operation = new operations.OperationDetect();
+                    break;
+                case operations.Operation.Check:
+                    operation = new operations.SoftwareStatus();
+                    break;
+                case operations.Operation.Update:
+                    operation = new operations.Update();
+                    break;
+                case operations.Operation.Unknown:
+                default:
+                    Console.WriteLine("Unknown operation was specified! Exiting program.");
+                    return ReturnCodes.rcUnknownOperation;
+            } //switch
+            return operation.perform();
         } //Main
     } //class
 } //namespace

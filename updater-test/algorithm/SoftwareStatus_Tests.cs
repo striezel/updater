@@ -17,7 +17,7 @@
 */
 
 using System;
-using updater_cli.algorithm;
+using updater_cli.operations;
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 

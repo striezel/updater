@@ -22,9 +22,9 @@ using System.IO;
 using System.Net;
 using updater_cli.data;
 
-namespace updater_cli.algorithm
+namespace updater_cli.operations
 {
-    public class Update
+    public class Update : IOperation
     {
         /// <summary>
         /// default timeout (in seconds) after which an update of a single
@@ -254,6 +254,27 @@ namespace updater_cli.algorithm
             if (!string.IsNullOrWhiteSpace(path))
                 return Path.Combine(path, ".updaterCache");
             return null;
+        }
+
+
+        public int perform()
+        {
+            var query = SoftwareStatus.query();
+            int result = update(query);
+            if (result <0)
+            {
+                Console.WriteLine("At least one error occurred during the update.");
+                if (result < -1)
+                {
+                    Console.WriteLine("However, " + (-result - 1).ToString() + " applications were updated.");
+                }
+                return result;
+            }
+            if (result == 1)
+                Console.WriteLine("One application was updated.");
+            else if (result > 1)
+                Console.WriteLine(result.ToString() + " applications were updated.");
+            return 0;
         }
     } //class
 } //namespace
