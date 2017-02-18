@@ -32,6 +32,7 @@ namespace updater_cli.software
             var result = new List<ISoftware>();
             result.Add(new KeePass());
             result.Add(new NotepadPlusPlus());
+            result.Add(new SevenZip());
             //Thunderbird
             var languages = Thunderbird.validLanguageCodes();
             foreach (var lang in languages)

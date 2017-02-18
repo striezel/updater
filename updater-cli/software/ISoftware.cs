@@ -20,6 +20,9 @@ using updater_cli.data;
 
 namespace updater_cli.software
 {
+    /// <summary>
+    /// interface to provide information for various softwares
+    /// </summary>
     public interface ISoftware
     {
         /// <summary>
