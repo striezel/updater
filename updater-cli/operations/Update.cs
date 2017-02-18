@@ -99,7 +99,7 @@ namespace updater_cli.operations
                 }
                 Console.WriteLine("Downloading " + instInfo.downloadUrl + "...");
                 string downloadedFile = download(instInfo.downloadUrl);
-                if (!string.IsNullOrWhiteSpace(downloadedFile))
+                if (string.IsNullOrWhiteSpace(downloadedFile))
                 {
                     Console.WriteLine("Error: Could not download installer from " + instInfo.downloadUrl + "!");
                     return -1 - updatedApplications;
@@ -127,34 +127,48 @@ namespace updater_cli.operations
                     System.Diagnostics.Process proc = new System.Diagnostics.Process();
                     proc.StartInfo.FileName = downloadedFile;
                     proc.StartInfo.Arguments = instInfo.silentSwitches;
-                    bool startedNew = proc.Start();
-                    uint intervalCounter = 0;
-                    do
+                    try
                     {
-                        System.Threading.Thread.Sleep(1000);
-                        ++intervalCounter;
-                        if (proc.HasExited)
+                        bool startedNew = proc.Start();
+                        uint intervalCounter = 0;
+                        do
                         {
-                            Console.WriteLine("Info: Update process exited after "
-                                + intervalCounter.ToString() + " second(s) with code "
-                                + proc.ExitCode.ToString() + ".");
-                            break;
+                            System.Threading.Thread.Sleep(1000);
+                            ++intervalCounter;
+                            if (proc.HasExited)
+                            {
+                                Console.WriteLine("Info: Update process exited after "
+                                    + intervalCounter.ToString() + " second(s) with code "
+                                    + proc.ExitCode.ToString() + ".");
+                                break;
+                            }
+                            //only wait up to timeoutPerUpdate seconds
+                        } while (intervalCounter <= timeoutPerUpdate);
+                        bool success = proc.HasExited && (proc.ExitCode == 0);
+                        //Kill it, if it is not done yet.
+                        if (!proc.HasExited)
+                        {
+                            Console.WriteLine("Warning: Killing update process, because timeout has been reached.");
+                            proc.Kill();
                         }
-                        //only wait up to timeoutPerUpdate seconds
-                    } while (intervalCounter <= timeoutPerUpdate);
-                    bool success = proc.HasExited && (proc.ExitCode == 0);
-                    //Kill it, if it is not done yet.
-                    if (!proc.HasExited)
+                        if (success)
+                        {
+                            Console.WriteLine("Info: Update of " + entry.software.info().Name + " was successful.");
+                            ++updatedApplications;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Error: Could not update " + entry.software.info().Name + ".");
+                            return -1 - updatedApplications;
+                        }
+                    } //try-c
+                    catch (Exception ex)
                     {
-                        Console.WriteLine("Warning: Killing update process, because timeout has been reached.");
-                        proc.Kill();
-                    }
-                    if (success)
-                    {
-                        Console.WriteLine("Info: Update of " + entry.software.info().Name + " was successful.");
-                        ++updatedApplications;
-                    }
-                }
+                        Console.WriteLine("Error: Exception occurred while updating "
+                            + entry.software.info().Name + ": " + ex.Message);
+                        return -1 - updatedApplications;
+                    } //try-catch
+                } //try-fin
                 finally
                 {
                     try
@@ -166,7 +180,7 @@ namespace updater_cli.operations
                         Console.WriteLine("Error: Could not delete file "
                             + downloadedFile + " after update: " + ex.Message);
                     }
-                }
+                } //try-finally
             } //foreach
 
             return updatedApplications;
@@ -188,14 +202,15 @@ namespace updater_cli.operations
             try
             {
                 Uri uri = new Uri(url);
-                if (uri.IsFile)
+                int segCount = uri.Segments.Length;
+                if (!string.IsNullOrWhiteSpace(uri.Segments[segCount-1]))
                     basename = Path.GetFileName(uri.LocalPath);
             }
             catch (Exception)
             {
                 //ignore
             }
-            if (null == basename)
+            if (string.IsNullOrWhiteSpace(basename))
                 basename = Path.GetRandomFileName() + ".exe";
             string cacheDirectory = downloadCacheDirectory();
             if (null == cacheDirectory)

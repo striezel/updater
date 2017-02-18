@@ -53,7 +53,7 @@ namespace updater_cli
             } //if parameter is given
 
             if (op == operations.Operation.Unknown)
-                op = operations.Operation.Check;
+                op = operations.Operation.Update;
 
             operations.IOperation operation = null;
             switch (op)
