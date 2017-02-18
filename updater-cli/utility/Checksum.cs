@@ -85,9 +85,11 @@ namespace updater_cli.utility
                 return null;
 
             string result = "";
+            char[] digits = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f' };
             for (int i = 0; i < hash.Length; i++)
             {
-                result += string.Format("x2", hash[i]);
+                result += digits[hash[i] / 16];
+                result += digits[hash[i] % 16];
             } //for
             return result;
         }
@@ -98,7 +100,7 @@ namespace updater_cli.utility
         /// </summary>
         /// <param name="cs">hexadecimal string representation of a checksum</param>
         /// <returns>Returns normalised checksum representation.</returns>
-        private static string normalise(string cs)
+        public static string normalise(string cs)
         {
             if (string.IsNullOrWhiteSpace(cs))
                 return null;
