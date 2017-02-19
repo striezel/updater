@@ -31,11 +31,17 @@ namespace updater_cli.software
         {
             var result = new List<ISoftware>();
             result.Add(new CDBurnerXP());
+            //Firefox ESR
+            var languages = FirefoxESR.validLanguageCodes();
+            foreach (var lang in languages)
+            {
+                result.Add(new FirefoxESR(lang));
+            } //foreach
             result.Add(new KeePass());
             result.Add(new NotepadPlusPlus());
             result.Add(new SevenZip());
             //Thunderbird
-            var languages = Thunderbird.validLanguageCodes();
+            languages = Thunderbird.validLanguageCodes();
             foreach (var lang in languages)
             {
                 result.Add(new Thunderbird(lang));

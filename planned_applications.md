@@ -8,6 +8,7 @@ updater application.
 * 7-Zip
 * CDBurnerXP
 * KeePass 2
+* Mozilla Firefox ESR
 * Mozilla Thunderbird
 * Notepad++
 
