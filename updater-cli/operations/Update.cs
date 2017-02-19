@@ -144,6 +144,7 @@ namespace updater_cli.operations
 
                     try
                     {
+                        Console.WriteLine("Info: Starting update of " + entry.software.info().Name + "...");
                         bool startedNew = proc.Start();
                         uint intervalCounter = 0;
                         do
@@ -291,7 +292,7 @@ namespace updater_cli.operations
         {
             var query = SoftwareStatus.query();
             int result = update(query);
-            if (result <0)
+            if (result < 0)
             {
                 Console.WriteLine("At least one error occurred during the update.");
                 if (result < -1)
@@ -304,6 +305,8 @@ namespace updater_cli.operations
                 Console.WriteLine("One application was updated.");
             else if (result > 1)
                 Console.WriteLine(result.ToString() + " applications were updated.");
+            else if (result == 0)
+                Console.WriteLine("No applications were updated.");
             return 0;
         }
     } //class

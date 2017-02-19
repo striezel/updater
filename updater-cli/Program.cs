@@ -24,7 +24,7 @@ namespace updater_cli
     {
         static int Main(string[] args)
         {
-            if (args.Length >1)
+            if (args.Length > 1)
             {
                 Console.WriteLine("Error: No more than one command line argument is allowed!");
                 return ReturnCodes.rcInvalidParameter;
@@ -38,6 +38,7 @@ namespace updater_cli
                 {
                     case "check":
                     case "query":
+                    case "status":
                         op = operations.Operation.Check;
                         break;
                     case "detect":
