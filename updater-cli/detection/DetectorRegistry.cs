@@ -33,10 +33,33 @@ namespace updater_cli.detection
         /// <returns>Returns a list of installed software.</returns>
         public static List<data.DetectedSoftware> detect()
         {
-            string keyName = "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall";
-            RegistryKey rKey = Registry.LocalMachine.OpenSubKey(keyName);
+            if (Environment.Is64BitOperatingSystem)
+            {
+                var data64 = detectSingleView(RegistryView.Registry64);
+                var data32 = detectSingleView(RegistryView.Registry32);
+                if ((data64 == null) || (data32 == null))
+                    return null;
+                data64.AddRange(data32);
+                return data64;
+            } //if 64 bit OS
+            else
+            {
+                return detectSingleView(RegistryView.Registry32);
+            }
+        }
+
+
+        private static List<data.DetectedSoftware> detectSingleView(RegistryView view)
+        {
+            RegistryKey baseKey = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, view);
+            const string keyName = "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall";
+            RegistryKey rKey = baseKey.OpenSubKey(keyName);
             if (null == rKey)
+            {
+                baseKey.Close();
+                baseKey = null;
                 return null;
+            }
 
             List<data.DetectedSoftware> entries = new List<data.DetectedSoftware>();
             var subKeys = rKey.GetSubKeyNames();
@@ -64,7 +87,9 @@ namespace updater_cli.detection
             subKeys = null;
             rKey.Close();
             rKey = null;
+            baseKey.Close();
+            baseKey = null;
             return entries;
         }
     } //class
-} 
+} //namespace

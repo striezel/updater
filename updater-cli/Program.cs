@@ -42,7 +42,7 @@ namespace updater_cli
                 return ReturnCodes.rcInvalidParameter;
             }
 
-            operations.Operation op = Operation.Unknown;
+            Operation op = Operation.Unknown;
             if (args.Length == 1)
             {
                 string command = args[0].ToLower();
