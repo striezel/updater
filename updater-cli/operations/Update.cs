@@ -81,8 +81,7 @@ namespace updater_cli.operations
                 } //switch
 
                 //If no checksum is provided, we do not even try to download the file.
-                if (string.IsNullOrWhiteSpace(instInfo.checksum)
-                    || (instInfo.algorithm == HashAlgorithm.Unknown))
+                if (!instInfo.hasChecksum())
                 {
                     Console.WriteLine("Error: No checksum for download of "
                         + entry.software.info().Name + "!");

@@ -61,6 +61,7 @@ namespace updater_cli.data
             install32Bit = _install32;
             install64Bit = _install64;
         }
+
         
         /// <summary>
         /// generic name of the software

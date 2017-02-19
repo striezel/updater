@@ -61,6 +61,18 @@ namespace updater_cli.data
 
 
         /// <summary>
+        /// determines whether or not this instance has checksum information
+        /// </summary>
+        /// <returns>Returns true, if there is a checksum.
+        /// Returns false, if there is no checksum.</returns>
+        public bool hasChecksum()
+        {
+            return ((algorithm != HashAlgorithm.Unknown)
+                && !string.IsNullOrWhiteSpace(checksum));
+        }
+
+
+        /// <summary>
         /// URL where the installer can be downloaded
         /// </summary>
         [XmlElement(ElementName = "url", IsNullable = true)]

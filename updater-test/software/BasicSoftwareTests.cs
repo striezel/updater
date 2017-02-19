@@ -41,6 +41,11 @@ namespace updater_test.software
             Assert.AreEqual<bool>(info.install32Bit != null, !string.IsNullOrWhiteSpace(info.match32Bit));
             //64 bit information should match
             Assert.AreEqual<bool>(info.install64Bit != null, !string.IsNullOrWhiteSpace(info.match64Bit));
+            //checksums should always be present
+            if (null != info.install32Bit)
+                Assert.IsTrue(info.install32Bit.hasChecksum());
+            if (null != info.install64Bit)
+                Assert.IsTrue(info.install64Bit.hasChecksum());
         }
 
 
