@@ -17,11 +17,23 @@
 */
 
 using System;
+using updater_cli.operations;
 
 namespace updater_cli
 {
     class Program
     {
+        /// <summary>
+        /// shows the current program version
+        /// </summary>
+        static void showVersion()
+        {
+            var asm = System.Reflection.Assembly.GetExecutingAssembly();
+            var ver = asm.GetName().Version;
+            Console.WriteLine("updater, version " + utility.Version.get());
+        }
+
+
         static int Main(string[] args)
         {
             if (args.Length > 1)
@@ -30,7 +42,7 @@ namespace updater_cli
                 return ReturnCodes.rcInvalidParameter;
             }
 
-            operations.Operation op = operations.Operation.Unknown;
+            operations.Operation op = Operation.Unknown;
             if (args.Length == 1)
             {
                 string command = args[0].ToLower();
@@ -39,36 +51,41 @@ namespace updater_cli
                     case "check":
                     case "query":
                     case "status":
-                        op = operations.Operation.Check;
+                        op = Operation.Check;
                         break;
                     case "detect":
-                        op = operations.Operation.Detect;
+                        op = Operation.Detect;
                         break;
                     case "update":
-                        op = operations.Operation.Update;
+                        op = Operation.Update;
                         break;
+                    case "--version":
+                    case "/v":
+                    case "-v":
+                        showVersion();
+                        return 0;
                     default:
                         Console.WriteLine("Error: " + command + " is not a valid operation!");
                         return ReturnCodes.rcInvalidParameter;
                 } //switch
             } //if parameter is given
 
-            if (op == operations.Operation.Unknown)
-                op = operations.Operation.Update;
+            if (op == Operation.Unknown)
+                op = Operation.Update;
 
-            operations.IOperation operation = null;
+            IOperation operation = null;
             switch (op)
             {
-                case operations.Operation.Detect:
-                    operation = new operations.OperationDetect();
+                case Operation.Detect:
+                    operation = new OperationDetect();
                     break;
-                case operations.Operation.Check:
-                    operation = new operations.SoftwareStatus();
+                case Operation.Check:
+                    operation = new SoftwareStatus();
                     break;
-                case operations.Operation.Update:
-                    operation = new operations.Update();
+                case Operation.Update:
+                    operation = new Update();
                     break;
-                case operations.Operation.Unknown:
+                case Operation.Unknown:
                 default:
                     Console.WriteLine("Unknown operation was specified! Exiting program.");
                     return ReturnCodes.rcUnknownOperation;

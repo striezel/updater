@@ -88,6 +88,7 @@
     <Compile Include="software\Thunderbird.cs" />
     <Compile Include="utility\Checksum.cs" />
     <Compile Include="utility\Strings.cs" />
+    <Compile Include="utility\Version.cs" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
