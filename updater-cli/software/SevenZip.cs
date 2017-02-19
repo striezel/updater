@@ -33,8 +33,8 @@ namespace updater_cli.software
         public AvailableSoftware info()
         {
             return new AvailableSoftware("7-Zip", "16.04",
-                "^7\\-Zip [0-9]+\\[0-9]{2}$",
-                "^7\\-Zip [0-9]+\\[0-9]{2} \\(x64\\)$",
+                "^7\\-Zip [0-9]+\\.[0-9]{2}$",
+                "^7\\-Zip [0-9]+\\.[0-9]{2} \\(x64\\)$",
                 new InstallInfoExe(
                     "http://www.7-zip.org/a/7z1604.exe",
                     HashAlgorithm.SHA256,
