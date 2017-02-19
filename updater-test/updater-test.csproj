@@ -64,6 +64,7 @@
     <Compile Include="software\NotepadPlusPlus_Tests.cs" />
     <Compile Include="software\SevenZip_Tests.cs" />
     <Compile Include="software\Thunderbird_Tests.cs" />
+    <Compile Include="software\CDBurnerXP_Tests.cs" />
     <Compile Include="utility\Checksum_Tests.cs" />
     <Compile Include="utility\Strings_Tests.cs" />
   </ItemGroup>

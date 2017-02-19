@@ -6,6 +6,7 @@ updater application.
 ## Implemented
 
 * 7-Zip
+* CDBurnerXP
 * KeePass 2
 * Mozilla Thunderbird
 * Notepad++
@@ -17,7 +18,6 @@ updater application.
 * Adobe Shockwave
 * Audacity
 * CCleaner
-* CDBurnerXP
 * FileZilla
 * GIMP
 * Google Chrome

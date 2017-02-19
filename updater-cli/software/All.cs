@@ -30,6 +30,7 @@ namespace updater_cli.software
         public static List<ISoftware> get()
         {
             var result = new List<ISoftware>();
+            result.Add(new CDBurnerXP());
             result.Add(new KeePass());
             result.Add(new NotepadPlusPlus());
             result.Add(new SevenZip());
