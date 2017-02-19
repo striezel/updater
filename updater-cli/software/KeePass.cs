@@ -33,7 +33,7 @@ namespace updater_cli.software
         public AvailableSoftware info()
         {
             return new AvailableSoftware("KeePass", "2.35",
-                "KeePass Password Safe [2-9]\\.[0-9]{2}", null,
+                "^KeePass Password Safe [2-9]\\.[0-9]{2}$", null,
                 new InstallInfoExe(
                     "https://kent.dl.sourceforge.net/project/keepass/KeePass%202.x/2.35/KeePass-2.35-Setup.exe",
                     HashAlgorithm.SHA256,

@@ -33,8 +33,8 @@ namespace updater_cli.software
         public AvailableSoftware info()
         {
             return new AvailableSoftware("Notepad++", "7.3.1",
-                "Notepad\\+\\+ \\(32\\-bit x86\\)",
-                "Notepad\\+\\+ \\(64\\-bit x64\\)",
+                "^Notepad\\+\\+ \\(32\\-bit x86\\)$",
+                "^Notepad\\+\\+ \\(64\\-bit x64\\)$",
                 new InstallInfoExe(
                     "https://notepad-plus-plus.org/repository/7.x/7.3.1/npp.7.3.1.Installer.exe",
                     HashAlgorithm.SHA1,
