@@ -35,7 +35,7 @@ namespace updater_cli.software
             return new AvailableSoftware("Notepad++", "7.3.1",
                 "Notepad\\+\\+ \\(32\\-bit x86\\)",
                 "Notepad\\+\\+ \\(64\\-bit x64\\)",
-                new InstallInfo(
+                new InstallInfoExe(
                     "https://notepad-plus-plus.org/repository/7.x/7.3.1/npp.7.3.1.Installer.exe",
                     HashAlgorithm.SHA1,
                     "a61f9380255bb154f001cc15f27374ea30de1013",
@@ -43,7 +43,7 @@ namespace updater_cli.software
                     "C:\\Program Files\\Notepad++",
                     "C:\\Program Files (x86)\\Notepad++"),
                 //A 64 bit is available, but the data still needs to be added.
-                new InstallInfo(
+                new InstallInfoExe(
                     "https://notepad-plus-plus.org/repository/7.x/7.3.1/npp.7.3.1.Installer.x64.exe",
                     HashAlgorithm.SHA1,
                     "1654f7619b73196f9528f4beca7cda428c4750ef",

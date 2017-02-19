@@ -35,14 +35,14 @@ namespace updater_cli.software
             return new AvailableSoftware("7-Zip", "16.04",
                 "^7\\-Zip [0-9]+\\[0-9]{2}$",
                 "^7\\-Zip [0-9]+\\[0-9]{2} \\(x64\\)$",
-                new InstallInfo(
+                new InstallInfoExe(
                     "http://www.7-zip.org/a/7z1604.exe",
                     HashAlgorithm.SHA256,
                     "dbb2b11dea9f4432291e2cbefe14ebe05e021940e983a37e113600eee55daa95",
                     "/S",
                     "C:\\Program Files\\7-Zip",
                     "C:\\Program Files (x86)\\7-Zip"),
-                new InstallInfo(
+                new InstallInfoExe(
                     "http://www.7-zip.org/a/7z1604-x64.exe",
                     HashAlgorithm.SHA256,
                     "9bb4dc4fab2a2a45c15723c259dc2f7313c89a5ac55ab7c3f76bba26edc8bcaa",

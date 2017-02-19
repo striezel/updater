@@ -53,9 +53,9 @@ namespace updater_test
         internal static AvailableSoftware getAcme()
         {
             return new AvailableSoftware("ACME", "1.2.3", "ACME 32", "ACME 64",
-                new InstallInfo("https://www.example.com/dl/file.ext", HashAlgorithm.SHA1,
+                new InstallInfoExe("https://www.example.com/dl/file.ext", HashAlgorithm.SHA1,
                 "7772433567cb18608519f649f981e38a0be12c26", "/S", "C:\\foo", "C:\\foo64"),
-                new InstallInfo("https://www.example.com/dl/file64.ext", HashAlgorithm.SHA1,
+                new InstallInfoExe("https://www.example.com/dl/file64.ext", HashAlgorithm.SHA1,
                 "08519f649f981e38a0be12c267772433567cb186", "/S", "C:\\foo", "C:\\foo64"));
         }
 

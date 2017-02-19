@@ -24,7 +24,7 @@ namespace updater_cli.data
     /// holds information about an installer
     /// </summary>
     [XmlRoot(ElementName = "installinfo")]
-    public class InstallInfo
+    public abstract class InstallInfo
     {
         /// <summary>
         /// default constructor
@@ -70,6 +70,20 @@ namespace updater_cli.data
             return ((algorithm != HashAlgorithm.Unknown)
                 && !string.IsNullOrWhiteSpace(checksum));
         }
+
+
+        /// <summary>
+        /// whether the installer is a simple exe file, not using msiexec
+        /// </summary>
+        /// <returns>Returns true, if the installer does not use msiexec.</returns>
+        abstract public bool isExe();
+
+
+        /// <summary>
+        /// whether the installer uses msiexec
+        /// </summary>
+        /// <returns>Returns true, if the installer uses msiexec.</returns>
+        abstract public bool isMsi();
 
 
         /// <summary>

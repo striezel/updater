@@ -124,8 +124,24 @@ namespace updater_cli.operations
                 try
                 {
                     System.Diagnostics.Process proc = new System.Diagnostics.Process();
-                    proc.StartInfo.FileName = downloadedFile;
-                    proc.StartInfo.Arguments = instInfo.silentSwitches;
+                    if (instInfo.isExe())
+                    {
+                        proc.StartInfo.FileName = downloadedFile;
+                        proc.StartInfo.Arguments = instInfo.silentSwitches;
+                    }
+                    else if (instInfo.isMsi())
+                    {
+                        proc.StartInfo.FileName = "msiexec.exe";
+                        proc.StartInfo.Arguments = "/i \"" + downloadedFile + "\" " + instInfo.silentSwitches;
+                    }
+                    else
+                    {
+                        //unknown installer type - should never happen
+                        Console.WriteLine("Error: " + entry.software.info().Name
+                            + " has unknown installer type!");
+                        return -1 - updatedApplications;
+                    }
+
                     try
                     {
                         bool startedNew = proc.Start();

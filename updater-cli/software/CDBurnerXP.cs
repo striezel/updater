@@ -35,18 +35,18 @@ namespace updater_cli.software
             return new AvailableSoftware("CDBurnerXP", "4.5.7.6521",
                 "^CDBurnerXP$",
                 "^CDBurnerXP \\(64 Bit\\)$",
-                new InstallInfo(
+                new InstallInfoMsi(
                     "https://download.cdburnerxp.se/msi/cdbxp_setup_4.5.7.6521.msi",
                     HashAlgorithm.SHA256,
                     "c38d057b27fa8428e13c21bd749ef690b4969fab14518fb07c99ad667db6167e",
-                    "/qn",
+                    "/qn /norestart",
                     "C:\\Program Files\\CDBurnerXP",
                     "C:\\Program Files (x86)\\CDBurnerXP"),
-                new InstallInfo(
+                new InstallInfoMsi(
                     "https://download.cdburnerxp.se/msi/cdbxp_setup_x64_4.5.7.6521.msi",
                     HashAlgorithm.SHA256,
                     "3a665bcbaa60c229303a2676507d4753089a03cfe5e890f7c72fe83e298fa153",
-                    "/qn",
+                    "/qn /norestart",
                     null,
                     "C:\\Program Files\\CDBurnerXP")
                     );

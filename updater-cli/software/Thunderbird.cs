@@ -134,7 +134,7 @@ namespace updater_cli.software
                 "45.7.1",
                 "^Mozilla Thunderbird [0-9]{2}\\.[0-9]\\.[0-9] \\(x86 " + Regex.Escape(languageCode) + "\\)$",
                 null,
-                new InstallInfo(
+                new InstallInfoExe(
                     "https://ftp.mozilla.org/pub/thunderbird/releases/45.7.1/win32/" + languageCode + "/Thunderbird%20Setup%2045.7.1.exe",
                     HashAlgorithm.SHA512,
                     checksum,
