@@ -26,8 +26,12 @@ namespace updater_cli.software
         /// gets a list that contains one instance of each class that implements
         /// the ISoftware interface
         /// </summary>
+        /// <param name="withAurora">Whether or not Firefox Developer Edition
+        /// (aurora channel) shall be included, too. Default is false, because
+        /// this increases time of subsequent operations like getting the info()
+        /// for every element in the list by quite a bit.</param>
         /// <returns></returns>
-        public static List<ISoftware> get()
+        public static List<ISoftware> get(bool withAurora = false)
         {
             var result = new List<ISoftware>();
             result.Add(new CDBurnerXP());
@@ -43,6 +47,15 @@ namespace updater_cli.software
             {
                 result.Add(new FirefoxESR(lang));
             } //foreach
+            if (withAurora)
+            {
+                //Firefox Developer Edition
+                languages = FirefoxAurora.validLanguageCodes();
+                foreach (var lang in languages)
+                {
+                    result.Add(new FirefoxAurora(lang));
+                } //foreach
+            } //if aurora is requested, too
             result.Add(new KeePass());
             result.Add(new NotepadPlusPlus());
             result.Add(new SevenZip());

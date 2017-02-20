@@ -31,6 +31,15 @@ namespace updater_cli.operations
         /// application will be cancelled, if it is still in progress
         /// </summary>
         public const uint defaultTimeout = 120;
+
+
+        /// <summary>
+        /// default constructor
+        /// </summary>
+        public Update()
+        {
+            includeAurora = false;
+        }
         
         
         /// <summary>
@@ -288,9 +297,17 @@ namespace updater_cli.operations
         }
 
 
+        /// <summary>
+        /// Flag that indicates whether or not Firefox Developer Edition
+        /// (aurora channel) shall be included, too. Default is false, because
+        /// this increases time of the query by quite a bit (several seconds).
+        /// </summary>
+        public bool includeAurora;
+
+
         public int perform()
         {
-            var query = SoftwareStatus.query();
+            var query = SoftwareStatus.query(includeAurora);
             int result = update(query);
             if (result < 0)
             {

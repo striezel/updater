@@ -60,6 +60,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="software\All_Tests.cs" />
     <Compile Include="software\BasicSoftwareTests.cs" />
+    <Compile Include="software\FirefoxAurora_Tests.cs" />
     <Compile Include="software\Firefox_Tests.cs" />
     <Compile Include="software\KeePass_Tests.cs" />
     <Compile Include="software\NotepadPlusPlus_Tests.cs" />

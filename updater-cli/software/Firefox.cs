@@ -24,6 +24,9 @@ using updater_cli.data;
 
 namespace updater_cli.software
 {
+    /// <summary>
+    /// Firefox, release channel
+    /// </summary>
     public class Firefox : ISoftware
     {
         /// <summary>

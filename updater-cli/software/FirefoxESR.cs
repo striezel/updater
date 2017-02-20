@@ -24,6 +24,9 @@ using updater_cli.data;
 
 namespace updater_cli.software
 {
+    /// <summary>
+    /// Firefox Extended Support Release
+    /// </summary>
     public class FirefoxESR : ISoftware
     {
         /// <summary>

@@ -82,6 +82,7 @@
     <Compile Include="software\All.cs" />
     <Compile Include="software\CDBurnerXP.cs" />
     <Compile Include="software\Firefox.cs" />
+    <Compile Include="software\FirefoxAurora.cs" />
     <Compile Include="software\FirefoxESR.cs" />
     <Compile Include="software\ISoftware.cs" />
     <Compile Include="software\NotepadPlusPlus.cs" />
