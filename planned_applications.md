@@ -8,6 +8,7 @@ updater application.
 * 7-Zip
 * CDBurnerXP
 * KeePass 2
+* Mozilla Firefox
 * Mozilla Firefox ESR
 * Mozilla Thunderbird
 * Notepad++
@@ -27,7 +28,6 @@ updater application.
 * Java Development Kit
 * Java Runtime Environment
 * LibreOffice
-* Mozilla Firefox
 * OpenOffice (may possibly be dropped in favour of LibreOffice)
 * Opera
 * Pidgin

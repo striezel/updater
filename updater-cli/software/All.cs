@@ -31,8 +31,14 @@ namespace updater_cli.software
         {
             var result = new List<ISoftware>();
             result.Add(new CDBurnerXP());
+            //Firefox (release channel)
+            var languages = Firefox.validLanguageCodes();
+            foreach (var lang in languages)
+            {
+                result.Add(new Firefox(lang));
+            } //foreach
             //Firefox ESR
-            var languages = FirefoxESR.validLanguageCodes();
+            languages = FirefoxESR.validLanguageCodes();
             foreach (var lang in languages)
             {
                 result.Add(new FirefoxESR(lang));

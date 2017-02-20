@@ -155,7 +155,7 @@ namespace updater_cli.software
         /// <returns>Returns a dictionary where keys are the language codes and values are the associated checksums.</returns>
         private static Dictionary<string, string> knownChecksums64Bit()
         {
-            // These are the checksums for Windows 32 bit installers from
+            // These are the checksums for Windows 64 bit installers from
             // https://ftp.mozilla.org/pub/firefox/releases/45.7.0esr/SHA512SUMS
             var result = new Dictionary<string, string>();
             result.Add("ach", "63c9f3402e712e934a24f4c0bbef9e3e7fa102feeb4f9370e0eed6f8a74edb80d8662fecd806276d32053a0b7b00b55656c4cb518c6c468847424293245f8c3e");
@@ -360,14 +360,14 @@ namespace updater_cli.software
             } //using
             //look for line with the correct language code and version for 32 bit
             Regex reChecksum32Bit = new Regex("[0-9a-f]{128}  win32/" + languageCode.Replace("-", "\\-")
-                + "/Firefox Setup " + Regex.Escape(newerVersion) + "\\esr.exe");
+                + "/Firefox Setup " + Regex.Escape(newerVersion) + "esr\\.exe");
             Match matchChecksum32Bit = reChecksum32Bit.Match(sha512SumsContent);
             if (!matchChecksum32Bit.Success)
                 return null;
             //look for line with the correct language code and version for 64 bit
             Regex reChecksum64Bit = new Regex("[0-9a-f]{128}  win64/" + languageCode.Replace("-", "\\-")
-                + "/Firefox Setup " + Regex.Escape(newerVersion) + "\\esr.exe");
-            Match matchChecksum64Bit = reChecksum32Bit.Match(sha512SumsContent);
+                + "/Firefox Setup " + Regex.Escape(newerVersion) + "esr\\.exe");
+            Match matchChecksum64Bit = reChecksum64Bit.Match(sha512SumsContent);
             if (!matchChecksum64Bit.Success)
                 return null;
             // checksum is the first 128 characters of the match
