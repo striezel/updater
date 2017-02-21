@@ -89,6 +89,7 @@
     <Compile Include="software\KeePass.cs" />
     <Compile Include="software\SevenZip.cs" />
     <Compile Include="software\Thunderbird.cs" />
+    <Compile Include="software\WinSCP.cs" />
     <Compile Include="utility\Checksum.cs" />
     <Compile Include="utility\Strings.cs" />
     <Compile Include="utility\Version.cs" />

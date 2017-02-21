@@ -65,6 +65,7 @@ namespace updater_cli.software
             {
                 result.Add(new Thunderbird(lang));
             } //foreach
+            result.Add(new WinSCP());
             return result;
         }
     } //class
