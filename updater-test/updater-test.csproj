@@ -68,6 +68,7 @@
     <Compile Include="software\Thunderbird_Tests.cs" />
     <Compile Include="software\CDBurnerXP_Tests.cs" />
     <Compile Include="software\FirefoxESR_Tests.cs" />
+    <Compile Include="software\VLC_Tests.cs" />
     <Compile Include="software\WinSCP_Tests.cs" />
     <Compile Include="utility\Checksum_Tests.cs" />
     <Compile Include="utility\Strings_Tests.cs" />

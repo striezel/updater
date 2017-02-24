@@ -12,6 +12,7 @@ updater application.
 * Mozilla Firefox ESR
 * Mozilla Thunderbird
 * Notepad++
+* VLC
 * WinSCP
 
 ## Planned
@@ -34,4 +35,3 @@ updater application.
 * Pidgin
 * Putty
 * Skype
-* VLC

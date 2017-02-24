@@ -63,7 +63,7 @@ namespace updater_cli.operations
                 {
                     Regex regularExp = new Regex(info.match64Bit, RegexOptions.IgnoreCase);
                     int idx = detected.FindIndex(x => regularExp.IsMatch(x.displayName) && !string.IsNullOrWhiteSpace(x.displayVersion));
-                    if (idx >= 0)
+                    if ((idx >= 0) && (detected[idx].appType == ApplicationType.Bit64))
                     {
                         //found it
                         bool needsUpdate = (string.Compare(detected[idx].displayVersion, info.newestVersion, true) < 0);
@@ -74,7 +74,7 @@ namespace updater_cli.operations
                 {
                     Regex regularExp = new Regex(info.match32Bit, RegexOptions.IgnoreCase);
                     int idx = detected.FindIndex(x => regularExp.IsMatch(x.displayName) && !string.IsNullOrWhiteSpace(x.displayVersion));
-                    if (idx >= 0)
+                    if ((idx >= 0) && (detected[idx].appType == ApplicationType.Bit32))
                     {
                         //found it
                         bool needsUpdate = (string.Compare(detected[idx].displayVersion, info.newestVersion, true) < 0);
@@ -103,6 +103,7 @@ namespace updater_cli.operations
             }
 
             const string cName = "Software";
+            const string cAppType = "type";
             const string cCurrent = "current";
             const string cNewest = "newest";
             const string cVersion = "version";
@@ -111,6 +112,7 @@ namespace updater_cli.operations
 
             //determine longest entries
             int maxSoftwareNameLength = cName.Length;
+            int maxAppTypeLength = Math.Max(cAppType.Length, ApplicationType.Bit32.ToString().Length);
             int maxCurrentVersionLength = Math.Max(cCurrent.Length, cVersion.Length);
             int maxNewestVersionLength = Math.Max(cNewest.Length, cVersion.Length);
             int maxUpdatableLength = Math.Max(cUpdatable1.Length, cUpdatable2.Length); ;
@@ -131,17 +133,20 @@ namespace updater_cli.operations
             //get output
             string output = "";
             string fullLine = "+-" + "-".PadRight(maxSoftwareNameLength, '-')
-                + "-+-" + "-".PadRight(maxCurrentVersionLength, '-') + "-+-"
+                + "-+-" + "-".PadRight(maxAppTypeLength, '-') + "-+-"
+                + "-".PadRight(maxCurrentVersionLength, '-') + "-+-"
                 + "-".PadRight(maxNewestVersionLength, '-') + "-+-"
                 + "-".PadRight(maxUpdatableLength, '-') + "-+"
                 + Environment.NewLine;
             string header = "| " + cName.PadRight(maxSoftwareNameLength)
-                + " | " + cCurrent.PadRight(maxCurrentVersionLength) + " | "
+                + " | " + cAppType.PadRight(maxAppTypeLength) + " | "
+                + cCurrent.PadRight(maxCurrentVersionLength) + " | "
                 + cNewest.PadRight(maxNewestVersionLength) + " | "
                 + cUpdatable1.PadRight(maxUpdatableLength) + " |"
                 + Environment.NewLine
                 + "| " + " ".PadRight(maxSoftwareNameLength)
-                + " | " + cVersion.PadRight(maxCurrentVersionLength) + " | "
+                + " | " + " ".PadRight(maxAppTypeLength) + " | "
+                + cVersion.PadRight(maxCurrentVersionLength) + " | "
                 + cVersion.PadRight(maxNewestVersionLength) + " | "
                 + cUpdatable2.PadRight(maxUpdatableLength) + " |"
                 + Environment.NewLine;
@@ -150,6 +155,8 @@ namespace updater_cli.operations
                 var info = item.software.info();
                 //name of software
                 output += "| " + info.Name.PadRight(maxSoftwareNameLength) + " | ";
+                //application type
+                output += item.type.ToString().PadRight(maxAppTypeLength) + " | ";
                 //currently installed version
                 if (!string.IsNullOrWhiteSpace(item.detected.displayVersion))
                 output += item.detected.displayVersion.PadRight(maxCurrentVersionLength);

@@ -30,11 +30,12 @@ namespace updater_cli.data
         /// <summary>
         /// default constructor
         /// </summary>
-        public DetectedSoftware(string dispName = null, string dispVersion = null, string instPath = null)
+        public DetectedSoftware(string dispName = null, string dispVersion = null, string instPath = null, ApplicationType _appType = ApplicationType.Unknown)
         {
             displayName = dispName;
             displayVersion = dispVersion;
             installPath = instPath;
+            appType = _appType;
         }
 
 
@@ -114,5 +115,12 @@ namespace updater_cli.data
         /// </summary>
         [XmlElement(ElementName = "path", IsNullable = true)]
         public string installPath;
+
+
+        /// <summary>
+        /// whether this is a 32 bit or 64 bit app
+        /// </summary>
+        [XmlElement(ElementName = "appType", IsNullable = true)]
+        public ApplicationType appType;
     } //struct
 } //namespace

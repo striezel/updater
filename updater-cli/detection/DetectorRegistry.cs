@@ -49,6 +49,11 @@ namespace updater_cli.detection
         }
 
 
+        /// <summary>
+        /// gets a list of installed software from the registry, using a specified registry view
+        /// </summary>
+        /// <param name="view">the registry view (64 bit or 32 bit)</param>
+        /// <returns>Returns a list of installed software.</returns>
         private static List<data.DetectedSoftware> detectSingleView(RegistryView view)
         {
             RegistryKey baseKey = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, view);
@@ -80,6 +85,19 @@ namespace updater_cli.detection
                         e.installPath = ilObj.ToString().Trim();
                     subKey.Close();
                     subKey = null;
+                    switch (view)
+                    {
+
+                        case RegistryView.Registry64:
+                            e.appType = data.ApplicationType.Bit64;
+                            break;
+                        case RegistryView.Registry32:
+                            e.appType = data.ApplicationType.Bit32;
+                            break;
+                        case RegistryView.Default:
+                        default:
+                            throw new ArgumentOutOfRangeException(nameof(view), "Unknown registry view type!");
+                    } //switch
                     if (e.containsInformation())
                         entries.Add(e);
                 } //if subKey was opened
