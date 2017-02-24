@@ -12,6 +12,7 @@ updater application.
 * Mozilla Firefox ESR
 * Mozilla Thunderbird
 * Notepad++
+* PuTTY
 * VLC
 * WinSCP
 
@@ -33,5 +34,4 @@ updater application.
 * OpenOffice (may possibly be dropped in favour of LibreOffice)
 * Opera
 * Pidgin
-* Putty
 * Skype

@@ -20,6 +20,9 @@ using System.Collections.Generic;
 
 namespace updater_cli.software
 {
+    /// <summary>
+    /// utility class to list all known software
+    /// </summary>
     public class All
     {
         /// <summary>
@@ -58,6 +61,7 @@ namespace updater_cli.software
             } //if aurora is requested, too
             result.Add(new KeePass());
             result.Add(new NotepadPlusPlus());
+            result.Add(new Putty());
             result.Add(new SevenZip());
             //Thunderbird
             languages = Thunderbird.validLanguageCodes();
