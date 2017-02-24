@@ -62,7 +62,9 @@ namespace updater_test.software
             Assert.IsNotNull(sw);
             var info = sw.info();
             var newerInfo = sw.searchForNewer();
-            Assert.AreEqual<string>(info.newestVersion, newerInfo.newestVersion);
+            Assert.AreEqual<string>(info.newestVersion, newerInfo.newestVersion,
+                "Known newest version of " + info.Name + " is " + info.newestVersion
+                + ", but the current newest version is " + newerInfo.newestVersion + "!");
         }
     } //class
 } //namespace

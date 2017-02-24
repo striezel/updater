@@ -88,10 +88,6 @@ namespace updater_test.software
         }
 
 
-        //Developer edition changes daily/nightly, and I do not want to update
-        // the current version info every day, so we do not check for up to
-        // date info.
-        /*
         /// <summary>
         /// checks whether the class info is up to date
         /// </summary>
@@ -100,6 +96,6 @@ namespace updater_test.software
         {
             _upToDate_info(new FirefoxAurora("de"));
         }
-        */
+        
     } //class
 } //namespace
