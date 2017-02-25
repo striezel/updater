@@ -23,14 +23,14 @@ using System.Text.RegularExpressions;
 
 namespace updater_cli.software
 {
-    public class KeePass : ISoftware
+    public class KeePass : NoPreUpdateProcessSoftware
     {
         /// <summary>
         /// gets the currently known information about the software
         /// </summary>
         /// <returns>Returns an AvailableSoftware instance with the known
         /// details about the software.</returns>
-        public AvailableSoftware info()
+        public override AvailableSoftware info()
         {
             return new AvailableSoftware("KeePass", "2.35",
                 "^KeePass Password Safe [2-9]\\.[0-9]{2}$", null,
@@ -52,7 +52,7 @@ namespace updater_cli.software
         /// <returns>Returns true, if searchForNewer() is implemented for that
         /// class. Returns false, if not. Calling searchForNewer() may throw an
         /// exception in the later case.</returns>
-        public bool implementsSearchForNewer()
+        public override bool implementsSearchForNewer()
         {
             return true;
         }
@@ -63,7 +63,7 @@ namespace updater_cli.software
         /// </summary>
         /// <returns>Returns an AvailableSoftware instance with the information
         /// that was retrieved from the net.</returns>
-        public AvailableSoftware searchForNewer()
+        public override AvailableSoftware searchForNewer()
         {
             string htmlCode = null;
             using (var client = new WebClient())

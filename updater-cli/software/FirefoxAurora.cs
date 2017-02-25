@@ -28,7 +28,7 @@ namespace updater_cli.software
     /// <summary>
     /// Firefox Developer Edition (i.e. aurora channel)
     /// </summary>
-    public class FirefoxAurora : ISoftware
+    public class FirefoxAurora : NoPreUpdateProcessSoftware
     {
         /// <summary>
         /// the currently known newest version
@@ -73,7 +73,7 @@ namespace updater_cli.software
         /// </summary>
         /// <returns>Returns an AvailableSoftware instance with the known
         /// details about the software.</returns>
-        public AvailableSoftware info()
+        public override AvailableSoftware info()
         {
             if (!triedToGetChecksums && ((checksum32Bit == null) || (checksum64Bit == null)))
             {
@@ -200,7 +200,7 @@ namespace updater_cli.software
         /// <returns>Returns true, if searchForNewer() is implemented for that
         /// class. Returns false, if not. Calling searchForNewer() may throw an
         /// exception in the later case.</returns>
-        public bool implementsSearchForNewer()
+        public override bool implementsSearchForNewer()
         {
             return true;
         }
@@ -211,7 +211,7 @@ namespace updater_cli.software
         /// </summary>
         /// <returns>Returns an AvailableSoftware instance with the information
         /// that was retrieved from the net.</returns>
-        public AvailableSoftware searchForNewer()
+        public override AvailableSoftware searchForNewer()
         {
             string newerVersion = determineNewestVersion();
             if (string.IsNullOrWhiteSpace(newerVersion))

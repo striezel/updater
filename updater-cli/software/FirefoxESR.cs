@@ -27,7 +27,7 @@ namespace updater_cli.software
     /// <summary>
     /// Firefox Extended Support Release
     /// </summary>
-    public class FirefoxESR : ISoftware
+    public class FirefoxESR : NoPreUpdateProcessSoftware
     {
         /// <summary>
         /// constructor with language code
@@ -270,7 +270,7 @@ namespace updater_cli.software
         /// </summary>
         /// <returns>Returns an AvailableSoftware instance with the known
         /// details about the software.</returns>
-        public AvailableSoftware info()
+        public override AvailableSoftware info()
         {
             return new AvailableSoftware("Mozilla Firefox ESR (" + languageCode + ")",
                 "45.7.0",
@@ -384,7 +384,7 @@ namespace updater_cli.software
         /// <returns>Returns true, if searchForNewer() is implemented for that
         /// class. Returns false, if not. Calling searchForNewer() may throw an
         /// exception in the later case.</returns>
-        public bool implementsSearchForNewer()
+        public override bool implementsSearchForNewer()
         {
             return true;
         }
@@ -395,7 +395,7 @@ namespace updater_cli.software
         /// </summary>
         /// <returns>Returns an AvailableSoftware instance with the information
         /// that was retrieved from the net.</returns>
-        public AvailableSoftware searchForNewer()
+        public override AvailableSoftware searchForNewer()
         {
             string newerVersion = determineNewestVersion();
             if (string.IsNullOrWhiteSpace(newerVersion))

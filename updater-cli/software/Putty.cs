@@ -18,8 +18,10 @@
 
 using updater_cli.data;
 using System;
+using System.Diagnostics;
 using System.Net;
 using System.Text.RegularExpressions;
+using System.Collections.Generic;
 
 namespace updater_cli.software
 {
@@ -137,6 +139,58 @@ namespace updater_cli.software
             newInfo.install64Bit.downloadUrl = newInfo.install64Bit.downloadUrl.Replace(oldVersion, newVersion);
             newInfo.install64Bit.checksum = hash64;
             return newInfo;
+        }
+
+
+        /// <summary>
+        /// whether or not a separate process must be run before the update
+        /// </summary>
+        /// <param name="detected">currently installed / detected software version</param>
+        /// <returns>Returns true, if a separate proess returned by
+        /// preUpdateProcess() needs to run in preparation of the update.
+        /// Returns false, if not. Calling preUpdateProcess() may throw an
+        /// exception in the later case.</returns>
+        public bool needsPreUpdateProcess(DetectedSoftware detected)
+        {
+            if (string.IsNullOrWhiteSpace(detected.displayVersion))
+                return false;
+
+            return string.Compare(detected.displayVersion, "0.68") < 0;
+        }
+
+
+        /// <summary>
+        /// returns a process that must be run before the update
+        /// </summary>
+        /// <param name="detected">currently installed / detected software version</param>
+        /// <returns>Returns a Process ready to start that should be run before
+        /// the update. May return null or may throw, of needsPreUpdateProcess()
+        /// returned false.</returns>
+        public List<Process> preUpdateProcess(DetectedSoftware detected)
+        {
+            //We do not need a pre-update process, if the version is 0.68 or
+            // newer, because that one uses MSI.
+            // We also cannot create a process, if the install directory is
+            // unknown.
+            if (string.IsNullOrWhiteSpace(detected.displayVersion)
+                || string.IsNullOrWhiteSpace(detected.installPath)
+                || (string.Compare(detected.displayVersion, "0.68") >= 0))
+                return null;
+
+            var processes = new List<Process>();
+            //first process:
+            // delete putty.exe to disable prompt that deletes settings (we want to keep them)
+            var proc = new Process();
+                proc.StartInfo.FileName = "cmd.exe";
+            proc.StartInfo.Arguments = "/C del \""
+                + System.IO.Path.Combine(detected.installPath, "putty.exe") + "\"";
+            processes.Add(proc);
+            //second process: uninstall old PuTTY
+            proc = new Process();
+            proc.StartInfo.FileName = System.IO.Path.Combine(detected.installPath, "unins000.exe");
+            proc.StartInfo.Arguments = "/VERYSILENT /SUPPRESSMSGBOXES /NORESTART";
+            processes.Add(proc);
+            return processes;
         }
     } //class
 } //namesoace

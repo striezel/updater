@@ -23,14 +23,14 @@ using updater_cli.data;
 
 namespace updater_cli.software
 {
-    public class CDBurnerXP : ISoftware
+    public class CDBurnerXP : NoPreUpdateProcessSoftware
     {
         /// <summary>
         /// gets the currently known information about the software
         /// </summary>
         /// <returns>Returns an AvailableSoftware instance with the known
         /// details about the software.</returns>
-        public AvailableSoftware info()
+        public override AvailableSoftware info()
         {
             return new AvailableSoftware("CDBurnerXP", "4.5.7.6521",
                 "^CDBurnerXP$",
@@ -59,7 +59,7 @@ namespace updater_cli.software
         /// <returns>Returns true, if searchForNewer() is implemented for that
         /// class. Returns false, if not. Calling searchForNewer() may throw an
         /// exception in the later case.</returns>
-        public bool implementsSearchForNewer()
+        public override bool implementsSearchForNewer()
         {
             return true;
         }
@@ -70,7 +70,7 @@ namespace updater_cli.software
         /// </summary>
         /// <returns>Returns an AvailableSoftware instance with the information
         /// that was retrieved from the net.</returns>
-        public AvailableSoftware searchForNewer()
+        public override AvailableSoftware searchForNewer()
         {
             string htmlCode = null;
             using (var client = new WebClient())

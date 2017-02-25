@@ -24,7 +24,7 @@ using updater_cli.data;
 
 namespace updater_cli.software
 {
-    public class Thunderbird : ISoftware
+    public class Thunderbird : NoPreUpdateProcessSoftware
     {
         /// <summary>
         /// constructor with language code
@@ -128,7 +128,7 @@ namespace updater_cli.software
         /// </summary>
         /// <returns>Returns an AvailableSoftware instance with the known
         /// details about the software.</returns>
-        public AvailableSoftware info()
+        public override AvailableSoftware info()
         {
             return new AvailableSoftware("Mozilla Thunderbird (" + languageCode + ")",
                 "45.7.1",
@@ -228,7 +228,7 @@ namespace updater_cli.software
         /// <returns>Returns true, if searchForNewer() is implemented for that
         /// class. Returns false, if not. Calling searchForNewer() may throw an
         /// exception in the later case.</returns>
-        public bool implementsSearchForNewer()
+        public override bool implementsSearchForNewer()
         {
             return true;
         }
@@ -239,7 +239,7 @@ namespace updater_cli.software
         /// </summary>
         /// <returns>Returns an AvailableSoftware instance with the information
         /// that was retrieved from the net.</returns>
-        public AvailableSoftware searchForNewer()
+        public override AvailableSoftware searchForNewer()
         {
             string newerVersion = determineNewestVersion();
             var currentInfo = info();

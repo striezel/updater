@@ -23,16 +23,17 @@ using updater_cli.data;
 namespace updater_cli.software
 {
     /// <summary>
-    /// interface to provide information for various softwares
+    /// abstract base class for software that needs no separate task in
+    /// preparation for the update
     /// </summary>
-    public interface ISoftware
+    public abstract class NoPreUpdateProcessSoftware : ISoftware
     {
         /// <summary>
         /// gets the currently known information about the software
         /// </summary>
         /// <returns>Returns an AvailableSoftware instance with the known
         /// details about the software.</returns>
-        AvailableSoftware info();
+        public abstract AvailableSoftware info();
 
 
         /// <summary>
@@ -41,7 +42,7 @@ namespace updater_cli.software
         /// <returns>Returns true, if searchForNewer() is implemented for that
         /// class. Returns false, if not. Calling searchForNewer() may throw an
         /// exception in the later case.</returns>
-        bool implementsSearchForNewer();
+        public abstract bool implementsSearchForNewer();
 
 
         /// <summary>
@@ -49,7 +50,7 @@ namespace updater_cli.software
         /// </summary>
         /// <returns>Returns an AvailableSoftware instance with the information
         /// that was retrieved from the net.</returns>
-        AvailableSoftware searchForNewer();
+        public abstract AvailableSoftware searchForNewer();
 
 
         /// <summary>
@@ -60,7 +61,10 @@ namespace updater_cli.software
         /// preUpdateProcess() needs to run in preparation of the update.
         /// Returns false, if not. Calling preUpdateProcess() may throw an
         /// exception in the later case.</returns>
-        bool needsPreUpdateProcess(DetectedSoftware detected);
+        public bool needsPreUpdateProcess(DetectedSoftware detected)
+        {
+            return false;
+        }
 
 
         /// <summary>
@@ -70,6 +74,10 @@ namespace updater_cli.software
         /// <returns>Returns a Process ready to start that should be run before
         /// the update. May return null or may throw, of needsPreUpdateProcess()
         /// returned false.</returns>
-        List<Process> preUpdateProcess(DetectedSoftware detected);
-    } //interface
+        public List<Process> preUpdateProcess(DetectedSoftware detected)
+        {
+            return null;
+        }
+
+    } //class
 } //namespace

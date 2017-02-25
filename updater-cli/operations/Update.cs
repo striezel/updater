@@ -58,6 +58,7 @@ namespace updater_cli.operations
                 Console.WriteLine("No known software was found, so no update will be performed.");
                 return -1;
             }
+            //set some reasonable timeout, if necessary
             if (timeoutPerUpdate <= 10)
             {
                 timeoutPerUpdate = defaultTimeout;
@@ -132,6 +133,62 @@ namespace updater_cli.operations
                 //start update process
                 try
                 {
+                    //preparational process needed?
+                    if (entry.software.needsPreUpdateProcess(entry.detected))
+                    {
+                        var preProcs = entry.software.preUpdateProcess(entry.detected);
+                        if (null == preProcs)
+                        {
+                            Console.WriteLine("Error: Pre-update process for "
+                                + entry.software.info().Name + " is null!");
+                            return -1 - updatedApplications;
+                        }
+
+                        foreach (System.Diagnostics.Process preProc in preProcs)
+                        {
+                            Console.WriteLine("Info: Starting pre-update task for "
+                                + entry.software.info().Name + "...");
+                            try
+                            {
+                                preProc.Start();
+                                uint intervalCounter = 0;
+                                do
+                                {
+                                    System.Threading.Thread.Sleep(1000);
+                                    ++intervalCounter;
+                                    if (preProc.HasExited)
+                                    {
+                                        Console.WriteLine("Info: Pre-update process exited after "
+                                            + intervalCounter.ToString() + " second(s) with code "
+                                            + preProc.ExitCode.ToString() + ".");
+                                        break;
+                                    }
+                                    //only wait up to timeoutPerUpdate seconds
+                                } while (intervalCounter <= timeoutPerUpdate);
+                                bool success = preProc.HasExited && (preProc.ExitCode == 0);
+                                //Kill it, if it is not done yet.
+                                if (!preProc.HasExited)
+                                {
+                                    Console.WriteLine("Error: Killing pre-update process, because timeout has been reached.");
+                                    preProc.Kill();
+                                    return -1 - updatedApplications;
+                                }
+                                if (!success)
+                                {
+                                    Console.WriteLine("Error: Could not perform pre-update task for "
+                                        + entry.software.info().Name + ".");
+                                    return -1 - updatedApplications;
+                                }
+                            } //try-c
+                            catch (Exception ex)
+                            {
+                                Console.WriteLine("Error: An exception occurred while running a pre-update tast for "
+                                    + entry.software.info().Name + ": " + ex.Message);
+                                return -1 - updatedApplications;
+                            }
+                        } //foreach
+                    } //if preparational process is needed
+
                     var proc = instInfo.createInstallProccess(downloadedFile);
                     if (null == proc)
                     {
@@ -192,7 +249,7 @@ namespace updater_cli.operations
                     }
                     catch (Exception ex)
                     {
-                        Console.WriteLine("Error: Could not delete file "
+                        Console.WriteLine("Error: Could not delete installer file "
                             + downloadedFile + " after update: " + ex.Message);
                     }
                 } //try-finally
