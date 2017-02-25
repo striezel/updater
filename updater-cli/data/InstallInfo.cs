@@ -16,6 +16,7 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+using System.Diagnostics;
 using System.Xml.Serialization;
 
 namespace updater_cli.data
@@ -73,17 +74,12 @@ namespace updater_cli.data
 
 
         /// <summary>
-        /// whether the installer is a simple exe file, not using msiexec
+        /// creates a process instance that can be used to perform the update
         /// </summary>
-        /// <returns>Returns true, if the installer does not use msiexec.</returns>
-        abstract public bool isExe();
-
-
-        /// <summary>
-        /// whether the installer uses msiexec
-        /// </summary>
-        /// <returns>Returns true, if the installer uses msiexec.</returns>
-        abstract public bool isMsi();
+        /// <param name="downloadedFile">path to the downloaded installer file</param>
+        /// <returns>Returns a process instance ready to start, if successful.
+        /// Returns null, if an error occurred.</returns>
+        public abstract Process createInstallProccess(string downloadedFile);
 
 
         /// <summary>

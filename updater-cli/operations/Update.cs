@@ -132,22 +132,12 @@ namespace updater_cli.operations
                 //start update process
                 try
                 {
-                    System.Diagnostics.Process proc = new System.Diagnostics.Process();
-                    if (instInfo.isExe())
+                    var proc = instInfo.createInstallProccess(downloadedFile);
+                    if (null == proc)
                     {
-                        proc.StartInfo.FileName = downloadedFile;
-                        proc.StartInfo.Arguments = instInfo.silentSwitches;
-                    }
-                    else if (instInfo.isMsi())
-                    {
-                        proc.StartInfo.FileName = "msiexec.exe";
-                        proc.StartInfo.Arguments = "/i \"" + downloadedFile + "\" " + instInfo.silentSwitches;
-                    }
-                    else
-                    {
-                        //unknown installer type - should never happen
-                        Console.WriteLine("Error: " + entry.software.info().Name
-                            + " has unknown installer type!");
+                        //error while creating install process - should never happen
+                        Console.WriteLine("Error: Could not create install process for "
+                            + entry.software.info().Name + "!");
                         return -1 - updatedApplications;
                     }
 

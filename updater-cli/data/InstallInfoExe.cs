@@ -16,6 +16,8 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+using System.Diagnostics;
+
 namespace updater_cli.data
 {
     /// <summary>
@@ -50,22 +52,20 @@ namespace updater_cli.data
 
 
         /// <summary>
-        /// whether the installer is a simple exe file, not using msiexec
+        /// creates a process instance that can be used to perform the update
         /// </summary>
-        /// <returns>Returns true, if the installer does not use msiexec.</returns>
-        public override bool isExe()
+        /// <param name="downloadedFile">path to the downloaded installer file</param>
+        /// <returns>Returns a process instance ready to start, if successful.
+        /// Returns null, if an error occurred.</returns>
+        public override Process createInstallProccess(string downloadedFile)
         {
-            return true;
-        }
+            if (string.IsNullOrWhiteSpace(downloadedFile))
+                return null;
 
-
-        /// <summary>
-        /// whether the installer uses msiexec
-        /// </summary>
-        /// <returns>Returns true, if the installer uses msiexec.</returns>
-        public override bool isMsi()
-        {
-            return false;
+            var proc = new Process();
+            proc.StartInfo.FileName = downloadedFile;
+            proc.StartInfo.Arguments = silentSwitches;
+            return proc;
         }
     } //class
 } //namespace
