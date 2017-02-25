@@ -112,10 +112,10 @@ namespace updater_cli.operations
 
             //determine longest entries
             int maxSoftwareNameLength = cName.Length;
-            int maxAppTypeLength = Math.Max(cAppType.Length, ApplicationType.Bit32.ToString().Length);
+            int maxAppTypeLength = Math.Max(cAppType.Length, utility.Strings.appTypeToString(ApplicationType.Bit32).Length);
             int maxCurrentVersionLength = Math.Max(cCurrent.Length, cVersion.Length);
             int maxNewestVersionLength = Math.Max(cNewest.Length, cVersion.Length);
-            int maxUpdatableLength = Math.Max(cUpdatable1.Length, cUpdatable2.Length); ;
+            int maxUpdatableLength = Math.Max(cUpdatable1.Length, cUpdatable2.Length);
             foreach (var item in query)
             {
                 var info = item.software.info();
@@ -156,7 +156,7 @@ namespace updater_cli.operations
                 //name of software
                 output += "| " + info.Name.PadRight(maxSoftwareNameLength) + " | ";
                 //application type
-                output += item.type.ToString().PadRight(maxAppTypeLength) + " | ";
+                output += utility.Strings.appTypeToString(item.type).PadRight(maxAppTypeLength) + " | ";
                 //currently installed version
                 if (!string.IsNullOrWhiteSpace(item.detected.displayVersion))
                 output += item.detected.displayVersion.PadRight(maxCurrentVersionLength);

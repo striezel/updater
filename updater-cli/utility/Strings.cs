@@ -36,5 +36,26 @@ namespace updater_cli.utility
             else
                 return "no";
         }
+
+
+        /// <summary>
+        /// returns a string representation of the application type
+        /// </summary>
+        /// <param name="appT">the application type</param>
+        /// <returns>Returns a string indicating the appliation type.</returns>
+        public static string appTypeToString(data.ApplicationType appT)
+        {
+            switch (appT)
+            {
+                
+                case data.ApplicationType.Bit32:
+                    return "32 bit";
+                case data.ApplicationType.Bit64:
+                    return "64 bit";
+                case data.ApplicationType.Unknown:
+                default:
+                    return "unknown";
+            } //switch
+        }
     } //class
 } //namespace
