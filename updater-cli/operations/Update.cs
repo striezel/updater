@@ -30,7 +30,7 @@ namespace updater_cli.operations
         /// default timeout (in seconds) after which an update of a single
         /// application will be cancelled, if it is still in progress
         /// </summary>
-        public const uint defaultTimeout = 120;
+        public const uint defaultTimeout = 900;
 
 
         /// <summary>
