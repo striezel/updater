@@ -60,6 +60,7 @@ namespace updater_cli.software
                 } //foreach
             } //if aurora is requested, too
             result.Add(new KeePass());
+            result.Add(new LibreOffice());
             result.Add(new NotepadPlusPlus());
             result.Add(new Putty());
             result.Add(new SevenZip());

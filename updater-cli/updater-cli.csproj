@@ -85,6 +85,7 @@
     <Compile Include="software\FirefoxAurora.cs" />
     <Compile Include="software\FirefoxESR.cs" />
     <Compile Include="software\ISoftware.cs" />
+    <Compile Include="software\LibreOffice.cs" />
     <Compile Include="software\NoPreUpdateProcessSoftware.cs" />
     <Compile Include="software\NotepadPlusPlus.cs" />
     <Compile Include="software\KeePass.cs" />
