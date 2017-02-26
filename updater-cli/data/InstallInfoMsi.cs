@@ -55,16 +55,21 @@ namespace updater_cli.data
         /// creates a process instance that can be used to perform the update
         /// </summary>
         /// <param name="downloadedFile">path to the downloaded installer file</param>
+        /// <param name="detected">info about detected software</param>
         /// <returns>Returns a process instance ready to start, if successful.
         /// Returns null, if an error occurred.</returns>
-        public override Process createInstallProccess(string downloadedFile)
+        public override Process createInstallProccess(string downloadedFile, DetectedSoftware detected)
         {
             if (string.IsNullOrWhiteSpace(downloadedFile))
                 return null;
 
             var proc = new Process();
             proc.StartInfo.FileName = "msiexec.exe";
-            proc.StartInfo.Arguments = "/i \"" + downloadedFile + "\" " + silentSwitches;
+            if (!string.IsNullOrWhiteSpace(detected.installPath))
+                proc.StartInfo.Arguments = "/i \"" + downloadedFile
+                    + "\" TARGETDIR=\"" + detected.installPath + "\" " + silentSwitches;
+            else
+                proc.StartInfo.Arguments = "/i \"" + downloadedFile + "\" " + silentSwitches;
             return proc;
         }
     } //class

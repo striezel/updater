@@ -77,9 +77,10 @@ namespace updater_cli.data
         /// creates a process instance that can be used to perform the update
         /// </summary>
         /// <param name="downloadedFile">path to the downloaded installer file</param>
+        /// <param name="detected">info about the detected software</param>
         /// <returns>Returns a process instance ready to start, if successful.
         /// Returns null, if an error occurred.</returns>
-        public abstract Process createInstallProccess(string downloadedFile);
+        public abstract Process createInstallProccess(string downloadedFile, DetectedSoftware detected);
 
 
         /// <summary>

@@ -115,6 +115,7 @@ namespace updater_cli.operations
                 }
 
                 //calculate checksum
+                Console.WriteLine("Calculating checksum of " + downloadedFile + " ...");
                 string hash = utility.Checksum.calculate(downloadedFile, instInfo.algorithm);
                 if (string.IsNullOrWhiteSpace(hash))
                 {
@@ -129,6 +130,7 @@ namespace updater_cli.operations
                     File.Delete(downloadedFile);
                     return -1 - updatedApplications;
                 }
+                Console.WriteLine("Info: Checksum of " + downloadedFile + " is correct.");
 
                 //start update process
                 try
@@ -189,7 +191,7 @@ namespace updater_cli.operations
                         } //foreach
                     } //if preparational process is needed
 
-                    var proc = instInfo.createInstallProccess(downloadedFile);
+                    var proc = instInfo.createInstallProccess(downloadedFile, entry.detected);
                     if (null == proc)
                     {
                         //error while creating install process - should never happen
