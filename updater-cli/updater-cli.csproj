@@ -60,6 +60,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="data\InstallInfoExe.cs" />
+    <Compile Include="data\InstallInfoLibO.cs" />
     <Compile Include="data\InstallInfoMsi.cs" />
     <Compile Include="operations\IOperation.cs" />
     <Compile Include="operations\Operation.cs" />

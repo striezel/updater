@@ -21,14 +21,14 @@ using System.Diagnostics;
 namespace updater_cli.data
 {
     /// <summary>
-    /// holds information about an installer using msiexec
+    /// special case of MSI installation for LibreOffice
     /// </summary>
-    public class InstallInfoMsi : InstallInfo
+    public class InstallInfoLibO : InstallInfo
     {
         /// <summary>
         /// default constructor
         /// </summary>
-        public InstallInfoMsi()
+        public InstallInfoLibO()
             : base()
         {
             //base class constructor does initialization
@@ -44,7 +44,7 @@ namespace updater_cli.data
         /// <param name="_silent">switches for silent installation</param>
         /// <param name="_def32">default installation path on 32 bit systems</param>
         /// <param name="_def64">default installation path on 64 bit systems</param>
-        public InstallInfoMsi(string _downloadUrl, HashAlgorithm _algo, string _check, string _silent, string _def32, string _def64)
+        public InstallInfoLibO(string _downloadUrl, HashAlgorithm _algo, string _check, string _silent, string _def32, string _def64)
             : base(_downloadUrl, _algo, _check, _silent, _def32, _def64)
         {
             //base class constructor does initialization
@@ -67,7 +67,7 @@ namespace updater_cli.data
             proc.StartInfo.FileName = "msiexec.exe";
             if (!string.IsNullOrWhiteSpace(detected.installPath))
                 proc.StartInfo.Arguments = "/i \"" + downloadedFile
-                    + "\" INSTALLDIR=\"" + utility.Strings.removeTrailingBackslash(detected.installPath) + "\" " + silentSwitches;
+                    + "\" INSTALLLOCATION=\"" + utility.Strings.removeTrailingBackslash(detected.installPath) + "\" " + silentSwitches;
             else
                 proc.StartInfo.Arguments = "/i \"" + downloadedFile + "\" " + silentSwitches;
             return proc;

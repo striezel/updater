@@ -35,14 +35,14 @@ namespace updater_cli.software
             return new AvailableSoftware("LibreOffice", "5.3.0.3",
                 "^LibreOffice [0-9]\\.[0-9]\\.[0-9]\\.[0-9]$",
                 "^LibreOffice [0-9]\\.[0-9]\\.[0-9]\\.[0-9]$",
-                new InstallInfoMsi(
+                new InstallInfoLibO(
                     "http://download.documentfoundation.org/libreoffice/stable/5.3.0/win/x86/LibreOffice_5.3.0_Win_x86.msi",
                     HashAlgorithm.SHA256,
                     "1dd1026627a1f83b095cee9a1ce9444e2e6b137c061123e26df80dd40317ef25",
                     "/qn /norestart",
                     "C:\\Program Files\\LibreOffice 5",
                     "C:\\Program Files (x86)\\LibreOffice 5"),
-                new InstallInfoMsi(
+                new InstallInfoLibO(
                     "http://download.documentfoundation.org/libreoffice/stable/5.3.0/win/x86_64/LibreOffice_5.3.0_Win_x64.msi",
                     HashAlgorithm.SHA256,
                     "1347fc4edba74a5ca20f35c89d8ad68b57a9d52b23c3c8b2b3737b0ca94c01b4",

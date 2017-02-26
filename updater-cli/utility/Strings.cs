@@ -57,5 +57,23 @@ namespace updater_cli.utility
                     return "unknown";
             } //switch
         }
+
+
+        /// <summary>
+        /// removes a backslash from the end of the string
+        /// </summary>
+        /// <param name="val">the string</param>
+        /// <returns>Returns the string with the backslash removed.</returns>
+        public static string removeTrailingBackslash(string val)
+        {
+            if (string.IsNullOrWhiteSpace(val))
+                return val;
+
+            int len = val.Length;
+            if (val[len - 1] == '\\')
+                return val.Remove(len - 1);
+            else
+                return val;
+        }
     } //class
 } //namespace

@@ -33,5 +33,16 @@ namespace updater_test.utility
             Assert.AreEqual<string>("yes", Strings.boolToYesNo(true));
             Assert.AreEqual<string>("no", Strings.boolToYesNo(false));
         }
-    }
-}
+
+
+        [TestMethod]
+        public void Test_removeTrailingBackslash()
+        {
+            Assert.AreEqual<string>("C:\\Program Files\\LibreOffice 5",
+                Strings.removeTrailingBackslash("C:\\Program Files\\LibreOffice 5\\"));
+            Assert.AreEqual<string>("C:\\Program Files\\LibreOffice 5",
+                Strings.removeTrailingBackslash("C:\\Program Files\\LibreOffice 5"));
+
+        }
+    } //class
+} //namespace
