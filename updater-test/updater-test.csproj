@@ -63,6 +63,7 @@
     <Compile Include="software\FirefoxAurora_Tests.cs" />
     <Compile Include="software\Firefox_Tests.cs" />
     <Compile Include="software\KeePass_Tests.cs" />
+    <Compile Include="software\LibreOfficeHelpPackGerman_Tests.cs" />
     <Compile Include="software\LibreOffice_Tests.cs" />
     <Compile Include="software\NotepadPlusPlus_Tests.cs" />
     <Compile Include="software\Putty_Tests.cs" />
