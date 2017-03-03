@@ -7,6 +7,7 @@ updater application.
 
 * 7-Zip
 * CDBurnerXP
+* Inkscape
 * KeePass 2
 * LibreOffice
 * Mozilla Firefox
@@ -27,7 +28,6 @@ updater application.
 * FileZilla
 * GIMP
 * Google Chrome
-* Inkscape
 * IrfanView
 * Java Development Kit
 * Java Runtime Environment

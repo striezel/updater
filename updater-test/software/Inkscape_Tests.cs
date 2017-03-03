@@ -22,16 +22,15 @@ using updater_cli.software;
 namespace updater_test.software
 {
     [TestClass]
-    public class CDBurnerXP_Tests : BasicSoftwareTests
+    public class Inkscape_Tests : BasicSoftwareTests
     {
-
         /// <summary>
         /// checks whether info() returns some meaningful data
         /// </summary>
         [TestMethod]
         public void Test_info()
         {
-            _info(new CDBurnerXP());
+            _info(new Inkscape());
         }
 
 
@@ -41,8 +40,8 @@ namespace updater_test.software
         [TestMethod]
         public void Test_implementsSearchForNewer()
         {
-            var cd = new CDBurnerXP();
-            Assert.IsTrue(cd.implementsSearchForNewer());
+            var i = new Inkscape();
+            Assert.IsTrue(i.implementsSearchForNewer());
         }
 
 
@@ -52,7 +51,7 @@ namespace updater_test.software
         [TestMethod]
         public void Test_searchForNewer()
         {
-            _searchForNewer(new CDBurnerXP());
+            _searchForNewer(new Inkscape());
         }
 
 
@@ -62,7 +61,7 @@ namespace updater_test.software
         [TestMethod]
         public void Test_upToDate_info()
         {
-            _upToDate_info(new CDBurnerXP());
+            _upToDate_info(new Inkscape());
         }
 
     } //class

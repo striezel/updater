@@ -192,5 +192,19 @@ namespace updater_cli.software
             processes.Add(proc);
             return processes;
         }
+
+
+        /// <summary>
+        /// whether the detected software is older than the newest known software
+        /// </summary>
+        /// <param name="detected">the corresponding detected software</param>
+        /// <returns>Returns true, if the detected software version is older
+        /// than the newest software version, thus needing an update.
+        /// Returns false, if no update is necessary.</returns>
+        public bool needsUpdate(DetectedSoftware detected)
+        {
+            //Simple version string comparison.
+            return (string.Compare(detected.displayVersion, info().newestVersion, true) < 0);
+        }
     } //class
 } //namesoace

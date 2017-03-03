@@ -59,6 +59,7 @@ namespace updater_cli.software
                     result.Add(new FirefoxAurora(lang));
                 } //foreach
             } //if aurora is requested, too
+            result.Add(new Inkscape());
             result.Add(new KeePass());
             result.Add(new LibreOffice());
             result.Add(new LibreOfficeHelpPackGerman());

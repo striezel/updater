@@ -66,7 +66,7 @@ namespace updater_cli.operations
                     if ((idx >= 0) && (detected[idx].appType == ApplicationType.Bit64))
                     {
                         //found it
-                        bool needsUpdate = (string.Compare(detected[idx].displayVersion, info.newestVersion, true) < 0);
+                        bool needsUpdate = item.needsUpdate(detected[idx]);
                         result.Add(new QueryEntry(item, detected[idx], needsUpdate, ApplicationType.Bit64));
                     } //if match was found
                 } //if 64 bit expression does exist and we are on a 64 bit system
@@ -77,7 +77,7 @@ namespace updater_cli.operations
                     if ((idx >= 0) && (detected[idx].appType == ApplicationType.Bit32))
                     {
                         //found it
-                        bool needsUpdate = (string.Compare(detected[idx].displayVersion, info.newestVersion, true) < 0);
+                        bool needsUpdate = item.needsUpdate(detected[idx]);
                         result.Add(new QueryEntry(item, detected[idx], needsUpdate, ApplicationType.Bit32));
                     } //if match was found
                 } //if 32 bit expression does exist

@@ -62,6 +62,7 @@
     <Compile Include="software\BasicSoftwareTests.cs" />
     <Compile Include="software\FirefoxAurora_Tests.cs" />
     <Compile Include="software\Firefox_Tests.cs" />
+    <Compile Include="software\Inkscape_Tests.cs" />
     <Compile Include="software\KeePass_Tests.cs" />
     <Compile Include="software\LibreOfficeHelpPackGerman_Tests.cs" />
     <Compile Include="software\LibreOffice_Tests.cs" />

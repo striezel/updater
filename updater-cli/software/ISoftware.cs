@@ -71,5 +71,15 @@ namespace updater_cli.software
         /// the update. May return null or may throw, of needsPreUpdateProcess()
         /// returned false.</returns>
         List<Process> preUpdateProcess(DetectedSoftware detected);
+
+
+        /// <summary>
+        /// whether the detected software is older than the newest known software
+        /// </summary>
+        /// <param name="detected">the corresponding detected software</param>
+        /// <returns>Returns true, if the detected software version is older
+        /// than the newest software version, thus needing an update.
+        /// Returns false, if no update is necessary.</returns>
+        bool needsUpdate(DetectedSoftware detected);
     } //interface
 } //namespace
