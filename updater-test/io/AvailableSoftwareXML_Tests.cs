@@ -43,7 +43,6 @@ namespace updater_test.io
             {
                 //save file to XML
                 Assert.IsTrue(AvailableSoftwareXML.write(tempName, listOut));
-                var listIn = new List<AvailableSoftware>();
             }
             finally
             {

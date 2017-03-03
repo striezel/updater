@@ -47,7 +47,7 @@ namespace updater_test
 
 
         /// <summary>
-        /// gest an instance if AvailabeSoftware filled with example data
+        /// gets an instance if AvailableSoftware filled with example data
         /// </summary>
         /// <returns>Returns a filled instance of AvailableSoftware class.</returns>
         internal static AvailableSoftware getAcme()
