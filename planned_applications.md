@@ -7,6 +7,7 @@ updater application.
 
 * 7-Zip
 * CDBurnerXP
+* GIMP
 * Inkscape
 * KeePass 2
 * LibreOffice
@@ -26,7 +27,6 @@ updater application.
 * Audacity
 * CCleaner
 * FileZilla
-* GIMP
 * Google Chrome
 * IrfanView
 * Java Development Kit

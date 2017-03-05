@@ -68,6 +68,7 @@
     <Compile Include="software\LibreOffice_Tests.cs" />
     <Compile Include="software\NotepadPlusPlus_Tests.cs" />
     <Compile Include="software\Putty_Tests.cs" />
+    <Compile Include="software\Gimp_Tests.cs" />
     <Compile Include="software\SevenZip_Tests.cs" />
     <Compile Include="software\Thunderbird_Tests.cs" />
     <Compile Include="software\CDBurnerXP_Tests.cs" />
