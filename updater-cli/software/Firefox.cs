@@ -322,7 +322,7 @@ namespace updater_cli.software
                 string newLocation = response.Headers[HttpResponseHeader.Location];
                 request = null;
                 response = null;
-                Regex reVersion = new Regex("[0-9]{2}\\.[0-9]\\.[0-9]");
+                Regex reVersion = new Regex("[0-9]{2}\\.[0-9](\\.[0-9])?");
                 Match matchVersion = reVersion.Match(newLocation);
                 if (!matchVersion.Success)
                     return null;
