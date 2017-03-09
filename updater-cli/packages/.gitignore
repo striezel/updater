@@ -1,0 +1,11 @@
+# ignore NLog files for other .NET versions
+NLog.?.?.?/lib/MonoAndroid*/
+NLog.?.?.?/lib/net35/
+NLog.?.?.?/lib/net45/
+NLog.?.?.?/lib/sl4/
+NLog.?.?.?/lib/sl5/
+NLog.?.?.?/lib/wp8/
+NLog.?.?.?/lib/Xamarin*/
+
+# ignore .nupkg files
+*.nupkg
