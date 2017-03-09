@@ -48,8 +48,8 @@ namespace updater_cli.operations
         /// this increases time of the query by quite a bit (several seconds).</param>
         public Update(bool _autoGetNewer, bool withAurora)
         {
-            includeAurora = _autoGetNewer;
-            autoGetNewer = withAurora;
+            includeAurora = withAurora;
+            autoGetNewer = _autoGetNewer;
         }
         
         
