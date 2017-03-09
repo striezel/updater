@@ -24,6 +24,12 @@ namespace updater_cli
     class Program
     {
         /// <summary>
+        /// NLog.Logger for Program
+        /// </summary>
+        private static NLog.Logger logger = NLog.LogManager.GetLogger(typeof(Program).FullName);
+
+
+        /// <summary>
         /// shows the current program version
         /// </summary>
         static void showVersion()
@@ -36,9 +42,11 @@ namespace updater_cli
 
         static int Main(string[] args)
         {
+            utility.Logging.initialize();
+
             if (args.Length < 1)
             {
-                Console.WriteLine("Error: At least one command line argument must be present!");
+                logger.Error("Error: At least one command line argument must be present!");
                 return ReturnCodes.rcInvalidParameter;
             }
 
@@ -80,14 +88,14 @@ namespace updater_cli
                         autoGetNewer = true;
                         break;
                     default:
-                        Console.WriteLine("Error: " + param + " is not a valid command line option!");
+                        logger.Error("Error: " + param + " is not a valid command line option!");
                         return ReturnCodes.rcInvalidParameter;
                 } //switch
             } //for
 
             if (op == Operation.Unknown)
             {
-                Console.WriteLine("Error: No operation was specified!");
+                logger.Error("Error: No operation was specified!");
                 return ReturnCodes.rcInvalidParameter;
             }
 
@@ -105,7 +113,7 @@ namespace updater_cli
                     break;
                 case Operation.Unknown:
                 default:
-                    Console.WriteLine("Unknown operation was specified! Exiting program.");
+                    logger.Error("Unknown operation was specified! Exiting program.");
                     return ReturnCodes.rcUnknownOperation;
             } //switch
             return operation.perform();

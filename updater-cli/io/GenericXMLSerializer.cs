@@ -30,6 +30,12 @@ namespace updater_cli.io
     public class GenericXmlSerializer<T> where T: new()
     {
         /// <summary>
+        /// NLog.Logger for GenericXmlSerializer class
+        /// </summary>
+        private static NLog.Logger logger = NLog.LogManager.GetLogger(typeof(GenericXmlSerializer<T>).FullName);
+
+
+        /// <summary>
         /// constructor
         /// </summary>
         /// <param name="_rootElementName">name of the root element</param>
@@ -82,7 +88,7 @@ namespace updater_cli.io
             catch (Exception ex)
             {
                 //Something bad happened here. Time to exit.
-                Console.WriteLine("Error while creating XML file: " + ex.Message);
+                logger.Error("Error while creating XML file: " + ex.Message);
                 return false;
             }
 
@@ -93,7 +99,7 @@ namespace updater_cli.io
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Error while writing to XML file: " + ex.Message);
+                logger.Error("Error while writing to XML file: " + ex.Message);
                 writer.Close();
                 writer = null;
                 return false;
@@ -109,7 +115,7 @@ namespace updater_cli.io
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine("Error while serializing data element to XML: " + ex.Message);
+                    logger.Error("Error while serializing data element to XML: " + ex.Message);
                     writer.Close();
                     writer = null;
                     return false;
@@ -124,7 +130,7 @@ namespace updater_cli.io
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Error while writing end element to XML: " + ex.Message);
+                logger.Error("Error while writing end element to XML: " + ex.Message);
                 success = false;
             }
             writer.Close();
@@ -166,7 +172,7 @@ namespace updater_cli.io
             catch (Exception ex)
             {
                 //Something bad happened here. Time to exit.
-                Console.WriteLine("Error while opening XML file: " + ex.Message);
+                logger.Error("Error while opening XML file: " + ex.Message);
                 return false;
             }
 
@@ -177,7 +183,7 @@ namespace updater_cli.io
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Error while reading start element from XML: " + ex.Message);
+                logger.Error("Error while reading start element from XML: " + ex.Message);
                 reader.Close();
                 reader = null;
                 return false;
@@ -219,7 +225,7 @@ namespace updater_cli.io
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Error while reading end element from XML: " + ex.Message);
+                logger.Error("Error while reading end element from XML: " + ex.Message);
                 success = false;
             }
             reader.Close();

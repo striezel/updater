@@ -1,6 +1,6 @@
 ﻿/*
     updater, command line interface
-    Copyright (C) 2016  Dirk Stolle
+    Copyright (C) 2016, 2017  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -26,6 +26,12 @@ namespace updater_cli.io
     /// </summary>
     public class CSVWriter
     {
+        /// <summary>
+        /// NLog.Logger for CSVWriter class
+        /// </summary>
+        private static NLog.Logger logger = NLog.LogManager.GetLogger(typeof(CSVWriter).FullName);
+
+
         /// <summary>
         /// default separator for CSV files
         /// </summary>
@@ -77,7 +83,7 @@ namespace updater_cli.io
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Error whilre writing CSV to " + fileName + ": " + ex.Message);
+                logger.Error("Error while writing CSV to " + fileName + ": " + ex.Message);
                 return false;
             }
         }

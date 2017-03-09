@@ -28,6 +28,12 @@ namespace updater_cli.software
     public class Putty : AbstractSoftware
     {
         /// <summary>
+        /// NLog.Logger for Putty class
+        /// </summary>
+        private static NLog.Logger logger = NLog.LogManager.GetLogger(typeof(Putty).FullName);
+
+
+        /// <summary>
         /// default constructor
         /// </summary>
         /// <param name="autoGetNewer">whether to automatically get
@@ -86,6 +92,7 @@ namespace updater_cli.software
         /// that was retrieved from the net.</returns>
         public override AvailableSoftware searchForNewer()
         {
+            logger.Debug("Searching for newer version of PuTTY...");
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://the.earth.li/~sgtatham/putty/latest/");
             request.Method = WebRequestMethods.Http.Head;
             request.AllowAutoRedirect = false;
@@ -101,7 +108,7 @@ namespace updater_cli.software
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Error while looking for newer PuTTY version: " + ex.Message);
+                logger.Warn("Error while looking for newer PuTTY version: " + ex.Message);
                 return null;
             }
 
@@ -121,7 +128,7 @@ namespace updater_cli.software
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine("Exception occurred while checking for newer version of PuTTY: " + ex.Message);
+                    logger.Warn("Exception occurred while checking for newer version of PuTTY: " + ex.Message);
                     return null;
                 }
                 client.Dispose();

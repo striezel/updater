@@ -26,6 +26,12 @@ namespace updater_cli.software
     public class LibreOfficeHelpPackGerman : NoPreUpdateProcessSoftware
     {
         /// <summary>
+        /// NLog.Logger for LibreOfficeHelpPackGerman class
+        /// </summary>
+        private static NLog.Logger logger = NLog.LogManager.GetLogger(typeof(LibreOfficeHelpPackGerman).FullName);
+
+
+        /// <summary>
         /// default constructor
         /// </summary>
         /// <param name="autoGetNewer">whether to automatically get
@@ -82,6 +88,7 @@ namespace updater_cli.software
         /// that was retrieved from the net.</returns>
         public override AvailableSoftware searchForNewer()
         {
+            logger.Debug("Searching for newer version of LibreOffice Help Pack (German)...");
             string htmlCode = null;
             using (var client = new WebClient())
             {
@@ -91,7 +98,7 @@ namespace updater_cli.software
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine("Exception occurred while checking for newer version of LibreOffice Help Pack: " + ex.Message);
+                    logger.Warn("Exception occurred while checking for newer version of LibreOffice Help Pack: " + ex.Message);
                     return null;
                 }
                 client.Dispose();
@@ -120,7 +127,7 @@ namespace updater_cli.software
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine("Exception occurred while checking for newer version of LibreOffice Help Pack: " + ex.Message);
+                    logger.Warn("Exception occurred while checking for newer version of LibreOffice Help Pack: " + ex.Message);
                     return null;
                 }
                 client.Dispose();
@@ -142,7 +149,7 @@ namespace updater_cli.software
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine("Exception occurred while checking for newer version of LibreOffice: " + ex.Message);
+                    logger.Warn("Exception occurred while checking for newer version of LibreOffice Help Pack: " + ex.Message);
                     return null;
                 }
                 client.Dispose();

@@ -26,6 +26,12 @@ namespace updater_cli.software
     public class VLC : NoPreUpdateProcessSoftware
     {
         /// <summary>
+        /// NLog.Logger for VLC class
+        /// </summary>
+        private static NLog.Logger logger = NLog.LogManager.GetLogger(typeof(VLC).FullName);
+
+
+        /// <summary>
         /// default constructor
         /// </summary>
         /// <param name="autoGetNewer">whether to automatically get
@@ -84,6 +90,7 @@ namespace updater_cli.software
         /// that was retrieved from the net.</returns>
         public override AvailableSoftware searchForNewer()
         {
+            logger.Debug("Searching for newer version of VLC media player...");
             string htmlCode = null;
             using (var client = new WebClient())
             {
@@ -93,7 +100,7 @@ namespace updater_cli.software
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine("Exception occurred while checking for newer version of VLC: " + ex.Message);
+                    logger.Warn("Exception occurred while checking for newer version of VLC: " + ex.Message);
                     return null;
                 }
                 client.Dispose();
@@ -127,7 +134,7 @@ namespace updater_cli.software
                     }
                     catch (Exception ex)
                     {
-                        Console.WriteLine("Exception occurred while checking for newer version of VLC: " + ex.Message);
+                        logger.Warn("Exception occurred while checking for newer version of VLC: " + ex.Message);
                         return null;
                     }
                     client.Dispose();

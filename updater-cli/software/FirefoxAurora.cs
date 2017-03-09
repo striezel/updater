@@ -31,6 +31,12 @@ namespace updater_cli.software
     public class FirefoxAurora : NoPreUpdateProcessSoftware
     {
         /// <summary>
+        /// NLog.Logger for FirefoxAurora class
+        /// </summary>
+        private static NLog.Logger logger = NLog.LogManager.GetLogger(typeof(FirefoxAurora).FullName);
+
+
+        /// <summary>
         /// the currently known newest version
         /// </summary>
         private const string currentVersion = "53.0a2";
@@ -46,11 +52,17 @@ namespace updater_cli.software
             : base(autoGetNewer)
         {
             if (string.IsNullOrWhiteSpace(langCode))
+            {
+                logger.Error("The language code must not be null, empty or whitespace!");
                 throw new ArgumentNullException("langCode", "The language code must not be null, empty or whitespace!");
+            }
             languageCode = langCode.Trim();
             var validCodes = validLanguageCodes();
             if (!validCodes.Contains<string>(languageCode))
+            {
+                logger.Error("The string '" + langCode + "' does not represent a valid language code!");
                 throw new ArgumentOutOfRangeException("langCode", "The string '" + langCode + "' does not represent a valid language code!");
+            }
             //Do not set checksum explicitly, because nightly releases change too often.
             // Instead we try to get them on demand, when needed.
             checksum32Bit = null;
@@ -142,7 +154,7 @@ namespace updater_cli.software
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Error while looking for newer Firefox Developer Edition version: " + ex.Message);
+                logger.Warn("Error while looking for newer Firefox Developer Edition version: " + ex.Message);
                 return null;
             }
         }
@@ -177,7 +189,7 @@ namespace updater_cli.software
                     }
                     catch (Exception ex)
                     {
-                        Console.WriteLine("Exception occurred while checking for newer"
+                        logger.Warn("Exception occurred while checking for newer"
                             + " version of Firefox Developer Edition (" + languageCode + "): " + ex.Message);
                         return null;
                     }
@@ -216,6 +228,7 @@ namespace updater_cli.software
         /// that was retrieved from the net.</returns>
         public override AvailableSoftware searchForNewer()
         {
+            logger.Debug("Searching for newer version of Firefox Developer Edition (" + languageCode + ")...");
             string newerVersion = determineNewestVersion();
             if (string.IsNullOrWhiteSpace(newerVersion))
                 return null;

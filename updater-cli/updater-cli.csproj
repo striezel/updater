@@ -105,6 +105,7 @@
     <Compile Include="software\VLC.cs" />
     <Compile Include="software\WinSCP.cs" />
     <Compile Include="utility\Checksum.cs" />
+    <Compile Include="utility\Logging.cs" />
     <Compile Include="utility\Strings.cs" />
     <Compile Include="utility\Version.cs" />
   </ItemGroup>

@@ -27,6 +27,12 @@ namespace updater_cli.software
     public class Thunderbird : NoPreUpdateProcessSoftware
     {
         /// <summary>
+        /// NLog.Logger for Thunderbird class
+        /// </summary>
+        private static NLog.Logger logger = NLog.LogManager.GetLogger(typeof(Thunderbird).FullName);
+
+
+        /// <summary>
         /// constructor with language code
         /// </summary>
         /// <param name="langCode">the language code for the Thunderbird software,
@@ -37,11 +43,17 @@ namespace updater_cli.software
             : base(autoGetNewer)
         {
             if (string.IsNullOrWhiteSpace(langCode))
+            {
+                logger.Error("The language code must not be null, empty or whitespace!");
                 throw new ArgumentNullException("langCode", "The language code must not be null, empty or whitespace!");
+            }
             languageCode = langCode.Trim();
             var d = knownChecksums();
             if (!d.ContainsKey(languageCode))
+            {
+                logger.Error("The string '" + langCode + "' does not represent a valid language code!");
                 throw new ArgumentOutOfRangeException("langCode", "The string '" + langCode + "' does not represent a valid language code!");
+            }
             checksum = d[languageCode];
         }
 
@@ -178,7 +190,7 @@ namespace updater_cli.software
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Error while looking for newer Thunderbird version: " + ex.Message);
+                logger.Warn("Error while looking for newer Thunderbird version: " + ex.Message);
                 return null;
             }
         }
@@ -209,7 +221,7 @@ namespace updater_cli.software
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine("Exception occurred while checking for newer version of Thunderbird: " + ex.Message);
+                    logger.Warn("Exception occurred while checking for newer version of Thunderbird: " + ex.Message);
                     return null;
                 }
                 client.Dispose();
@@ -244,6 +256,7 @@ namespace updater_cli.software
         /// that was retrieved from the net.</returns>
         public override AvailableSoftware searchForNewer()
         {
+            logger.Debug("Searching for newer version of Thunderbird (" + languageCode + ")...");
             string newerVersion = determineNewestVersion();
             var currentInfo = knownInfo();
             if (string.IsNullOrWhiteSpace(newerVersion) || (newerVersion == currentInfo.newestVersion))

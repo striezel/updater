@@ -27,6 +27,12 @@ namespace updater_cli.operations
     public class Update : IOperation
     {
         /// <summary>
+        /// NLog.Logger for Update class
+        /// </summary>
+        private static NLog.Logger logger = NLog.LogManager.GetLogger(typeof(Update).FullName);
+
+
+        /// <summary>
         /// default timeout (in seconds) after which an update of a single
         /// application will be cancelled, if it is still in progress
         /// </summary>
@@ -60,7 +66,7 @@ namespace updater_cli.operations
                 return -1;
             if (status.Count == 0)
             {
-                Console.WriteLine("No known software was found, so no update will be performed.");
+                logger.Info("No known software was found, so no update will be performed.");
                 return -1;
             }
             //set some reasonable timeout, if necessary
@@ -86,11 +92,11 @@ namespace updater_cli.operations
                         instInfo = entry.software.info().install64Bit;
                         break;
                     case ApplicationType.Unknown:
-                        Console.WriteLine("Warning: Unknown application type detected for "
+                        logger.Warn("Warning: Unknown application type detected for "
                             + entry.software.info().Name + "! Update will be skipped.");
                         continue;
                     default:
-                        Console.WriteLine("Warning: Unknown application type detected for "
+                        logger.Warn("Warning: Unknown application type detected for "
                             + entry.software.info().Name + "! Update will be aborted.");
                         return -1 - updatedApplications;
                 } //switch
@@ -98,9 +104,9 @@ namespace updater_cli.operations
                 //If no checksum is provided, we do not even try to download the file.
                 if (!instInfo.hasChecksum())
                 {
-                    Console.WriteLine("Error: No checksum for download of "
+                    logger.Error("Error: No checksum for download of "
                         + entry.software.info().Name + "!");
-                    Console.WriteLine("Since installing unverified software can"
+                    logger.Error("Since installing unverified software can"
                         + " pose a security thread to your system, the update is cancelled.");
                     return -1 - updatedApplications;
                 }
@@ -108,34 +114,34 @@ namespace updater_cli.operations
                 //download file
                 if (string.IsNullOrWhiteSpace(instInfo.downloadUrl))
                 {
-                    Console.WriteLine("Error: No known download URL for " + entry.software.info().Name + "!");
+                    logger.Error("Error: No known download URL for " + entry.software.info().Name + "!");
                     return -1 - updatedApplications;
                 }
-                Console.WriteLine("Downloading " + instInfo.downloadUrl + "...");
+                logger.Info("Downloading " + instInfo.downloadUrl + "...");
                 string downloadedFile = download(instInfo.downloadUrl);
                 if (string.IsNullOrWhiteSpace(downloadedFile))
                 {
-                    Console.WriteLine("Error: Could not download installer from " + instInfo.downloadUrl + "!");
+                    logger.Error("Error: Could not download installer from " + instInfo.downloadUrl + "!");
                     return -1 - updatedApplications;
                 }
 
                 //calculate checksum
-                Console.WriteLine("Calculating checksum of " + downloadedFile + " ...");
+                logger.Info("Calculating checksum of " + downloadedFile + " ...");
                 string hash = utility.Checksum.calculate(downloadedFile, instInfo.algorithm);
                 if (string.IsNullOrWhiteSpace(hash))
                 {
-                    Console.WriteLine("Error: Could not calculate checksum of file " + downloadedFile + "!");
+                    logger.Error("Error: Could not calculate checksum of file " + downloadedFile + "!");
                     File.Delete(downloadedFile);
                     return -1 - updatedApplications;
                 }
                 if (!utility.Checksum.areEqual(hash, instInfo.checksum))
                 {
-                    Console.WriteLine("Error: Checksum of file " + downloadedFile
+                    logger.Error("Error: Checksum of file " + downloadedFile
                         + " is " + hash + ", but expected checksum is " + instInfo.checksum + "!");
                     File.Delete(downloadedFile);
                     return -1 - updatedApplications;
                 }
-                Console.WriteLine("Info: Checksum of " + downloadedFile + " is correct.");
+                logger.Info("Info: Checksum of " + downloadedFile + " is correct.");
 
                 //start update process
                 try
@@ -146,14 +152,14 @@ namespace updater_cli.operations
                         var preProcs = entry.software.preUpdateProcess(entry.detected);
                         if (null == preProcs)
                         {
-                            Console.WriteLine("Error: Pre-update process for "
+                            logger.Error("Error: Pre-update process for "
                                 + entry.software.info().Name + " is null!");
                             return -1 - updatedApplications;
                         }
 
                         foreach (System.Diagnostics.Process preProc in preProcs)
                         {
-                            Console.WriteLine("Info: Starting pre-update task for "
+                            logger.Info("Info: Starting pre-update task for "
                                 + entry.software.info().Name + "...");
                             try
                             {
@@ -165,7 +171,7 @@ namespace updater_cli.operations
                                     ++intervalCounter;
                                     if (preProc.HasExited)
                                     {
-                                        Console.WriteLine("Info: Pre-update process exited after "
+                                        logger.Info("Info: Pre-update process exited after "
                                             + intervalCounter.ToString() + " second(s) with code "
                                             + preProc.ExitCode.ToString() + ".");
                                         break;
@@ -176,20 +182,20 @@ namespace updater_cli.operations
                                 //Kill it, if it is not done yet.
                                 if (!preProc.HasExited)
                                 {
-                                    Console.WriteLine("Error: Killing pre-update process, because timeout has been reached.");
+                                    logger.Error("Error: Killing pre-update process, because timeout has been reached.");
                                     preProc.Kill();
                                     return -1 - updatedApplications;
                                 }
                                 if (!success)
                                 {
-                                    Console.WriteLine("Error: Could not perform pre-update task for "
+                                    logger.Error("Error: Could not perform pre-update task for "
                                         + entry.software.info().Name + ".");
                                     return -1 - updatedApplications;
                                 }
                             } //try-c
                             catch (Exception ex)
                             {
-                                Console.WriteLine("Error: An exception occurred while running a pre-update tast for "
+                                logger.Error("Error: An exception occurred while running a pre-update tast for "
                                     + entry.software.info().Name + ": " + ex.Message);
                                 return -1 - updatedApplications;
                             }
@@ -200,14 +206,15 @@ namespace updater_cli.operations
                     if (null == proc)
                     {
                         //error while creating install process - should never happen
-                        Console.WriteLine("Error: Could not create install process for "
+                        logger.Error("Error: Could not create install process for "
                             + entry.software.info().Name + "!");
                         return -1 - updatedApplications;
                     }
 
                     try
                     {
-                        Console.WriteLine("Info: Starting update of " + entry.software.info().Name + "...");
+                        logger.Info("Info: Starting update of " + entry.software.info().Name + "...");
+                        logger.Debug("Command line: " + proc.StartInfo.FileName + " " + proc.StartInfo.Arguments);
                         bool startedNew = proc.Start();
                         uint intervalCounter = 0;
                         do
@@ -216,7 +223,7 @@ namespace updater_cli.operations
                             ++intervalCounter;
                             if (proc.HasExited)
                             {
-                                Console.WriteLine("Info: Update process exited after "
+                                logger.Info("Info: Update process exited after "
                                     + intervalCounter.ToString() + " second(s) with code "
                                     + proc.ExitCode.ToString() + ".");
                                 break;
@@ -227,23 +234,23 @@ namespace updater_cli.operations
                         //Kill it, if it is not done yet.
                         if (!proc.HasExited)
                         {
-                            Console.WriteLine("Warning: Killing update process, because timeout has been reached.");
+                            logger.Warn("Warning: Killing update process, because timeout has been reached.");
                             proc.Kill();
                         }
                         if (success)
                         {
-                            Console.WriteLine("Info: Update of " + entry.software.info().Name + " was successful.");
+                            logger.Info("Info: Update of " + entry.software.info().Name + " was successful.");
                             ++updatedApplications;
                         }
                         else
                         {
-                            Console.WriteLine("Error: Could not update " + entry.software.info().Name + ".");
+                            logger.Error("Error: Could not update " + entry.software.info().Name + ".");
                             return -1 - updatedApplications;
                         }
                     } //try-c
                     catch (Exception ex)
                     {
-                        Console.WriteLine("Error: Exception occurred while updating "
+                        logger.Error("Error: Exception occurred while updating "
                             + entry.software.info().Name + ": " + ex.Message);
                         return -1 - updatedApplications;
                     } //try-catch
@@ -256,7 +263,7 @@ namespace updater_cli.operations
                     }
                     catch (Exception ex)
                     {
-                        Console.WriteLine("Error: Could not delete installer file "
+                        logger.Error("Error: Could not delete installer file "
                             + downloadedFile + " after update: " + ex.Message);
                     }
                 } //try-finally
@@ -302,7 +309,7 @@ namespace updater_cli.operations
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine("Error while creating cache directory: " + ex.Message);
+                    logger.Error("Error while creating cache directory: " + ex.Message);
                     return null;
                 }
             } //if
@@ -315,7 +322,7 @@ namespace updater_cli.operations
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine("An error occurred while downloading the file "
+                    logger.Error("An error occurred while downloading the file "
                         + url + ": " + ex.Message);
                     wc.Dispose();
                     return null;
@@ -371,19 +378,19 @@ namespace updater_cli.operations
             int result = update(query);
             if (result < 0)
             {
-                Console.WriteLine("At least one error occurred during the update.");
+                logger.Error("At least one error occurred during the update.");
                 if (result < -1)
                 {
-                    Console.WriteLine("However, " + (-result - 1).ToString() + " applications were updated.");
+                    logger.Info("However, " + (-result - 1).ToString() + " applications were updated.");
                 }
                 return result;
             }
             if (result == 1)
-                Console.WriteLine("One application was updated.");
+                logger.Info("One application was updated.");
             else if (result > 1)
-                Console.WriteLine(result.ToString() + " applications were updated.");
+                logger.Info(result.ToString() + " applications were updated.");
             else if (result == 0)
-                Console.WriteLine("No applications were updated.");
+                logger.Info("No applications were updated.");
             return 0;
         }
     } //class
