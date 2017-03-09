@@ -36,17 +36,20 @@ namespace updater_cli
 
         static int Main(string[] args)
         {
-            if (args.Length > 1)
+            if (args.Length < 1)
             {
-                Console.WriteLine("Error: No more than one command line argument is allowed!");
+                Console.WriteLine("Error: At least one command line argument must be present!");
                 return ReturnCodes.rcInvalidParameter;
             }
 
             Operation op = Operation.Unknown;
-            if (args.Length == 1)
+            bool autoGetNewer = false;
+            bool withAurora = false;
+
+            for (int i = 0; i < args.Length; i++)
             {
-                string command = args[0].ToLower();
-                switch (command)
+                string param = args[i].ToLower();
+                switch (param)
                 {
                     case "check":
                     case "query":
@@ -57,6 +60,7 @@ namespace updater_cli
                         op = Operation.Detect;
                         break;
                     case "update":
+                    case "upgrade":
                         op = Operation.Update;
                         break;
                     case "--version":
@@ -64,14 +68,28 @@ namespace updater_cli
                     case "-v":
                         showVersion();
                         return 0;
+                    case "--aurora":
+                    case "--with-aurora":
+                        withAurora = true;
+                        break;
+                    case "-n":
+                    case "/n":
+                    case "--newer":
+                    case "--auto-get-newer":
+                    case "--automatically-get-newer":
+                        autoGetNewer = true;
+                        break;
                     default:
-                        Console.WriteLine("Error: " + command + " is not a valid operation!");
+                        Console.WriteLine("Error: " + param + " is not a valid command line option!");
                         return ReturnCodes.rcInvalidParameter;
                 } //switch
-            } //if parameter is given
+            } //for
 
             if (op == Operation.Unknown)
-                op = Operation.Update;
+            {
+                Console.WriteLine("Error: No operation was specified!");
+                return ReturnCodes.rcInvalidParameter;
+            }
 
             IOperation operation = null;
             switch (op)
@@ -80,10 +98,10 @@ namespace updater_cli
                     operation = new OperationDetect();
                     break;
                 case Operation.Check:
-                    operation = new SoftwareStatus(false, false);
+                    operation = new SoftwareStatus(autoGetNewer, withAurora);
                     break;
                 case Operation.Update:
-                    operation = new Update(false, false);
+                    operation = new Update(autoGetNewer, withAurora);
                     break;
                 case Operation.Unknown:
                 default:
