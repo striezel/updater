@@ -132,6 +132,7 @@ namespace updater_cli.software
         /// Returns null, if an error occurred.</returns>
         private string determineNewestVersion()
         {
+            logger.Debug("Determining newest version of Firefox Developer Edition (" + languageCode + ")...");
             string url = "https://download.mozilla.org/?product=firefox-aurora-latest-l10n-ssl&os=win&lang=" + languageCode;
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
             request.Method = WebRequestMethods.Http.Head;
@@ -175,6 +176,7 @@ namespace updater_cli.software
              * "faa1ddd5...1512 sha512 47502080 install/sea/firefox-53.0a2.de.win64.installer.exe"
              */
 
+            logger.Debug("Determining newest checksums of Firefox Developer Edition (" + languageCode + ")...");
             var sums = new List<string>();
             foreach (var bits in new string[] { "32", "64" })
             {
