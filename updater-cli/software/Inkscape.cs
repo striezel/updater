@@ -26,14 +26,24 @@ using System.Collections.Generic;
 
 namespace updater_cli.software
 {
-    public class Inkscape : ISoftware
+    public class Inkscape : AbstractSoftware
     {
+        /// <summary>
+        /// default constructor
+        /// </summary>
+        /// <param name="autoGetNewer">whether to automatically get
+        /// newer information about the software when calling the info() method</param>
+        public Inkscape(bool autoGetNewer)
+            : base(autoGetNewer)
+        { }
+
+
         /// <summary>
         /// gets the currently known information about the software
         /// </summary>
         /// <returns>Returns an AvailableSoftware instance with the known
         /// details about the software.</returns>
-        public AvailableSoftware info()
+        public override AvailableSoftware knownInfo()
         {
             return new AvailableSoftware("Inkscape", "0.92.1",
                 "^Inkscape [0-9]\\.[0-9]+(\\.[0-9]+)?$",
@@ -62,7 +72,7 @@ namespace updater_cli.software
         /// <returns>Returns true, if searchForNewer() is implemented for that
         /// class. Returns false, if not. Calling searchForNewer() may throw an
         /// exception in the later case.</returns>
-        public bool implementsSearchForNewer()
+        public override bool implementsSearchForNewer()
         {
             return true;
         }
@@ -73,7 +83,7 @@ namespace updater_cli.software
         /// </summary>
         /// <returns>Returns an AvailableSoftware instance with the information
         /// that was retrieved from the net.</returns>
-        public AvailableSoftware searchForNewer()
+        public override AvailableSoftware searchForNewer()
         {
             string htmlCode = null;
             using (var client = new WebClient())
@@ -124,7 +134,7 @@ namespace updater_cli.software
         /// preUpdateProcess() needs to run in preparation of the update.
         /// Returns false, if not. Calling preUpdateProcess() may throw an
         /// exception in the later case.</returns>
-        public bool needsPreUpdateProcess(DetectedSoftware detected)
+        public override bool needsPreUpdateProcess(DetectedSoftware detected)
         {
             return true;
         }
@@ -137,7 +147,7 @@ namespace updater_cli.software
         /// <returns>Returns a Process ready to start that should be run before
         /// the update. May return null or may throw, of needsPreUpdateProcess()
         /// returned false.</returns>
-        public List<Process> preUpdateProcess(DetectedSoftware detected)
+        public override List<Process> preUpdateProcess(DetectedSoftware detected)
         {
             //The pre-update processes basically need to uninstall all older
             // versions before installing the newest version.
@@ -195,7 +205,7 @@ namespace updater_cli.software
         /// <returns>Returns true, if the detected software version is older
         /// than the newest software version, thus needing an update.
         /// Returns false, if no update is necessary.</returns>
-        public bool needsUpdate(DetectedSoftware detected)
+        public override bool needsUpdate(DetectedSoftware detected)
         {
             Regex re = new Regex("[0-9]\\.[0-9]+(\\.[0-9]+)?");
             Match m = re.Match(detected.displayName);
@@ -211,7 +221,7 @@ namespace updater_cli.software
                 //always triggering an update.
                 return (string.Compare(detected.displayVersion, info().newestVersion, true) < 0);
             }
-            
         }
+
     } //class
 } //namespace

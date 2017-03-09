@@ -30,7 +30,7 @@ namespace updater_test.software
         [TestMethod]
         public void Test_info()
         {
-            _info(new Inkscape());
+            _info(new Inkscape(false));
         }
 
 
@@ -40,7 +40,7 @@ namespace updater_test.software
         [TestMethod]
         public void Test_implementsSearchForNewer()
         {
-            var i = new Inkscape();
+            var i = new Inkscape(false);
             Assert.IsTrue(i.implementsSearchForNewer());
         }
 
@@ -51,7 +51,7 @@ namespace updater_test.software
         [TestMethod]
         public void Test_searchForNewer()
         {
-            _searchForNewer(new Inkscape());
+            _searchForNewer(new Inkscape(false));
         }
 
 
@@ -61,7 +61,7 @@ namespace updater_test.software
         [TestMethod]
         public void Test_upToDate_info()
         {
-            _upToDate_info(new Inkscape());
+            _upToDate_info(new Inkscape(false));
         }
 
     } //class

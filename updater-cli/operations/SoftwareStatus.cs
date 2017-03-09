@@ -33,9 +33,10 @@ namespace updater_cli.operations
         /// <summary>
         /// default constructor
         /// </summary>
-        public SoftwareStatus()
+        public SoftwareStatus(bool _getNewer, bool withAurora)
         {
-            includeAurora = false;
+            includeAurora = withAurora;
+            autoGetNewer = _getNewer;
         }
 
         
@@ -46,7 +47,7 @@ namespace updater_cli.operations
         /// (aurora channel) shall be included, too. Default is false, because
         /// this increases time of the query by quite a bit (several seconds).</param>
         /// <returns>Returns a list of query entries.</returns>
-        public static List<QueryEntry> query(bool withAurora = false)
+        public static List<QueryEntry> query(bool autoGetNewer, bool withAurora)
         {
             var detected = DetectorRegistry.detect();
             if (null == detected)
@@ -55,7 +56,7 @@ namespace updater_cli.operations
 
             var result = new List<QueryEntry>();
 
-            var all = All.get(withAurora);
+            var all = All.get(autoGetNewer, withAurora);
             foreach (var item in all)
             {
                 var info = item.info();
@@ -182,13 +183,19 @@ namespace updater_cli.operations
 
 
         /// <summary>
+        /// whether to automatically get newer software info, if possible
+        /// </summary>
+        public bool autoGetNewer;
+
+
+        /// <summary>
         /// shows the query result in the console
         /// </summary>
         /// <returns>Returns zero.</returns>
         public int perform()
         {
             //get software status
-            var status = query(includeAurora);
+            var status = query(autoGetNewer, includeAurora);
             string output = toConsoleOutput(status);
             Console.Write(output);
             return 0;

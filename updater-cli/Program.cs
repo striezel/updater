@@ -80,10 +80,10 @@ namespace updater_cli
                     operation = new OperationDetect();
                     break;
                 case Operation.Check:
-                    operation = new SoftwareStatus();
+                    operation = new SoftwareStatus(false, false);
                     break;
                 case Operation.Update:
-                    operation = new Update();
+                    operation = new Update(false, false);
                     break;
                 case Operation.Unknown:
                 default:

@@ -33,7 +33,7 @@ namespace updater_test.software
         [TestMethod]
         public void Test_info()
         {
-            _info(new KeePass());
+            _info(new KeePass(false));
         }
 
 
@@ -43,7 +43,7 @@ namespace updater_test.software
         [TestMethod]
         public void Test_implementsSearchForNewer()
         {
-            var kp = new KeePass();
+            var kp = new KeePass(false);
             Assert.IsTrue(kp.implementsSearchForNewer());
         }
 
@@ -54,7 +54,7 @@ namespace updater_test.software
         [TestMethod]
         public void Test_searchForNewer()
         {
-            _searchForNewer(new KeePass());
+            _searchForNewer(new KeePass(false));
         }
 
 
@@ -64,7 +64,7 @@ namespace updater_test.software
         [TestMethod]
         public void Test_upToDate_info()
         {
-            _upToDate_info(new KeePass());
+            _upToDate_info(new KeePass(false));
         }
     } //class
 } //namespace

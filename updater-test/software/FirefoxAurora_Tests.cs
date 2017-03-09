@@ -50,7 +50,7 @@ namespace updater_test.software
         [TestMethod]
         public void Test_info()
         {
-            _info(new FirefoxAurora("de"));
+            _info(new FirefoxAurora("de", false));
         }
 
 
@@ -60,7 +60,7 @@ namespace updater_test.software
         [TestMethod]
         public void Test_implementsSearchForNewer()
         {
-            var fx = new FirefoxAurora("de");
+            var fx = new FirefoxAurora("de", false);
             Assert.IsTrue(fx.implementsSearchForNewer());
         }
 
@@ -68,7 +68,7 @@ namespace updater_test.software
         [TestMethod]
         public void Test_matchTest()
         {
-            var fx = new FirefoxAurora("de");
+            var fx = new FirefoxAurora("de", false);
             var info = fx.info();
 
             Regex re = new Regex(info.match64Bit);
@@ -84,7 +84,7 @@ namespace updater_test.software
         [TestMethod]
         public void Test_searchForNewer()
         {
-            _searchForNewer(new FirefoxAurora("de"));
+            _searchForNewer(new FirefoxAurora("de", false));
         }
 
 
@@ -94,7 +94,7 @@ namespace updater_test.software
         [TestMethod]
         public void Test_upToDate_info()
         {
-            _upToDate_info(new FirefoxAurora("de"));
+            _upToDate_info(new FirefoxAurora("de", false));
         }
         
     } //class

@@ -33,8 +33,11 @@ namespace updater_cli.software
         /// constructor with language code
         /// </summary>
         /// <param name="langCode">the language code for the Firefox ESR software,
-        /// e.g. "de" for German,  "en-GB" for British English, "fr" for French, etc.</param>
-        public FirefoxESR(string langCode)
+        /// e.g. "de" for German,  "en-GB" for British English, "fr" for French, etc.</param
+        /// <param name="autoGetNewer">whether to automatically get
+        /// newer information about the software when calling the info() method</param>
+        public FirefoxESR(string langCode, bool autoGetNewer)
+            : base(autoGetNewer)
         {
             if (string.IsNullOrWhiteSpace(langCode))
                 throw new ArgumentNullException("langCode", "The language code must not be null, empty or whitespace!");
@@ -270,7 +273,7 @@ namespace updater_cli.software
         /// </summary>
         /// <returns>Returns an AvailableSoftware instance with the known
         /// details about the software.</returns>
-        public override AvailableSoftware info()
+        public override AvailableSoftware knownInfo()
         {
             return new AvailableSoftware("Mozilla Firefox ESR (" + languageCode + ")",
                 "45.7.0",

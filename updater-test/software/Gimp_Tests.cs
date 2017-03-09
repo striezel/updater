@@ -30,7 +30,7 @@ namespace updater_test.software
         [TestMethod]
         public void Test_info()
         {
-            _info(new GIMP());
+            _info(new GIMP(false));
         }
 
 
@@ -40,7 +40,7 @@ namespace updater_test.software
         [TestMethod]
         public void Test_implementsSearchForNewer()
         {
-            var GnuImageManipulationProgram = new GIMP();
+            var GnuImageManipulationProgram = new GIMP(false);
             Assert.IsTrue(GnuImageManipulationProgram.implementsSearchForNewer());
         }
 
@@ -51,7 +51,7 @@ namespace updater_test.software
         [TestMethod]
         public void Test_searchForNewer()
         {
-            _searchForNewer(new GIMP());
+            _searchForNewer(new GIMP(false));
         }
 
 
@@ -61,7 +61,7 @@ namespace updater_test.software
         [TestMethod]
         public void Test_upToDate_info()
         {
-            _upToDate_info(new GIMP());
+            _upToDate_info(new GIMP(false));
         }
     } //class
 } //namespace

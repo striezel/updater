@@ -33,7 +33,7 @@ namespace updater_test.software
         [TestMethod]
         public void Test_info()
         {
-            _info(new NotepadPlusPlus());
+            _info(new NotepadPlusPlus(false));
         }
 
 
@@ -43,7 +43,7 @@ namespace updater_test.software
         [TestMethod]
         public void Test_implementsSearchForNewer()
         {
-            var kp = new NotepadPlusPlus();
+            var kp = new NotepadPlusPlus(false);
             Assert.IsTrue(kp.implementsSearchForNewer());
         }
 
@@ -54,7 +54,7 @@ namespace updater_test.software
         [TestMethod]
         public void Test_searchForNewer()
         {
-            _searchForNewer(new NotepadPlusPlus());
+            _searchForNewer(new NotepadPlusPlus(false));
         }
 
 
@@ -64,7 +64,7 @@ namespace updater_test.software
         [TestMethod]
         public void Test_upToDate_info()
         {
-            _upToDate_info(new NotepadPlusPlus());
+            _upToDate_info(new NotepadPlusPlus(false));
         }
     } //class
 } //namespace

@@ -36,9 +36,14 @@ namespace updater_cli.operations
         /// <summary>
         /// default constructor
         /// </summary>
-        public Update()
+        /// <param name="_autoGetNewer">whether to get newer software information, if possible</param>
+        /// <param name="withAurora">Whether or not Firefox Developer Edition
+        /// (aurora channel) shall be included, too. Default is false, because
+        /// this increases time of the query by quite a bit (several seconds).</param>
+        public Update(bool _autoGetNewer, bool withAurora)
         {
-            includeAurora = false;
+            includeAurora = _autoGetNewer;
+            autoGetNewer = withAurora;
         }
         
         
@@ -351,12 +356,18 @@ namespace updater_cli.operations
         /// (aurora channel) shall be included, too. Default is false, because
         /// this increases time of the query by quite a bit (several seconds).
         /// </summary>
-        public bool includeAurora;
+        private bool includeAurora;
+
+
+        /// <summary>
+        /// whether to get newer software information automatically
+        /// </summary>
+        private bool autoGetNewer;
 
 
         public int perform()
         {
-            var query = SoftwareStatus.query(includeAurora);
+            var query = SoftwareStatus.query(autoGetNewer, includeAurora);
             int result = update(query);
             if (result < 0)
             {

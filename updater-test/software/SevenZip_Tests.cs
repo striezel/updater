@@ -30,7 +30,7 @@ namespace updater_test.software
         [TestMethod]
         public void Test_info()
         {
-            _info(new SevenZip());
+            _info(new SevenZip(false));
         }
 
 
@@ -40,8 +40,8 @@ namespace updater_test.software
         [TestMethod]
         public void Test_implementsSearchForNewer()
         {
-            var kp = new SevenZip();
-            Assert.IsTrue(kp.implementsSearchForNewer());
+            var seven = new SevenZip(false);
+            Assert.IsTrue(seven.implementsSearchForNewer());
         }
 
 
@@ -51,7 +51,7 @@ namespace updater_test.software
         [TestMethod]
         public void Test_searchForNewer()
         {
-            _searchForNewer(new SevenZip());
+            _searchForNewer(new SevenZip(false));
         }
 
 
@@ -61,7 +61,7 @@ namespace updater_test.software
         [TestMethod]
         public void Test_upToDate_info()
         {
-            _upToDate_info(new SevenZip());
+            _upToDate_info(new SevenZip(false));
         }
     } //class
 } //namespace

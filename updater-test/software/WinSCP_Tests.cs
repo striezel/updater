@@ -33,7 +33,7 @@ namespace updater_test.software
         [TestMethod]
         public void Test_info()
         {
-            _info(new WinSCP());
+            _info(new WinSCP(false));
         }
 
 
@@ -43,7 +43,7 @@ namespace updater_test.software
         [TestMethod]
         public void Test_implementsSearchForNewer()
         {
-            var w = new WinSCP();
+            var w = new WinSCP(false);
             Assert.IsTrue(w.implementsSearchForNewer());
         }
 
@@ -54,7 +54,7 @@ namespace updater_test.software
         [TestMethod]
         public void Test_searchForNewer()
         {
-            _searchForNewer(new WinSCP());
+            _searchForNewer(new WinSCP(false));
         }
 
 
@@ -64,7 +64,7 @@ namespace updater_test.software
         [TestMethod]
         public void Test_upToDate_info()
         {
-            _upToDate_info(new WinSCP());
+            _upToDate_info(new WinSCP(false));
         }
     } //class
 } //namespace

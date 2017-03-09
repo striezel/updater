@@ -34,7 +34,10 @@ namespace updater_cli.software
         /// </summary>
         /// <param name="langCode">the language code for the Firefox software,
         /// e.g. "de" for German,  "en-GB" for British English, "fr" for French, etc.</param>
-        public Firefox(string langCode)
+        /// <param name="autoGetNewer">whether to automatically get
+        /// newer information about the software when calling the info() method</param>
+        public Firefox(string langCode, bool autoGetNewer)
+            : base(autoGetNewer)
         {
             if (string.IsNullOrWhiteSpace(langCode))
                 throw new ArgumentNullException("langCode", "The language code must not be null, empty or whitespace!");
@@ -274,7 +277,7 @@ namespace updater_cli.software
         /// </summary>
         /// <returns>Returns an AvailableSoftware instance with the known
         /// details about the software.</returns>
-        public override AvailableSoftware info()
+        public override AvailableSoftware knownInfo()
         {
             return new AvailableSoftware("Mozilla Firefox (" + languageCode + ")",
                 "51.0.1",

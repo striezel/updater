@@ -30,7 +30,7 @@ namespace updater_test.software
         [TestMethod]
         public void Test_info()
         {
-            _info(new LibreOffice());
+            _info(new LibreOffice(false));
         }
 
 
@@ -40,7 +40,7 @@ namespace updater_test.software
         [TestMethod]
         public void Test_implementsSearchForNewer()
         {
-            var libO = new LibreOffice();
+            var libO = new LibreOffice(false);
             Assert.IsTrue(libO.implementsSearchForNewer());
         }
 
@@ -51,7 +51,7 @@ namespace updater_test.software
         [TestMethod]
         public void Test_searchForNewer()
         {
-            _searchForNewer(new LibreOffice());
+            _searchForNewer(new LibreOffice(false));
         }
 
 
@@ -61,7 +61,7 @@ namespace updater_test.software
         [TestMethod]
         public void Test_upToDate_info()
         {
-            _upToDate_info(new LibreOffice());
+            _upToDate_info(new LibreOffice(false));
         }
     } //class
 } //namespace

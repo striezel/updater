@@ -30,7 +30,7 @@ namespace updater_test.software
         [TestMethod]
         public void Test_info()
         {
-            _info(new Putty());
+            _info(new Putty(false));
         }
 
 
@@ -40,7 +40,7 @@ namespace updater_test.software
         [TestMethod]
         public void Test_implementsSearchForNewer()
         {
-            var p = new Putty();
+            var p = new Putty(false);
             Assert.IsTrue(p.implementsSearchForNewer());
         }
 
@@ -51,7 +51,7 @@ namespace updater_test.software
         [TestMethod]
         public void Test_searchForNewer()
         {
-            _searchForNewer(new Putty());
+            _searchForNewer(new Putty(false));
         }
 
 
@@ -61,7 +61,7 @@ namespace updater_test.software
         [TestMethod]
         public void Test_upToDate_info()
         {
-            _upToDate_info(new Putty());
+            _upToDate_info(new Putty(false));
         }
     } //class
 } //namespace

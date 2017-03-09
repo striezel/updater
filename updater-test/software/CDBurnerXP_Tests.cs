@@ -31,7 +31,7 @@ namespace updater_test.software
         [TestMethod]
         public void Test_info()
         {
-            _info(new CDBurnerXP());
+            _info(new CDBurnerXP(false));
         }
 
 
@@ -41,7 +41,7 @@ namespace updater_test.software
         [TestMethod]
         public void Test_implementsSearchForNewer()
         {
-            var cd = new CDBurnerXP();
+            var cd = new CDBurnerXP(false);
             Assert.IsTrue(cd.implementsSearchForNewer());
         }
 
@@ -52,7 +52,7 @@ namespace updater_test.software
         [TestMethod]
         public void Test_searchForNewer()
         {
-            _searchForNewer(new CDBurnerXP());
+            _searchForNewer(new CDBurnerXP(false));
         }
 
 
@@ -62,7 +62,7 @@ namespace updater_test.software
         [TestMethod]
         public void Test_upToDate_info()
         {
-            _upToDate_info(new CDBurnerXP());
+            _upToDate_info(new CDBurnerXP(false));
         }
 
     } //class

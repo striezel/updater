@@ -50,7 +50,7 @@ namespace updater_test.software
         [TestMethod]
         public void Test_info()
         {
-            _info(new FirefoxESR("de"));
+            _info(new FirefoxESR("de", false));
         }
 
 
@@ -60,7 +60,7 @@ namespace updater_test.software
         [TestMethod]
         public void Test_implementsSearchForNewer()
         {
-            var fx = new FirefoxESR("de");
+            var fx = new FirefoxESR("de", false);
             Assert.IsTrue(fx.implementsSearchForNewer());
         }
 
@@ -68,7 +68,7 @@ namespace updater_test.software
         [TestMethod]
         public void Test_matchTest()
         {
-            var fx = new FirefoxESR("de");
+            var fx = new FirefoxESR("de", false);
             var info = fx.info();
 
             Regex re = new Regex(info.match64Bit);
@@ -84,7 +84,7 @@ namespace updater_test.software
         [TestMethod]
         public void Test_searchForNewer()
         {
-            _searchForNewer(new FirefoxESR("de"));
+            _searchForNewer(new FirefoxESR("de", false));
         }
 
 
@@ -94,7 +94,7 @@ namespace updater_test.software
         [TestMethod]
         public void Test_upToDate_info()
         {
-            _upToDate_info(new FirefoxESR("de"));
+            _upToDate_info(new FirefoxESR("de", false));
         }
     } //class
 } //namespace

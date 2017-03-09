@@ -25,14 +25,24 @@ using System.Collections.Generic;
 
 namespace updater_cli.software
 {
-    public class Putty : ISoftware
+    public class Putty : AbstractSoftware
     {
+        /// <summary>
+        /// default constructor
+        /// </summary>
+        /// <param name="autoGetNewer">whether to automatically get
+        /// newer information about the software when calling the info() method</param>
+        public Putty(bool autoGetNewer)
+            : base(autoGetNewer)
+        { }
+
+
         /// <summary>
         /// gets the currently known information about the software
         /// </summary>
         /// <returns>Returns an AvailableSoftware instance with the known
         /// details about the software.</returns>
-        public AvailableSoftware info()
+        public override AvailableSoftware knownInfo()
         {
             return new AvailableSoftware("PuTTY", "0.68",
                 "^PuTTY release [0-9]\\.[0-9]+$",
@@ -63,7 +73,7 @@ namespace updater_cli.software
         /// <returns>Returns true, if searchForNewer() is implemented for that
         /// class. Returns false, if not. Calling searchForNewer() may throw an
         /// exception in the later case.</returns>
-        public bool implementsSearchForNewer()
+        public override bool implementsSearchForNewer()
         {
             return true;
         }
@@ -74,7 +84,7 @@ namespace updater_cli.software
         /// </summary>
         /// <returns>Returns an AvailableSoftware instance with the information
         /// that was retrieved from the net.</returns>
-        public AvailableSoftware searchForNewer()
+        public override AvailableSoftware searchForNewer()
         {
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://the.earth.li/~sgtatham/putty/latest/");
             request.Method = WebRequestMethods.Http.Head;
@@ -150,7 +160,7 @@ namespace updater_cli.software
         /// preUpdateProcess() needs to run in preparation of the update.
         /// Returns false, if not. Calling preUpdateProcess() may throw an
         /// exception in the later case.</returns>
-        public bool needsPreUpdateProcess(DetectedSoftware detected)
+        public override bool needsPreUpdateProcess(DetectedSoftware detected)
         {
             if (string.IsNullOrWhiteSpace(detected.displayVersion))
                 return false;
@@ -166,7 +176,7 @@ namespace updater_cli.software
         /// <returns>Returns a Process ready to start that should be run before
         /// the update. May return null or may throw, of needsPreUpdateProcess()
         /// returned false.</returns>
-        public List<Process> preUpdateProcess(DetectedSoftware detected)
+        public override List<Process> preUpdateProcess(DetectedSoftware detected)
         {
             //We do not need a pre-update process, if the version is 0.68 or
             // newer, because that one uses MSI.
@@ -201,7 +211,7 @@ namespace updater_cli.software
         /// <returns>Returns true, if the detected software version is older
         /// than the newest software version, thus needing an update.
         /// Returns false, if no update is necessary.</returns>
-        public bool needsUpdate(DetectedSoftware detected)
+        public override bool needsUpdate(DetectedSoftware detected)
         {
             //Simple version string comparison.
             return (string.Compare(detected.displayVersion, info().newestVersion, true) < 0);

@@ -26,11 +26,21 @@ namespace updater_cli.software
     public class VLC : NoPreUpdateProcessSoftware
     {
         /// <summary>
+        /// default constructor
+        /// </summary>
+        /// <param name="autoGetNewer">whether to automatically get
+        /// newer information about the software when calling the info() method</param>
+        public VLC(bool autoGetNewer)
+            : base(autoGetNewer)
+        { }
+
+
+        /// <summary>
         /// gets the currently known information about the software
         /// </summary>
         /// <returns>Returns an AvailableSoftware instance with the known
         /// details about the software.</returns>
-        public override AvailableSoftware info()
+        public override AvailableSoftware knownInfo()
         {
             return new AvailableSoftware("VLC media player", "2.2.4",
                 "^VLC media player$",

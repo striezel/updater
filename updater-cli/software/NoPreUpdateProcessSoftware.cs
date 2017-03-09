@@ -26,31 +26,16 @@ namespace updater_cli.software
     /// abstract base class for software that needs no separate task in
     /// preparation for the update
     /// </summary>
-    public abstract class NoPreUpdateProcessSoftware : ISoftware
+    public abstract class NoPreUpdateProcessSoftware : AbstractSoftware
     {
         /// <summary>
-        /// gets the currently known information about the software
+        /// default constructor
         /// </summary>
-        /// <returns>Returns an AvailableSoftware instance with the known
-        /// details about the software.</returns>
-        public abstract AvailableSoftware info();
-
-
-        /// <summary>
-        /// whether or not the method searchForNewer() is implemented
-        /// </summary>
-        /// <returns>Returns true, if searchForNewer() is implemented for that
-        /// class. Returns false, if not. Calling searchForNewer() may throw an
-        /// exception in the later case.</returns>
-        public abstract bool implementsSearchForNewer();
-
-
-        /// <summary>
-        /// looks for newer versions of the software than the currently known version
-        /// </summary>
-        /// <returns>Returns an AvailableSoftware instance with the information
-        /// that was retrieved from the net.</returns>
-        public abstract AvailableSoftware searchForNewer();
+        /// <param name="autoGetNewer">whether to automatically get
+        /// newer information about the software when calling the info() method</param>
+        public NoPreUpdateProcessSoftware(bool autoGetNewer)
+            : base(autoGetNewer)
+        { }
 
 
         /// <summary>
@@ -61,7 +46,7 @@ namespace updater_cli.software
         /// preUpdateProcess() needs to run in preparation of the update.
         /// Returns false, if not. Calling preUpdateProcess() may throw an
         /// exception in the later case.</returns>
-        public bool needsPreUpdateProcess(DetectedSoftware detected)
+        public override bool needsPreUpdateProcess(DetectedSoftware detected)
         {
             return false;
         }
@@ -74,23 +59,9 @@ namespace updater_cli.software
         /// <returns>Returns a Process ready to start that should be run before
         /// the update. May return null or may throw, of needsPreUpdateProcess()
         /// returned false.</returns>
-        public List<Process> preUpdateProcess(DetectedSoftware detected)
+        public override List<Process> preUpdateProcess(DetectedSoftware detected)
         {
             return null;
-        }
-
-
-        /// <summary>
-        /// whether the detected software is older than the newest known software
-        /// </summary>
-        /// <param name="detected">the corresponding detected software</param>
-        /// <returns>Returns true, if the detected software version is older
-        /// than the newest software version, thus needing an update.
-        /// Returns false, if no update is necessary.</returns>
-        public virtual bool needsUpdate(DetectedSoftware detected)
-        {
-            //Simple version string comparison.
-            return (string.Compare(detected.displayVersion, info().newestVersion, true) < 0);
         }
     } //class
 } //namespace

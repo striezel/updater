@@ -50,7 +50,7 @@ namespace updater_test.software
         [TestMethod]
         public void Test_info()
         {
-            _info(new Firefox("de"));
+            _info(new Firefox("de", false));
         }
 
 
@@ -60,7 +60,7 @@ namespace updater_test.software
         [TestMethod]
         public void Test_implementsSearchForNewer()
         {
-            var fx = new Firefox("de");
+            var fx = new Firefox("de", false);
             Assert.IsTrue(fx.implementsSearchForNewer());
         }
 
@@ -68,7 +68,7 @@ namespace updater_test.software
         [TestMethod]
         public void Test_matchTest()
         {
-            var fx = new Firefox("de");
+            var fx = new Firefox("de", false);
             var info = fx.info();
 
             //versions with three number
@@ -90,7 +90,7 @@ namespace updater_test.software
         [TestMethod]
         public void Test_searchForNewer()
         {
-            _searchForNewer(new Firefox("de"));
+            _searchForNewer(new Firefox("de", false));
         }
 
 
@@ -100,7 +100,7 @@ namespace updater_test.software
         [TestMethod]
         public void Test_upToDate_info()
         {
-            _upToDate_info(new Firefox("de"));
+            _upToDate_info(new Firefox("de", false));
         }
     } //class
 } //namespace

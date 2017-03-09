@@ -33,7 +33,7 @@ namespace updater_test.software
         [TestMethod]
         public void Test_get()
         {
-            var result = All.get(true);
+            var result = All.get(false, true);
             Assert.IsNotNull(result);
             Assert.IsTrue(result.Count > 0);
             for (int i = 0; i < result.Count; i++)

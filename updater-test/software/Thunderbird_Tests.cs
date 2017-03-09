@@ -52,7 +52,7 @@ namespace updater_test.software
         [TestMethod]
         public void Test_info()
         {
-            _info(new Thunderbird("de"));
+            _info(new Thunderbird("de", false));
         }
 
 
@@ -62,7 +62,7 @@ namespace updater_test.software
         [TestMethod]
         public void Test_implementsSearchForNewer()
         {
-            var tb = new Thunderbird("de");
+            var tb = new Thunderbird("de", false);
             Assert.IsTrue(tb.implementsSearchForNewer());
         }
 
@@ -73,7 +73,7 @@ namespace updater_test.software
         [TestMethod]
         public void Test_searchForNewer()
         {
-            _searchForNewer(new Thunderbird("de"));
+            _searchForNewer(new Thunderbird("de", false));
         }
 
 
@@ -83,7 +83,7 @@ namespace updater_test.software
         [TestMethod]
         public void Test_upToDate_info()
         {
-            _upToDate_info(new Thunderbird("de"));
+            _upToDate_info(new Thunderbird("de", false));
         }
     } //class
 } //namespace

@@ -33,22 +33,24 @@ namespace updater_cli.software
         /// (aurora channel) shall be included, too. Default is false, because
         /// this increases time of subsequent operations like getting the info()
         /// for every element in the list by quite a bit.</param>
+        /// <param name="autoGetNewer">whether to automatically get
+        /// newer information about the software when calling the info() method</param>
         /// <returns></returns>
-        public static List<ISoftware> get(bool withAurora = false)
+        public static List<ISoftware> get(bool autoGetNewer, bool withAurora)
         {
             var result = new List<ISoftware>();
-            result.Add(new CDBurnerXP());
+            result.Add(new CDBurnerXP(autoGetNewer));
             //Firefox (release channel)
             var languages = Firefox.validLanguageCodes();
             foreach (var lang in languages)
             {
-                result.Add(new Firefox(lang));
+                result.Add(new Firefox(lang, autoGetNewer));
             } //foreach
             //Firefox ESR
             languages = FirefoxESR.validLanguageCodes();
             foreach (var lang in languages)
             {
-                result.Add(new FirefoxESR(lang));
+                result.Add(new FirefoxESR(lang, autoGetNewer));
             } //foreach
             if (withAurora)
             {
@@ -56,25 +58,25 @@ namespace updater_cli.software
                 languages = FirefoxAurora.validLanguageCodes();
                 foreach (var lang in languages)
                 {
-                    result.Add(new FirefoxAurora(lang));
+                    result.Add(new FirefoxAurora(lang, autoGetNewer));
                 } //foreach
             } //if aurora is requested, too
-            result.Add(new GIMP());
-            result.Add(new Inkscape());
-            result.Add(new KeePass());
-            result.Add(new LibreOffice());
-            result.Add(new LibreOfficeHelpPackGerman());
-            result.Add(new NotepadPlusPlus());
-            result.Add(new Putty());
-            result.Add(new SevenZip());
+            result.Add(new GIMP(autoGetNewer));
+            result.Add(new Inkscape(autoGetNewer));
+            result.Add(new KeePass(autoGetNewer));
+            result.Add(new LibreOffice(autoGetNewer));
+            result.Add(new LibreOfficeHelpPackGerman(autoGetNewer));
+            result.Add(new NotepadPlusPlus(autoGetNewer));
+            result.Add(new Putty(autoGetNewer));
+            result.Add(new SevenZip(autoGetNewer));
             //Thunderbird
             languages = Thunderbird.validLanguageCodes();
             foreach (var lang in languages)
             {
-                result.Add(new Thunderbird(lang));
+                result.Add(new Thunderbird(lang, autoGetNewer));
             } //foreach
-            result.Add(new VLC());
-            result.Add(new WinSCP());
+            result.Add(new VLC(autoGetNewer));
+            result.Add(new WinSCP(autoGetNewer));
             return result;
         }
     } //class

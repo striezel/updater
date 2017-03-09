@@ -33,7 +33,7 @@ namespace updater_test.software
         [TestMethod]
         public void Test_info()
         {
-            _info(new VLC());
+            _info(new VLC(false));
         }
 
 
@@ -43,7 +43,7 @@ namespace updater_test.software
         [TestMethod]
         public void Test_implementsSearchForNewer()
         {
-            var w = new VLC();
+            var w = new VLC(false);
             Assert.IsTrue(w.implementsSearchForNewer());
         }
 
@@ -54,7 +54,7 @@ namespace updater_test.software
         [TestMethod]
         public void Test_searchForNewer()
         {
-            _searchForNewer(new VLC());
+            _searchForNewer(new VLC(false));
         }
 
 
@@ -64,7 +64,7 @@ namespace updater_test.software
         [TestMethod]
         public void Test_upToDate_info()
         {
-            _upToDate_info(new VLC());
+            _upToDate_info(new VLC(false));
         }
     } //class
 } //namespace
