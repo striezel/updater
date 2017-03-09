@@ -101,7 +101,7 @@ namespace updater_cli.software
                 return null;
             //extract new version number
             string newVersion = matchExe.Value.Replace("&lt;KeePass-", "").Replace("-Setup.exe&gt;", "");
-            if (string.Compare(newVersion, info().newestVersion) < 0)
+            if (string.Compare(newVersion, knownInfo().newestVersion) < 0)
                 return null;
             //version number should match usual scheme, e.g. 2.xx, where xx are two digits
             Regex version = new Regex("^[2-9]\\.[0-9]{2}$");
@@ -125,7 +125,7 @@ namespace updater_cli.software
             string newHash = matchHash.Value.Replace("SHA256       : ", "").Trim()
                 + " " + matchHash2.Value.Trim();
             //construct new version information
-            var newInfo = info();
+            var newInfo = knownInfo();
             //replace version number - both as newest version and in URL for download
             string oldVersion = newInfo.newestVersion;
             newInfo.newestVersion = newVersion;

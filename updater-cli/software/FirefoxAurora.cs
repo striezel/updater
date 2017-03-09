@@ -220,7 +220,7 @@ namespace updater_cli.software
             if (string.IsNullOrWhiteSpace(newerVersion))
                 return null;
             //If versions match, we can return the current information.
-            var currentInfo = info();
+            var currentInfo = knownInfo();
             if (newerVersion == currentInfo.newestVersion)
                 // fallback to known information
                 return currentInfo;

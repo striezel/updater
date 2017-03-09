@@ -245,7 +245,7 @@ namespace updater_cli.software
         public override AvailableSoftware searchForNewer()
         {
             string newerVersion = determineNewestVersion();
-            var currentInfo = info();
+            var currentInfo = knownInfo();
             if (string.IsNullOrWhiteSpace(newerVersion) || (newerVersion == currentInfo.newestVersion))
                 // fallback to known information
                 return currentInfo;

@@ -133,7 +133,7 @@ namespace updater_cli.software
             if (idx < 0)
                 return null;
             directoryDetailed = directoryDetailed.Remove(idx);
-            if (string.Compare(directoryDetailed, info().newestVersion) < 0)
+            if (string.Compare(directoryDetailed, knownInfo().newestVersion) < 0)
                 return null;
 
             //download checksum file, e.g. "https://notepad-plus-plus.org/repository/7.x/7.3.1/npp.7.3.1.sha1.md5.digest.txt"
@@ -164,7 +164,7 @@ namespace updater_cli.software
                 return null;
             string newHash64Bit = matchHash.Value.Substring(0, 40);
             //construct new information
-            var newInfo = info();
+            var newInfo = knownInfo();
             string oldVersion = newInfo.newestVersion;
             newInfo.newestVersion = directoryDetailed;
             newInfo.install32Bit.downloadUrl = "https://notepad-plus-plus.org/repository/" + directoryMajor + "/" + directoryDetailed + "/npp." + directoryDetailed + ".Installer.exe";

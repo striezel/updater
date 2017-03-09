@@ -140,7 +140,7 @@ namespace updater_cli.software
             string hash64 = matchHash64.Value.Substring(0, 128);
 
             //construct new version information
-            var newInfo = info();
+            var newInfo = knownInfo();
             //replace version number - both as newest version and in URL for download
             string oldVersion = newInfo.newestVersion;
             newInfo.newestVersion = newVersion;

@@ -96,7 +96,7 @@ namespace updater_cli.software
                 return null;
             //extract new version number
             string newVersion = matchExe.Value.Replace("WinSCP-", "").Replace("-Setup.exe", "");
-            if (string.Compare(newVersion, info().newestVersion) < 0)
+            if (string.Compare(newVersion, knownInfo().newestVersion) < 0)
                 return null;
             //version number should match usual scheme, e.g. 5.x.y, where x and y are digits
             Regex version = new Regex("^[1-9]+\\.[0-9]+\\.[0-9]+$");
@@ -126,7 +126,7 @@ namespace updater_cli.software
                 return null;
             string newHash = matchHash.Value.Replace("SHA-256: ", "").Trim();
             //construct new version information
-            var newInfo = info();
+            var newInfo = knownInfo();
             //replace version number - both as newest version and in URL for download
             string oldVersion = newInfo.newestVersion;
             newInfo.newestVersion = newVersion;

@@ -111,7 +111,7 @@ namespace updater_cli.software
                 return null;
 
             //construct new information
-            var newInfo = info();
+            var newInfo = knownInfo();
             newInfo.newestVersion = version;
             string newVersionWithoutDot = version.Replace(".", "");
             //32 bit

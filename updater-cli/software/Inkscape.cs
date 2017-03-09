@@ -108,7 +108,7 @@ namespace updater_cli.software
             string newVersion = matchVersion.Value.Replace("Latest stable version: Inkscape", "").Trim();
             
             //construct new version information based on old information
-            var newInfo = info();
+            var newInfo = knownInfo();
             if (newVersion == newInfo.newestVersion)
                 return newInfo;
             //replace version number - both as newest version and in URL for download

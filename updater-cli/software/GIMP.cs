@@ -136,7 +136,7 @@ namespace updater_cli.software
             string checksum = m.Value.Substring(0, 64);
 
             //construct new information
-            var newInfo = info();
+            var newInfo = knownInfo();
             string oldVersion = newInfo.newestVersion;
             string oldShortVersion = string.Join(".", oldVersion.Split(new char[] { '.' }), 0, 2);
             newInfo.newestVersion = version;

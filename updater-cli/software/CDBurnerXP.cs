@@ -104,7 +104,7 @@ namespace updater_cli.software
             string newVersion = matchMsi.Value.Replace("cdbxp_setup_", "").Replace(".msi", "");
             
             //construct new version information
-            var newInfo = info();
+            var newInfo = knownInfo();
             //replace version number - both as newest version and in URL for download
             string oldVersion = newInfo.newestVersion;
             newInfo.newestVersion = newVersion;

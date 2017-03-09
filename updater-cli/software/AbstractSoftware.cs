@@ -78,6 +78,16 @@ namespace updater_cli.software
 
 
         /// <summary>
+        /// set whether to automatically get new software information
+        /// </summary>
+        /// <param name="autoGetNew">new setting value</param>
+        public void autoGetNewer(bool autoGetNew)
+        {
+            m_automaticallyGetNewer = autoGetNew;
+        }
+
+
+        /// <summary>
         /// whether or not the method searchForNewer() is implemented
         /// </summary>
         /// <returns>Returns true, if searchForNewer() is implemented for that

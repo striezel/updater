@@ -56,7 +56,7 @@ namespace updater_cli.operations
 
             var result = new List<QueryEntry>();
 
-            var all = All.get(autoGetNewer, withAurora);
+            var all = All.get(false, withAurora);
             foreach (var item in all)
             {
                 var info = item.info();
@@ -67,6 +67,7 @@ namespace updater_cli.operations
                     if ((idx >= 0) && (detected[idx].appType == ApplicationType.Bit64))
                     {
                         //found it
+                        item.autoGetNewer(autoGetNewer);
                         bool needsUpdate = item.needsUpdate(detected[idx]);
                         result.Add(new QueryEntry(item, detected[idx], needsUpdate, ApplicationType.Bit64));
                     } //if match was found
@@ -78,6 +79,7 @@ namespace updater_cli.operations
                     if ((idx >= 0) && (detected[idx].appType == ApplicationType.Bit32))
                     {
                         //found it
+                        item.autoGetNewer(autoGetNewer);
                         bool needsUpdate = item.needsUpdate(detected[idx]);
                         result.Add(new QueryEntry(item, detected[idx], needsUpdate, ApplicationType.Bit32));
                     } //if match was found
