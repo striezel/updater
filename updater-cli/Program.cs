@@ -51,7 +51,7 @@ namespace updater_cli
             }
 
             Operation op = Operation.Unknown;
-            bool autoGetNewer = false;
+            bool autoGetNewer = true;
             bool withAurora = false;
 
             for (int i = 0; i < args.Length; i++)
@@ -80,12 +80,23 @@ namespace updater_cli
                     case "--with-aurora":
                         withAurora = true;
                         break;
+                    case "--no-aurora":
+                    case "--without-aurora":
+                        withAurora = false;
+                        break;
                     case "-n":
                     case "/n":
                     case "--newer":
                     case "--auto-get-newer":
                     case "--automatically-get-newer":
                         autoGetNewer = true;
+                        break;
+                    case "-nn":
+                    case "/nn":
+                    case "--no-newer":
+                    case "--no-auto-get-newer":
+                    case "--no-automatically-get-newer":
+                        autoGetNewer = false;
                         break;
                     default:
                         logger.Error("Error: " + param + " is not a valid command line option!");

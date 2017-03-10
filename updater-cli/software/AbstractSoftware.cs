@@ -25,6 +25,12 @@ namespace updater_cli.software
     abstract public class AbstractSoftware : ISoftware
     {
         /// <summary>
+        /// NLog.Logger for AbstractSoftware class
+        /// </summary>
+        private static NLog.Logger logger = NLog.LogManager.GetLogger(typeof(AbstractSoftware).FullName);
+
+
+        /// <summary>
         /// default constructor
         /// </summary>
         /// <param name="automaticallyGetNewer">whether to automatically get
@@ -72,6 +78,7 @@ namespace updater_cli.software
                 m_newerInfo = temp;
                 return m_newerInfo;
             }
+            logger.Warn("Search for newer information for " + knownInfo().Name + " failed!");
             //Search for newer info failed. Return default known info.
             return knownInfo();
         }
