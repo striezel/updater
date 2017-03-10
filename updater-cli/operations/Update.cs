@@ -36,7 +36,15 @@ namespace updater_cli.operations
         /// default timeout (in seconds) after which an update of a single
         /// application will be cancelled, if it is still in progress
         /// </summary>
-        public const uint defaultTimeout = 900;
+        public const uint defaultTimeout = 1800; //1800 s = 30 min
+
+
+        /// <summary>
+        /// minimum timeout (in seconds) for an update of a single application
+        /// </summary>
+        /// <remarks>Ten seconds is too low for most updates, except for small
+        /// updates / installers on solid state drives or similar fast drives.</remarks>
+        public const uint minimumTimeout = 10;
 
 
         /// <summary>
@@ -46,10 +54,12 @@ namespace updater_cli.operations
         /// <param name="withAurora">Whether or not Firefox Developer Edition
         /// (aurora channel) shall be included, too. Default is false, because
         /// this increases time of the query by quite a bit (several seconds).</param>
-        public Update(bool _autoGetNewer, bool withAurora)
+        /// <param name="_timeout">maximum time in seconds per update process</param>
+        public Update(bool _autoGetNewer, bool withAurora, uint _timeout)
         {
             includeAurora = withAurora;
             autoGetNewer = _autoGetNewer;
+            timeout = _timeout;
         }
         
         
@@ -70,7 +80,7 @@ namespace updater_cli.operations
                 return -1;
             }
             //set some reasonable timeout, if necessary
-            if (timeoutPerUpdate <= 10)
+            if (timeoutPerUpdate <= minimumTimeout)
             {
                 timeoutPerUpdate = defaultTimeout;
             }
@@ -372,10 +382,16 @@ namespace updater_cli.operations
         private bool autoGetNewer;
 
 
+        /// <summary>
+        /// maximum time in seconds per update process
+        /// </summary>
+        private uint timeout;
+
+
         public int perform()
         {
             var query = SoftwareStatus.query(autoGetNewer, includeAurora);
-            int result = update(query);
+            int result = update(query, timeout);
             if (result < 0)
             {
                 logger.Error("At least one error occurred during the update.");

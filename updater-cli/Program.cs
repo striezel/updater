@@ -50,9 +50,11 @@ namespace updater_cli
                 return ReturnCodes.rcInvalidParameter;
             }
 
+
             Operation op = Operation.Unknown;
             bool autoGetNewer = true;
             bool withAurora = false;
+            uint timeout = Update.defaultTimeout;
 
             for (int i = 0; i < args.Length; i++)
             {
@@ -98,6 +100,28 @@ namespace updater_cli
                     case "--no-automatically-get-newer":
                         autoGetNewer = false;
                         break;
+                    case "/t":
+                    case "-t":
+                    case "--timeout":
+                        if (i + 1 >= args.Length)
+                        {
+                            logger.Error("Error: Parameter " + param + " must be followed by an integer value!");
+                            return ReturnCodes.rcInvalidParameter;
+                        }
+                        if (!uint.TryParse(args[i + 1], out timeout))
+                        {
+                            logger.Error("Error: Parameter " + param + " must be followed by a non-negative integer value,"
+                                + " but '" + args[i + 1] + "' is not such a value.");
+                            return ReturnCodes.rcInvalidParameter;
+                        }
+                        if (timeout < 120)
+                        {
+                            timeout = Update.defaultTimeout;
+                            logger.Warn("Hint: Specified timeout was less than two minutes / 120 seconds."
+                                + " It has been set to " + timeout.ToString() + " seconds intead.");
+                        }
+                        ++i; //skip next argument, because that is the timeout
+                        break;
                     default:
                         logger.Error("Error: " + param + " is not a valid command line option!");
                         return ReturnCodes.rcInvalidParameter;
@@ -120,7 +144,7 @@ namespace updater_cli
                     operation = new SoftwareStatus(autoGetNewer, withAurora);
                     break;
                 case Operation.Update:
-                    operation = new Update(autoGetNewer, withAurora);
+                    operation = new Update(autoGetNewer, withAurora, timeout);
                     break;
                 case Operation.Unknown:
                 default:
