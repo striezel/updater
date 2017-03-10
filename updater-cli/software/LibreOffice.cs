@@ -94,7 +94,7 @@ namespace updater_cli.software
             {
                 try
                 {
-                    htmlCode = client.DownloadString("https://download.documentfoundation.org/libreoffice/stable/?C=M;O=D");
+                    htmlCode = client.DownloadString("https://download.documentfoundation.org/libreoffice/stable/?C=N;O=D");
                 }
                 catch (Exception ex)
                 {
