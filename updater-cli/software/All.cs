@@ -39,6 +39,7 @@ namespace updater_cli.software
         public static List<ISoftware> get(bool autoGetNewer, bool withAurora)
         {
             var result = new List<ISoftware>();
+            result.Add(new CCleaner(autoGetNewer));
             result.Add(new CDBurnerXP(autoGetNewer));
             //Firefox (release channel)
             var languages = Firefox.validLanguageCodes();
