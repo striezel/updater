@@ -42,6 +42,9 @@ namespace updater_cli.utility
             HashAlgorithm hasher = null;
             switch (algorithm)
             {
+                case data.HashAlgorithm.MD5:
+                    hasher = new MD5Cng();
+                    break;
                 case data.HashAlgorithm.SHA1:
                     hasher = new SHA1Managed();
                     break;

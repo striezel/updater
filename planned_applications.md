@@ -16,6 +16,7 @@ updater application.
 * Mozilla Firefox ESR
 * Mozilla Thunderbird
 * Notepad++
+* Opera
 * PuTTY
 * VLC
 * WinSCP
@@ -32,6 +33,5 @@ updater application.
 * Java Development Kit
 * Java Runtime Environment
 * OpenOffice (may possibly be dropped in favour of LibreOffice)
-* Opera
 * Pidgin
 * Skype

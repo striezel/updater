@@ -99,6 +99,7 @@
     <Compile Include="software\NoPreUpdateProcessSoftware.cs" />
     <Compile Include="software\NotepadPlusPlus.cs" />
     <Compile Include="software\KeePass.cs" />
+    <Compile Include="software\Opera.cs" />
     <Compile Include="software\Putty.cs" />
     <Compile Include="software\GIMP.cs" />
     <Compile Include="software\SevenZip.cs" />
@@ -109,6 +110,7 @@
     <Compile Include="utility\Logging.cs" />
     <Compile Include="utility\Strings.cs" />
     <Compile Include="utility\Version.cs" />
+    <Compile Include="utility\VersionQuartet.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="NLog.config">

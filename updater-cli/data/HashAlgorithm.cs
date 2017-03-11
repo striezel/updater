@@ -27,6 +27,13 @@ namespace updater_cli.data
         /// unknown or no hash algorithm
         /// </summary>
         Unknown,
+
+        /// <summary>
+        /// Message Digest 5, 128 bits
+        /// (This algoritm is weak and practically broken. But some vendors use
+        ///  it as the only checksum for their setups/installers.)
+        /// </summary>
+        MD5,
         
         /// <summary>
         /// secure hash algorithm 1, 160 bits

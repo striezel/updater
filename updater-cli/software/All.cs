@@ -68,6 +68,7 @@ namespace updater_cli.software
             result.Add(new LibreOffice(autoGetNewer));
             result.Add(new LibreOfficeHelpPackGerman(autoGetNewer));
             result.Add(new NotepadPlusPlus(autoGetNewer));
+            result.Add(new Opera(autoGetNewer));
             result.Add(new Putty(autoGetNewer));
             result.Add(new SevenZip(autoGetNewer));
             //Thunderbird
