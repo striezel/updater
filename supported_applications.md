@@ -33,4 +33,3 @@ updater application.
 * Java Development Kit
 * Java Runtime Environment
 * Pidgin
-* Skype
