@@ -32,6 +32,5 @@ updater application.
 * IrfanView
 * Java Development Kit
 * Java Runtime Environment
-* OpenOffice (may possibly be dropped in favour of LibreOffice)
 * Pidgin
 * Skype
