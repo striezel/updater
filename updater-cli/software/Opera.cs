@@ -111,13 +111,13 @@ namespace updater_cli.software
             if (matches.Count == 0)
                 return null;
             //Add found versions to a list ...
-            List<utility.VersionQuartet> versions = new List<utility.VersionQuartet>();
+            List<versions.Quartet> versions = new List<versions.Quartet>();
             foreach (Match match in matches)
             {
                 if (!match.Success)
                     return null;
                 string version = match.Value.Substring(1).Replace("/\"", "");
-                versions.Add(new utility.VersionQuartet(version));
+                versions.Add(new versions.Quartet(version));
             } //foreach
             // ... and sort them from earliest to latest.
             versions.Sort();

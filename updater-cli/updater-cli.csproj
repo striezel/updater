@@ -110,7 +110,7 @@
     <Compile Include="utility\Logging.cs" />
     <Compile Include="utility\Strings.cs" />
     <Compile Include="utility\Version.cs" />
-    <Compile Include="utility\VersionQuartet.cs" />
+    <Compile Include="versions\Quartet.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="NLog.config">

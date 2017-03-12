@@ -18,12 +18,12 @@
 
 using System;
 
-namespace updater_cli.utility
+namespace updater_cli.versions
 {
     /// <summary>
     /// utility class to represent a four-part version, e.g. "11.23.4.5"
     /// </summary>
-    public struct VersionQuartet : IComparable<VersionQuartet>
+    public struct Quartet : IComparable<Quartet>
     {
         /// <summary>
         /// major version number
@@ -50,7 +50,7 @@ namespace updater_cli.utility
         /// construct quartet from string value
         /// </summary>
         /// <param name="value">string value containing a dot-separated version, e.g. "11.2.7.23"</param>
-        public VersionQuartet(string value)
+        public Quartet(string value)
         {
             major = 0;
             minor = 0;
@@ -80,7 +80,7 @@ namespace updater_cli.utility
 
         }
 
-        public int CompareTo(VersionQuartet other)
+        public int CompareTo(Quartet other)
         {
             if (ReferenceEquals(this, other))
                 return 0;
