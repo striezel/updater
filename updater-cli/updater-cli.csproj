@@ -96,6 +96,7 @@
     <Compile Include="software\ISoftware.cs" />
     <Compile Include="software\LibreOffice.cs" />
     <Compile Include="software\LibreOfficeHelpPackGerman.cs" />
+    <Compile Include="software\Mumble.cs" />
     <Compile Include="software\NoPreUpdateProcessSoftware.cs" />
     <Compile Include="software\NotepadPlusPlus.cs" />
     <Compile Include="software\KeePass.cs" />
@@ -110,6 +111,7 @@
     <Compile Include="utility\Logging.cs" />
     <Compile Include="utility\Strings.cs" />
     <Compile Include="utility\Version.cs" />
+    <Compile Include="versions\Triple.cs" />
     <Compile Include="versions\Quartet.cs" />
   </ItemGroup>
   <ItemGroup>

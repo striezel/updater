@@ -15,6 +15,7 @@ updater application.
 * Mozilla Firefox
 * Mozilla Firefox ESR
 * Mozilla Thunderbird
+* Mumble
 * Notepad++
 * Opera
 * PuTTY
