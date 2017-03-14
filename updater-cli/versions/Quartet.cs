@@ -57,14 +57,14 @@ namespace updater_cli.versions
             patch = 0;
             build = 0;
             string[] parts = value.Split(new char[] { '.' });
-            if (parts.Length < 4)
-            {
-                return;
-            }
+            //If there are less than four parts, we just assume zero.
             uint.TryParse(parts[0], out major);
-            uint.TryParse(parts[1], out minor);
-            uint.TryParse(parts[2], out patch);
-            uint.TryParse(parts[3], out build);
+            if (parts.Length >= 2)
+                uint.TryParse(parts[1], out minor);
+            if (parts.Length >= 3)
+                uint.TryParse(parts[2], out patch);
+            if (parts.Length >= 4)
+                uint.TryParse(parts[3], out build);
             return;
         }
 
@@ -79,6 +79,7 @@ namespace updater_cli.versions
                 patch.ToString() + "." + build.ToString();
 
         }
+
 
         public int CompareTo(Quartet other)
         {

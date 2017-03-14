@@ -51,13 +51,13 @@ namespace updater_cli.versions
             minor = 0;
             patch = 0;
             string[] parts = value.Split(new char[] { '.' });
-            if (parts.Length < 3)
-            {
-                return;
-            }
-            uint.TryParse(parts[0], out major);
-            uint.TryParse(parts[1], out minor);
-            uint.TryParse(parts[2], out patch);
+            //If there are not enough parts, we just use zero instead.
+            if (parts.Length >= 1)
+                uint.TryParse(parts[0], out major);
+            if (parts.Length >= 2)
+                uint.TryParse(parts[1], out minor);
+            if (parts.Length >= 3)
+                uint.TryParse(parts[2], out patch);
         }
 
 

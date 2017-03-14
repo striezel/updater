@@ -62,6 +62,7 @@ namespace updater_cli.software
                     result.Add(new FirefoxAurora(lang, autoGetNewer));
                 } //foreach
             } //if aurora is requested, too
+            result.Add(new FileZilla(autoGetNewer));
             result.Add(new GIMP(autoGetNewer));
             result.Add(new Inkscape(autoGetNewer));
             result.Add(new KeePass(autoGetNewer));

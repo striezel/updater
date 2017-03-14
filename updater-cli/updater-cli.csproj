@@ -88,6 +88,7 @@
     <Compile Include="software\AbstractSoftware.cs" />
     <Compile Include="software\All.cs" />
     <Compile Include="software\CCleaner.cs" />
+    <Compile Include="software\FileZilla.cs" />
     <Compile Include="software\Inkscape.cs" />
     <Compile Include="software\CDBurnerXP.cs" />
     <Compile Include="software\Firefox.cs" />

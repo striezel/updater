@@ -70,6 +70,7 @@
     <Compile Include="software\LibreOfficeHelpPackGerman_Tests.cs" />
     <Compile Include="software\LibreOffice_Tests.cs" />
     <Compile Include="software\NotepadPlusPlus_Tests.cs" />
+    <Compile Include="software\FileZilla_Tests.cs" />
     <Compile Include="software\Putty_Tests.cs" />
     <Compile Include="software\Gimp_Tests.cs" />
     <Compile Include="software\SevenZip_Tests.cs" />

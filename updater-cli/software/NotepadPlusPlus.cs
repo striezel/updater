@@ -58,7 +58,6 @@ namespace updater_cli.software
                     "/S",
                     "C:\\Program Files\\Notepad++",
                     "C:\\Program Files (x86)\\Notepad++"),
-                //A 64 bit is available, but the data still needs to be added.
                 new InstallInfoExe(
                     "https://notepad-plus-plus.org/repository/7.x/7.3.1/npp.7.3.1.Installer.x64.exe",
                     HashAlgorithm.SHA1,
