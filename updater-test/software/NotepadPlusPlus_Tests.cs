@@ -43,8 +43,8 @@ namespace updater_test.software
         [TestMethod]
         public void Test_implementsSearchForNewer()
         {
-            var kp = new NotepadPlusPlus(false);
-            Assert.IsTrue(kp.implementsSearchForNewer());
+            var npp = new NotepadPlusPlus(false);
+            Assert.IsTrue(npp.implementsSearchForNewer());
         }
 
 

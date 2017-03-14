@@ -48,21 +48,21 @@ namespace updater_cli.software
         /// details about the software.</returns>
         public override AvailableSoftware knownInfo()
         {
-            return new AvailableSoftware("CCleaner", "5.27",
+            return new AvailableSoftware("CCleaner", "5.28",
                 "^CCleaner+$",
                 "^CCleaner+$",
                 //CCleaner uses the same installer for 32 and 64 bit.
                 new InstallInfoExe(
-                    "https://download.piriform.com/ccsetup527.exe",
+                    "https://download.piriform.com/ccsetup528.exe",
                     HashAlgorithm.SHA256,
-                    "7f6b831129ce21153e83fc2b27c4b3236927b310c1fbdaf95755ce4eac223431",
+                    "c0095229fe2e0c9bde8ef960b6fed40a71f5f2d9cc17d4c53ee9ca30c5b032a9",
                     "/S",
                     "C:\\Program Files\\CCleaner",
                     "C:\\Program Files (x86)\\CCleaner"),
                 new InstallInfoExe(
-                    "https://download.piriform.com/ccsetup527.exe",
+                    "https://download.piriform.com/ccsetup528.exe",
                     HashAlgorithm.SHA256,
-                    "7f6b831129ce21153e83fc2b27c4b3236927b310c1fbdaf95755ce4eac223431",
+                    "c0095229fe2e0c9bde8ef960b6fed40a71f5f2d9cc17d4c53ee9ca30c5b032a9",
                     "/S",
                     null,
                     "C:\\Program Files\\CCleaner")
@@ -118,6 +118,8 @@ namespace updater_cli.software
                 return null;
             string newVersion = match.Value;
             newVersion = newVersion.Substring(0, newVersion.Length - 2) + "." + newVersion.Substring(newVersion.Length - 2);
+            if (newVersion == knownInfo().newestVersion)
+                return knownInfo();
 
             //No checksums are provided.
 
