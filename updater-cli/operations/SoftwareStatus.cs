@@ -21,7 +21,6 @@ using System.Collections.Generic;
 using updater_cli.data;
 using updater_cli.detection;
 using updater_cli.software;
-using System.Text.RegularExpressions;
 
 namespace updater_cli.operations
 {
@@ -59,31 +58,7 @@ namespace updater_cli.operations
             var all = All.get(false, withAurora);
             foreach (var item in all)
             {
-                var info = item.info();
-                if (Environment.Is64BitOperatingSystem && !string.IsNullOrWhiteSpace(info.match64Bit))
-                {
-                    Regex regularExp = new Regex(info.match64Bit, RegexOptions.IgnoreCase);
-                    int idx = detected.FindIndex(x => regularExp.IsMatch(x.displayName) && !string.IsNullOrWhiteSpace(x.displayVersion));
-                    if ((idx >= 0) && (detected[idx].appType == ApplicationType.Bit64))
-                    {
-                        //found it
-                        item.autoGetNewer(autoGetNewer);
-                        bool needsUpdate = item.needsUpdate(detected[idx]);
-                        result.Add(new QueryEntry(item, detected[idx], needsUpdate, ApplicationType.Bit64));
-                    } //if match was found
-                } //if 64 bit expression does exist and we are on a 64 bit system
-                if (!string.IsNullOrWhiteSpace(info.match32Bit))
-                {
-                    Regex regularExp = new Regex(info.match32Bit, RegexOptions.IgnoreCase);
-                    int idx = detected.FindIndex(x => regularExp.IsMatch(x.displayName) && !string.IsNullOrWhiteSpace(x.displayVersion));
-                    if ((idx >= 0) && (detected[idx].appType == ApplicationType.Bit32))
-                    {
-                        //found it
-                        item.autoGetNewer(autoGetNewer);
-                        bool needsUpdate = item.needsUpdate(detected[idx]);
-                        result.Add(new QueryEntry(item, detected[idx], needsUpdate, ApplicationType.Bit32));
-                    } //if match was found
-                } //if 32 bit expression does exist
+                item.detectionQuery(detected, autoGetNewer, result);
             } //foreach
             return result;
         }

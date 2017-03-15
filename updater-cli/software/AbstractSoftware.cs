@@ -16,8 +16,10 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Text.RegularExpressions;
 using updater_cli.data;
 
 namespace updater_cli.software
@@ -143,6 +145,42 @@ namespace updater_cli.software
         {
             //Simple version string comparison.
             return (string.Compare(detected.displayVersion, info().newestVersion, true) < 0);
+        }
+
+
+        /// <summary>
+        /// checks whether the software is in the list of detected software
+        /// </summary>
+        /// <param name="detected">list of detected software on the system</param>
+        /// <param name="autoGetNew">whether to automatically get new software information</param>
+        /// <param name="result">query result where software will be added, if it is in the detection list</param>
+        public virtual void detectionQuery(List<DetectedSoftware> detected, bool autoGetNew, List<QueryEntry> result)
+        {
+            var known = knownInfo();
+            if (Environment.Is64BitOperatingSystem && !string.IsNullOrWhiteSpace(known.match64Bit))
+            {
+                Regex regularExp = new Regex(known.match64Bit, RegexOptions.IgnoreCase);
+                int idx = detected.FindIndex(x => regularExp.IsMatch(x.displayName) && !string.IsNullOrWhiteSpace(x.displayVersion));
+                if ((idx >= 0) && (detected[idx].appType == ApplicationType.Bit64))
+                {
+                    //found it
+                    autoGetNewer(autoGetNew);
+                    bool updatable = needsUpdate(detected[idx]);
+                    result.Add(new QueryEntry(this, detected[idx], updatable, ApplicationType.Bit64));
+                } //if match was found
+            } //if 64 bit expression does exist and we are on a 64 bit system
+            if (!string.IsNullOrWhiteSpace(known.match32Bit))
+            {
+                Regex regularExp = new Regex(known.match32Bit, RegexOptions.IgnoreCase);
+                int idx = detected.FindIndex(x => regularExp.IsMatch(x.displayName) && !string.IsNullOrWhiteSpace(x.displayVersion));
+                if ((idx >= 0) && (detected[idx].appType == ApplicationType.Bit32))
+                {
+                    //found it
+                    autoGetNewer(autoGetNew);
+                    bool updatable = needsUpdate(detected[idx]);
+                    result.Add(new QueryEntry(this, detected[idx], updatable, ApplicationType.Bit32));
+                } //if match was found
+            } //if 32 bit expression does exist
         }
 
 

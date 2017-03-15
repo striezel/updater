@@ -88,5 +88,14 @@ namespace updater_cli.software
         /// than the newest software version, thus needing an update.
         /// Returns false, if no update is necessary.</returns>
         bool needsUpdate(DetectedSoftware detected);
+
+
+        /// <summary>
+        /// checks whether the software is in the list of detected software
+        /// </summary>
+        /// <param name="detected">list of detected software on the system</param>
+        /// <param name="autoGetNew">whether to automatically get new software information</param>
+        /// <param name="result">query result where software will be added, if it is in the detection list</param>
+        void detectionQuery(List<DetectedSoftware> detected, bool autoGetNew, List<QueryEntry> result);
     } //interface
 } //namespace
