@@ -17,6 +17,7 @@
 */
 
 using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Text.RegularExpressions;
 using updater_cli.data;
@@ -174,6 +175,41 @@ namespace updater_cli.software
             versions.Quartet verDetected = new versions.Quartet(detected.displayVersion);
             versions.Quartet verNewest = new versions.Quartet(info().newestVersion);
             return (verNewest.CompareTo(verDetected) > 0);
+        }
+
+
+        /// <summary>
+        /// checks whether the software is in the list of detected software
+        /// </summary>
+        /// <param name="detected">list of detected software on the system</param>
+        /// <param name="autoGetNew">whether to automatically get new software information</param>
+        /// <param name="result">query result where software will be added, if it is in the detection list</param>
+        public override void detectionQuery(List<DetectedSoftware> detected, bool autoGetNew, List<QueryEntry> result)
+        {
+            //32 bit systems use normal detection.
+            if (!Environment.Is64BitOperatingSystem)
+            {
+                base.detectionQuery(detected, autoGetNew, result);
+                return;
+            }
+            //64 bit systems might need adjustments.
+            var resBase = new List<QueryEntry>();
+            base.detectionQuery(detected, autoGetNew, resBase);
+            foreach (var item in resBase)
+            {
+                if (string.IsNullOrWhiteSpace(item.detected.installPath))
+                    continue;
+                //See if we need to adjust the type for the 64 bit variant.
+                string exePath = System.IO.Path.Combine(item.detected.installPath, "filezilla.exe");
+                utility.PEFormat format = utility.PortableExecutable.determineFormat(exePath);
+                logger.Debug("Format for " + item.detected.installPath + " is " + format.ToString() + ".");
+                if ((format == utility.PEFormat.PE64) && (item.type != ApplicationType.Bit64))
+                {
+                    item.type = ApplicationType.Bit64;
+                    item.detected.appType = ApplicationType.Bit64;
+                }
+            } //foreach
+            result.AddRange(resBase);
         }
 
     } //class
