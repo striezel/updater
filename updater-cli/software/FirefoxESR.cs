@@ -292,8 +292,8 @@ namespace updater_cli.software
         {
             return new AvailableSoftware("Mozilla Firefox ESR (" + languageCode + ")",
                 "45.7.0",
-                "^Mozilla Firefox [0-9]{2}\\.[0-9]\\.[0-9] ESR \\(x86 " + Regex.Escape(languageCode) + "\\)$",
-                "^Mozilla Firefox [0-9]{2}\\.[0-9]\\.[0-9] ESR \\(x64 " + Regex.Escape(languageCode) + "\\)$",
+                "^Mozilla Firefox [0-9]{2}\\.[0-9](\\.[0-9])? ESR \\(x86 " + Regex.Escape(languageCode) + "\\)$",
+                "^Mozilla Firefox [0-9]{2}\\.[0-9](\\.[0-9])? ESR \\(x64 " + Regex.Escape(languageCode) + "\\)$",
                 //32 bit installer
                 new InstallInfoExe(
                     "https://ftp.mozilla.org/pub/firefox/releases/45.7.0esr/win32/" + languageCode + "/Firefox%20Setup%2045.7.0esr.exe",
@@ -333,7 +333,7 @@ namespace updater_cli.software
                 string newLocation = response.Headers[HttpResponseHeader.Location];
                 request = null;
                 response = null;
-                Regex reVersion = new Regex("[0-9]{2}\\.[0-9]\\.[0-9]");
+                Regex reVersion = new Regex("[0-9]{2}\\.[0-9](\\.[0-9])?");
                 Match matchVersion = reVersion.Match(newLocation);
                 if (!matchVersion.Success)
                     return null;
