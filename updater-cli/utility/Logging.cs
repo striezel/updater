@@ -43,7 +43,7 @@ namespace updater_cli.utility
             config.AddTarget("file", fileTarget);
 
             // set target properties 
-            consoleTarget.Layout = @"${date:format=yyyy-MM-dd HH\:mm\:ss} [${logger}] ${message}";
+            consoleTarget.Layout = @"${date:format=yyyy-MM-dd HH\:mm\:ss} - ${message}";
             fileTarget.FileName = getLogFileName();
             fileTarget.Layout = @"${date:format=yyyy-MM-dd HH\:mm\:ss} [${logger}] ${message}";
 
