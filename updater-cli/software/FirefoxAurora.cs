@@ -39,7 +39,7 @@ namespace updater_cli.software
         /// <summary>
         /// the currently known newest version
         /// </summary>
-        private const string currentVersion = "53.0a2";
+        private const string currentVersion = "54.0a2";
 
         /// <summary>
         /// constructor with language code
@@ -107,7 +107,7 @@ namespace updater_cli.software
                 "^Firefox Developer Edition [0-9]{2}\\.[0-9][a-z][0-9] \\(x64 " + Regex.Escape(languageCode) + "\\)$",
                 //32 bit installer
                 new InstallInfoExe(
-                    "https://ftp.mozilla.org/pub/firefox/nightly/latest-mozilla-aurora-l10n/firefox-53.0a2." + languageCode + ".win32.installer.exe",
+                    "https://ftp.mozilla.org/pub/firefox/nightly/latest-mozilla-aurora-l10n/firefox-" + currentVersion + "." + languageCode + ".win32.installer.exe",
                     HashAlgorithm.SHA512,
                     checksum32Bit,
                     "-ms -ma",
@@ -115,7 +115,7 @@ namespace updater_cli.software
                     "C:\\Program Files (x86)\\Firefox Developer Edition"),
                 //64 bit installer
                 new InstallInfoExe(
-                    "https://ftp.mozilla.org/pub/firefox/nightly/latest-mozilla-aurora-l10n/firefox-53.0a2." + languageCode + ".win64.installer.exe",
+                    "https://ftp.mozilla.org/pub/firefox/nightly/latest-mozilla-aurora-l10n/firefox-" + currentVersion + "." + languageCode + ".win64.installer.exe",
                     HashAlgorithm.SHA512,
                     checksum64Bit,
                     "-ms -ma",
