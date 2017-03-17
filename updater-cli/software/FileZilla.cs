@@ -202,7 +202,6 @@ namespace updater_cli.software
                 //See if we need to adjust the type for the 64 bit variant.
                 string exePath = System.IO.Path.Combine(item.detected.installPath, "filezilla.exe");
                 utility.PEFormat format = utility.PortableExecutable.determineFormat(exePath);
-                logger.Debug("Format for " + item.detected.installPath + " is " + format.ToString() + ".");
                 if ((format == utility.PEFormat.PE64) && (item.type != ApplicationType.Bit64))
                 {
                     item.type = ApplicationType.Bit64;
