@@ -22,7 +22,7 @@ using updater_cli.software;
 namespace updater_test.software
 {
     /// <summary>
-    /// unit tests for software.KeePass class
+    /// unit tests for software.CCleaner class
     /// </summary>
     [TestClass]
     public class CCleaner_Tests : BasicSoftwareTests
