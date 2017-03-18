@@ -23,7 +23,7 @@ namespace updater_cli.data
     /// <summary>
     /// special case of MSI installation for LibreOffice
     /// </summary>
-    public class InstallInfoLibO : InstallInfo
+    public class InstallInfoLibO : InstallInfoMsi
     {
         /// <summary>
         /// default constructor

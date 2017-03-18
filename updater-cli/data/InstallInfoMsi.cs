@@ -72,5 +72,14 @@ namespace updater_cli.data
                 proc.StartInfo.Arguments = "/i \"" + downloadedFile + "\" " + silentSwitches;
             return proc;
         }
+
+
+        /// <summary>
+        /// return code that indicates that the installation / update was successful,
+        /// but a reboot is required to finish the process
+        /// </summary>
+        /// <remarks>See https://msdn.microsoft.com/en-us/library/windows/desktop/aa376931(v=vs.85).aspx
+        /// for more exit codes of MsiExec.exe.</remarks>
+        public const int successRebootRequired = 3010;
     } //class
 } //namespace

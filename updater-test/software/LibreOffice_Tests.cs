@@ -63,5 +63,19 @@ namespace updater_test.software
         {
             _upToDate_info(new LibreOffice(false));
         }
+
+
+        /// <summary>
+        /// checks whether InstallInfoLibO is derived from InstallInfoMsi
+        /// (This is required for MSI handling in the Update class.)
+        /// </summary>
+        [TestMethod]
+        public void Test_isInstallInfoMsi()
+        {
+            var libO = new LibreOffice(false);
+            updater_cli.data.InstallInfo inst = libO.knownInfo().install32Bit;
+            Assert.IsTrue(inst is updater_cli.data.InstallInfoLibO);
+            Assert.IsTrue(inst is updater_cli.data.InstallInfoMsi, "InstallInfoLibO is not derived from InstallInfoMsi!");
+        }
     } //class
 } //namespace

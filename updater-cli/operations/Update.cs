@@ -240,7 +240,14 @@ namespace updater_cli.operations
                             }
                             //only wait up to timeoutPerUpdate seconds
                         } while (intervalCounter <= timeoutPerUpdate);
-                        bool success = proc.HasExited && (proc.ExitCode == 0);
+                        // Update was successful, if process has exited already,
+                        // i.e. there was no timeout.
+                        // Additionally, the exit code must be zero.
+                        // However, for MSI processes the exit code 3010 means
+                        // the the update succeeded, but a reboot is required.
+                        bool success = proc.HasExited
+                            && ((proc.ExitCode == 0)
+                            || ((proc.ExitCode == InstallInfoMsi.successRebootRequired) && (instInfo is InstallInfoMsi)));
                         //Kill it, if it is not done yet.
                         if (!proc.HasExited)
                         {
@@ -251,7 +258,12 @@ namespace updater_cli.operations
                         {
                             logger.Info("Info: Update of " + entry.software.info().Name + " was successful.");
                             ++updatedApplications;
-                        }
+                            if ((instInfo is InstallInfoMsi) && (proc.ExitCode == InstallInfoMsi.successRebootRequired))
+                            {
+                                logger.Warn("Warning: A reboot is required to"
+                                    +" finish the update of " + entry.software.info().Name + ".");
+                            } //if MSI installer requires reboot
+                        } //if success
                         else
                         {
                             logger.Error("Error: Could not update " + entry.software.info().Name + ".");
