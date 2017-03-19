@@ -59,6 +59,7 @@
     <Compile Include="io\AvailableSoftwareXML_Tests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="software\All_Tests.cs" />
+    <Compile Include="software\Pidgin_Tests.cs" />
     <Compile Include="software\BasicSoftwareTests.cs" />
     <Compile Include="software\Audacity_Tests.cs" />
     <Compile Include="software\Shockwave_Tests.cs" />

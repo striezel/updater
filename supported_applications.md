@@ -20,6 +20,7 @@ updater application.
 * Mumble
 * Notepad++
 * Opera
+* Pidgin
 * PuTTY
 * VLC
 * WinSCP
@@ -33,4 +34,3 @@ updater application.
 * IrfanView
 * Java Development Kit
 * Java Runtime Environment
-* Pidgin

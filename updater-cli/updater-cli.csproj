@@ -64,6 +64,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="data\InstallInfoExe.cs" />
+    <Compile Include="data\InstallInfoPidgin.cs" />
     <Compile Include="data\InstallInfoLibO.cs" />
     <Compile Include="data\InstallInfoMsi.cs" />
     <Compile Include="io\GenericXmlSerializer.cs" />
@@ -87,6 +88,7 @@
     <Compile Include="ReturnCodes.cs" />
     <Compile Include="software\AbstractSoftware.cs" />
     <Compile Include="software\All.cs" />
+    <Compile Include="software\Pidgin.cs" />
     <Compile Include="software\Audacity.cs" />
     <Compile Include="software\CCleaner.cs" />
     <Compile Include="software\FileZilla.cs" />
