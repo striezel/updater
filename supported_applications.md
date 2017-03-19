@@ -6,6 +6,7 @@ updater application.
 ## Implemented
 
 * 7-Zip
+* Audacity
 * CCleaner
 * CDBurnerXP
 * FileZilla
@@ -28,7 +29,6 @@ updater application.
 * Adobe Acrobat Reader
 * Adobe AIR
 * Adobe Shockwave
-* Audacity
 * Google Chrome
 * IrfanView
 * Java Development Kit
