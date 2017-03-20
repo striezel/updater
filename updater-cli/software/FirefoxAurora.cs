@@ -126,6 +126,16 @@ namespace updater_cli.software
 
 
         /// <summary>
+        /// list iof IDs to identify the software
+        /// </summary>
+        /// <returns>Returns a non-empty array of IDs, where at least one entry is unique to the software.</returns>
+        public override string[] id()
+        {
+            return new string[] { "firefox-aurora", "firefox-aurora-" + languageCode.ToLower() };
+        }
+
+
+        /// <summary>
         /// tries to find the newest version number of Firefox Developer Edition
         /// </summary>
         /// <returns>Returns a string containing the newest version number on success.

@@ -46,6 +46,13 @@ namespace updater_cli.software
 
 
         /// <summary>
+        /// list iof IDs to identify the software
+        /// </summary>
+        /// <returns>Returns a non-empty array of IDs, where at least one entry is unique to the software.</returns>
+        abstract public string[] id();
+
+
+        /// <summary>
         /// gets the currently known information about the software
         /// </summary>
         /// <returns>Returns an AvailableSoftware instance with the known

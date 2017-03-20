@@ -16,37 +16,36 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+using System;
+
 namespace updater_cli.operations
 {
-    /// <summary>
-    /// enumeration that specifies the basic operation
-    /// </summary>
-    public enum Operation
+    public class IdList : IOperation
     {
         /// <summary>
-        /// unknown operation
+        /// default constructor
         /// </summary>
-        Unknown,
+        /// <param name="withAurora"></param>
+        public IdList(bool withAurora)
+        {
+            mWithAurora = withAurora;
+        }
+
+
+        public int perform()
+        {
+            var all = software.All.get(false, mWithAurora);
+            foreach (var software in all)
+            {
+                Console.WriteLine(software.info().Name + ": " + string.Join(", ", software.id()));
+            } //foreach
+            return 0;
+        }
 
 
         /// <summary>
-        /// software detection
+        /// whether Aurora is included in the list or not
         /// </summary>
-        Detect,
-
-        /// <summary>
-        /// check/query current software status
-        /// </summary>
-        Check,
-
-        /// <summary>
-        /// update software
-        /// </summary>
-        Update,
-
-        /// <summary>
-        /// list IDs of available software
-        /// </summary>
-        Id
-    } //enum
+        private bool mWithAurora;
+    } //class
 } //namespace

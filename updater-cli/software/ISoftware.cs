@@ -36,6 +36,13 @@ namespace updater_cli.software
 
 
         /// <summary>
+        /// list iof IDs to identify the software
+        /// </summary>
+        /// <returns>Returns a non-empty array of IDs, where at least one entry is unique to the software.</returns>
+        string[] id();
+
+
+        /// <summary>
         /// set whether to automatically get new software information
         /// </summary>
         /// <param name="autoGetNew">new setting value</param>

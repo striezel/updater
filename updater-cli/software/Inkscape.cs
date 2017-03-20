@@ -73,6 +73,16 @@ namespace updater_cli.software
 
 
         /// <summary>
+        /// list iof IDs to identify the software
+        /// </summary>
+        /// <returns>Returns a non-empty array of IDs, where at least one entry is unique to the software.</returns>
+        public override string[] id()
+        {
+            return new string[] { "inkscape" };
+        }
+
+
+        /// <summary>
         /// whether or not the method searchForNewer() is implemented
         /// </summary>
         /// <returns>Returns true, if searchForNewer() is implemented for that

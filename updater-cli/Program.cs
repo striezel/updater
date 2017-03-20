@@ -73,6 +73,11 @@ namespace updater_cli
                     case "upgrade":
                         op = Operation.Update;
                         break;
+                    case "id":
+                    case "list-id":
+                    case "id-list":
+                        op = Operation.Id;
+                        break;
                     case "--version":
                     case "/v":
                     case "-v":
@@ -145,6 +150,9 @@ namespace updater_cli
                     break;
                 case Operation.Update:
                     operation = new Update(autoGetNewer, withAurora, timeout);
+                    break;
+                case Operation.Id:
+                    operation = new IdList(withAurora);
                     break;
                 case Operation.Unknown:
                 default:
