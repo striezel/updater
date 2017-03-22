@@ -17,6 +17,7 @@
 */
 
 using System;
+using System.Collections.Generic;
 using updater_cli.operations;
 
 namespace updater_cli
@@ -55,6 +56,7 @@ namespace updater_cli
             bool autoGetNewer = true;
             bool withAurora = false;
             uint timeout = Update.defaultTimeout;
+            var excluded = new List<string>();
 
             for (int i = 0; i < args.Length; i++)
             {
@@ -127,6 +129,29 @@ namespace updater_cli
                         }
                         ++i; //skip next argument, because that is the timeout
                         break;
+                    case "--exclude":
+                    case "--except":
+                    case "-e":
+                        if (i + 1 >= args.Length)
+                        {
+                            logger.Error("Error: Parameter " + param + " must be followed by a software ID!");
+                            return ReturnCodes.rcInvalidParameter;
+                        }
+                        string id = args[i + 1];
+                        if (string.IsNullOrWhiteSpace(id))
+                        {
+                            logger.Error("Error: Software ID for parameter " + param + " is invalid!");
+                            return ReturnCodes.rcInvalidParameter;
+                        }
+                        id = id.ToLower();
+                        if (excluded.Contains(id))
+                        {
+                            logger.Error("Error: Software ID " + id + " is already in the exclusion list.");
+                            return ReturnCodes.rcInvalidParameter;
+                        }
+                        excluded.Add(id);
+                        ++i; //skip next argument, because that is the ID
+                        break;
                     default:
                         logger.Error("Error: " + param + " is not a valid command line option!");
                         return ReturnCodes.rcInvalidParameter;
@@ -146,10 +171,10 @@ namespace updater_cli
                     operation = new OperationDetect();
                     break;
                 case Operation.Check:
-                    operation = new SoftwareStatus(autoGetNewer, withAurora);
+                    operation = new SoftwareStatus(autoGetNewer, withAurora, excluded);
                     break;
                 case Operation.Update:
-                    operation = new Update(autoGetNewer, withAurora, timeout);
+                    operation = new Update(autoGetNewer, withAurora, timeout, excluded);
                     break;
                 case Operation.Id:
                     operation = new IdList(withAurora);

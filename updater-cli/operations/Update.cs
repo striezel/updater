@@ -55,11 +55,13 @@ namespace updater_cli.operations
         /// (aurora channel) shall be included, too. Default is false, because
         /// this increases time of the query by quite a bit (several seconds).</param>
         /// <param name="_timeout">maximum time in seconds per update process</param>
-        public Update(bool _autoGetNewer, bool withAurora, uint _timeout)
+        /// <param name="_exclusion">list of software IDs that shall not be in the list</param>
+        public Update(bool _autoGetNewer, bool withAurora, uint _timeout, List<string> _exclusion)
         {
             includeAurora = withAurora;
             autoGetNewer = _autoGetNewer;
             timeout = _timeout;
+            exclusion = _exclusion;
         }
         
         
@@ -400,9 +402,15 @@ namespace updater_cli.operations
         private uint timeout;
 
 
+        /// <summary>
+        /// list of software IDs that shall not be updated
+        /// </summary>
+        private List<string> exclusion;
+
+
         public int perform()
         {
-            var query = SoftwareStatus.query(autoGetNewer, includeAurora);
+            var query = SoftwareStatus.query(autoGetNewer, includeAurora, exclusion);
             int result = update(query, timeout);
             if (result < 0)
             {

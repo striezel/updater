@@ -32,10 +32,11 @@ namespace updater_cli.operations
         /// <summary>
         /// default constructor
         /// </summary>
-        public SoftwareStatus(bool _getNewer, bool withAurora)
+        public SoftwareStatus(bool _getNewer, bool withAurora, List<string> _exclusion)
         {
             includeAurora = withAurora;
             autoGetNewer = _getNewer;
+            exclusion = _exclusion;
         }
 
         
@@ -45,8 +46,9 @@ namespace updater_cli.operations
         /// <param name="withAurora">Whether or not Firefox Developer Edition
         /// (aurora channel) shall be included, too. Default is false, because
         /// this increases time of the query by quite a bit (several seconds).</param>
+        /// <param name="exclusion">software exclusion list</param>
         /// <returns>Returns a list of query entries.</returns>
-        public static List<QueryEntry> query(bool autoGetNewer, bool withAurora)
+        public static List<QueryEntry> query(bool autoGetNewer, bool withAurora, List<string> exclusion)
         {
             var detected = DetectorRegistry.detect();
             if (null == detected)
@@ -55,7 +57,7 @@ namespace updater_cli.operations
 
             var result = new List<QueryEntry>();
 
-            var all = All.get(false, withAurora);
+            var all = All.get(false, withAurora, exclusion);
             foreach (var item in all)
             {
                 item.detectionQuery(detected, autoGetNewer, result);
@@ -166,13 +168,19 @@ namespace updater_cli.operations
 
 
         /// <summary>
+        /// list of software IDs that shall not be queried
+        /// </summary>
+        private List<string> exclusion;
+
+
+        /// <summary>
         /// shows the query result in the console
         /// </summary>
         /// <returns>Returns zero.</returns>
         public int perform()
         {
             //get software status
-            var status = query(autoGetNewer, includeAurora);
+            var status = query(autoGetNewer, includeAurora, exclusion);
             string output = toConsoleOutput(status);
             Console.Write(output);
             return 0;

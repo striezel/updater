@@ -34,7 +34,7 @@ namespace updater_cli.operations
 
         public int perform()
         {
-            var all = software.All.get(false, mWithAurora);
+            var all = software.All.get(false, mWithAurora, null);
             foreach (var software in all)
             {
                 Console.WriteLine(software.info().Name + ": " + string.Join(", ", software.id()));

@@ -26,6 +26,12 @@ namespace updater_cli.software
     public class All
     {
         /// <summary>
+        /// NLog.Logger for class All
+        /// </summary>
+        private static NLog.Logger logger = NLog.LogManager.GetLogger(typeof(All).FullName);
+
+
+        /// <summary>
         /// gets a list that contains one instance of each class that implements
         /// the ISoftware interface
         /// </summary>
@@ -35,8 +41,8 @@ namespace updater_cli.software
         /// for every element in the list by quite a bit.</param>
         /// <param name="autoGetNewer">whether to automatically get
         /// newer information about the software when calling the info() method</param>
-        /// <returns></returns>
-        public static List<ISoftware> get(bool autoGetNewer, bool withAurora)
+        /// <returns>Returns a list of all supported softwares.</returns>
+        private static List<ISoftware> get(bool autoGetNewer, bool withAurora)
         {
             var result = new List<ISoftware>();
             result.Add(new Audacity(autoGetNewer));
@@ -83,6 +89,45 @@ namespace updater_cli.software
             } //foreach
             result.Add(new VLC(autoGetNewer));
             result.Add(new WinSCP(autoGetNewer));
+            return result;
+        }
+
+
+        /// <summary>
+        /// gets a list that contains one instance of each class that implements
+        /// the ISoftware interface, but without the ones in the exclusion list
+        /// </summary>
+        /// <param name="withAurora">Whether or not Firefox Developer Edition
+        /// (aurora channel) shall be included, too. Default is false, because
+        /// this increases time of subsequent operations like getting the info()
+        /// for every element in the list by quite a bit.</param>
+        /// <param name="autoGetNewer">whether to automatically get
+        /// newer information about the software when calling the info() method</param>
+        /// <param name="exclusion">list of software IDs that shall not be in the list</param>
+        /// <returns>Returns a list of all supported softwares, minus the ones in the exclusion list.</returns>
+        public static List<ISoftware> get(bool autoGetNewer, bool withAurora, List<string> exclusion)
+        {
+            var result = get(autoGetNewer, withAurora);
+            if ((null == exclusion) || (exclusion.Count == 0))
+                return result;
+
+            for (int i = 0; i < result.Count; )
+            {
+                bool removed = false;
+                foreach (string id in result[i].id())
+                {
+                    if (exclusion.Contains(id))
+                    {
+                        logger.Info("Excluding " + result[i].info().Name + " from software list as requested.");
+                        result.RemoveAt(i);
+                        removed = true;
+                        break;
+                    }
+                }
+                if (!removed)
+                    ++i;
+            } //for
+
             return result;
         }
     } //class

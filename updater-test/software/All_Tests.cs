@@ -18,6 +18,7 @@
 
 using updater_cli.software;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Collections.Generic;
 
 namespace updater_test.software
 {
@@ -33,7 +34,7 @@ namespace updater_test.software
         [TestMethod]
         public void Test_get()
         {
-            var result = All.get(false, true);
+            var result = All.get(false, true, null);
             Assert.IsNotNull(result);
             Assert.IsTrue(result.Count > 0);
             for (int i = 0; i < result.Count; i++)
@@ -41,5 +42,51 @@ namespace updater_test.software
                 Assert.IsNotNull(result[i]);
             } //for
         }
+
+
+        /// <summary>
+        /// checks whether All.get() can handle null and empty exclusion lists
+        /// </summary>
+        [TestMethod]
+        public void Test_get_NullEmpty()
+        {
+            var result = All.get(false, true, null);
+            Assert.IsNotNull(result);
+            Assert.IsTrue(result.Count > 0);
+
+            var result2 = All.get(false, true, new List<string>());
+            Assert.IsNotNull(result2);
+            Assert.IsTrue(result2.Count > 0);
+
+            //count should be equal
+            Assert.AreEqual<int>(result.Count, result2.Count);
+        }
+
+
+        /// <summary>
+        /// checks whether All.get() respects the exclusion list
+        /// </summary>
+        [TestMethod]
+        public void Test_get_WithExclusionList()
+        {
+            var result = All.get(false, false, null);
+            Assert.IsNotNull(result);
+            Assert.IsTrue(result.Count > 0);
+
+
+            var excluded = new List<string>();
+            excluded.Add(new CCleaner(false).id()[0]);
+            excluded.Add(new CDBurnerXP(false).id()[0]);
+            excluded.Add(new Pidgin(false).id()[0]);
+
+            var result2 = All.get(false, false, excluded);
+            Assert.IsNotNull(result2);
+            Assert.IsTrue(result2.Count > 0);
+
+            //count not should be equal
+            Assert.AreNotEqual<int>(result.Count, result2.Count);
+            Assert.AreEqual<int>(result.Count - excluded.Count, result2.Count);
+        }
+
     } //class
 } //namespace

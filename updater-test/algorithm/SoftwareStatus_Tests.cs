@@ -35,7 +35,7 @@ namespace updater_test.algorithm
         [TestMethod]
         public void Test_query()
         {
-            var q = SoftwareStatus.query(false, false);
+            var q = SoftwareStatus.query(false, false, null);
             Assert.IsNotNull(q);
             Assert.IsTrue(q.Count >= 0);
 
@@ -54,7 +54,7 @@ namespace updater_test.algorithm
         [TestMethod]
         public void Test_toConsoleOutput()
         {
-            var q = SoftwareStatus.query(false, false);
+            var q = SoftwareStatus.query(false, false, null);
             Assert.IsTrue(q.Count > 0);
 
             string data = SoftwareStatus.toConsoleOutput(q);
