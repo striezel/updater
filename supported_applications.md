@@ -20,6 +20,7 @@ updater application.
 * Mumble
 * Notepad++
 * Opera
+* PDF24 Creator
 * Pidgin
 * PuTTY
 * VLC

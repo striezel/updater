@@ -17,6 +17,7 @@
 */
 
 using System;
+using updater_cli.cli;
 
 namespace updater_cli.operations
 {
@@ -25,16 +26,16 @@ namespace updater_cli.operations
         /// <summary>
         /// default constructor
         /// </summary>
-        /// <param name="withAurora"></param>
-        public IdList(bool withAurora)
+        /// <param name="_opts">parameters / options from command line</param>
+        public IdList(Options _opts)
         {
-            mWithAurora = withAurora;
+            opts = _opts;
         }
 
 
         public int perform()
         {
-            var all = software.All.get(false, mWithAurora, null);
+            var all = software.All.get(opts);
             foreach (var software in all)
             {
                 Console.WriteLine(software.info().Name + ": " + string.Join(", ", software.id()));
@@ -44,8 +45,8 @@ namespace updater_cli.operations
 
 
         /// <summary>
-        /// whether Aurora is included in the list or not
+        /// all command line options parsed
         /// </summary>
-        private bool mWithAurora;
+        private Options opts;
     } //class
 } //namespace

@@ -19,6 +19,7 @@
 using updater_cli.software;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
+using updater_cli.cli;
 
 namespace updater_test.software
 {
@@ -34,7 +35,11 @@ namespace updater_test.software
         [TestMethod]
         public void Test_get()
         {
-            var result = All.get(false, true, null);
+            var opts = new Options();
+            opts.autoGetNewer = false;
+            opts.withAurora = true;
+            opts.excluded = null;
+            var result = All.get(opts);
             Assert.IsNotNull(result);
             Assert.IsTrue(result.Count > 0);
             for (int i = 0; i < result.Count; i++)
@@ -50,11 +55,18 @@ namespace updater_test.software
         [TestMethod]
         public void Test_get_NullEmpty()
         {
-            var result = All.get(false, true, null);
+            var opts = new Options();
+            opts.autoGetNewer = false;
+            opts.withAurora = true;
+            opts.excluded = null;
+            var result = All.get(opts);
             Assert.IsNotNull(result);
             Assert.IsTrue(result.Count > 0);
 
-            var result2 = All.get(false, true, new List<string>());
+            opts.autoGetNewer = false;
+            opts.withAurora = true;
+            opts.excluded = new List<string>();
+            var result2 = All.get(opts);
             Assert.IsNotNull(result2);
             Assert.IsTrue(result2.Count > 0);
 
@@ -69,7 +81,12 @@ namespace updater_test.software
         [TestMethod]
         public void Test_get_WithExclusionList()
         {
-            var result = All.get(false, false, null);
+            var opts = new Options();
+            opts.autoGetNewer = false;
+            opts.withAurora = false;
+            opts.excluded = null;
+
+            var result = All.get(opts);
             Assert.IsNotNull(result);
             Assert.IsTrue(result.Count > 0);
 
@@ -78,8 +95,9 @@ namespace updater_test.software
             excluded.Add(new CCleaner(false).id()[0]);
             excluded.Add(new CDBurnerXP(false).id()[0]);
             excluded.Add(new Pidgin(false).id()[0]);
+            opts.excluded = excluded;
 
-            var result2 = All.get(false, false, excluded);
+            var result2 = All.get(opts);
             Assert.IsNotNull(result2);
             Assert.IsTrue(result2.Count > 0);
 

@@ -20,6 +20,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
+using updater_cli.cli;
 using updater_cli.data;
 
 namespace updater_cli.operations
@@ -50,18 +51,10 @@ namespace updater_cli.operations
         /// <summary>
         /// default constructor
         /// </summary>
-        /// <param name="_autoGetNewer">whether to get newer software information, if possible</param>
-        /// <param name="withAurora">Whether or not Firefox Developer Edition
-        /// (aurora channel) shall be included, too. Default is false, because
-        /// this increases time of the query by quite a bit (several seconds).</param>
-        /// <param name="_timeout">maximum time in seconds per update process</param>
-        /// <param name="_exclusion">list of software IDs that shall not be in the list</param>
-        public Update(bool _autoGetNewer, bool withAurora, uint _timeout, List<string> _exclusion)
+        /// <param name="_options">all programm options</param>
+        public Update(Options _options)
         {
-            includeAurora = withAurora;
-            autoGetNewer = _autoGetNewer;
-            timeout = _timeout;
-            exclusion = _exclusion;
+            opts = _options;
         }
         
         
@@ -383,35 +376,15 @@ namespace updater_cli.operations
 
 
         /// <summary>
-        /// Flag that indicates whether or not Firefox Developer Edition
-        /// (aurora channel) shall be included, too. Default is false, because
-        /// this increases time of the query by quite a bit (several seconds).
+        /// program options
         /// </summary>
-        private bool includeAurora;
-
-
-        /// <summary>
-        /// whether to get newer software information automatically
-        /// </summary>
-        private bool autoGetNewer;
-
-
-        /// <summary>
-        /// maximum time in seconds per update process
-        /// </summary>
-        private uint timeout;
-
-
-        /// <summary>
-        /// list of software IDs that shall not be updated
-        /// </summary>
-        private List<string> exclusion;
+        private Options opts;
 
 
         public int perform()
         {
-            var query = SoftwareStatus.query(autoGetNewer, includeAurora, exclusion);
-            int result = update(query, timeout);
+            var query = SoftwareStatus.query(opts);
+            int result = update(query, opts.timeout);
             if (result < 0)
             {
                 logger.Error("At least one error occurred during the update.");

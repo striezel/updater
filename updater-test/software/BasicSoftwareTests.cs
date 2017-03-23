@@ -53,8 +53,8 @@ namespace updater_test.software
         {
             Assert.IsNotNull(sw);
             if (!sw.implementsSearchForNewer())
-                Assert.Inconclusive("The result of searchForNewer() could not be tested, "
-                    +"because this class does not implement that method.");
+                Assert.Inconclusive("The result of searchForNewer() was not tested, "
+                    + "because this class indicates that it does not implement that method.");
             var newerInfo = sw.searchForNewer();
             Assert.IsNotNull(newerInfo);
         }
@@ -64,8 +64,8 @@ namespace updater_test.software
         {
             Assert.IsNotNull(sw);
             if (!sw.implementsSearchForNewer())
-                Assert.Inconclusive("The check for up to date information could not be performed, "
-                    + "because this class does not implement the searchForNewer() method.");
+                Assert.Inconclusive("The check for up to date information was not performed, "
+                    + "because this class indicates that it does not implement the searchForNewer() method.");
             var info = sw.info();
             var newerInfo = sw.searchForNewer();
             int comp = string.Compare(info.newestVersion, newerInfo.newestVersion);

@@ -16,41 +16,21 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+using System;
+
 namespace updater_cli.operations
 {
     /// <summary>
-    /// enumeration that specifies the basic operation
+    /// displays version information
     /// </summary>
-    public enum Operation
+    public class Version : IOperation
     {
-        /// <summary>
-        /// unknown operation
-        /// </summary>
-        Unknown,
-
-        /// <summary>
-        /// software detection
-        /// </summary>
-        Detect,
-
-        /// <summary>
-        /// check/query current software status
-        /// </summary>
-        Check,
-
-        /// <summary>
-        /// update software
-        /// </summary>
-        Update,
-
-        /// <summary>
-        /// list IDs of available software
-        /// </summary>
-        Id,
-
-        /// <summary>
-        /// show program version
-        /// </summary>
-        Version
-    } //enum
+        public int perform()
+        {
+            var asm = System.Reflection.Assembly.GetExecutingAssembly();
+            var ver = asm.GetName().Version;
+            Console.WriteLine("updater, version " + utility.Version.get());
+            return 0;
+        }
+    } //class
 } //namespace

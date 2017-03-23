@@ -20,6 +20,7 @@ using System;
 using updater_cli.operations;
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using updater_cli.cli;
 
 namespace updater_test.algorithm
 {
@@ -35,7 +36,11 @@ namespace updater_test.algorithm
         [TestMethod]
         public void Test_query()
         {
-            var q = SoftwareStatus.query(false, false, null);
+            var opts = new Options();
+            opts.excluded = null;
+            opts.autoGetNewer = false;
+            opts.withAurora = false;
+            var q = SoftwareStatus.query(opts);
             Assert.IsNotNull(q);
             Assert.IsTrue(q.Count >= 0);
 
@@ -54,7 +59,11 @@ namespace updater_test.algorithm
         [TestMethod]
         public void Test_toConsoleOutput()
         {
-            var q = SoftwareStatus.query(false, false, null);
+            var opts = new Options();
+            opts.excluded = null;
+            opts.autoGetNewer = false;
+            opts.withAurora = false;
+            var q = SoftwareStatus.query(opts);
             Assert.IsTrue(q.Count > 0);
 
             string data = SoftwareStatus.toConsoleOutput(q);

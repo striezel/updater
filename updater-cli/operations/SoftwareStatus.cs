@@ -18,6 +18,7 @@
 
 using System;
 using System.Collections.Generic;
+using updater_cli.cli;
 using updater_cli.data;
 using updater_cli.detection;
 using updater_cli.software;
@@ -32,11 +33,9 @@ namespace updater_cli.operations
         /// <summary>
         /// default constructor
         /// </summary>
-        public SoftwareStatus(bool _getNewer, bool withAurora, List<string> _exclusion)
+        public SoftwareStatus(Options _options)
         {
-            includeAurora = withAurora;
-            autoGetNewer = _getNewer;
-            exclusion = _exclusion;
+            opts = _options;
         }
 
         
@@ -48,7 +47,7 @@ namespace updater_cli.operations
         /// this increases time of the query by quite a bit (several seconds).</param>
         /// <param name="exclusion">software exclusion list</param>
         /// <returns>Returns a list of query entries.</returns>
-        public static List<QueryEntry> query(bool autoGetNewer, bool withAurora, List<string> exclusion)
+        public static List<QueryEntry> query(Options options)
         {
             var detected = DetectorRegistry.detect();
             if (null == detected)
@@ -57,10 +56,10 @@ namespace updater_cli.operations
 
             var result = new List<QueryEntry>();
 
-            var all = All.get(false, withAurora, exclusion);
+            var all = All.get(options);
             foreach (var item in all)
             {
-                item.detectionQuery(detected, autoGetNewer, result);
+                item.detectionQuery(detected, options.autoGetNewer, result);
             } //foreach
             return result;
         }
@@ -154,23 +153,9 @@ namespace updater_cli.operations
 
 
         /// <summary>
-        /// Flag that indicates whether or not Firefox Developer Edition
-        /// (aurora channel) shall be included, too. Default is false, because
-        /// this increases time of the query by quite a bit (several seconds).
+        /// all necessary options
         /// </summary>
-        public bool includeAurora;
-
-
-        /// <summary>
-        /// whether to automatically get newer software info, if possible
-        /// </summary>
-        public bool autoGetNewer;
-
-
-        /// <summary>
-        /// list of software IDs that shall not be queried
-        /// </summary>
-        private List<string> exclusion;
+        private Options opts;
 
 
         /// <summary>
@@ -180,7 +165,7 @@ namespace updater_cli.operations
         public int perform()
         {
             //get software status
-            var status = query(autoGetNewer, includeAurora, exclusion);
+            var status = query(opts);
             string output = toConsoleOutput(status);
             Console.Write(output);
             return 0;

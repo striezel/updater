@@ -17,6 +17,7 @@
 */
 
 using System.Collections.Generic;
+using updater_cli.cli;
 
 namespace updater_cli.software
 {
@@ -35,15 +36,11 @@ namespace updater_cli.software
         /// gets a list that contains one instance of each class that implements
         /// the ISoftware interface
         /// </summary>
-        /// <param name="withAurora">Whether or not Firefox Developer Edition
-        /// (aurora channel) shall be included, too. Default is false, because
-        /// this increases time of subsequent operations like getting the info()
-        /// for every element in the list by quite a bit.</param>
-        /// <param name="autoGetNewer">whether to automatically get
-        /// newer information about the software when calling the info() method</param>
+        /// <param name="opts">parsed command line options</param>
         /// <returns>Returns a list of all supported softwares.</returns>
-        private static List<ISoftware> get(bool autoGetNewer, bool withAurora)
+        private static List<ISoftware> getUnfiltered(Options opts)
         {
+            bool autoGetNewer = opts.autoGetNewer;
             var result = new List<ISoftware>();
             result.Add(new Audacity(autoGetNewer));
             result.Add(new CCleaner(autoGetNewer));
@@ -60,7 +57,7 @@ namespace updater_cli.software
             {
                 result.Add(new FirefoxESR(lang, autoGetNewer));
             } //foreach
-            if (withAurora)
+            if (opts.withAurora)
             {
                 //Firefox Developer Edition
                 languages = FirefoxAurora.validLanguageCodes();
@@ -78,6 +75,7 @@ namespace updater_cli.software
             result.Add(new Mumble(autoGetNewer));
             result.Add(new NotepadPlusPlus(autoGetNewer));
             result.Add(new Opera(autoGetNewer));
+            result.Add(new Pdf24Creator(autoGetNewer, opts.pdf24autoUpdate, opts.pdf24desktopIcons, opts.pdf24faxPrinter));
             result.Add(new Pidgin(autoGetNewer));
             result.Add(new Putty(autoGetNewer));
             result.Add(new SevenZip(autoGetNewer));
@@ -97,18 +95,12 @@ namespace updater_cli.software
         /// gets a list that contains one instance of each class that implements
         /// the ISoftware interface, but without the ones in the exclusion list
         /// </summary>
-        /// <param name="withAurora">Whether or not Firefox Developer Edition
-        /// (aurora channel) shall be included, too. Default is false, because
-        /// this increases time of subsequent operations like getting the info()
-        /// for every element in the list by quite a bit.</param>
-        /// <param name="autoGetNewer">whether to automatically get
-        /// newer information about the software when calling the info() method</param>
-        /// <param name="exclusion">list of software IDs that shall not be in the list</param>
+        /// <param name="opts">parsed command line options</param>
         /// <returns>Returns a list of all supported softwares, minus the ones in the exclusion list.</returns>
-        public static List<ISoftware> get(bool autoGetNewer, bool withAurora, List<string> exclusion)
+        public static List<ISoftware> get(Options opts)
         {
-            var result = get(autoGetNewer, withAurora);
-            if ((null == exclusion) || (exclusion.Count == 0))
+            var result = getUnfiltered(opts);
+            if ((null == opts.excluded) || (opts.excluded.Count == 0))
                 return result;
 
             for (int i = 0; i < result.Count; )
@@ -116,7 +108,7 @@ namespace updater_cli.software
                 bool removed = false;
                 foreach (string id in result[i].id())
                 {
-                    if (exclusion.Contains(id))
+                    if (opts.excluded.Contains(id))
                     {
                         logger.Info("Excluding " + result[i].info().Name + " from software list as requested.");
                         result.RemoveAt(i);
