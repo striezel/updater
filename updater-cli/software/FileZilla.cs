@@ -49,20 +49,20 @@ namespace updater_cli.software
         /// details about the software.</returns>
         public override AvailableSoftware knownInfo()
         {
-            return new AvailableSoftware("FileZilla FTP Client", "3.25.0",
+            return new AvailableSoftware("FileZilla FTP Client", "3.25.1",
                 "^FileZilla Client [0-9]+\\.[0-9]+(\\.[0-9]+(\\.[0-9]+)?)?$",
                 "^FileZilla Client [0-9]+\\.[0-9]+(\\.[0-9]+(\\.[0-9]+)?)?$",
                 new InstallInfoExe(
-                    "https://netcologne.dl.sourceforge.net/project/filezilla/FileZilla_Client/3.25.0/FileZilla_3.25.0_win32-setup.exe",
+                    "https://netcologne.dl.sourceforge.net/project/filezilla/FileZilla_Client/3.25.1/FileZilla_3.25.1_win32-setup.exe",
                     HashAlgorithm.SHA512,
-                    "e943cffffb4ecba2ba92e5b5c2a56bc8882fd8c19297397b685066c0a2e9e88fbe22814d6684de4d440ab199416fbcc71c0a3e4bd45239ebebf478f80695526e",
+                    "c87ad1c6379374efdb11c4176dfc9237164ce4218d8add3fb65dd9f459ab695405580e357806d2f7cb0140589dcb2599106ad52c615af3501d1702fd51c41895",
                     "/S",
                     "C:\\Program Files\\FileZilla FTP Client",
                     "C:\\Program Files (x86)\\FileZilla FTP Client"),
                 new InstallInfoExe(
-                    "https://vorboss.dl.sourceforge.net/project/filezilla/FileZilla_Client/3.25.0/FileZilla_3.25.0_win64-setup.exe",
+                    "https://netcologne.dl.sourceforge.net/project/filezilla/FileZilla_Client/3.25.1/FileZilla_3.25.1_win64-setup.exe",
                     HashAlgorithm.SHA512,
-                    "d661c24bf2234f73c8f700225cf8034f8dc2fa00183cd8decd0cd37b9df8cfbcd3fdf1db2fe4d9119abfaac5d31c2a03e57ce79e51029d8ab28667bb5579d9ac",
+                    "929e8c6a12dc1fc3e77eb17efe5cd860e5a263b97facd1fd2d9a427277d515dad7dd14516341d600b271b1013cc1d966ad36560edd619a401571caacce94e1b1",
                     "/S",
                     null,
                     "C:\\Program Files\\FileZilla FTP Client")
