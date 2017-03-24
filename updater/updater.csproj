@@ -1,0 +1,145 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{6CE74677-6889-4E18-AF1A-C933AE211AB6}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>updater</RootNamespace>
+    <AssemblyName>updater</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>packages\NLog.4.4.3\lib\net40\NLog.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="cli\ArgumentParser.cs" />
+    <Compile Include="cli\Options.cs" />
+    <Compile Include="data\InstallInfoExe.cs" />
+    <Compile Include="data\InstallInfoPidgin.cs" />
+    <Compile Include="data\InstallInfoLibO.cs" />
+    <Compile Include="data\InstallInfoMsi.cs" />
+    <Compile Include="io\GenericXmlSerializer.cs" />
+    <Compile Include="operations\IdList.cs" />
+    <Compile Include="operations\IOperation.cs" />
+    <Compile Include="operations\Operation.cs" />
+    <Compile Include="operations\OperationDetect.cs" />
+    <Compile Include="operations\SoftwareStatus.cs" />
+    <Compile Include="operations\Version.cs" />
+    <Compile Include="operations\Update.cs" />
+    <Compile Include="data\ApplicationType.cs" />
+    <Compile Include="data\AvailableSoftware.cs" />
+    <Compile Include="data\HashAlgorithm.cs" />
+    <Compile Include="data\InstallInfo.cs" />
+    <Compile Include="data\QueryEntry.cs" />
+    <Compile Include="detection\DetectorMSI.cs" />
+    <Compile Include="data\DetectedSoftware.cs" />
+    <Compile Include="detection\DetectorRegistry.cs" />
+    <Compile Include="io\AvailableSoftwareXML.cs" />
+    <Compile Include="io\CSVWriter.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReturnCodes.cs" />
+    <Compile Include="software\AbstractSoftware.cs" />
+    <Compile Include="software\All.cs" />
+    <Compile Include="software\Pdf24Creator.cs" />
+    <Compile Include="software\Pidgin.cs" />
+    <Compile Include="software\Audacity.cs" />
+    <Compile Include="software\CCleaner.cs" />
+    <Compile Include="software\FileZilla.cs" />
+    <Compile Include="software\Inkscape.cs" />
+    <Compile Include="software\CDBurnerXP.cs" />
+    <Compile Include="software\Firefox.cs" />
+    <Compile Include="software\FirefoxAurora.cs" />
+    <Compile Include="software\FirefoxESR.cs" />
+    <Compile Include="software\ISoftware.cs" />
+    <Compile Include="software\LibreOffice.cs" />
+    <Compile Include="software\LibreOfficeHelpPackGerman.cs" />
+    <Compile Include="software\Mumble.cs" />
+    <Compile Include="software\NoPreUpdateProcessSoftware.cs" />
+    <Compile Include="software\NotepadPlusPlus.cs" />
+    <Compile Include="software\KeePass.cs" />
+    <Compile Include="software\Opera.cs" />
+    <Compile Include="software\Putty.cs" />
+    <Compile Include="software\GIMP.cs" />
+    <Compile Include="software\SevenZip.cs" />
+    <Compile Include="software\Shockwave.cs" />
+    <Compile Include="software\Thunderbird.cs" />
+    <Compile Include="software\VLC.cs" />
+    <Compile Include="software\WinSCP.cs" />
+    <Compile Include="utility\Checksum.cs" />
+    <Compile Include="utility\Logging.cs" />
+    <Compile Include="utility\PortableExecutable.cs" />
+    <Compile Include="utility\Strings.cs" />
+    <Compile Include="utility\Version.cs" />
+    <Compile Include="versions\Triple.cs" />
+    <Compile Include="versions\Quartet.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="NLog.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Include="NLog.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

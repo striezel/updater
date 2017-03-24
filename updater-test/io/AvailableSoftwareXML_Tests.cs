@@ -19,8 +19,8 @@
 using System.IO;
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using updater_cli.data;
-using updater_cli.io;
+using updater.data;
+using updater.io;
 
 namespace updater_test.io
 {

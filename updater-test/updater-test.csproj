@@ -88,9 +88,9 @@
     <Compile Include="utility\Strings_Tests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\updater-cli\updater-cli.csproj">
+    <ProjectReference Include="..\updater\updater.csproj">
       <Project>{6ce74677-6889-4e18-af1a-c933ae211ab6}</Project>
-      <Name>updater-cli</Name>
+      <Name>updater</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>

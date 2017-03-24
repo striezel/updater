@@ -16,7 +16,7 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-using updater_cli.detection;
+using updater.detection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace updater_test.detection

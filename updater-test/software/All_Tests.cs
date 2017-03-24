@@ -16,10 +16,10 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-using updater_cli.software;
+using updater.software;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
-using updater_cli.cli;
+using updater.cli;
 
 namespace updater_test.software
 {

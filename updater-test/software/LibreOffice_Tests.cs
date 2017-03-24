@@ -17,7 +17,7 @@
 */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using updater_cli.software;
+using updater.software;
 
 namespace updater_test.software
 {
@@ -73,9 +73,9 @@ namespace updater_test.software
         public void Test_isInstallInfoMsi()
         {
             var libO = new LibreOffice(false);
-            updater_cli.data.InstallInfo inst = libO.knownInfo().install32Bit;
-            Assert.IsTrue(inst is updater_cli.data.InstallInfoLibO);
-            Assert.IsTrue(inst is updater_cli.data.InstallInfoMsi, "InstallInfoLibO is not derived from InstallInfoMsi!");
+            updater.data.InstallInfo inst = libO.knownInfo().install32Bit;
+            Assert.IsTrue(inst is updater.data.InstallInfoLibO);
+            Assert.IsTrue(inst is updater.data.InstallInfoMsi, "InstallInfoLibO is not derived from InstallInfoMsi!");
         }
     } //class
 } //namespace

@@ -18,7 +18,7 @@
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Text.RegularExpressions;
-using updater_cli.software;
+using updater.software;
 
 namespace updater_test.software
 {

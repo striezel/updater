@@ -17,10 +17,10 @@
 */
 
 using System;
-using updater_cli.operations;
+using updater.operations;
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using updater_cli.cli;
+using updater.cli;
 
 namespace updater_test.algorithm
 {
@@ -82,7 +82,7 @@ namespace updater_test.algorithm
             //null
             Assert.IsNull(SoftwareStatus.toConsoleOutput(null));
             //empty
-            var data = SoftwareStatus.toConsoleOutput(new List<updater_cli.data.QueryEntry>());
+            var data = SoftwareStatus.toConsoleOutput(new List<updater.data.QueryEntry>());
             Assert.IsNotNull(data);
             Assert.AreEqual<int>(1, data.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries).Length);
         }

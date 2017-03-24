@@ -18,7 +18,7 @@
 
 using System;
 using System.IO;
-using updater_cli.data;
+using updater.data;
 
 namespace updater_test
 {

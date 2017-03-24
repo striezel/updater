@@ -17,8 +17,8 @@
 */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using updater_cli.data;
-using updater_cli.software;
+using updater.data;
+using updater.software;
 
 namespace updater_test.software
 {
