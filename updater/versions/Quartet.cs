@@ -23,7 +23,7 @@ namespace updater.versions
     /// <summary>
     /// utility class to represent a four-part version, e.g. "11.23.4.5"
     /// </summary>
-    public struct Quartet : IComparable<Quartet>
+    public struct Quartet : IComparable<Quartet>, IEquatable<Quartet>
     {
         /// <summary>
         /// major version number
@@ -77,7 +77,19 @@ namespace updater.versions
         {
             return major.ToString() + "." + minor.ToString() + "." +
                 patch.ToString() + "." + build.ToString();
+        }
 
+
+        public override string ToString()
+        {
+            return full();
+        }
+
+
+        public bool Equals(Quartet other)
+        {
+            return ((major == other.major) && (minor == other.minor)
+                && (patch == other.patch) && (build == other.build));
         }
 
 
@@ -95,6 +107,18 @@ namespace updater.versions
             if (c != 0)
                 return c;
             return build.CompareTo(other.build);
+        }
+
+
+        public static bool operator <(Quartet a, Quartet b)
+        {
+            return a.CompareTo(b) < 0;
+        }
+
+
+        public static bool operator >(Quartet a, Quartet b)
+        {
+            return a.CompareTo(b) > 0;
         }
     } //class
 } //namespace

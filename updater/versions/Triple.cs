@@ -42,7 +42,7 @@ namespace updater.versions
 
 
         /// <summary>
-        /// construct quartet from string value
+        /// construct triple from string value
         /// </summary>
         /// <param name="value">string value containing a dot-separated version, e.g. "11.2.7"</param>
         public Triple(string value)
@@ -72,6 +72,12 @@ namespace updater.versions
         }
 
 
+        public override string ToString()
+        {
+            return full();
+        }
+
+
         public int CompareTo(Triple other)
         {
             if (ReferenceEquals(this, other))
@@ -90,6 +96,18 @@ namespace updater.versions
         {
             return ((major == other.major) && (minor == other.minor)
                 && (patch == other.patch));
+        }
+
+
+        public static bool operator <(Triple a, Triple b)
+        {
+            return a.CompareTo(b) < 0;
+        }
+
+
+        public static bool operator >(Triple a, Triple b)
+        {
+            return a.CompareTo(b) > 0;
         }
     } //class
 } //namespace
