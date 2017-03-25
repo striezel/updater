@@ -23,6 +23,7 @@ updater application.
 * PDF24 Creator
 * Pidgin
 * PuTTY
+* SeaMonkey
 * VLC
 * WinSCP
 

@@ -78,6 +78,12 @@ namespace updater.software
             result.Add(new Pdf24Creator(autoGetNewer, opts.pdf24autoUpdate, opts.pdf24desktopIcons, opts.pdf24faxPrinter));
             result.Add(new Pidgin(autoGetNewer));
             result.Add(new Putty(autoGetNewer));
+            //SeaMonkey
+            languages = SeaMonkey.validLanguageCodes();
+            foreach (var lang in languages)
+            {
+                result.Add(new SeaMonkey(lang, autoGetNewer));
+            } //foreach
             result.Add(new SevenZip(autoGetNewer));
             //Thunderbird
             languages = Thunderbird.validLanguageCodes();

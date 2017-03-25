@@ -114,6 +114,7 @@
     <Compile Include="software\GIMP.cs" />
     <Compile Include="software\SevenZip.cs" />
     <Compile Include="software\Shockwave.cs" />
+    <Compile Include="software\SeaMonkey.cs" />
     <Compile Include="software\Thunderbird.cs" />
     <Compile Include="software\VLC.cs" />
     <Compile Include="software\WinSCP.cs" />

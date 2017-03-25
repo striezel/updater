@@ -18,13 +18,15 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using System.Net;
 using System.Text.RegularExpressions;
 using updater.data;
 
 namespace updater.software
 {
-    public class Thunderbird : NoPreUpdateProcessSoftware
+    public class Thunderbird : AbstractSoftware
     {
         /// <summary>
         /// NLog.Logger for Thunderbird class
@@ -271,20 +273,54 @@ namespace updater.software
         {
             logger.Debug("Searching for newer version of Thunderbird (" + languageCode + ")...");
             string newerVersion = determineNewestVersion();
+            if (string.IsNullOrWhiteSpace(newerVersion))
+                return null;
             var currentInfo = knownInfo();
-            if (string.IsNullOrWhiteSpace(newerVersion) || (newerVersion == currentInfo.newestVersion))
+            if (newerVersion == currentInfo.newestVersion)
                 // fallback to known information
                 return currentInfo;
             string newerChecksum = determineNewestChecksum(newerVersion);
             if (string.IsNullOrWhiteSpace(newerChecksum))
-                // fallback to known information
-                return currentInfo;
+                return null;
             //replace all stuff
             string oldVersion = currentInfo.newestVersion;
             currentInfo.newestVersion = newerVersion;
             currentInfo.install32Bit.downloadUrl = currentInfo.install32Bit.downloadUrl.Replace(oldVersion, newerVersion);
             currentInfo.install32Bit.checksum = newerChecksum;
             return currentInfo;
+        }
+
+
+        /// <summary>
+        /// whether or not a separate process must be run before the update
+        /// </summary>
+        /// <param name="detected">currently installed / detected software version</param>
+        /// <returns>Returns true, if a separate proess returned by
+        /// preUpdateProcess() needs to run in preparation of the update.
+        /// Returns false, if not. Calling preUpdateProcess() may throw an
+        /// exception in the later case.</returns>
+        public override bool needsPreUpdateProcess(DetectedSoftware detected)
+        {
+            return true;
+        }
+
+
+        /// <summary>
+        /// returns a process that must be run before the update
+        /// </summary>
+        /// <param name="detected">currently installed / detected software version</param>
+        /// <returns>Returns a Process ready to start that should be run before
+        /// the update. May return null or may throw, of needsPreUpdateProcess()
+        /// returned false.</returns>
+        public override List<Process> preUpdateProcess(DetectedSoftware detected)
+        {
+            var processes = new List<Process>();
+            //uninstall previous version to avoid having two Thunderbird entries in control panel
+            var proc = new Process();
+            proc.StartInfo.FileName = Path.Combine(detected.installPath, "uninstall", "helper.exe");
+            proc.StartInfo.Arguments = "/SILENT";
+            processes.Add(proc);
+            return processes;
         }
 
 
