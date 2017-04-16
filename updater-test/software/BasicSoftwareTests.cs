@@ -68,6 +68,7 @@ namespace updater_test.software
                     + "because this class indicates that it does not implement the searchForNewer() method.");
             var info = sw.info();
             var newerInfo = sw.searchForNewer();
+            Assert.IsNotNull(newerInfo, "searchForNewer() returned null!");
             int comp = string.Compare(info.newestVersion, newerInfo.newestVersion);
             Assert.IsTrue(comp >= 0,
                 "Known newest version of " + info.Name + " is " + info.newestVersion
