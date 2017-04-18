@@ -75,7 +75,7 @@ Options can change behaviour of the update process. Available options are:
       Does not install the fax printer for PDF24 Creator during update. This
       option is disabled by default.
 
-### Example
+### Examples
 
 Here are a few examples to give you a general idea:
 
@@ -96,6 +96,11 @@ Here are a few examples to give you a general idea:
   1200 seconds):
 
   `updater.exe update --timeout 1200`
+
+## Frequently asked questions
+
+If you have a question about the updater, please take a look at the
+[./faq.md](FAQ) first.
 
 ## Getting the source code
 
