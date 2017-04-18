@@ -28,7 +28,7 @@ these may be specified. Valid operations are:
                 option --exclude below for more information.
 
 ### Options
-Options can change bhaviour of the update process. Available options are:
+Options can change behaviour of the update process. Available options are:
 
     --auto-get-newer | --newer | -n
       automatically tries to get information about newer versions of the soft-
@@ -74,6 +74,28 @@ Options can change bhaviour of the update process. Available options are:
     --no-pdf24-fax-printer
       Does not install the fax printer for PDF24 Creator during update. This
       option is disabled by default.
+
+### Example
+
+Here are a few examples to give you a general idea:
+
+* Check which software can be updated:
+
+  `updater.exe check`
+
+* Download and apply all available updates:
+
+  `updater.exe update`
+
+* Download and apply all available updates, but do not update Thunderbird and
+  GIMP:
+
+  `updater.exe update --exclude thunderbird --exclude gimp`
+
+* Download and apply all available updates, but set timeout to 20 minutes (i.e.
+  1200 seconds):
+
+  `updater.exe update --timeout 1200`
 
 ## Getting the source code
 
