@@ -68,8 +68,16 @@ namespace updater.cli
                     case "id":
                     case "list-id":
                     case "id-list":
+                    case "list":
                         opts.op = Operation.Id;
                         break;
+                    case "help":
+                    case "--help":
+                    case "/?":
+                    case "-?":
+                    case "usage":
+                        opts.op = Operation.Help;
+                        return 0;
                     case "--version":
                     case "/v":
                     case "-v":

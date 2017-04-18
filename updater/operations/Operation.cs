@@ -51,6 +51,12 @@ namespace updater.operations
         /// <summary>
         /// show program version
         /// </summary>
-        Version
+        Version,
+
+
+        /// <summary>
+        /// shows help message
+        /// </summary>
+        Help
     } //enum
 } //namespace

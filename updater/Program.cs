@@ -16,7 +16,6 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-using System;
 using updater.operations;
 
 namespace updater
@@ -62,6 +61,9 @@ namespace updater
                     break;
                 case Operation.Version:
                     operation = new operations.Version();
+                    break;
+                case Operation.Help:
+                    operation = new Help();
                     break;
                 case Operation.Unknown:
                 default:

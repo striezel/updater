@@ -70,6 +70,7 @@
     <Compile Include="data\InstallInfoLibO.cs" />
     <Compile Include="data\InstallInfoMsi.cs" />
     <Compile Include="io\GenericXmlSerializer.cs" />
+    <Compile Include="operations\Help.cs" />
     <Compile Include="operations\IdList.cs" />
     <Compile Include="operations\IOperation.cs" />
     <Compile Include="operations\Operation.cs" />
