@@ -48,21 +48,21 @@ namespace updater.software
         /// details about the software.</returns>
         public override AvailableSoftware knownInfo()
         {
-            return new AvailableSoftware("CCleaner", "5.28",
+            return new AvailableSoftware("CCleaner", "5.29",
                 "^CCleaner+$",
                 "^CCleaner+$",
                 //CCleaner uses the same installer for 32 and 64 bit.
                 new InstallInfoExe(
-                    "https://download.piriform.com/ccsetup528.exe",
+                    "https://download.piriform.com/ccsetup529.exe",
                     HashAlgorithm.SHA256,
-                    "c0095229fe2e0c9bde8ef960b6fed40a71f5f2d9cc17d4c53ee9ca30c5b032a9",
+                    "3e0b1faf12fc72445e48251731bc6f4b4687b1f154a9a66890040f8091655339",
                     "/S",
                     "C:\\Program Files\\CCleaner",
                     "C:\\Program Files (x86)\\CCleaner"),
                 new InstallInfoExe(
-                    "https://download.piriform.com/ccsetup528.exe",
+                    "https://download.piriform.com/ccsetup529.exe",
                     HashAlgorithm.SHA256,
-                    "c0095229fe2e0c9bde8ef960b6fed40a71f5f2d9cc17d4c53ee9ca30c5b032a9",
+                    "3e0b1faf12fc72445e48251731bc6f4b4687b1f154a9a66890040f8091655339",
                     "/S",
                     null,
                     "C:\\Program Files\\CCleaner")
@@ -120,6 +120,7 @@ namespace updater.software
             Match match = reg.Match(htmlCode);
             if (!match.Success)
                 return null;
+            //switch to HTTPS, if URL is HTTP only
             string newUrl = match.Value.Replace("http://", "https://");
             //extract version
             reg = new Regex("[0-9]+");
@@ -127,6 +128,9 @@ namespace updater.software
             if (!match.Success)
                 return null;
             string newVersion = match.Value;
+            //new version should be at least three digits long
+            if (newVersion.Length < 3)
+                return null;
             newVersion = newVersion.Substring(0, newVersion.Length - 2) + "." + newVersion.Substring(newVersion.Length - 2);
             if (newVersion == knownInfo().newestVersion)
                 return knownInfo();
