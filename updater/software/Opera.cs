@@ -183,14 +183,14 @@ namespace updater.software
             } //using
 
             //checksum for 32 bit installer
-            Regex reg = new Regex("^[0-9a-f]{32}  pub/opera/desktop/" + Regex.Escape(newVersion) + "/win/Opera_" + Regex.Escape(newVersion) + "_Setup\\.exe");
+            Regex reg = new Regex("[0-9a-f]{32}  pub/opera/desktop/" + Regex.Escape(newVersion) + "/win/Opera_" + Regex.Escape(newVersion) + "_Setup\\.exe");
             Match m = reg.Match(htmlCode);
             if (!m.Success)
                 return null;
             string checksum32 = m.Value.Substring(0, 32);
 
             //checksum for 64 bit installer
-            reg = new Regex("^[0-9a-f]{32}  pub/opera/desktop/" + Regex.Escape(newVersion) + "/win/Opera_" + Regex.Escape(newVersion) + "_Setup_x64\\.exe");
+            reg = new Regex("[0-9a-f]{32}  pub/opera/desktop/" + Regex.Escape(newVersion) + "/win/Opera_" + Regex.Escape(newVersion) + "_Setup_x64\\.exe");
             m = reg.Match(htmlCode);
             if (!m.Success)
                 return null;
@@ -201,13 +201,11 @@ namespace updater.software
             string oldVersion = newInfo.newestVersion;
             newInfo.newestVersion = newVersion;
             newInfo.install32Bit.downloadUrl = newInfo.install32Bit.downloadUrl.Replace(oldVersion, newVersion);
-            //no checksums are provided on the official site
             newInfo.install32Bit.checksum = checksum32;
-            newInfo.install32Bit.algorithm = HashAlgorithm.Unknown;
+            newInfo.install32Bit.algorithm = HashAlgorithm.MD5;
             newInfo.install64Bit.downloadUrl = newInfo.install64Bit.downloadUrl.Replace(oldVersion, newVersion);
-            //no checksums are provided on the official site, but binaries are signed
             newInfo.install64Bit.checksum = checksum64;
-            newInfo.install64Bit.algorithm = HashAlgorithm.Unknown;
+            newInfo.install64Bit.algorithm = HashAlgorithm.MD5;
             return newInfo;
         }
     } //class
