@@ -30,6 +30,8 @@ namespace updater.operations
         public IdList(Options _opts)
         {
             opts = _opts;
+            //no need to get newer versions, if user just wants the ID list
+            opts.autoGetNewer = false;
         }
 
 
