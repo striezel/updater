@@ -52,7 +52,11 @@ namespace updater_test.software
         [TestMethod]
         public void Test_info()
         {
-            _info(new Thunderbird("de", false));
+            var languages = Thunderbird.validLanguageCodes();
+            foreach (var languageCode in languages)
+            {
+                _info(new Thunderbird(languageCode, false));
+            } //foreach
         }
 
 
