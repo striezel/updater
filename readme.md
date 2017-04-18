@@ -6,6 +6,75 @@ easily.
 
 More to come soon.
 
+## Usage
+
+The update is a command-line program, there is no graphical user interface yet
+(and maybe there never will be one). Basic invocation is as follows:
+
+    updater.exe operation [options]
+
+### Operations
+Operations or commands define the main action of the program. Only one of
+these may be specified. Valid operations are:
+
+* **check** - displays which installed software can be updated, but does not
+              actually perform the updates.
+* **update** - updates every software that can be updated, i.e. downloads and
+               installs new versions / updates.
+* **help** - shows a help message.
+* **version** - shows version of the program.
+* **list-id** - prints a list of software IDs to the standard output. These IDs
+                can be used to exculde certain software from updates. See the
+                option --exclude below for more information.
+
+### Options
+Options can change bhaviour of the update process. Available options are:
+
+    --auto-get-newer | --newer | -n
+      automatically tries to get information about newer versions of the soft-
+      ware from the internet. The updater has a list of known newest software
+      versions, but that information can get outdated quickly. That is why
+      this option exists - it helps to get the latest software version.
+      The option is enabled by default.
+    --no-auto-get-newer | --no-newer | -nn
+      Do not try to get information about newer software versions. It is not
+      recommended to use this option, because it might mean that you get some
+      slightly outdated updates.
+    --timeout SECONDS | -t SECONDS
+      Sets the timeout in seconds for a single update process. If an update
+      runs longer than the specified amount of seconds, it gets cancelled. The
+      default timeout is 1800 seconds (30 minutes).
+    --exclude ID | --except ID | -e ID
+      Excludes the software with the given ID from the update process. To get
+      the ID for a specific software, run the program with the --list-id
+      option which lists all software IDs. You can use this option several
+      times to exclude more than one software from the update process.
+    --aurora | --with-aurora
+      Include updates for Firefox Aurora, i.e. the developer edition of
+      Firefox. This option is disabled by default, because it increases the
+      time for initial version checks by several seconds.
+    --no-aurora | --without-aurora
+      Do not include updates for Firefox Aurora. This option is enabled by
+      default.
+    --pdf24-autoupdate
+      Enable automatic updates for PDF24 Creator after update. This option is
+      enabled by default.
+    --no-pdf24-autoupdate
+      Disable automatic updates for PDF24 Creator after update. This option is
+      disabled by default.
+    --pdf24-icons
+      Enable desktop icons for PDF24 Creator during update. This option is
+      enabled by default.
+    --no-pdf24-icons
+      Disable desktop icons for PDF24 Creator during update. This option is
+      disabled by default.
+    --pdf24-fax-printer
+      Installs the fax printer for PDF24 Creator during update. This option is
+      enabled by default.
+    --no-pdf24-fax-printer
+      Does not install the fax printer for PDF24 Creator during update. This
+      option is disabled by default.
+
 ## Getting the source code
 
 Get the source directly from GitHub by cloning the Git repository (e.g. in Git

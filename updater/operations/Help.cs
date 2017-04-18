@@ -27,7 +27,7 @@ namespace updater.operations
     {
         public int perform()
         {
-            Console.WriteLine("updater operation [options]" + Environment.NewLine);
+            Console.WriteLine("updater.exe operation [options]" + Environment.NewLine);
             Console.WriteLine("Operations:" + Environment.NewLine
                 + "  Operations or commands define the main action of the program. Only one of\r\n"
                 + "  these may be specified. Valid operations are:" + Environment.NewLine
