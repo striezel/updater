@@ -74,7 +74,7 @@
     <Compile Include="operations\IdList.cs" />
     <Compile Include="operations\IOperation.cs" />
     <Compile Include="operations\Operation.cs" />
-    <Compile Include="operations\OperationDetect.cs" />
+    <Compile Include="operations\Detect.cs" />
     <Compile Include="operations\SoftwareStatus.cs" />
     <Compile Include="operations\Version.cs" />
     <Compile Include="operations\Update.cs" />

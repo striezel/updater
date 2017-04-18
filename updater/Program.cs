@@ -48,7 +48,7 @@ namespace updater
             switch (options.op)
             {
                 case Operation.Detect:
-                    operation = new OperationDetect();
+                    operation = new Detect();
                     break;
                 case Operation.Check:
                     operation = new SoftwareStatus(options);

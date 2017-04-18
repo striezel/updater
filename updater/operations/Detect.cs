@@ -18,7 +18,7 @@
 
 namespace updater.operations
 {
-    internal class OperationDetect : IOperation
+    internal class Detect : IOperation
     {
         public int perform()
         {
