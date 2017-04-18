@@ -100,7 +100,7 @@ Here are a few examples to give you a general idea:
 ## Frequently asked questions
 
 If you have a question about the updater, please take a look at the
-[./faq.md](FAQ) first.
+[FAQ](./faq.md) first.
 
 ## Getting the source code
 
