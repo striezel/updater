@@ -7,7 +7,7 @@ See the [list of supported applications](./supported_applications.md).
 **Does the updater support 32 bit and 64 bit versions of applications?**
 
 Yes.
-If there are 32 bit and 64 bit versions of an application, the update will
+If there are 32 bit and 64 bit versions of an application, the updater will
 detect the installed version and will download and install the matching patch.
 
 **Can the updater be used to install Microsoft patches that are usually
@@ -45,4 +45,17 @@ There are a couple of preconditions though:
 updater?**
 
 Sure. Just make sure you tested it before submission, because I will decline
-any pull requests that do not compile or do not work.
+any pull requests that do not compile or have similar issues.
+
+**Do I need to update the updater.exe to make sure I get the latest software?**
+
+No, not necessarily.
+
+updater.exe has a builtin mechanism that can find the latest software versions
+by checking the servers of the software creators / developers. This means that
+the updater.exe can for example find updates for Firefox 59 even if this
+version was not released when the updater.exe was created.
+
+However, when new applications are added to the updater.exe and you want to
+use the updater to update that new application, you have to get the newer
+version of updater.exe.

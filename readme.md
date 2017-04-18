@@ -102,7 +102,7 @@ Here are a few examples to give you a general idea:
 If you have a question about the updater, please take a look at the
 [FAQ](./faq.md) first.
 
-## Getting the source code
+## Getting the source code and building the application
 
 Get the source directly from GitHub by cloning the Git repository (e.g. in Git
 Bash) and change to the directory after the repository is completely cloned:
@@ -112,6 +112,10 @@ Bash) and change to the directory after the repository is completely cloned:
 
 That's it, you should now have the current source code of updater on your
 machine.
+
+After that, open Visual Studio (2015 Community Edition or later recommended)
+and just build the solution **updater/updater.sln** from the checked out
+sources.
 
 ## Copyright and Licensing
 
