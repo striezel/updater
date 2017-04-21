@@ -135,19 +135,47 @@ namespace updater.software
                 }
                 client.Dispose();
             } //using
-
             //extract hash - .exe occurs first, so first hash is the one we want
             Regex hash = new Regex("SHA\\-256\\: [0-9a-f]{64}");
             Match matchHash = hash.Match(htmlCode);
             if (!matchHash.Success)
                 return null;
             string newHash = matchHash.Value.Replace("SHA-256: ", "").Trim();
+
+            //The "file" https://winscp.net/download/WinSCP-5.9.4-Setup.exe or
+            // similar is just a HTML page that starts the download of the real
+            // file after a few seconds, so we have to parse the direct link of
+            // the download and use that.
+            htmlCode = null;
+            using (var client = new WebClient())
+            {
+                try
+                {
+                    htmlCode = client.DownloadString("https://winscp.net/download/WinSCP-" + newVersion + "-Setup.exe");
+                }
+                catch (Exception ex)
+                {
+                    logger.Warn("Exception occurred while checking for newer version of WinSCP: " + ex.Message);
+                    return null;
+                }
+                client.Dispose();
+            } //using
+            //URL for direct download is something like
+            // https://winscp.net/download/files/201704212143f42467fc64e4c84259bce4a07a98edbd/WinSCP-5.9.5-Setup.exe,
+            // where the middle part (date plus random MD5 hash?) varies.
+            Regex downloadUrl = new Regex(Regex.Escape("https://winscp.net/download/files/")
+                + "[0-9]{12}[0-9a-f]{32}" + "/WinSCP\\-" + Regex.Escape(newVersion)
+                + "\\-Setup\\.exe");
+            Match matchUrl = downloadUrl.Match(htmlCode);
+            if (!matchUrl.Success)
+                return null;
+
             //construct new version information
             var newInfo = knownInfo();
             //replace version number - both as newest version and in URL for download
             string oldVersion = newInfo.newestVersion;
             newInfo.newestVersion = newVersion;
-            newInfo.install32Bit.downloadUrl = newInfo.install32Bit.downloadUrl.Replace(oldVersion, newVersion);
+            newInfo.install32Bit.downloadUrl = matchUrl.Value;
             newInfo.install32Bit.checksum = newHash;
             return newInfo;
         }
