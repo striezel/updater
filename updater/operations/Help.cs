@@ -38,6 +38,7 @@ namespace updater.operations
                 + "            installs new versions / updates." + Environment.NewLine
                 + "  help    - shows this help message." + Environment.NewLine
                 + "  version - shows version of the program." + Environment.NewLine
+                + "  license - shows license information for the program." + Environment.NewLine
                 + "  list-id - prints a list of software IDs to the standard output. These IDs\r\n"
                 + "            can be used to exculde certain software from updates. See the\r\n"
                 + "            option --exclude below for more information.\r\n"

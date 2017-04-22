@@ -73,6 +73,7 @@
     <Compile Include="operations\Help.cs" />
     <Compile Include="operations\IdList.cs" />
     <Compile Include="operations\IOperation.cs" />
+    <Compile Include="operations\License.cs" />
     <Compile Include="operations\Operation.cs" />
     <Compile Include="operations\Detect.cs" />
     <Compile Include="operations\SoftwareStatus.cs" />

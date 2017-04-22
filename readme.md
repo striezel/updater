@@ -23,6 +23,7 @@ these may be specified. Valid operations are:
                installs new versions / updates.
 * **help** - shows a help message.
 * **version** - shows version of the program.
+* **license** - shows license information for the program.
 * **list-id** - prints a list of software IDs to the standard output. These IDs
                 can be used to exculde certain software from updates. See the
                 option --exclude below for more information.

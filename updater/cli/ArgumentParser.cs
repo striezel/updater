@@ -21,7 +21,7 @@ using updater.operations;
 namespace updater.cli
 {
     /// <summary>
-    /// Parses command line arguments
+    /// Parses command line arguments of the updater.
     /// </summary>
     public class ArgumentParser
     {
@@ -34,8 +34,11 @@ namespace updater.cli
         /// <summary>
         /// parses command line arguments
         /// </summary>
-        /// <param name="argv"></param>
-        /// <returns></returns>
+        /// <param name="argv">command line arguments as seen in the main function</param>
+        /// <param name="opts">reference to class that will hold the parsed options</param>
+        /// <returns>Returns zero in case of success.
+        /// Returns non-zero value, if an error occurred. The program should
+        /// exit the main function in the later case.</returns>
         public static int parse(string[] argv, ref Options opts)
         {
             if (null == opts)
@@ -77,6 +80,13 @@ namespace updater.cli
                     case "-?":
                     case "usage":
                         opts.op = Operation.Help;
+                        return 0;
+                    case "license":
+                    case "--license":
+                    case "licence":
+                    case "--licence":
+                    case "-l":
+                        opts.op = Operation.License;
                         return 0;
                     case "--version":
                     case "/v":

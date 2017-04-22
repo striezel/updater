@@ -55,6 +55,12 @@ namespace updater.operations
 
 
         /// <summary>
+        /// show lincense information of the programm
+        /// </summary>
+        License,
+
+
+        /// <summary>
         /// shows help message
         /// </summary>
         Help
