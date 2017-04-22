@@ -4,7 +4,8 @@ Updater _(working title, final name may change)_ is a command line application
 that can update popular third party software on Windows operating systems
 easily.
 
-More to come soon.
+The applications that can currently be updated with this application are listed
+[here](./supported_applications.md).
 
 ## Usage
 
