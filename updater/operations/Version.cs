@@ -44,6 +44,9 @@ namespace updater.operations
             var asm = System.Reflection.Assembly.GetExecutingAssembly();
             var ver = asm.GetName().Version;
             Console.WriteLine("updater, version " + utility.Version.get());
+            Console.WriteLine();
+            Console.WriteLine("Version control commit: " + GitInfo.getCommit());
+            Console.WriteLine("Version control date:   " + GitInfo.getCommitDate());
             //show license information
             Console.Write(Environment.NewLine + licInfo);
             return 0;
