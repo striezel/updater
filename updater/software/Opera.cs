@@ -49,20 +49,21 @@ namespace updater.software
         /// details about the software.</returns>
         public override AvailableSoftware knownInfo()
         {
-            return new AvailableSoftware("Opera", "43.0.2442.1144",
+            return new AvailableSoftware("Opera",
+                "44.0.2510.1218",
                 "^Opera Stable [0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+$",
                 "^Opera Stable [0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+$",
                 new InstallInfoExe(
-                    "https://get.geo.opera.com/pub/opera/desktop/43.0.2442.1144/win/Opera_43.0.2442.1144_Setup.exe",
+                    "https://get.geo.opera.com/pub/opera/desktop/44.0.2510.1218/win/Opera_44.0.2510.1218_Setup.exe",
                     HashAlgorithm.SHA256,
-                    "fada2d23185568fe84d7b5110cc51c92badc1cf615b993e3ecbfb5a96083786e",
+                    "d854aff85480989e3a903444ab4e6598fd20bbea37e589279b0cf9a93057f819",
                     "/silent /norestart /launchopera 0 /setdefaultbrowser 0 /allusers",
                     "C:\\Program Files\\Opera",
                     "C:\\Program Files (x86)\\Opera"),
                 new InstallInfoExe(
-                    "https://get.geo.opera.com/pub/opera/desktop/43.0.2442.1144/win/Opera_43.0.2442.1144_Setup_x64.exe",
+                    "https://get.geo.opera.com/pub/opera/desktop/44.0.2510.1218/win/Opera_44.0.2510.1218_Setup_x64.exe",
                     HashAlgorithm.SHA256,
-                    "e07717d251968decb51914f0eb34fd0b1237386dfdd2983be76c7bf966e86208",
+                    "dae0985cfb3931e81e488056db169c5b520a28e8190e559b467d6cdf553afb57",
                     "/silent /norestart /launchopera 0 /setdefaultbrowser 0 /allusers",
                     null,
                     "C:\\Program Files\\Opera")
