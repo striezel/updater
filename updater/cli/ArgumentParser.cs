@@ -88,6 +88,7 @@ namespace updater.cli
                     case "-l":
                         opts.op = Operation.License;
                         return 0;
+                    case "version":
                     case "--version":
                     case "/v":
                     case "-v":
