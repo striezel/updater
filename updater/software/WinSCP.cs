@@ -48,12 +48,13 @@ namespace updater.software
         /// details about the software.</returns>
         public override AvailableSoftware knownInfo()
         {
-            return new AvailableSoftware("WinSCP", "5.9.4",
+            return new AvailableSoftware("WinSCP",
+                "5.9.5",
                 "^WinSCP [1-9]+\\.[0-9]+\\.[0-9]+$", null,
                 new InstallInfoExe(
-                    "https://winscp.net/download/WinSCP-5.9.4-Setup.exe",
+                    "https://netcologne.dl.sourceforge.net/project/winscp/WinSCP/5.9.5/WinSCP-5.9.5-Setup.exe",
                     HashAlgorithm.SHA256,
-                    "af062b32c907ee1d51de82cadb570171750a51e7dd3d953bb8f24282c3db642d",
+                    "2c1c9ae9a5ba315924e0b2348f27320ea8aecd6ebfea8eb40472dfd51a7e09f9",
                     "/VERYSILENT /NORESTART",
                     "C:\\Program Files\\WinSCP",
                     "C:\\Program Files (x86)\\WinSCP"),
@@ -120,7 +121,7 @@ namespace updater.software
             if (!version.IsMatch(newVersion))
                 return null;
 
-            //Readme (e.g. https://winscp.net/download/WinSCP-5.9.4-ReadMe.txt) contains hash.
+            //Readme (e.g. https://winscp.net/download/WinSCP-5.9.5-ReadMe.txt) contains hash.
             htmlCode = null;
             using (var client = new WebClient())
             {
@@ -142,7 +143,7 @@ namespace updater.software
                 return null;
             string newHash = matchHash.Value.Replace("SHA-256: ", "").Trim();
 
-            //The "file" https://winscp.net/download/WinSCP-5.9.4-Setup.exe or
+            //The "file" https://winscp.net/download/WinSCP-5.9.5-Setup.exe or
             // similar is just a HTML page that starts the download of the real
             // file after a few seconds, so we have to parse the direct link of
             // the download and use that.
