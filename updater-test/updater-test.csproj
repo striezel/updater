@@ -57,7 +57,6 @@
     <Compile Include="detection\DetectorMSI_Tests.cs" />
     <Compile Include="detection\DetectorRegistry_Tests.cs" />
     <Compile Include="git-info\GitInfo_Tests.cs" />
-    <Compile Include="io\AvailableSoftwareXML_Tests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="software\All_Tests.cs" />
     <Compile Include="software\Calibre_Tests.cs" />
