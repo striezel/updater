@@ -1,0 +1,7 @@
+version: 2017.04.24.{build}
+skip_tags: true
+configuration: Debug
+platform: x86
+build:
+  project: updater/updater.sln
+  verbosity: normal
