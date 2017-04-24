@@ -7,6 +7,7 @@ updater application.
 
 * 7-Zip
 * Audacity
+* Calibre
 * CCleaner
 * CDBurnerXP
 * FileZilla

@@ -99,6 +99,7 @@
     <Compile Include="ReturnCodes.cs" />
     <Compile Include="software\AbstractSoftware.cs" />
     <Compile Include="software\All.cs" />
+    <Compile Include="software\Calibre.cs" />
     <Compile Include="software\Pdf24Creator.cs" />
     <Compile Include="software\Pidgin.cs" />
     <Compile Include="software\Audacity.cs" />

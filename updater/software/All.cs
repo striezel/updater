@@ -43,6 +43,7 @@ namespace updater.software
             bool autoGetNewer = opts.autoGetNewer;
             var result = new List<ISoftware>();
             result.Add(new Audacity(autoGetNewer));
+            result.Add(new Calibre(autoGetNewer));
             result.Add(new CCleaner(autoGetNewer));
             result.Add(new CDBurnerXP(autoGetNewer));
             //Firefox (release channel)
