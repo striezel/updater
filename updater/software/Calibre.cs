@@ -17,6 +17,7 @@
 */
 
 using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Text.RegularExpressions;
 using updater.data;
@@ -175,6 +176,18 @@ namespace updater.software
             newInfo.install64Bit.checksum = checksum64;
             newInfo.install64Bit.algorithm = HashAlgorithm.SHA256;
             return newInfo;
+        }
+
+
+        /// <summary>
+        /// lists names of processes that might block an update, e.g. because
+        /// the application cannot be update while it is running
+        /// </summary>
+        /// <param name="detected">currently installed / detected software version</param>
+        /// <returns>Returns a list of process names that block the upgrade.</returns>
+        public override List<string> blockerProcesses(DetectedSoftware detected)
+        {
+            return new List<string>();
         }
 
     } //class

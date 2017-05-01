@@ -448,7 +448,7 @@ namespace updater.software
             if ((null == newerChecksums) || (newerChecksums.Length != 2)
                 || string.IsNullOrWhiteSpace(newerChecksums[0])
                 || string.IsNullOrWhiteSpace(newerChecksums[1]))
-                // fallback to known information
+                // failure occurred
                 return null;
             //replace all stuff
             string oldVersion = currentInfo.newestVersion;
@@ -458,6 +458,18 @@ namespace updater.software
             currentInfo.install64Bit.downloadUrl = currentInfo.install64Bit.downloadUrl.Replace(oldVersion, newerVersion);
             currentInfo.install64Bit.checksum = newerChecksums[1];
             return currentInfo;
+        }
+
+
+        /// <summary>
+        /// lists names of processes that might block an update, e.g. because
+        /// the application cannot be update while it is running
+        /// </summary>
+        /// <param name="detected">currently installed / detected software version</param>
+        /// <returns>Returns a list of process names that block the upgrade.</returns>
+        public override List<string> blockerProcesses(DetectedSoftware detected)
+        {
+            return new List<string>();
         }
 
 

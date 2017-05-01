@@ -175,6 +175,18 @@ namespace updater.software
 
 
         /// <summary>
+        /// lists names of processes that might block an update, e.g. because
+        /// the application cannot be update while it is running
+        /// </summary>
+        /// <param name="detected">currently installed / detected software version</param>
+        /// <returns>Returns a list of process names that block the upgrade.</returns>
+        public override List<string> blockerProcesses(DetectedSoftware detected)
+        {
+            return new List<string>();
+        }
+
+
+        /// <summary>
         /// whether the detected software is older than the newest known software
         /// </summary>
         /// <param name="detected">the corresponding detected software</param>

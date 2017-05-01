@@ -293,6 +293,18 @@ namespace updater.software
 
 
         /// <summary>
+        /// lists names of processes that might block an update, e.g. because
+        /// the application cannot be update while it is running
+        /// </summary>
+        /// <param name="detected">currently installed / detected software version</param>
+        /// <returns>Returns a list of process names that block the upgrade.</returns>
+        public override List<string> blockerProcesses(DetectedSoftware detected)
+        {
+            return new List<string>();
+        }
+
+
+        /// <summary>
         /// whether or not a separate process must be run before the update
         /// </summary>
         /// <param name="detected">currently installed / detected software version</param>
@@ -311,10 +323,12 @@ namespace updater.software
         /// </summary>
         /// <param name="detected">currently installed / detected software version</param>
         /// <returns>Returns a Process ready to start that should be run before
-        /// the update. May return null or may throw, of needsPreUpdateProcess()
+        /// the update. May return null or may throw, if needsPreUpdateProcess()
         /// returned false.</returns>
         public override List<Process> preUpdateProcess(DetectedSoftware detected)
         {
+            if (string.IsNullOrWhiteSpace(detected.installPath))
+                return null;
             var processes = new List<Process>();
             //uninstall previous version to avoid having two Thunderbird entries in control panel
             var proc = new Process();

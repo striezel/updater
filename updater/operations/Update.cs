@@ -116,6 +116,15 @@ namespace updater.operations
                     return -1 - updatedApplications;
                 }
 
+                //check for blocking processes
+                if (utility.Processes.processesExist(entry.software.blockerProcesses(entry.detected)))
+                {
+                    logger.Warn("Warning: At least one process was found that "
+                        + "blocks the update of " + entry.software.info().Name
+                        + "! Update will be omitted.");
+                    continue;
+                }
+
                 //download file
                 if (string.IsNullOrWhiteSpace(instInfo.downloadUrl))
                 {
@@ -147,6 +156,16 @@ namespace updater.operations
                     return -1 - updatedApplications;
                 }
                 logger.Info("Info: Checksum of " + downloadedFile + " is correct.");
+
+                //check for blocking processes - again, because download can take
+                // enough time to start some new processes
+                if (utility.Processes.processesExist(entry.software.blockerProcesses(entry.detected)))
+                {
+                    logger.Warn("Warning: At least one process was found that "
+                        + "blocks the update of " + entry.software.info().Name
+                        + "! Update will be omitted.");
+                    continue;
+                }
 
                 //start update process
                 try

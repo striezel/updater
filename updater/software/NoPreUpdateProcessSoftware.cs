@@ -57,7 +57,7 @@ namespace updater.software
         /// </summary>
         /// <param name="detected">currently installed / detected software version</param>
         /// <returns>Returns a Process ready to start that should be run before
-        /// the update. May return null or may throw, of needsPreUpdateProcess()
+        /// the update. May return null or may throw, if needsPreUpdateProcess()
         /// returned false.</returns>
         public override List<Process> preUpdateProcess(DetectedSoftware detected)
         {
