@@ -49,20 +49,21 @@ namespace updater.software
         /// details about the software.</returns>
         public override AvailableSoftware knownInfo()
         {
-            return new AvailableSoftware("FileZilla FTP Client", "3.25.1",
+            return new AvailableSoftware("FileZilla FTP Client",
+                "3.25.2",
                 "^FileZilla Client [0-9]+\\.[0-9]+(\\.[0-9]+(\\.[0-9]+)?)?$",
                 "^FileZilla Client [0-9]+\\.[0-9]+(\\.[0-9]+(\\.[0-9]+)?)?$",
                 new InstallInfoExe(
-                    "https://netcologne.dl.sourceforge.net/project/filezilla/FileZilla_Client/3.25.1/FileZilla_3.25.1_win32-setup.exe",
+                    "https://netcologne.dl.sourceforge.net/project/filezilla/FileZilla_Client/3.25.2/FileZilla_3.25.2_win32-setup.exe",
                     HashAlgorithm.SHA512,
-                    "c87ad1c6379374efdb11c4176dfc9237164ce4218d8add3fb65dd9f459ab695405580e357806d2f7cb0140589dcb2599106ad52c615af3501d1702fd51c41895",
+                    "d3ba3e3f0e681c104c0c2b4e91714203991c832d183ba09401d9a4be72151352c0136a8f3227d0f30efdf9ac0aefdf20b5b622e58d9a76564fd3fe212c45abbd",
                     "/S",
                     "C:\\Program Files\\FileZilla FTP Client",
                     "C:\\Program Files (x86)\\FileZilla FTP Client"),
                 new InstallInfoExe(
-                    "https://netcologne.dl.sourceforge.net/project/filezilla/FileZilla_Client/3.25.1/FileZilla_3.25.1_win64-setup.exe",
+                    "https://netcologne.dl.sourceforge.net/project/filezilla/FileZilla_Client/3.25.2/FileZilla_3.25.2_win64-setup.exe",
                     HashAlgorithm.SHA512,
-                    "929e8c6a12dc1fc3e77eb17efe5cd860e5a263b97facd1fd2d9a427277d515dad7dd14516341d600b271b1013cc1d966ad36560edd619a401571caacce94e1b1",
+                    "e45d2717dd9bb2e3e93b46e29d8b4aa9aaf5a3f04943668f4556e9a78cc75a088410bcade9cb459fb888a9ce8682051a4c0d5fc309be4fb5be928608f4d6775c",
                     "/S",
                     null,
                     "C:\\Program Files\\FileZilla FTP Client")
