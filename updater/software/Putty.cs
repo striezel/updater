@@ -50,22 +50,23 @@ namespace updater.software
         /// details about the software.</returns>
         public override AvailableSoftware knownInfo()
         {
-            return new AvailableSoftware("PuTTY", "0.68",
+            return new AvailableSoftware("PuTTY",
+                "0.69",
                 "^PuTTY release [0-9]\\.[0-9]+$",
                 "^PuTTY release [0-9]\\.[0-9]+ \\(64\\-bit\\)$",
                 //32 bit installer
                 new InstallInfoMsi(
-                    "https://the.earth.li/~sgtatham/putty/0.68/w32/putty-0.68-installer.msi",
+                    "https://the.earth.li/~sgtatham/putty/0.69/w32/putty-0.69-installer.msi",
                     HashAlgorithm.SHA512,
-                    "2b6b1acc51fc9cfe8a08e17afc4ac7d962af4575d55806456aa1a42c563f14457cc81d7e625191fd856b4be9a0e885cef78da4018d542010eba18718bb73fecd",
+                    "f1cdfb5e98eea7cdf0d38e22ad0c31e0d12e5948977bc23fbc332896af0e87b646312ca399f2349ca89a5f40fb304482952efd4b774ff282d0c34dba5143d49d",
                     "/qn /norestart",
                     "C:\\Program Files\\PuTTY",
                     "C:\\Program Files (x86)\\PuTTY"),
                 //64 bit installer
                 new InstallInfoMsi(
-                    "https://the.earth.li/~sgtatham/putty/0.68/w64/putty-64bit-0.68-installer.msi",
+                    "https://the.earth.li/~sgtatham/putty/0.69/w64/putty-64bit-0.69-installer.msi",
                     HashAlgorithm.SHA512,
-                    "8262c133e3569dcc188e5ac2360ebd3cc09d9edd2f78d6eaaf0e2762fba511de07ce614ba4fedf5f62fe64dd17d5a626dc63a579ee1fc1ef90f45e9e1f0c3d06",
+                    "b1d6077279f5587841aa3fb0f6c268b0e3cd6cae630d55934863f80c6a5e5de333a1995aea24cffb18ff1c04b787ff6b844fec5641aa8e39ae6c6e18fd1b67e5",
                     "/qn /norestart",
                     null,
                     "C:\\Program Files\\PuTTY")
