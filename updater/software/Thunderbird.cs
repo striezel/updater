@@ -300,7 +300,9 @@ namespace updater.software
         /// <returns>Returns a list of process names that block the upgrade.</returns>
         public override List<string> blockerProcesses(DetectedSoftware detected)
         {
-            return new List<string>();
+            var p = new List<string>();
+            p.Add("thunderbird");
+            return p;
         }
 
 
