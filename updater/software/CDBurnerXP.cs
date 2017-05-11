@@ -124,6 +124,10 @@ namespace updater.software
             
             //construct new version information
             var newInfo = knownInfo();
+            // ... but use known information, if versions match. That way we
+            // have valid checksums for the files after download.
+            if (newInfo.newestVersion == newVersion)
+                return newInfo;
             //replace version number - both as newest version and in URL for download
             string oldVersion = newInfo.newestVersion;
             newInfo.newestVersion = newVersion;
