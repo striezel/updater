@@ -49,22 +49,23 @@ namespace updater.software
         /// details about the software.</returns>
         public override AvailableSoftware knownInfo()
         {
-            return new AvailableSoftware("VLC media player", "2.2.4",
+            return new AvailableSoftware("VLC media player",
+                "2.2.5.1",
                 "^VLC media player$",
                 "^VLC media player$",
                 //32 bit installer
                 new InstallInfoExe(
-                    "http://get.videolan.org/vlc/2.2.4/win32/vlc-2.2.4-win32.exe",
+                    "https://get.videolan.org/vlc/2.2.5.1/win32/vlc-2.2.5.1-win32.exe",
                     HashAlgorithm.SHA256,
-                    "f4a4b8897e86f52a319ee4568e62be9cda1bcb2341e798da12e359d81cb36e51",
+                    "37e857b0322a6676c4d01310b2927c109720a6d89cc149d1a35852b649b53387",
                     "/S",
                     "C:\\Program Files\\VideoLAN\\VLC",
                     "C:\\Program Files (x86)\\VideoLAN\\VLC"),
                 //64 bit installer
                 new InstallInfoExe(
-                    "http://get.videolan.org/vlc/2.2.4/win64/vlc-2.2.4-win64.exe",
+                    "http://get.videolan.org/vlc/2.2.5.1/win64/vlc-2.2.5.1-win64.exe",
                     HashAlgorithm.SHA256,
-                    "a283b1913c8905c4d58787f34b4a85f28f3f77c4157bee554e3e70441e6e75e4",
+                    "41a69a5f329315ea9b5ae6d3da8f4900f9f7ba4fb3d3c07e1adb844e60208159",
                     "/S",
                     null,
                     "C:\\Program Files\\VideoLAN\\VLC")
@@ -132,8 +133,8 @@ namespace updater.software
 
             //There are extra files for hashes:
             // https://get.videolan.org/vlc/last/win32/vlc-2.2.4-win32.exe.sha256 for 32 bit
-            // and https://get.videolan.org/vlc/last/win64/vlc-2.2.4-win64.7z.sha256 for 64 bit.
-            var newHashes = new System.Collections.Generic.List<string>();
+            // and https://get.videolan.org/vlc/last/win64/vlc-2.2.4-win64.exe.sha256 for 64 bit.
+            var newHashes = new List<string>();
             foreach (var bits in new string[] { "32", "64" })
             {
                 htmlCode = null;
