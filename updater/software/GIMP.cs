@@ -49,21 +49,22 @@ namespace updater.software
         /// details about the software.</returns>
         public override AvailableSoftware knownInfo()
         {
-            return new AvailableSoftware("The GIMP", "2.8.20",
+            return new AvailableSoftware("The GIMP",
+                "2.8.22",
                 "^GIMP [0-9]+\\.[0-9]+\\.[0-9]+$",
                 "^GIMP [0-9]+\\.[0-9]+\\.[0-9]+$",
                 //The GIMP uses the same installer for 32 and 64 bit.
                 new InstallInfoExe(
-                    "https://download.gimp.org/mirror/pub/gimp/v2.8/windows/gimp-2.8.20-setup.exe",
+                    "https://download.gimp.org/mirror/pub/gimp/v2.8/windows/gimp-2.8.22-setup.exe",
                     HashAlgorithm.SHA256,
-                    "4ad9ab85c969093810d4932b9574d9d82e0527263bcf37a042de1503c36111da",
+                    "a2e52129a28feec1ee3f22f5aaf9bdecbb02d51af6da408ace0a2ac2e0365c8b",
                     "/VERYSILENT /NORESTART",
                     "C:\\Program Files\\GIMP 2",
                     "C:\\Program Files (x86)\\GIMP 2"),
                 new InstallInfoExe(
-                    "https://download.gimp.org/mirror/pub/gimp/v2.8/windows/gimp-2.8.20-setup.exe",
+                    "https://download.gimp.org/mirror/pub/gimp/v2.8/windows/gimp-2.8.22-setup.exe",
                     HashAlgorithm.SHA256,
-                    "4ad9ab85c969093810d4932b9574d9d82e0527263bcf37a042de1503c36111da",
+                    "a2e52129a28feec1ee3f22f5aaf9bdecbb02d51af6da408ace0a2ac2e0365c8b",
                     "/VERYSILENT /NORESTART",
                     null,
                     "C:\\Program Files\\GIMP 2")
