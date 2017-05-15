@@ -50,20 +50,20 @@ namespace updater.software
         public override AvailableSoftware knownInfo()
         {
             return new AvailableSoftware("Calibre", 
-                "2.84.0",
+                "2.85.1",
                 "^calibre$",
                 "^calibre 64 bit$",
                 new InstallInfoMsi(
-                    "https://download.calibre-ebook.com/2.84.0/calibre-2.84.0.msi",
+                    "https://download.calibre-ebook.com/2.85.1/calibre-2.85.1.msi",
                     HashAlgorithm.SHA256,
-                    "9712fe39ec2dafb3954352a5b5810402c2955cec943d752223016005a63f20d7",
+                    "e7c1e0f489911e59bea163c520ec81c333f717ac3f5c53969a342c7cf600eb83",
                     "/qn /norestart",
                     "C:\\Program Files\\Calibre2",
                     "C:\\Program Files (x86)\\Calibre2"),
                 new InstallInfoMsi(
-                    "https://download.calibre-ebook.com/2.84.0/calibre-64bit-2.84.0.msi",
+                    "https://download.calibre-ebook.com/2.85.1/calibre-64bit-2.85.1.msi",
                     HashAlgorithm.SHA256,
-                    "d0b5af644bee98529d66f81ba21134e48583dfcd7cb37bc1aa38521295058203",
+                    "1318596d26e8b2b6fb5a44bb47bc67ce8b70aba48dc2428c8e8bae562e224532",
                     "/qn /norestart",
                     null,
                     "C:\\Program Files\\Calibre2")
