@@ -139,6 +139,30 @@ namespace updater.software
                     string sha256Url = "https://download.gimp.org/pub/gimp/v" + shortVersion + "/windows/gimp-" + version + "-setup.exe.sha256";
                     htmlCode = client.DownloadString(sha256Url);
                 }
+                catch (WebException webEx)
+                {
+                    if ((webEx.Response is HttpWebResponse)
+                        && ((webEx.Response as HttpWebResponse).StatusCode == HttpStatusCode.NotFound))
+                    {
+                        //try SHA256 file for whole directory instead
+                        try
+                        {
+                            string sha256Url = "https://download.gimp.org/pub/gimp/v" + shortVersion + "/windows/SHA256SUMS";
+                            htmlCode = client.DownloadString(sha256Url);
+                        }
+                        catch (Exception ex)
+                        {
+                            logger.Warn("Exception occurred while checking for newer version of GIMP: " + ex.Message);
+                            return null;
+                        } //try-catch (inner)
+                    } //if 404 Not Found
+                    //Other web exceptions are still errors.
+                    else
+                    {
+                        logger.Warn("Exception occurred while checking for newer version of GIMP: " + webEx.Message);
+                        return null;
+                    }
+                } //catch WebException
                 catch (Exception ex)
                 {
                     logger.Warn("Exception occurred while checking for newer version of GIMP: " + ex.Message);
