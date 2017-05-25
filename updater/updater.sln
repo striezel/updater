@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "updater", "updater.csproj",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "updater-test", "..\updater-test\updater-test.csproj", "{F1F55187-4CED-43A0-A9C9-920DDBD7FF76}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "moz-checksum-generator", "..\moz-checksum-generator\moz-checksum-generator.csproj", "{555625FB-731F-462A-A30A-9B71DCDB1737}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,18 @@ Global
 		{F1F55187-4CED-43A0-A9C9-920DDBD7FF76}.Release|x64.Build.0 = Release|Any CPU
 		{F1F55187-4CED-43A0-A9C9-920DDBD7FF76}.Release|x86.ActiveCfg = Release|Any CPU
 		{F1F55187-4CED-43A0-A9C9-920DDBD7FF76}.Release|x86.Build.0 = Release|Any CPU
+		{555625FB-731F-462A-A30A-9B71DCDB1737}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{555625FB-731F-462A-A30A-9B71DCDB1737}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{555625FB-731F-462A-A30A-9B71DCDB1737}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{555625FB-731F-462A-A30A-9B71DCDB1737}.Debug|x64.Build.0 = Debug|Any CPU
+		{555625FB-731F-462A-A30A-9B71DCDB1737}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{555625FB-731F-462A-A30A-9B71DCDB1737}.Debug|x86.Build.0 = Debug|Any CPU
+		{555625FB-731F-462A-A30A-9B71DCDB1737}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{555625FB-731F-462A-A30A-9B71DCDB1737}.Release|Any CPU.Build.0 = Release|Any CPU
+		{555625FB-731F-462A-A30A-9B71DCDB1737}.Release|x64.ActiveCfg = Release|Any CPU
+		{555625FB-731F-462A-A30A-9B71DCDB1737}.Release|x64.Build.0 = Release|Any CPU
+		{555625FB-731F-462A-A30A-9B71DCDB1737}.Release|x86.ActiveCfg = Release|Any CPU
+		{555625FB-731F-462A-A30A-9B71DCDB1737}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

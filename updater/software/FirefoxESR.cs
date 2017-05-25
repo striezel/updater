@@ -338,7 +338,7 @@ namespace updater.software
         /// </summary>
         /// <returns>Returns a string containing the newest version number on success.
         /// Returns null, if an error occurred.</returns>
-        private string determineNewestVersion()
+        public string determineNewestVersion()
         {
             string url = "https://download.mozilla.org/?product=firefox-esr-latest&os=win&lang=" + languageCode;
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
@@ -356,9 +356,7 @@ namespace updater.software
                 Match matchVersion = reVersion.Match(newLocation);
                 if (!matchVersion.Success)
                     return null;
-                string currentVersion = matchVersion.Value;
-
-                return currentVersion;
+                return matchVersion.Value;
             }
             catch (Exception ex)
             {
