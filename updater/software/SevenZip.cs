@@ -71,7 +71,7 @@ namespace updater.software
 
 
         /// <summary>
-        /// list iof IDs to identify the software
+        /// list of IDs to identify the software
         /// </summary>
         /// <returns>Returns a non-empty array of IDs, where at least one entry is unique to the software.</returns>
         public override string[] id()
