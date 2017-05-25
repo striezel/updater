@@ -49,21 +49,22 @@ namespace updater.software
         /// details about the software.</returns>
         public override AvailableSoftware knownInfo()
         {
-            return new AvailableSoftware("CCleaner", "5.29",
+            return new AvailableSoftware("CCleaner",
+                "5.30",
                 "^CCleaner+$",
                 "^CCleaner+$",
                 //CCleaner uses the same installer for 32 and 64 bit.
                 new InstallInfoExe(
-                    "https://download.piriform.com/ccsetup529.exe",
+                    "https://download.piriform.com/ccsetup530.exe",
                     HashAlgorithm.SHA256,
-                    "3e0b1faf12fc72445e48251731bc6f4b4687b1f154a9a66890040f8091655339",
+                    "8d7262f4107fc7b1c1bdfd406d3662474be51ebb71437a86d6065c22d05b6f39",
                     "/S",
                     "C:\\Program Files\\CCleaner",
                     "C:\\Program Files (x86)\\CCleaner"),
                 new InstallInfoExe(
-                    "https://download.piriform.com/ccsetup529.exe",
+                    "https://download.piriform.com/ccsetup530.exe",
                     HashAlgorithm.SHA256,
-                    "3e0b1faf12fc72445e48251731bc6f4b4687b1f154a9a66890040f8091655339",
+                    "8d7262f4107fc7b1c1bdfd406d3662474be51ebb71437a86d6065c22d05b6f39",
                     "/S",
                     null,
                     "C:\\Program Files\\CCleaner")
@@ -72,7 +73,7 @@ namespace updater.software
 
 
         /// <summary>
-        /// list iof IDs to identify the software
+        /// list of IDs to identify the software
         /// </summary>
         /// <returns>Returns a non-empty array of IDs, where at least one entry is unique to the software.</returns>
         public override string[] id()
