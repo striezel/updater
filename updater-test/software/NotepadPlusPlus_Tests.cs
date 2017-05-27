@@ -17,6 +17,7 @@
 */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Text.RegularExpressions;
 using updater.software;
 
 namespace updater_test.software
@@ -65,6 +66,22 @@ namespace updater_test.software
         public void Test_upToDate_info()
         {
             _upToDate_info(new NotepadPlusPlus(false));
+        }
+
+
+        /// <summary>
+        /// checks whether the regular expression for 32 bit variant detects old
+        /// and new variants
+        /// </summary>
+        [TestMethod]
+        public void Test_match32Bit()
+        {
+            var npp = new NotepadPlusPlus(false);
+            Regex regex = new Regex(npp.knownInfo().match32Bit);
+            //new variant (after introduction of 64 bit variant)
+            Assert.IsTrue(regex.IsMatch("Notepad++ (32-bit x86)"));
+            //old variant (before introduction of 64 bit variant)
+            Assert.IsTrue(regex.IsMatch("Notepad++"), "The regular expression does not detect the old variant of 32-bit Notepad++.");
         }
     } //class
 } //namespace

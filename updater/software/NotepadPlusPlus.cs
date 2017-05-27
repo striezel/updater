@@ -51,7 +51,7 @@ namespace updater.software
         {
             return new AvailableSoftware("Notepad++",
                 "7.4.1",
-                "^Notepad\\+\\+ \\(32\\-bit x86\\)$",
+                "^Notepad\\+\\+ \\(32\\-bit x86\\)$|^Notepad\\+\\+$",
                 "^Notepad\\+\\+ \\(64\\-bit x64\\)$",
                 new InstallInfoExe(
                     "https://notepad-plus-plus.org/repository/7.x/7.4.1/npp.7.4.1.Installer.exe",
