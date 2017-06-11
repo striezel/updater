@@ -21,6 +21,7 @@ using System;
 using System.Net;
 using System.Text.RegularExpressions;
 using System.Collections.Generic;
+using updater.versions;
 
 namespace updater.software
 {
@@ -96,13 +97,13 @@ namespace updater.software
 
 
         /// <summary>
-        /// looks for newer versions of the software than the currently known version
+        /// determines the last version of VLC media player, which is usually
+        /// the latest version, too
         /// </summary>
-        /// <returns>Returns an AvailableSoftware instance with the information
-        /// that was retrieved from the net.</returns>
-        public override AvailableSoftware searchForNewer()
+        /// <returns>Returns a version number, if successful.
+        /// Returns null, if an error occurred.</returns>
+        private string getLastVersion()
         {
-            logger.Debug("Searching for newer version of VLC media player...");
             string htmlCode = null;
             using (var client = new WebClient())
             {
@@ -112,18 +113,79 @@ namespace updater.software
                 }
                 catch (Exception ex)
                 {
-                    logger.Warn("Exception occurred while checking for newer version of VLC: " + ex.Message);
+                    logger.Warn("Exception occurred while checking for latest version of VLC: " + ex.Message);
                     return null;
                 }
                 client.Dispose();
             } //using
 
-            Regex reTarXz = new Regex("vlc\\-[1-9]+\\.[0-9]+\\.[0-9]+(\\.[0-9]+)?\\.tar\\.xz");
+            Regex reTarXz = new Regex("vlc\\-[0-9]+\\.[0-9]+\\.[0-9]+(\\.[0-9]+)?\\.tar\\.xz");
             Match matchTarXz = reTarXz.Match(htmlCode);
             if (!matchTarXz.Success)
                 return null;
             //extract new version number
             string newVersion = matchTarXz.Value.Replace("vlc-", "").Replace(".tar.xz", "");
+            return newVersion;
+        }
+
+
+        /// <summary>
+        /// gets the latest available version from download site directory listing
+        /// </summary>
+        /// <returns>Returns latest available version number, if successful.
+        /// Returns null, if an error occurred.</returns>
+        private string getLatestAvailableVersion()
+        {
+            //See http://get.videolan.org/vlc/ for available versions.
+            string htmlCode = null;
+            using (var client = new WebClient())
+            {
+                try
+                {
+                    htmlCode = client.DownloadString("https://get.videolan.org/vlc/");
+                }
+                catch (Exception ex)
+                {
+                    logger.Warn("Exception occurred while checking for available versions of VLC: " + ex.Message);
+                    return null;
+                }
+                client.Dispose();
+            } //using
+
+            Regex reVersion = new Regex("\"[0-9]+\\.[0-9]+\\.[0-9]+(\\.[0-9]+)?/\"");
+            var matches = reVersion.Matches(htmlCode);
+            var latestVersion = new Quartet("0.0.0.0");
+            string latestVersionString = null;
+            foreach (Match m in matches)
+            {
+                if (!m.Success)
+                    continue;
+                var possibleVersionString = m.Value.Replace("\"", "").Replace("/", "");
+                var possibleVersion = new Quartet(possibleVersionString);
+                if (string.IsNullOrWhiteSpace(latestVersionString) || possibleVersion > latestVersion)
+                {
+                    latestVersion = possibleVersion;
+                    latestVersionString = possibleVersionString;
+                }
+            } //foreach
+            return latestVersionString;
+        }
+
+        /// <summary>
+        /// looks for newer versions of the software than the currently known version
+        /// </summary>
+        /// <returns>Returns an AvailableSoftware instance with the information
+        /// that was retrieved from the net.</returns>
+        public override AvailableSoftware searchForNewer()
+        {
+            logger.Debug("Searching for newer version of VLC media player...");
+            //get new version number
+            string lastVersion = getLastVersion();
+            string availableVersion = getLatestAvailableVersion();
+            string newVersion = lastVersion;
+            if (string.Compare(lastVersion, availableVersion) < 0)
+                newVersion = availableVersion;
+            //should not be lesser than known newest version
             if (string.Compare(newVersion, knownInfo().newestVersion) < 0)
                 return null;
             //version number should match usual scheme, e.g. 5.x.y, where x and y are digits
@@ -137,12 +199,12 @@ namespace updater.software
             var newHashes = new List<string>();
             foreach (var bits in new string[] { "32", "64" })
             {
-                htmlCode = null;
+                string htmlCode = null;
                 using (var client = new WebClient())
                 {
                     try
                     {
-                        htmlCode = client.DownloadString("https://get.videolan.org/vlc/last/win" + bits + "/vlc-" + newVersion + "-win" + bits + ".exe.sha256");
+                        htmlCode = client.DownloadString("https://get.videolan.org/vlc/" + newVersion + "/win" + bits + "/vlc-" + newVersion + "-win" + bits + ".exe.sha256");
                     }
                     catch (Exception ex)
                     {
@@ -153,7 +215,7 @@ namespace updater.software
                 } //using
 
                 //extract hash
-                Regex reHash = new Regex("^[0-9a-f]{64} \\*vlc\\-" + Regex.Escape(newVersion) + "\\-win" + bits + ".exe");
+                Regex reHash = new Regex("^[0-9a-f]{64} [\\* ]vlc\\-" + Regex.Escape(newVersion) + "\\-win" + bits + ".exe");
                 Match matchHash = reHash.Match(htmlCode);
                 if (!matchHash.Success)
                     return null;
