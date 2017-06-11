@@ -49,21 +49,24 @@ namespace updater.software
         /// details about the software.</returns>
         public override AvailableSoftware knownInfo()
         {
+            //Note: This only works on Windows 7 or newer.
+            // The last version for Windows Vista is 3.25.1.
+            // The last version that still supports Windows XP is 3.8.0
             return new AvailableSoftware("FileZilla FTP Client",
-                "3.25.2",
+                "3.26.1",
                 "^FileZilla Client [0-9]+\\.[0-9]+(\\.[0-9]+(\\.[0-9]+)?)?$",
                 "^FileZilla Client [0-9]+\\.[0-9]+(\\.[0-9]+(\\.[0-9]+)?)?$",
                 new InstallInfoExe(
-                    "https://netcologne.dl.sourceforge.net/project/filezilla/FileZilla_Client/3.25.2/FileZilla_3.25.2_win32-setup.exe",
+                    "https://netcologne.dl.sourceforge.net/project/filezilla/FileZilla_Client/3.26.1/FileZilla_3.26.1_win32-setup.exe",
                     HashAlgorithm.SHA512,
-                    "d3ba3e3f0e681c104c0c2b4e91714203991c832d183ba09401d9a4be72151352c0136a8f3227d0f30efdf9ac0aefdf20b5b622e58d9a76564fd3fe212c45abbd",
+                    "e1e33fe05c8b4c0993380347bc2d385bde6324c94546d2b98ec20f617a559d0998cec427c152f16a63f4b1ff26ff6759da5374caab7ed5b6bad77031a2540f21",
                     "/S",
                     "C:\\Program Files\\FileZilla FTP Client",
                     "C:\\Program Files (x86)\\FileZilla FTP Client"),
                 new InstallInfoExe(
-                    "https://netcologne.dl.sourceforge.net/project/filezilla/FileZilla_Client/3.25.2/FileZilla_3.25.2_win64-setup.exe",
+                    "https://netcologne.dl.sourceforge.net/project/filezilla/FileZilla_Client/3.26.1/FileZilla_3.26.1_win64-setup.exe",
                     HashAlgorithm.SHA512,
-                    "e45d2717dd9bb2e3e93b46e29d8b4aa9aaf5a3f04943668f4556e9a78cc75a088410bcade9cb459fb888a9ce8682051a4c0d5fc309be4fb5be928608f4d6775c",
+                    "68f8de89322046436dc0a73aacea7064b576082be0671e1d3111663ece9d184f6db436ed60a9b6ca71799b100aec7a95a7095f00571802b7d1b1d069ab868ee4",
                     "/S",
                     null,
                     "C:\\Program Files\\FileZilla FTP Client")
