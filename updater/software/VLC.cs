@@ -51,22 +51,22 @@ namespace updater.software
         public override AvailableSoftware knownInfo()
         {
             return new AvailableSoftware("VLC media player",
-                "2.2.5.1",
+                "2.2.6",
                 "^VLC media player$",
                 "^VLC media player$",
                 //32 bit installer
                 new InstallInfoExe(
-                    "https://get.videolan.org/vlc/2.2.5.1/win32/vlc-2.2.5.1-win32.exe",
+                    "https://get.videolan.org/vlc/2.2.6/win32/vlc-2.2.6-win32.exe",
                     HashAlgorithm.SHA256,
-                    "37e857b0322a6676c4d01310b2927c109720a6d89cc149d1a35852b649b53387",
+                    "6000f3a1386c06eed2a61ede6437df2e537e1bcaac73a4a32b7648a99ffcb6ed",
                     "/S",
                     "C:\\Program Files\\VideoLAN\\VLC",
                     "C:\\Program Files (x86)\\VideoLAN\\VLC"),
                 //64 bit installer
                 new InstallInfoExe(
-                    "http://get.videolan.org/vlc/2.2.5.1/win64/vlc-2.2.5.1-win64.exe",
+                    "http://get.videolan.org/vlc/2.2.6/win64/vlc-2.2.6-win64.exe",
                     HashAlgorithm.SHA256,
-                    "41a69a5f329315ea9b5ae6d3da8f4900f9f7ba4fb3d3c07e1adb844e60208159",
+                    "21670eae2c8041d6f26667c664f97e8931f5977225bcc3c146902beb26305ed2",
                     "/S",
                     null,
                     "C:\\Program Files\\VideoLAN\\VLC")
