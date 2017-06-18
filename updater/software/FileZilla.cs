@@ -53,20 +53,20 @@ namespace updater.software
             // The last version for Windows Vista is 3.25.1.
             // The last version that still supports Windows XP is 3.8.0
             return new AvailableSoftware("FileZilla FTP Client",
-                "3.26.1",
+                "3.26.2",
                 "^FileZilla Client [0-9]+\\.[0-9]+(\\.[0-9]+(\\.[0-9]+)?)?$",
                 "^FileZilla Client [0-9]+\\.[0-9]+(\\.[0-9]+(\\.[0-9]+)?)?$",
                 new InstallInfoExe(
-                    "https://netcologne.dl.sourceforge.net/project/filezilla/FileZilla_Client/3.26.1/FileZilla_3.26.1_win32-setup.exe",
+                    "https://netcologne.dl.sourceforge.net/project/filezilla/FileZilla_Client/3.26.2/FileZilla_3.26.2_win32-setup.exe",
                     HashAlgorithm.SHA512,
-                    "e1e33fe05c8b4c0993380347bc2d385bde6324c94546d2b98ec20f617a559d0998cec427c152f16a63f4b1ff26ff6759da5374caab7ed5b6bad77031a2540f21",
+                    "4a5c3a6b258c11b7787bb4ff21305205f43cce3244b1d227c4d7f50d16016c52d1cb41e3bb37ce66d76cb00f91aa3bac63e609fabdc19ca9c108403cba003ffb",
                     "/S",
                     "C:\\Program Files\\FileZilla FTP Client",
                     "C:\\Program Files (x86)\\FileZilla FTP Client"),
                 new InstallInfoExe(
-                    "https://netcologne.dl.sourceforge.net/project/filezilla/FileZilla_Client/3.26.1/FileZilla_3.26.1_win64-setup.exe",
+                    "https://netcologne.dl.sourceforge.net/project/filezilla/FileZilla_Client/3.26.2/FileZilla_3.26.2_win64-setup.exe",
                     HashAlgorithm.SHA512,
-                    "68f8de89322046436dc0a73aacea7064b576082be0671e1d3111663ece9d184f6db436ed60a9b6ca71799b100aec7a95a7095f00571802b7d1b1d069ab868ee4",
+                    "49d961e61b19a65dd555ca59411ab4bb8cea719d11b26cbd646e0fcc7c373210e852acf8bc09a4456f77ac6219249128500e4ac9ef9a08f57eb15d6dce0d4381",
                     "/S",
                     null,
                     "C:\\Program Files\\FileZilla FTP Client")
