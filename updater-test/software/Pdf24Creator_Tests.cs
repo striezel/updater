@@ -24,7 +24,6 @@ namespace updater_test.software
     [TestClass]
     public class Pdf24Creator_Tests : BasicSoftwareTests
     {
-
         /// <summary>
         /// checks whether info() returns some meaningful data
         /// </summary>
