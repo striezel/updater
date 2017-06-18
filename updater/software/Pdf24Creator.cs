@@ -82,13 +82,13 @@ namespace updater.software
         {
 
             return new AvailableSoftware("PDF24 Creator",
-                "8.1.4",
+                "8.2.0",
                 "^PDF24 Creator$",
                 null, //no 64 bit version
                 new InstallInfoMsi(
-                    "https://en.pdf24.org/products/pdf-creator/download/pdf24-creator-8.1.4.msi",
+                    "https://en.pdf24.org/products/pdf-creator/download/pdf24-creator-8.2.0.msi",
                     HashAlgorithm.SHA512,
-                    "79a2031e8637798c58442e5c46242b27f23d3aebafa3d96e94e62caa64c0ac401714c85e57a8ef054745350f465c55278ad8f7e5ed5a6cf974bcb3de51da243f",
+                    "4b09ec0a17b64dfd4f2e74f2ed1bf8a34253e4b62345b133e8f54e92ba6e0c20df9d5a38801b38a96fab18c2938d6f77024c3fc7041dc35aeed3bb0d67720180",
                     getOptions() + " /qn /norestart",
                     "C:\\Program Files\\PDF24",
                     "C:\\Program Files (x86)\\PDF24"),
