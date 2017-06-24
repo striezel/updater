@@ -50,12 +50,12 @@ namespace updater.software
         public override AvailableSoftware knownInfo()
         {
             return new AvailableSoftware("WinSCP",
-                "5.9.5",
+                "5.9.6",
                 "^WinSCP [1-9]+\\.[0-9]+\\.[0-9]+$", null,
                 new InstallInfoExe(
-                    "https://netcologne.dl.sourceforge.net/project/winscp/WinSCP/5.9.5/WinSCP-5.9.5-Setup.exe",
+                    "https://netcologne.dl.sourceforge.net/project/winscp/WinSCP/5.9.6/WinSCP-5.9.6-Setup.exe",
                     HashAlgorithm.SHA256,
-                    "2c1c9ae9a5ba315924e0b2348f27320ea8aecd6ebfea8eb40472dfd51a7e09f9",
+                    "db1053d9f136302607738487621f77f577ac0a642482d0dad87508795ea94e7f",
                     "/VERYSILENT /NORESTART",
                     "C:\\Program Files\\WinSCP",
                     "C:\\Program Files (x86)\\WinSCP"),
