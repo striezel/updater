@@ -58,7 +58,7 @@ namespace updater.software
                 new InstallInfoMsi(
                     "https://the.earth.li/~sgtatham/putty/0.69/w32/putty-0.69-installer.msi",
                     HashAlgorithm.SHA512,
-                    "f1cdfb5e98eea7cdf0d38e22ad0c31e0d12e5948977bc23fbc332896af0e87b646312ca399f2349ca89a5f40fb304482952efd4b774ff282d0c34dba5143d49d",
+                    "436c74c6e71e18e2c766664a75f09380c63d15f769c9eddb6c8f569a8ad372e9457bc06ce7d6443ee33a327e03d395f362681e79a573792a3bfad9115c577eda",
                     "/qn /norestart",
                     "C:\\Program Files\\PuTTY",
                     "C:\\Program Files (x86)\\PuTTY"),
