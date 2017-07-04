@@ -127,6 +127,7 @@ namespace updater.software
                     "https://archive.mozilla.org/pub/seamonkey/releases/2.46/win32/" + languageCode + "/SeaMonkey%20Setup%202.46.exe",
                     HashAlgorithm.SHA1,
                     checksum,
+                    null,
                     "-ms -ma",
                     "C:\\Program Files\\SeaMonkey",
                     "C:\\Program Files (x86)\\SeaMonkey"),

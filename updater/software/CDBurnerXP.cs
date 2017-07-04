@@ -43,6 +43,12 @@ namespace updater.software
 
 
         /// <summary>
+        /// publisher of signed installer files
+        /// </summary>
+        private const string publisherX509 = "CN=Canneverbe Limited, O=Canneverbe Limited, L=Goch, C=DE";
+
+
+        /// <summary>
         /// gets the currently known information about the software
         /// </summary>
         /// <returns>Returns an AvailableSoftware instance with the known
@@ -57,6 +63,7 @@ namespace updater.software
                     "https://download.cdburnerxp.se/msi/cdbxp_setup_4.5.7.6623.msi",
                     HashAlgorithm.SHA256,
                     "e4f35b5948b92a02b4f0e00426536dc65e3c28b200f2a9c8f3e19b01bff502f3",
+                    publisherX509,
                     "/qn /norestart",
                     "C:\\Program Files\\CDBurnerXP",
                     "C:\\Program Files (x86)\\CDBurnerXP"),
@@ -64,6 +71,7 @@ namespace updater.software
                     "https://download.cdburnerxp.se/msi/cdbxp_setup_x64_4.5.7.6623.msi",
                     HashAlgorithm.SHA256,
                     "b73e4fc3843aba9f9a1d8ecf01e52307b856e088fb4f6a5c74e52d0f9db25508",
+                    publisherX509,
                     "/qn /norestart",
                     null,
                     "C:\\Program Files\\CDBurnerXP")

@@ -58,6 +58,7 @@ namespace updater.software
                     "https://netcologne.dl.sourceforge.net/project/pidgin/Pidgin/2.12.0/pidgin-2.12.0-offline.exe",
                     HashAlgorithm.SHA256,
                     "eda8a422c8d99a1d136a807d0363c9609c05d9f909f6313efb4e2f34f606b484",
+                    null,
                     "/DS=1 /SMS=1 /S",
                     "C:\\Program Files\\Pidgin",
                     "C:\\Program Files (x86)\\Pidgin"),

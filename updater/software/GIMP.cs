@@ -58,6 +58,7 @@ namespace updater.software
                     "https://download.gimp.org/mirror/pub/gimp/v2.8/windows/gimp-2.8.22-setup.exe",
                     HashAlgorithm.SHA256,
                     "a2e52129a28feec1ee3f22f5aaf9bdecbb02d51af6da408ace0a2ac2e0365c8b",
+                    null,
                     "/VERYSILENT /NORESTART",
                     "C:\\Program Files\\GIMP 2",
                     "C:\\Program Files (x86)\\GIMP 2"),
@@ -65,6 +66,7 @@ namespace updater.software
                     "https://download.gimp.org/mirror/pub/gimp/v2.8/windows/gimp-2.8.22-setup.exe",
                     HashAlgorithm.SHA256,
                     "a2e52129a28feec1ee3f22f5aaf9bdecbb02d51af6da408ace0a2ac2e0365c8b",
+                    null,
                     "/VERYSILENT /NORESTART",
                     null,
                     "C:\\Program Files\\GIMP 2")

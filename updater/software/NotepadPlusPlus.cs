@@ -43,6 +43,12 @@ namespace updater.software
 
 
         /// <summary>
+        /// publisher name for signed binaries
+        /// </summary>
+        private const string publisherX509 = "CN=\"Notepad++\", O=\"Notepad++\", L=Saint Cloud, S=Ile-de-France, C=FR";
+
+
+        /// <summary>
         /// gets the currently known information about the software
         /// </summary>
         /// <returns>Returns an AvailableSoftware instance with the known
@@ -57,6 +63,7 @@ namespace updater.software
                     "https://notepad-plus-plus.org/repository/7.x/7.4.2/npp.7.4.2.Installer.exe",
                     HashAlgorithm.SHA1,
                     "54f638fa6bdecedaf62770abb015fde6c2e0d6bc",
+                    publisherX509,
                     "/S",
                     "C:\\Program Files\\Notepad++",
                     "C:\\Program Files (x86)\\Notepad++"),
@@ -64,6 +71,7 @@ namespace updater.software
                     "https://notepad-plus-plus.org/repository/7.x/7.4.2/npp.7.4.2.Installer.x64.exe",
                     HashAlgorithm.SHA1,
                     "bd2a6ef69c97a1e6d236f8c2021520cb32899945",
+                    publisherX509,
                     "/S",
                     null,
                     "C:\\Program Files\\Notepad++")

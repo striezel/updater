@@ -110,6 +110,7 @@ namespace updater.software
                     "https://ftp.mozilla.org/pub/firefox/nightly/latest-mozilla-aurora-l10n/firefox-" + currentVersion + "." + languageCode + ".win32.installer.exe",
                     HashAlgorithm.SHA512,
                     checksum32Bit,
+                    null,
                     "-ms -ma",
                     "C:\\Program Files\\Firefox Developer Edition",
                     "C:\\Program Files (x86)\\Firefox Developer Edition"),
@@ -118,6 +119,7 @@ namespace updater.software
                     "https://ftp.mozilla.org/pub/firefox/nightly/latest-mozilla-aurora-l10n/firefox-" + currentVersion + "." + languageCode + ".win64.installer.exe",
                     HashAlgorithm.SHA512,
                     checksum64Bit,
+                    null,
                     "-ms -ma",
                     null,
                     "C:\\Program Files\\Firefox Developer Edition")

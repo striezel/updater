@@ -43,6 +43,12 @@ namespace updater.software
 
 
         /// <summary>
+        /// publisher name for signed executables
+        /// </summary>
+        private const string publisherX509 = "CN=Piriform Ltd, O=Piriform Ltd, L=London, S=London, C=GB";
+
+
+        /// <summary>
         /// gets the currently known information about the software
         /// </summary>
         /// <returns>Returns an AvailableSoftware instance with the known
@@ -58,6 +64,7 @@ namespace updater.software
                     "https://download.piriform.com/ccsetup531.exe",
                     HashAlgorithm.SHA256,
                     "c0ea5b0a8c1f2f1bf0eed8e688ea60fc48f6f953f46e7df40bc26cb8de4585f3",
+                    publisherX509,
                     "/S",
                     "C:\\Program Files\\CCleaner",
                     "C:\\Program Files (x86)\\CCleaner"),
@@ -65,6 +72,7 @@ namespace updater.software
                     "https://download.piriform.com/ccsetup531.exe",
                     HashAlgorithm.SHA256,
                     "c0ea5b0a8c1f2f1bf0eed8e688ea60fc48f6f953f46e7df40bc26cb8de4585f3",
+                    publisherX509,
                     "/S",
                     null,
                     "C:\\Program Files\\CCleaner")

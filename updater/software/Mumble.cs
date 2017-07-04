@@ -56,6 +56,7 @@ namespace updater.software
                     "https://github.com/mumble-voip/mumble/releases/download/1.2.19/mumble-1.2.19.msi",
                     HashAlgorithm.SHA256,
                     "2186eddd99264c2e68f5425308f59bd5151a8aecebea9f852728be3487a7a93b",
+                    null, //"CN=mkrautz.dk, O=mkrautz.dk, STREET=Kirkegade 6, L=Esbjerg, S=Region of Southern Denmark, PostalCode=6700, C=DK"
                     "/qn /norestart",
                     "C:\\Program Files\\Mumble",
                     "C:\\Program Files (x86)\\Mumble"),

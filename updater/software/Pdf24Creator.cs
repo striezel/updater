@@ -80,7 +80,6 @@ namespace updater.software
         /// details about the software.</returns>
         public override AvailableSoftware knownInfo()
         {
-
             return new AvailableSoftware("PDF24 Creator",
                 "8.2.0",
                 "^PDF24 Creator$",
@@ -89,6 +88,7 @@ namespace updater.software
                     "https://en.pdf24.org/products/pdf-creator/download/pdf24-creator-8.2.0.msi",
                     HashAlgorithm.SHA512,
                     "4b09ec0a17b64dfd4f2e74f2ed1bf8a34253e4b62345b133e8f54e92ba6e0c20df9d5a38801b38a96fab18c2938d6f77024c3fc7041dc35aeed3bb0d67720180",
+                    "CN=Geek Software GmbH, O=Geek Software GmbH, STREET=Friedrichstr 171, L=Berlin, S=Berlin, PostalCode=10117, C=DE",
                     getOptions() + " /qn /norestart",
                     "C:\\Program Files\\PDF24",
                     "C:\\Program Files (x86)\\PDF24"),

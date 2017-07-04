@@ -57,6 +57,7 @@ namespace updater.software
                     "https://get.geo.opera.com/pub/opera/desktop/46.0.2597.26/win/Opera_46.0.2597.26_Setup.exe",
                     HashAlgorithm.SHA256,
                     "f536dadef999707ee6f0ab5460b7464e6b1c28c7013d429baf34ed5d6f1e570f",
+                    null,
                     "/silent /norestart /launchopera 0 /setdefaultbrowser 0 /allusers",
                     "C:\\Program Files\\Opera",
                     "C:\\Program Files (x86)\\Opera"),
@@ -64,6 +65,7 @@ namespace updater.software
                     "https://get.geo.opera.com/pub/opera/desktop/46.0.2597.26/win/Opera_46.0.2597.26_Setup_x64.exe",
                     HashAlgorithm.SHA256,
                     "769cc21e48b437b0526a17ab214b63274d904858ca0c82e32342a7e562f8c5f6",
+                    null,
                     "/silent /norestart /launchopera 0 /setdefaultbrowser 0 /allusers",
                     null,
                     "C:\\Program Files\\Opera")

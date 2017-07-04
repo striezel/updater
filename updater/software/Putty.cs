@@ -44,6 +44,12 @@ namespace updater.software
 
 
         /// <summary>
+        /// publisher name on signed binaries
+        /// </summary>
+        private const string publisherX509 = "CN=Simon Tatham, O=Simon Tatham, L=Cambridge, S=Cambridgeshire, C=GB";
+
+
+        /// <summary>
         /// gets the currently known information about the software
         /// </summary>
         /// <returns>Returns an AvailableSoftware instance with the known
@@ -59,6 +65,7 @@ namespace updater.software
                     "https://the.earth.li/~sgtatham/putty/0.69/w32/putty-0.69-installer.msi",
                     HashAlgorithm.SHA512,
                     "436c74c6e71e18e2c766664a75f09380c63d15f769c9eddb6c8f569a8ad372e9457bc06ce7d6443ee33a327e03d395f362681e79a573792a3bfad9115c577eda",
+                    publisherX509,
                     "/qn /norestart",
                     "C:\\Program Files\\PuTTY",
                     "C:\\Program Files (x86)\\PuTTY"),
@@ -67,6 +74,7 @@ namespace updater.software
                     "https://the.earth.li/~sgtatham/putty/0.69/w64/putty-64bit-0.69-installer.msi",
                     HashAlgorithm.SHA512,
                     "b1d6077279f5587841aa3fb0f6c268b0e3cd6cae630d55934863f80c6a5e5de333a1995aea24cffb18ff1c04b787ff6b844fec5641aa8e39ae6c6e18fd1b67e5",
+                    publisherX509,
                     "/qn /norestart",
                     null,
                     "C:\\Program Files\\PuTTY")

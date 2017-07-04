@@ -43,6 +43,12 @@ namespace updater.software
 
 
         /// <summary>
+        /// publisher of signed binaries
+        /// </summary>
+        private string publisherX509 = "E=cert@dominik-reichl.de, CN=\"Open Source Developer, Dominik Reichl\", O=Open Source Developer, C=DE";
+
+
+        /// <summary>
         /// gets the currently known information about the software
         /// </summary>
         /// <returns>Returns an AvailableSoftware instance with the known
@@ -56,6 +62,7 @@ namespace updater.software
                     "https://kent.dl.sourceforge.net/project/keepass/KeePass%202.x/2.36/KeePass-2.36-Setup.exe",
                     HashAlgorithm.SHA256,
                     "6E34391F 83870404 D21666B6 689B2A34 521B4DB2 AB1B007D 9347F81B 5F7E288B",
+                    publisherX509,
                     "/VERYSILENT",
                     "C:\\Program Files\\KeePass Password Safe 2",
                     "C:\\Program Files (x86)\\KeePass Password Safe 2"),

@@ -57,6 +57,7 @@ namespace updater.software
                     "https://download.documentfoundation.org/libreoffice/stable/5.3.4/win/x86/LibreOffice_5.3.4_Win_x86_helppack_de.msi",
                     HashAlgorithm.SHA256,
                     "ec40604d92b0021604ef22f14fb4a8aa3e15e4061b6b9366698d53a517f6c910",
+                    null,
                     "/qn /norestart",
                     "C:\\Program Files\\LibreOffice 5",
                     "C:\\Program Files (x86)\\LibreOffice 5"),
@@ -64,6 +65,7 @@ namespace updater.software
                     "https://download.documentfoundation.org/libreoffice/stable/5.3.4/win/x86_64/LibreOffice_5.3.4_Win_x64_helppack_de.msi",
                     HashAlgorithm.SHA256,
                     "9c0d459d0a18e6f184a9ef57e1f36095662c1f4d0a3a4b1e235f59e83c52b5fe",
+                    null,
                     "/qn /norestart",
                     null,
                     "C:\\Program Files\\LibreOffice 5")

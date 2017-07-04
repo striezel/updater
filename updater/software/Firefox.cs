@@ -313,6 +313,7 @@ namespace updater.software
                     "https://ftp.mozilla.org/pub/firefox/releases/" + knownVersion + "/win32/" + languageCode + "/Firefox%20Setup%20" + knownVersion + ".exe",
                     HashAlgorithm.SHA512,
                     checksum32Bit,
+                    null,
                     "-ms -ma",
                     "C:\\Program Files\\Mozilla Firefox",
                     "C:\\Program Files (x86)\\Mozilla Firefox"),
@@ -321,6 +322,7 @@ namespace updater.software
                     "https://ftp.mozilla.org/pub/firefox/releases/" + knownVersion + "/win64/" + languageCode + "/Firefox%20Setup%20" + knownVersion + ".exe",
                     HashAlgorithm.SHA512,
                     checksum64Bit,
+                    null,
                     "-ms -ma",
                     "C:\\Program Files\\Mozilla Firefox",
                     "C:\\Program Files (x86)\\Mozilla Firefox")

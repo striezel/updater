@@ -56,6 +56,7 @@ namespace updater.software
                     "https://netcologne.dl.sourceforge.net/project/winscp/WinSCP/5.9.6/WinSCP-5.9.6-Setup.exe",
                     HashAlgorithm.SHA256,
                     "db1053d9f136302607738487621f77f577ac0a642482d0dad87508795ea94e7f",
+                    "CN=Martin Prikryl, O=Martin Prikryl, L=Prague, S=Hlavni mesto Praha, C=CZ",
                     "/VERYSILENT /NORESTART",
                     "C:\\Program Files\\WinSCP",
                     "C:\\Program Files (x86)\\WinSCP"),

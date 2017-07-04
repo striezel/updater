@@ -57,6 +57,7 @@ namespace updater.software
                     "https://www.fosshub.com/Audacity.html/audacity-win-2.1.3.exe",
                     HashAlgorithm.SHA256,
                     "12d83cb444734e3aaba8114115a83f7ceaa314d14641cde65b4f35f9847c5e1f",
+                    "E=james.k.crook@gmail.com, CN=James Crook, O=James Crook, C=IE",
                     "/VERYSILENT /NORESTART",
                     "C:\\Program Files\\Audacity",
                     "C:\\Program Files (x86)\\Audacity"),

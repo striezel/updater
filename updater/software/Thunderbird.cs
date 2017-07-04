@@ -159,6 +159,7 @@ namespace updater.software
                     "https://ftp.mozilla.org/pub/thunderbird/releases/52.2.1/win32/" + languageCode + "/Thunderbird%20Setup%2052.2.1.exe",
                     HashAlgorithm.SHA512,
                     checksum,
+                    "CN=Mozilla Corporation, O=Mozilla Corporation, L=Mountain View, S=California, C=US",
                     "-ms -ma",
                     "C:\\Program Files\\Mozilla Thunderbird",
                     "C:\\Program Files (x86)\\Mozilla Thunderbird"),

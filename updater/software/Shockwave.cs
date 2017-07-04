@@ -57,6 +57,7 @@ namespace updater.software
                     "http://fpdownload.macromedia.com/get/shockwave/default/english/win95nt/latest/sw_lic_full_installer.msi",
                     HashAlgorithm.SHA512,
                     "51f548e54203be5f24373dd5f65a8b5bdb1a877e15959e4303a9545d498c0235e852e2e9efa4b3be4ad73034c3284ae42728c4e13f5b85d97f1689145d33401a",
+                    null,
                     "/qn /norestart",
                     null,
                     "C:\\Windows\\syswow64\\Adobe\\Director"),

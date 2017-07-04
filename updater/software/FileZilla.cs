@@ -60,6 +60,7 @@ namespace updater.software
                     "https://netcologne.dl.sourceforge.net/project/filezilla/FileZilla_Client/3.26.2/FileZilla_3.26.2_win32-setup.exe",
                     HashAlgorithm.SHA512,
                     "4a5c3a6b258c11b7787bb4ff21305205f43cce3244b1d227c4d7f50d16016c52d1cb41e3bb37ce66d76cb00f91aa3bac63e609fabdc19ca9c108403cba003ffb",
+                    null,
                     "/S",
                     "C:\\Program Files\\FileZilla FTP Client",
                     "C:\\Program Files (x86)\\FileZilla FTP Client"),
@@ -67,6 +68,7 @@ namespace updater.software
                     "https://netcologne.dl.sourceforge.net/project/filezilla/FileZilla_Client/3.26.2/FileZilla_3.26.2_win64-setup.exe",
                     HashAlgorithm.SHA512,
                     "49d961e61b19a65dd555ca59411ab4bb8cea719d11b26cbd646e0fcc7c373210e852acf8bc09a4456f77ac6219249128500e4ac9ef9a08f57eb15d6dce0d4381",
+                    null,
                     "/S",
                     null,
                     "C:\\Program Files\\FileZilla FTP Client")

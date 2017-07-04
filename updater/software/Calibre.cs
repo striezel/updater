@@ -43,6 +43,11 @@ namespace updater.software
 
 
         /// <summary>
+        /// publisher of signed installers
+        /// </summary>
+        private const string publisherX509 = "CN=Kovid Goyal, OU=Individual Developer, O=No Organization Affiliation, L=Mumbai, S=Maharashtra, C=IN";
+
+        /// <summary>
         /// gets the currently known information about the software
         /// </summary>
         /// <returns>Returns an AvailableSoftware instance with the known
@@ -57,6 +62,7 @@ namespace updater.software
                     "https://download.calibre-ebook.com/3.1.1/calibre-3.1.1.msi",
                     HashAlgorithm.SHA256,
                     "27f7e75b84e864d15b270b89d721a039a6c0de2a016f91f73096eb6d1d3851bd",
+                    publisherX509,
                     "/qn /norestart",
                     "C:\\Program Files\\Calibre2",
                     "C:\\Program Files (x86)\\Calibre2"),
@@ -64,6 +70,7 @@ namespace updater.software
                     "https://download.calibre-ebook.com/3.1.1/calibre-64bit-3.1.1.msi",
                     HashAlgorithm.SHA256,
                     "3ab7112339413ed210be1ad0c6d0150fb58f1ab0f1fe08b4b8821311273b7416",
+                    publisherX509,
                     "/qn /norestart",
                     null,
                     "C:\\Program Files\\Calibre2")

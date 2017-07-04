@@ -44,6 +44,12 @@ namespace updater.software
 
 
         /// <summary>
+        /// publisher of signed binaries
+        /// </summary>
+        private const string publisherX509 = "CN=VideoLAN, O=VideoLAN, L=Paris, C=FR";
+
+
+        /// <summary>
         /// gets the currently known information about the software
         /// </summary>
         /// <returns>Returns an AvailableSoftware instance with the known
@@ -59,6 +65,7 @@ namespace updater.software
                     "https://get.videolan.org/vlc/2.2.6/win32/vlc-2.2.6-win32.exe",
                     HashAlgorithm.SHA256,
                     "6000f3a1386c06eed2a61ede6437df2e537e1bcaac73a4a32b7648a99ffcb6ed",
+                    publisherX509,
                     "/S",
                     "C:\\Program Files\\VideoLAN\\VLC",
                     "C:\\Program Files (x86)\\VideoLAN\\VLC"),
@@ -67,6 +74,7 @@ namespace updater.software
                     "http://get.videolan.org/vlc/2.2.6/win64/vlc-2.2.6-win64.exe",
                     HashAlgorithm.SHA256,
                     "21670eae2c8041d6f26667c664f97e8931f5977225bcc3c146902beb26305ed2",
+                    publisherX509,
                     "/S",
                     null,
                     "C:\\Program Files\\VideoLAN\\VLC")

@@ -54,9 +54,9 @@ namespace updater_test
         {
             return new AvailableSoftware("ACME", "1.2.3", "ACME 32", "ACME 64",
                 new InstallInfoExe("https://www.example.com/dl/file.ext", HashAlgorithm.SHA1,
-                "7772433567cb18608519f649f981e38a0be12c26", "/S", "C:\\foo", "C:\\foo64"),
+                "7772433567cb18608519f649f981e38a0be12c26", null, "/S", "C:\\foo", "C:\\foo64"),
                 new InstallInfoExe("https://www.example.com/dl/file64.ext", HashAlgorithm.SHA1,
-                "08519f649f981e38a0be12c267772433567cb186", "/S", "C:\\foo", "C:\\foo64"));
+                "08519f649f981e38a0be12c267772433567cb186", null, "/S", "C:\\foo", "C:\\foo64"));
         }
 
     } //class

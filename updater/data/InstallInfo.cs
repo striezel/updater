@@ -35,6 +35,7 @@ namespace updater.data
             downloadUrl = null;
             algorithm = HashAlgorithm.Unknown;
             checksum = null;
+            publisher = null;
             silentSwitches = null;
             defaultPath32 = null;
             defaultPath64 = null;
@@ -47,14 +48,16 @@ namespace updater.data
         /// <param name="_downloadUrl">URL where the installer can be downloaded</param>
         /// <param name="_algo">hash algorithm that was used to create or verify the checksum</param>
         /// <param name="_check">checksum for the installer - hexadecimal representation</param>
+        /// <param name="_publisher">common name of publisher, if file is signed</param>
         /// <param name="_silent">switches for silent installation</param>
         /// <param name="_def32">default installation path on 32 bit systems</param>
         /// <param name="_def64">default installation path on 64 bit systems</param>
-        public InstallInfo(string _downloadUrl, HashAlgorithm _algo, string _check, string _silent, string _def32, string _def64)
+        public InstallInfo(string _downloadUrl, HashAlgorithm _algo, string _check, string _publisher, string _silent, string _def32, string _def64)
         {
             downloadUrl = _downloadUrl;
             algorithm = _algo;
             checksum = _check;
+            publisher = _publisher;
             silentSwitches = _silent;
             defaultPath32 = _def32;
             defaultPath64 = _def64;
@@ -70,6 +73,28 @@ namespace updater.data
         {
             return ((algorithm != HashAlgorithm.Unknown)
                 && !string.IsNullOrWhiteSpace(checksum));
+        }
+
+
+        /// <summary>
+        /// determines whether or not this instance has signature publisher information
+        /// </summary>
+        /// <returns>Returns true, if there is information about a publisher.
+        /// Returns false otherwise.</returns>
+        public bool hasSignature()
+        {
+            return !string.IsNullOrWhiteSpace(publisher);
+        }
+
+
+        /// <summary>
+        /// checks whether there is a way to verify the downloaded file
+        /// </summary>
+        /// <returns>Returns true, if sufficient information is present.
+        /// Returns false, if there is no verification information.</returns>
+        public bool canBeVerified()
+        {
+            return hasChecksum() || hasSignature();
         }
 
 
@@ -103,6 +128,13 @@ namespace updater.data
         /// </summary>
         [XmlElement(ElementName = "checksum", IsNullable = true)]
         public string checksum;
+
+
+        /// <summary>
+        /// common name of the publisher, if file is signed
+        /// </summary>
+        [XmlElement(ElementName = "publisher", IsNullable = true)]
+        public string publisher;
 
 
         /// <summary>
