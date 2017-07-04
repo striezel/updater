@@ -106,11 +106,11 @@ namespace updater.operations
                         return -1 - updatedApplications;
                 } //switch
 
-                //If no checksum is provided, we do not even try to download the file.
-                if (!instInfo.hasChecksum())
+                //If no verification method is provided, we do not even try to download the file.
+                if (!instInfo.canBeVerified())
                 {
-                    logger.Error("Error: No checksum for download of "
-                        + entry.software.info().Name + "!");
+                    logger.Error("Error: No checksum and no signature information for download of "
+                        + entry.software.info().Name + " is available!");
                     logger.Error("Since installing unverified software can"
                         + " pose a security thread to your system, the update is cancelled.");
                     return -1 - updatedApplications;
@@ -139,23 +139,54 @@ namespace updater.operations
                     return -1 - updatedApplications;
                 }
 
-                //calculate checksum
-                logger.Info("Calculating checksum of " + downloadedFile + " ...");
-                string hash = utility.Checksum.calculate(downloadedFile, instInfo.algorithm);
-                if (string.IsNullOrWhiteSpace(hash))
+                //file verification
+                bool verifiedChecksum = false;
+                bool verifiedSignature = false;
+                //checksum verification
+                if (instInfo.hasChecksum())
                 {
-                    logger.Error("Error: Could not calculate checksum of file " + downloadedFile + "!");
+                    //calculate checksum
+                    logger.Info("Calculating checksum of " + downloadedFile + " ...");
+                    string hash = utility.Checksum.calculate(downloadedFile, instInfo.algorithm);
+                    if (string.IsNullOrWhiteSpace(hash))
+                    {
+                        logger.Error("Error: Could not calculate checksum of file " + downloadedFile + "!");
+                        File.Delete(downloadedFile);
+                        return -1 - updatedApplications;
+                    }
+                    if (!utility.Checksum.areEqual(hash, instInfo.checksum))
+                    {
+                        logger.Error("Error: Checksum of file " + downloadedFile
+                            + " is " + hash + ", but expected checksum is " + instInfo.checksum + "!");
+                        File.Delete(downloadedFile);
+                        return -1 - updatedApplications;
+                    }
+                    logger.Info("Info: Checksum of " + downloadedFile + " is correct.");
+                    verifiedChecksum = true;
+                } //if checksum
+                //signature verification
+                if (instInfo.hasSignature())
+                {
+                    logger.Info("Verifying signature of " + downloadedFile + " ...");
+                    if (!utility.Verificator.verifySignature(downloadedFile, instInfo.publisher))
+                    {
+                        logger.Error("Error: Signature of file " + downloadedFile
+                            + " is invalid or missing! The file may also have the wrong publisher.");
+                        File.Delete(downloadedFile);
+                        return -1 - updatedApplications;
+                    }
+                    logger.Info("Info: Signature and publisher of " + downloadedFile + " are correct.");
+                    verifiedSignature = true;
+                } //if signature
+                if (!verifiedChecksum && !verifiedSignature)
+                {
+                    logger.Error("Error: Downloaded file " + downloadedFile
+                            + " could not be verified to be authentic!");
+                    logger.Error("Since installing unverified software can"
+                        + " pose a security thread to your system, the update is cancelled.");
                     File.Delete(downloadedFile);
                     return -1 - updatedApplications;
                 }
-                if (!utility.Checksum.areEqual(hash, instInfo.checksum))
-                {
-                    logger.Error("Error: Checksum of file " + downloadedFile
-                        + " is " + hash + ", but expected checksum is " + instInfo.checksum + "!");
-                    File.Delete(downloadedFile);
-                    return -1 - updatedApplications;
-                }
-                logger.Info("Info: Checksum of " + downloadedFile + " is correct.");
 
                 //check for blocking processes - again, because download can take
                 // enough time to start some new processes
