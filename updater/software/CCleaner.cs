@@ -145,7 +145,7 @@ namespace updater.software
             if (newVersion == knownInfo().newestVersion)
                 return knownInfo();
 
-            //No checksums are provided.
+            //No checksums are provided, but binary is signed.
 
             //construct new information
             var newInfo = knownInfo();

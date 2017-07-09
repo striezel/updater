@@ -115,7 +115,7 @@ namespace updater.software
         /// exception in the later case.</returns>
         public override bool implementsSearchForNewer()
         {
-            return false;
+            return true;
         }
 
 
