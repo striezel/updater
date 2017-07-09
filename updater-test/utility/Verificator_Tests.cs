@@ -23,13 +23,30 @@ using System.Net;
 
 namespace updater_test.utility
 {
+    /// <summary>
+    /// unit tests for updater.utility.Verificator class
+    /// </summary>
     [TestClass]
     public class Verificator_Tests
     {
+        /// <summary>
+        /// holds the path of the downloaded file
+        /// </summary>
         private static string downloadFileLocation = null;
 
+
+        /// <summary>
+        /// subject in signature for PuTTY installer
+        /// </summary>
         private const string puttyPublisherX509 = "CN=Simon Tatham, O=Simon Tatham, L=Cambridge, S=Cambridgeshire, C=GB";
 
+
+        /// <summary>
+        /// downloads a file from the given URL
+        /// </summary>
+        /// <param name="url">URL of the file</param>
+        /// <returns>Returns the local path of the downloaded file, if successful.
+        /// Returns null, if an error occurred.</returns>
         private static string download(string url)
         {
             string localFile = Path.Combine(Path.GetTempPath(), "test_original.msi");
@@ -82,10 +99,12 @@ namespace updater_test.utility
         }
 
 
+        /// <summary>
+        /// negative test case for verifiySignature, i.e. verification fails
+        /// </summary>
         [TestMethod]
         public void Test_verifySignature_negative()
         {
-
             bool verified = true;
             string copyLocation = downloadFileLocation + "_copy";
             try
@@ -113,6 +132,9 @@ namespace updater_test.utility
         }
 
 
+        /// <summary>
+        /// positive test case for verifiySignature, i.e. verification succeeds
+        /// </summary>
         [TestMethod]
         public void Test_verifySignature_positive()
         {
