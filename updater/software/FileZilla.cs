@@ -52,26 +52,96 @@ namespace updater.software
             //Note: This only works on Windows 7 or newer.
             // The last version for Windows Vista is 3.25.1.
             // The last version that still supports Windows XP is 3.8.0
+            if (utility.OS.isWin7OrNewer())
+                return new AvailableSoftware("FileZilla FTP Client",
+                    "3.26.2",
+                    "^FileZilla Client [0-9]+\\.[0-9]+(\\.[0-9]+(\\.[0-9]+)?)?$",
+                    "^FileZilla Client [0-9]+\\.[0-9]+(\\.[0-9]+(\\.[0-9]+)?)?$",
+                    new InstallInfoExe(
+                        "https://netcologne.dl.sourceforge.net/project/filezilla/FileZilla_Client/3.26.2/FileZilla_3.26.2_win32-setup.exe",
+                        HashAlgorithm.SHA512,
+                        "4a5c3a6b258c11b7787bb4ff21305205f43cce3244b1d227c4d7f50d16016c52d1cb41e3bb37ce66d76cb00f91aa3bac63e609fabdc19ca9c108403cba003ffb",
+                        null,
+                        "/S",
+                        "C:\\Program Files\\FileZilla FTP Client",
+                        "C:\\Program Files (x86)\\FileZilla FTP Client"),
+                    new InstallInfoExe(
+                        "https://netcologne.dl.sourceforge.net/project/filezilla/FileZilla_Client/3.26.2/FileZilla_3.26.2_win64-setup.exe",
+                        HashAlgorithm.SHA512,
+                        "49d961e61b19a65dd555ca59411ab4bb8cea719d11b26cbd646e0fcc7c373210e852acf8bc09a4456f77ac6219249128500e4ac9ef9a08f57eb15d6dce0d4381",
+                        null,
+                        "/S",
+                        null,
+                        "C:\\Program Files\\FileZilla FTP Client")
+                    );
+            //Windows Vista
+            if (utility.OS.isWinVistaOrNewer())
+                return latestSupportedVersionWinVista();
+            //WinXP or older, but we do not care about older stuff. If you are
+            // still using Windows 2000 or Windows 98 as productive system, you
+            // have screwed up somewhere along the way.
+            return latestSupportedVersionWinXP();
+        }
+
+
+        /// <summary>
+        /// gets the information about the latest supported software version in WinXP
+        /// </summary>
+        /// <returns>Returns an AvailableSoftware instance with the known
+        /// details about the software.</returns>
+        private AvailableSoftware latestSupportedVersionWinVista()
+        {
+            // The last version for Windows Vista is 3.25.1.
+            // Additionally, Windows Vista is not officially supported by Microsoft anymore.
+            logger.Warn("Windows Vista cannot use newer FileZilla versions than 3.25.1. Please consider updating your operating sytem!");
             return new AvailableSoftware("FileZilla FTP Client",
-                "3.26.2",
+                "3.25.1",
                 "^FileZilla Client [0-9]+\\.[0-9]+(\\.[0-9]+(\\.[0-9]+)?)?$",
                 "^FileZilla Client [0-9]+\\.[0-9]+(\\.[0-9]+(\\.[0-9]+)?)?$",
                 new InstallInfoExe(
-                    "https://netcologne.dl.sourceforge.net/project/filezilla/FileZilla_Client/3.26.2/FileZilla_3.26.2_win32-setup.exe",
+                    "https://netcologne.dl.sourceforge.net/project/filezilla/FileZilla_Client/3.25.1/FileZilla_3.25.1_win32-setup.exe",
                     HashAlgorithm.SHA512,
-                    "4a5c3a6b258c11b7787bb4ff21305205f43cce3244b1d227c4d7f50d16016c52d1cb41e3bb37ce66d76cb00f91aa3bac63e609fabdc19ca9c108403cba003ffb",
+                    "c87ad1c6379374efdb11c4176dfc9237164ce4218d8add3fb65dd9f459ab695405580e357806d2f7cb0140589dcb2599106ad52c615af3501d1702fd51c41895",
                     null,
                     "/S",
                     "C:\\Program Files\\FileZilla FTP Client",
                     "C:\\Program Files (x86)\\FileZilla FTP Client"),
                 new InstallInfoExe(
-                    "https://netcologne.dl.sourceforge.net/project/filezilla/FileZilla_Client/3.26.2/FileZilla_3.26.2_win64-setup.exe",
+                    "https://netcologne.dl.sourceforge.net/project/filezilla/FileZilla_Client/3.25.1/FileZilla_3.25.1_win64-setup.exe",
                     HashAlgorithm.SHA512,
-                    "49d961e61b19a65dd555ca59411ab4bb8cea719d11b26cbd646e0fcc7c373210e852acf8bc09a4456f77ac6219249128500e4ac9ef9a08f57eb15d6dce0d4381",
+                    "929e8c6a12dc1fc3e77eb17efe5cd860e5a263b97facd1fd2d9a427277d515dad7dd14516341d600b271b1013cc1d966ad36560edd619a401571caacce94e1b1",
                     null,
                     "/S",
                     null,
                     "C:\\Program Files\\FileZilla FTP Client")
+                );
+        }
+
+
+        /// <summary>
+        /// gets the information about the latest supported software version in WinXP
+        /// </summary>
+        /// <returns>Returns an AvailableSoftware instance with the known
+        /// details about the software.</returns>
+        private AvailableSoftware latestSupportedVersionWinXP()
+        {
+            // The last version that still supports Windows XP is 3.8.0.
+            // Additionally, WinXP is not officially supported by Microsoft anymore.
+            logger.Warn("Windows XP cannot use newer FileZilla versions than 3.8.0. Please consider updating your operating sytem!");
+            return new AvailableSoftware("FileZilla FTP Client",
+                "3.8.0",
+                "^FileZilla Client [0-9]+\\.[0-9]+(\\.[0-9]+(\\.[0-9]+)?)?$",
+                "^FileZilla Client [0-9]+\\.[0-9]+(\\.[0-9]+(\\.[0-9]+)?)?$",
+                new InstallInfoExe(
+                    "https://netcologne.dl.sourceforge.net/project/filezilla/FileZilla_Client/3.8.0/FileZilla_3.8.0_win32-setup.exe",
+                    HashAlgorithm.SHA512,
+                    "48089aad2da20b49b2d6ad1baf450a14cd20ed2b65b681c469b2b9c943f20970d48cf73008e4ff427ed9743af0c257cfca1b6bdeecdd2153b6531c1449ab8353",
+                    null,
+                    "/S",
+                    "C:\\Program Files\\FileZilla FTP Client",
+                    "C:\\Program Files (x86)\\FileZilla FTP Client"),
+                //There was no 64 bit version as of version 3.8.0.
+                null
                 );
         }
 
@@ -106,76 +176,86 @@ namespace updater.software
         public override AvailableSoftware searchForNewer()
         {
             logger.Debug("Searching for newer version of FileZilla FTP Client...");
-            string htmlCode = null;
-            using (var client = new WebClient())
+            if (utility.OS.isWin7OrNewer())
             {
-                try
+                string htmlCode = null;
+                using (var client = new WebClient())
                 {
-                    htmlCode = client.DownloadString("https://filezilla-project.org/download.php?show_all=1");
-                }
-                catch (Exception ex)
+                    try
+                    {
+                        htmlCode = client.DownloadString("https://filezilla-project.org/download.php?show_all=1");
+                    }
+                    catch (Exception ex)
+                    {
+                        logger.Warn("Exception occurred while checking for newer version of FileZilla: " + ex.Message);
+                        return null;
+                    }
+                    client.Dispose();
+                } //using
+                  //find version number
+                Regex reVersion = new Regex("FileZilla_[0-9]+\\.[0-9]+(\\.[0-9]+(\\.[0-9]+)?)?_win64\\-setup\\.exe");
+                Match matchVersion = reVersion.Match(htmlCode);
+                if (!matchVersion.Success)
+                    return null;
+                string version = matchVersion.Value.Replace("FileZilla_", "").Replace("_win64-setup.exe", "");
+                if (version == knownInfo().newestVersion)
+                    return knownInfo();
+
+                //find hashes
+                int idx64 = htmlCode.IndexOf("FileZilla_" + version + "_win64-setup.exe");
+                if (idx64 < 0)
+                    return null;
+                int idx32 = htmlCode.IndexOf("FileZilla_" + version + "_win32-setup.exe");
+                if (idx32 < 0)
+                    return null;
+
+                string checksum64 = null;
+                string checksum32 = null;
+                Regex reSha512 = new Regex("[0-9a-f]{128}");
+                if (idx64 < idx32)
                 {
-                    logger.Warn("Exception occurred while checking for newer version of FileZilla: " + ex.Message);
-                    return null;
-                }
-                client.Dispose();
-            } //using
-            //find version number
-            Regex reVersion = new Regex("FileZilla_[0-9]+\\.[0-9]+(\\.[0-9]+(\\.[0-9]+)?)?_win64\\-setup\\.exe");
-            Match matchVersion = reVersion.Match(htmlCode);
-            if (!matchVersion.Success)
-                return null;
-            string version = matchVersion.Value.Replace("FileZilla_", "").Replace("_win64-setup.exe", "");
-            if (version == knownInfo().newestVersion)
-                return knownInfo();
+                    //64 bit first
+                    Match sha512 = reSha512.Match(htmlCode, idx64 + 1, idx32 - idx64);
+                    if (!sha512.Success)
+                        return null;
+                    checksum64 = sha512.Value;
+                    //32 bit next
+                    sha512 = reSha512.Match(htmlCode, idx32);
+                    if (!sha512.Success)
+                        return null;
+                    checksum32 = sha512.Value;
+                } //if 64 bit build is before 32 bit build
+                else
+                {
+                    //32 bit build before 64 bit build
+                    Match sha512 = reSha512.Match(htmlCode, idx32 + 1, idx64 - idx32);
+                    if (!sha512.Success)
+                        return null;
+                    checksum32 = sha512.Value;
+                    //64 bit next
+                    sha512 = reSha512.Match(htmlCode, idx64);
+                    if (!sha512.Success)
+                        return null;
+                    checksum64 = sha512.Value;
+                } //else
 
-            //find hashes
-            int idx64 = htmlCode.IndexOf("FileZilla_" + version + "_win64-setup.exe");
-            if (idx64 < 0)
-                return null;
-            int idx32 = htmlCode.IndexOf("FileZilla_" + version + "_win32-setup.exe");
-            if (idx32 < 0)
-                return null;
-
-            string checksum64 = null;
-            string checksum32 = null;
-            Regex reSha512 = new Regex("[0-9a-f]{128}");
-            if (idx64< idx32)
+                //construct new information
+                var newInfo = knownInfo();
+                string oldVersion = newInfo.newestVersion;
+                newInfo.newestVersion = version;
+                newInfo.install32Bit.downloadUrl = newInfo.install32Bit.downloadUrl.Replace(oldVersion, version);
+                newInfo.install32Bit.checksum = checksum32;
+                newInfo.install64Bit.downloadUrl = newInfo.install64Bit.downloadUrl.Replace(oldVersion, version);
+                newInfo.install64Bit.checksum = checksum64;
+                return newInfo;
+            }
+            //Windows Vista
+            if (utility.OS.isWinVistaOrNewer())
             {
-                //64 bit first
-                Match sha512 = reSha512.Match(htmlCode, idx64 + 1, idx32 - idx64);
-                if (!sha512.Success)
-                    return null;
-                checksum64 = sha512.Value;
-                //32 bit next
-                sha512 = reSha512.Match(htmlCode, idx32);
-                if (!sha512.Success)
-                    return null;
-                checksum32 = sha512.Value;
-            } //if 64 bit build is before 32 bit build
-            else
-            {
-                //32 bit build before 64 bit build
-                Match sha512 = reSha512.Match(htmlCode, idx32 + 1, idx64 - idx32);
-                if (!sha512.Success)
-                    return null;
-                checksum32 = sha512.Value;
-                //64 bit next
-                sha512 = reSha512.Match(htmlCode, idx64);
-                if (!sha512.Success)
-                    return null;
-                checksum64 = sha512.Value;
-            } //else
-            
-            //construct new information
-            var newInfo = knownInfo();
-            string oldVersion = newInfo.newestVersion;
-            newInfo.newestVersion = version;
-            newInfo.install32Bit.downloadUrl = newInfo.install32Bit.downloadUrl.Replace(oldVersion, version);
-            newInfo.install32Bit.checksum = checksum32;
-            newInfo.install64Bit.downloadUrl = newInfo.install64Bit.downloadUrl.Replace(oldVersion, version);
-            newInfo.install64Bit.checksum = checksum64;
-            return newInfo;
+                return latestSupportedVersionWinVista();
+            }
+            //WinXP or older - you should really get an OS update.
+            return latestSupportedVersionWinXP();
         }
 
 
