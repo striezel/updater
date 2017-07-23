@@ -127,6 +127,7 @@
     <Compile Include="software\WinSCP.cs" />
     <Compile Include="utility\Checksum.cs" />
     <Compile Include="utility\Logging.cs" />
+    <Compile Include="utility\OS.cs" />
     <Compile Include="utility\PortableExecutable.cs" />
     <Compile Include="utility\Processes.cs" />
     <Compile Include="utility\Strings.cs" />

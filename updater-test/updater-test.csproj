@@ -86,6 +86,7 @@
     <Compile Include="software\VLC_Tests.cs" />
     <Compile Include="software\WinSCP_Tests.cs" />
     <Compile Include="utility\Checksum_Tests.cs" />
+    <Compile Include="utility\OS_Tests.cs" />
     <Compile Include="utility\PortableExecutable_Tests.cs" />
     <Compile Include="utility\Strings_Tests.cs" />
     <Compile Include="utility\Verificator_Tests.cs" />
