@@ -1,4 +1,4 @@
-version: 2017.07.04.{build}
+version: 2017.07.23.{build}
 skip_tags: true
 configuration: Debug
 platform: x86
