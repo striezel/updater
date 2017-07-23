@@ -38,9 +38,9 @@ namespace updater.operations
         public int perform()
         {
             var all = software.All.get(opts);
-            foreach (var software in all)
+            foreach (var sw in all)
             {
-                Console.WriteLine(software.info().Name + ": " + string.Join(", ", software.id()));
+                Console.WriteLine(sw.info().Name + ": " + string.Join(", ", sw.id()));
             } //foreach
             return 0;
         }
