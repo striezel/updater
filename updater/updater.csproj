@@ -119,6 +119,7 @@
     <Compile Include="software\Opera.cs" />
     <Compile Include="software\Putty.cs" />
     <Compile Include="software\GIMP.cs" />
+    <Compile Include="software\SeaMonkey_2.46.cs" />
     <Compile Include="software\SevenZip.cs" />
     <Compile Include="software\Shockwave.cs" />
     <Compile Include="software\SeaMonkey.cs" />

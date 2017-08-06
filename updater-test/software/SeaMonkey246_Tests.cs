@@ -23,10 +23,10 @@ using updater.software;
 namespace updater_test.software
 {
     /// <summary>
-    /// unit tests for software.SeaMonkey class
+    /// unit tests for software.SeaMonkey246 class
     /// </summary>
     [TestClass]
-    public class SeaMonkey_Tests : BasicSoftwareTests
+    public class SeaMonkey246_Tests : BasicSoftwareTests
     {
         /// <summary>
         /// checks return value of the validLanguageCodes() method
@@ -34,7 +34,7 @@ namespace updater_test.software
         [TestMethod]
         public void Test_validLanguageCodes()
         {
-            var list = SeaMonkey.validLanguageCodes();
+            var list = SeaMonkey246.validLanguageCodes();
             Assert.IsNotNull(list);
 
             int items = 0;
@@ -43,7 +43,7 @@ namespace updater_test.software
                 Assert.IsFalse(string.IsNullOrWhiteSpace(item));
                 ++items;
             }
-            Assert.IsTrue(items > 15);
+            Assert.AreEqual<int>(7, items);
         }
 
 
@@ -53,7 +53,7 @@ namespace updater_test.software
         [TestMethod]
         public void Test_info()
         {
-            _info(new SeaMonkey("de", false));
+            _info(new SeaMonkey246("fi", false));
         }
 
 
@@ -63,7 +63,7 @@ namespace updater_test.software
         [TestMethod]
         public void Test_implementsSearchForNewer()
         {
-            var sm = new SeaMonkey("de", false);
+            var sm = new SeaMonkey246("fi", false);
             Assert.IsTrue(sm.implementsSearchForNewer());
         }
 
@@ -74,17 +74,7 @@ namespace updater_test.software
         [TestMethod]
         public void Test_searchForNewer()
         {
-            _searchForNewer(new SeaMonkey("de", false));
-        }
-
-
-        /// <summary>
-        /// checks whether the class info is up to date
-        /// </summary>
-        [TestMethod]
-        public void Test_upToDate_info()
-        {
-            _upToDate_info(new SeaMonkey("de", false));
+            _searchForNewer(new SeaMonkey246("fi", false));
         }
 
 
@@ -96,7 +86,7 @@ namespace updater_test.software
         {
             string[] versions = { "1.0.1", "2.5", "2.9", "2.40" };
 
-            var sm = new SeaMonkey("de", false);
+            var sm = new SeaMonkey246("fi", false);
             var dect = new DetectedSoftware();
             foreach (var item in versions)
             {
@@ -104,5 +94,6 @@ namespace updater_test.software
                 Assert.IsTrue(sm.needsUpdate(dect));
             } //foreach
         }
+
     } //class
 } //namespace

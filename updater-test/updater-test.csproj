@@ -64,6 +64,7 @@
     <Compile Include="software\Pidgin_Tests.cs" />
     <Compile Include="software\BasicSoftwareTests.cs" />
     <Compile Include="software\Audacity_Tests.cs" />
+    <Compile Include="software\SeaMonkey246_Tests.cs" />
     <Compile Include="software\Shockwave_Tests.cs" />
     <Compile Include="software\CCleaner_Tests.cs" />
     <Compile Include="software\Mumble_Tests.cs" />

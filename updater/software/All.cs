@@ -46,18 +46,21 @@ namespace updater.software
             result.Add(new Calibre(autoGetNewer));
             result.Add(new CCleaner(autoGetNewer));
             result.Add(new CDBurnerXP(autoGetNewer));
+
             //Firefox (release channel)
             var languages = Firefox.validLanguageCodes();
             foreach (var lang in languages)
             {
                 result.Add(new Firefox(lang, autoGetNewer));
             } //foreach
+
             //Firefox ESR
             languages = FirefoxESR.validLanguageCodes();
             foreach (var lang in languages)
             {
                 result.Add(new FirefoxESR(lang, autoGetNewer));
             } //foreach
+
             if (opts.withAurora)
             {
                 //Firefox Developer Edition
@@ -67,6 +70,7 @@ namespace updater.software
                     result.Add(new FirefoxAurora(lang, autoGetNewer));
                 } //foreach
             } //if aurora is requested, too
+
             result.Add(new FileZilla(autoGetNewer));
             result.Add(new GIMP(autoGetNewer));
             result.Add(new Inkscape(autoGetNewer));
@@ -79,19 +83,31 @@ namespace updater.software
             result.Add(new Pdf24Creator(autoGetNewer, opts.pdf24autoUpdate, opts.pdf24desktopIcons, opts.pdf24faxPrinter));
             result.Add(new Pidgin(autoGetNewer));
             result.Add(new Putty(autoGetNewer));
+
             //SeaMonkey
             languages = SeaMonkey.validLanguageCodes();
             foreach (var lang in languages)
             {
                 result.Add(new SeaMonkey(lang, autoGetNewer));
             } //foreach
+            
+            //old SeaMonkey languages (available until SeaMonkey 2.46 and
+            // dropped in SeaMonkey 2.48)
+            languages = SeaMonkey246.validLanguageCodes();
+            foreach (var lang in languages)
+            {
+                result.Add(new SeaMonkey246(lang, autoGetNewer));
+            } //foreach
+
             result.Add(new SevenZip(autoGetNewer));
+            
             //Thunderbird
             languages = Thunderbird.validLanguageCodes();
             foreach (var lang in languages)
             {
                 result.Add(new Thunderbird(lang, autoGetNewer));
             } //foreach
+
             result.Add(new VLC(autoGetNewer));
             result.Add(new WinSCP(autoGetNewer));
             return result;
