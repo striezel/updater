@@ -221,8 +221,8 @@ namespace updater.software
                 client.Dispose();
             } //using
             //look for line with the correct language code and version
-            Regex reChecksum = new Regex("^[0-9a-f]{40}  win32/" + languageCode.Replace("-", "\\-")
-                + "/SeaMonkey Setup " + Regex.Escape(newerVersion) + "\\.exe$");
+            Regex reChecksum = new Regex("[0-9a-f]{40}  win32/" + languageCode.Replace("-", "\\-")
+                + "/SeaMonkey Setup " + Regex.Escape(newerVersion) + "\\.exe");
             Match matchChecksum = reChecksum.Match(sha1SumsContent);
             if (!matchChecksum.Success)
                 return null;
