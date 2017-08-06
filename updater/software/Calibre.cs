@@ -54,22 +54,23 @@ namespace updater.software
         /// details about the software.</returns>
         public override AvailableSoftware knownInfo()
         {
-            return new AvailableSoftware("Calibre", 
-                "3.1.1",
+            const string knownVersion = "3.6.0";
+            return new AvailableSoftware("Calibre",
+                knownVersion,
                 "^calibre$",
                 "^calibre 64 bit$",
                 new InstallInfoMsi(
-                    "https://download.calibre-ebook.com/3.1.1/calibre-3.1.1.msi",
+                    "https://download.calibre-ebook.com/"+ knownVersion + "/calibre-" + knownVersion + ".msi",
                     HashAlgorithm.SHA256,
-                    "27f7e75b84e864d15b270b89d721a039a6c0de2a016f91f73096eb6d1d3851bd",
+                    "de2704c2782966d516c976e1117a0a28b61f2675d345835aaf60cf2fc85a893e",
                     publisherX509,
                     "/qn /norestart",
                     "C:\\Program Files\\Calibre2",
                     "C:\\Program Files (x86)\\Calibre2"),
                 new InstallInfoMsi(
-                    "https://download.calibre-ebook.com/3.1.1/calibre-64bit-3.1.1.msi",
+                    "https://download.calibre-ebook.com/" + knownVersion + "/calibre-64bit-" + knownVersion + ".msi",
                     HashAlgorithm.SHA256,
-                    "3ab7112339413ed210be1ad0c6d0150fb58f1ab0f1fe08b4b8821311273b7416",
+                    "12d1ed7b52bf5ef42660e5332f9260d4310a20f1e849f5e9d7450467ed3509b7",
                     publisherX509,
                     "/qn /norestart",
                     null,
