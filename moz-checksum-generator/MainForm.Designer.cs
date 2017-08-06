@@ -29,17 +29,18 @@
         private void InitializeComponent()
         {
             this.gbProduct = new System.Windows.Forms.GroupBox();
-            this.rbFirefoxRelease = new System.Windows.Forms.RadioButton();
-            this.rbFirefoxESR = new System.Windows.Forms.RadioButton();
+            this.lblVersion = new System.Windows.Forms.Label();
+            this.btnChecksums = new System.Windows.Forms.Button();
             this.rbThunderbird = new System.Windows.Forms.RadioButton();
+            this.rbFirefoxESR = new System.Windows.Forms.RadioButton();
+            this.rbFirefoxRelease = new System.Windows.Forms.RadioButton();
             this.gbChecksums = new System.Windows.Forms.GroupBox();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.lblBit32 = new System.Windows.Forms.Label();
-            this.lblBit64 = new System.Windows.Forms.Label();
             this.rtbBit32 = new System.Windows.Forms.RichTextBox();
+            this.lblBit32 = new System.Windows.Forms.Label();
             this.rtbBit64 = new System.Windows.Forms.RichTextBox();
-            this.btnChecksums = new System.Windows.Forms.Button();
-            this.lblVersion = new System.Windows.Forms.Label();
+            this.lblBit64 = new System.Windows.Forms.Label();
+            this.rbSeaMonkey = new System.Windows.Forms.RadioButton();
             this.gbProduct.SuspendLayout();
             this.gbChecksums.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -52,6 +53,7 @@
             // 
             this.gbProduct.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.gbProduct.Controls.Add(this.rbSeaMonkey);
             this.gbProduct.Controls.Add(this.lblVersion);
             this.gbProduct.Controls.Add(this.btnChecksums);
             this.gbProduct.Controls.Add(this.rbThunderbird);
@@ -59,10 +61,50 @@
             this.gbProduct.Controls.Add(this.rbFirefoxRelease);
             this.gbProduct.Location = new System.Drawing.Point(12, 12);
             this.gbProduct.Name = "gbProduct";
-            this.gbProduct.Size = new System.Drawing.Size(677, 100);
+            this.gbProduct.Size = new System.Drawing.Size(677, 118);
             this.gbProduct.TabIndex = 1;
             this.gbProduct.TabStop = false;
             this.gbProduct.Text = "Product";
+            // 
+            // lblVersion
+            // 
+            this.lblVersion.AutoSize = true;
+            this.lblVersion.Location = new System.Drawing.Point(273, 44);
+            this.lblVersion.Name = "lblVersion";
+            this.lblVersion.Size = new System.Drawing.Size(0, 13);
+            this.lblVersion.TabIndex = 4;
+            // 
+            // btnChecksums
+            // 
+            this.btnChecksums.Location = new System.Drawing.Point(143, 39);
+            this.btnChecksums.Name = "btnChecksums";
+            this.btnChecksums.Size = new System.Drawing.Size(124, 23);
+            this.btnChecksums.TabIndex = 3;
+            this.btnChecksums.Text = "Get checksums";
+            this.btnChecksums.UseVisualStyleBackColor = true;
+            this.btnChecksums.Click += new System.EventHandler(this.btnChecksums_Click);
+            // 
+            // rbThunderbird
+            // 
+            this.rbThunderbird.AutoSize = true;
+            this.rbThunderbird.Location = new System.Drawing.Point(6, 65);
+            this.rbThunderbird.Name = "rbThunderbird";
+            this.rbThunderbird.Size = new System.Drawing.Size(78, 17);
+            this.rbThunderbird.TabIndex = 2;
+            this.rbThunderbird.Text = "thunderbird";
+            this.rbThunderbird.UseVisualStyleBackColor = true;
+            this.rbThunderbird.CheckedChanged += new System.EventHandler(this.rbFirefoxRelease_CheckedChanged);
+            // 
+            // rbFirefoxESR
+            // 
+            this.rbFirefoxESR.AutoSize = true;
+            this.rbFirefoxESR.Location = new System.Drawing.Point(6, 42);
+            this.rbFirefoxESR.Name = "rbFirefoxESR";
+            this.rbFirefoxESR.Size = new System.Drawing.Size(70, 17);
+            this.rbFirefoxESR.TabIndex = 1;
+            this.rbFirefoxESR.Text = "firefox-esr";
+            this.rbFirefoxESR.UseVisualStyleBackColor = true;
+            this.rbFirefoxESR.CheckedChanged += new System.EventHandler(this.rbFirefoxRelease_CheckedChanged);
             // 
             // rbFirefoxRelease
             // 
@@ -77,35 +119,13 @@
             this.rbFirefoxRelease.UseVisualStyleBackColor = true;
             this.rbFirefoxRelease.CheckedChanged += new System.EventHandler(this.rbFirefoxRelease_CheckedChanged);
             // 
-            // rbFirefoxESR
-            // 
-            this.rbFirefoxESR.AutoSize = true;
-            this.rbFirefoxESR.Location = new System.Drawing.Point(6, 42);
-            this.rbFirefoxESR.Name = "rbFirefoxESR";
-            this.rbFirefoxESR.Size = new System.Drawing.Size(70, 17);
-            this.rbFirefoxESR.TabIndex = 1;
-            this.rbFirefoxESR.Text = "firefox-esr";
-            this.rbFirefoxESR.UseVisualStyleBackColor = true;
-            this.rbFirefoxESR.CheckedChanged += new System.EventHandler(this.rbFirefoxRelease_CheckedChanged);
-            // 
-            // rbThunderbird
-            // 
-            this.rbThunderbird.AutoSize = true;
-            this.rbThunderbird.Location = new System.Drawing.Point(6, 65);
-            this.rbThunderbird.Name = "rbThunderbird";
-            this.rbThunderbird.Size = new System.Drawing.Size(78, 17);
-            this.rbThunderbird.TabIndex = 2;
-            this.rbThunderbird.Text = "thunderbird";
-            this.rbThunderbird.UseVisualStyleBackColor = true;
-            this.rbThunderbird.CheckedChanged += new System.EventHandler(this.rbFirefoxRelease_CheckedChanged);
-            // 
             // gbChecksums
             // 
             this.gbChecksums.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.gbChecksums.Controls.Add(this.splitContainer1);
-            this.gbChecksums.Location = new System.Drawing.Point(12, 118);
+            this.gbChecksums.Location = new System.Drawing.Point(12, 136);
             this.gbChecksums.Name = "gbChecksums";
             this.gbChecksums.Size = new System.Drawing.Size(677, 209);
             this.gbChecksums.TabIndex = 2;
@@ -133,24 +153,6 @@
             this.splitContainer1.SplitterDistance = 300;
             this.splitContainer1.TabIndex = 0;
             // 
-            // lblBit32
-            // 
-            this.lblBit32.AutoSize = true;
-            this.lblBit32.Location = new System.Drawing.Point(3, 0);
-            this.lblBit32.Name = "lblBit32";
-            this.lblBit32.Size = new System.Drawing.Size(36, 13);
-            this.lblBit32.TabIndex = 0;
-            this.lblBit32.Text = "32 bit:";
-            // 
-            // lblBit64
-            // 
-            this.lblBit64.AutoSize = true;
-            this.lblBit64.Location = new System.Drawing.Point(3, 0);
-            this.lblBit64.Name = "lblBit64";
-            this.lblBit64.Size = new System.Drawing.Size(36, 13);
-            this.lblBit64.TabIndex = 0;
-            this.lblBit64.Text = "64 bit:";
-            // 
             // rtbBit32
             // 
             this.rtbBit32.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -160,9 +162,18 @@
             this.rtbBit32.Location = new System.Drawing.Point(3, 16);
             this.rtbBit32.Name = "rtbBit32";
             this.rtbBit32.ReadOnly = true;
-            this.rtbBit32.Size = new System.Drawing.Size(294, 171);
+            this.rtbBit32.Size = new System.Drawing.Size(294, 147);
             this.rtbBit32.TabIndex = 1;
             this.rtbBit32.Text = "";
+            // 
+            // lblBit32
+            // 
+            this.lblBit32.AutoSize = true;
+            this.lblBit32.Location = new System.Drawing.Point(3, 0);
+            this.lblBit32.Name = "lblBit32";
+            this.lblBit32.Size = new System.Drawing.Size(36, 13);
+            this.lblBit32.TabIndex = 0;
+            this.lblBit32.Text = "32 bit:";
             // 
             // rtbBit64
             // 
@@ -173,33 +184,36 @@
             this.rtbBit64.Location = new System.Drawing.Point(6, 16);
             this.rtbBit64.Name = "rtbBit64";
             this.rtbBit64.ReadOnly = true;
-            this.rtbBit64.Size = new System.Drawing.Size(358, 171);
+            this.rtbBit64.Size = new System.Drawing.Size(358, 147);
             this.rtbBit64.TabIndex = 1;
             this.rtbBit64.Text = "";
             // 
-            // btnChecksums
+            // lblBit64
             // 
-            this.btnChecksums.Location = new System.Drawing.Point(143, 39);
-            this.btnChecksums.Name = "btnChecksums";
-            this.btnChecksums.Size = new System.Drawing.Size(124, 23);
-            this.btnChecksums.TabIndex = 3;
-            this.btnChecksums.Text = "Get checksums";
-            this.btnChecksums.UseVisualStyleBackColor = true;
-            this.btnChecksums.Click += new System.EventHandler(this.btnChecksums_Click);
+            this.lblBit64.AutoSize = true;
+            this.lblBit64.Location = new System.Drawing.Point(3, 0);
+            this.lblBit64.Name = "lblBit64";
+            this.lblBit64.Size = new System.Drawing.Size(36, 13);
+            this.lblBit64.TabIndex = 0;
+            this.lblBit64.Text = "64 bit:";
             // 
-            // lblVersion
+            // rbSeaMonkey
             // 
-            this.lblVersion.AutoSize = true;
-            this.lblVersion.Location = new System.Drawing.Point(273, 44);
-            this.lblVersion.Name = "lblVersion";
-            this.lblVersion.Size = new System.Drawing.Size(0, 13);
-            this.lblVersion.TabIndex = 4;
+            this.rbSeaMonkey.AutoSize = true;
+            this.rbSeaMonkey.Location = new System.Drawing.Point(6, 88);
+            this.rbSeaMonkey.Name = "rbSeaMonkey";
+            this.rbSeaMonkey.Size = new System.Drawing.Size(79, 17);
+            this.rbSeaMonkey.TabIndex = 5;
+            this.rbSeaMonkey.TabStop = true;
+            this.rbSeaMonkey.Text = "seamonkey";
+            this.rbSeaMonkey.UseVisualStyleBackColor = true;
+            this.rbSeaMonkey.CheckedChanged += new System.EventHandler(this.rbFirefoxRelease_CheckedChanged);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(701, 339);
+            this.ClientSize = new System.Drawing.Size(701, 357);
             this.Controls.Add(this.gbChecksums);
             this.Controls.Add(this.gbProduct);
             this.MinimumSize = new System.Drawing.Size(600, 300);
@@ -232,6 +246,7 @@
         private System.Windows.Forms.Label lblBit64;
         private System.Windows.Forms.Button btnChecksums;
         private System.Windows.Forms.Label lblVersion;
+        private System.Windows.Forms.RadioButton rbSeaMonkey;
     }
 }
 

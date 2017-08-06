@@ -46,6 +46,8 @@ namespace moz_checksum_generator
                 getFxEsrChecksums();
             else if (rbThunderbird.Checked)
                 getTbChecksums();
+            else if (rbSeaMonkey.Checked)
+                getSmChecksums();
             else
                 MessageBox.Show("No product has been selected!", "Hint",
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -66,6 +68,10 @@ namespace moz_checksum_generator
             return result;
         }
 
+
+        /// <summary>
+        /// finds checksums for the current Firefox release
+        /// </summary>
         void getFxChecksums()
         {
             updater.software.Firefox fx = new updater.software.Firefox("de", false);
@@ -123,6 +129,10 @@ namespace moz_checksum_generator
             rtbBit64.Text = getChecksumCode(data);
         }
 
+
+        /// <summary>
+        /// finds checksums for the current Firefox ESR release
+        /// </summary>
         void getFxEsrChecksums()
         {
             updater.software.FirefoxESR fx = new updater.software.FirefoxESR("de", false);
@@ -180,6 +190,71 @@ namespace moz_checksum_generator
             rtbBit64.Text = getChecksumCode(data);
         }
 
+
+        /// <summary>
+        /// finds checksums for the current SeaMonkey release
+        /// </summary>
+        void getSmChecksums()
+        {
+            updater.software.SeaMonkey sm = new updater.software.SeaMonkey("de", false);
+            string version = sm.determineNewestVersion();
+            if (string.IsNullOrWhiteSpace(version))
+            {
+                MessageBox.Show("Could not determine current version of SeaMonkey!",
+                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            lblVersion.Text = "Version " + version;
+
+            /* Checksums are found in a file like
+             * https://archive.mozilla.org/pub/seamonkey/releases/2.46/SHA1SUMS
+             * Common lines look like
+             * bcf9b6828d3143adbfe46066e94650aa67726a02  win32/en-GB/SeaMonkey Setup 2.48.exe"
+             */
+
+            string url = "https://archive.mozilla.org/pub/seamonkey/releases/" + version + "/SHA1SUMS";
+            string sha1SumsContent = null;
+            using (var client = new WebClient())
+            {
+                try
+                {
+                    sha1SumsContent = client.DownloadString(url);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Exception occurred while checking for newer version of SeaMonkey: " + ex.Message);
+                    client.Dispose();
+                    return;
+                }
+                client.Dispose();
+            } //using
+            //look for line with language code and version for 32 bit
+            Regex reChecksum = new Regex("[0-9a-f]{40}  win32/[a-z]{2,3}(\\-[A-Z]+)?/SeaMonkey Setup " + Regex.Escape(version) + "\\.exe");
+            var data = new SortedDictionary<string, string>();
+            MatchCollection matches = reChecksum.Matches(sha1SumsContent);
+            for (int i = 0; i < matches.Count; i++)
+            {
+                string language = matches[i].Value.Substring(48).Replace("/SeaMonkey Setup " + version + ".exe", "");
+                data.Add(language, matches[i].Value.Substring(0, 40));
+            } //for
+            rtbBit32.Text = getChecksumCode(data);
+
+            //look for line with the correct language code and version for 64 bit
+            Regex reChecksum64Bit = new Regex("[0-9a-f]{40}  win64/[a-z]{2,3}(\\-[A-Z]+)?/SeaMonkey Setup " + Regex.Escape(version) + "\\.exe");
+            data.Clear();
+            matches = reChecksum64Bit.Matches(sha1SumsContent);
+            for (int i = 0; i < matches.Count; i++)
+            {
+                string language = matches[i].Value.Substring(48).Replace("/SeaMonkey Setup " + version + ".exe", "");
+                data.Add(language, matches[i].Value.Substring(0, 40));
+            } //for
+            rtbBit64.Text = getChecksumCode(data);
+        }
+
+
+        /// <summary>
+        /// finds checksums for the current Thunderbird release
+        /// </summary>
         void getTbChecksums()
         {
             updater.software.Thunderbird tb = new updater.software.Thunderbird("de", false);
