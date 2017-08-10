@@ -50,21 +50,21 @@ namespace updater.software
         public override AvailableSoftware knownInfo()
         {
             return new AvailableSoftware("Opera",
-                "46.0.2597.26",
+                "47.0.2631.48",
                 "^Opera Stable [0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+$",
                 "^Opera Stable [0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+$",
                 new InstallInfoExe(
-                    "https://get.geo.opera.com/pub/opera/desktop/46.0.2597.26/win/Opera_46.0.2597.26_Setup.exe",
+                    "https://get.geo.opera.com/pub/opera/desktop/47.0.2631.48/win/Opera_47.0.2631.48_i386_Setup.exe",
                     HashAlgorithm.SHA256,
-                    "f536dadef999707ee6f0ab5460b7464e6b1c28c7013d429baf34ed5d6f1e570f",
+                    "ac978fe32372106ac07ab73aa8278144a06a0b86c871114010a0c8b14720ccd0",
                     null,
                     "/silent /norestart /launchopera 0 /setdefaultbrowser 0 /allusers",
                     "C:\\Program Files\\Opera",
                     "C:\\Program Files (x86)\\Opera"),
                 new InstallInfoExe(
-                    "https://get.geo.opera.com/pub/opera/desktop/46.0.2597.26/win/Opera_46.0.2597.26_Setup_x64.exe",
+                    "https://get.geo.opera.com/pub/opera/desktop/47.0.2631.48/win/Opera_47.0.2631.48_x64_Setup.exe",
                     HashAlgorithm.SHA256,
-                    "769cc21e48b437b0526a17ab214b63274d904858ca0c82e32342a7e562f8c5f6",
+                    "953c40fec6263b2aaa5d34093abf0ce8b93b59503493772b3a9debaab910f158",
                     null,
                     "/silent /norestart /launchopera 0 /setdefaultbrowser 0 /allusers",
                     null,
@@ -186,14 +186,14 @@ namespace updater.software
             } //using
 
             //checksum for 32 bit installer
-            Regex reg = new Regex("[0-9a-f]{32}  pub/opera/desktop/" + Regex.Escape(newVersion) + "/win/Opera_" + Regex.Escape(newVersion) + "_Setup\\.exe");
+            Regex reg = new Regex("[0-9a-f]{32}  pub/opera/desktop/" + Regex.Escape(newVersion) + "/win/Opera_" + Regex.Escape(newVersion) + "_i386_Setup\\.exe");
             Match m = reg.Match(htmlCode);
             if (!m.Success)
                 return null;
             string checksum32 = m.Value.Substring(0, 32);
 
             //checksum for 64 bit installer
-            reg = new Regex("[0-9a-f]{32}  pub/opera/desktop/" + Regex.Escape(newVersion) + "/win/Opera_" + Regex.Escape(newVersion) + "_Setup_x64\\.exe");
+            reg = new Regex("[0-9a-f]{32}  pub/opera/desktop/" + Regex.Escape(newVersion) + "/win/Opera_" + Regex.Escape(newVersion) + "_x64_Setup\\.exe");
             m = reg.Match(htmlCode);
             if (!m.Success)
                 return null;
