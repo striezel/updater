@@ -56,21 +56,21 @@ namespace updater.software
         public override AvailableSoftware knownInfo()
         {
             return new AvailableSoftware("Notepad++",
-                "7.4.2",
+                "7.5",
                 "^Notepad\\+\\+ \\(32\\-bit x86\\)$|^Notepad\\+\\+$",
                 "^Notepad\\+\\+ \\(64\\-bit x64\\)$",
                 new InstallInfoExe(
-                    "https://notepad-plus-plus.org/repository/7.x/7.4.2/npp.7.4.2.Installer.exe",
+                    "https://notepad-plus-plus.org/repository/7.x/7.5/npp.7.5.Installer.exe",
                     HashAlgorithm.SHA1,
-                    "54f638fa6bdecedaf62770abb015fde6c2e0d6bc",
+                    "abd933d283ade15949f553a1350fe126951be70a",
                     publisherX509,
                     "/S",
                     "C:\\Program Files\\Notepad++",
                     "C:\\Program Files (x86)\\Notepad++"),
                 new InstallInfoExe(
-                    "https://notepad-plus-plus.org/repository/7.x/7.4.2/npp.7.4.2.Installer.x64.exe",
+                    "https://notepad-plus-plus.org/repository/7.x/7.5/npp.7.5.Installer.x64.exe",
                     HashAlgorithm.SHA1,
-                    "bd2a6ef69c97a1e6d236f8c2021520cb32899945",
+                    "d465070957be11d01c3b255c417ccc1545229c60",
                     publisherX509,
                     "/S",
                     null,
