@@ -70,9 +70,12 @@ namespace updater_test.software
             var newerInfo = sw.searchForNewer();
             Assert.IsNotNull(newerInfo, "searchForNewer() returned null!");
             int comp = string.Compare(info.newestVersion, newerInfo.newestVersion);
-            Assert.IsTrue(comp >= 0,
-                "Known newest version of " + info.Name + " is " + info.newestVersion
-                + ", but the current newest version is " + newerInfo.newestVersion + "!");
+            if (comp < 0)
+            {
+                Assert.Inconclusive(
+                    "Known newest version of " + info.Name + " is " + info.newestVersion
+                    + ", but the current newest version is " + newerInfo.newestVersion + "!");
+            }
         }
     } //class
 } //namespace
