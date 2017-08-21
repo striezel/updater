@@ -50,21 +50,21 @@ namespace updater.software
         public override AvailableSoftware knownInfo()
         {
             return new AvailableSoftware("LibreOffice Help Pack German",
-                "5.3.4.2",
+                "5.4.0.3",
                 "^LibreOffice [0-9]\\.[0-9] Help Pack \\(German\\)$",
                 "^LibreOffice [0-9]\\.[0-9] Help Pack \\(German\\)$",
                 new InstallInfoLibO(
-                    "https://download.documentfoundation.org/libreoffice/stable/5.3.4/win/x86/LibreOffice_5.3.4_Win_x86_helppack_de.msi",
+                    "https://download.documentfoundation.org/libreoffice/stable/5.4.0/win/x86/LibreOffice_5.4.0_Win_x86_helppack_de.msi",
                     HashAlgorithm.SHA256,
-                    "ec40604d92b0021604ef22f14fb4a8aa3e15e4061b6b9366698d53a517f6c910",
+                    "ad159795ccb7749135f3b2a0bc150b9f032cbb602fea9e46cb4cf88299cc6866",
                     null,
                     "/qn /norestart",
                     "C:\\Program Files\\LibreOffice 5",
                     "C:\\Program Files (x86)\\LibreOffice 5"),
                 new InstallInfoLibO(
-                    "https://download.documentfoundation.org/libreoffice/stable/5.3.4/win/x86_64/LibreOffice_5.3.4_Win_x64_helppack_de.msi",
+                    "https://download.documentfoundation.org/libreoffice/stable/5.4.0/win/x86_64/LibreOffice_5.4.0_Win_x64_helppack_de.msi",
                     HashAlgorithm.SHA256,
-                    "9c0d459d0a18e6f184a9ef57e1f36095662c1f4d0a3a4b1e235f59e83c52b5fe",
+                    "57e6d87229d6d0c955c48b6f25952766e916be921bf231168f66b68779e2891c",
                     null,
                     "/qn /norestart",
                     null,
