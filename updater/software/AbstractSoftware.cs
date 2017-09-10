@@ -21,6 +21,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text.RegularExpressions;
 using updater.data;
+using updater.versions;
 
 namespace updater.software
 {
@@ -159,8 +160,11 @@ namespace updater.software
         /// Returns false, if no update is necessary.</returns>
         public virtual bool needsUpdate(DetectedSoftware detected)
         {
-            //Simple version string comparison.
-            return (string.Compare(detected.displayVersion, info().newestVersion, true) < 0);
+            //Simple version string comparison may not be enough, so use the
+            // parsed version numbers instead.
+            Quartet verDetected = new Quartet(detected.displayVersion);
+            Quartet verNewest = new Quartet(info().newestVersion);
+            return (verDetected < verNewest);
         }
 
 
