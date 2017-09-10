@@ -116,7 +116,9 @@ namespace updater.software
                 return null;
             //extract new version number
             string newVersion = matchExe.Value.Replace("WinSCP-", "").Replace("-Setup.exe", "");
-            if (string.Compare(newVersion, knownInfo().newestVersion) < 0)
+            versions.Triple newTriple = new versions.Triple(newVersion);
+            versions.Triple oldTriple = new versions.Triple(knownInfo().newestVersion);
+            if (newTriple < oldTriple)
                 return null;
             //version number should match usual scheme, e.g. 5.x.y, where x and y are digits
             Regex version = new Regex("^[1-9]+\\.[0-9]+\\.[0-9]+$");
