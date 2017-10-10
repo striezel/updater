@@ -115,7 +115,7 @@ namespace updater.software
             {
                 try
                 {
-                    htmlCode = client.DownloadString("https://www.piriform.com/ccleaner/download/standard");
+                    htmlCode = client.DownloadString("http://www.piriform.com/ccleaner/download/standard");
                 }
                 catch (Exception ex)
                 {
