@@ -6,7 +6,7 @@
 
 AppId={{EA408AA2-29B2-46BB-B3E2-0EF7E379A25C}}
 AppName=updater
-AppVersion=2017.05.15.0
+AppVersion=2017.10.10.0
 AppPublisher=Dirk Stolle
 AppPublisherURL=https://github.com/striezel/updater
 AppSupportURL=https://github.com/striezel/updater
