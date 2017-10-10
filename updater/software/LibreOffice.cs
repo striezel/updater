@@ -50,21 +50,21 @@ namespace updater.software
         public override AvailableSoftware knownInfo()
         {
             return new AvailableSoftware("LibreOffice",
-                "5.4.0.3",
+                "5.4.2.2",
                 "^LibreOffice [0-9]\\.[0-9]\\.[0-9]\\.[0-9]$",
                 "^LibreOffice [0-9]\\.[0-9]\\.[0-9]\\.[0-9]$",
                 new InstallInfoLibO(
-                    "https://download.documentfoundation.org/libreoffice/stable/5.4.0/win/x86/LibreOffice_5.4.0_Win_x86.msi",
+                    "https://download.documentfoundation.org/libreoffice/stable/5.4.2/win/x86/LibreOffice_5.4.2_Win_x86.msi",
                     HashAlgorithm.SHA256,
-                    "015be18efadf6b001f767b8bfcb9460eb6ce6721566ca65120a383dbecb1be99",
+                    "4796b4a150bbd9b749933b3b60b4e0cd2e55b06a207147ee6b0e88c2ebd8b699",
                     null,
                     "/qn /norestart",
                     "C:\\Program Files\\LibreOffice 5",
                     "C:\\Program Files (x86)\\LibreOffice 5"),
                 new InstallInfoLibO(
-                    "https://download.documentfoundation.org/libreoffice/stable/5.4.0/win/x86_64/LibreOffice_5.4.0_Win_x64.msi",
+                    "https://download.documentfoundation.org/libreoffice/stable/5.4.2/win/x86_64/LibreOffice_5.4.2_Win_x64.msi",
                     HashAlgorithm.SHA256,
-                    "87aa62d1bb7e21b624e9cba46b3b51e40807d353b4d483cf1b13ee19e8b6092a",
+                    "89654954118f46df428eceb892f694f84a58bbfe6179abcfb8728cd244e5ec9b",
                     null,
                     "/qn /norestart",
                     null,
