@@ -56,12 +56,12 @@ namespace updater.software
         public override AvailableSoftware knownInfo()
         {
             return new AvailableSoftware("KeePass",
-                "2.36",
+                "2.37",
                 "^KeePass Password Safe [2-9]\\.[0-9]{2}$", null,
                 new InstallInfoExe(
-                    "https://kent.dl.sourceforge.net/project/keepass/KeePass%202.x/2.36/KeePass-2.36-Setup.exe",
+                    "https://kent.dl.sourceforge.net/project/keepass/KeePass%202.x/2.37/KeePass-2.37-Setup.exe",
                     HashAlgorithm.SHA256,
-                    "6E34391F 83870404 D21666B6 689B2A34 521B4DB2 AB1B007D 9347F81B 5F7E288B",
+                    "3EB75F0D 94270469 3110859E 97B66B8E 5245398D DE7E2CCD 82AB0ABC C5D73B36",
                     publisherX509,
                     "/VERYSILENT",
                     "C:\\Program Files\\KeePass Password Safe 2",
