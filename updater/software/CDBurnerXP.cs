@@ -56,21 +56,21 @@ namespace updater.software
         public override AvailableSoftware knownInfo()
         {
             return new AvailableSoftware("CDBurnerXP",
-                "4.5.7.6623",
+                "4.5.8.6795",
                 "^CDBurnerXP$",
                 "^CDBurnerXP \\(64 Bit\\)$",
                 new InstallInfoMsi(
-                    "https://download.cdburnerxp.se/msi/cdbxp_setup_4.5.7.6623.msi",
+                    "https://download.cdburnerxp.se/msi/cdbxp_setup_4.5.8.6795.msi",
                     HashAlgorithm.SHA256,
-                    "e4f35b5948b92a02b4f0e00426536dc65e3c28b200f2a9c8f3e19b01bff502f3",
+                    "fbf9772ecf2d2829f097d33013f5c3b9a01ba9f7c1345dc494a7d913afdd2810",
                     publisherX509,
                     "/qn /norestart",
                     "C:\\Program Files\\CDBurnerXP",
                     "C:\\Program Files (x86)\\CDBurnerXP"),
                 new InstallInfoMsi(
-                    "https://download.cdburnerxp.se/msi/cdbxp_setup_x64_4.5.7.6623.msi",
+                    "https://download.cdburnerxp.se/msi/cdbxp_setup_x64_4.5.8.6795.msi",
                     HashAlgorithm.SHA256,
-                    "b73e4fc3843aba9f9a1d8ecf01e52307b856e088fb4f6a5c74e52d0f9db25508",
+                    "49002f2f802dda8b8e86882601c78620fb0740878ada46f5158bc95034fa3738",
                     publisherX509,
                     "/qn /norestart",
                     null,
