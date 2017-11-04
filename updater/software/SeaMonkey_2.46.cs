@@ -81,7 +81,8 @@ namespace updater.software
             result.Add("ca", "fcbd9a1b3ba22c8ab23e5239238ab13e58d72d35");
             result.Add("fi", "23c2866da87fffb825d2c4cc060aab09f8af6d3e");
             result.Add("gl", "452b0ad172d35561fc9053c84d2793d07a3ce78c");
-            result.Add("nb-NO", "2d70dec6be6b924733bebf90b36ab25a865b8f15");
+            // Support for nb-NO has been reintroduced in version 2.49.1.
+            //result.Add("nb-NO", "2d70dec6be6b924733bebf90b36ab25a865b8f15");
             result.Add("tr", "f227afd4ff6a1fa28c8a4fccde9c597575e2f7f0");
             result.Add("uk", "9fad7399f92b7e16c1cfd1d26374152f25d4ee82");
 
