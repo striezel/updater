@@ -49,14 +49,15 @@ namespace updater.software
         /// details about the software.</returns>
         public override AvailableSoftware knownInfo()
         {
-            return new AvailableSoftware("Audacity", "2.1.3",
+            return new AvailableSoftware("Audacity",
+                "2.2.0",
                 "^Audacity [0-9]+\\.[0-9]+\\.[0-9]+$",
                 null,
                 //Audacity only has an installer for 32 bit.
                 new InstallInfoExe(
-                    "https://www.fosshub.com/Audacity.html/audacity-win-2.1.3.exe",
+                    "https://www.fosshub.com/Audacity.html/audacity-win-2.2.0.exe",
                     HashAlgorithm.SHA256,
-                    "12d83cb444734e3aaba8114115a83f7ceaa314d14641cde65b4f35f9847c5e1f",
+                    "adb0907d3be543f789bfa1dee10429d761ba858e320acf1b98ca5b4ef50b327a",
                     "E=james.k.crook@gmail.com, CN=James Crook, O=James Crook, C=IE",
                     "/VERYSILENT /NORESTART",
                     "C:\\Program Files\\Audacity",
