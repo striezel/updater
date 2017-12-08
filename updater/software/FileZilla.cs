@@ -54,21 +54,21 @@ namespace updater.software
             // The last version that still supports Windows XP is 3.8.0
             if (utility.OS.isWin7OrNewer())
                 return new AvailableSoftware("FileZilla FTP Client",
-                    "3.28.0",
+                    "3.29.0",
                     "^FileZilla Client [0-9]+\\.[0-9]+(\\.[0-9]+(\\.[0-9]+)?)?$",
                     "^FileZilla Client [0-9]+\\.[0-9]+(\\.[0-9]+(\\.[0-9]+)?)?$",
                     new InstallInfoExe(
-                        "https://netcologne.dl.sourceforge.net/project/filezilla/FileZilla_Client/3.28.0/FileZilla_3.28.0_win32-setup.exe",
+                        "https://netcologne.dl.sourceforge.net/project/filezilla/FileZilla_Client/3.29.0/FileZilla_3.29.0_win32-setup.exe",
                         HashAlgorithm.SHA512,
-                        "5676b4ad2a444671bf3c6990cfd487aaa554938b394e3537a5d8c3dc2bb6bad0c5dce0fa50574df495f66c331278b6aa337c74bd198952c6d9af828f2afd9a32",
+                        "ff792881c7f7aebd88136ccac92d6a69076116b007722105b56030d7624fc69e38290615fc64f375c5a2cfa243217e78c7115ed663478ded238c66408493d0b3",
                         null,
                         "/S",
                         "C:\\Program Files\\FileZilla FTP Client",
                         "C:\\Program Files (x86)\\FileZilla FTP Client"),
                     new InstallInfoExe(
-                        "https://netcologne.dl.sourceforge.net/project/filezilla/FileZilla_Client/3.28.0/FileZilla_3.28.0_win64-setup.exe",
+                        "https://netcologne.dl.sourceforge.net/project/filezilla/FileZilla_Client/3.29.0/FileZilla_3.29.0_win64-setup.exe",
                         HashAlgorithm.SHA512,
-                        "a7444d0fe8a40d4bfe6d9d84c5b609033d1b932705acd5ab9426cbf9ff5125116e446e2e1f39194a98934e9cf0178ef5a099d6994c7b5a8cf9a7c36ce9a65ce3",
+                        "6f61581d72f30ecc98361d7c36dd9d6fb4bf94b0c7c298e8d1cbc16d2b665a6a6f1598585ff1c1b4996ebabfde08061db6a209f734759a621b7626fbb9e74f99",
                         null,
                         "/S",
                         null,
