@@ -56,22 +56,22 @@ namespace updater.software
         public override AvailableSoftware knownInfo()
         {
             return new AvailableSoftware("CCleaner",
-                "5.36",
+                "5.38",
                 "^CCleaner+$",
                 "^CCleaner+$",
                 //CCleaner uses the same installer for 32 and 64 bit.
                 new InstallInfoExe(
-                    "https://download.piriform.com/ccsetup536.exe",
+                    "https://download.piriform.com/ccsetup538.exe",
                     HashAlgorithm.SHA256,
-                    "03d8b1eafddb81140afe512122c20d048863ba861f976f97d28697f9e44a9e5b",
+                    "e28d4eb40c69b7457d72a1ebef1d8ed41f9e087800d02074d1742c83d584453c",
                     publisherX509,
                     "/S",
                     "C:\\Program Files\\CCleaner",
                     "C:\\Program Files (x86)\\CCleaner"),
                 new InstallInfoExe(
-                    "https://download.piriform.com/ccsetup536.exe",
+                    "https://download.piriform.com/ccsetup538.exe",
                     HashAlgorithm.SHA256,
-                    "03d8b1eafddb81140afe512122c20d048863ba861f976f97d28697f9e44a9e5b",
+                    "e28d4eb40c69b7457d72a1ebef1d8ed41f9e087800d02074d1742c83d584453c",
                     publisherX509,
                     "/S",
                     null,
