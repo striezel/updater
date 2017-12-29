@@ -69,7 +69,7 @@ namespace updater.software
 
 
         /// <summary>
-        /// gets a dictionary with the known checksums for the installers (key: language, value: checksum)
+        /// Gets a dictionary with the known checksums for the installers (key: language, value: checksum).
         /// </summary>
         /// <returns>Returns a dictionary where keys are the language codes and values are the associated checksums.</returns>
         private static Dictionary<string, string> knownChecksums32Bit()
@@ -175,7 +175,7 @@ namespace updater.software
 
 
         /// <summary>
-        /// gets a dictionary with the known checksums for the installers (key: language, value: checksum)
+        /// Gets a dictionary with the known checksums for the installers (key: language, value: checksum).
         /// </summary>
         /// <returns>Returns a dictionary where keys are the language codes and values are the associated checksums.</returns>
         private static Dictionary<string, string> knownChecksums64Bit()
@@ -281,7 +281,7 @@ namespace updater.software
 
 
         /// <summary>
-        /// gets an enumerable collection of valid language codes
+        /// Gets an enumerable collection of valid language codes.
         /// </summary>
         /// <returns>Returns an enumerable collection of valid language codes.</returns>
         public static IEnumerable<string> validLanguageCodes()
@@ -292,7 +292,7 @@ namespace updater.software
 
 
         /// <summary>
-        /// gets the currently known information about the software
+        /// Gets the currently known information about the software.
         /// </summary>
         /// <returns>Returns an AvailableSoftware instance with the known
         /// details about the software.</returns>
@@ -303,7 +303,7 @@ namespace updater.software
                 knownVersion,
                 "^Mozilla Firefox [0-9]{2}\\.[0-9](\\.[0-9])? ESR \\(x86 " + Regex.Escape(languageCode) + "\\)$",
                 "^Mozilla Firefox [0-9]{2}\\.[0-9](\\.[0-9])? ESR \\(x64 " + Regex.Escape(languageCode) + "\\)$",
-                //32 bit installer
+                // 32 bit installer
                 new InstallInfoExe(
                     "https://ftp.mozilla.org/pub/firefox/releases/" + knownVersion + "esr/win32/" + languageCode + "/Firefox%20Setup%20" + knownVersion + "esr.exe",
                     HashAlgorithm.SHA512,
@@ -312,7 +312,7 @@ namespace updater.software
                     "-ms -ma",
                     "C:\\Program Files\\Mozilla Firefox",
                     "C:\\Program Files (x86)\\Mozilla Firefox"),
-                //64 bit installer
+                // 64 bit installer
                 new InstallInfoExe(
                     "https://ftp.mozilla.org/pub/firefox/releases/" + knownVersion + "esr/win64/" + languageCode + "/Firefox%20Setup%20" + knownVersion + "esr.exe",
                     HashAlgorithm.SHA512,
@@ -326,7 +326,7 @@ namespace updater.software
 
 
         /// <summary>
-        /// list of IDs to identify the software
+        /// Gets a list of IDs to identify the software.
         /// </summary>
         /// <returns>Returns a non-empty array of IDs, where at least one entry is unique to the software.</returns>
         public override string[] id()
@@ -336,7 +336,7 @@ namespace updater.software
 
 
         /// <summary>
-        /// tries to find the newest version number of Firefox ESR
+        /// Tries to find the newest version number of Firefox ESR.
         /// </summary>
         /// <returns>Returns a string containing the newest version number on success.
         /// Returns null, if an error occurred.</returns>
@@ -369,7 +369,7 @@ namespace updater.software
 
 
         /// <summary>
-        /// tries to get the checksums of the newer version
+        /// Tries to get the checksums of the newer version.
         /// </summary>
         /// <returns>Returns a string array containing the checksums for 32 bit an 64 bit (in that order), if successfull.
         /// Returns null, if an error occurred.</returns>
@@ -397,38 +397,40 @@ namespace updater.software
                     return null;
                 }
                 client.Dispose();
-            } //using
-            //look for line with the correct language code and version for 32 bit
+            } // using
+            // look for line with the correct language code and version for 32 bit
             Regex reChecksum32Bit = new Regex("[0-9a-f]{128}  win32/" + languageCode.Replace("-", "\\-")
                 + "/Firefox Setup " + Regex.Escape(newerVersion) + "esr\\.exe");
             Match matchChecksum32Bit = reChecksum32Bit.Match(sha512SumsContent);
             if (!matchChecksum32Bit.Success)
                 return null;
-            //look for line with the correct language code and version for 64 bit
+            // look for line with the correct language code and version for 64 bit
             Regex reChecksum64Bit = new Regex("[0-9a-f]{128}  win64/" + languageCode.Replace("-", "\\-")
                 + "/Firefox Setup " + Regex.Escape(newerVersion) + "esr\\.exe");
             Match matchChecksum64Bit = reChecksum64Bit.Match(sha512SumsContent);
             if (!matchChecksum64Bit.Success)
                 return null;
-            // checksum is the first 128 characters of the match
+            // Checksum is the first 128 characters of the match.
             return new string[] { matchChecksum32Bit.Value.Substring(0, 128), matchChecksum64Bit.Value.Substring(0, 128) };
         }
 
 
         /// <summary>
-        /// lists names of processes that might block an update, e.g. because
-        /// the application cannot be update while it is running
+        /// Lists names of processes that might block an update, e.g. because
+        /// the application cannot be update while it is running.
         /// </summary>
         /// <param name="detected">currently installed / detected software version</param>
         /// <returns>Returns a list of process names that block the upgrade.</returns>
         public override List<string> blockerProcesses(DetectedSoftware detected)
         {
+            // Firefox ESR can be updated, even while it is running, so there
+            // is no need to list firefox.exe here.
             return new List<string>();
         }
 
 
         /// <summary>
-        /// whether or not the method searchForNewer() is implemented
+        /// Determines whether or not the method searchForNewer() is implemented.
         /// </summary>
         /// <returns>Returns true, if searchForNewer() is implemented for that
         /// class. Returns false, if not. Calling searchForNewer() may throw an
@@ -440,7 +442,7 @@ namespace updater.software
 
 
         /// <summary>
-        /// looks for newer versions of the software than the currently known version
+        /// Looks for newer versions of the software than the currently known version.
         /// </summary>
         /// <returns>Returns an AvailableSoftware instance with the information
         /// that was retrieved from the net.</returns>
@@ -450,7 +452,7 @@ namespace updater.software
             string newerVersion = determineNewestVersion();
             if (string.IsNullOrWhiteSpace(newerVersion))
                 return null;
-            //If versions match, we can return the current information.
+            // If versions match, we can return the current information.
             var currentInfo = knownInfo();
             if (newerVersion == currentInfo.newestVersion)
                 // fallback to known information
@@ -461,7 +463,7 @@ namespace updater.software
                 || string.IsNullOrWhiteSpace(newerChecksums[1]))
                 // fallback to known information
                 return null;
-            //replace all stuff
+            // replace all stuff
             string oldVersion = currentInfo.newestVersion;
             currentInfo.newestVersion = newerVersion;
             currentInfo.install32Bit.downloadUrl = currentInfo.install32Bit.downloadUrl.Replace(oldVersion, newerVersion);
@@ -488,5 +490,5 @@ namespace updater.software
         /// checksum for the 64 bit installer
         /// </summary>
         private string checksum64Bit;
-    } //class
-} //namespace
+    } // class
+} // namespace
