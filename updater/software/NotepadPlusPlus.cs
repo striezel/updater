@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017  Dirk Stolle
+    Copyright (C) 2017, 2018  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -33,7 +33,7 @@ namespace updater.software
 
 
         /// <summary>
-        /// default constructor
+        /// Default constructor.
         /// </summary>
         /// <param name="autoGetNewer">whether to automatically get
         /// newer information about the software when calling the info() method</param>
@@ -49,28 +49,28 @@ namespace updater.software
 
 
         /// <summary>
-        /// gets the currently known information about the software
+        /// Gets the currently known information about the software.
         /// </summary>
         /// <returns>Returns an AvailableSoftware instance with the known
         /// details about the software.</returns>
         public override AvailableSoftware knownInfo()
         {
             return new AvailableSoftware("Notepad++",
-                "7.5.3",
+                "7.5.4",
                 "^Notepad\\+\\+ \\(32\\-bit x86\\)$|^Notepad\\+\\+$",
                 "^Notepad\\+\\+ \\(64\\-bit x64\\)$",
                 new InstallInfoExe(
-                    "https://notepad-plus-plus.org/repository/7.x/7.5.3/npp.7.5.3.Installer.exe",
+                    "https://notepad-plus-plus.org/repository/7.x/7.5.4/npp.7.5.4.Installer.exe",
                     HashAlgorithm.SHA1,
-                    "37d4f0cd7395bca586336de353e6cb87ed5c5ed3",
+                    "c5b0205a3aa9ed2c15ad9788281a27c083b044b8",
                     publisherX509,
                     "/S",
                     "C:\\Program Files\\Notepad++",
                     "C:\\Program Files (x86)\\Notepad++"),
                 new InstallInfoExe(
-                    "https://notepad-plus-plus.org/repository/7.x/7.5.3/npp.7.5.3.Installer.x64.exe",
+                    "https://notepad-plus-plus.org/repository/7.x/7.5.4/npp.7.5.4.Installer.x64.exe",
                     HashAlgorithm.SHA1,
-                    "a0f630b1688446798958c480703df4aea696af31",
+                    "f6f63a8c489410f465ddbbd2d90f6ba97f590b48",
                     publisherX509,
                     "/S",
                     null,
@@ -80,7 +80,7 @@ namespace updater.software
 
 
         /// <summary>
-        /// list of IDs to identify the software
+        /// Gets a list of IDs to identify the software.
         /// </summary>
         /// <returns>Returns a non-empty array of IDs, where at least one entry is unique to the software.</returns>
         public override string[] id()
@@ -90,7 +90,7 @@ namespace updater.software
 
 
         /// <summary>
-        /// whether or not the method searchForNewer() is implemented
+        /// Determines whether or not the method searchForNewer() is implemented.
         /// </summary>
         /// <returns>Returns true, if searchForNewer() is implemented for that
         /// class. Returns false, if not. Calling searchForNewer() may throw an
@@ -102,7 +102,7 @@ namespace updater.software
 
 
         /// <summary>
-        /// looks for newer versions of the software than the currently known version
+        /// Looks for newer versions of the software than the currently known version.
         /// </summary>
         /// <returns>Returns an AvailableSoftware instance with the information
         /// that was retrieved from the net.</returns>
@@ -122,7 +122,7 @@ namespace updater.software
                     return null;
                 }
                 client.Dispose();
-            } //using
+            } // using
 
             Regex reVersionDir = new Regex("<a href=\"[0-9]+\\.x/\">[0-9]+\\.x/</a>");
             Match matchDirectory = reVersionDir.Match(htmlCode);
@@ -135,7 +135,7 @@ namespace updater.software
                 return null;
             directoryMajor = directoryMajor.Remove(idx);
 
-            //get directory listing again "https://notepad-plus-plus.org/repository/7.x/?C=M;O=D"
+            // get directory listing again "https://notepad-plus-plus.org/repository/7.x/?C=M;O=D"
             using (var client = new WebClient())
             {
                 try
@@ -148,8 +148,9 @@ namespace updater.software
                     return null;
                 }
                 client.Dispose();
-            } //using
-            //search for link like <a href="7.3.1/">7.3.1/</a>
+            } // using
+
+            // search for link like <a href="7.3.1/">7.3.1/</a>
             reVersionDir = new Regex("<a href=\"[0-9]+\\.[0-9]+(\\.[0-9]+)?/\">[0-9]+\\.[0-9]+(\\.[0-9]+)?/</a>");
             matchDirectory = reVersionDir.Match(htmlCode);
             if (!matchDirectory.Success)
@@ -162,7 +163,7 @@ namespace updater.software
             if (string.Compare(directoryDetailed, knownInfo().newestVersion) < 0)
                 return null;
 
-            //download checksum file, e.g. "https://notepad-plus-plus.org/repository/7.x/7.3.1/npp.7.3.1.sha1.md5.digest.txt"
+            // download checksum file, e.g. "https://notepad-plus-plus.org/repository/7.x/7.3.1/npp.7.3.1.sha1.md5.digest.txt"
             using (var client = new WebClient())
             {
                 try
@@ -175,21 +176,21 @@ namespace updater.software
                     return null;
                 }
                 client.Dispose();
-            } //using
+            } // using
 
-            //find SHA1 hash for 32 bit installer
+            // find SHA1 hash for 32 bit installer
             Regex reHash = new Regex("[a-f0-9]{40}    npp.+Installer\\.exe");
             Match matchHash = reHash.Match(htmlCode);
             if (!matchHash.Success)
                 return null;
             string newHash32Bit = matchHash.Value.Substring(0, 40);
-            //find SHA1 hash for 64 bit installer
+            // find SHA1 hash for 64 bit installer
             reHash = new Regex("[a-f0-9]{40}    npp.+Installer\\.x64\\.exe");
             matchHash = reHash.Match(htmlCode);
             if (!matchHash.Success)
                 return null;
             string newHash64Bit = matchHash.Value.Substring(0, 40);
-            //construct new information
+            // construct new information
             var newInfo = knownInfo();
             string oldVersion = newInfo.newestVersion;
             newInfo.newestVersion = directoryDetailed;
@@ -202,8 +203,8 @@ namespace updater.software
 
 
         /// <summary>
-        /// lists names of processes that might block an update, e.g. because
-        /// the application cannot be update while it is running
+        /// Lists names of processes that might block an update, e.g. because
+        /// the application cannot be update while it is running.
         /// </summary>
         /// <param name="detected">currently installed / detected software version</param>
         /// <returns>Returns a list of process names that block the upgrade.</returns>
@@ -212,5 +213,5 @@ namespace updater.software
             return new List<string>();
         }
 
-    } //class
-} //namespace
+    } // class
+} // namespace
