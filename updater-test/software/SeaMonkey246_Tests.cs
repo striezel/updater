@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017  Dirk Stolle
+    Copyright (C) 2017, 2018  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -43,7 +43,7 @@ namespace updater_test.software
                 Assert.IsFalse(string.IsNullOrWhiteSpace(item));
                 ++items;
             }
-            Assert.AreEqual<int>(7, items);
+            Assert.AreEqual<int>(6, items);
         }
 
 

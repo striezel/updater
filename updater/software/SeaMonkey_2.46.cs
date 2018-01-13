@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017  Dirk Stolle
+    Copyright (C) 2017, 2018  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -33,7 +33,7 @@ namespace updater.software
     /// </summary>
     /// <remarks>Language support for be, ca, fi, gl, nb-No, tr and uk has been
     /// dropped in 2.46, because the languages are no longer updated for
-    /// SeaMonkey.</remarks>
+    /// SeaMonkey. However, support for nb-No has been reintroduced in 2.49.1.</remarks>
     public class SeaMonkey246 : AbstractSoftware
     {
         /// <summary>
