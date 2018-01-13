@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017  Dirk Stolle
+    Copyright (C) 2017, 2018  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -33,7 +33,7 @@ namespace updater.software
 
 
         /// <summary>
-        /// default constructor
+        /// Default constructor.
         /// </summary>
         /// <param name="autoGetNewer">whether to automatically get
         /// newer information about the software when calling the info() method</param>
@@ -49,19 +49,19 @@ namespace updater.software
 
 
         /// <summary>
-        /// gets the currently known information about the software
+        /// Gets the currently known information about the software.
         /// </summary>
         /// <returns>Returns an AvailableSoftware instance with the known
         /// details about the software.</returns>
         public override AvailableSoftware knownInfo()
         {
             return new AvailableSoftware("KeePass",
-                "2.37",
+                "2.38",
                 "^KeePass Password Safe [2-9]\\.[0-9]{2}$", null,
                 new InstallInfoExe(
-                    "https://kent.dl.sourceforge.net/project/keepass/KeePass%202.x/2.37/KeePass-2.37-Setup.exe",
+                    "https://kent.dl.sourceforge.net/project/keepass/KeePass%202.x/2.38/KeePass-2.38-Setup.exe",
                     HashAlgorithm.SHA256,
-                    "3EB75F0D 94270469 3110859E 97B66B8E 5245398D DE7E2CCD 82AB0ABC C5D73B36",
+                    "400B6638 0D30C904 711BA3B0 17AA97F9 E67081B7 3D6A239C 6C44AC2B 663CB23B",
                     publisherX509,
                     "/VERYSILENT",
                     "C:\\Program Files\\KeePass Password Safe 2",
@@ -72,7 +72,7 @@ namespace updater.software
 
 
         /// <summary>
-        /// list of IDs to identify the software
+        /// Gets the list of IDs to identify the software.
         /// </summary>
         /// <returns>Returns a non-empty array of IDs, where at least one entry is unique to the software.</returns>
         public override string[] id()
@@ -82,7 +82,7 @@ namespace updater.software
 
 
         /// <summary>
-        /// whether or not the method searchForNewer() is implemented
+        /// Determines whether or not the method searchForNewer() is implemented.
         /// </summary>
         /// <returns>Returns true, if searchForNewer() is implemented for that
         /// class. Returns false, if not. Calling searchForNewer() may throw an
@@ -94,7 +94,7 @@ namespace updater.software
 
 
         /// <summary>
-        /// looks for newer versions of the software than the currently known version
+        /// Looks for newer versions of the software than the currently known version.
         /// </summary>
         /// <returns>Returns an AvailableSoftware instance with the information
         /// that was retrieved from the net.</returns>
@@ -114,34 +114,34 @@ namespace updater.software
                     return null;
                 }
                 client.Dispose();
-            } //using
+            } // using
 
             Regex reExe = new Regex("&lt;KeePass\\-[2-9]\\.[0-9]{2}\\-Setup\\.exe&gt;");
             Match matchExe = reExe.Match(htmlCode);
             if (!matchExe.Success)
                 return null;
-            //MSI follows after .exe
+            // MSI follows after .exe
             Regex reMsi = new Regex("&lt;KeePass\\-[2-9]\\.[0-9]{2}\\.msi&gt;");
             Match matchMsi = reMsi.Match(htmlCode, matchExe.Index + 1);
             if (!matchMsi.Success)
                 return null;
-            //extract new version number
+            // extract new version number
             string newVersion = matchExe.Value.Replace("&lt;KeePass-", "").Replace("-Setup.exe&gt;", "");
             if (string.Compare(newVersion, knownInfo().newestVersion) < 0)
                 return null;
-            //version number should match usual scheme, e.g. 2.xx, where xx are two digits
+            // Version number should match usual scheme, e.g. 2.xx, where xx are two digits.
             Regex version = new Regex("^[2-9]\\.[0-9]{2}$");
             if (!version.IsMatch(newVersion))
                 return null;
 
-            //extract hash
+            // extract hash
             Regex hash = new Regex("SHA256       \\: [0-9A-F ]+");
             Match matchHash = hash.Match(htmlCode, matchExe.Index + 1);
             if (!matchHash.Success)
                 return null;
             if (matchHash.Index > matchMsi.Index)
                 return null;
-            //find second part of hash
+            // find second part of hash
             Regex hash2 = new Regex("[0-9A-F ]+");
             Match matchHash2 = hash2.Match(htmlCode, matchHash.Index + matchHash.Length);
             if (!matchHash2.Success)
@@ -150,9 +150,9 @@ namespace updater.software
                 return null;
             string newHash = matchHash.Value.Replace("SHA256       : ", "").Trim()
                 + " " + matchHash2.Value.Trim();
-            //construct new version information
+            // construct new version information
             var newInfo = knownInfo();
-            //replace version number - both as newest version and in URL for download
+            // replace version number - both as newest version and in URL for download
             string oldVersion = newInfo.newestVersion;
             newInfo.newestVersion = newVersion;
             newInfo.install32Bit.downloadUrl = newInfo.install32Bit.downloadUrl.Replace(oldVersion, newVersion);
@@ -162,8 +162,8 @@ namespace updater.software
 
 
         /// <summary>
-        /// lists names of processes that might block an update, e.g. because
-        /// the application cannot be update while it is running
+        /// Lists names of processes that might block an update, e.g. because
+        /// the application cannot be update while it is running.
         /// </summary>
         /// <param name="detected">currently installed / detected software version</param>
         /// <returns>Returns a list of process names that block the upgrade.</returns>
@@ -172,5 +172,5 @@ namespace updater.software
             return new List<string>();
         }
 
-    } //class
-} //namespace
+    } // class
+} // namespace
