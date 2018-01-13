@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017  Dirk Stolle
+    Copyright (C) 2017, 2018  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -33,7 +33,7 @@ namespace updater.software
 
 
         /// <summary>
-        /// default constructor
+        /// Default constructor.
         /// </summary>
         /// <param name="autoGetNewer">whether to automatically get
         /// newer information about the software when calling the info() method</param>
@@ -43,7 +43,7 @@ namespace updater.software
 
 
         /// <summary>
-        /// gets the currently known information about the software
+        /// Gets the currently known information about the software.
         /// </summary>
         /// <returns>Returns an AvailableSoftware instance with the known
         /// details about the software.</returns>
@@ -54,30 +54,30 @@ namespace updater.software
             // The last version that still supports Windows XP is 3.8.0
             if (utility.OS.isWin7OrNewer())
                 return new AvailableSoftware("FileZilla FTP Client",
-                    "3.29.0",
+                    "3.30.0",
                     "^FileZilla Client [0-9]+\\.[0-9]+(\\.[0-9]+(\\.[0-9]+)?)?$",
                     "^FileZilla Client [0-9]+\\.[0-9]+(\\.[0-9]+(\\.[0-9]+)?)?$",
                     new InstallInfoExe(
-                        "https://netcologne.dl.sourceforge.net/project/filezilla/FileZilla_Client/3.29.0/FileZilla_3.29.0_win32-setup.exe",
+                        "https://netcologne.dl.sourceforge.net/project/filezilla/FileZilla_Client/3.30.0/FileZilla_3.30.0_win32-setup.exe",
                         HashAlgorithm.SHA512,
-                        "ff792881c7f7aebd88136ccac92d6a69076116b007722105b56030d7624fc69e38290615fc64f375c5a2cfa243217e78c7115ed663478ded238c66408493d0b3",
+                        "2e8966cfbd74ece306b0b2ee8efc95196a854a5d3025a4a8c693ce430169563665cb7b36cfb786bfec8ab487a2ca7386f323acced9aac0015561df2005a135e6",
                         null,
                         "/S",
                         "C:\\Program Files\\FileZilla FTP Client",
                         "C:\\Program Files (x86)\\FileZilla FTP Client"),
                     new InstallInfoExe(
-                        "https://netcologne.dl.sourceforge.net/project/filezilla/FileZilla_Client/3.29.0/FileZilla_3.29.0_win64-setup.exe",
+                        "https://netcologne.dl.sourceforge.net/project/filezilla/FileZilla_Client/3.30.0/FileZilla_3.30.0_win64-setup.exe",
                         HashAlgorithm.SHA512,
-                        "6f61581d72f30ecc98361d7c36dd9d6fb4bf94b0c7c298e8d1cbc16d2b665a6a6f1598585ff1c1b4996ebabfde08061db6a209f734759a621b7626fbb9e74f99",
+                        "0c28bbeff19876df38378dffd2f5ddf84ea361c7bc51014d57343b5dd5a686ee5e32499b7e887fc90a3150666924c8ddafe00a7a36c77abbee42101c7cbd0ebe",
                         null,
                         "/S",
                         null,
                         "C:\\Program Files\\FileZilla FTP Client")
                     );
-            //Windows Vista
+            // Windows Vista
             if (utility.OS.isWinVistaOrNewer())
                 return latestSupportedVersionWinVista();
-            //WinXP or older, but we do not care about older stuff. If you are
+            // WinXP or older, but we do not care about older stuff. If you are
             // still using Windows 2000 or Windows 98 as productive system, you
             // have screwed up somewhere along the way.
             return latestSupportedVersionWinXP();
@@ -85,7 +85,7 @@ namespace updater.software
 
 
         /// <summary>
-        /// gets the information about the latest supported software version in WinXP
+        /// Gets the information about the latest supported software version in WinXP.
         /// </summary>
         /// <returns>Returns an AvailableSoftware instance with the known
         /// details about the software.</returns>
@@ -119,7 +119,7 @@ namespace updater.software
 
 
         /// <summary>
-        /// gets the information about the latest supported software version in WinXP
+        /// Gets the information about the latest supported software version in WinXP.
         /// </summary>
         /// <returns>Returns an AvailableSoftware instance with the known
         /// details about the software.</returns>
@@ -140,14 +140,14 @@ namespace updater.software
                     "/S",
                     "C:\\Program Files\\FileZilla FTP Client",
                     "C:\\Program Files (x86)\\FileZilla FTP Client"),
-                //There was no 64 bit version as of version 3.8.0.
+                // There was no 64 bit version as of version 3.8.0.
                 null
                 );
         }
 
 
         /// <summary>
-        /// list of IDs to identify the software
+        /// Gets a list of IDs to identify the software.
         /// </summary>
         /// <returns>Returns a non-empty array of IDs, where at least one entry is unique to the software.</returns>
         public override string[] id()
@@ -157,7 +157,7 @@ namespace updater.software
 
 
         /// <summary>
-        /// whether or not the method searchForNewer() is implemented
+        /// Determines whether or not the method searchForNewer() is implemented.
         /// </summary>
         /// <returns>Returns true, if searchForNewer() is implemented for that
         /// class. Returns false, if not. Calling searchForNewer() may throw an
@@ -169,7 +169,7 @@ namespace updater.software
 
 
         /// <summary>
-        /// looks for newer versions of the software than the currently known version
+        /// Looks for newer versions of the software than the currently known version.
         /// </summary>
         /// <returns>Returns an AvailableSoftware instance with the information
         /// that was retrieved from the net.</returns>
@@ -191,8 +191,9 @@ namespace updater.software
                         return null;
                     }
                     client.Dispose();
-                } //using
-                  //find version number
+                } // using
+
+                // find version number
                 Regex reVersion = new Regex("FileZilla_[0-9]+\\.[0-9]+(\\.[0-9]+(\\.[0-9]+)?)?_win64\\-setup\\.exe");
                 Match matchVersion = reVersion.Match(htmlCode);
                 if (!matchVersion.Success)
@@ -201,7 +202,7 @@ namespace updater.software
                 if (version == knownInfo().newestVersion)
                     return knownInfo();
 
-                //find hashes
+                // find hashes
                 int idx64 = htmlCode.IndexOf("FileZilla_" + version + "_win64-setup.exe");
                 if (idx64 < 0)
                     return null;
@@ -214,32 +215,32 @@ namespace updater.software
                 Regex reSha512 = new Regex("[0-9a-f]{128}");
                 if (idx64 < idx32)
                 {
-                    //64 bit first
+                    // 64 bit first
                     Match sha512 = reSha512.Match(htmlCode, idx64 + 1, idx32 - idx64);
                     if (!sha512.Success)
                         return null;
                     checksum64 = sha512.Value;
-                    //32 bit next
+                    // 32 bit next
                     sha512 = reSha512.Match(htmlCode, idx32);
                     if (!sha512.Success)
                         return null;
                     checksum32 = sha512.Value;
-                } //if 64 bit build is before 32 bit build
+                } // if 64 bit build is before 32 bit build
                 else
                 {
-                    //32 bit build before 64 bit build
+                    // 32 bit build before 64 bit build
                     Match sha512 = reSha512.Match(htmlCode, idx32 + 1, idx64 - idx32);
                     if (!sha512.Success)
                         return null;
                     checksum32 = sha512.Value;
-                    //64 bit next
+                    // 64 bit next
                     sha512 = reSha512.Match(htmlCode, idx64);
                     if (!sha512.Success)
                         return null;
                     checksum64 = sha512.Value;
-                } //else
+                } // else
 
-                //construct new information
+                // construct new information
                 var newInfo = knownInfo();
                 string oldVersion = newInfo.newestVersion;
                 newInfo.newestVersion = version;
@@ -249,19 +250,19 @@ namespace updater.software
                 newInfo.install64Bit.checksum = checksum64;
                 return newInfo;
             }
-            //Windows Vista
+            // Windows Vista
             if (utility.OS.isWinVistaOrNewer())
             {
                 return latestSupportedVersionWinVista();
             }
-            //WinXP or older - you should really get an OS update.
+            // WinXP or older - you should really get an OS update.
             return latestSupportedVersionWinXP();
         }
 
 
         /// <summary>
-        /// lists names of processes that might block an update, e.g. because
-        /// the application cannot be update while it is running
+        /// Lists names of processes that might block an update, e.g. because
+        /// the application cannot be update while it is running.
         /// </summary>
         /// <param name="detected">currently installed / detected software version</param>
         /// <returns>Returns a list of process names that block the upgrade.</returns>
@@ -272,7 +273,7 @@ namespace updater.software
 
 
         /// <summary>
-        /// whether the detected software is older than the newest known software
+        /// Determines whether the detected software is older than the newest known software.
         /// </summary>
         /// <param name="detected">the corresponding detected software</param>
         /// <returns>Returns true, if the detected software version is older
@@ -287,27 +288,27 @@ namespace updater.software
 
 
         /// <summary>
-        /// checks whether the software is in the list of detected software
+        /// Checks whether the software is in the list of detected software.
         /// </summary>
         /// <param name="detected">list of detected software on the system</param>
         /// <param name="autoGetNew">whether to automatically get new software information</param>
         /// <param name="result">query result where software will be added, if it is in the detection list</param>
         public override void detectionQuery(List<DetectedSoftware> detected, bool autoGetNew, List<QueryEntry> result)
         {
-            //32 bit systems use normal detection.
+            // 32 bit systems use normal detection.
             if (!Environment.Is64BitOperatingSystem)
             {
                 base.detectionQuery(detected, autoGetNew, result);
                 return;
             }
-            //64 bit systems might need adjustments.
+            // 64 bit systems might need adjustments.
             var resBase = new List<QueryEntry>();
             base.detectionQuery(detected, autoGetNew, resBase);
             foreach (var item in resBase)
             {
                 if (string.IsNullOrWhiteSpace(item.detected.installPath))
                     continue;
-                //See if we need to adjust the type for the 64 bit variant.
+                // See if we need to adjust the type for the 64 bit variant.
                 string exePath = System.IO.Path.Combine(item.detected.installPath, "filezilla.exe");
                 utility.PEFormat format = utility.PortableExecutable.determineFormat(exePath);
                 if ((format == utility.PEFormat.PE64) && (item.type != ApplicationType.Bit64))
@@ -315,9 +316,9 @@ namespace updater.software
                     item.type = ApplicationType.Bit64;
                     item.detected.appType = ApplicationType.Bit64;
                 }
-            } //foreach
+            } // foreach
             result.AddRange(resBase);
         }
 
-    } //class
-} //namespace
+    } // class
+} // namespace
