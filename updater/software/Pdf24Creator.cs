@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017  Dirk Stolle
+    Copyright (C) 2017, 2018  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -33,7 +33,7 @@ namespace updater.software
 
 
         /// <summary>
-        /// default constructor
+        /// Default constructor.
         /// </summary>
         /// <param name="autoGetNewer">whether to automatically get
         /// newer information about the software when calling the info() method</param>
@@ -50,7 +50,7 @@ namespace updater.software
 
 
         /// <summary>
-        /// gets options for update
+        /// Gets options for update.
         /// </summary>
         private string getOptions()
         {
@@ -74,31 +74,31 @@ namespace updater.software
 
 
         /// <summary>
-        /// gets the currently known information about the software
+        /// Gets the currently known information about the software.
         /// </summary>
         /// <returns>Returns an AvailableSoftware instance with the known
         /// details about the software.</returns>
         public override AvailableSoftware knownInfo()
         {
             return new AvailableSoftware("PDF24 Creator",
-                "8.2.3",
+                "8.4.0",
                 "^PDF24 Creator$",
-                null, //no 64 bit version
+                null, // no 64 bit version
                 new InstallInfoMsi(
-                    "https://en.pdf24.org/products/pdf-creator/download/pdf24-creator-8.2.3.msi",
+                    "https://en.pdf24.org/products/pdf-creator/download/pdf24-creator-8.4.0.msi",
                     HashAlgorithm.SHA512,
-                    "a7fb1944c850926daf8684a856e877d99b6b5ca6102acd1dba65744cfceba682335653eba29723b2dd24d051c5478078e80a17163d630b50ac8a7a9e24daf9d5",
+                    "63da9b04743a7a5a5784d2dfcd5672acea00052a9de00bcf207144ab0c2912e054644f916242aea9661e53a6aff4865eefe6c0d00772ed8b2480643e47cf6786",
                     "CN=Geek Software GmbH, O=Geek Software GmbH, STREET=Friedrichstr 171, L=Berlin, S=Berlin, PostalCode=10117, C=DE",
                     getOptions() + " /qn /norestart",
                     "C:\\Program Files\\PDF24",
                     "C:\\Program Files (x86)\\PDF24"),
-                //There is no 64 bit installer.
+                // There is no 64 bit installer.
                 null);
         }
 
 
         /// <summary>
-        /// list of IDs to identify the software
+        /// Gets a list of IDs to identify the software.
         /// </summary>
         /// <returns>Returns a non-empty array of IDs, where at least one entry is unique to the software.</returns>
         public override string[] id()
@@ -108,7 +108,7 @@ namespace updater.software
 
 
         /// <summary>
-        /// whether or not the method searchForNewer() is implemented
+        /// Determines whether or not the method searchForNewer() is implemented.
         /// </summary>
         /// <returns>Returns true, if searchForNewer() is implemented for that
         /// class. Returns false, if not. Calling searchForNewer() may throw an
@@ -120,7 +120,7 @@ namespace updater.software
 
 
         /// <summary>
-        /// looks for newer versions of the software than the currently known version
+        /// Looks for newer versions of the software than the currently known version.
         /// </summary>
         /// <returns>Returns an AvailableSoftware instance with the information
         /// that was retrieved from the net.</returns>
@@ -140,9 +140,9 @@ namespace updater.software
                     return null;
                 }
                 client.Dispose();
-            } //using
+            } // using
 
-            //version number occurs three times on the site (private exe, business exe, msi)
+            // version number occurs three times on the site (private exe, business exe, msi)
             Regex reVersion = new Regex("[1-9]+\\.[0-9]+\\.[0-9]+");
             Match versionMatch = reVersion.Match(htmlCode);
             if (!versionMatch.Success)
@@ -155,13 +155,13 @@ namespace updater.software
                 return null;
             string newVersion = versionMatch.Value;
             
-            //construct new version information
+            // construct new version information
             var newInfo = knownInfo();
-            //replace version number - both as newest version and in URL for download
+            // replace version number - both as newest version and in URL for download
             string oldVersion = newInfo.newestVersion;
             newInfo.newestVersion = newVersion;
             newInfo.install32Bit.downloadUrl = newInfo.install32Bit.downloadUrl.Replace(oldVersion, newVersion);
-            //no checksums are provided on the official site, but binaries are signed
+            // no checksums are provided on the official site, but binaries are signed
             newInfo.install32Bit.checksum = null;
             newInfo.install32Bit.algorithm = HashAlgorithm.Unknown;
             return newInfo;
@@ -169,8 +169,8 @@ namespace updater.software
 
 
         /// <summary>
-        /// lists names of processes that might block an update, e.g. because
-        /// the application cannot be update while it is running
+        /// Lists names of processes that might block an update, e.g. because
+        /// the application cannot be update while it is running.
         /// </summary>
         /// <param name="detected">currently installed / detected software version</param>
         /// <returns>Returns a list of process names that block the upgrade.</returns>
@@ -181,7 +181,7 @@ namespace updater.software
 
 
         /// <summary>
-        /// whether the detected software is older than the newest known software
+        /// Determines whether the detected software is older than the newest known software.
         /// </summary>
         /// <param name="detected">the corresponding detected software</param>
         /// <returns>Returns true, if the detected software version is older
@@ -196,7 +196,7 @@ namespace updater.software
 
 
         /// <summary>
-        /// sets whether automatic updates are enabled
+        /// Sets whether automatic updates are enabled.
         /// </summary>
         /// <param name="enabled">true if automatic updates shall be enabled</param>
         public void enableAutoUpdate(bool enabled)
@@ -206,7 +206,7 @@ namespace updater.software
 
 
         /// <summary>
-        /// determines whether to create desktop icons
+        /// Determines whether to create desktop icons.
         /// </summary>
         /// <param name="create">true to create icons, false if not</param>
         public void createDesktopIcons(bool create)
@@ -216,7 +216,7 @@ namespace updater.software
 
 
         /// <summary>
-        /// determines whether the fax printer will be enabled
+        /// Determines whether the fax printer will be enabled.
         /// </summary>
         /// <param name="enabled">true to enable fax printer, false to disable fax printer</param>
         public void enableFaxPrinter(bool enabled)
@@ -240,5 +240,5 @@ namespace updater.software
         /// whether the fax printer is enabled
         /// </summary>
         private bool mFaxPrinter;
-    } //class
-} //namespace
+    } // class
+} // namespace
