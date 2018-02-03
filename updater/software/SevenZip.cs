@@ -49,21 +49,22 @@ namespace updater.software
         /// details about the software.</returns>
         public override AvailableSoftware knownInfo()
         {
-            return new AvailableSoftware("7-Zip", "16.04",
+            return new AvailableSoftware("7-Zip",
+                "18.01",
                 "^7\\-Zip [0-9]+\\.[0-9]{2}$",
                 "^7\\-Zip [0-9]+\\.[0-9]{2} \\(x64\\)$",
                 new InstallInfoExe(
-                    "http://www.7-zip.org/a/7z1604.exe",
+                    "http://www.7-zip.org/a/7z1801.exe",
                     HashAlgorithm.SHA256,
-                    "dbb2b11dea9f4432291e2cbefe14ebe05e021940e983a37e113600eee55daa95",
+                    "c55c60a674114be26ce470f43109d405a5adcd2bd38e346d4a35c98727174eb0",
                     null,
                     "/S",
                     "C:\\Program Files\\7-Zip",
                     "C:\\Program Files (x86)\\7-Zip"),
                 new InstallInfoExe(
-                    "http://www.7-zip.org/a/7z1604-x64.exe",
+                    "http://www.7-zip.org/a/7z1801-x64.exe",
                     HashAlgorithm.SHA256,
-                    "9bb4dc4fab2a2a45c15723c259dc2f7313c89a5ac55ab7c3f76bba26edc8bcaa",
+                    "86670d63429281a4a65c36919ca0f3099e3f803e3096c3a9722d61b3d31e4a9f",
                     null,
                     "/S",
                     null,
