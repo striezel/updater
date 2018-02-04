@@ -133,6 +133,11 @@ namespace updater.software
 
             //construct new information
             var newInfo = knownInfo();
+            if (newInfo.newestVersion == version)
+            {
+                // No need to change things here, it is still the same version.
+                return newInfo;
+            }
             newInfo.newestVersion = version;
             string newVersionWithoutDot = version.Replace(".", "");
             //32 bit
