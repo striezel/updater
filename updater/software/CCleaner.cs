@@ -115,7 +115,7 @@ namespace updater.software
             {
                 try
                 {
-                    htmlCode = client.DownloadString("http://www.piriform.com/ccleaner/download/standard");
+                    htmlCode = client.DownloadString("http://www.ccleaner.com/ccleaner/download/standard");
                 }
                 catch (Exception ex)
                 {
@@ -126,7 +126,7 @@ namespace updater.software
             } //using
 
             //extract download URL
-            Regex reg = new Regex("http(s)?://download\\.piriform\\.com/ccsetup[0-9]+\\.exe");
+            Regex reg = new Regex("http(s)?://download\\.ccleaner\\.com/ccsetup[0-9]+\\.exe");
             Match match = reg.Match(htmlCode);
             if (!match.Success)
                 return null;
