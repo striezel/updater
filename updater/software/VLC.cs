@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017  Dirk Stolle
+    Copyright (C) 2017, 2018  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -34,7 +34,7 @@ namespace updater.software
 
 
         /// <summary>
-        /// default constructor
+        /// Default constructor.
         /// </summary>
         /// <param name="autoGetNewer">whether to automatically get
         /// newer information about the software when calling the info() method</param>
@@ -50,30 +50,31 @@ namespace updater.software
 
 
         /// <summary>
-        /// gets the currently known information about the software
+        /// Gets the currently known information about the software.
         /// </summary>
         /// <returns>Returns an AvailableSoftware instance with the known
         /// details about the software.</returns>
         public override AvailableSoftware knownInfo()
         {
+            const string version = "3.0.0";
             return new AvailableSoftware("VLC media player",
-                "2.2.8",
+                version,
                 "^VLC media player$",
                 "^VLC media player$",
-                //32 bit installer
+                // 32 bit installer
                 new InstallInfoExe(
-                    "https://get.videolan.org/vlc/2.2.8/win32/vlc-2.2.8-win32.exe",
+                    "https://get.videolan.org/vlc/" + version + "/win32/vlc-" + version + "-win32.exe",
                     HashAlgorithm.SHA256,
-                    "3956020408c1666c168985a5afd01310dc5976cca67b458f9d70414d36f2608d",
+                    "222ca889492850d42922de9ad3ac073bb6dd524a832ea6841f221f980453ecdc",
                     publisherX509,
                     "/S",
                     "C:\\Program Files\\VideoLAN\\VLC",
                     "C:\\Program Files (x86)\\VideoLAN\\VLC"),
-                //64 bit installer
+                // 64 bit installer
                 new InstallInfoExe(
-                    "http://get.videolan.org/vlc/2.2.8/win64/vlc-2.2.8-win64.exe",
+                    "http://get.videolan.org/vlc/" + version + "/win64/vlc-" + version + "-win64.exe",
                     HashAlgorithm.SHA256,
-                    "e3dcf2e7c2cb6ed741e78e1bbdd198875ec626a261711c7580aec5c95c8edac2",
+                    "76d7cfbcdc1624623dcbf14143db8fcac82a1363e06af03c1370254afc5074e1",
                     publisherX509,
                     "/S",
                     null,
@@ -83,7 +84,7 @@ namespace updater.software
 
 
         /// <summary>
-        /// list of IDs to identify the software
+        /// Gets a list of IDs to identify the software.
         /// </summary>
         /// <returns>Returns a non-empty array of IDs, where at least one entry is unique to the software.</returns>
         public override string[] id()
@@ -93,7 +94,7 @@ namespace updater.software
 
 
         /// <summary>
-        /// whether or not the method searchForNewer() is implemented
+        /// Determines whether or not the method searchForNewer() is implemented.
         /// </summary>
         /// <returns>Returns true, if searchForNewer() is implemented for that
         /// class. Returns false, if not. Calling searchForNewer() may throw an
@@ -105,8 +106,8 @@ namespace updater.software
 
 
         /// <summary>
-        /// determines the last version of VLC media player, which is usually
-        /// the latest version, too
+        /// Determines the last version of VLC media player, which is usually
+        /// the latest version, too.
         /// </summary>
         /// <returns>Returns a version number, if successful.
         /// Returns null, if an error occurred.</returns>
@@ -125,20 +126,20 @@ namespace updater.software
                     return null;
                 }
                 client.Dispose();
-            } //using
+            } // using
 
             Regex reTarXz = new Regex("vlc\\-[0-9]+\\.[0-9]+\\.[0-9]+(\\.[0-9]+)?\\.tar\\.xz");
             Match matchTarXz = reTarXz.Match(htmlCode);
             if (!matchTarXz.Success)
                 return null;
-            //extract new version number
+            // extract new version number
             string newVersion = matchTarXz.Value.Replace("vlc-", "").Replace(".tar.xz", "");
             return newVersion;
         }
 
 
         /// <summary>
-        /// gets the latest available version from download site directory listing
+        /// Gets the latest available version from download site directory listing.
         /// </summary>
         /// <returns>Returns latest available version number, if successful.
         /// Returns null, if an error occurred.</returns>
@@ -158,7 +159,7 @@ namespace updater.software
                     return null;
                 }
                 client.Dispose();
-            } //using
+            } // using
 
             Regex reVersion = new Regex("\"[0-9]+\\.[0-9]+\\.[0-9]+(\\.[0-9]+)?/\"");
             var matches = reVersion.Matches(htmlCode);
@@ -175,33 +176,33 @@ namespace updater.software
                     latestVersion = possibleVersion;
                     latestVersionString = possibleVersionString;
                 }
-            } //foreach
+            } // foreach
             return latestVersionString;
         }
 
         /// <summary>
-        /// looks for newer versions of the software than the currently known version
+        /// Looks for newer versions of the software than the currently known version.
         /// </summary>
         /// <returns>Returns an AvailableSoftware instance with the information
         /// that was retrieved from the net.</returns>
         public override AvailableSoftware searchForNewer()
         {
             logger.Debug("Searching for newer version of VLC media player...");
-            //get new version number
+            // get new version number
             string lastVersion = getLastVersion();
             string availableVersion = getLatestAvailableVersion();
             string newVersion = lastVersion;
             if (string.Compare(lastVersion, availableVersion) < 0)
                 newVersion = availableVersion;
-            //should not be lesser than known newest version
+            // should not be lesser than known newest version
             if (string.Compare(newVersion, knownInfo().newestVersion) < 0)
                 return null;
-            //version number should match usual scheme, e.g. 5.x.y, where x and y are digits
+            // version number should match usual scheme, e.g. 5.x.y, where x and y are digits
             Regex version = new Regex("^[1-9]+\\.[0-9]+\\.[0-9]+(\\.[0-9]+)?$");
             if (!version.IsMatch(newVersion))
                 return null;
 
-            //There are extra files for hashes:
+            // There are extra files for hashes:
             // https://get.videolan.org/vlc/last/win32/vlc-2.2.4-win32.exe.sha256 for 32 bit
             // and https://get.videolan.org/vlc/last/win64/vlc-2.2.4-win64.exe.sha256 for 64 bit.
             var newHashes = new List<string>();
@@ -220,20 +221,20 @@ namespace updater.software
                         return null;
                     }
                     client.Dispose();
-                } //using
+                } // using
 
-                //extract hash
+                // extract hash
                 Regex reHash = new Regex("^[0-9a-f]{64} [\\* ]vlc\\-" + Regex.Escape(newVersion) + "\\-win" + bits + ".exe");
                 Match matchHash = reHash.Match(htmlCode);
                 if (!matchHash.Success)
                     return null;
                 string newHash = matchHash.Value.Substring(0, 64).Trim();
                 newHashes.Add(newHash);
-            } //foreach
+            } // foreach
 
-            //construct new version information
+            // construct new version information
             var newInfo = knownInfo();
-            //replace version number - both as newest version and in URL for download
+            // replace version number - both as newest version and in URL for download
             string oldVersion = newInfo.newestVersion;
             newInfo.newestVersion = newVersion;
             newInfo.install32Bit.downloadUrl = newInfo.install32Bit.downloadUrl.Replace(oldVersion, newVersion);
@@ -245,8 +246,8 @@ namespace updater.software
 
 
         /// <summary>
-        /// lists names of processes that might block an update, e.g. because
-        /// the application cannot be update while it is running
+        /// Lists names of processes that might block an update, e.g. because
+        /// the application cannot be update while it is running.
         /// </summary>
         /// <param name="detected">currently installed / detected software version</param>
         /// <returns>Returns a list of process names that block the upgrade.</returns>
@@ -254,5 +255,5 @@ namespace updater.software
         {
             return new List<string>();
         }
-    } //class
-} //namesoace
+    } // class
+} // namespace
