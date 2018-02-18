@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017  Dirk Stolle
+    Copyright (C) 2017, 2018  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -71,28 +71,28 @@ namespace updater.software
         private static Dictionary<string, string> knownChecksums()
         {
             // These are the checksums for Windows 32 bit installers from
-            // https://archive.mozilla.org/pub/seamonkey/releases/2.49.1/SHA1SUMS
+            // https://archive.mozilla.org/pub/seamonkey/releases/2.49.2/SHA1SUMS
             var result = new Dictionary<string, string>();
-            result.Add("cs", "fc00fdc226882ae03081ece7059cc912da679653");
-            result.Add("de", "c83a7a539dd6ed4bbf42e5bbcd3b4c8fa3fc6c25");
-            result.Add("en-GB", "0afc40ee3787b6582426ba5d609cdbc63d0755d2");
-            result.Add("en-US", "1fb5b4fccea1176e9bb64d7521ef84742221a0dd");
-            result.Add("es-AR", "662942b95308dcc81db8923ce96552b0ac0c6ef2");
-            result.Add("es-ES", "64b5eb1b638010dcbef8151f1c5417c09c2bc145");
-            result.Add("fr", "a9e4538976dfd414dd9b7228034689d7bb05f5cc");
-            result.Add("hu", "b0a20b91730c76bcc7ccc770cb91db3e81b06466");
-            result.Add("it", "b65308fe5dcaa9eb863bfe40e5471f1c4024e54e");
-            result.Add("ja", "dd232ee3103bd9cd1855b99d51bfc72fcb4defeb");
-            result.Add("lt", "8d2312cee1b471ee1c20a9b84a395f5cd53bb4a0");
-            result.Add("nb-NO", "578951eb5159c62d019771c4749aa4c0bf75c563");
-            result.Add("nl", "e2b8d64100a80790b34c2f17fa312efaa8c33efc");
-            result.Add("pl", "bcea73a96a2cfa8d1497135e9fdd577d20d8c8a5");
-            result.Add("pt-PT", "2ef2552ef9084f1fc6dfcd29bbff5e3a33a27816");
-            result.Add("ru", "be2dd25b8695db4ce78521b577a6e2ab9e5e62c1");
-            result.Add("sk", "e3f463e6b195711095e031d11eecec13f3e8a007");
-            result.Add("sv-SE", "200cee6b4f28f2cfdd329923b3f959f611436edc");
-            result.Add("zh-CN", "26058faf7d4a2bad8710c5c36b1375295ccacca6");
-            result.Add("zh-TW", "06300ed659fd550b09e53dd9ee7c3c3f1af61819");
+            result.Add("cs", "6e373e5cb3ecde04c436428b5c7685a6d04bf492");
+            result.Add("de", "5b1d4efc0f73b10f7e03c2a303897a63e66024c8");
+            result.Add("en-GB", "e1a7d329eb1e3e14f0765aa7732b16481fa8e535");
+            result.Add("en-US", "540166506d6f53615fb229d2fa96cbd9e4e5683c");
+            result.Add("es-AR", "9fe43e2263d12685a34513a0610b948b9951c0e0");
+            result.Add("es-ES", "0c687cd9f99711e1d94c82333529ffa1155446fb");
+            result.Add("fr", "6e31e736e6a34be85d487e84f719fd5017f0a716");
+            result.Add("hu", "6451fbe04ef6ae8d24f1607ae1c5e2ef0e4efbf7");
+            result.Add("it", "26142c2f7aa1808cfec446253661cebc1abd5650");
+            result.Add("ja", "72ccf252c69214102cc9fce62e9c4eef87a1494d");
+            result.Add("lt", "4ecbda1f98298eca1821c209aee5ac92aa951456");
+            result.Add("nb-NO", "bbd3ade5eefd21da626a51270d99fc80d60f842d");
+            result.Add("nl", "9c268b82dcf1da864d7e11df1dd907bdedc302b4");
+            result.Add("pl", "41ccc24a9d248a178f2218d35ef444b029aa563a");
+            result.Add("pt-PT", "ecf321f69c2281dd676bc7f2dc5e58cac9abc527");
+            result.Add("ru", "836d096f886a13ef535e10542f2fdf321dd17f16");
+            result.Add("sk", "0cac39b1b4751cf5ded361f7769e4b6ca4cd9623");
+            result.Add("sv-SE", "029367acfec529c0eaabb93419fa0d9adfbdaea7");
+            result.Add("zh-CN", "d47610cd28da08dbb774aa7ddb2c1c794e1f281b");
+            result.Add("zh-TW", "3b3ed40e7eeb29ccc8559639f7b8e54427843216");
 
             return result;
         }
@@ -116,7 +116,7 @@ namespace updater.software
         /// details about the software.</returns>
         public override AvailableSoftware knownInfo()
         {
-            const string knownVersion = "2.49.1";
+            const string knownVersion = "2.49.2";
             return new AvailableSoftware("SeaMonkey (" + languageCode + ")",
                 knownVersion,
                 "^SeaMonkey [0-9]+\\.[0-9]+(\\.[0-9]+)? \\(x86 " + Regex.Escape(languageCode) + "\\)$",

@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017  Dirk Stolle
+    Copyright (C) 2017, 2018  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -56,22 +56,22 @@ namespace updater.software
         public override AvailableSoftware knownInfo()
         {
             return new AvailableSoftware("CCleaner",
-                "5.39",
+                "5.40",
                 "^CCleaner+$",
                 "^CCleaner+$",
                 //CCleaner uses the same installer for 32 and 64 bit.
                 new InstallInfoExe(
-                    "https://download.ccleaner.com/ccsetup539.exe",
+                    "https://download.ccleaner.com/ccsetup540.exe",
                     HashAlgorithm.SHA256,
-                    "d34e7a806569a0948190758971b0c1e63e45c822ffa5671a04bf5a30a84fb421",
+                    "72c650f8b4cb5d411375bbc965ba29c81aebc6d40991a3cda5ff5a333051e66b",
                     publisherX509,
                     "/S",
                     "C:\\Program Files\\CCleaner",
                     "C:\\Program Files (x86)\\CCleaner"),
                 new InstallInfoExe(
-                    "https://download.ccleaner.com/ccsetup539.exe",
+                    "https://download.ccleaner.com/ccsetup540.exe",
                     HashAlgorithm.SHA256,
-                    "d34e7a806569a0948190758971b0c1e63e45c822ffa5671a04bf5a30a84fb421",
+                    "72c650f8b4cb5d411375bbc965ba29c81aebc6d40991a3cda5ff5a333051e66b",
                     publisherX509,
                     "/S",
                     null,
