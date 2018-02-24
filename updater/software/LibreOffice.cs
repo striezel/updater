@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017  Dirk Stolle
+    Copyright (C) 2017, 2018  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -43,38 +43,38 @@ namespace updater.software
 
 
         /// <summary>
-        /// gets the currently known information about the software
+        /// Gets the currently known information about the software.
         /// </summary>
         /// <returns>Returns an AvailableSoftware instance with the known
         /// details about the software.</returns>
         public override AvailableSoftware knownInfo()
         {
             return new AvailableSoftware("LibreOffice",
-                "5.4.3.2",
+                "6.0.1.1",
                 "^LibreOffice [0-9]\\.[0-9]\\.[0-9]\\.[0-9]$",
                 "^LibreOffice [0-9]\\.[0-9]\\.[0-9]\\.[0-9]$",
                 new InstallInfoLibO(
-                    "https://download.documentfoundation.org/libreoffice/stable/5.4.3/win/x86/LibreOffice_5.4.3_Win_x86.msi",
+                    "https://download.documentfoundation.org/libreoffice/stable/6.0.1/win/x86/LibreOffice_6.0.1_Win_x86.msi",
                     HashAlgorithm.SHA256,
-                    "81de54e88c79a4a2c00fa49b64874a506e6a94a9a54f70a1b1a6b7a7f910b73d",
+                    "02fb4846bd1081e310af1b0f34cd1a3abbd067b44c078d6207761d2a52b36939",
                     null,
                     "/qn /norestart",
-                    "C:\\Program Files\\LibreOffice 5",
-                    "C:\\Program Files (x86)\\LibreOffice 5"),
+                    "C:\\Program Files\\LibreOffice",
+                    "C:\\Program Files (x86)\\LibreOffice"),
                 new InstallInfoLibO(
-                    "https://download.documentfoundation.org/libreoffice/stable/5.4.3/win/x86_64/LibreOffice_5.4.3_Win_x64.msi",
+                    "https://download.documentfoundation.org/libreoffice/stable/6.0.1/win/x86_64/LibreOffice_6.0.1_Win_x64.msi",
                     HashAlgorithm.SHA256,
-                    "70995d375091c769936f438e51d41b6d92d2a26ff8d04674eb695bbe88dba7c0",
+                    "61cec581df5a11d5ee1d58b744cfedf2a38dc4833588e88fd2d45da0c2595fa2",
                     null,
                     "/qn /norestart",
                     null,
-                    "C:\\Program Files\\LibreOffice 5")
+                    "C:\\Program Files\\LibreOffice")
                     );
         }
 
 
         /// <summary>
-        /// list of IDs to identify the software
+        /// Gets a list of IDs to identify the software.
         /// </summary>
         /// <returns>Returns a non-empty array of IDs, where at least one entry is unique to the software.</returns>
         public override string[] id()
@@ -84,7 +84,7 @@ namespace updater.software
 
 
         /// <summary>
-        /// whether or not the method searchForNewer() is implemented
+        /// Determines whether or not the method searchForNewer() is implemented.
         /// </summary>
         /// <returns>Returns true, if searchForNewer() is implemented for that
         /// class. Returns false, if not. Calling searchForNewer() may throw an
@@ -96,7 +96,7 @@ namespace updater.software
 
 
         /// <summary>
-        /// looks for newer versions of the software than the currently known version
+        /// Looks for newer versions of the software than the currently known version.
         /// </summary>
         /// <returns>Returns an AvailableSoftware instance with the information
         /// that was retrieved from the net.</returns>
@@ -116,7 +116,7 @@ namespace updater.software
                     return null;
                 }
                 client.Dispose();
-            } //using
+            } // using
             // Link is something like <a href="5.3.0/">5.3.0/</a>, no fourth digit.
             Regex reVersion = new Regex("<a href=\"[0-9]\\.[0-9]\\.[0-9]/\">[0-9]\\.[0-9]\\.[0-9]/</a>");
             Match matchVersion = reVersion.Match(htmlCode);
@@ -167,7 +167,7 @@ namespace updater.software
                     return null;
                 }
                 client.Dispose();
-            } //using
+            } // using
 
             Regex reHash64 = new Regex("[0-9a-f]{64}  LibreOffice_" + Regex.Escape(newVersion) + "_Win_x64\\.msi");
             Match matchHash64 = reHash64.Match(htmlCode);
@@ -175,9 +175,9 @@ namespace updater.software
                 return null;
             string hash64 = matchHash64.Value.Substring(0, 64);
 
-            //construct new version information
+            // construct new version information
             var newInfo = knownInfo();
-            //replace version number - both as newest version and in URL for download
+            // replace version number - both as newest version and in URL for download
             string oldVersion = newInfo.newestVersion;
             newInfo.newestVersion = newVersion;
             newInfo.install32Bit.downloadUrl = "http://download.documentfoundation.org/libreoffice/stable/"
@@ -191,8 +191,8 @@ namespace updater.software
 
 
         /// <summary>
-        /// lists names of processes that might block an update, e.g. because
-        /// the application cannot be update while it is running
+        /// Lists names of processes that might block an update, e.g. because
+        /// the application cannot be update while it is running.
         /// </summary>
         /// <param name="detected">currently installed / detected software version</param>
         /// <returns>Returns a list of process names that block the upgrade.</returns>
@@ -201,5 +201,5 @@ namespace updater.software
             return new List<string>();
         }
 
-    } //class
-} //namespace
+    } // class
+} // namespace
