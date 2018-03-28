@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017  Dirk Stolle
+    Copyright (C) 2017, 2018  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -59,9 +59,7 @@ namespace updater.software
                     HashAlgorithm.SHA256,
                     "eda8a422c8d99a1d136a807d0363c9609c05d9f909f6313efb4e2f34f606b484",
                     null,
-                    "/DS=1 /SMS=1 /S",
-                    "C:\\Program Files\\Pidgin",
-                    "C:\\Program Files (x86)\\Pidgin"),
+                    "/DS=1 /SMS=1 /S"),
                 null
                 );
         }

@@ -67,18 +67,14 @@ namespace updater.software
                     HashAlgorithm.SHA256,
                     "222ca889492850d42922de9ad3ac073bb6dd524a832ea6841f221f980453ecdc",
                     publisherX509,
-                    "/S",
-                    "C:\\Program Files\\VideoLAN\\VLC",
-                    "C:\\Program Files (x86)\\VideoLAN\\VLC"),
+                    "/S"),
                 // 64 bit installer
                 new InstallInfoExe(
                     "http://get.videolan.org/vlc/" + version + "/win64/vlc-" + version + "-win64.exe",
                     HashAlgorithm.SHA256,
                     "76d7cfbcdc1624623dcbf14143db8fcac82a1363e06af03c1370254afc5074e1",
                     publisherX509,
-                    "/S",
-                    null,
-                    "C:\\Program Files\\VideoLAN\\VLC")
+                    "/S")
                 );
         }
 

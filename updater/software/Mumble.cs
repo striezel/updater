@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017  Dirk Stolle
+    Copyright (C) 2017, 2018  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -57,9 +57,7 @@ namespace updater.software
                     HashAlgorithm.SHA256,
                     "2186eddd99264c2e68f5425308f59bd5151a8aecebea9f852728be3487a7a93b",
                     null, //"CN=mkrautz.dk, O=mkrautz.dk, STREET=Kirkegade 6, L=Esbjerg, S=Region of Southern Denmark, PostalCode=6700, C=DK"
-                    "/qn /norestart",
-                    "C:\\Program Files\\Mumble",
-                    "C:\\Program Files (x86)\\Mumble"),
+                    "/qn /norestart"),
                 //No official 64 bit MSI installer yet, but there might be one for 1.3.0.
                 null);
         }

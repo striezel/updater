@@ -63,9 +63,7 @@ namespace updater.software
                     HashAlgorithm.SHA256,
                     "400B6638 0D30C904 711BA3B0 17AA97F9 E67081B7 3D6A239C 6C44AC2B 663CB23B",
                     publisherX509,
-                    "/VERYSILENT",
-                    "C:\\Program Files\\KeePass Password Safe 2",
-                    "C:\\Program Files (x86)\\KeePass Password Safe 2"),
+                    "/VERYSILENT"),
                 //There is no 64 bit installer yet.
                 null);
         }

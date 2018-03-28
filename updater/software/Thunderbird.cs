@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017  Dirk Stolle
+    Copyright (C) 2017, 2018  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -161,9 +161,7 @@ namespace updater.software
                     HashAlgorithm.SHA512,
                     checksum,
                     "CN=Mozilla Corporation, O=Mozilla Corporation, L=Mountain View, S=California, C=US",
-                    "-ms -ma",
-                    "C:\\Program Files\\Mozilla Thunderbird",
-                    "C:\\Program Files (x86)\\Mozilla Thunderbird"),
+                    "-ms -ma"),
                 // There is no 64 bit installer yet.
                 null);
         }

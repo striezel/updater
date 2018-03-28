@@ -58,17 +58,13 @@ namespace updater.software
                     HashAlgorithm.SHA256,
                     "02fb4846bd1081e310af1b0f34cd1a3abbd067b44c078d6207761d2a52b36939",
                     null,
-                    "/qn /norestart",
-                    "C:\\Program Files\\LibreOffice",
-                    "C:\\Program Files (x86)\\LibreOffice"),
+                    "/qn /norestart"),
                 new InstallInfoLibO(
                     "https://download.documentfoundation.org/libreoffice/stable/6.0.1/win/x86_64/LibreOffice_6.0.1_Win_x64.msi",
                     HashAlgorithm.SHA256,
                     "61cec581df5a11d5ee1d58b744cfedf2a38dc4833588e88fd2d45da0c2595fa2",
                     null,
-                    "/qn /norestart",
-                    null,
-                    "C:\\Program Files\\LibreOffice")
+                    "/qn /norestart")
                     );
         }
 

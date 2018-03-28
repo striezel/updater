@@ -58,17 +58,13 @@ namespace updater.software
                     HashAlgorithm.SHA256,
                     "ac978fe32372106ac07ab73aa8278144a06a0b86c871114010a0c8b14720ccd0",
                     null,
-                    "/silent /norestart /launchopera 0 /setdefaultbrowser 0 /allusers",
-                    "C:\\Program Files\\Opera",
-                    "C:\\Program Files (x86)\\Opera"),
+                    "/silent /norestart /launchopera 0 /setdefaultbrowser 0 /allusers"),
                 new InstallInfoExe(
                     "https://get.geo.opera.com/pub/opera/desktop/47.0.2631.48/win/Opera_47.0.2631.48_x64_Setup.exe",
                     HashAlgorithm.SHA256,
                     "953c40fec6263b2aaa5d34093abf0ce8b93b59503493772b3a9debaab910f158",
                     null,
-                    "/silent /norestart /launchopera 0 /setdefaultbrowser 0 /allusers",
-                    null,
-                    "C:\\Program Files\\Opera")
+                    "/silent /norestart /launchopera 0 /setdefaultbrowser 0 /allusers")
                     );
         }
 

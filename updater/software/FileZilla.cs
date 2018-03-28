@@ -62,17 +62,13 @@ namespace updater.software
                         HashAlgorithm.SHA512,
                         "2e8966cfbd74ece306b0b2ee8efc95196a854a5d3025a4a8c693ce430169563665cb7b36cfb786bfec8ab487a2ca7386f323acced9aac0015561df2005a135e6",
                         null,
-                        "/S",
-                        "C:\\Program Files\\FileZilla FTP Client",
-                        "C:\\Program Files (x86)\\FileZilla FTP Client"),
+                        "/S"),
                     new InstallInfoExe(
                         "https://netcologne.dl.sourceforge.net/project/filezilla/FileZilla_Client/3.30.0/FileZilla_3.30.0_win64-setup.exe",
                         HashAlgorithm.SHA512,
                         "0c28bbeff19876df38378dffd2f5ddf84ea361c7bc51014d57343b5dd5a686ee5e32499b7e887fc90a3150666924c8ddafe00a7a36c77abbee42101c7cbd0ebe",
                         null,
-                        "/S",
-                        null,
-                        "C:\\Program Files\\FileZilla FTP Client")
+                        "/S")
                     );
             // Windows Vista
             if (utility.OS.isWinVistaOrNewer())
@@ -103,17 +99,13 @@ namespace updater.software
                     HashAlgorithm.SHA512,
                     "c87ad1c6379374efdb11c4176dfc9237164ce4218d8add3fb65dd9f459ab695405580e357806d2f7cb0140589dcb2599106ad52c615af3501d1702fd51c41895",
                     null,
-                    "/S",
-                    "C:\\Program Files\\FileZilla FTP Client",
-                    "C:\\Program Files (x86)\\FileZilla FTP Client"),
+                    "/S"),
                 new InstallInfoExe(
                     "https://netcologne.dl.sourceforge.net/project/filezilla/FileZilla_Client/3.25.1/FileZilla_3.25.1_win64-setup.exe",
                     HashAlgorithm.SHA512,
                     "929e8c6a12dc1fc3e77eb17efe5cd860e5a263b97facd1fd2d9a427277d515dad7dd14516341d600b271b1013cc1d966ad36560edd619a401571caacce94e1b1",
                     null,
-                    "/S",
-                    null,
-                    "C:\\Program Files\\FileZilla FTP Client")
+                    "/S")
                 );
         }
 
@@ -137,9 +129,7 @@ namespace updater.software
                     HashAlgorithm.SHA512,
                     "48089aad2da20b49b2d6ad1baf450a14cd20ed2b65b681c469b2b9c943f20970d48cf73008e4ff427ed9743af0c257cfca1b6bdeecdd2153b6531c1449ab8353",
                     null,
-                    "/S",
-                    "C:\\Program Files\\FileZilla FTP Client",
-                    "C:\\Program Files (x86)\\FileZilla FTP Client"),
+                    "/S"),
                 // There was no 64 bit version as of version 3.8.0.
                 null
                 );

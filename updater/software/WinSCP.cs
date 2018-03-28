@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017  Dirk Stolle
+    Copyright (C) 2017, 2018  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -57,9 +57,7 @@ namespace updater.software
                     HashAlgorithm.SHA256,
                     "864c7e7d3148384c857d8cb129d9c501e73709031136cd2783d9ec222db6137d",
                     "CN=Martin Prikryl, O=Martin Prikryl, L=Prague, S=Hlavni mesto Praha, C=CZ",
-                    "/VERYSILENT /NORESTART",
-                    "C:\\Program Files\\WinSCP",
-                    "C:\\Program Files (x86)\\WinSCP"),
+                    "/VERYSILENT /NORESTART"),
                 //There is no 64 bit installer yet.
                 null);
         }

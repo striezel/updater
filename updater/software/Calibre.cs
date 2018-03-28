@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017  Dirk Stolle
+    Copyright (C) 2017, 2018  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -64,17 +64,13 @@ namespace updater.software
                     HashAlgorithm.SHA256,
                     "55ca136782f109a42e6201376b344718256b98314c173fd8547354278769582b",
                     publisherX509,
-                    "/qn /norestart",
-                    "C:\\Program Files\\Calibre2",
-                    "C:\\Program Files (x86)\\Calibre2"),
+                    "/qn /norestart"),
                 new InstallInfoMsi(
                     "https://download.calibre-ebook.com/" + knownVersion + "/calibre-64bit-" + knownVersion + ".msi",
                     HashAlgorithm.SHA256,
                     "8c353230213e90178188569ba7b997e3afa069921ae43b9c207a0ff4474db267",
                     publisherX509,
-                    "/qn /norestart",
-                    null,
-                    "C:\\Program Files\\Calibre2")
+                    "/qn /norestart")
                     );
         }
 

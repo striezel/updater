@@ -126,9 +126,7 @@ namespace updater.software
                     HashAlgorithm.SHA1,
                     checksum,
                     null,
-                    "-ms -ma",
-                    "C:\\Program Files\\SeaMonkey",
-                    "C:\\Program Files (x86)\\SeaMonkey"),
+                    "-ms -ma"),
                 //There is no 64 bit installer yet.
                 null);
         }

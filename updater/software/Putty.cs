@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017  Dirk Stolle
+    Copyright (C) 2017, 2018  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -66,18 +66,14 @@ namespace updater.software
                     HashAlgorithm.SHA512,
                     "5798f63a9260297c322703da0303378b6ae94396885d3973148bc69baf6d9141813504e522c05745f008ceeafdcf45e55279b171b0945625bf0fdc8225913ca7",
                     publisherX509,
-                    "/qn /norestart",
-                    "C:\\Program Files\\PuTTY",
-                    "C:\\Program Files (x86)\\PuTTY"),
+                    "/qn /norestart"),
                 //64 bit installer
                 new InstallInfoMsi(
                     "https://the.earth.li/~sgtatham/putty/0.70/w64/putty-64bit-0.70-installer.msi",
                     HashAlgorithm.SHA512,
                     "71c2d5503c7ae4cdc4f689fb7870465c8524db1baf245ea12d56a9a45ab63a1b4ed9baa6e10216072edc915b09024d8872a849e49072a958c1f57d0a3af17edf",
                     publisherX509,
-                    "/qn /norestart",
-                    null,
-                    "C:\\Program Files\\PuTTY")
+                    "/qn /norestart")
                 );
         }
 

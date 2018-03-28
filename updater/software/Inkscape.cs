@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017  Dirk Stolle
+    Copyright (C) 2017, 2018  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -59,17 +59,13 @@ namespace updater.software
                     HashAlgorithm.SHA256,
                     "ee6d9ce1061fef6e66dd618e17eed3311133739f1bd782e927b0c2c04b572ccc",
                     null,
-                    "/qn /norestart",
-                    "C:\\Program Files\\Inkscape",
-                    "C:\\Program Files (x86)\\Inkscape"),
+                    "/qn /norestart"),
                 new InstallInfoMsi(
                     "https://media.inkscape.org/dl/resources/file/Inkscape-0.92.1-x64.msi",
                     HashAlgorithm.SHA256,
                     "96f919b5a5c05af39fe6f7f18cdfa8f0c60ae4bccbdb25093726cb628de79a20",
                     null,
-                    "/qn /norestart",
-                    null,
-                    "C:\\Program Files\\Inkscape")
+                    "/qn /norestart")
                     );
         }
 

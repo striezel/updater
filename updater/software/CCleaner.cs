@@ -65,17 +65,13 @@ namespace updater.software
                     HashAlgorithm.SHA256,
                     "72c650f8b4cb5d411375bbc965ba29c81aebc6d40991a3cda5ff5a333051e66b",
                     publisherX509,
-                    "/S",
-                    "C:\\Program Files\\CCleaner",
-                    "C:\\Program Files (x86)\\CCleaner"),
+                    "/S"),
                 new InstallInfoExe(
                     "https://download.ccleaner.com/ccsetup540.exe",
                     HashAlgorithm.SHA256,
                     "72c650f8b4cb5d411375bbc965ba29c81aebc6d40991a3cda5ff5a333051e66b",
                     publisherX509,
-                    "/S",
-                    null,
-                    "C:\\Program Files\\CCleaner")
+                    "/S")
                 );
         }
 

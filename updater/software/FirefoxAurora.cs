@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017  Dirk Stolle
+    Copyright (C) 2017, 2018  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -111,18 +111,14 @@ namespace updater.software
                     HashAlgorithm.SHA512,
                     checksum32Bit,
                     null,
-                    "-ms -ma",
-                    "C:\\Program Files\\Firefox Developer Edition",
-                    "C:\\Program Files (x86)\\Firefox Developer Edition"),
+                    "-ms -ma"),
                 //64 bit installer
                 new InstallInfoExe(
                     "https://ftp.mozilla.org/pub/firefox/nightly/latest-mozilla-aurora-l10n/firefox-" + currentVersion + "." + languageCode + ".win64.installer.exe",
                     HashAlgorithm.SHA512,
                     checksum64Bit,
                     null,
-                    "-ms -ma",
-                    null,
-                    "C:\\Program Files\\Firefox Developer Edition")
+                    "-ms -ma")
                     );
         }
 

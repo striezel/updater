@@ -64,17 +64,13 @@ namespace updater.software
                     HashAlgorithm.SHA1,
                     "c5b0205a3aa9ed2c15ad9788281a27c083b044b8",
                     publisherX509,
-                    "/S",
-                    "C:\\Program Files\\Notepad++",
-                    "C:\\Program Files (x86)\\Notepad++"),
+                    "/S"),
                 new InstallInfoExe(
                     "https://notepad-plus-plus.org/repository/7.x/7.5.4/npp.7.5.4.Installer.x64.exe",
                     HashAlgorithm.SHA1,
                     "f6f63a8c489410f465ddbbd2d90f6ba97f590b48",
                     publisherX509,
-                    "/S",
-                    null,
-                    "C:\\Program Files\\Notepad++")
+                    "/S")
                 );
         }
 

@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017  Dirk Stolle
+    Copyright (C) 2017, 2018  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -28,7 +28,7 @@ namespace updater_test
     internal class BasicTest
     {
         /// <summary>
-        /// get a temporary file name (does NOT create the file)
+        /// Gets a temporary file name (does NOT create the file).
         /// </summary>
         /// <returns>Returns file name, if successful.
         /// Returns null, if an error occurred.</returns>
@@ -47,17 +47,17 @@ namespace updater_test
 
 
         /// <summary>
-        /// gets an instance if AvailableSoftware filled with example data
+        /// Gets an instance if AvailableSoftware filled with example data.
         /// </summary>
         /// <returns>Returns a filled instance of AvailableSoftware class.</returns>
         internal static AvailableSoftware getAcme()
         {
             return new AvailableSoftware("ACME", "1.2.3", "ACME 32", "ACME 64",
                 new InstallInfoExe("https://www.example.com/dl/file.ext", HashAlgorithm.SHA1,
-                "7772433567cb18608519f649f981e38a0be12c26", null, "/S", "C:\\foo", "C:\\foo64"),
+                "7772433567cb18608519f649f981e38a0be12c26", null, "/S"),
                 new InstallInfoExe("https://www.example.com/dl/file64.ext", HashAlgorithm.SHA1,
-                "08519f649f981e38a0be12c267772433567cb186", null, "/S", "C:\\foo", "C:\\foo64"));
+                "08519f649f981e38a0be12c267772433567cb186", null, "/S"));
         }
 
-    } //class
-} //namespace
+    } // class
+} // namespace

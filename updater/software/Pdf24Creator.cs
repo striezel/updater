@@ -89,9 +89,7 @@ namespace updater.software
                     HashAlgorithm.SHA512,
                     "63da9b04743a7a5a5784d2dfcd5672acea00052a9de00bcf207144ab0c2912e054644f916242aea9661e53a6aff4865eefe6c0d00772ed8b2480643e47cf6786",
                     "CN=Geek Software GmbH, O=Geek Software GmbH, STREET=Friedrichstr 171, L=Berlin, S=Berlin, PostalCode=10117, C=DE",
-                    getOptions() + " /qn /norestart",
-                    "C:\\Program Files\\PDF24",
-                    "C:\\Program Files (x86)\\PDF24"),
+                    getOptions() + " /qn /norestart"),
                 // There is no 64 bit installer.
                 null);
         }

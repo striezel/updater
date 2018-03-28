@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017  Dirk Stolle
+    Copyright (C) 2017, 2018  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -59,9 +59,7 @@ namespace updater.software
                     HashAlgorithm.SHA256,
                     "adb0907d3be543f789bfa1dee10429d761ba858e320acf1b98ca5b4ef50b327a",
                     "E=james.k.crook@gmail.com, CN=James Crook, O=James Crook, C=IE",
-                    "/VERYSILENT /NORESTART",
-                    "C:\\Program Files\\Audacity",
-                    "C:\\Program Files (x86)\\Audacity"),
+                    "/VERYSILENT /NORESTART"),
                 null
                 );
         }

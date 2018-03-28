@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017  Dirk Stolle
+    Copyright (C) 2017, 2018  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -64,17 +64,13 @@ namespace updater.software
                     HashAlgorithm.SHA256,
                     "fbf9772ecf2d2829f097d33013f5c3b9a01ba9f7c1345dc494a7d913afdd2810",
                     publisherX509,
-                    "/qn /norestart",
-                    "C:\\Program Files\\CDBurnerXP",
-                    "C:\\Program Files (x86)\\CDBurnerXP"),
+                    "/qn /norestart"),
                 new InstallInfoMsi(
                     "https://download.cdburnerxp.se/msi/cdbxp_setup_x64_4.5.8.6795.msi",
                     HashAlgorithm.SHA256,
                     "49002f2f802dda8b8e86882601c78620fb0740878ada46f5158bc95034fa3738",
                     publisherX509,
-                    "/qn /norestart",
-                    null,
-                    "C:\\Program Files\\CDBurnerXP")
+                    "/qn /norestart")
                     );
         }
 

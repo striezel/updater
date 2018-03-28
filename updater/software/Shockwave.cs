@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017  Dirk Stolle
+    Copyright (C) 2017, 2018  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -58,9 +58,7 @@ namespace updater.software
                     HashAlgorithm.SHA512,
                     "51f548e54203be5f24373dd5f65a8b5bdb1a877e15959e4303a9545d498c0235e852e2e9efa4b3be4ad73034c3284ae42728c4e13f5b85d97f1689145d33401a",
                     null,
-                    "/qn /norestart",
-                    null,
-                    "C:\\Windows\\syswow64\\Adobe\\Director"),
+                    "/qn /norestart"),
                 //There is no 64 bit installer.
                 null);
         }

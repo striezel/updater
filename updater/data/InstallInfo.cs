@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017  Dirk Stolle
+    Copyright (C) 2017, 2018  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -37,8 +37,6 @@ namespace updater.data
             checksum = null;
             publisher = null;
             silentSwitches = null;
-            defaultPath32 = null;
-            defaultPath64 = null;
         }
 
 
@@ -50,17 +48,13 @@ namespace updater.data
         /// <param name="_check">checksum for the installer - hexadecimal representation</param>
         /// <param name="_publisher">common name of publisher, if file is signed</param>
         /// <param name="_silent">switches for silent installation</param>
-        /// <param name="_def32">default installation path on 32 bit systems</param>
-        /// <param name="_def64">default installation path on 64 bit systems</param>
-        public InstallInfo(string _downloadUrl, HashAlgorithm _algo, string _check, string _publisher, string _silent, string _def32, string _def64)
+        public InstallInfo(string _downloadUrl, HashAlgorithm _algo, string _check, string _publisher, string _silent)
         {
             downloadUrl = _downloadUrl;
             algorithm = _algo;
             checksum = _check;
             publisher = _publisher;
             silentSwitches = _silent;
-            defaultPath32 = _def32;
-            defaultPath64 = _def64;
         }
 
 
@@ -142,19 +136,5 @@ namespace updater.data
         /// </summary>
         [XmlElement(ElementName = "silent_switches", IsNullable = true)]
         public string silentSwitches;
-
-
-        /// <summary>
-        /// default installation path on 32 bit systems
-        /// </summary>
-        [XmlElement(ElementName = "defaultPath32", IsNullable = true)]
-        public string defaultPath32;
-
-
-        /// <summary>
-        /// default installation path on 64 bit systems
-        /// </summary>
-        [XmlElement(ElementName = "defaultPath64", IsNullable = true)]
-        public string defaultPath64;
     } //class
 } //namespace

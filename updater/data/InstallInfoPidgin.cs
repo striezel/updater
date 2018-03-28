@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017  Dirk Stolle
+    Copyright (C) 2017, 2018  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -26,7 +26,7 @@ namespace updater.data
     public class InstallInfoPidgin : InstallInfoExe
     {
         /// <summary>
-        /// default constructor
+        /// Default constructor.
         /// </summary>
         public InstallInfoPidgin()
             : base()
@@ -36,24 +36,22 @@ namespace updater.data
 
 
         /// <summary>
-        /// constructor with initial value parameters
+        /// Constructor with initial value parameters.
         /// </summary>
         /// <param name="_downloadUrl">URL where the installer can be downloaded</param>
         /// <param name="_algo">hash algorithm that was used to create or verify the checksum</param>
         /// <param name="_check">checksum for the installer - hexadecimal representation</param>
         /// <param name="_pub">publisher name</param>
         /// <param name="_silent">switches for silent installation</param>
-        /// <param name="_def32">default installation path on 32 bit systems</param>
-        /// <param name="_def64">default installation path on 64 bit systems</param>
-        public InstallInfoPidgin(string _downloadUrl, HashAlgorithm _algo, string _check, string _pub, string _silent, string _def32, string _def64)
-            : base(_downloadUrl, _algo, _check, _pub, _silent, _def32, _def64)
+        public InstallInfoPidgin(string _downloadUrl, HashAlgorithm _algo, string _check, string _pub, string _silent)
+            : base(_downloadUrl, _algo, _check, _pub, _silent)
         {
             //base class constructor does initialization
         }
 
 
         /// <summary>
-        /// creates a process instance that can be used to perform the update
+        /// Creates a process instance that can be used to perform the update.
         /// </summary>
         /// <param name="downloadedFile">path to the downloaded installer file</param>
         /// <param name="detected">info about detected software</param>
@@ -71,5 +69,5 @@ namespace updater.data
                 proc.StartInfo.Arguments += " /D " + utility.Strings.removeTrailingBackslash(detected.installPath);
             return proc;
         }
-    } //class
-} //namespace
+    } // class
+} // namespace

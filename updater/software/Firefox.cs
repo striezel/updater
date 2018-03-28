@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017  Dirk Stolle
+    Copyright (C) 2017, 2018  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -316,18 +316,14 @@ namespace updater.software
                     HashAlgorithm.SHA512,
                     checksum32Bit,
                     null,
-                    "-ms -ma",
-                    "C:\\Program Files\\Mozilla Firefox",
-                    "C:\\Program Files (x86)\\Mozilla Firefox"),
+                    "-ms -ma"),
                 //64 bit installer
                 new InstallInfoExe(
                     "https://ftp.mozilla.org/pub/firefox/releases/" + knownVersion + "/win64/" + languageCode + "/Firefox%20Setup%20" + knownVersion + ".exe",
                     HashAlgorithm.SHA512,
                     checksum64Bit,
                     null,
-                    "-ms -ma",
-                    "C:\\Program Files\\Mozilla Firefox",
-                    "C:\\Program Files (x86)\\Mozilla Firefox")
+                    "-ms -ma")
                     );
         }
 
