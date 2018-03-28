@@ -49,27 +49,27 @@ namespace updater.software
 
 
         /// <summary>
-        /// gets the currently known information about the software
+        /// Gets the currently known information about the software.
         /// </summary>
         /// <returns>Returns an AvailableSoftware instance with the known
         /// details about the software.</returns>
         public override AvailableSoftware knownInfo()
         {
             return new AvailableSoftware("CCleaner",
-                "5.40",
+                "5.41",
                 "^CCleaner+$",
                 "^CCleaner+$",
                 //CCleaner uses the same installer for 32 and 64 bit.
                 new InstallInfoExe(
-                    "https://download.ccleaner.com/ccsetup540.exe",
+                    "https://download.ccleaner.com/ccsetup541.exe",
                     HashAlgorithm.SHA256,
-                    "72c650f8b4cb5d411375bbc965ba29c81aebc6d40991a3cda5ff5a333051e66b",
+                    "d6fe8435a84858669ca04384595e5fdf7c7543a6d5f5198887a7b53852aecabf",
                     publisherX509,
                     "/S"),
                 new InstallInfoExe(
-                    "https://download.ccleaner.com/ccsetup540.exe",
+                    "https://download.ccleaner.com/ccsetup541.exe",
                     HashAlgorithm.SHA256,
-                    "72c650f8b4cb5d411375bbc965ba29c81aebc6d40991a3cda5ff5a333051e66b",
+                    "d6fe8435a84858669ca04384595e5fdf7c7543a6d5f5198887a7b53852aecabf",
                     publisherX509,
                     "/S")
                 );
@@ -77,7 +77,7 @@ namespace updater.software
 
 
         /// <summary>
-        /// list of IDs to identify the software
+        /// Gets a list of IDs to identify the software.
         /// </summary>
         /// <returns>Returns a non-empty array of IDs, where at least one entry is unique to the software.</returns>
         public override string[] id()
@@ -87,7 +87,7 @@ namespace updater.software
 
 
         /// <summary>
-        /// whether or not the method searchForNewer() is implemented
+        /// Determines whether or not the method searchForNewer() is implemented.
         /// </summary>
         /// <returns>Returns true, if searchForNewer() is implemented for that
         /// class. Returns false, if not. Calling searchForNewer() may throw an
@@ -99,7 +99,7 @@ namespace updater.software
 
 
         /// <summary>
-        /// looks for newer versions of the software than the currently known version
+        /// Looks for newer versions of the software than the currently known version.
         /// </summary>
         /// <returns>Returns an AvailableSoftware instance with the information
         /// that was retrieved from the net.</returns>
@@ -121,20 +121,20 @@ namespace updater.software
                 client.Dispose();
             } //using
 
-            //extract download URL
+            // extract download URL
             Regex reg = new Regex("http(s)?://download\\.ccleaner\\.com/ccsetup[0-9]+\\.exe");
             Match match = reg.Match(htmlCode);
             if (!match.Success)
                 return null;
-            //switch to HTTPS, if URL is HTTP only
+            // switch to HTTPS, if URL is HTTP only
             string newUrl = match.Value.Replace("http://", "https://");
-            //extract version
+            // extract version
             reg = new Regex("[0-9]+");
             match = reg.Match(newUrl);
             if (!match.Success)
                 return null;
             string newVersion = match.Value;
-            //new version should be at least three digits long
+            // new version should be at least three digits long
             if (newVersion.Length < 3)
                 return null;
             newVersion = newVersion.Substring(0, newVersion.Length - 2) + "." + newVersion.Substring(newVersion.Length - 2);
@@ -143,10 +143,10 @@ namespace updater.software
 
             //No checksums are provided, but binary is signed.
 
-            //construct new information
+            // construct new information
             var newInfo = knownInfo();
             newInfo.newestVersion = newVersion;
-            //32 bit
+            // 32 bit
             newInfo.install32Bit.downloadUrl = newUrl;
             newInfo.install32Bit.checksum = null;
             newInfo.install32Bit.algorithm = HashAlgorithm.Unknown;
@@ -159,8 +159,8 @@ namespace updater.software
 
 
         /// <summary>
-        /// lists names of processes that might block an update, e.g. because
-        /// the application cannot be update while it is running
+        /// Lists names of processes that might block an update, e.g. because
+        /// the application cannot be update while it is running.
         /// </summary>
         /// <param name="detected">currently installed / detected software version</param>
         /// <returns>Returns a list of process names that block the upgrade.</returns>
@@ -168,5 +168,5 @@ namespace updater.software
         {
             return new List<string>();
         }
-    } //class
-} //namespace
+    } // class
+} // namespace
