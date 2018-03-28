@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017  Dirk Stolle
+    Copyright (C) 2017, 2018  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -50,19 +50,19 @@ namespace updater.software
         public override AvailableSoftware knownInfo()
         {
             return new AvailableSoftware("Opera",
-                "47.0.2631.48",
+                "52.0.2871.37",
                 "^Opera Stable [0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+$",
                 "^Opera Stable [0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+$",
                 new InstallInfoExe(
-                    "https://get.geo.opera.com/pub/opera/desktop/47.0.2631.48/win/Opera_47.0.2631.48_i386_Setup.exe",
+                    "https://get.geo.opera.com/pub/opera/desktop/52.0.2871.37/win/Opera_52.0.2871.37_Setup.exe",
                     HashAlgorithm.SHA256,
-                    "ac978fe32372106ac07ab73aa8278144a06a0b86c871114010a0c8b14720ccd0",
+                    "07d2c4d005626d2632250a939af412ef6ef69f508fecd92ecd5a7475fac0b915",
                     null,
                     "/silent /norestart /launchopera 0 /setdefaultbrowser 0 /allusers"),
                 new InstallInfoExe(
-                    "https://get.geo.opera.com/pub/opera/desktop/47.0.2631.48/win/Opera_47.0.2631.48_x64_Setup.exe",
+                    "https://get.geo.opera.com/pub/opera/desktop/52.0.2871.37/win/Opera_52.0.2871.37_Setup_x64.exe",
                     HashAlgorithm.SHA256,
-                    "953c40fec6263b2aaa5d34093abf0ce8b93b59503493772b3a9debaab910f158",
+                    "404d016d6fade9ddbfa24d3d96401456ef7980d57eb9cfcc5b6e9037879b2a74",
                     null,
                     "/silent /norestart /launchopera 0 /setdefaultbrowser 0 /allusers")
                     );
@@ -182,14 +182,14 @@ namespace updater.software
             } //using
 
             //checksum for 32 bit installer
-            Regex reg = new Regex("[0-9a-f]{32}  pub/opera/desktop/" + Regex.Escape(newVersion) + "/win/Opera_" + Regex.Escape(newVersion) + "_i386_Setup\\.exe");
+            Regex reg = new Regex("[0-9a-f]{32}  pub/opera/desktop/" + Regex.Escape(newVersion) + "/win/Opera_" + Regex.Escape(newVersion) + "_Setup\\.exe");
             Match m = reg.Match(htmlCode);
             if (!m.Success)
                 return null;
             string checksum32 = m.Value.Substring(0, 32);
 
             //checksum for 64 bit installer
-            reg = new Regex("[0-9a-f]{32}  pub/opera/desktop/" + Regex.Escape(newVersion) + "/win/Opera_" + Regex.Escape(newVersion) + "_x64_Setup\\.exe");
+            reg = new Regex("[0-9a-f]{32}  pub/opera/desktop/" + Regex.Escape(newVersion) + "/win/Opera_" + Regex.Escape(newVersion) + "_Setup_x64\\.exe");
             m = reg.Match(htmlCode);
             if (!m.Success)
                 return null;
