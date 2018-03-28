@@ -43,7 +43,7 @@ namespace updater.software
 
 
         /// <summary>
-        /// gets the currently known information about the software
+        /// Gets the currently known information about the software.
         /// </summary>
         /// <returns>Returns an AvailableSoftware instance with the known
         /// details about the software.</returns>
@@ -70,7 +70,7 @@ namespace updater.software
 
 
         /// <summary>
-        /// list of IDs to identify the software
+        /// Gets a list of IDs to identify the software.
         /// </summary>
         /// <returns>Returns a non-empty array of IDs, where at least one entry is unique to the software.</returns>
         public override string[] id()
@@ -80,7 +80,7 @@ namespace updater.software
 
 
         /// <summary>
-        /// whether or not the method searchForNewer() is implemented
+        /// Determines whether or not the method searchForNewer() is implemented.
         /// </summary>
         /// <returns>Returns true, if searchForNewer() is implemented for that
         /// class. Returns false, if not. Calling searchForNewer() may throw an
@@ -92,7 +92,7 @@ namespace updater.software
 
 
         /// <summary>
-        /// looks for newer versions of the software than the currently known version
+        /// Looks for newer versions of the software than the currently known version.
         /// </summary>
         /// <returns>Returns an AvailableSoftware instance with the information
         /// that was retrieved from the net.</returns>
@@ -112,14 +112,14 @@ namespace updater.software
                     return null;
                 }
                 client.Dispose();
-            } //using
+            } // using
 
-            //Search for all knonwn versions.
+            // Search for all known versions.
             Regex reVersion = new Regex("\"[0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+/\"");
             var matches = reVersion.Matches(htmlCode);
             if (matches.Count == 0)
                 return null;
-            //Add found versions to a list ...
+            // Add found versions to a list ...
             List<versions.Quartet> versions = new List<versions.Quartet>();
             foreach (Match match in matches)
             {
@@ -131,7 +131,7 @@ namespace updater.software
             // ... and sort them from earliest to latest.
             versions.Sort();
 
-            //Now find the latest version that already has a win/ directory.
+            // Now find the latest version that already has a win/ directory.
             string newVersion = null;
             for (int i = versions.Count - 1; i >= 0; i--)
             {
@@ -146,17 +146,17 @@ namespace updater.software
                     }
                     catch (Exception)
                     {
-                        //Not found.
+                        // Not found.
                         exists = false;
                     }
                     client.Dispose();
-                } //using
+                } // using
                 if (exists)
                 {
                     newVersion = versions[i].full();
                     break;
-                } //if
-            } //for
+                } // if
+            } // for
 
             if (null == newVersion)
                 return null;
@@ -165,7 +165,9 @@ namespace updater.software
             if (newVersion == newInfo.newestVersion)
                 return newInfo;
 
-            //Look into "https://get.geo.opera.com/ftp/pub/opera/info/md5sum.txt".
+            // Look into "https://get.geo.opera.com/ftp/pub/opera/info/md5sum.txt".
+            // Yes, MD5 is weak and broken, but that is the only checksum that
+            // Opera provides via FTP. Still better than nothing.
             htmlCode = null;
             using (var client = new WebClient())
             {
@@ -179,24 +181,24 @@ namespace updater.software
                     return null;
                 }
                 client.Dispose();
-            } //using
+            } // using
 
-            //checksum for 32 bit installer
+            // checksum for 32 bit installer
             Regex reg = new Regex("[0-9a-f]{32}  pub/opera/desktop/" + Regex.Escape(newVersion) + "/win/Opera_" + Regex.Escape(newVersion) + "_Setup\\.exe");
             Match m = reg.Match(htmlCode);
             if (!m.Success)
                 return null;
             string checksum32 = m.Value.Substring(0, 32);
 
-            //checksum for 64 bit installer
+            // checksum for 64 bit installer
             reg = new Regex("[0-9a-f]{32}  pub/opera/desktop/" + Regex.Escape(newVersion) + "/win/Opera_" + Regex.Escape(newVersion) + "_Setup_x64\\.exe");
             m = reg.Match(htmlCode);
             if (!m.Success)
                 return null;
             string checksum64 = m.Value.Substring(0, 32);
 
-            //construct new version information based on old information
-            //replace version number - both as newest version and in URL for download
+            // Construct new version information based on old information.
+            // Replace version number - both as newest version and in URL for download.
             string oldVersion = newInfo.newestVersion;
             newInfo.newestVersion = newVersion;
             newInfo.install32Bit.downloadUrl = newInfo.install32Bit.downloadUrl.Replace(oldVersion, newVersion);
@@ -210,8 +212,8 @@ namespace updater.software
 
 
         /// <summary>
-        /// lists names of processes that might block an update, e.g. because
-        /// the application cannot be update while it is running
+        /// Lists names of processes that might block an update, e.g. because
+        /// the application cannot be update while it is running.
         /// </summary>
         /// <param name="detected">currently installed / detected software version</param>
         /// <returns>Returns a list of process names that block the upgrade.</returns>
@@ -219,5 +221,5 @@ namespace updater.software
         {
             return new List<string>();
         }
-    } //class
-} //namespace
+    } // class
+} // namespace
