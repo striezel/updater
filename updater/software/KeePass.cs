@@ -114,17 +114,17 @@ namespace updater.software
                 client.Dispose();
             } // using
 
-            Regex reExe = new Regex("&lt;KeePass\\-[2-9]\\.[0-9]{2}\\-Setup\\.exe&gt;");
+            Regex reExe = new Regex(">KeePass\\-[2-9]\\.[0-9]{2}\\-Setup\\.exe<");
             Match matchExe = reExe.Match(htmlCode);
             if (!matchExe.Success)
                 return null;
             // MSI follows after .exe
-            Regex reMsi = new Regex("&lt;KeePass\\-[2-9]\\.[0-9]{2}\\.msi&gt;");
+            Regex reMsi = new Regex(">KeePass\\-[2-9]\\.[0-9]{2}\\.msi<");
             Match matchMsi = reMsi.Match(htmlCode, matchExe.Index + 1);
             if (!matchMsi.Success)
                 return null;
             // extract new version number
-            string newVersion = matchExe.Value.Replace("&lt;KeePass-", "").Replace("-Setup.exe&gt;", "");
+            string newVersion = matchExe.Value.Replace(">KeePass-", "").Replace("-Setup.exe<", "");
             if (string.Compare(newVersion, knownInfo().newestVersion) < 0)
                 return null;
             // Version number should match usual scheme, e.g. 2.xx, where xx are two digits.
@@ -133,21 +133,13 @@ namespace updater.software
                 return null;
 
             // extract hash
-            Regex hash = new Regex("SHA256       \\: [0-9A-F ]+");
+            Regex hash = new Regex("([0-9A-F]{8} ){7}[0-9A-F]{8}");
             Match matchHash = hash.Match(htmlCode, matchExe.Index + 1);
             if (!matchHash.Success)
                 return null;
             if (matchHash.Index > matchMsi.Index)
                 return null;
-            // find second part of hash
-            Regex hash2 = new Regex("[0-9A-F ]+");
-            Match matchHash2 = hash2.Match(htmlCode, matchHash.Index + matchHash.Length);
-            if (!matchHash2.Success)
-                return null;
-            if (matchHash2.Index > matchMsi.Index)
-                return null;
-            string newHash = matchHash.Value.Replace("SHA256       : ", "").Trim()
-                + " " + matchHash2.Value.Trim();
+            string newHash = matchHash.Value.Trim();
             // construct new version information
             var newInfo = knownInfo();
             // replace version number - both as newest version and in URL for download
