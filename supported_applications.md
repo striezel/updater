@@ -10,7 +10,7 @@ updater application.
 * Calibre
 * CCleaner
 * CDBurnerXP
-* FileZilla
+* FileZilla FTP Client
 * GIMP
 * Inkscape
 * KeePass 2
@@ -18,14 +18,14 @@ updater application.
 * Mozilla Firefox
 * Mozilla Firefox ESR
 * Mozilla Thunderbird
-* Mumble
+* Mumble (client only)
 * Notepad++
 * Opera
 * PDF24 Creator
 * Pidgin
 * PuTTY
 * SeaMonkey
-* VLC
+* VLC media player
 * WinSCP
 
 ## Planned
