@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.gbProduct = new System.Windows.Forms.GroupBox();
+            this.rbSeaMonkey = new System.Windows.Forms.RadioButton();
             this.lblVersion = new System.Windows.Forms.Label();
             this.btnChecksums = new System.Windows.Forms.Button();
             this.rbThunderbird = new System.Windows.Forms.RadioButton();
@@ -40,7 +41,7 @@
             this.lblBit32 = new System.Windows.Forms.Label();
             this.rtbBit64 = new System.Windows.Forms.RichTextBox();
             this.lblBit64 = new System.Windows.Forms.Label();
-            this.rbSeaMonkey = new System.Windows.Forms.RadioButton();
+            this.rbFirefoxAurora = new System.Windows.Forms.RadioButton();
             this.gbProduct.SuspendLayout();
             this.gbChecksums.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -53,6 +54,7 @@
             // 
             this.gbProduct.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.gbProduct.Controls.Add(this.rbFirefoxAurora);
             this.gbProduct.Controls.Add(this.rbSeaMonkey);
             this.gbProduct.Controls.Add(this.lblVersion);
             this.gbProduct.Controls.Add(this.btnChecksums);
@@ -61,10 +63,21 @@
             this.gbProduct.Controls.Add(this.rbFirefoxRelease);
             this.gbProduct.Location = new System.Drawing.Point(12, 12);
             this.gbProduct.Name = "gbProduct";
-            this.gbProduct.Size = new System.Drawing.Size(677, 118);
+            this.gbProduct.Size = new System.Drawing.Size(677, 140);
             this.gbProduct.TabIndex = 1;
             this.gbProduct.TabStop = false;
             this.gbProduct.Text = "Product";
+            // 
+            // rbSeaMonkey
+            // 
+            this.rbSeaMonkey.AutoSize = true;
+            this.rbSeaMonkey.Location = new System.Drawing.Point(6, 111);
+            this.rbSeaMonkey.Name = "rbSeaMonkey";
+            this.rbSeaMonkey.Size = new System.Drawing.Size(79, 17);
+            this.rbSeaMonkey.TabIndex = 5;
+            this.rbSeaMonkey.Text = "seamonkey";
+            this.rbSeaMonkey.UseVisualStyleBackColor = true;
+            this.rbSeaMonkey.CheckedChanged += new System.EventHandler(this.rbFirefoxRelease_CheckedChanged);
             // 
             // lblVersion
             // 
@@ -87,7 +100,7 @@
             // rbThunderbird
             // 
             this.rbThunderbird.AutoSize = true;
-            this.rbThunderbird.Location = new System.Drawing.Point(6, 65);
+            this.rbThunderbird.Location = new System.Drawing.Point(6, 88);
             this.rbThunderbird.Name = "rbThunderbird";
             this.rbThunderbird.Size = new System.Drawing.Size(78, 17);
             this.rbThunderbird.TabIndex = 2;
@@ -98,7 +111,7 @@
             // rbFirefoxESR
             // 
             this.rbFirefoxESR.AutoSize = true;
-            this.rbFirefoxESR.Location = new System.Drawing.Point(6, 42);
+            this.rbFirefoxESR.Location = new System.Drawing.Point(6, 65);
             this.rbFirefoxESR.Name = "rbFirefoxESR";
             this.rbFirefoxESR.Size = new System.Drawing.Size(70, 17);
             this.rbFirefoxESR.TabIndex = 1;
@@ -114,7 +127,6 @@
             this.rbFirefoxRelease.Name = "rbFirefoxRelease";
             this.rbFirefoxRelease.Size = new System.Drawing.Size(90, 17);
             this.rbFirefoxRelease.TabIndex = 0;
-            this.rbFirefoxRelease.TabStop = true;
             this.rbFirefoxRelease.Text = "firefox-release";
             this.rbFirefoxRelease.UseVisualStyleBackColor = true;
             this.rbFirefoxRelease.CheckedChanged += new System.EventHandler(this.rbFirefoxRelease_CheckedChanged);
@@ -125,7 +137,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.gbChecksums.Controls.Add(this.splitContainer1);
-            this.gbChecksums.Location = new System.Drawing.Point(12, 136);
+            this.gbChecksums.Location = new System.Drawing.Point(12, 158);
             this.gbChecksums.Name = "gbChecksums";
             this.gbChecksums.Size = new System.Drawing.Size(677, 209);
             this.gbChecksums.TabIndex = 2;
@@ -197,23 +209,21 @@
             this.lblBit64.TabIndex = 0;
             this.lblBit64.Text = "64 bit:";
             // 
-            // rbSeaMonkey
+            // rbFirefoxAurora
             // 
-            this.rbSeaMonkey.AutoSize = true;
-            this.rbSeaMonkey.Location = new System.Drawing.Point(6, 88);
-            this.rbSeaMonkey.Name = "rbSeaMonkey";
-            this.rbSeaMonkey.Size = new System.Drawing.Size(79, 17);
-            this.rbSeaMonkey.TabIndex = 5;
-            this.rbSeaMonkey.TabStop = true;
-            this.rbSeaMonkey.Text = "seamonkey";
-            this.rbSeaMonkey.UseVisualStyleBackColor = true;
-            this.rbSeaMonkey.CheckedChanged += new System.EventHandler(this.rbFirefoxRelease_CheckedChanged);
+            this.rbFirefoxAurora.AutoSize = true;
+            this.rbFirefoxAurora.Location = new System.Drawing.Point(6, 42);
+            this.rbFirefoxAurora.Name = "rbFirefoxAurora";
+            this.rbFirefoxAurora.Size = new System.Drawing.Size(86, 17);
+            this.rbFirefoxAurora.TabIndex = 6;
+            this.rbFirefoxAurora.Text = "firefox-aurora";
+            this.rbFirefoxAurora.UseVisualStyleBackColor = true;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(701, 357);
+            this.ClientSize = new System.Drawing.Size(701, 379);
             this.Controls.Add(this.gbChecksums);
             this.Controls.Add(this.gbProduct);
             this.MinimumSize = new System.Drawing.Size(600, 300);
@@ -247,6 +257,7 @@
         private System.Windows.Forms.Button btnChecksums;
         private System.Windows.Forms.Label lblVersion;
         private System.Windows.Forms.RadioButton rbSeaMonkey;
+        private System.Windows.Forms.RadioButton rbFirefoxAurora;
     }
 }
 

@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017  Dirk Stolle
+    Copyright (C) 2017, 2018  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -44,6 +44,8 @@ namespace moz_checksum_generator
                 getFxChecksums();
             else if (rbFirefoxESR.Checked)
                 getFxEsrChecksums();
+            else if (rbFirefoxAurora.Checked)
+                getFxAuroraChecksums();
             else if (rbThunderbird.Checked)
                 getTbChecksums();
             else if (rbSeaMonkey.Checked)
@@ -131,6 +133,67 @@ namespace moz_checksum_generator
 
 
         /// <summary>
+        /// finds checksums for the current Firefox Developer Edition release
+        /// </summary>
+        void getFxAuroraChecksums()
+        {
+            updater.software.FirefoxAurora fx = new updater.software.FirefoxAurora("de", false);
+            string version = fx.determineNewestVersion();
+            if (string.IsNullOrWhiteSpace(version))
+            {
+                MessageBox.Show("Could not determine current version of Firefox Developer Edition!",
+                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            lblVersion.Text = "Version " + version;
+
+            /* Checksums are found in a file like
+             * https://ftp.mozilla.org/pub/devedition/releases/60.0b9/SHA512SUMS
+             * Common lines look like
+             * "7d2caf5e18....2aa76f2  win64/en-GB/Firefox Setup 60.0b9.exe"
+             */
+
+            string url = "https://ftp.mozilla.org/pub/devedition/releases/" + version + "/SHA512SUMS";
+            string sha512SumsContent = null;
+            using (var client = new WebClient())
+            {
+                try
+                {
+                    sha512SumsContent = client.DownloadString(url);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Exception occurred while checking for newer version of Firefox Developer Edition: " + ex.Message);
+                    client.Dispose();
+                    return;
+                }
+                client.Dispose();
+            } //using
+            //look for line with language code and version for 32 bit
+            Regex reChecksum32Bit = new Regex("[0-9a-f]{128}  win32/[a-z]{2,3}(\\-[A-Z]+)?/Firefox Setup " + Regex.Escape(version) + "\\.exe");
+            var data = new SortedDictionary<string, string>();
+            MatchCollection matches = reChecksum32Bit.Matches(sha512SumsContent);
+            for (int i = 0; i < matches.Count; i++)
+            {
+                string language = matches[i].Value.Substring(136).Replace("/Firefox Setup " + version + ".exe", "");
+                data.Add(language, matches[i].Value.Substring(0, 128));
+            } //for
+            rtbBit32.Text = getChecksumCode(data);
+
+            //look for line with the correct language code and version for 64 bit
+            Regex reChecksum64Bit = new Regex("[0-9a-f]{128}  win64/[a-z]{2,3}(\\-[A-Z]+)?/Firefox Setup " + Regex.Escape(version) + "\\.exe");
+            data.Clear();
+            matches = reChecksum64Bit.Matches(sha512SumsContent);
+            for (int i = 0; i < matches.Count; i++)
+            {
+                string language = matches[i].Value.Substring(136).Replace("/Firefox Setup " + version + ".exe", "");
+                data.Add(language, matches[i].Value.Substring(0, 128));
+            } //for
+            rtbBit64.Text = getChecksumCode(data);
+        }
+
+
+        /// <summary>
         /// finds checksums for the current Firefox ESR release
         /// </summary>
         void getFxEsrChecksums()
@@ -139,7 +202,7 @@ namespace moz_checksum_generator
             string version = fx.determineNewestVersion();
             if (string.IsNullOrWhiteSpace(version))
             {
-                MessageBox.Show("Could not determine current version of Thunderbird!",
+                MessageBox.Show("Could not determine current version of Firefox ESR!",
                     "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
