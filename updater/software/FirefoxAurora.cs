@@ -40,7 +40,7 @@ namespace updater.software
         /// <summary>
         /// the currently known newest version
         /// </summary>
-        private const string currentVersion = "60.0b8";
+        private const string currentVersion = "60.0b10";
 
         /// <summary>
         /// constructor with language code
@@ -200,7 +200,7 @@ namespace updater.software
 
             logger.Debug("Determining newest checksums of Firefox Developer Edition (" + languageCode + ")...");
             string sha512SumsContent = null;
-            if (!string.IsNullOrWhiteSpace(checksumsText))
+            if (!string.IsNullOrWhiteSpace(checksumsText) && (newerVersion==currentVersion))
             {
                 // Use text from earlier request.
                 sha512SumsContent = checksumsText;
@@ -214,7 +214,10 @@ namespace updater.software
                     try
                     {
                         sha512SumsContent = client.DownloadString(url);
-                        checksumsText = sha512SumsContent;
+                        if (newerVersion == currentVersion)
+                        {
+                            checksumsText = sha512SumsContent;
+                        }
                     }
                     catch (Exception ex)
                     {
@@ -225,6 +228,17 @@ namespace updater.software
                     client.Dispose();
                 } // using
             } // else
+            if (newerVersion == currentVersion)
+            {
+                if (cs64==null || cs32==null)
+                {
+                    fillChecksumDictionaries();
+                }
+                if (cs64 != null && cs32 != null && cs32.ContainsKey(languageCode) && cs64.ContainsKey(languageCode))
+                {
+                    return new string[2] { cs32[languageCode], cs64[languageCode] };
+                }
+            }
             var sums = new List<string>();
             foreach (var bits in new string[] { "32", "64" })
             {
@@ -241,6 +255,41 @@ namespace updater.software
             return sums.ToArray();
         }
 
+
+        /// <summary>
+        /// Takes the plain text from the checksum file (if already present) and extracts checksums from that file into a dictionary.
+        /// </summary>
+        private void fillChecksumDictionaries()
+        {
+            if (!string.IsNullOrWhiteSpace(checksumsText))
+            {
+                if ((null == cs32) || (cs32.Count == 0))
+                {
+                    // look for lines with language code and version for 32 bit
+                    Regex reChecksum32Bit = new Regex("[0-9a-f]{128}  win32/[a-z]{2,3}(\\-[A-Z]+)?/Firefox Setup " + Regex.Escape(currentVersion) + "\\.exe");
+                    cs32 = new SortedDictionary<string, string>();
+                    MatchCollection matches = reChecksum32Bit.Matches(checksumsText);
+                    for (int i = 0; i < matches.Count; i++)
+                    {
+                        string language = matches[i].Value.Substring(136).Replace("/Firefox Setup " + currentVersion + ".exe", "");
+                        cs32.Add(language, matches[i].Value.Substring(0, 128));
+                    } //for
+                }
+
+                if ((null == cs64) || (cs64.Count == 0))
+                {
+                    //look for line with the correct language code and version for 64 bit
+                    Regex reChecksum64Bit = new Regex("[0-9a-f]{128}  win64/[a-z]{2,3}(\\-[A-Z]+)?/Firefox Setup " + Regex.Escape(currentVersion) + "\\.exe");
+                    cs64 = new SortedDictionary<string, string>();
+                    MatchCollection matches = reChecksum64Bit.Matches(checksumsText);
+                    for (int i = 0; i < matches.Count; i++)
+                    {
+                        string language = matches[i].Value.Substring(136).Replace("/Firefox Setup " + currentVersion + ".exe", "");
+                        cs64.Add(language, matches[i].Value.Substring(0, 128));
+                    } //for
+                }
+            }
+        }
 
         /// <summary>
         /// Determines whether or not the method searchForNewer() is implemented.
@@ -326,5 +375,15 @@ namespace updater.software
         /// static variable that contains the text from the checksums file
         /// </summary>
         private static string checksumsText = null;
+
+        /// <summary>
+        /// dictionary of known checksums for 32 bit versions (key: language code; value: checksum)
+        /// </summary>
+        private static SortedDictionary<string, string> cs32 = null;
+
+        /// <summary>
+        /// dictionary of known checksums for 64 bit version (key: language code; value: checksum)
+        /// </summary>
+        private static SortedDictionary<string, string> cs64 = null;
     } // class
 } // namespace
