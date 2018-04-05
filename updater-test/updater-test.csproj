@@ -91,6 +91,7 @@
     <Compile Include="utility\PortableExecutable_Tests.cs" />
     <Compile Include="utility\Strings_Tests.cs" />
     <Compile Include="utility\Verificator_Tests.cs" />
+    <Compile Include="versions\QuartetAurora_Tests.cs" />
     <Compile Include="versions\Quartet_Tests.cs" />
     <Compile Include="versions\Triple_Tests.cs" />
   </ItemGroup>

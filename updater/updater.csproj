@@ -135,6 +135,7 @@
     <Compile Include="utility\trust\AuxiliaryClasses.cs" />
     <Compile Include="utility\Verificator.cs" />
     <Compile Include="utility\Version.cs" />
+    <Compile Include="versions\QuartetAurora.cs" />
     <Compile Include="versions\Triple.cs" />
     <Compile Include="versions\Quartet.cs" />
   </ItemGroup>

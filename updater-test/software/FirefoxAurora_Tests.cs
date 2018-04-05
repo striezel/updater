@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017  Dirk Stolle
+    Copyright (C) 2017, 2018  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -26,7 +26,7 @@ namespace updater_test.software
     public class FirefoxAurora_Tests : BasicSoftwareTests
     {
         /// <summary>
-        /// checks return value of the validLanguageCodes() method
+        /// Checks return value of the validLanguageCodes() method.
         /// </summary>
         [TestMethod]
         public void Test_validLanguageCodes()
@@ -45,7 +45,7 @@ namespace updater_test.software
 
 
         /// <summary>
-        /// checks whether info() returns some meaningful data
+        /// Checks whether info() returns some meaningful data.
         /// </summary>
         [TestMethod]
         public void Test_info()
@@ -55,7 +55,7 @@ namespace updater_test.software
 
 
         /// <summary>
-        /// checks whether the class implements the searchForNewer() method
+        /// Checks whether the class implements the searchForNewer() method.
         /// </summary>
         [TestMethod]
         public void Test_implementsSearchForNewer()
@@ -72,14 +72,20 @@ namespace updater_test.software
             var info = fx.info();
 
             Regex re = new Regex(info.match64Bit);
+            // older naming convention
             Assert.IsTrue(re.IsMatch("Firefox Developer Edition 53.0a2 (x64 de)"));
+            // newer naming convention
+            Assert.IsTrue(re.IsMatch("Firefox Developer Edition 59.0 (x64 de)"));
             re = new Regex(info.match32Bit);
+            // older naming convention
             Assert.IsTrue(re.IsMatch("Firefox Developer Edition 53.0a2 (x86 de)"));
+            // newer naming convention
+            Assert.IsTrue(re.IsMatch("Firefox Developer Edition 59.0 (x86 de)"));
         }
 
 
         /// <summary>
-        /// checks whether searchForNewer() returns something
+        /// Checks whether searchForNewer() returns something.
         /// </summary>
         [TestMethod]
         public void Test_searchForNewer()
@@ -89,7 +95,7 @@ namespace updater_test.software
 
 
         /// <summary>
-        /// checks whether the class info is up to date
+        /// Checks whether the class info is up to date.
         /// </summary>
         [TestMethod]
         public void Test_upToDate_info()
@@ -97,5 +103,5 @@ namespace updater_test.software
             _upToDate_info(new FirefoxAurora("de", false));
         }
         
-    } //class
-} //namespace
+    } // class
+} // namespace

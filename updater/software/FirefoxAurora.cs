@@ -22,6 +22,7 @@ using System.Linq;
 using System.Net;
 using System.Text.RegularExpressions;
 using updater.data;
+using updater.versions;
 
 namespace updater.software
 {
@@ -39,7 +40,7 @@ namespace updater.software
         /// <summary>
         /// the currently known newest version
         /// </summary>
-        private const string currentVersion = "54.0a2";
+        private const string currentVersion = "60.0b8";
 
         /// <summary>
         /// constructor with language code
@@ -63,7 +64,7 @@ namespace updater.software
                 logger.Error("The string '" + langCode + "' does not represent a valid language code!");
                 throw new ArgumentOutOfRangeException("langCode", "The string '" + langCode + "' does not represent a valid language code!");
             }
-            //Do not set checksum explicitly, because nightly releases change too often.
+            //Do not set checksum explicitly, because aurora releases change too often.
             // Instead we try to get them on demand, when needed.
             checksum32Bit = null;
             checksum64Bit = null;
@@ -72,19 +73,19 @@ namespace updater.software
 
 
         /// <summary>
-        /// gets an enumerable collection of valid language codes
+        /// Gets an enumerable collection of valid language codes.
         /// </summary>
         /// <returns>Returns an enumerable collection of valid language codes.</returns>
         public static IEnumerable<string> validLanguageCodes()
         {
-            //Let's use the same language codes as in Firefox release channel.
+            // Let's use the same language codes as in Firefox release channel.
             // That may not be completely accurate, but it should be close enough.
             return Firefox.validLanguageCodes();
         }
 
 
         /// <summary>
-        /// gets the currently known information about the software
+        /// Gets the currently known information about the software.
         /// </summary>
         /// <returns>Returns an AvailableSoftware instance with the known
         /// details about the software.</returns>
@@ -99,22 +100,24 @@ namespace updater.software
                     checksum32Bit = sums[0];
                     checksum64Bit = sums[1];
                 }
-            } //if there are no checksums and we did not try to find them yet
+            } // if there are no checksums and we did not try to find them yet
 
             return new AvailableSoftware("Firefox Developer Edition (" + languageCode + ")",
                 currentVersion,
-                "^Firefox Developer Edition [0-9]{2}\\.[0-9][a-z][0-9] \\(x86 " + Regex.Escape(languageCode) + "\\)$",
-                "^Firefox Developer Edition [0-9]{2}\\.[0-9][a-z][0-9] \\(x64 " + Regex.Escape(languageCode) + "\\)$",
-                //32 bit installer
+                "^Firefox Developer Edition [0-9]{2}\\.[0-9]([a-z][0-9])? \\(x86 " + Regex.Escape(languageCode) + "\\)$",
+                "^Firefox Developer Edition [0-9]{2}\\.[0-9]([a-z][0-9])? \\(x64 " + Regex.Escape(languageCode) + "\\)$",
+                // 32 bit installer
                 new InstallInfoExe(
-                    "https://ftp.mozilla.org/pub/firefox/nightly/latest-mozilla-aurora-l10n/firefox-" + currentVersion + "." + languageCode + ".win32.installer.exe",
+                    // URL is formed like "https://ftp.mozilla.org/pub/devedition/releases/60.0b9/win32/en-GB/Firefox%20Setup%2060.0b9.exe".
+                    "https://ftp.mozilla.org/pub/devedition/releases/" + currentVersion + "/win32/" + languageCode + "/Firefox%20Setup%20" + currentVersion + ".exe",
                     HashAlgorithm.SHA512,
                     checksum32Bit,
                     null,
                     "-ms -ma"),
-                //64 bit installer
+                // 64 bit installer
                 new InstallInfoExe(
-                    "https://ftp.mozilla.org/pub/firefox/nightly/latest-mozilla-aurora-l10n/firefox-" + currentVersion + "." + languageCode + ".win64.installer.exe",
+                    // URL is formed like "https://ftp.mozilla.org/pub/devedition/releases/60.0b9/win64/en-GB/Firefox%20Setup%2060.0b9.exe".
+                    "https://ftp.mozilla.org/pub/devedition/releases/" + currentVersion + "/win64/"+ languageCode+"/Firefox%20Setup%20" + currentVersion + ".exe",
                     HashAlgorithm.SHA512,
                     checksum64Bit,
                     null,
@@ -124,7 +127,7 @@ namespace updater.software
 
 
         /// <summary>
-        /// list of IDs to identify the software
+        /// Gets a list of IDs to identify the software.
         /// </summary>
         /// <returns>Returns a non-empty array of IDs, where at least one entry is unique to the software.</returns>
         public override string[] id()
@@ -134,43 +137,54 @@ namespace updater.software
 
 
         /// <summary>
-        /// tries to find the newest version number of Firefox Developer Edition
+        /// Tries to find the newest version number of Firefox Developer Edition.
         /// </summary>
         /// <returns>Returns a string containing the newest version number on success.
         /// Returns null, if an error occurred.</returns>
         private string determineNewestVersion()
         {
             logger.Debug("Determining newest version of Firefox Developer Edition (" + languageCode + ")...");
-            string url = "https://download.mozilla.org/?product=firefox-aurora-latest-l10n-ssl&os=win&lang=" + languageCode;
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
-            request.Method = WebRequestMethods.Http.Head;
-            request.AllowAutoRedirect = false;
-            try
-            {
-                HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-                if (response.StatusCode != HttpStatusCode.Found)
-                    return null;
-                string newLocation = response.Headers[HttpResponseHeader.Location];
-                request = null;
-                response = null;
-                Regex reVersion = new Regex("[0-9]{2}\\.[0-9][a-z][0-9]");
-                Match matchVersion = reVersion.Match(newLocation);
-                if (!matchVersion.Success)
-                    return null;
-                string currentVersion = matchVersion.Value;
+            string url = "https://ftp.mozilla.org/pub/devedition/releases/";
 
-                return currentVersion;
-            }
-            catch (Exception ex)
+            string htmlContent = null;
+            using (var client = new WebClient())
             {
-                logger.Warn("Error while looking for newer Firefox Developer Edition version: " + ex.Message);
-                return null;
+                try
+                {
+                    htmlContent = client.DownloadString(url);
+                }
+                catch (Exception ex)
+                {
+                    logger.Warn("Error while looking for newer Firefox Developer Edition version: " + ex.Message);
+                    return null;
+                }
+                client.Dispose();
+            } // using
+
+            // HTML source contains something like "<a href="/pub/devedition/releases/54.0b11/">54.0b11/</a>"
+            // for every version. We just collect them all and look for the newest version.
+            List<QuartetAurora> versions = new List<QuartetAurora>();
+            Regex regEx = new Regex("<a href=\"/pub/devedition/releases/([0-9]+\\.[0-9]+[a-z][0-9]+)/\">([0-9]+\\.[0-9]+[a-z][0-9]+)/</a>");
+            MatchCollection matches = regEx.Matches(htmlContent);
+            foreach (Match match in matches)
+            {
+                if (match.Success)
+                {
+                    versions.Add(new QuartetAurora(match.Groups[1].Value));
+                }
+            } // foreach
+            versions.Sort();
+            if (versions.Count > 0)
+            {
+                return versions[versions.Count - 1].full();
             }
+            else
+                return null;
         }
 
 
         /// <summary>
-        /// tries to get the checksums of the newer version
+        /// Tries to get the checksums of the newer version.
         /// </summary>
         /// <returns>Returns a string array containing the checksums for 32 bit an 64 bit (in that order), if successfull.
         /// Returns null, if an error occurred.</returns>
@@ -179,48 +193,47 @@ namespace updater.software
             if (string.IsNullOrWhiteSpace(newerVersion))
                 return null;
             /* Checksums are found in a file like
-             * https://ftp.mozilla.org/pub/firefox/nightly/latest-mozilla-aurora-l10n/firefox-53.0a2.de.win64.checksums
+             * https://ftp.mozilla.org/pub/devedition/releases/60.0b9/SHA512SUMS
              * Common lines look like
-             * "faa1ddd5...1512 sha512 47502080 install/sea/firefox-53.0a2.de.win64.installer.exe"
+             * "7d2caf5e18....2aa76f2  win64/en-GB/Firefox Setup 60.0b9.exe"
              */
 
             logger.Debug("Determining newest checksums of Firefox Developer Edition (" + languageCode + ")...");
+            string url = "https://ftp.mozilla.org/pub/devedition/releases/" + newerVersion + "/SHA512SUMS";
+            string sha512SumsContent = null;
+            using (var client = new WebClient())
+            {
+                try
+                {
+                    sha512SumsContent = client.DownloadString(url);
+                }
+                catch (Exception ex)
+                {
+                    logger.Warn("Exception occurred while checking for newer"
+                        + " version of Firefox Developer Edition (" + languageCode + "): " + ex.Message);
+                    return null;
+                }
+                client.Dispose();
+            } // using
             var sums = new List<string>();
             foreach (var bits in new string[] { "32", "64" })
             {
-                string url = "https://ftp.mozilla.org/pub/firefox/nightly/latest-mozilla-aurora-l10n/firefox-"
-                    + newerVersion + "." + languageCode + ".win" + bits + ".checksums";
-                string sha512SumsContent = null;
-                using (var client = new WebClient())
-                {
-                    try
-                    {
-                        sha512SumsContent = client.DownloadString(url);
-                    }
-                    catch (Exception ex)
-                    {
-                        logger.Warn("Exception occurred while checking for newer"
-                            + " version of Firefox Developer Edition (" + languageCode + "): " + ex.Message);
-                        return null;
-                    }
-                    client.Dispose();
-                } //using
-                  //look for line with the correct data
-                Regex reChecksum = new Regex("[0-9a-f]{128} sha512 [0-9]+ install/sea/firefox\\-"
-                    + Regex.Escape(newerVersion) + "\\." + languageCode.Replace("-", "\\-") + "\\.win" + bits + "\\.installer\\.exe");
+                // look for line with the correct data
+                Regex reChecksum = new Regex("[0-9a-f]{128}  win" + bits + "/" + languageCode.Replace("-", "\\-")
+                    + "/Firefox Setup " + Regex.Escape(newerVersion) + "\\.exe");
                 Match matchChecksum = reChecksum.Match(sha512SumsContent);
                 if (!matchChecksum.Success)
                     return null;
                 // checksum is the first 128 characters of the match
                 sums.Add(matchChecksum.Value.Substring(0, 128));
-            } //foreach
-            //return list as array
+            } // foreach
+            // return list as array
             return sums.ToArray();
         }
 
 
         /// <summary>
-        /// whether or not the method searchForNewer() is implemented
+        /// Determines whether or not the method searchForNewer() is implemented.
         /// </summary>
         /// <returns>Returns true, if searchForNewer() is implemented for that
         /// class. Returns false, if not. Calling searchForNewer() may throw an
@@ -232,7 +245,7 @@ namespace updater.software
 
 
         /// <summary>
-        /// looks for newer versions of the software than the currently known version
+        /// Looks for newer versions of the software than the currently known version.
         /// </summary>
         /// <returns>Returns an AvailableSoftware instance with the information
         /// that was retrieved from the net.</returns>
@@ -242,7 +255,7 @@ namespace updater.software
             string newerVersion = determineNewestVersion();
             if (string.IsNullOrWhiteSpace(newerVersion))
                 return null;
-            //If versions match, we can return the current information.
+            // If versions match, we can return the current information.
             var currentInfo = knownInfo();
             if (newerVersion == currentInfo.newestVersion)
                 // fallback to known information
@@ -253,7 +266,7 @@ namespace updater.software
                 || string.IsNullOrWhiteSpace(newerChecksums[1]))
                 // fallback to known information
                 return null;
-            //replace all stuff
+            // replace all stuff
             string oldVersion = currentInfo.newestVersion;
             currentInfo.newestVersion = newerVersion;
             currentInfo.install32Bit.downloadUrl = currentInfo.install32Bit.downloadUrl.Replace(oldVersion, newerVersion);
@@ -265,8 +278,8 @@ namespace updater.software
 
 
         /// <summary>
-        /// lists names of processes that might block an update, e.g. because
-        /// the application cannot be update while it is running
+        /// Lists names of processes that might block an update, e.g. because
+        /// the application cannot be update while it is running.
         /// </summary>
         /// <param name="detected">currently installed / detected software version</param>
         /// <returns>Returns a list of process names that block the upgrade.</returns>
@@ -277,7 +290,7 @@ namespace updater.software
 
 
         /// <summary>
-        /// language code for the Firefox ESR version
+        /// language code for the Firefox Developer Edition version
         /// </summary>
         private string languageCode;
 
@@ -298,5 +311,5 @@ namespace updater.software
         /// whether or not this instance already tried to get the checksums
         /// </summary>
         private bool triedToGetChecksums;
-    } //class
-} //namespace
+    } // class
+} // namespace
