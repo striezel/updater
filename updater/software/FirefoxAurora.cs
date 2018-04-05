@@ -199,22 +199,32 @@ namespace updater.software
              */
 
             logger.Debug("Determining newest checksums of Firefox Developer Edition (" + languageCode + ")...");
-            string url = "https://ftp.mozilla.org/pub/devedition/releases/" + newerVersion + "/SHA512SUMS";
             string sha512SumsContent = null;
-            using (var client = new WebClient())
+            if (!string.IsNullOrWhiteSpace(checksumsText))
             {
-                try
+                // Use text from earlier request.
+                sha512SumsContent = checksumsText;
+            }
+            else
+            {
+                // Get file content from Mozilla server.
+                string url = "https://ftp.mozilla.org/pub/devedition/releases/" + newerVersion + "/SHA512SUMS";
+                using (var client = new WebClient())
                 {
-                    sha512SumsContent = client.DownloadString(url);
-                }
-                catch (Exception ex)
-                {
-                    logger.Warn("Exception occurred while checking for newer"
-                        + " version of Firefox Developer Edition (" + languageCode + "): " + ex.Message);
-                    return null;
-                }
-                client.Dispose();
-            } // using
+                    try
+                    {
+                        sha512SumsContent = client.DownloadString(url);
+                        checksumsText = sha512SumsContent;
+                    }
+                    catch (Exception ex)
+                    {
+                        logger.Warn("Exception occurred while checking for newer"
+                            + " version of Firefox Developer Edition (" + languageCode + "): " + ex.Message);
+                        return null;
+                    }
+                    client.Dispose();
+                } // using
+            } // else
             var sums = new List<string>();
             foreach (var bits in new string[] { "32", "64" })
             {
@@ -311,5 +321,10 @@ namespace updater.software
         /// whether or not this instance already tried to get the checksums
         /// </summary>
         private bool triedToGetChecksums;
+
+        /// <summary>
+        /// static variable that contains the text from the checksums file
+        /// </summary>
+        private static string checksumsText = null;
     } // class
 } // namespace
