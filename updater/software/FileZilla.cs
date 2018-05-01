@@ -24,6 +24,9 @@ using updater.data;
 
 namespace updater.software
 {
+    /// <summary>
+    /// FileZilla FTP Client
+    /// </summary>
     public class FileZilla : NoPreUpdateProcessSoftware
     {
         /// <summary>
@@ -54,19 +57,19 @@ namespace updater.software
             // The last version that still supports Windows XP is 3.8.0
             if (utility.OS.isWin7OrNewer())
                 return new AvailableSoftware("FileZilla FTP Client",
-                    "3.31.0",
+                    "3.32.0",
                     "^FileZilla Client [0-9]+\\.[0-9]+(\\.[0-9]+(\\.[0-9]+)?)?$",
                     "^FileZilla Client [0-9]+\\.[0-9]+(\\.[0-9]+(\\.[0-9]+)?)?$",
                     new InstallInfoExe(
-                        "https://dl1.cdn.filezilla-project.org/client/FileZilla_3.31.0_win32-setup.exe",
+                        "https://dl1.cdn.filezilla-project.org/client/FileZilla_3.32.0_win32-setup.exe",
                         HashAlgorithm.SHA512,
-                        "da984f2ca362c93984af1eacb0f2c15841f4f6c7bdfacbf94d19eb9f6b01224973977c3ffe66156cf343af4d859ab14e1231b95bc9d3301f94edecd15ab84d5c",
+                        "e7b2992c31ff74c8ec141cd1a64dacd58167c4816f1d4040b3385e6abba5d8587fa4c39d9f7a1f1b69d13de00a51177f65f56405ee2b11a9e26bc7ace6982e0e",
                         null,
                         "/S"),
                     new InstallInfoExe(
-                        "https://dl1.cdn.filezilla-project.org/client/FileZilla_3.31.0_win64-setup.exe",
+                        "https://dl1.cdn.filezilla-project.org/client/FileZilla_3.32.0_win64-setup.exe",
                         HashAlgorithm.SHA512,
-                        "ce07d3e0e315b917dc98cbfcaff570a03eb73c50f4d62af20531aec92ab234f38edd48ec54a66825f235061c106700d8d5799ba90558d65fd60135e6eed3944b",
+                        "fc29cbf2d642d889a35f04caac3a830d678a7a590b941e0e1e4557eaafb310cbddbfcc2b8d889d5de2b6e5f27fe271a5b9850a50727b08c255d03bf0bf72e640",
                         null,
                         "/S")
                     );
