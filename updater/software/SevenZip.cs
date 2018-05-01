@@ -24,6 +24,9 @@ using updater.data;
 
 namespace updater.software
 {
+    /// <summary>
+    /// 7-Zip update management class
+    /// </summary>
     public class SevenZip : NoPreUpdateProcessSoftware
     {
         /// <summary>
@@ -33,7 +36,7 @@ namespace updater.software
 
 
         /// <summary>
-        /// default constructor
+        /// Default constructor.
         /// </summary>
         /// <param name="autoGetNewer">whether to automatically get
         /// newer information about the software when calling the info() method</param>
@@ -43,26 +46,26 @@ namespace updater.software
 
 
         /// <summary>
-        /// gets the currently known information about the software
+        /// Gets the currently known information about the software.
         /// </summary>
         /// <returns>Returns an AvailableSoftware instance with the known
         /// details about the software.</returns>
         public override AvailableSoftware knownInfo()
         {
             return new AvailableSoftware("7-Zip",
-                "18.01",
+                "18.05",
                 "^7\\-Zip [0-9]+\\.[0-9]{2}$",
                 "^7\\-Zip [0-9]+\\.[0-9]{2} \\(x64\\)$",
                 new InstallInfoExe(
-                    "http://www.7-zip.org/a/7z1801.exe",
+                    "http://www.7-zip.org/a/7z1805.exe",
                     HashAlgorithm.SHA256,
-                    "c55c60a674114be26ce470f43109d405a5adcd2bd38e346d4a35c98727174eb0",
+                    "647a9a621162cd7a5008934a08e23ff7c1135d6f1261689fd954aa17d50f9729",
                     null,
                     "/S"),
                 new InstallInfoExe(
-                    "http://www.7-zip.org/a/7z1801-x64.exe",
+                    "http://www.7-zip.org/a/7z1805-x64.exe",
                     HashAlgorithm.SHA256,
-                    "86670d63429281a4a65c36919ca0f3099e3f803e3096c3a9722d61b3d31e4a9f",
+                    "c1e42d8b76a86ea1890ad080e69a04c75a5f2c0484bdcd838dc8fa908dd4a84c",
                     null,
                     "/S")
                 );
@@ -70,7 +73,7 @@ namespace updater.software
 
 
         /// <summary>
-        /// list of IDs to identify the software
+        /// Gets a list of IDs to identify the software.
         /// </summary>
         /// <returns>Returns a non-empty array of IDs, where at least one entry is unique to the software.</returns>
         public override string[] id()
@@ -80,7 +83,7 @@ namespace updater.software
 
 
         /// <summary>
-        /// whether or not the method searchForNewer() is implemented
+        /// Determines whether or not the method searchForNewer() is implemented.
         /// </summary>
         /// <returns>Returns true, if searchForNewer() is implemented for that
         /// class. Returns false, if not. Calling searchForNewer() may throw an
@@ -92,7 +95,7 @@ namespace updater.software
 
 
         /// <summary>
-        /// looks for newer versions of the software than the currently known version
+        /// Looks for newer versions of the software than the currently known version.
         /// </summary>
         /// <returns>Returns an AvailableSoftware instance with the information
         /// that was retrieved from the net.</returns>
@@ -127,7 +130,7 @@ namespace updater.software
             if (string.IsNullOrWhiteSpace(version))
                 return null;
 
-            //construct new information
+            // construct new information
             var newInfo = knownInfo();
             if (newInfo.newestVersion == version)
             {
@@ -136,7 +139,7 @@ namespace updater.software
             }
             newInfo.newestVersion = version;
             string newVersionWithoutDot = version.Replace(".", "");
-            //32 bit
+            // 32 bit
             newInfo.install32Bit.downloadUrl = "http://www.7-zip.org/a/7z" + newVersionWithoutDot + ".exe";
             // The official 7-zip.org site does not provide any checksums,
             // so we have to do without.
@@ -153,8 +156,8 @@ namespace updater.software
 
 
         /// <summary>
-        /// lists names of processes that might block an update, e.g. because
-        /// the application cannot be update while it is running
+        /// Lists names of processes that might block an update, e.g. because
+        /// the application cannot be update while it is running.
         /// </summary>
         /// <param name="detected">currently installed / detected software version</param>
         /// <returns>Returns a list of process names that block the upgrade.</returns>
@@ -162,5 +165,5 @@ namespace updater.software
         {
             return new List<string>();
         }
-    } //class
-} //namespace
+    } // class
+} // namespace
