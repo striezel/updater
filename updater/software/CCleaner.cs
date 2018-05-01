@@ -24,6 +24,9 @@ using updater.data;
 
 namespace updater.software
 {
+    /// <summary>
+    /// CCleaner (free version)
+    /// </summary>
     public class CCleaner : NoPreUpdateProcessSoftware
     {
         /// <summary>
@@ -33,7 +36,7 @@ namespace updater.software
 
 
         /// <summary>
-        /// default constructor
+        /// Default constructor.
         /// </summary>
         /// <param name="autoGetNewer">whether to automatically get
         /// newer information about the software when calling the info() method</param>
@@ -56,20 +59,20 @@ namespace updater.software
         public override AvailableSoftware knownInfo()
         {
             return new AvailableSoftware("CCleaner",
-                "5.41",
+                "5.42",
                 "^CCleaner+$",
                 "^CCleaner+$",
                 //CCleaner uses the same installer for 32 and 64 bit.
                 new InstallInfoExe(
-                    "https://download.ccleaner.com/ccsetup541.exe",
+                    "https://download.ccleaner.com/ccsetup542.exe",
                     HashAlgorithm.SHA256,
-                    "d6fe8435a84858669ca04384595e5fdf7c7543a6d5f5198887a7b53852aecabf",
+                    "f9f80095c2c8eeb70d9c8a216ab8d237db2b9b138b572459a1e930af1c2c9bfc",
                     publisherX509,
                     "/S"),
                 new InstallInfoExe(
-                    "https://download.ccleaner.com/ccsetup541.exe",
+                    "https://download.ccleaner.com/ccsetup542.exe",
                     HashAlgorithm.SHA256,
-                    "d6fe8435a84858669ca04384595e5fdf7c7543a6d5f5198887a7b53852aecabf",
+                    "f9f80095c2c8eeb70d9c8a216ab8d237db2b9b138b572459a1e930af1c2c9bfc",
                     publisherX509,
                     "/S")
                 );
