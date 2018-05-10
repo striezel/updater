@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017  Dirk Stolle
+    Copyright (C) 2017, 2018  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -65,13 +65,6 @@ namespace updater.operations
                 + "      the ID for a specific software, run the program with the --list-id\r\n"
                 + "      option which lists all software IDs. You can use this option several\r\n"
                 + "      times to exclude more than one software from the update process.\r\n"
-                + "  --aurora | --with-aurora" + Environment.NewLine
-                + "      Include updates for Firefox Aurora, i.e. the developer edition of\r\n"
-                + "      Firefox. This option is disabled by default, because it increases the\r\n"
-                + "      time for initial version checks by several seconds.\r\n"
-                + "  --no-aurora | --without-aurora" + Environment.NewLine
-                + "      Do not include updates for Firefox Aurora. This option is enabled by\r\n"
-                + "      default.\r\n"
                 + "  --pdf24-autoupdate" + Environment.NewLine
                 + "      Enable automatic updates for PDF24 Creator after update. This option is\r\n"
                 + "      enabled by default.\r\n"
@@ -92,5 +85,5 @@ namespace updater.operations
                 + "      option is disabled by default.");
             return 0;
         }
-    } //class
-} //namespace
+    } // class
+} // namespace

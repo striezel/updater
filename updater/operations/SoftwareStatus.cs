@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017  Dirk Stolle
+    Copyright (C) 2017, 2018  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -33,6 +33,7 @@ namespace updater.operations
         /// <summary>
         /// default constructor
         /// </summary>
+        /// <param name="options">program options from the command line</param>
         public SoftwareStatus(Options _options)
         {
             opts = _options;
@@ -40,12 +41,9 @@ namespace updater.operations
 
         
         /// <summary>
-        /// queries the software status
+        /// Queries the software status.
         /// </summary>
-        /// <param name="withAurora">Whether or not Firefox Developer Edition
-        /// (aurora channel) shall be included, too. Default is false, because
-        /// this increases time of the query by quite a bit (several seconds).</param>
-        /// <param name="exclusion">software exclusion list</param>
+        /// <param name="options">program options from the command line</param>
         /// <returns>Returns a list of query entries.</returns>
         public static List<QueryEntry> query(Options options)
         {
@@ -89,7 +87,7 @@ namespace updater.operations
             const string cUpdatable1 = "can be";
             const string cUpdatable2 = "updated";
 
-            //determine longest entries
+            // determine longest entries
             int maxSoftwareNameLength = cName.Length;
             int maxAppTypeLength = Math.Max(cAppType.Length, utility.Strings.appTypeToString(ApplicationType.Bit32).Length);
             int maxCurrentVersionLength = Math.Max(cCurrent.Length, cVersion.Length);
@@ -159,7 +157,7 @@ namespace updater.operations
 
 
         /// <summary>
-        /// shows the query result in the console
+        /// Shows the query result in the console.
         /// </summary>
         /// <returns>Returns zero.</returns>
         public int perform()
@@ -170,5 +168,5 @@ namespace updater.operations
             Console.Write(output);
             return 0;
         }
-    } //class
-} //namespace
+    } // class
+} // namespace

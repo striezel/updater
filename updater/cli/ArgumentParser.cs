@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017  Dirk Stolle
+    Copyright (C) 2017, 2018  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -32,7 +32,7 @@ namespace updater.cli
 
 
         /// <summary>
-        /// parses command line arguments
+        /// Parses command line arguments.
         /// </summary>
         /// <param name="argv">command line arguments as seen in the main function</param>
         /// <param name="opts">reference to class that will hold the parsed options</param>
@@ -94,14 +94,6 @@ namespace updater.cli
                     case "-v":
                         opts.op = Operation.Version;
                         return 0;
-                    case "--aurora":
-                    case "--with-aurora":
-                        opts.withAurora = true;
-                        break;
-                    case "--no-aurora":
-                    case "--without-aurora":
-                        opts.withAurora = false;
-                        break;
                     case "-n":
                     case "/n":
                     case "--newer":

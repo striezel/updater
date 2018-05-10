@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017  Dirk Stolle
+    Copyright (C) 2017, 2018  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -33,8 +33,8 @@ namespace updater.software
 
 
         /// <summary>
-        /// gets a list that contains one instance of each class that implements
-        /// the ISoftware interface
+        /// Gets a list that contains one instance of each class that implements
+        /// the ISoftware interface.
         /// </summary>
         /// <param name="opts">parsed command line options</param>
         /// <returns>Returns a list of all supported softwares.</returns>
@@ -47,29 +47,26 @@ namespace updater.software
             result.Add(new CCleaner(autoGetNewer));
             result.Add(new CDBurnerXP(autoGetNewer));
 
-            //Firefox (release channel)
+            // Firefox (release channel)
             var languages = Firefox.validLanguageCodes();
             foreach (var lang in languages)
             {
                 result.Add(new Firefox(lang, autoGetNewer));
             } //foreach
 
-            //Firefox ESR
+            // Firefox ESR
             languages = FirefoxESR.validLanguageCodes();
             foreach (var lang in languages)
             {
                 result.Add(new FirefoxESR(lang, autoGetNewer));
             } //foreach
 
-            if (opts.withAurora)
+            // Firefox Developer Edition
+            languages = FirefoxAurora.validLanguageCodes();
+            foreach (var lang in languages)
             {
-                //Firefox Developer Edition
-                languages = FirefoxAurora.validLanguageCodes();
-                foreach (var lang in languages)
-                {
-                    result.Add(new FirefoxAurora(lang, autoGetNewer));
-                } //foreach
-            } //if aurora is requested, too
+                result.Add(new FirefoxAurora(lang, autoGetNewer));
+            } //foreach
 
             result.Add(new FileZilla(autoGetNewer));
             result.Add(new GIMP(autoGetNewer));
@@ -84,14 +81,14 @@ namespace updater.software
             result.Add(new Pidgin(autoGetNewer));
             result.Add(new Putty(autoGetNewer));
 
-            //SeaMonkey
+            // SeaMonkey
             languages = SeaMonkey.validLanguageCodes();
             foreach (var lang in languages)
             {
                 result.Add(new SeaMonkey(lang, autoGetNewer));
             } //foreach
             
-            //old SeaMonkey languages (available until SeaMonkey 2.46 and
+            // old SeaMonkey languages (available until SeaMonkey 2.46 and
             // dropped in SeaMonkey 2.48)
             languages = SeaMonkey246.validLanguageCodes();
             foreach (var lang in languages)
@@ -101,7 +98,7 @@ namespace updater.software
 
             result.Add(new SevenZip(autoGetNewer));
             
-            //Thunderbird
+            // Thunderbird
             languages = Thunderbird.validLanguageCodes();
             foreach (var lang in languages)
             {
@@ -115,8 +112,8 @@ namespace updater.software
 
 
         /// <summary>
-        /// gets a list that contains one instance of each class that implements
-        /// the ISoftware interface, but without the ones in the exclusion list
+        /// Gets a list that contains one instance of each class that implements
+        /// the ISoftware interface, but without the ones in the exclusion list.
         /// </summary>
         /// <param name="opts">parsed command line options</param>
         /// <returns>Returns a list of all supported softwares, minus the ones in the exclusion list.</returns>
@@ -145,5 +142,5 @@ namespace updater.software
 
             return result;
         }
-    } //class
-} //namespace
+    } // class
+} // namespace

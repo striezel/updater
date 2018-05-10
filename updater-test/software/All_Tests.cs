@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017  Dirk Stolle
+    Copyright (C) 2017, 2018  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -30,14 +30,13 @@ namespace updater_test.software
     public class All_Tests
     {
         /// <summary>
-        /// checks whether All.get() returns some usable data
+        /// Checks whether All.get() returns some usable data.
         /// </summary>
         [TestMethod]
         public void Test_get()
         {
             var opts = new Options();
             opts.autoGetNewer = false;
-            opts.withAurora = true;
             opts.excluded = null;
             var result = All.get(opts);
             Assert.IsNotNull(result);
@@ -50,40 +49,37 @@ namespace updater_test.software
 
 
         /// <summary>
-        /// checks whether All.get() can handle null and empty exclusion lists
+        /// Checks whether All.get() can handle null and empty exclusion lists.
         /// </summary>
         [TestMethod]
         public void Test_get_NullEmpty()
         {
             var opts = new Options();
             opts.autoGetNewer = false;
-            opts.withAurora = true;
             opts.excluded = null;
             var result = All.get(opts);
             Assert.IsNotNull(result);
             Assert.IsTrue(result.Count > 0);
 
             opts.autoGetNewer = false;
-            opts.withAurora = true;
             opts.excluded = new List<string>();
             var result2 = All.get(opts);
             Assert.IsNotNull(result2);
             Assert.IsTrue(result2.Count > 0);
 
-            //count should be equal
+            // count should be equal
             Assert.AreEqual<int>(result.Count, result2.Count);
         }
 
 
         /// <summary>
-        /// checks whether All.get() respects the exclusion list
+        /// Checks whether All.get() respects the exclusion list.
         /// </summary>
         [TestMethod]
         public void Test_get_WithExclusionList()
         {
             var opts = new Options();
             opts.autoGetNewer = false;
-            opts.withAurora = false;
             opts.excluded = null;
 
             var result = All.get(opts);
@@ -101,10 +97,10 @@ namespace updater_test.software
             Assert.IsNotNull(result2);
             Assert.IsTrue(result2.Count > 0);
 
-            //count not should be equal
+            // count should not be equal
             Assert.AreNotEqual<int>(result.Count, result2.Count);
             Assert.AreEqual<int>(result.Count - excluded.Count, result2.Count);
         }
 
-    } //class
-} //namespace
+    } // class
+} // namespace

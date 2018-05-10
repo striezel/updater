@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017  Dirk Stolle
+    Copyright (C) 2017, 2018  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -31,7 +31,6 @@ namespace updater.cli
         {
             op = Operation.Unknown;
             autoGetNewer = true;
-            withAurora = false;
             timeout = Update.defaultTimeout;
             excluded = new List<string>();
             pdf24autoUpdate = true;
@@ -49,14 +48,6 @@ namespace updater.cli
         /// whether to automatically get newer info about software
         /// </summary>
         public bool autoGetNewer;
-
-        /// <summary>
-        /// Whether or not Firefox Developer Edition (aurora channel) shall be
-        /// included, too. Default is false, because this increases time of
-        /// subsequent operations like getting the info() for every element in
-        /// the list by quite a bit.
-        /// </summary>
-        public bool withAurora;
 
         /// <summary>
         /// maximum time in seconds to wait per update
@@ -82,5 +73,5 @@ namespace updater.cli
         /// whether PDF24 Creator shall install fax printer
         /// </summary>
         public bool pdf24faxPrinter;
-    } //class
-} //namespace
+    } // class
+} // namespace

@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017  Dirk Stolle
+    Copyright (C) 2017, 2018  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -31,7 +31,7 @@ namespace updater_test.algorithm
     public class SoftwareStatus_Tests
     {
         /// <summary>
-        /// checks whether algorithm.SoftwareStatus.query() returns something
+        /// Checks whether algorithm.SoftwareStatus.query() returns something.
         /// </summary>
         [TestMethod]
         public void Test_query()
@@ -39,7 +39,6 @@ namespace updater_test.algorithm
             var opts = new Options();
             opts.excluded = null;
             opts.autoGetNewer = false;
-            opts.withAurora = false;
             var q = SoftwareStatus.query(opts);
             Assert.IsNotNull(q);
             Assert.IsTrue(q.Count >= 0);
@@ -54,7 +53,7 @@ namespace updater_test.algorithm
 
 
         /// <summary>
-        /// checks whether algorithm.SoftwareStatus.toConsoleOutput() works
+        /// Checks whether algorithm.SoftwareStatus.toConsoleOutput() works.
         /// </summary>
         [TestMethod]
         public void Test_toConsoleOutput()
@@ -62,7 +61,6 @@ namespace updater_test.algorithm
             var opts = new Options();
             opts.excluded = null;
             opts.autoGetNewer = false;
-            opts.withAurora = false;
             var q = SoftwareStatus.query(opts);
             Assert.IsTrue(q.Count > 0);
 
@@ -73,8 +71,8 @@ namespace updater_test.algorithm
 
 
         /// <summary>
-        /// checks whether algorithm.SoftwareStatus.toConsoleOutput() can handle
-        /// null and empty input
+        /// Checks whether algorithm.SoftwareStatus.toConsoleOutput() can handle
+        /// null and empty input.
         /// </summary>
         [TestMethod]
         public void Test_toConsoleOutput_NullEmpty()
@@ -87,6 +85,5 @@ namespace updater_test.algorithm
             Assert.AreEqual<int>(1, data.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries).Length);
         }
 
-
-    } //class
-} //namespace
+    } // class
+} // namespace
