@@ -45,7 +45,7 @@ namespace updater.software
         /// <summary>
         /// publisher of signed binaries
         /// </summary>
-        private string publisherX509 = "E=cert@dominik-reichl.de, CN=\"Open Source Developer, Dominik Reichl\", O=Open Source Developer, C=DE";
+        private string publisherX509 = "E=cert@dominik-reichl.de, CN=\"Open Source Developer, Dominik Reichl\", L=Metzingen, O=Open Source Developer, C=DE";
 
 
         /// <summary>
@@ -56,12 +56,12 @@ namespace updater.software
         public override AvailableSoftware knownInfo()
         {
             return new AvailableSoftware("KeePass",
-                "2.38",
+                "2.39",
                 "^KeePass Password Safe [2-9]\\.[0-9]{2}$", null,
                 new InstallInfoExe(
-                    "https://kent.dl.sourceforge.net/project/keepass/KeePass%202.x/2.38/KeePass-2.38-Setup.exe",
+                    "https://netcologne.dl.sourceforge.net/project/keepass/KeePass%202.x/2.39/KeePass-2.39-Setup.exe",
                     HashAlgorithm.SHA256,
-                    "400B6638 0D30C904 711BA3B0 17AA97F9 E67081B7 3D6A239C 6C44AC2B 663CB23B",
+                    "B61DB932 44B95946 33D2E685 4497C580 76F93A26 A0C8CBEB 4D65F16D ED74C578",
                     publisherX509,
                     "/VERYSILENT"),
                 //There is no 64 bit installer yet.
