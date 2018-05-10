@@ -57,19 +57,19 @@ namespace updater.software
             // The last version that still supports Windows XP is 3.8.0
             if (utility.OS.isWin7OrNewer())
                 return new AvailableSoftware("FileZilla FTP Client",
-                    "3.32.0",
+                    "3.33.0",
                     "^FileZilla Client [0-9]+\\.[0-9]+(\\.[0-9]+(\\.[0-9]+)?)?$",
                     "^FileZilla Client [0-9]+\\.[0-9]+(\\.[0-9]+(\\.[0-9]+)?)?$",
                     new InstallInfoExe(
-                        "https://dl1.cdn.filezilla-project.org/client/FileZilla_3.32.0_win32-setup.exe",
+                        "https://dl1.cdn.filezilla-project.org/client/FileZilla_3.33.0_win32-setup.exe",
                         HashAlgorithm.SHA512,
-                        "e7b2992c31ff74c8ec141cd1a64dacd58167c4816f1d4040b3385e6abba5d8587fa4c39d9f7a1f1b69d13de00a51177f65f56405ee2b11a9e26bc7ace6982e0e",
+                        "863968450f993604ccf31db46ecf1ace929f5488cecf24b5dd4fcb5c3c6336c86bff63e8e4be819b98bed2be5834aa671f1189a143db0b5f67bc2008f2312e7c",
                         null,
                         "/S"),
                     new InstallInfoExe(
-                        "https://dl1.cdn.filezilla-project.org/client/FileZilla_3.32.0_win64-setup.exe",
+                        "https://dl1.cdn.filezilla-project.org/client/FileZilla_3.33.0_win64-setup.exe",
                         HashAlgorithm.SHA512,
-                        "fc29cbf2d642d889a35f04caac3a830d678a7a590b941e0e1e4557eaafb310cbddbfcc2b8d889d5de2b6e5f27fe271a5b9850a50727b08c255d03bf0bf72e640",
+                        "1e852bed5b81e9e630c1ae6307242bbb16d5004320564583253a892def478f1f9211e0c5de2c5acb1ce311db8d7911691673caaffdc73481c682a079b1c4b016",
                         null,
                         "/S")
                     );
