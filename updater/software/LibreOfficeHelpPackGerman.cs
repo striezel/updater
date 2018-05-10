@@ -50,19 +50,19 @@ namespace updater.software
         public override AvailableSoftware knownInfo()
         {
             return new AvailableSoftware("LibreOffice Help Pack German",
-                "6.0.2.1",
+                "6.0.4.2",
                 "^LibreOffice [0-9]\\.[0-9] Help Pack \\(German\\)$",
                 "^LibreOffice [0-9]\\.[0-9] Help Pack \\(German\\)$",
                 new InstallInfoLibO(
-                    "https://download.documentfoundation.org/libreoffice/stable/6.0.2/win/x86/LibreOffice_6.0.2_Win_x86_helppack_de.msi",
+                    "https://download.documentfoundation.org/libreoffice/stable/6.0.4/win/x86/LibreOffice_6.0.4_Win_x86_helppack_de.msi",
                     HashAlgorithm.SHA256,
-                    "b3500bc10d5cda074bedf02402a8031fc8c4f18178dddd6190354f3ea8ec2ad9",
+                    "a8361581edfcb0a6d4a7760e3024cb54e402e69a4608afeb8926f81dfd905c0a",
                     null,
                     "/qn /norestart"),
                 new InstallInfoLibO(
-                    "https://download.documentfoundation.org/libreoffice/stable/6.0.2/win/x86_64/LibreOffice_6.0.2_Win_x64_helppack_de.msi",
+                    "https://download.documentfoundation.org/libreoffice/stable/6.0.4/win/x86_64/LibreOffice_6.0.4_Win_x64_helppack_de.msi",
                     HashAlgorithm.SHA256,
-                    "51d67e00106f9ee92d6c3dd5f61f9d83202774803a34c1dd4bf8da181bf88a47",
+                    "735177349e44aae072727e7c236ef5afeaea5e568ec2508aaf0c3864f8919fb4",
                     null,
                     "/qn /norestart")
                     );
