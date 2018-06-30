@@ -59,20 +59,20 @@ namespace updater.software
         public override AvailableSoftware knownInfo()
         {
             return new AvailableSoftware("CCleaner",
-                "5.42",
+                "5.44",
                 "^CCleaner+$",
                 "^CCleaner+$",
-                //CCleaner uses the same installer for 32 and 64 bit.
+                // CCleaner uses the same installer for 32 and 64 bit.
                 new InstallInfoExe(
-                    "https://download.ccleaner.com/ccsetup542.exe",
+                    "https://download.ccleaner.com/ccsetup544.exe",
                     HashAlgorithm.SHA256,
-                    "f9f80095c2c8eeb70d9c8a216ab8d237db2b9b138b572459a1e930af1c2c9bfc",
+                    "fe052ad062014cbb89fb70a6a1bd9c9c324a9e4b9b46a6d9753e34d85cddf8df",
                     publisherX509,
                     "/S"),
                 new InstallInfoExe(
-                    "https://download.ccleaner.com/ccsetup542.exe",
+                    "https://download.ccleaner.com/ccsetup544.exe",
                     HashAlgorithm.SHA256,
-                    "f9f80095c2c8eeb70d9c8a216ab8d237db2b9b138b572459a1e930af1c2c9bfc",
+                    "fe052ad062014cbb89fb70a6a1bd9c9c324a9e4b9b46a6d9753e34d85cddf8df",
                     publisherX509,
                     "/S")
                 );
@@ -144,7 +144,7 @@ namespace updater.software
             if (newVersion == knownInfo().newestVersion)
                 return knownInfo();
 
-            //No checksums are provided, but binary is signed.
+            // No checksums are provided, but binary is signed.
 
             // construct new information
             var newInfo = knownInfo();
