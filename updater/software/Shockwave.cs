@@ -41,6 +41,11 @@ namespace updater.software
             : base(autoGetNewer)
         { }
 
+        /// <summary>
+        /// publisher of signed installers
+        /// </summary>
+        private const string publisherX509 = "CN=Adobe Systems Incorporated, OU=Shockwave Player, O=Adobe Systems Incorporated, L=San Jose, S=California, C=US, PostalCode=95110, STREET=345 Park Avenue, SERIALNUMBER=2748129, OID.1.3.6.1.4.1.311.60.2.1.2=Delaware, OID.1.3.6.1.4.1.311.60.2.1.3=US, OID.2.5.4.15=Private Organization";
+
 
         /// <summary>
         /// Gets the currently known information about the software.
@@ -50,15 +55,15 @@ namespace updater.software
         public override AvailableSoftware knownInfo()
         {
             return new AvailableSoftware("Adobe Shockwave Player",
-                "12.2.8.198",
+                "12.3.4.204",
                 "^Adobe Shockwave Player [0-9]+\\.[0-9]+$",
                 null,
                 // Shockwave Player only has one installer.
                 new InstallInfoMsi(
                     "http://fpdownload.macromedia.com/get/shockwave/default/english/win95nt/latest/sw_lic_full_installer.msi",
                     HashAlgorithm.SHA512,
-                    "51f548e54203be5f24373dd5f65a8b5bdb1a877e15959e4303a9545d498c0235e852e2e9efa4b3be4ad73034c3284ae42728c4e13f5b85d97f1689145d33401a",
-                    null,
+                    "eb77b34564f6ef4abb7591a5c33d5dfef9167127af39571fc7d8463aeb2f9977ccd6187eabdb3e4d1d3964a72fdcbe621bc48d5605e4f70321a22c69a8e4d8a9",
+                    publisherX509,
                     "/qn /norestart"),
                 // There is no 64 bit installer.
                 null);
@@ -83,7 +88,7 @@ namespace updater.software
         /// exception in the later case.</returns>
         public override bool implementsSearchForNewer()
         {
-            return false;
+            return true;
         }
 
 
@@ -95,7 +100,89 @@ namespace updater.software
         public override AvailableSoftware searchForNewer()
         {
             logger.Debug("Searching for newer version of Shockwave Player...");
-            throw new NotImplementedException();
+            // https://get.adobe.com/de/shockwave/
+            // https://get.adobe.com/shockwave/webservices/json/
+            string htmlCode = null;
+            using (var client = new WebClient())
+            {
+                // Add fake user agent header to emulate Firefox browser.
+                // Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:52.0) Gecko/20100101 Firefox/52.0
+                // This is required to get a proper answer from the webservice endpoint.
+                client.Headers.Add(HttpRequestHeader.UserAgent, "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:52.0) Gecko/20100101 Firefox/52.0");
+                try
+                {
+                    htmlCode = client.DownloadString("https://get.adobe.com/shockwave/webservices/json/");
+                }
+                catch (Exception ex)
+                {
+                    logger.Error("Exception occurred while checking for newer version of Shockwave Player: " + ex.Message);
+                    return null;
+                }
+                client.Dispose();
+            } // using
+
+            /* JSON response is something like this, but not so nicely formatted:
+             
+             [{
+               "distrib": 0.0,
+               "file_size": 5.9,
+               "can_use_dlm": 0.0,
+               "queryName": "Shockwave_12.3.4.204_Windows_Slim_Other_Browsers",
+               "installation_type": "Standalone",
+               "live": 1.0,
+               "platform": "Windows",
+               "language_type": "English",
+               "browser": "Firefox",
+               "download_url": "http:\/\/fpdownload.macromedia.com\/get\/shockwave\/default\/english\/win95nt\/latest\/Shockwave_Installer_Slim.exe",
+               "Version": "12.3.4.204",
+               "gp_diskspace": 6626544.0,
+               "aih_ineligible_reg_test": 0.0,
+               "date_posted": "06\/25\/2014",
+               "aih_show_installer_window": 0.0,
+               "livebeta": 1.0,
+               "aih_ineligibility_file_test": 0.0,
+               "Name": "Shockwave 12.3.4.204 Windows Slim Other Browsers",
+               "aih_is_visible": 1.0,
+               "aih_ineligible_chk_uninst": 0.0,
+               "gp_checksum": "27a4c795d5c8c50168d7cafa121bfc58",
+               "aih_cleanup": 1.0,
+               "id": 345.0,
+               "shockwave_type": "Slim"
+             }]
+             
+             */
+
+            // find version number
+            int idx = htmlCode.IndexOf("\"Version\"");
+            if (idx < 0)
+                return null;
+            Regex regExVersion = new Regex("\"[0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+");
+            string shortened = htmlCode.Substring(idx);
+            Match versionMatch = regExVersion.Match(shortened);
+            if (!versionMatch.Success)
+                return null;
+            string newVersion = versionMatch.Value.Replace("\"", "");
+            // find download URL
+            idx = htmlCode.IndexOf("\"download_url\"");
+            if (idx < 0)
+                return null;
+            shortened = htmlCode.Substring(idx);
+            Regex regExURL = new Regex("\"http.+\\.exe\"");
+            Match urlMatch = regExURL.Match(shortened);
+            if (!urlMatch.Success)
+                return null;
+            string downloadURL = urlMatch.Value.Replace("\"", "").Replace("\\", "");
+            // Default installer is the "slim" installer, but we want the full installer.
+            downloadURL = downloadURL.Replace("Shockwave_Installer_Slim.exe", "sw_lic_full_installer.msi");
+
+            // create new info from known information
+            var newInfo = knownInfo();
+            newInfo.newestVersion = newVersion;
+            newInfo.install32Bit.downloadUrl = downloadURL;
+            // There is no checksum provided here.
+            newInfo.install32Bit.checksum = null;
+            newInfo.install32Bit.algorithm = HashAlgorithm.Unknown;
+            return newInfo;
         }
 
 

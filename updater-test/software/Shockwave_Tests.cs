@@ -28,7 +28,7 @@ namespace updater_test.software
     public class Shockwave_Tests : BasicSoftwareTests
     {
         /// <summary>
-        /// checks whether info() returns some meaningful data
+        /// Checks whether info() returns some meaningful data.
         /// </summary>
         [TestMethod]
         public void Test_info()

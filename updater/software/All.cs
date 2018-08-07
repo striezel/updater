@@ -97,6 +97,7 @@ namespace updater.software
             } //foreach
 
             result.Add(new SevenZip(autoGetNewer));
+            result.Add(new Shockwave(autoGetNewer));
             
             // Thunderbird
             languages = Thunderbird.validLanguageCodes();
