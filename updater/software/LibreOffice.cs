@@ -33,7 +33,7 @@ namespace updater.software
 
 
         /// <summary>
-        /// default constructor
+        /// Constructor.
         /// </summary>
         /// <param name="autoGetNewer">whether to automatically get
         /// newer information about the software when calling the info() method</param>
@@ -50,19 +50,19 @@ namespace updater.software
         public override AvailableSoftware knownInfo()
         {
             return new AvailableSoftware("LibreOffice",
-                "6.0.4.2",
+                "6.0.6.2",
                 "^LibreOffice [0-9]\\.[0-9]\\.[0-9]\\.[0-9]$",
                 "^LibreOffice [0-9]\\.[0-9]\\.[0-9]\\.[0-9]$",
                 new InstallInfoLibO(
-                    "https://download.documentfoundation.org/libreoffice/stable/6.0.4/win/x86/LibreOffice_6.0.4_Win_x86.msi",
+                    "https://download.documentfoundation.org/libreoffice/stable/6.0.6/win/x86/LibreOffice_6.0.6_Win_x86.msi",
                     HashAlgorithm.SHA256,
-                    "05d31998f64b0abe7364307c5949b4ed821c12d890e86396fc9b1c4214e7d999",
+                    "8438f42ebb988c66b5e20f64a7067a4e14f229d0df3f9bd0bc5fb4939351d2e5",
                     null,
                     "/qn /norestart"),
                 new InstallInfoLibO(
-                    "https://download.documentfoundation.org/libreoffice/stable/6.0.4/win/x86_64/LibreOffice_6.0.4_Win_x64.msi",
+                    "https://download.documentfoundation.org/libreoffice/stable/6.0.6/win/x86_64/LibreOffice_6.0.6_Win_x64.msi",
                     HashAlgorithm.SHA256,
-                    "80d796f1875942e31f00d5983bdba5bc913174cf3fcae6d39cde42148133ddf9",
+                    "7a4746ad788d15fb78f3e76bd4f6bfcdf5311f96e31b7969952a764c5adca08f",
                     null,
                     "/qn /norestart")
                     );
