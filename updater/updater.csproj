@@ -162,7 +162,6 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PreBuildEvent>git rev-parse --abbrev-ref HEAD &gt; "$(ProjectDir)\git-info\branch.txt"
-REM needs two percentage signs instead of one, because one is stripped
 git show -s --format=%25%25ci &gt; "$(ProjectDir)\git-info\date.txt"
 git describe --always &gt; "$(ProjectDir)\git-info\description.txt"
 git rev-parse HEAD &gt; "$(ProjectDir)\git-info\hash.txt"
