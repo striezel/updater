@@ -33,7 +33,7 @@ namespace updater.software
 
 
         /// <summary>
-        /// default constructor
+        /// Constructor.
         /// </summary>
         /// <param name="autoGetNewer">whether to automatically get
         /// newer information about the software when calling the info() method</param>
@@ -50,19 +50,19 @@ namespace updater.software
         public override AvailableSoftware knownInfo()
         {
             return new AvailableSoftware("Opera",
-                "52.0.2871.37",
+                "54.0.2952.71",
                 "^Opera Stable [0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+$",
                 "^Opera Stable [0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+$",
                 new InstallInfoExe(
-                    "https://get.geo.opera.com/pub/opera/desktop/52.0.2871.37/win/Opera_52.0.2871.37_Setup.exe",
+                    "https://get.geo.opera.com/pub/opera/desktop/54.0.2952.71/win/Opera_54.0.2952.71_Setup.exe",
                     HashAlgorithm.SHA256,
-                    "07d2c4d005626d2632250a939af412ef6ef69f508fecd92ecd5a7475fac0b915",
+                    "aa9e8c9c732ad4f9cb9335d9203a7a91ca24f2a9269a8b07accfacea2b7692ab",
                     null,
                     "/silent /norestart /launchopera 0 /setdefaultbrowser 0 /allusers"),
                 new InstallInfoExe(
-                    "https://get.geo.opera.com/pub/opera/desktop/52.0.2871.37/win/Opera_52.0.2871.37_Setup_x64.exe",
+                    "https://get.geo.opera.com/pub/opera/desktop/54.0.2952.71/win/Opera_54.0.2952.71_Setup_x64.exe",
                     HashAlgorithm.SHA256,
-                    "404d016d6fade9ddbfa24d3d96401456ef7980d57eb9cfcc5b6e9037879b2a74",
+                    "d6fd01e8d17fac1a20d6a4f8d4d600ac82a2720122d90f4d6e29d2142ba120d1",
                     null,
                     "/silent /norestart /launchopera 0 /setdefaultbrowser 0 /allusers")
                     );
