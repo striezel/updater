@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017  Dirk Stolle
+    Copyright (C) 2017, 2018  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -22,7 +22,7 @@ using updater.software;
 namespace updater_test.software
 {
     /// <summary>
-    /// class that provides methods to implement some test for classes derived from ISoftware
+    /// Provides methods to implement some test for classes derived from ISoftware.
     /// </summary>
     public class BasicSoftwareTests
     {
@@ -31,17 +31,17 @@ namespace updater_test.software
             Assert.IsNotNull(sw);
             var info = sw.info();
             Assert.IsNotNull(info);
-            //name must be set
+            // name must be set
             Assert.IsFalse(string.IsNullOrWhiteSpace(info.Name));
-            //at least one installation information instance should be present
+            // at least one installation information instance should be present
             Assert.IsTrue((info.install32Bit != null) || (info.install64Bit != null));
-            //at least one regex should be present
+            // at least one regex should be present
             Assert.IsTrue(!string.IsNullOrWhiteSpace(info.match32Bit) || !string.IsNullOrWhiteSpace(info.match64Bit));
-            //32 bit information should match
+            // 32 bit information should match
             Assert.AreEqual<bool>(info.install32Bit != null, !string.IsNullOrWhiteSpace(info.match32Bit));
-            //64 bit information should match
+            // 64 bit information should match
             Assert.AreEqual<bool>(info.install64Bit != null, !string.IsNullOrWhiteSpace(info.match64Bit));
-            //checksums should always be present
+            // checksums should always be present
             if (null != info.install32Bit)
                 Assert.IsTrue(info.install32Bit.hasChecksum());
             if (null != info.install64Bit)
@@ -77,5 +77,5 @@ namespace updater_test.software
                     + ", but the current newest version is " + newerInfo.newestVersion + "!");
             }
         }
-    } //class
-} //namespace
+    } // class
+} // namespace

@@ -328,7 +328,7 @@ namespace updater.software
                 // 64 bit installer
                 new InstallInfoExe(
                     // URL is formed like "https://ftp.mozilla.org/pub/devedition/releases/60.0b9/win64/en-GB/Firefox%20Setup%2060.0b9.exe".
-                    "https://ftp.mozilla.org/pub/devedition/releases/" + currentVersion + "/win64/"+ languageCode+"/Firefox%20Setup%20" + currentVersion + ".exe",
+                    "https://ftp.mozilla.org/pub/devedition/releases/" + currentVersion + "/win64/" + languageCode + "/Firefox%20Setup%20" + currentVersion + ".exe",
                     HashAlgorithm.SHA512,
                     checksum64Bit,
                     null,
@@ -410,7 +410,7 @@ namespace updater.software
 
             logger.Debug("Determining newest checksums of Firefox Developer Edition (" + languageCode + ")...");
             string sha512SumsContent = null;
-            if (!string.IsNullOrWhiteSpace(checksumsText) && (newerVersion==currentVersion))
+            if (!string.IsNullOrWhiteSpace(checksumsText) && (newerVersion == currentVersion))
             {
                 // Use text from earlier request.
                 sha512SumsContent = checksumsText;
@@ -440,7 +440,7 @@ namespace updater.software
             } // else
             if (newerVersion == currentVersion)
             {
-                if (cs64==null || cs32==null)
+                if (cs64 == null || cs32 == null)
                 {
                     fillChecksumDictionaries();
                 }

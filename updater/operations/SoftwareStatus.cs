@@ -26,12 +26,12 @@ using updater.software;
 namespace updater.operations
 {
     /// <summary>
-    /// class to query the status of installed software
+    /// Queries the status of installed software.
     /// </summary>
     public class SoftwareStatus : IOperation
     {
         /// <summary>
-        /// default constructor
+        /// Constructor.
         /// </summary>
         /// <param name="options">program options from the command line</param>
         public SoftwareStatus(Options _options)
@@ -105,9 +105,9 @@ namespace updater.operations
                 int len = utility.Strings.boolToYesNo(item.needsUpdate).Length;
                 if (len > maxUpdatableLength)
                     maxUpdatableLength = len;
-            } //foreach
+            } // foreach
 
-            //get output
+            // get output
             string output = "";
             string fullLine = "+-" + "-".PadRight(maxSoftwareNameLength, '-')
                 + "-+-" + "-".PadRight(maxAppTypeLength, '-') + "-+-"
@@ -130,18 +130,18 @@ namespace updater.operations
             foreach (var item in query)
             {
                 var info = item.software.info();
-                //name of software
+                // name of software
                 output += "| " + info.Name.PadRight(maxSoftwareNameLength) + " | ";
-                //application type
+                // application type
                 output += utility.Strings.appTypeToString(item.type).PadRight(maxAppTypeLength) + " | ";
-                //currently installed version
+                // currently installed version
                 if (!string.IsNullOrWhiteSpace(item.detected.displayVersion))
                 output += item.detected.displayVersion.PadRight(maxCurrentVersionLength);
                 else
                     output += "???".PadRight(maxCurrentVersionLength);
-                //newest version
+                // newest version
                 output += " | " + info.newestVersion.PadRight(maxNewestVersionLength) + " | ";
-                //updatable
+                // updatable
                 output += utility.Strings.boolToYesNo(item.needsUpdate)
                     .PadRight(maxUpdatableLength) + " |" + Environment.NewLine;
             } //foreach
