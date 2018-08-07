@@ -21,7 +21,7 @@ using System;
 namespace updater.utility
 {
     /// <summary>
-    /// utility class to get operating system information
+    /// Utility class to get operating system information.
     /// </summary>
     public class OS
     {
@@ -36,7 +36,7 @@ namespace updater.utility
 
 
         /// <summary>
-        /// checks whether the system is Windows XP or newer
+        /// Checks whether the system is Windows XP or newer.
         /// </summary>
         /// <param name="os">operating system information
         /// (Leave this at null, if you want to examine the current OS.)</param>
@@ -45,7 +45,7 @@ namespace updater.utility
         {
             if (null == os)
                 os = thisOS;
-            //5.1 (32bit) or 5.2 (64bit) is WinXP
+            // 5.1 (32bit) or 5.2 (64bit) is WinXP.
             return (os.Platform == PlatformID.Win32NT)
                 && ((os.Version.Major > 5)
                 || ((os.Version.Major == 5) && (os.Version.Minor >= 1)));
@@ -53,7 +53,7 @@ namespace updater.utility
 
 
         /// <summary>
-        /// checks whether the system is Windows Vista or newer
+        /// Checks whether the system is Windows Vista or newer.
         /// </summary>
         /// <param name="os">operating system information
         /// (Leave this at null, if you want to examine the current OS.)</param>
@@ -62,13 +62,13 @@ namespace updater.utility
         {
             if (null == os)
                 os = thisOS;
-            //6.0
+            // Internal version of Vista is 6.0.
             return (os.Platform == PlatformID.Win32NT) && (os.Version.Major >= 6);
         }
 
 
         /// <summary>
-        /// checks whether the system is Windows 7 or newer
+        /// Checks whether the system is Windows 7 or newer.
         /// </summary>
         /// <param name="os">operating system information
         /// (Leave this at null, if you want to examine the current OS.)</param>
@@ -77,10 +77,10 @@ namespace updater.utility
         {
             if (null == os)
                 os = thisOS;
-            //6.1
-            return (os.Platform == PlatformID.Win32NT) 
+            // Internal version of Windows 7 is 6.1.
+            return (os.Platform == PlatformID.Win32NT)
                 && ((os.Version.Major > 6)
-                || ((os.Version.Major == 6) && (os.Version.Minor >=1)));
+                || ((os.Version.Major == 6) && (os.Version.Minor >= 1)));
         }
-    } //class
-} //namespace
+    } // class
+} // namespace
