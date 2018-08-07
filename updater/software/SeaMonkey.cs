@@ -71,28 +71,28 @@ namespace updater.software
         private static Dictionary<string, string> knownChecksums()
         {
             // These are the checksums for Windows 32 bit installers from
-            // https://archive.mozilla.org/pub/seamonkey/releases/2.49.3/SHA1SUMS
+            // https://archive.mozilla.org/pub/seamonkey/releases/2.49.4/SHA1SUMS
             var result = new Dictionary<string, string>();
-            result.Add("cs", "58ed387f3d49cbce000d8478997f6cc01833b60d");
-            result.Add("de", "0765baba32b6cfa1d4b4137136c2236393bbe4ce");
-            result.Add("en-GB", "2b5dfcb880b267a60af70786de7b595dc6359cf8");
-            result.Add("en-US", "bb57baec4559bb188f596402d5784951eefb3faf");
-            result.Add("es-AR", "64cf08c7d81b74ace81905c582b9b7bfc09eae07");
-            result.Add("es-ES", "d136e4ca11594c3cdcad23cdd6051155117aa01d");
-            result.Add("fr", "b2c113e330b49e2c9db0c69674b69f2f6fbafb8c");
-            result.Add("hu", "d5b24b401f8c6cfae69317a682fa09ed6ff18646");
-            result.Add("it", "af86b5f251cf322a1a4debad7e9a14ceb5d5a242");
-            result.Add("ja", "f359634e63f4fda91defddb3357bd2c26023246f");
-            result.Add("lt", "d2c355b39d1adf2b1d9bbc4e4148559365cb66e8");
-            result.Add("nb-NO", "d9d44db8e0445f3664291e50aecf1dff73e9cb16");
-            result.Add("nl", "b6879a2106975664d547f26fcd5cbb8e9107904d");
-            result.Add("pl", "133fd46e5b7396d8caac79991717abe23ce873e9");
-            result.Add("pt-PT", "025164c46df0910efac212e629d6b280b1b92777");
-            result.Add("ru", "b8ebdc6c986c6da4251376cd7c3b9c899ec7a94c");
-            result.Add("sk", "7805c90c200561c3675859b9056f365e20d0f2e0");
-            result.Add("sv-SE", "df9126162c3be6b85afda198a07b69f743e3df27");
-            result.Add("zh-CN", "4fb033f96897a26995c3b2592aa184f1dbd6b07a");
-            result.Add("zh-TW", "4bed296ab13050f3c6ff8d7db875c92b039e4671");
+            result.Add("cs", "cf74566a89f5c5f8103dfa1d625fa0534f7ab3f0");
+            result.Add("de", "a7cce6c9f99464e3e992a8dc7e94d29110aece54");
+            result.Add("en-GB", "5534ad032553cb522a6e4f30d5b8a4fe8f8d039a");
+            result.Add("en-US", "ee095b6730c4ec9b6b02174fc0d3d3212335f332");
+            result.Add("es-AR", "842732fc84b58a40068833783ac72c59a4df8e2b");
+            result.Add("es-ES", "b5ee29c5c35176a28ea07a92312bd768d0da5ef5");
+            result.Add("fr", "49c91d221aa2520a4d09f71f6bab4228870b126b");
+            result.Add("hu", "828345b6b57a97de7f7d1158108a88fd6dc3a004");
+            result.Add("it", "7d1a206f1699357e72b6dfe6bacb58a3f73c0b45");
+            result.Add("ja", "1ca1364ea791149ed27ab6538995d22fb332578e");
+            result.Add("lt", "39f2362b03c664a19ede779c7a5905d6af20cc09");
+            result.Add("nb-NO", "5e5385efbad67840acc623b431c1ff7ddc6e7ac4");
+            result.Add("nl", "46d7184cf0b67191c4e633df05e822276e1a0567");
+            result.Add("pl", "914398fb0ff19be8d60b46e69f530d0c66d69be2");
+            result.Add("pt-PT", "194f89622420add222043d36ad89fa5a0f5c7238");
+            result.Add("ru", "dae3297003b36e39e36c9c8337e6c513a6dd7ff6");
+            result.Add("sk", "e30d20565cef27e8c1288becf00dcf2bac0a9c8c");
+            result.Add("sv-SE", "9bd058844a8e9186338a3557f259a5b5694767b0");
+            result.Add("zh-CN", "4aa18d2e727362a1741e937094afd21c0b4f1375");
+            result.Add("zh-TW", "98366fb32872ba97ad01a6ac71b97348e19ea076");
 
             return result;
         }
@@ -116,7 +116,7 @@ namespace updater.software
         /// details about the software.</returns>
         public override AvailableSoftware knownInfo()
         {
-            const string knownVersion = "2.49.3";
+            const string knownVersion = "2.49.4";
             return new AvailableSoftware("SeaMonkey (" + languageCode + ")",
                 knownVersion,
                 "^SeaMonkey [0-9]+\\.[0-9]+(\\.[0-9]+)? \\(x86 " + Regex.Escape(languageCode) + "\\)$",
