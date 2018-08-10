@@ -50,19 +50,19 @@ namespace updater.software
         public override AvailableSoftware knownInfo()
         {
             return new AvailableSoftware("LibreOffice",
-                "6.0.6.2",
+                "6.1.0.3",
                 "^LibreOffice [0-9]\\.[0-9]\\.[0-9]\\.[0-9]$",
                 "^LibreOffice [0-9]\\.[0-9]\\.[0-9]\\.[0-9]$",
                 new InstallInfoLibO(
-                    "https://download.documentfoundation.org/libreoffice/stable/6.0.6/win/x86/LibreOffice_6.0.6_Win_x86.msi",
+                    "https://download.documentfoundation.org/libreoffice/stable/6.1.0/win/x86/LibreOffice_6.1.0_Win_x86.msi",
                     HashAlgorithm.SHA256,
-                    "8438f42ebb988c66b5e20f64a7067a4e14f229d0df3f9bd0bc5fb4939351d2e5",
+                    "dd4524ed7416a3d8533d66a289a9db3f3a4d6231fc8887b2fb50f3ff49a8dff0",
                     null,
                     "/qn /norestart"),
                 new InstallInfoLibO(
-                    "https://download.documentfoundation.org/libreoffice/stable/6.0.6/win/x86_64/LibreOffice_6.0.6_Win_x64.msi",
+                    "https://download.documentfoundation.org/libreoffice/stable/6.1.0/win/x86_64/LibreOffice_6.1.0_Win_x64.msi",
                     HashAlgorithm.SHA256,
-                    "7a4746ad788d15fb78f3e76bd4f6bfcdf5311f96e31b7969952a764c5adca08f",
+                    "17d01f5e9b9944c5888ff41ac7d0c7d8aa93e84c5b5df98183b0b287a2e7c77d",
                     null,
                     "/qn /norestart")
                     );
