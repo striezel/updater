@@ -114,12 +114,12 @@ namespace updater.software
                 client.Dispose();
             } // using
 
-            Regex reExe = new Regex(">KeePass\\-[2-9]\\.[0-9]{2}\\-Setup\\.exe<");
+            Regex reExe = new Regex(">KeePass\\-[2-9]\\.[0-9]{2}(\\.[0-9]+)?\\-Setup\\.exe<");
             Match matchExe = reExe.Match(htmlCode);
             if (!matchExe.Success)
                 return null;
             // MSI follows after .exe
-            Regex reMsi = new Regex(">KeePass\\-[2-9]\\.[0-9]{2}\\.msi<");
+            Regex reMsi = new Regex(">KeePass\\-[2-9]\\.[0-9]{2}(\\.[0-9]+)?\\.msi<");
             Match matchMsi = reMsi.Match(htmlCode, matchExe.Index + 1);
             if (!matchMsi.Success)
                 return null;
@@ -128,7 +128,8 @@ namespace updater.software
             if (string.Compare(newVersion, knownInfo().newestVersion) < 0)
                 return null;
             // Version number should match usual scheme, e.g. 2.xx, where xx are two digits.
-            Regex version = new Regex("^[2-9]\\.[0-9]{2}$");
+            // In some rarer cases it can also have three parts, e.g. 2.xx.y.
+            Regex version = new Regex("^[2-9]\\.[0-9]{2}(\\.[0-9]+)?$");
             if (!version.IsMatch(newVersion))
                 return null;
 
