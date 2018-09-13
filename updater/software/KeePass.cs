@@ -56,13 +56,13 @@ namespace updater.software
         public override AvailableSoftware knownInfo()
         {
             return new AvailableSoftware("KeePass",
-                "2.39.1",
+                "2.40",
                 "^KeePass Password Safe [2-9]\\.[0-9]{2}(\\.[0-9]+)?$",
                 null,
                 new InstallInfoExe(
-                    "https://netcologne.dl.sourceforge.net/project/keepass/KeePass%202.x/2.39.1/KeePass-2.39.1-Setup.exe",
+                    "https://netcologne.dl.sourceforge.net/project/keepass/KeePass%202.x/2.40/KeePass-2.40-Setup.exe",
                     HashAlgorithm.SHA256,
-                    "BBB51C65 A73D5C0A A0C065F4 31505A2E 5A52A405 3528950E B8CEBB02 24E6B762",
+                    "B1666942 32668792 A8D5B63D D990711F E683B789 9433DFF0 B4C87964 57035B36",
                     publisherX509,
                     "/VERYSILENT"),
                 //There is no 64 bit installer yet.
