@@ -33,6 +33,12 @@ namespace updater.software
 
 
         /// <summary>
+        /// publisher name for signed executables of LibreOffice
+        /// </summary>
+        private const string publisherX509 = "CN=The Document Foundation, O=The Document Foundation, L=Berlin, C=DE";
+
+
+        /// <summary>
         /// Constructor.
         /// </summary>
         /// <param name="autoGetNewer">whether to automatically get
@@ -50,20 +56,20 @@ namespace updater.software
         public override AvailableSoftware knownInfo()
         {
             return new AvailableSoftware("LibreOffice",
-                "6.1.0.3",
+                "6.1.1.2",
                 "^LibreOffice [0-9]\\.[0-9]\\.[0-9]\\.[0-9]$",
                 "^LibreOffice [0-9]\\.[0-9]\\.[0-9]\\.[0-9]$",
                 new InstallInfoLibO(
-                    "https://download.documentfoundation.org/libreoffice/stable/6.1.0/win/x86/LibreOffice_6.1.0_Win_x86.msi",
+                    "https://download.documentfoundation.org/libreoffice/stable/6.1.1/win/x86/LibreOffice_6.1.1_Win_x86.msi",
                     HashAlgorithm.SHA256,
-                    "dd4524ed7416a3d8533d66a289a9db3f3a4d6231fc8887b2fb50f3ff49a8dff0",
-                    null,
+                    "a35240ae3e7d7310d943389cab0acebf4cb91b20f4ac9cf3ce9342cea7a1144b",
+                    publisherX509,
                     "/qn /norestart"),
                 new InstallInfoLibO(
-                    "https://download.documentfoundation.org/libreoffice/stable/6.1.0/win/x86_64/LibreOffice_6.1.0_Win_x64.msi",
+                    "https://download.documentfoundation.org/libreoffice/stable/6.1.1/win/x86_64/LibreOffice_6.1.1_Win_x64.msi",
                     HashAlgorithm.SHA256,
-                    "17d01f5e9b9944c5888ff41ac7d0c7d8aa93e84c5b5df98183b0b287a2e7c77d",
-                    null,
+                    "05b7cd7d55dc5feb2f5da401c3676f0c091ad7db820424cca2aff77f8a300cb5",
+                    publisherX509,
                     "/qn /norestart")
                     );
         }

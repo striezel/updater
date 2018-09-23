@@ -33,6 +33,12 @@ namespace updater.software
 
 
         /// <summary>
+        /// publisher name for signed executables of LibreOffice
+        /// </summary>
+        private const string publisherX509 = "CN=The Document Foundation, O=The Document Foundation, L=Berlin, C=DE";
+
+
+        /// <summary>
         /// default constructor
         /// </summary>
         /// <param name="autoGetNewer">whether to automatically get
@@ -50,20 +56,20 @@ namespace updater.software
         public override AvailableSoftware knownInfo()
         {
             return new AvailableSoftware("LibreOffice Help Pack German",
-                "6.1.0.3",
+                "6.1.1.2",
                 "^LibreOffice [0-9]\\.[0-9] Help Pack \\(German\\)$",
                 "^LibreOffice [0-9]\\.[0-9] Help Pack \\(German\\)$",
                 new InstallInfoLibO(
-                    "https://download.documentfoundation.org/libreoffice/stable/6.1.0/win/x86/LibreOffice_6.1.0_Win_x86_helppack_de.msi",
+                    "https://download.documentfoundation.org/libreoffice/stable/6.1.1/win/x86/LibreOffice_6.1.1_Win_x86_helppack_de.msi",
                     HashAlgorithm.SHA256,
-                    "857224bd685230ea1f6bd77c9590e32f6dbf54a126ed2d78a8be0c32259e2037",
-                    null,
+                    "a267f2e4766f71959a7d0e4136b1c780c99b91fdf169da1760efccc1de135545",
+                    publisherX509,
                     "/qn /norestart"),
                 new InstallInfoLibO(
-                    "https://download.documentfoundation.org/libreoffice/stable/6.1.0/win/x86_64/LibreOffice_6.1.0_Win_x64_helppack_de.msi",
+                    "https://download.documentfoundation.org/libreoffice/stable/6.1.1/win/x86_64/LibreOffice_6.1.1_Win_x64_helppack_de.msi",
                     HashAlgorithm.SHA256,
-                    "0923204416159f4079d7fe73a061fc9aa822473d47ce5128f7f287f57378f524",
-                    null,
+                    "81a000ae48ac121f48a33739d44768e0613341a576960b55f28b72019e2b9d2f",
+                    publisherX509,
                     "/qn /norestart")
                     );
         }
