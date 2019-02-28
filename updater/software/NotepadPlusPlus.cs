@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017, 2018  Dirk Stolle
+    Copyright (C) 2017, 2018, 2019  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -56,19 +56,19 @@ namespace updater.software
         public override AvailableSoftware knownInfo()
         {
             return new AvailableSoftware("Notepad++",
-                "7.6.1",
+                "7.6.3",
                 "^Notepad\\+\\+ \\(32\\-bit x86\\)$|^Notepad\\+\\+$",
                 "^Notepad\\+\\+ \\(64\\-bit x64\\)$",
                 new InstallInfoExe(
-                    "https://notepad-plus-plus.org/repository/7.x/7.6.1/npp.7.6.1.Installer.exe",
-                    HashAlgorithm.SHA1,
-                    "091037b00f8cdc0e50e61a1a3f147dde8a4178dd",
+                    "https://notepad-plus-plus.org/repository/7.x/7.6.3/npp.7.6.3.Installer.exe",
+                    HashAlgorithm.SHA256,
+                    "48af4c024131f9d76927f301c7489d44cffb50acd92e1b05264389d1880bba81",
                     publisherX509,
                     "/S"),
                 new InstallInfoExe(
-                    "https://notepad-plus-plus.org/repository/7.x/7.6.1/npp.7.6.1.Installer.x64.exe",
-                    HashAlgorithm.SHA1,
-                    "8763daeb06c730afd2bb3e227129c1b9410bc404",
+                    "https://notepad-plus-plus.org/repository/7.x/7.6.3/npp.7.6.3.Installer.x64.exe",
+                    HashAlgorithm.SHA256,
+                    "c99e5ba7386010f85c1a19d88fbe48c1f0df281ab624c00b0a1fa6bf8d46ce42",
                     publisherX509,
                     "/S")
                 );
@@ -174,18 +174,18 @@ namespace updater.software
                 client.Dispose();
             } // using
 
-            // find SHA1 hash for 32 bit installer
-            Regex reHash = new Regex("[a-f0-9]{40}    npp.+Installer\\.exe");
+            // find SHA256 hash for 32 bit installer
+            Regex reHash = new Regex("[a-f0-9]{64}  npp.+Installer\\.exe");
             Match matchHash = reHash.Match(htmlCode);
             if (!matchHash.Success)
                 return null;
-            string newHash32Bit = matchHash.Value.Substring(0, 40);
-            // find SHA1 hash for 64 bit installer
-            reHash = new Regex("[a-f0-9]{40}    npp.+Installer\\.x64\\.exe");
+            string newHash32Bit = matchHash.Value.Substring(0, 64);
+            // find SHA256 hash for 64 bit installer
+            reHash = new Regex("[a-f0-9]{64}  npp.+Installer\\.x64\\.exe");
             matchHash = reHash.Match(htmlCode);
             if (!matchHash.Success)
                 return null;
-            string newHash64Bit = matchHash.Value.Substring(0, 40);
+            string newHash64Bit = matchHash.Value.Substring(0, 64);
             // construct new information
             var newInfo = knownInfo();
             string oldVersion = newInfo.newestVersion;
