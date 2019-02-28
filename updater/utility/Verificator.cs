@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017  Dirk Stolle
+    Copyright (C) 2017, 2019  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -21,12 +21,18 @@ using System.Security.Cryptography.X509Certificates;
 namespace updater.utility
 {
     /// <summary>
-    /// class to verify signed binary files
+    /// Class to verify signed binary files.
     /// </summary>
     public class Verificator
     {
         /// <summary>
-        /// verifies signature and publisher of a file
+        /// NLog.Logger for Verificator class
+        /// </summary>
+        private static NLog.Logger logger = NLog.LogManager.GetLogger(typeof(Verificator).FullName);
+
+
+        /// <summary>
+        /// Verifies signature and publisher of a file.
         /// </summary>
         /// <param name="fileName">file name with full path</param>
         /// <param name="publisher">publisher name</param>
@@ -42,7 +48,7 @@ namespace updater.utility
 
 
         /// <summary>
-        /// verifies that a given file is from a certain publisher
+        /// Verifies that a given file is from a certain publisher.
         /// </summary>
         /// <param name="fileName">file name with full path</param>
         /// <param name="publisher">publisher name</param>
@@ -55,17 +61,33 @@ namespace updater.utility
             try
             {
                 cert = new X509Certificate2(fileName);
+                X509Chain certChain = new X509Chain();
+                bool chainValid = certChain.Build(cert);
+                if (!chainValid)
+                {
+                    foreach (var status in certChain.ChainStatus)
+                    {
+                        var level = (status.Status == X509ChainStatusFlags.NoError)
+                            ? NLog.LogLevel.Info : NLog.LogLevel.Error;
+                        logger.Log(level, "Certificate chain status: " + status.Status.ToString() + " - " + status.StatusInformation);
+                        if (status.Status == X509ChainStatusFlags.NotTimeValid)
+                        {
+                            logger.Info("Certificate is not valid before " + cert.NotBefore.ToString("yyyy-MM-dd HH:mm:ss")
+                                + " and not valid after " + cert.NotAfter.ToString("yyyy-MM-dd HH:mm:ss") + ".");
+                        }
+                    } // foreach
+                }
                 if (!cert.Verify())
                     return false;
                 sub = cert.Subject;
             }
             catch
             {
-                //Any exception is an error and makes verification impossible.
+                // Any exception is an error and makes verification impossible.
                 return false;
             }
             return sub == publisher;
         }
 
     }
-} //namespace
+} // namespace
