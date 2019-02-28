@@ -75,6 +75,9 @@ namespace updater_test.utility
         [ClassInitialize()]
         public static void DownloadExampleFile(TestContext testContext)
         {
+            // TODO: Certificate on that file expired in 2018, so we need to find a
+            // new one with a valid certificate. Unfortunately, Putty 0.70, which is
+            // the latest release as of now (2019-02-28), also uses the old certificate.
             downloadFileLocation = download("https://the.earth.li/~sgtatham/putty/0.69/w32/putty-0.69-installer.msi");
         }
 
