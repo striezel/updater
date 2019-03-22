@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017, 2018  Dirk Stolle
+    Copyright (C) 2017, 2018, 2019  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -34,7 +34,7 @@ namespace updater.software
 
 
         /// <summary>
-        /// default constructor
+        /// Constructor.
         /// </summary>
         /// <param name="autoGetNewer">whether to automatically get
         /// newer information about the software when calling the info() method</param>
@@ -50,28 +50,28 @@ namespace updater.software
 
 
         /// <summary>
-        /// gets the currently known information about the software
+        /// Gets the currently known information about the software.
         /// </summary>
         /// <returns>Returns an AvailableSoftware instance with the known
         /// details about the software.</returns>
         public override AvailableSoftware knownInfo()
         {
             return new AvailableSoftware("PuTTY",
-                "0.70",
+                "0.71",
                 "^PuTTY release [0-9]\\.[0-9]+$",
                 "^PuTTY release [0-9]\\.[0-9]+ \\(64\\-bit\\)$",
                 //32 bit installer
                 new InstallInfoMsi(
-                    "https://the.earth.li/~sgtatham/putty/0.70/w32/putty-0.70-installer.msi",
+                    "https://the.earth.li/~sgtatham/putty/0.71/w32/putty-0.71-installer.msi",
                     HashAlgorithm.SHA512,
-                    "5798f63a9260297c322703da0303378b6ae94396885d3973148bc69baf6d9141813504e522c05745f008ceeafdcf45e55279b171b0945625bf0fdc8225913ca7",
+                    "2d27bfbc830022da545da5e64f8d1d197bdd5e85730f714d17ad7da495766cb10a49e34acb8b0abb796527923df349d8acf5fbdf85f32fd7d4a227d61e38166b",
                     publisherX509,
                     "/qn /norestart"),
                 //64 bit installer
                 new InstallInfoMsi(
-                    "https://the.earth.li/~sgtatham/putty/0.70/w64/putty-64bit-0.70-installer.msi",
+                    "https://the.earth.li/~sgtatham/putty/0.71/w64/putty-64bit-0.71-installer.msi",
                     HashAlgorithm.SHA512,
-                    "71c2d5503c7ae4cdc4f689fb7870465c8524db1baf245ea12d56a9a45ab63a1b4ed9baa6e10216072edc915b09024d8872a849e49072a958c1f57d0a3af17edf",
+                    "9b3d010b0310efa1123c828fd664de1f1331d9a7e9796104187f10fd4fe0a0aff5cb1c541d810905e7751a9adc6691ba66927f57b761081ed19a89e0b2998be8",
                     publisherX509,
                     "/qn /norestart")
                 );
@@ -133,7 +133,7 @@ namespace updater.software
                 return null;
             string newVersion = matchVersion.Value.Replace("/", "");
 
-            //Checksums are in a file like https://the.earth.li/~sgtatham/putty/0.68/sha512sums
+            // Checksums are in a file like https://the.earth.li/~sgtatham/putty/0.68/sha512sums
             string sha512sums = null;
             using (var client = new WebClient())
             {
@@ -161,9 +161,9 @@ namespace updater.software
                 return null;
             string hash64 = matchHash64.Value.Substring(0, 128);
 
-            //construct new version information
+            // construct new version information
             var newInfo = knownInfo();
-            //replace version number - both as newest version and in URL for download
+            // replace version number - both as newest version and in URL for download
             string oldVersion = newInfo.newestVersion;
             newInfo.newestVersion = newVersion;
             newInfo.install32Bit.downloadUrl = newInfo.install32Bit.downloadUrl.Replace(oldVersion, newVersion);
@@ -175,8 +175,8 @@ namespace updater.software
 
 
         /// <summary>
-        /// lists names of processes that might block an update, e.g. because
-        /// the application cannot be update while it is running
+        /// Lists names of processes that might block an update, e.g. because
+        /// the application cannot be update while it is running.
         /// </summary>
         /// <param name="detected">currently installed / detected software version</param>
         /// <returns>Returns a list of process names that block the upgrade.</returns>
@@ -204,7 +204,7 @@ namespace updater.software
 
 
         /// <summary>
-        /// returns a process that must be run before the update
+        /// Returns a process that must be run before the update.
         /// </summary>
         /// <param name="detected">currently installed / detected software version</param>
         /// <returns>Returns a Process ready to start that should be run before
@@ -212,7 +212,7 @@ namespace updater.software
         /// returned false.</returns>
         public override List<Process> preUpdateProcess(DetectedSoftware detected)
         {
-            //We do not need a pre-update process, if the version is 0.68 or
+            // We do not need a pre-update process, if the version is 0.68 or
             // newer, because that one uses MSI.
             // We also cannot create a process, if the install directory is
             // unknown.
@@ -222,14 +222,14 @@ namespace updater.software
                 return null;
 
             var processes = new List<Process>();
-            //first process:
-            // delete putty.exe to disable prompt that deletes settings (we want to keep them)
+            // First process:
+            // Delete putty.exe to disable prompt that deletes settings (we want to keep them).
             var proc = new Process();
                 proc.StartInfo.FileName = "cmd.exe";
             proc.StartInfo.Arguments = "/C del \""
                 + System.IO.Path.Combine(detected.installPath, "putty.exe") + "\"";
             processes.Add(proc);
-            //second process: uninstall old PuTTY
+            // second process: uninstall old PuTTY
             proc = new Process();
             proc.StartInfo.FileName = System.IO.Path.Combine(detected.installPath, "unins000.exe");
             proc.StartInfo.Arguments = "/VERYSILENT /SUPPRESSMSGBOXES /NORESTART";
@@ -247,8 +247,8 @@ namespace updater.software
         /// Returns false, if no update is necessary.</returns>
         public override bool needsUpdate(DetectedSoftware detected)
         {
-            //Simple version string comparison.
+            // Simple version string comparison.
             return (string.Compare(detected.displayVersion, info().newestVersion, true) < 0);
         }
-    } //class
-} //namesoace
+    } // class
+} // namespace
