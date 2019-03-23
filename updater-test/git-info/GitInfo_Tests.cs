@@ -63,8 +63,8 @@ namespace updater_test.git_info
         {
             string desc = updater.GitInfo.getDescription();
             Regex seven = new Regex("^[0-9a-f]{7}$");
-            Regex versionTag = new Regex("^v[0-9]{4}\\.[0-9]{2}\\.[0-9]{2}$");
-            Regex versionTagAndCommit = new Regex("^v[0-9]{4}\\.[0-9]{2}\\.[0-9]{2}\\-[0-9]+\\-g[0-9a-f]{7}$");
+            Regex versionTag = new Regex("^v[0-9]{4}\\.[0-9]{2}\\.[0-9]{2}(\\.[0-9]+)?$");
+            Regex versionTagAndCommit = new Regex("^v[0-9]{4}\\.[0-9]{2}\\.[0-9]{2}(\\.[0-9]+)?\\-[0-9]+\\-g[0-9a-f]{7}$");
             Assert.IsTrue(seven.IsMatch(desc) || versionTag.IsMatch(desc)
                 || versionTagAndCommit.IsMatch(desc), "Description is \""
                 + desc + "\" and does not match any of the regular expressions!");
