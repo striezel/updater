@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017  Dirk Stolle
+    Copyright (C) 2017, 2019  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -24,7 +24,7 @@ using System.Net;
 namespace updater_test.utility
 {
     /// <summary>
-    /// unit tests for updater.utility.Verificator class
+    /// Unit tests for updater.utility.Verificator class.
     /// </summary>
     [TestClass]
     public class Verificator_Tests
@@ -42,7 +42,7 @@ namespace updater_test.utility
 
 
         /// <summary>
-        /// downloads a file from the given URL
+        /// Downloads a file from the given URL.
         /// </summary>
         /// <param name="url">URL of the file</param>
         /// <returns>Returns the local path of the downloaded file, if successful.
@@ -63,27 +63,24 @@ namespace updater_test.utility
                     wc.Dispose();
                     return null;
                 }
-            } //using
+            } // using
             return localFile;
         }
 
 
         /// <summary>
-        /// downloads a signed MSi file that will be used during the tests
+        /// Downloads a signed MSI file that will be used during the tests.
         /// </summary>
         /// <param name="testContext"></param>
         [ClassInitialize()]
         public static void DownloadExampleFile(TestContext testContext)
         {
-            // TODO: Certificate on that file expired in 2018, so we need to find a
-            // new one with a valid certificate. Unfortunately, Putty 0.70, which is
-            // the latest release as of now (2019-02-28), also uses the old certificate.
-            downloadFileLocation = download("https://the.earth.li/~sgtatham/putty/0.69/w32/putty-0.69-installer.msi");
+            downloadFileLocation = download("https://the.earth.li/~sgtatham/putty/0.71/w32/putty-0.71-installer.msi");
         }
 
 
         /// <summary>
-        /// deletes the signed MSi file that was used during the tests
+        /// Deletes the signed MSI file that was used during the tests.
         /// </summary>
         [ClassCleanup()]
         public static void DeleteExampleFile()
@@ -96,7 +93,7 @@ namespace updater_test.utility
                 }
                 catch (Exception)
                 {
-                    //nothing
+                    // nothing
                 }
             }
         }
@@ -112,9 +109,9 @@ namespace updater_test.utility
             string copyLocation = downloadFileLocation + "_copy";
             try
             {
-                //copy original file
+                // copy original file
                 File.Copy(downloadFileLocation, copyLocation);
-                //modify some bytes in the copied file
+                // modify some bytes in the copied file
                 using (Stream stream = File.Open(copyLocation, FileMode.Open))
                 {
                     stream.Position = 345;
@@ -122,7 +119,7 @@ namespace updater_test.utility
                     stream.Write(data, 0, data.Length);
                     stream.Close();
                 }
-                //check signature
+                // check signature
                 verified = updater.utility.Verificator.verifySignature(copyLocation, puttyPublisherX509);
             }
             finally
@@ -130,7 +127,7 @@ namespace updater_test.utility
                 if (File.Exists(copyLocation))
                     File.Delete(copyLocation);
             }
-            //verification should have failed
+            // Verification should have failed.
             Assert.IsFalse(verified);
         }
 
