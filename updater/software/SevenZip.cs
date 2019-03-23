@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017, 2018  Dirk Stolle
+    Copyright (C) 2017, 2018, 2019  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -53,19 +53,19 @@ namespace updater.software
         public override AvailableSoftware knownInfo()
         {
             return new AvailableSoftware("7-Zip",
-                "18.05",
+                "19.00",
                 "^7\\-Zip [0-9]+\\.[0-9]{2}$",
                 "^7\\-Zip [0-9]+\\.[0-9]{2} \\(x64\\)$",
                 new InstallInfoExe(
-                    "http://www.7-zip.org/a/7z1805.exe",
+                    "http://www.7-zip.org/a/7z1900.exe",
                     HashAlgorithm.SHA256,
-                    "647a9a621162cd7a5008934a08e23ff7c1135d6f1261689fd954aa17d50f9729",
+                    "759aa04d5b03ebeee13ba01df554e8c962ca339c74f56627c8bed6984bb7ef80",
                     null,
                     "/S"),
                 new InstallInfoExe(
-                    "http://www.7-zip.org/a/7z1805-x64.exe",
+                    "http://www.7-zip.org/a/7z1900-x64.exe",
                     HashAlgorithm.SHA256,
-                    "c1e42d8b76a86ea1890ad080e69a04c75a5f2c0484bdcd838dc8fa908dd4a84c",
+                    "0f5d4dbbe5e55b7aa31b91e5925ed901fdf46a367491d81381846f05ad54c45e",
                     null,
                     "/S")
                 );
@@ -115,20 +115,16 @@ namespace updater.software
                     return null;
                 }
                 client.Dispose();
-            } //using
+            } // using
 
-            Regex reVersion = new Regex("Download 7\\-Zip [0-9]+\\.[0-9]{2} \\([0-9]{4}\\-[0-9]{2}\\-[0-9]{2}\\) for Windows");
+            Regex reVersion = new Regex("<A href=\"a/7z[0-9]{4}.exe\">Download</A>", RegexOptions.IgnoreCase);
             Match matchVersion = reVersion.Match(htmlCode);
             if (!matchVersion.Success)
                 return null;
 
-            string version = matchVersion.Value.Replace("Download 7-Zip", "").Trim();
-            int idx = version.IndexOf(' ');
-            if (idx < 0)
-                return null;
-            version = version.Remove(idx);
-            if (string.IsNullOrWhiteSpace(version))
-                return null;
+            string version = matchVersion.Value.Replace("<A href=\"a/7z", "")
+                .Replace(".exe\">Download</A>", "").Trim();
+            version = version.Substring(0, 2) + "." + version.Substring(2, 2);
 
             // construct new information
             var newInfo = knownInfo();
