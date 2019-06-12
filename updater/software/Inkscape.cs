@@ -51,7 +51,8 @@ namespace updater.software
         /// details about the software.</returns>
         public override AvailableSoftware knownInfo()
         {
-            return new AvailableSoftware("Inkscape", "0.92.1",
+            return new AvailableSoftware("Inkscape",
+                "0.92.1",
                 "^Inkscape [0-9]\\.[0-9]+(\\.[0-9]+)?$",
                 "^Inkscape [0-9]\\.[0-9]+(\\.[0-9]+)?$",
                 new InstallInfoMsi(
@@ -105,7 +106,7 @@ namespace updater.software
             {
                 try
                 {
-                    htmlCode = client.DownloadString("https://inkscape.org/en/download/windows/");
+                    htmlCode = client.DownloadString("https://inkscape.org/release/");
                 }
                 catch (Exception ex)
                 {
@@ -115,28 +116,103 @@ namespace updater.software
                 client.Dispose();
             } //using
 
-            //Search for headline like "Latest stable version: Inkscape 0.92.1".
-            Regex reVersion = new Regex("Latest stable version: Inkscape [0-9]\\.[0-9]+(\\.[0-9]+)?");
+            // Search for URL part like "/release/0.92.4/windows/".
+            Regex reVersion = new Regex("/release/[0-9]\\.[0-9]+(\\.[0-9]+)?/windows/");
             Match matchVersion = reVersion.Match(htmlCode);
             if (!matchVersion.Success)
                 return null;
-            string newVersion = matchVersion.Value.Replace("Latest stable version: Inkscape", "").Trim();
+            string newVersion = matchVersion.Value.Replace("/release/", "").Replace("/windows/", "").Trim();
             
-            //construct new version information based on old information
+            // construct new version information based on old information
             var newInfo = knownInfo();
             if (newVersion == newInfo.newestVersion)
                 return newInfo;
-            //replace version number - both as newest version and in URL for download
-            string oldVersion = newInfo.newestVersion;
             newInfo.newestVersion = newVersion;
-            newInfo.install32Bit.downloadUrl = newInfo.install32Bit.downloadUrl.Replace(oldVersion, newVersion);
-            //no checksums are provided on the official site
+            // Reset checksums to avoid working with older stuff.
             newInfo.install32Bit.checksum = null;
             newInfo.install32Bit.algorithm = HashAlgorithm.Unknown;
-            newInfo.install64Bit.downloadUrl = newInfo.install64Bit.downloadUrl.Replace(oldVersion, newVersion);
-            //no checksums are provided on the official site, but binaries are signed
             newInfo.install64Bit.checksum = null;
             newInfo.install64Bit.algorithm = HashAlgorithm.Unknown;
+
+            foreach (string bits in new string[] {"32", "64" })
+            {
+                // Find download URL for 32 bit version.
+                // https://inkscape.org/release/inkscape-0.92.4/windows/32-bit/msi/dl/
+                // 64 bit version is at an URL like
+                // https://inkscape.org/release/inkscape-0.92.4/windows/64-bit/msi/dl/
+                htmlCode = null;
+                using (var client = new WebClient())
+                {
+                    try
+                    {
+                        htmlCode = client.DownloadString("https://inkscape.org/release/inkscape-" + newVersion + "/windows/" + bits + "-bit/msi/dl/");
+                    }
+                    catch (Exception ex)
+                    {
+                        logger.Warn("Exception occurred while checking for newer version of Inkscape: " + ex.Message);
+                        return null;
+                    }
+                    client.Dispose();
+                } //using
+
+                // Search for URL part like '<a href="/gallery/item/13322/inkscape-0.92.4-x86.msi">'.
+                //     or
+                // Search for URL part like '<a href="/gallery/item/13321/inkscape-0.92.4-x64.msi">'.
+                string arch = (bits == "32") ? "x86" : "x64";
+                {
+                    Regex reUrl = new Regex("<a href=\"([a-zA-Z0-9\\/]+)/inkscape\\-" + Regex.Escape(newVersion) + "\\-" + arch + "\\.msi\">");
+                    Match matchUrl = reUrl.Match(htmlCode);
+                    if (!matchUrl.Success)
+                        return null;
+                    if (bits == "32")
+                        newInfo.install32Bit.downloadUrl = "https://inkscape.org/" + matchUrl.Groups[1].Value + "inkscape-" + newVersion + "-x86.msi";
+                    else
+                        newInfo.install64Bit.downloadUrl = "https://inkscape.org/" + matchUrl.Groups[1].Value + "inkscape-" + newVersion + "-x64.msi";
+                }
+
+                // Signature files are given in HTML elements like
+                // <a href="https://media.inkscape.org/media/resources/sigs/inkscape-0.92.4-x86.msi_v1j6SnA.md5"> or
+                // <a href="https://media.inkscape.org/media/resources/sigs/inkscape-0.92.4-x64.msi_8a41Ccz.md5">.
+                {
+                    Regex reSigUrl = new Regex(Regex.Escape("<a href=\"https://media.inkscape.org/media/resources/sigs/inkscape-" + newVersion + "-" + arch + ".msi_") + "[A-Za-z0-9]+\\.md5\">");
+                    Match matchSigUrl = reSigUrl.Match(htmlCode);
+                    if (!matchSigUrl.Success)
+                        return null;
+                    string signatureUrl = matchSigUrl.Value.Replace("<a href=\"", "").Replace("\">", "");
+
+                    htmlCode = null;
+                    using (var client = new WebClient())
+                    {
+                        try
+                        {
+                            htmlCode = client.DownloadString(signatureUrl);
+                        }
+                        catch (Exception ex)
+                        {
+                            logger.Warn("Exception occurred while checking for newer version of Inkscape: " + ex.Message);
+                            return null;
+                        }
+                        client.Dispose();
+                    } //using
+                }
+
+                Regex reHash = new Regex("[0-9a-f]{32} \\*inkscape\\-" + Regex.Escape(newVersion) + "\\-" + arch + "\\.msi");
+                Match matchHash = reHash.Match(htmlCode);
+                if (!matchHash.Success)
+                    return null;
+                string newHash = matchHash.Value.Substring(0, 32); // MD5 is 32 characters in hex.
+                if (bits == "32")
+                {
+                    newInfo.install32Bit.checksum = newHash;
+                    newInfo.install32Bit.algorithm = HashAlgorithm.MD5;
+                }
+                else
+                {
+                    newInfo.install64Bit.checksum = newHash;
+                    newInfo.install64Bit.algorithm = HashAlgorithm.MD5;
+                }
+            } // foreach
+
             return newInfo;
         }
 
