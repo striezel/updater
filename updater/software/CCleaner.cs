@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017, 2018  Dirk Stolle
+    Copyright (C) 2017, 2018, 2019  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -48,7 +48,7 @@ namespace updater.software
         /// <summary>
         /// publisher name for signed executables
         /// </summary>
-        private const string publisherX509 = "CN=Piriform Ltd, O=Piriform Ltd, L=London, C=GB";
+        private const string publisherX509 = "CN=Piriform Software Ltd, O=Piriform Software Ltd, L=London, C=GB";
 
 
         /// <summary>
@@ -59,20 +59,20 @@ namespace updater.software
         public override AvailableSoftware knownInfo()
         {
             return new AvailableSoftware("CCleaner",
-                "5.47",
+                "5.58",
                 "^CCleaner+$",
                 "^CCleaner+$",
                 // CCleaner uses the same installer for 32 and 64 bit.
                 new InstallInfoExe(
-                    "https://download.ccleaner.com/ccsetup547.exe",
+                    "https://download.ccleaner.com/ccsetup558.exe",
                     HashAlgorithm.SHA256,
-                    "d2c17468859fdc3d8d64c0d29c4d682e9c7f3a6b34ef28673de05ec9931af40c",
+                    "4c5bcfc6a3ba65d8330ebf0a58a65fb17dcd68824ac9cb81c7102ce3d7268c36",
                     publisherX509,
                     "/S"),
                 new InstallInfoExe(
-                    "https://download.ccleaner.com/ccsetup547.exe",
+                    "https://download.ccleaner.com/ccsetup558.exe",
                     HashAlgorithm.SHA256,
-                    "d2c17468859fdc3d8d64c0d29c4d682e9c7f3a6b34ef28673de05ec9931af40c",
+                    "4c5bcfc6a3ba65d8330ebf0a58a65fb17dcd68824ac9cb81c7102ce3d7268c36",
                     publisherX509,
                     "/S")
                 );
