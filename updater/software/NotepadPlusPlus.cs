@@ -55,20 +55,21 @@ namespace updater.software
         /// details about the software.</returns>
         public override AvailableSoftware knownInfo()
         {
+            string version = "7.7";
             return new AvailableSoftware("Notepad++",
-                "7.6.3",
+                version,
                 "^Notepad\\+\\+ \\(32\\-bit x86\\)$|^Notepad\\+\\+$",
                 "^Notepad\\+\\+ \\(64\\-bit x64\\)$",
                 new InstallInfoExe(
-                    "https://notepad-plus-plus.org/repository/7.x/7.6.3/npp.7.6.3.Installer.exe",
+                    "https://notepad-plus-plus.org/repository/7.x/" + version + "/npp." + version + ".Installer.exe",
                     HashAlgorithm.SHA256,
-                    "48af4c024131f9d76927f301c7489d44cffb50acd92e1b05264389d1880bba81",
+                    "f851e5cce9a1509f4e2c476ce5f7adf151d8f385afbcf448234b7f28fba28af9",
                     publisherX509,
                     "/S"),
                 new InstallInfoExe(
-                    "https://notepad-plus-plus.org/repository/7.x/7.6.3/npp.7.6.3.Installer.x64.exe",
+                    "https://notepad-plus-plus.org/repository/7.x/" + version + "/npp." + version + ".Installer.x64.exe",
                     HashAlgorithm.SHA256,
-                    "c99e5ba7386010f85c1a19d88fbe48c1f0df281ab624c00b0a1fa6bf8d46ce42",
+                    "c2e485758de1c7f3768b30778852a3b2624b6803d5c40411e9685cce478f5ff4",
                     publisherX509,
                     "/S")
                 );
@@ -159,12 +160,12 @@ namespace updater.software
             if (string.Compare(directoryDetailed, knownInfo().newestVersion) < 0)
                 return null;
 
-            // download checksum file, e.g. "https://notepad-plus-plus.org/repository/7.x/7.3.1/npp.7.3.1.sha1.md5.digest.txt"
+            // download checksum file, e.g. "https://notepad-plus-plus.org/repository/7.x/7.7/npp.7.7.checksums.sha256"
             using (var client = new WebClient())
             {
                 try
                 {
-                    htmlCode = client.DownloadString("https://notepad-plus-plus.org/repository/" + directoryMajor + "/" + directoryDetailed + "/npp." + directoryDetailed + ".sha1.md5.digest.txt");
+                    htmlCode = client.DownloadString("https://notepad-plus-plus.org/repository/" + directoryMajor + "/" + directoryDetailed + "/npp." + directoryDetailed + ".checksums.sha256");
                 }
                 catch (Exception ex)
                 {
