@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017, 2018  Dirk Stolle
+    Copyright (C) 2017, 2018, 2019  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -97,7 +97,6 @@ namespace updater.software
             } //foreach
 
             result.Add(new SevenZip(autoGetNewer));
-            result.Add(new Shockwave(autoGetNewer));
             
             // Thunderbird
             languages = Thunderbird.validLanguageCodes();
