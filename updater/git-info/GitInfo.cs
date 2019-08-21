@@ -19,12 +19,12 @@
 namespace updater
 {
     /// <summary>
-    /// class that provides access to some Git information for the updater
+    /// Provides access to some Git information for the updater.
     /// </summary>
     public class GitInfo
     {
         /// <summary>
-        /// gets the name of the Git branch
+        /// Gets the name of the Git branch.
         /// </summary>
         /// <returns>Returns a string that contains the git branch.</returns>
         public static string getBranch()
@@ -34,7 +34,7 @@ namespace updater
 
 
         /// <summary>
-        /// gets the hexadecimal SHA1 hash of the current commit (40 hex digits).
+        /// Gets the hexadecimal SHA1 hash of the current commit (40 hex digits).
         /// </summary>
         /// <returns>Returns the SHA1 hash of the current commit.</returns>
         public static string getCommit()
@@ -44,7 +44,7 @@ namespace updater
 
 
         /// <summary>
-        /// gets the date of the last commit (e.g. "2017-01-29 14:59:33 +0200")
+        /// Gets the date of the last commit (e.g. "2017-01-29 14:59:33 +0200").
         /// </summary>
         /// <returns>Returns the date of the last commit.</returns>
         public static string getCommitDate()
@@ -54,7 +54,7 @@ namespace updater
 
 
         /// <summary>
-        /// returns a Git-like description (e.g. "v2017.04.18-5-gabcdef") of the current commit.
+        /// Gets a Git-like description (e.g. "v2017.04.18-5-gabcdef") of the current commit.
         /// </summary>
         /// <returns>Returns a Git-like description (e.g. "v2017.04.18-5-gabcdef").</returns>
         public static string getDescription()
@@ -64,12 +64,12 @@ namespace updater
 
 
         /// <summary>
-        /// gets the a short version of the hexadecimal SHA1 hash of the current commit (less than 40 hex digits).
+        /// Gets the a short version of the hexadecimal SHA1 hash of the current commit (less than 40 hex digits).
         /// </summary>
         /// <returns>Returns a short version of the SHA1 hash of the current commit.</returns>
         public static string getShortHash()
         {
             return Properties.Resources.hash_short.Trim();
         }
-    } //class
-} //namespace
+    } // class
+} // namespace

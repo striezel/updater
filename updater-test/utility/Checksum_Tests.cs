@@ -25,13 +25,13 @@ using updater.utility;
 namespace updater_test.utility
 {
     /// <summary>
-    /// Zusammenfassungsbeschreibung für Checksum_Tests
+    /// Contains tests for the Checksum class.
     /// </summary>
     [TestClass]
     public class Checksum_Tests
     {
         /// <summary>
-        /// tests whether Checksum.areEqual() works as expected
+        /// Tests whether Checksum.areEqual() works as expected.
         /// </summary>
         [TestMethod]
         public void Test_areEqual_positive()
@@ -50,7 +50,7 @@ namespace updater_test.utility
 
 
         /// <summary>
-        /// tests whether Checksum.areEqual() works as expected
+        /// Tests whether Checksum.areEqual() works as expected.
         /// </summary>
         [TestMethod]
         public void Test_areEqual_negative()
@@ -68,7 +68,7 @@ namespace updater_test.utility
 
 
         /// <summary>
-        /// tests whether Checksum.calculate() can calculate checksums
+        /// Tests whether Checksum.calculate() can calculate checksums.
         /// </summary>
         [TestMethod]
         public void Test_calculate()
@@ -81,25 +81,25 @@ namespace updater_test.utility
             cases.Add(HashAlgorithm.SHA512,
                 "cf83e1357eefb8bdf1542850d66d8007d620e4050b5715dc83f4a921d36ce9ce47d0d13c5d85f2b0ff8318d2877eec2f63b931bd47417a81a538327af927da3e");
 
-            //create temporary file of zero bytes size
+            // Create temporary file of zero bytes size.
             string fileName = Path.GetTempFileName();
             try
             {
                 foreach (var item in cases)
                 {
                     Assert.AreEqual<string>(item.Value, Checksum.calculate(fileName, item.Key));
-                } //foreach                
-            } //try-fin
+                }
+            }
             finally
             {
-                //Always clean up.
+                // Always clean up.
                 File.Delete(fileName);
             }
         }
 
 
         /// <summary>
-        /// tests whether Checksum.hashToString() works as expected
+        /// Tests whether Checksum.hashToString() works as expected.
         /// </summary>
         [TestMethod]
         public void Test_hashToString()
@@ -112,7 +112,7 @@ namespace updater_test.utility
 
 
         /// <summary>
-        /// tests whether Checksum.hashToString() can handle null and empty parameters
+        /// Tests whether Checksum.hashToString() can handle null and empty parameters.
         /// </summary>
         [TestMethod]
         public void Test_hashToString_NullEmpty()
@@ -123,7 +123,7 @@ namespace updater_test.utility
 
 
         /// <summary>
-        /// tests whether Checksum.normalise() works as expected
+        /// Tests whether Checksum.normalise() works as expected.
         /// </summary>
         [TestMethod]
         public void Test_normalise()
@@ -140,5 +140,5 @@ namespace updater_test.utility
                 Assert.AreEqual<string>(item.Value, Checksum.normalise(item.Key));
             }
         }
-    } //class
-} //namespace
+    } // class
+} // namespace

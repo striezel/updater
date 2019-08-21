@@ -22,11 +22,14 @@ using System.Text.RegularExpressions;
 namespace updater_test.git_info
 {
     /// <summary>
-    /// unit tests for GitInfo class
+    /// Contains tests for the GitInfo class.
     /// </summary>
     [TestClass]
     public class GitInfo_Tests
     {
+        /// <summary>
+        /// Checks whether getBranch() can get the branch name.
+        /// </summary>
         [TestMethod]
         public void Test_getBranch()
         {
@@ -39,16 +42,22 @@ namespace updater_test.git_info
         }
 
 
+        /// <summary>
+        /// Checks whether getCommit() returns a proper Git commit hash.
+        /// </summary>
         [TestMethod]
         public void Test_getCommit()
         {
             string hash = updater.GitInfo.getCommit();
-            //Commit hash is a SHA-1 hash, i.e. 40 hex digits.
+            // Commit hash is a SHA-1 hash, i.e. 40 hex digits.
             Regex forty = new Regex("^[0-9a-f]{40}$");
             Assert.IsTrue(forty.IsMatch(hash));
         }
 
 
+        /// <summary>
+        /// Checks whether a proper date is returned by getCommitDate().
+        /// </summary>
         [TestMethod]
         public void Test_getCommitDate()
         {
@@ -58,6 +67,10 @@ namespace updater_test.git_info
         }
 
 
+        /// <summary>
+        /// Checks whether getDescription() returns a description with the
+        /// expected format.
+        /// </summary>
         [TestMethod]
         public void Test_getDescription()
         {
@@ -71,13 +84,16 @@ namespace updater_test.git_info
         }
 
 
+        /// <summary>
+        /// Checks whether getShortHash() returns a shortened SHA-1 hash.
+        /// </summary>
         [TestMethod]
         public void Test_getShortHash()
         {
             string shorty = updater.GitInfo.getShortHash();
-            //Start of commit hash, i.e. seven hex digits.
+            // Start of commit hash, i.e. seven hex digits.
             Regex seven = new Regex("^[0-9a-f]{7}$");
             Assert.IsTrue(seven.IsMatch(shorty));
         }
-    } //class
-} //namespace
+    } // class
+} // namespace

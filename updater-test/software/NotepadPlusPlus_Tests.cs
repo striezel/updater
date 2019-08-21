@@ -23,13 +23,13 @@ using updater.software;
 namespace updater_test.software
 {
     /// <summary>
-    /// unit test class for software.NotepadPlusPlus class
+    /// Contains tests for the NotepadPlusPlus class.
     /// </summary>
     [TestClass]
     public class NotepadPlusPlus_Tests : BasicSoftwareTests
     {
         /// <summary>
-        /// checks whether info() returns some meaningful data
+        /// Checks whether info() returns some meaningful data.
         /// </summary>
         [TestMethod]
         public void Test_info()
@@ -39,7 +39,7 @@ namespace updater_test.software
 
 
         /// <summary>
-        /// checks whether the class implements the searchForNewer() method
+        /// Checks whether the class implements the searchForNewer() method.
         /// </summary>
         [TestMethod]
         public void Test_implementsSearchForNewer()
@@ -50,7 +50,7 @@ namespace updater_test.software
 
 
         /// <summary>
-        /// checks whether searchForNewer() returns something
+        /// Checks whether searchForNewer() returns something.
         /// </summary>
         [TestMethod]
         public void Test_searchForNewer()
@@ -60,7 +60,7 @@ namespace updater_test.software
 
 
         /// <summary>
-        /// checks whether the class info is up to date
+        /// Checks whether the class info is up to date.
         /// </summary>
         [TestMethod]
         public void Test_upToDate_info()
@@ -70,18 +70,18 @@ namespace updater_test.software
 
 
         /// <summary>
-        /// checks whether the regular expression for 32 bit variant detects old
-        /// and new variants
+        /// Checks whether the regular expression for 32 bit variant detects old
+        /// and new variants.
         /// </summary>
         [TestMethod]
         public void Test_match32Bit()
         {
             var npp = new NotepadPlusPlus(false);
             Regex regex = new Regex(npp.knownInfo().match32Bit);
-            //new variant (after introduction of 64 bit variant)
+            // new variant (after introduction of 64 bit variant)
             Assert.IsTrue(regex.IsMatch("Notepad++ (32-bit x86)"));
-            //old variant (before introduction of 64 bit variant)
+            // old variant (before introduction of 64 bit variant)
             Assert.IsTrue(regex.IsMatch("Notepad++"), "The regular expression does not detect the old variant of 32-bit Notepad++.");
         }
-    } //class
-} //namespace
+    } // class
+} // namespace

@@ -23,13 +23,13 @@ using updater.software;
 namespace updater_test.software
 {
     /// <summary>
-    /// unit tests for software.SeaMonkey246 class
+    /// Contains tests for the SeaMonkey246 class.
     /// </summary>
     [TestClass]
     public class SeaMonkey246_Tests : BasicSoftwareTests
     {
         /// <summary>
-        /// checks return value of the validLanguageCodes() method
+        /// Checks return value of the validLanguageCodes() method.
         /// </summary>
         [TestMethod]
         public void Test_validLanguageCodes()
@@ -48,7 +48,7 @@ namespace updater_test.software
 
 
         /// <summary>
-        /// checks whether info() returns some meaningful data
+        /// Checks whether info() returns some meaningful data.
         /// </summary>
         [TestMethod]
         public void Test_info()
@@ -58,7 +58,7 @@ namespace updater_test.software
 
 
         /// <summary>
-        /// checks whether the class implements the searchForNewer() method
+        /// Checks whether the class implements the searchForNewer() method.
         /// </summary>
         [TestMethod]
         public void Test_implementsSearchForNewer()
@@ -69,7 +69,7 @@ namespace updater_test.software
 
 
         /// <summary>
-        /// checks whether searchForNewer() returns something
+        /// Checks whether searchForNewer() returns something.
         /// </summary>
         [TestMethod]
         public void Test_searchForNewer()
@@ -79,7 +79,7 @@ namespace updater_test.software
 
 
         /// <summary>
-        /// checks whether the needsUpdate() method works as expected
+        /// Checks whether the needsUpdate() method works as expected.
         /// </summary>
         [TestMethod]
         public void Test_needsUpdate()
@@ -92,8 +92,8 @@ namespace updater_test.software
             {
                 dect.displayVersion = "2.9";
                 Assert.IsTrue(sm.needsUpdate(dect));
-            } //foreach
+            }
         }
 
-    } //class
-} //namespace
+    } // class
+} // namespace

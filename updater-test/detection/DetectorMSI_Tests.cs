@@ -22,7 +22,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace updater_test
 {
     /// <summary>
-    /// unit tests for detection.DetectorMSI
+    /// Contains tests for detection.DetectorMSI class.
     /// </summary>
     [TestClass]
     public class DetectorMSI_Tests
@@ -33,10 +33,10 @@ namespace updater_test
             var detected = DetectorMSI.detect();
             Assert.IsNotNull(detected);
             Assert.AreNotEqual(0, detected.Count);
-            for (int i = 0; i < detected.Count; i++)
+            foreach (var item in detected)
             {
-                Assert.IsNotNull(detected[i]);
-            } //for
+                Assert.IsNotNull(item);
+            }
         }
-    } //class
-} //namespace
+    } // class
+} // namespace

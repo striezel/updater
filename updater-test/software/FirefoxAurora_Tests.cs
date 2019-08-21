@@ -22,6 +22,9 @@ using updater.software;
 
 namespace updater_test.software
 {
+    /// <summary>
+    /// Contains tests for the FirefoxAurora class.
+    /// </summary>
     [TestClass]
     public class FirefoxAurora_Tests : BasicSoftwareTests
     {
@@ -65,6 +68,10 @@ namespace updater_test.software
         }
 
 
+        /// <summary>
+        /// Checks whether the regular expressions match both old and newer
+        /// naming conventions of the software.
+        /// </summary>
         [TestMethod]
         public void Test_matchTest()
         {

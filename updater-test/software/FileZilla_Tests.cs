@@ -37,19 +37,22 @@ namespace updater_test.software
 
         public override AvailableSoftware knownInfo()
         {
-            //inject different version number for tests
+            // inject different version number for tests
             var baseValue = base.knownInfo();
             baseValue.newestVersion = mVersion;
             return baseValue;
         }
-    } //class
+    } // class
 
 
+    /// <summary>
+    /// Contains tests for FileZilla class.
+    /// </summary>
     [TestClass]
     public class FileZilla_Tests : BasicSoftwareTests
     {
         /// <summary>
-        /// checks whether info() returns some meaningful data
+        /// Checks whether info() returns some meaningful data.
         /// </summary>
         [TestMethod]
         public void Test_info()
@@ -59,7 +62,7 @@ namespace updater_test.software
 
 
         /// <summary>
-        /// checks whether the class implements the searchForNewer() method
+        /// Checks whether the class implements the searchForNewer() method.
         /// </summary>
         [TestMethod]
         public void Test_implementsSearchForNewer()
@@ -70,7 +73,7 @@ namespace updater_test.software
 
 
         /// <summary>
-        /// checks whether searchForNewer() returns something
+        /// Checks whether searchForNewer() returns something.
         /// </summary>
         [TestMethod]
         public void Test_searchForNewer()
@@ -80,7 +83,7 @@ namespace updater_test.software
 
 
         /// <summary>
-        /// checks whether the class info is up to date
+        /// Checks whether the class info is up to date.
         /// </summary>
         [TestMethod]
         public void Test_upToDate_info()
@@ -88,9 +91,9 @@ namespace updater_test.software
             _upToDate_info(new FileZilla(false));
         }
 
-        //needsUpdate
+
         /// <summary>
-        /// checks whether the needsUpdate() method works as expected
+        /// Checks whether the needsUpdate() method works as expected.
         /// </summary>
         [TestMethod]
         public void Test_needsUpdate()
@@ -98,11 +101,11 @@ namespace updater_test.software
             var fz = new FileZilla(false);
             DetectedSoftware det = new DetectedSoftware();
 
-            //equal numbers does not need update
+            // equal numbers does not need update
             det.displayVersion = fz.knownInfo().newestVersion;
             Assert.IsFalse(fz.needsUpdate(det));
 
-            //some older version numbers in ascending order
+            // some older version numbers in ascending order
             string[] older = { "3.0.0", "3.0.1", "3.0.2", "3.0.2.1",
                 "3.2.8", "3.2.8.1", "3.3.0", "3.3.0.1", "3.3.1", "3.3.2",
                 "3.3.2.1", "3.3.3",
@@ -110,14 +113,14 @@ namespace updater_test.software
                 "3.10.0", "3.10.0.1", "3.10.0.2", "3.10.1", "3.10.2", "3.10.3",
                 "3.11.0", "3.11.0.1", "3.11.0.2", "3.12.0", "3.12.0.1", "3.12.0.2",
                 "3.13.0" };
-            //older versions should always need update
+            // older versions should always need update
             foreach (string version in older)
             {
                 det.displayVersion = version;
                 Assert.IsTrue(fz.needsUpdate(det));
             }
 
-            //Only need update, if detected version is older than known version.
+            // Only need update, if detected version is older than known version.
             for (int i = 0; i < older.Length; i++)
             {
                 for (int j = 0; j < older.Length; j++)
@@ -127,8 +130,8 @@ namespace updater_test.software
                     Assert.AreEqual<bool>(i < j, fz.needsUpdate(det),
                         "Failed check for i=" + i.ToString() + " and j=" + j.ToString() + "!"
                         + " v[i]=" + older[i] + ", v[j]=" + older[j] + ".");
-                } //for j
-            } //for i
+                }
+            }
         }
-    } //class
-} //namespace
+    } // class
+} // namespace

@@ -21,12 +21,15 @@ using updater.software;
 
 namespace updater_test.software
 {
+    /// <summary>
+    /// Contains tests for the Calibre class.
+    /// </summary>
     [TestClass]
     public class Calibre_Tests : BasicSoftwareTests
     {
 
         /// <summary>
-        /// checks whether info() returns some meaningful data
+        /// Checks whether info() returns some meaningful data.
         /// </summary>
         [TestMethod]
         public void Test_info()
@@ -36,7 +39,7 @@ namespace updater_test.software
 
 
         /// <summary>
-        /// checks whether the class implements the searchForNewer() method
+        /// Checks whether the class implements the searchForNewer() method.
         /// </summary>
         [TestMethod]
         public void Test_implementsSearchForNewer()
@@ -47,7 +50,7 @@ namespace updater_test.software
 
 
         /// <summary>
-        /// checks whether searchForNewer() returns something
+        /// Checks whether searchForNewer() returns something.
         /// </summary>
         [TestMethod]
         public void Test_searchForNewer()
@@ -57,7 +60,7 @@ namespace updater_test.software
 
 
         /// <summary>
-        /// checks whether the class info is up to date
+        /// Checks whether the class info is up to date.
         /// </summary>
         [TestMethod]
         public void Test_upToDate_info()
@@ -65,5 +68,5 @@ namespace updater_test.software
             _upToDate_info(new Calibre(false));
         }
 
-    } //class
-} //namespace
+    } // class
+} // namespace

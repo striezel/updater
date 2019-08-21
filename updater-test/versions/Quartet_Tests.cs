@@ -22,7 +22,7 @@ using updater.versions;
 namespace updater_test.versions
 {
     /// <summary>
-    /// unit tests for the Quartet struct
+    /// Contains tests for the Quartet struct.
     /// </summary>
     [TestClass]
     public class Quartet_Tests
@@ -30,14 +30,14 @@ namespace updater_test.versions
         [TestMethod]
         public void Test_constructor()
         {
-            //default constructor should set 0.0.0.0
+            // default constructor should set 0.0.0.0
             var three = new Quartet();
             Assert.AreEqual<uint>(0, three.major);
             Assert.AreEqual<uint>(0, three.minor);
             Assert.AreEqual<uint>(0, three.patch);
             Assert.AreEqual<uint>(0, three.build);
 
-            //constructor with parameter should set version numbers
+            // constructor with parameter should set version numbers
             three = new Quartet("12.345.67.8");
             Assert.AreEqual<uint>(12, three.major);
             Assert.AreEqual<uint>(345, three.minor);
@@ -49,7 +49,7 @@ namespace updater_test.versions
         [TestMethod]
         public void Test_constructor_nonNumeric()
         { 
-            //constructor with parameter should set only numeric parts
+            // constructor with parameter should set only numeric parts
             var four = new Quartet("12.3b.foo7.8c");
             Assert.AreEqual<uint>(12, four.major);
             Assert.AreEqual<uint>(0, four.minor);
@@ -61,7 +61,7 @@ namespace updater_test.versions
         [TestMethod]
         public void Test_constructor_short()
         {
-            //constructor with parameter should set missing parts to zero
+            // constructor with parameter should set missing parts to zero
             var four = new Quartet("12.3.4");
             Assert.AreEqual<uint>(12, four.major);
             Assert.AreEqual<uint>(3, four.minor);
@@ -87,10 +87,10 @@ namespace updater_test.versions
         {
             var quadOne = new Quartet("12.3.4.56");
             var quadTwo = new Quartet("12.3.4.56");
-            //two instances should be equal
+            // two instances should be equal
             Assert.IsTrue(quadOne.Equals(quadTwo));
             Assert.IsTrue(quadTwo.Equals(quadOne));
-            //self equality
+            // self equality
             Assert.IsTrue(quadOne.Equals(quadOne));
             Assert.IsTrue(quadTwo.Equals(quadTwo));
         }
@@ -99,7 +99,7 @@ namespace updater_test.versions
         [TestMethod]
         public void Test_Equals_negative()
         {
-            //two different numbers should not be equal
+            // two different numbers should not be equal
             var quadOne = new Quartet("12.3.4.5");
             var quadTwo = new Quartet("12.1.2.7");
             Assert.IsFalse(quadOne.Equals(quadTwo));
@@ -130,7 +130,7 @@ namespace updater_test.versions
 
             Assert.AreEqual(0, quadOne.CompareTo(quadTwo));
             Assert.AreEqual(0, quadTwo.CompareTo(quadOne));
-            //self comparison
+            // self comparison
             Assert.AreEqual(0, quadOne.CompareTo(quadOne));
             Assert.AreEqual(0, quadTwo.CompareTo(quadTwo));
         }
@@ -184,5 +184,5 @@ namespace updater_test.versions
             Assert.IsFalse(quadTwo > quadThree);
             Assert.IsFalse(quadThree > quadTwo);
         }
-    } //class
-} //namespace
+    } // class
+} // namespace

@@ -22,11 +22,14 @@ using updater.software;
 
 namespace updater_test.software
 {
+    /// <summary>
+    /// Contains tests for Firefox class.
+    /// </summary>
     [TestClass]
     public class Firefox_Tests : BasicSoftwareTests
     {
         /// <summary>
-        /// checks return value of the validLanguageCodes() method
+        /// Checks return value of the validLanguageCodes() method.
         /// </summary>
         [TestMethod]
         public void Test_validLanguageCodes()
@@ -45,7 +48,7 @@ namespace updater_test.software
 
 
         /// <summary>
-        /// checks whether info() returns some meaningful data
+        /// Checks whether info() returns some meaningful data.
         /// </summary>
         [TestMethod]
         public void Test_info()
@@ -55,7 +58,7 @@ namespace updater_test.software
 
 
         /// <summary>
-        /// checks whether the class implements the searchForNewer() method
+        /// Checks whether the class implements the searchForNewer() method.
         /// </summary>
         [TestMethod]
         public void Test_implementsSearchForNewer()
@@ -71,12 +74,12 @@ namespace updater_test.software
             var fx = new Firefox("de", false);
             var info = fx.info();
 
-            //versions with three number
+            // versions with three numbers
             Regex re = new Regex(info.match64Bit);
             Assert.IsTrue(re.IsMatch("Mozilla Firefox 51.0.1 (x64 de)"));
             re = new Regex(info.match32Bit);
             Assert.IsTrue(re.IsMatch("Mozilla Firefox 51.0.1 (x86 de)"));
-            //versions with two numbers
+            // versions with two numbers
             re = new Regex(info.match64Bit);
             Assert.IsTrue(re.IsMatch("Mozilla Firefox 50.0 (x64 de)"));
             re = new Regex(info.match32Bit);
@@ -85,7 +88,7 @@ namespace updater_test.software
 
 
         /// <summary>
-        /// checks whether searchForNewer() returns something
+        /// Checks whether searchForNewer() returns something.
         /// </summary>
         [TestMethod]
         public void Test_searchForNewer()
@@ -95,12 +98,12 @@ namespace updater_test.software
 
 
         /// <summary>
-        /// checks whether the class info is up to date
+        /// Checks whether the class info is up to date.
         /// </summary>
         [TestMethod]
         public void Test_upToDate_info()
         {
             _upToDate_info(new Firefox("de", false));
         }
-    } //class
-} //namespace
+    } // class
+} // namespace

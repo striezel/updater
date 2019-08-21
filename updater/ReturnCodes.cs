@@ -35,5 +35,5 @@ namespace updater
         /// return code that identified unknown operation
         /// </summary>
         public const int rcUnknownOperation = 2;
-    } //class
-} //namespace
+    } // class
+} // namespace

@@ -24,7 +24,7 @@ using System.Text;
 namespace updater.detection
 {
     /// <summary>
-    /// class to detect installed software via MSI.dll
+    /// Detects installed software via MSI.dll.
     /// </summary>
     public class DetectorMSI
     {
@@ -38,7 +38,7 @@ namespace updater.detection
 
 
         /// <summary>
-        /// tries to get a list of installed software from the MSI cache
+        /// Tries to get a list of installed software from the MSI cache.
         /// </summary>
         /// <returns>Returns a list of installed software.</returns>
         public static List<data.DetectedSoftware> detect()
@@ -57,8 +57,8 @@ namespace updater.detection
                 var e = new data.DetectedSoftware(sbProductName.ToString(), null, sbInstallDir.ToString());
                 if (e.containsInformation())
                     entries.Add(e);
-            } //while
+            }
             return entries;
         }
-    } //class
-} //namespace
+    } // class
+} // namespace
