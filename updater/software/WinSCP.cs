@@ -50,15 +50,15 @@ namespace updater.software
         public override AvailableSoftware knownInfo()
         {
             return new AvailableSoftware("WinSCP",
-                "5.15.2",
+                "5.15.3",
                 "^WinSCP [1-9]+\\.[0-9]+\\.[0-9]+$", null,
                 new InstallInfoExe(
-                    "https://netix.dl.sourceforge.net/project/winscp/WinSCP/5.15.2/WinSCP-5.15.2-Setup.exe",
+                    "https://netix.dl.sourceforge.net/project/winscp/WinSCP/5.15.3/WinSCP-5.15.3-Setup.exe",
                     HashAlgorithm.SHA256,
-                    "e80937d138ef72bdd1d738b2c0e466fbc4fa39a2da2f7b4bd455dbb717728c31",
+                    "860590c784721d57efb7b14ad3c2614d1ec4b8741e9fc98df9763c3e8935b64b",
                     "CN=Martin Prikryl, O=Martin Prikryl, L=Prague, S=Hlavni mesto Praha, C=CZ",
                     "/VERYSILENT /NORESTART"),
-                //There is no 64 bit installer yet.
+                // There is no 64 bit installer yet.
                 null);
         }
 
@@ -106,7 +106,7 @@ namespace updater.software
                     return null;
                 }
                 client.Dispose();
-            } //using
+            }
 
             Regex reExe = new Regex("WinSCP\\-[1-9]+\\.[0-9]+\\.[0-9]+\\-Setup\\.exe");
             Match matchExe = reExe.Match(htmlCode);
