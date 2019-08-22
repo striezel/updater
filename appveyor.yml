@@ -1,4 +1,4 @@
-version: 2019.02.28.{build}
+version: 2019.08.22.{build}
 skip_tags: true
 configuration: Debug
 platform: x86
