@@ -211,6 +211,32 @@ namespace updater.software
                     {
                         htmlCode = client.DownloadString("https://get.videolan.org/vlc/" + newVersion + "/win" + bits + "/vlc-" + newVersion + "-win" + bits + ".exe.sha256");
                     }
+                    catch (WebException webEx)
+                    {
+                        logger.Warn("Exception occurred while checking for newer version of VLC: " + webEx.Message);
+                        // If it is not a SChannel failure (usually indicates invalid certificate),
+                        // then exit right here.
+                        if (webEx.Status != WebExceptionStatus.SecureChannelFailure)
+                            return null;
+                        // Try again with another mirror that hopefully has a valid TLS certificate.
+                        // The get.videolan.org/vlc/... URL redirects randomly to a VLC mirror server.
+                        // Some of those servers might not have a valid TLS certificate, so we try
+                        // some other mirror.
+                        using (var mirrorClient = new WebClient())
+                        {
+                            try
+                            {
+                                logger.Info("Trying another VLC mirror instead...");
+                                htmlCode = mirrorClient.DownloadString("https://ftp.halifax.rwth-aachen.de/videolan/vlc/" + newVersion + "/win" + bits + "/vlc-" + newVersion + "-win" + bits + ".exe.sha256");
+                            }
+                            catch (Exception ex)
+                            {
+                                logger.Warn("Exception occurred while checking for newer version of VLC on a mirror: " + ex.Message);
+                                return null;
+                            }
+                            mirrorClient.Dispose();
+                        }
+                    }
                     catch (Exception ex)
                     {
                         logger.Warn("Exception occurred while checking for newer version of VLC: " + ex.Message);
