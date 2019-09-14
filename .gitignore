@@ -2,5 +2,6 @@
 [Bb]in/
 [Oo]bj/
 
-# VisualStudio's *.suo files
+# Visual Studio's stuff
 *.suo
+.vs/
