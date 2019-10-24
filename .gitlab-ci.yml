@@ -1,12 +1,13 @@
 # Use the official mono image, based on debian.
 # It can use version tags as well, like mono:5.
 # See https://hub.docker.com/_/mono/ for more info.
-image: mono:5
+image: mono:6
 
 build:
   stage: build
   before_script:
     - apt-get update && apt-get -y install git
   script: 
+    - nuget restore ./updater/updater.sln
     - msbuild ./updater/updater.csproj
     - msbuild ./moz-checksum-generator/moz-checksum-generator.csproj
