@@ -53,12 +53,16 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
-      <HintPath>packages\NLog.4.4.12\lib\net40\NLog.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>packages\NLog.4.6.7\lib\net40-client\NLog.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
@@ -145,7 +149,7 @@
     <None Include="git-info\hash-short.txt" />
     <None Include="git-info\date.txt" />
     <Content Include="NLog.config">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="NLog.xsd">
       <SubType>Designer</SubType>
