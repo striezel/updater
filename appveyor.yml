@@ -2,6 +2,8 @@ version: 2019.08.22.{build}
 skip_tags: true
 configuration: Debug
 platform: x86
+before_build:
+  - nuget restore updater\updater.sln
 build:
   project: updater/updater.sln
   verbosity: normal
