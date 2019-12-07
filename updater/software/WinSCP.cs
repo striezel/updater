@@ -24,6 +24,9 @@ using System.Collections.Generic;
 
 namespace updater.software
 {
+    /// <summary>
+    /// Handles updates for WinSCP.
+    /// </summary>
     public class WinSCP : NoPreUpdateProcessSoftware
     {
         /// <summary>
@@ -50,12 +53,12 @@ namespace updater.software
         public override AvailableSoftware knownInfo()
         {
             return new AvailableSoftware("WinSCP",
-                "5.15.5",
+                "5.15.9",
                 "^WinSCP [1-9]+\\.[0-9]+\\.[0-9]+$", null,
                 new InstallInfoExe(
-                    "https://netcologne.dl.sourceforge.net/project/winscp/WinSCP/5.15.5/WinSCP-5.15.5-Setup.exe",
+                    "https://netcologne.dl.sourceforge.net/project/winscp/WinSCP/5.15.9/WinSCP-5.15.9-Setup.exe",
                     HashAlgorithm.SHA256,
-                    "412b598c02c9abe34f457a49bffcb9cca35491fec8ae6e674cfc3d34b5427133",
+                    "9ea6e0c215cb883e6ef2cf428531bbd48f9e74d363b4eb041125130fd10dafba",
                     "CN=Martin Prikryl, O=Martin Prikryl, L=Prague, S=Hlavni mesto Praha, C=CZ",
                     "/VERYSILENT /NORESTART"),
                 // There is no 64 bit installer yet.
@@ -177,7 +180,6 @@ namespace updater.software
             // construct new version information
             var newInfo = knownInfo();
             // replace version number - both as newest version and in URL for download
-            string oldVersion = newInfo.newestVersion;
             newInfo.newestVersion = newVersion;
             newInfo.install32Bit.downloadUrl = matchUrl.Value;
             newInfo.install32Bit.checksum = newHash;
