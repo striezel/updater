@@ -55,21 +55,21 @@ namespace updater.software
         /// details about the software.</returns>
         public override AvailableSoftware knownInfo()
         {
-            string version = "7.7.1";
+            string version = "7.8.2";
             return new AvailableSoftware("Notepad++",
                 version,
                 "^Notepad\\+\\+ \\(32\\-bit x86\\)$|^Notepad\\+\\+$",
                 "^Notepad\\+\\+ \\(64\\-bit x64\\)$",
                 new InstallInfoExe(
-                    "https://notepad-plus-plus.org/repository/7.x/" + version + "/npp." + version + ".Installer.exe",
+                    "http://download.notepad-plus-plus.org/repository/7.x/" + version + "/npp." + version + ".Installer.exe",
                     HashAlgorithm.SHA256,
-                    "6787c524b0ac30a698237ffb035f932d7132343671b8fe8f0388ed380d19a51c",
+                    "668e6c8a666c0cb91987985bf560bf587c4fb646523fe21d3fe85b7c7eeadd08",
                     publisherX509,
                     "/S"),
                 new InstallInfoExe(
-                    "https://notepad-plus-plus.org/repository/7.x/" + version + "/npp." + version + ".Installer.x64.exe",
+                    "http://download.notepad-plus-plus.org/repository/7.x/" + version + "/npp." + version + ".Installer.x64.exe",
                     HashAlgorithm.SHA256,
-                    "0ef89d2a9c9b15cd4aab3f3772f62cbebb54c3856bc1bd9a4a5fb3180ea6140e",
+                    "56ff0f152f5f84314cd995c65b567becb1ddf0f5a248d76b5e968e85d62e62a0",
                     publisherX509,
                     "/S")
                 );
@@ -111,7 +111,7 @@ namespace updater.software
             {
                 try
                 {
-                    htmlCode = client.DownloadString("https://notepad-plus-plus.org/repository/?C=N;O=D");
+                    htmlCode = client.DownloadString("http://download.notepad-plus-plus.org/repository/?C=N;O=D");
                 }
                 catch (Exception ex)
                 {
@@ -132,12 +132,12 @@ namespace updater.software
                 return null;
             directoryMajor = directoryMajor.Remove(idx);
 
-            // get directory listing again "https://notepad-plus-plus.org/repository/7.x/?C=M;O=D"
+            // get directory listing again "http://download.notepad-plus-plus.org/repository/7.x/?C=M;O=D"
             using (var client = new WebClient())
             {
                 try
                 {
-                    htmlCode = client.DownloadString("https://notepad-plus-plus.org/repository/" + directoryMajor + "/?C=M;O=D");
+                    htmlCode = client.DownloadString("http://download.notepad-plus-plus.org/repository/" + directoryMajor + "/?C=M;O=D");
                 }
                 catch (Exception ex)
                 {
@@ -160,12 +160,12 @@ namespace updater.software
             if (string.Compare(directoryDetailed, knownInfo().newestVersion) < 0)
                 return null;
 
-            // download checksum file, e.g. "https://notepad-plus-plus.org/repository/7.x/7.7/npp.7.7.checksums.sha256"
+            // download checksum file, e.g. "http://download.notepad-plus-plus.org/repository/7.x/7.7/npp.7.7.checksums.sha256"
             using (var client = new WebClient())
             {
                 try
                 {
-                    htmlCode = client.DownloadString("https://notepad-plus-plus.org/repository/" + directoryMajor + "/" + directoryDetailed + "/npp." + directoryDetailed + ".checksums.sha256");
+                    htmlCode = client.DownloadString("http://download.notepad-plus-plus.org/repository/" + directoryMajor + "/" + directoryDetailed + "/npp." + directoryDetailed + ".checksums.sha256");
                 }
                 catch (Exception ex)
                 {
@@ -189,11 +189,10 @@ namespace updater.software
             string newHash64Bit = matchHash.Value.Substring(0, 64);
             // construct new information
             var newInfo = knownInfo();
-            string oldVersion = newInfo.newestVersion;
             newInfo.newestVersion = directoryDetailed;
-            newInfo.install32Bit.downloadUrl = "https://notepad-plus-plus.org/repository/" + directoryMajor + "/" + directoryDetailed + "/npp." + directoryDetailed + ".Installer.exe";
+            newInfo.install32Bit.downloadUrl = "http://download.notepad-plus-plus.org/repository/" + directoryMajor + "/" + directoryDetailed + "/npp." + directoryDetailed + ".Installer.exe";
             newInfo.install32Bit.checksum = newHash32Bit;
-            newInfo.install64Bit.downloadUrl = "https://notepad-plus-plus.org/repository/" + directoryMajor + "/" + directoryDetailed + "/npp." + directoryDetailed + ".Installer.x64.exe";
+            newInfo.install64Bit.downloadUrl = "http://download.notepad-plus-plus.org/repository/" + directoryMajor + "/" + directoryDetailed + "/npp." + directoryDetailed + ".Installer.x64.exe";
             newInfo.install64Bit.checksum = newHash64Bit;
             return newInfo;
         }
