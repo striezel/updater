@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017, 2018  Dirk Stolle
+    Copyright (C) 2017, 2018, 2019  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -33,7 +33,7 @@ namespace updater.software
 
 
         /// <summary>
-        /// default constructor
+        /// Constructor.
         /// </summary>
         /// <param name="autoGetNewer">whether to automatically get
         /// newer information about the software when calling the info() method</param>
@@ -45,30 +45,30 @@ namespace updater.software
         /// <summary>
         /// publisher of signed installers
         /// </summary>
-        private const string publisherX509 = "CN=Kovid Goyal, OU=Individual Developer, O=No Organization Affiliation, L=Mumbai, S=Maharashtra, C=IN";
+        private const string publisherX509 = "CN=Kovid Goyal, O=Kovid Goyal, L=Mumbai, S=Maharashtra, C=IN";
 
         /// <summary>
-        /// gets the currently known information about the software
+        /// Gets the currently known information about the software.
         /// </summary>
         /// <returns>Returns an AvailableSoftware instance with the known
         /// details about the software.</returns>
         public override AvailableSoftware knownInfo()
         {
-            const string knownVersion = "3.9.0";
+            const string knownVersion = "4.5.0";
             return new AvailableSoftware("Calibre",
                 knownVersion,
                 "^calibre$",
-                "^calibre 64 bit$",
+                "^(calibre 64 bit)|(calibre 64bit)$",
                 new InstallInfoMsi(
-                    "https://download.calibre-ebook.com/"+ knownVersion + "/calibre-" + knownVersion + ".msi",
+                    "https://download.calibre-ebook.com/" + knownVersion + "/calibre-" + knownVersion + ".msi",
                     HashAlgorithm.SHA256,
-                    "55ca136782f109a42e6201376b344718256b98314c173fd8547354278769582b",
+                    "67e2184be260a0330f7fa29268e422aebab872a471ec7a807e28967641576661",
                     publisherX509,
                     "/qn /norestart"),
                 new InstallInfoMsi(
                     "https://download.calibre-ebook.com/" + knownVersion + "/calibre-64bit-" + knownVersion + ".msi",
                     HashAlgorithm.SHA256,
-                    "8c353230213e90178188569ba7b997e3afa069921ae43b9c207a0ff4474db267",
+                    "82e0a37fbb556792ce091e63177260d47662a757b21c768e0fe9f7dd4c1b1c06",
                     publisherX509,
                     "/qn /norestart")
                     );
@@ -86,7 +86,7 @@ namespace updater.software
 
 
         /// <summary>
-        /// whether or not the method searchForNewer() is implemented
+        /// Determines whether or not the method searchForNewer() is implemented.
         /// </summary>
         /// <returns>Returns true, if searchForNewer() is implemented for that
         /// class. Returns false, if not. Calling searchForNewer() may throw an
@@ -98,7 +98,7 @@ namespace updater.software
 
 
         /// <summary>
-        /// looks for newer versions of the software than the currently known version
+        /// Looks for newer versions of the software than the currently known version.
         /// </summary>
         /// <returns>Returns an AvailableSoftware instance with the information
         /// that was retrieved from the net.</returns>
@@ -118,9 +118,9 @@ namespace updater.software
                     return null;
                 }
                 client.Dispose();
-            } //using
+            } // using
 
-            //get new version from alternative MSI path on GitHub
+            // get new version from alternative MSI path on GitHub
             Regex reMsi = new Regex("https://github.com/kovidgoyal/calibre/releases/download/v[0-9]+\\.[0-9]+\\.[0-9]+/calibre\\-64bit\\-[0-9]+\\.[0-9]+\\.[0-9]+\\.msi");
             Match matchMsi = reMsi.Match(htmlCode);
             if (!matchMsi.Success)
@@ -131,7 +131,7 @@ namespace updater.software
                 return null;
             newVersion = newVersion.Remove(idx);
 
-            //get SHA-256 sums from FossHub (official site provides no hashes)
+            // get SHA-256 sums from FossHub (official site provides no hashes)
             htmlCode = null;
             using (var client = new WebClient())
             {
@@ -145,38 +145,39 @@ namespace updater.software
                     return null;
                 }
                 client.Dispose();
-            } //using
+            } // using
 
-            //checksum for Windows 64bit installer
-            idx = htmlCode.IndexOf("Windows 64bit installer");
+            // checksum for Windows 64bit installer
+            idx = htmlCode.IndexOf("\"n\":\"calibre-64bit-" + newVersion + ".msi\"");
             if (idx < 0)
                 return null;
-            Regex exprSha256 = new Regex("SHA256: [0-9a-f]{64}");
+            // "sha256":"82e0a37fbb556792ce091e63177260d47662a757b21c768e0fe9f7dd4c1b1c06"
+            Regex exprSha256 = new Regex("\"sha256\":\"[0-9a-f]{64}\"");
             Match match = exprSha256.Match(htmlCode, idx);
             if (!match.Success)
                 return null;
-            string checksum64 = match.Value.Substring(match.Value.Length - 64, 64);
+            string checksum64 = match.Value.Substring(match.Value.Length - 65, 64);
 
-            //checksum for Windows 32bit installer
-            idx = htmlCode.IndexOf("Windows installer");
+            // checksum for Windows 32bit installer
+            idx = htmlCode.IndexOf("\"n\":\"calibre-" + newVersion + ".msi");
             if (idx < 0)
                 return null;
             match = exprSha256.Match(htmlCode, idx);
             if (!match.Success)
                 return null;
-            string checksum32 = match.Value.Substring(match.Value.Length - 64, 64);
+            string checksum32 = match.Value.Substring(match.Value.Length - 65, 64);
 
-            //construct new version information
+            // construct new version information
             var newInfo = knownInfo();
-            //replace version number - both as newest version and in URL for download
+            // replace version number - both as newest version and in URL for download
             string oldVersion = newInfo.newestVersion;
             newInfo.newestVersion = newVersion;
             newInfo.install32Bit.downloadUrl = newInfo.install32Bit.downloadUrl.Replace(oldVersion, newVersion);
-            //no checksums are provided on the official site, but binaries are signed
+            // no checksums are provided on the official site, but binaries are signed
             newInfo.install32Bit.checksum = checksum32;
             newInfo.install32Bit.algorithm = HashAlgorithm.SHA256;
             newInfo.install64Bit.downloadUrl = newInfo.install64Bit.downloadUrl.Replace(oldVersion, newVersion);
-            //no checksums are provided on the official site, but binaries are signed
+            // no checksums are provided on the official site, but binaries are signed
             newInfo.install64Bit.checksum = checksum64;
             newInfo.install64Bit.algorithm = HashAlgorithm.SHA256;
             return newInfo;
@@ -191,8 +192,8 @@ namespace updater.software
         /// <returns>Returns a list of process names that block the upgrade.</returns>
         public override List<string> blockerProcesses(DetectedSoftware detected)
         {
-            return new List<string>();
+            return new List<string>(0);
         }
 
-    } //class
-} //namespace
+    } // class
+} // namespace
