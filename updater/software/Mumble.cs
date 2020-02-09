@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017, 2018  Dirk Stolle
+    Copyright (C) 2017, 2018, 2020  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -24,6 +24,9 @@ using updater.data;
 
 namespace updater.software
 {
+    /// <summary>
+    /// Handles updates of Mumble.
+    /// </summary>
     public class Mumble : NoPreUpdateProcessSoftware
     {
         /// <summary>
@@ -43,23 +46,35 @@ namespace updater.software
 
 
         /// <summary>
-        /// gets the currently known information about the software
+        /// publisher name for signed binaries
+        /// </summary>
+        private const string publisherX509 = "CN=mkrautz.dk, O=mkrautz.dk, STREET=Kirkegade 6, L=Esbjerg, S=Region of Southern Denmark, PostalCode=6700, C=DK";
+
+
+        /// <summary>
+        /// Gets the currently known information about the software.
         /// </summary>
         /// <returns>Returns an AvailableSoftware instance with the known
         /// details about the software.</returns>
         public override AvailableSoftware knownInfo()
         {
-            return new AvailableSoftware("Mumble", "1.2.19",
+            return new AvailableSoftware("Mumble", "1.3.0",
                 "^Mumble [0-9]\\.[0-9]+\\.[0-9]+$",
                 null,
                 new InstallInfoMsi(
-                    "https://github.com/mumble-voip/mumble/releases/download/1.2.19/mumble-1.2.19.msi",
+                    "https://github.com/mumble-voip/mumble/releases/download/1.3.0/mumble-1.3.0.msi",
                     HashAlgorithm.SHA256,
-                    "2186eddd99264c2e68f5425308f59bd5151a8aecebea9f852728be3487a7a93b",
-                    null, //"CN=mkrautz.dk, O=mkrautz.dk, STREET=Kirkegade 6, L=Esbjerg, S=Region of Southern Denmark, PostalCode=6700, C=DK"
+                    "e54f1343a9c40652d8e999eb1aebaf3b625e00accb671b84fb0d3f31b2885294",
+                    publisherX509,
                     "/qn /norestart"),
-                //No official 64 bit MSI installer yet, but there might be one for 1.3.0.
-                null);
+                // 64 bit MSI installer started with 1.3.0.
+                new InstallInfoMsi(
+                    "https://github.com/mumble-voip/mumble/releases/download/1.3.0/mumble-1.3.0.winx64.msi",
+                    HashAlgorithm.SHA256,
+                    "83dd36754e7369f2df5c540786784dd98d3095f21879e6602d079eaf27158a01",
+                    publisherX509,
+                    "/qn /norestart")
+                );
         }
 
 
@@ -74,7 +89,7 @@ namespace updater.software
 
 
         /// <summary>
-        /// whether or not the method searchForNewer() is implemented
+        /// Determines whether or not the method searchForNewer() is implemented.
         /// </summary>
         /// <returns>Returns true, if searchForNewer() is implemented for that
         /// class. Returns false, if not. Calling searchForNewer() may throw an
@@ -86,7 +101,7 @@ namespace updater.software
 
 
         /// <summary>
-        /// looks for newer versions of the software than the currently known version
+        /// Looks for newer versions of the software than the currently known version.
         /// </summary>
         /// <returns>Returns an AvailableSoftware instance with the information
         /// that was retrieved from the net.</returns>
@@ -96,7 +111,7 @@ namespace updater.software
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://github.com/mumble-voip/mumble/releases/latest");
             request.Method = WebRequestMethods.Http.Head;
             request.AllowAutoRedirect = false;
-            string currentVersion = null;
+            string currentVersion;
             try
             {
                 HttpWebResponse response = (HttpWebResponse)request.GetResponse();
@@ -127,15 +142,18 @@ namespace updater.software
                However, the updater cannot check signatures yet.
             */
             
-            //construct new version information
+            // construct new version information
             var newInfo = knownInfo();
-            //replace version number - both as newest version and in URL for download
+            // replace version number - both as newest version and in URL for download
             string oldVersion = newInfo.newestVersion;
             newInfo.newestVersion = currentVersion;
             newInfo.install32Bit.downloadUrl = newInfo.install32Bit.downloadUrl.Replace(oldVersion, currentVersion);
-            //no checksums are provided, only signature files
+            newInfo.install64Bit.downloadUrl = newInfo.install64Bit.downloadUrl.Replace(oldVersion, currentVersion);
+            // no checksums are provided, only signature files
             newInfo.install32Bit.checksum = null;
             newInfo.install32Bit.algorithm = HashAlgorithm.Unknown;
+            newInfo.install64Bit.checksum = null;
+            newInfo.install64Bit.algorithm = HashAlgorithm.Unknown;
             return newInfo;
         }
 
