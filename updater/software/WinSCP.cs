@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017, 2018, 2019  Dirk Stolle
+    Copyright (C) 2017, 2018, 2019, 2020  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -53,13 +53,13 @@ namespace updater.software
         public override AvailableSoftware knownInfo()
         {
             return new AvailableSoftware("WinSCP",
-                "5.15.9",
+                "5.17.1",
                 "^WinSCP [1-9]+\\.[0-9]+\\.[0-9]+$", null,
                 new InstallInfoExe(
-                    "https://netcologne.dl.sourceforge.net/project/winscp/WinSCP/5.15.9/WinSCP-5.15.9-Setup.exe",
+                    "https://netcologne.dl.sourceforge.net/project/winscp/WinSCP/5.17.1/WinSCP-5.17.1-Setup.exe",
                     HashAlgorithm.SHA256,
-                    "9ea6e0c215cb883e6ef2cf428531bbd48f9e74d363b4eb041125130fd10dafba",
-                    "CN=Martin Prikryl, O=Martin Prikryl, L=Prague, S=Hlavni mesto Praha, C=CZ",
+                    "fd9ecfb848325a7c7e7c4a4e5ceb72d70471e13df3f034898c5a2e8977179557",
+                    "CN=Martin Prikryl, O=Martin Prikryl, L=Prague, C=CZ, SERIALNUMBER=87331519, OID.2.5.4.15=Private Organization, OID.1.3.6.1.4.1.311.60.2.1.3=CZ",
                     "/VERYSILENT /NORESTART"),
                 // There is no 64 bit installer yet.
                 null);
