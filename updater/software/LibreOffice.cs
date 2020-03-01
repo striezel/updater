@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017, 2018, 2019  Dirk Stolle
+    Copyright (C) 2017, 2018, 2019, 2020  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -56,19 +56,19 @@ namespace updater.software
         public override AvailableSoftware knownInfo()
         {
             return new AvailableSoftware("LibreOffice",
-                "6.3.2.2",
+                "6.4.1.2",
                 "^LibreOffice [0-9]\\.[0-9]\\.[0-9]\\.[0-9]$",
                 "^LibreOffice [0-9]\\.[0-9]\\.[0-9]\\.[0-9]$",
                 new InstallInfoLibO(
-                    "https://download.documentfoundation.org/libreoffice/stable/6.3.2/win/x86/LibreOffice_6.3.2_Win_x86.msi",
+                    "https://download.documentfoundation.org/libreoffice/stable/6.4.1/win/x86/LibreOffice_6.4.1_Win_x86.msi",
                     HashAlgorithm.SHA256,
-                    "abd06f42abeb188c3e11cdbadd03d7042ccf5816d1751180c70a34660ca5ece3",
+                    "234880d074cc085cd6d35cca2516e5fe22141b5c105be8f1a12926d812c43932",
                     publisherX509,
                     "/qn /norestart"),
                 new InstallInfoLibO(
-                    "https://download.documentfoundation.org/libreoffice/stable/6.3.2/win/x86_64/LibreOffice_6.3.2_Win_x64.msi",
+                    "https://download.documentfoundation.org/libreoffice/stable/6.4.1/win/x86_64/LibreOffice_6.4.1_Win_x64.msi",
                     HashAlgorithm.SHA256,
-                    "46405297aa4123acb34a2466fd533e218253081c74f32ab6e9cd26a814410243",
+                    "bb649638229128543e73999f07aa39941907632d300cfc5eb014fe2b2472b3c5",
                     publisherX509,
                     "/qn /norestart")
                     );
