@@ -275,7 +275,7 @@ namespace moz_checksum_generator
              * bcf9b6828d3143adbfe46066e94650aa67726a02  win32/en-GB/SeaMonkey Setup 2.48.exe"
              */
 
-            string url = "https://archive.mozilla.org/pub/seamonkey/releases/" + version + "/SHA1SUMS";
+            string url = "https://archive.mozilla.org/pub/seamonkey/releases/" + version + "/SHA1SUMS.txt";
             string sha1SumsContent = null;
             using (var client = new WebClient())
             {
@@ -291,15 +291,18 @@ namespace moz_checksum_generator
                 }
                 client.Dispose();
             } //using
+
             //look for line with language code and version for 32 bit
-            Regex reChecksum = new Regex("[0-9a-f]{40}  win32/[a-z]{2,3}(\\-[A-Z]+)?/SeaMonkey Setup " + Regex.Escape(version) + "\\.exe");
+            //Regex reChecksum = new Regex("[0-9a-f]{40} sha1 [0-9]+ .*win32/[a-z]{2,3}(\\-[A-Z]+)?/SeaMonkey Setup " + Regex.Escape(version) + "\\.exe");
+            Regex reChecksum = new Regex("[0-9a-f]{40} sha1 [0-9]+ .*seamonkey\\-" + Regex.Escape(version) + "\\.[a-z]{2,3}(\\-[A-Z]+)?\\.win32\\.installer\\.exe");
             var data = new SortedDictionary<string, string>();
             MatchCollection matches = reChecksum.Matches(sha1SumsContent);
             for (int i = 0; i < matches.Count; i++)
             {
-                string language = matches[i].Value.Substring(48).Replace("/SeaMonkey Setup " + version + ".exe", "");
+                string[] parts = matches[i].Value.Split(new char[] { '.' });
+                string language = parts[parts.Length - 4];
                 data.Add(language, matches[i].Value.Substring(0, 40));
-            } //for
+            }
             rtbBit32.Text = getChecksumCode(data);
 
             //look for line with the correct language code and version for 64 bit
@@ -310,7 +313,7 @@ namespace moz_checksum_generator
             {
                 string language = matches[i].Value.Substring(48).Replace("/SeaMonkey Setup " + version + ".exe", "");
                 data.Add(language, matches[i].Value.Substring(0, 40));
-            } //for
+            }
             rtbBit64.Text = getChecksumCode(data);
         }
 

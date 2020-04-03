@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017, 2018  Dirk Stolle
+    Copyright (C) 2017, 2018, 2020  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -57,7 +57,7 @@ namespace updater.software
             var d = knownChecksums();
             if (!d.ContainsKey(languageCode))
             {
-                logger.Error("The string '" + langCode + "' does not represent a valid language code!");
+                logger.Error("The string '" + langCode + "' does not represent a valid language code for SeaMonkey!");
                 throw new ArgumentOutOfRangeException("langCode", "The string '" + langCode + "' does not represent a valid language code!");
             }
             checksum = d[languageCode];
@@ -71,28 +71,28 @@ namespace updater.software
         private static Dictionary<string, string> knownChecksums()
         {
             // These are the checksums for Windows 32 bit installers from
-            // https://archive.mozilla.org/pub/seamonkey/releases/2.49.4/SHA1SUMS
+            // https://archive.mozilla.org/pub/seamonkey/releases/2.53.1/SHA1SUMS.txt
             var result = new Dictionary<string, string>();
-            result.Add("cs", "cf74566a89f5c5f8103dfa1d625fa0534f7ab3f0");
-            result.Add("de", "a7cce6c9f99464e3e992a8dc7e94d29110aece54");
-            result.Add("en-GB", "5534ad032553cb522a6e4f30d5b8a4fe8f8d039a");
-            result.Add("en-US", "ee095b6730c4ec9b6b02174fc0d3d3212335f332");
-            result.Add("es-AR", "842732fc84b58a40068833783ac72c59a4df8e2b");
-            result.Add("es-ES", "b5ee29c5c35176a28ea07a92312bd768d0da5ef5");
-            result.Add("fr", "49c91d221aa2520a4d09f71f6bab4228870b126b");
-            result.Add("hu", "828345b6b57a97de7f7d1158108a88fd6dc3a004");
-            result.Add("it", "7d1a206f1699357e72b6dfe6bacb58a3f73c0b45");
-            result.Add("ja", "1ca1364ea791149ed27ab6538995d22fb332578e");
-            result.Add("lt", "39f2362b03c664a19ede779c7a5905d6af20cc09");
-            result.Add("nb-NO", "5e5385efbad67840acc623b431c1ff7ddc6e7ac4");
-            result.Add("nl", "46d7184cf0b67191c4e633df05e822276e1a0567");
-            result.Add("pl", "914398fb0ff19be8d60b46e69f530d0c66d69be2");
-            result.Add("pt-PT", "194f89622420add222043d36ad89fa5a0f5c7238");
-            result.Add("ru", "dae3297003b36e39e36c9c8337e6c513a6dd7ff6");
-            result.Add("sk", "e30d20565cef27e8c1288becf00dcf2bac0a9c8c");
-            result.Add("sv-SE", "9bd058844a8e9186338a3557f259a5b5694767b0");
-            result.Add("zh-CN", "4aa18d2e727362a1741e937094afd21c0b4f1375");
-            result.Add("zh-TW", "98366fb32872ba97ad01a6ac71b97348e19ea076");
+            result.Add("cs", "47be5df45e736c008813b39502549b368839588d");
+            result.Add("de", "d0417163e5252ef2e5cdbe6c847319584c4834d8");
+            result.Add("en-GB", "0f48cfc823ed6ba8efae664ffc304bc0da20e75e");
+            result.Add("en-US", "ea91230f2ca82be62a476ff4c06d0453187c8799");
+            result.Add("es-AR", "40d5dc371faff043b562c7da97b2b7dd58af5798");
+            result.Add("es-ES", "fa1565fef55b31b77fe1b2f0394422f55726c515");
+            result.Add("fr", "05ca3f15872d77cef27ff2db9fc3b85e11ebc0f6");
+            result.Add("hu", "53a64c1c6e560eda3333a102c01c070efd5a1bf4");
+            result.Add("it", "ffea8d1015391ac745f8df9b775b60b56c466f3e");
+            result.Add("ja", "79a36542fcf3f0ea2a96d7b30998f6e0cf6d2568");
+            result.Add("nb-NO", "375163fd45908271d7af71ffc7351867a320c9fe");
+            result.Add("nl", "398316404782758a91a88885f5131224158098f3");
+            result.Add("pl", "a67cd8e1d6aad30f5880b4ffc0ba73ad6a2b5dc7");
+            result.Add("pt-BR", "772ae389b154a9e8dd8237fa7f812720e7cfb44e");
+            result.Add("pt-PT", "2eb1e52548ddeb5939b7d8a5f510dd4dcda58eb4");
+            result.Add("ru", "ef407292195662554373f9430d1b2553cbb247ee");
+            result.Add("sk", "9129c82ca3568dc22b59e859965377c727b5192d");
+            result.Add("sv-SE", "bd1afea4b7ef181ab1d0520e01ea4dc024e2d242");
+            result.Add("zh-CN", "3f7129d568e4abffd94a3cfd8b053af9aa652cee");
+            result.Add("zh-TW", "22326454b6bd802b1a81fdf28bec1b2c843b2654");
 
             return result;
         }
@@ -116,13 +116,13 @@ namespace updater.software
         /// details about the software.</returns>
         public override AvailableSoftware knownInfo()
         {
-            const string knownVersion = "2.49.4";
+            const string knownVersion = "2.53.1";
             return new AvailableSoftware("SeaMonkey (" + languageCode + ")",
                 knownVersion,
                 "^SeaMonkey [0-9]+\\.[0-9]+(\\.[0-9]+)? \\(x86 " + Regex.Escape(languageCode) + "\\)$",
                 null,
                 new InstallInfoExe(
-                    "https://archive.mozilla.org/pub/seamonkey/releases/" + knownVersion + "/win32/" + languageCode + "/SeaMonkey%20Setup%20" + knownVersion + ".exe",
+                    "https://archive.mozilla.org/pub/seamonkey/releases/" + knownVersion + "/win32/" + languageCode + "/seamonkey-" + knownVersion + "." + languageCode + ".win32.installer.exe",
                     HashAlgorithm.SHA1,
                     checksum,
                     null,
@@ -199,9 +199,12 @@ namespace updater.software
              * https://archive.mozilla.org/pub/seamonkey/releases/2.46/SHA1SUMS
              * Common lines look like
              * "7219....f4b4d  win32/en-GB/SeaMonkey Setup 2.46.exe"
+             * 
+             * Version 2.53.1 uses a new format, the line looks like 
+             * "ea91...8799 sha1 36062460 platform/win32/en-US/seamonkey-2.53.1.en-US.win32.installer.exe"
              */
 
-            string url = "https://archive.mozilla.org/pub/seamonkey/releases/" + newerVersion + "/SHA1SUMS";
+            string url = "https://archive.mozilla.org/pub/seamonkey/releases/" + newerVersion + "/SHA1SUMS.txt";
             string sha1SumsContent = null;
             using (var client = new WebClient())
             {
@@ -217,8 +220,9 @@ namespace updater.software
                 client.Dispose();
             } //using
             //look for line with the correct language code and version
-            Regex reChecksum = new Regex("[0-9a-f]{40}  win32/" + languageCode.Replace("-", "\\-")
-                + "/SeaMonkey Setup " + Regex.Escape(newerVersion) + "\\.exe");
+            // File name looks like seamonkey-2.53.1.de.win32.installer.exe now.
+            Regex reChecksum = new Regex("[0-9a-f]{40} sha1 [0-9]+ .*seamonkey\\-" + Regex.Escape(newerVersion)
+                + "\\." + languageCode.Replace("-", "\\-") + "\\.win32\\.installer\\.exe");
             Match matchChecksum = reChecksum.Match(sha1SumsContent);
             if (!matchChecksum.Success)
                 return null;
