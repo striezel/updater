@@ -185,17 +185,22 @@ namespace updater.software
         {
             logger.Debug("Searching for newer version of VLC media player...");
             // get new version number
-            string lastVersion = getLastVersion();
-            string availableVersion = getLatestAvailableVersion();
-            string newVersion = lastVersion;
-            if (string.Compare(lastVersion, availableVersion) < 0)
+            Triple lastVersion = new Triple(getLastVersion());
+            Triple availableVersion = new Triple(getLatestAvailableVersion());
+            Triple newVersion = new Triple()
+            {
+                major = lastVersion.major,
+                minor = lastVersion.minor,
+                patch = lastVersion.patch
+            };
+            if (lastVersion < availableVersion)
                 newVersion = availableVersion;
             // should not be lesser than known newest version
-            if (string.Compare(newVersion, knownInfo().newestVersion) < 0)
+            if (newVersion < new Triple(knownInfo().newestVersion))
                 return null;
             // version number should match usual scheme, e.g. 5.x.y, where x and y are digits
             Regex version = new Regex("^[1-9]+\\.[0-9]+\\.[0-9]+(\\.[0-9]+)?$");
-            if (!version.IsMatch(newVersion))
+            if (!version.IsMatch(newVersion.full()))
                 return null;
 
             // There are extra files for hashes:
@@ -209,7 +214,7 @@ namespace updater.software
                 {
                     try
                     {
-                        htmlCode = client.DownloadString("https://get.videolan.org/vlc/" + newVersion + "/win" + bits + "/vlc-" + newVersion + "-win" + bits + ".exe.sha256");
+                        htmlCode = client.DownloadString("https://get.videolan.org/vlc/" + newVersion.full() + "/win" + bits + "/vlc-" + newVersion.full() + "-win" + bits + ".exe.sha256");
                     }
                     catch (WebException webEx)
                     {
@@ -227,7 +232,7 @@ namespace updater.software
                             try
                             {
                                 logger.Info("Trying another VLC mirror instead...");
-                                htmlCode = mirrorClient.DownloadString("https://ftp.halifax.rwth-aachen.de/videolan/vlc/" + newVersion + "/win" + bits + "/vlc-" + newVersion + "-win" + bits + ".exe.sha256");
+                                htmlCode = mirrorClient.DownloadString("https://ftp.halifax.rwth-aachen.de/videolan/vlc/" + newVersion.full() + "/win" + bits + "/vlc-" + newVersion.full() + "-win" + bits + ".exe.sha256");
                             }
                             catch (Exception ex)
                             {
@@ -246,7 +251,7 @@ namespace updater.software
                 } // using
 
                 // extract hash
-                Regex reHash = new Regex("^[0-9a-f]{64} [\\* ]vlc\\-" + Regex.Escape(newVersion) + "\\-win" + bits + ".exe");
+                Regex reHash = new Regex("^[0-9a-f]{64} [\\* ]vlc\\-" + Regex.Escape(newVersion.full()) + "\\-win" + bits + ".exe");
                 Match matchHash = reHash.Match(htmlCode);
                 if (!matchHash.Success)
                     return null;
@@ -258,10 +263,10 @@ namespace updater.software
             var newInfo = knownInfo();
             // replace version number - both as newest version and in URL for download
             string oldVersion = newInfo.newestVersion;
-            newInfo.newestVersion = newVersion;
-            newInfo.install32Bit.downloadUrl = newInfo.install32Bit.downloadUrl.Replace(oldVersion, newVersion);
+            newInfo.newestVersion = newVersion.full();
+            newInfo.install32Bit.downloadUrl = newInfo.install32Bit.downloadUrl.Replace(oldVersion, newVersion.full());
             newInfo.install32Bit.checksum = newHashes[0];
-            newInfo.install64Bit.downloadUrl = newInfo.install64Bit.downloadUrl.Replace(oldVersion, newVersion);
+            newInfo.install64Bit.downloadUrl = newInfo.install64Bit.downloadUrl.Replace(oldVersion, newVersion.full());
             newInfo.install64Bit.checksum = newHashes[1];
             return newInfo;
         }
