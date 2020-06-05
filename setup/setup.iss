@@ -6,7 +6,7 @@
 
 AppId={{EA408AA2-29B2-46BB-B3E2-0EF7E379A25C}}
 AppName=updater
-AppVersion=2019.08.22.0
+AppVersion=2020.06.05.0
 AppPublisher=Dirk Stolle
 AppPublisherURL=https://github.com/striezel/updater
 AppSupportURL=https://github.com/striezel/updater
@@ -35,7 +35,7 @@ Source: "..\updater\bin\Debug\updater.exe"; DestDir: "{app}"; Flags: ignoreversi
 ; NLog configuration file (logging)
 Source: "..\updater\bin\Debug\NLog.config"; DestDir: "{app}"; Flags: ignoreversion
 ; NLog main assembly (logging)
-Source: "..\updater\packages\NLog.4.6.8\lib\net40-client\NLog.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\updater\packages\NLog.4.7.2\lib\net40-client\NLog.dll"; DestDir: "{app}"; Flags: ignoreversion
 ; GPL 3 license text
 Source: "..\LICENSE"; DestDir: "{app}"; Flags: ignoreversion
 
