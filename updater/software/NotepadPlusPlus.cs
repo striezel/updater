@@ -55,7 +55,7 @@ namespace updater.software
         /// details about the software.</returns>
         public override AvailableSoftware knownInfo()
         {
-            string version = "7.8.6";
+            string version = "7.8.9";
             return new AvailableSoftware("Notepad++",
                 version,
                 "^Notepad\\+\\+ \\(32\\-bit x86\\)$|^Notepad\\+\\+$",
@@ -63,13 +63,13 @@ namespace updater.software
                 new InstallInfoExe(
                     "http://download.notepad-plus-plus.org/repository/7.x/" + version + "/npp." + version + ".Installer.exe",
                     HashAlgorithm.SHA256,
-                    "26ca36509ea21535a39f812a1eabdbdc8bacc617e517700229e3a662db00ff95",
+                    "e7585df965054954d8d786f62f316c06739a44e7dd6bfe0eff79596e3979a790",
                     publisherX509,
                     "/S"),
                 new InstallInfoExe(
                     "http://download.notepad-plus-plus.org/repository/7.x/" + version + "/npp." + version + ".Installer.x64.exe",
                     HashAlgorithm.SHA256,
-                    "03b3a8e2d0395b2dcaf7cd30cb47106ebac678cbcd72e81bb5ee0e618927d3dd",
+                    "e8e866aca5672e91446ce9d965250317e95d2a3d238ea32fa2c378cd315cb85f",
                     publisherX509,
                     "/S")
                 );
@@ -161,11 +161,12 @@ namespace updater.software
                 return null;
 
             // download checksum file, e.g. "http://download.notepad-plus-plus.org/repository/7.x/7.7/npp.7.7.checksums.sha256"
+            //                           or "http://download.notepad-plus-plus.org/repository/7.x/7.8.9/npp.7.8.9.checksums.sha256.txt"
             using (var client = new WebClient())
             {
                 try
                 {
-                    htmlCode = client.DownloadString("http://download.notepad-plus-plus.org/repository/" + directoryMajor + "/" + directoryDetailed + "/npp." + directoryDetailed + ".checksums.sha256");
+                    htmlCode = client.DownloadString("http://download.notepad-plus-plus.org/repository/" + directoryMajor + "/" + directoryDetailed + "/npp." + directoryDetailed + ".checksums.sha256.txt");
                 }
                 catch (Exception ex)
                 {
