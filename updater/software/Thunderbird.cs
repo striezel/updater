@@ -156,7 +156,7 @@ namespace updater.software
             const string version = "68.9.0";
             return new AvailableSoftware("Mozilla Thunderbird (" + languageCode + ")",
                 version,
-                "^Mozilla Thunderbird [0-9]{2}\\.[0-9](\\.[0-9])? \\(x86 " + Regex.Escape(languageCode) + "\\)$",
+                "^Mozilla Thunderbird [0-9]{2}\\.[0-9]+(\\.[0-9]+)? \\(x86 " + Regex.Escape(languageCode) + "\\)$",
                 null,
                 new InstallInfoExe(
                     "https://ftp.mozilla.org/pub/thunderbird/releases/" + version + "/win32/" + languageCode + "/Thunderbird%20Setup%20" + version + ".exe",
