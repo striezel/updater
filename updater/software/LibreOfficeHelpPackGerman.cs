@@ -180,7 +180,6 @@ namespace updater.software
             // construct new version information
             var newInfo = knownInfo();
             // replace version number - both as newest version and in URL for download
-            string oldVersion = newInfo.newestVersion;
             newInfo.newestVersion = newVersion;
             newInfo.install32Bit.downloadUrl = "http://download.documentfoundation.org/libreoffice/stable/"
                 + newVersion + "/win/x86/LibreOffice_" + newVersion + "_Win_x86_helppack_de.msi";

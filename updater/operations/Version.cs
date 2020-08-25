@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017  Dirk Stolle
+    Copyright (C) 2017, 2020  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -21,20 +21,17 @@ using System;
 namespace updater.operations
 {
     /// <summary>
-    /// displays version information
+    /// Displays version information.
     /// </summary>
     public class Version : IOperation
     {
         public int perform()
         {
-            //Program version equals assembly version, so show that. 
-            var asm = System.Reflection.Assembly.GetExecutingAssembly();
-            var ver = asm.GetName().Version;
             Console.WriteLine("updater, version " + utility.Version.get());
             Console.WriteLine();
             Console.WriteLine("Version control commit: " + GitInfo.getCommit());
             Console.WriteLine("Version control date:   " + GitInfo.getCommitDate());
             return 0;
         }
-    } //class
-} //namespace
+    } // class
+} // namespace
