@@ -48,7 +48,7 @@ namespace updater.software
         /// <summary>
         /// publisher name for signed executables
         /// </summary>
-        private const string publisherX509 = "CN=Piriform Software Ltd, O=Piriform Software Ltd, L=London, C=GB";
+        private const string publisherX509 = "CN=Piriform Software Ltd, OU=RE 901, O=Piriform Software Ltd, L=London, C=GB";
 
 
         /// <summary>
@@ -59,20 +59,20 @@ namespace updater.software
         public override AvailableSoftware knownInfo()
         {
             return new AvailableSoftware("CCleaner",
-                "5.63",
+                "5.70",
                 "^CCleaner+$",
                 "^CCleaner+$",
                 // CCleaner uses the same installer for 32 and 64 bit.
                 new InstallInfoExe(
-                    "https://download.ccleaner.com/ccsetup563.exe",
+                    "https://download.ccleaner.com/ccsetup570.exe",
                     HashAlgorithm.SHA256,
-                    "f2aba7dc1d4ab617d7b09b19e7a5b4f6b6e3f790981050d163f395002646b890",
+                    "825e7adc69360a9820be17603ec93aace7e998d3278b33b16048d9452f1ba860",
                     publisherX509,
                     "/S"),
                 new InstallInfoExe(
-                    "https://download.ccleaner.com/ccsetup563.exe",
+                    "https://download.ccleaner.com/ccsetup570.exe",
                     HashAlgorithm.SHA256,
-                    "f2aba7dc1d4ab617d7b09b19e7a5b4f6b6e3f790981050d163f395002646b890",
+                    "825e7adc69360a9820be17603ec93aace7e998d3278b33b16048d9452f1ba860",
                     publisherX509,
                     "/S")
                 );
