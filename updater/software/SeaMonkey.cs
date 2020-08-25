@@ -71,28 +71,30 @@ namespace updater.software
         private static Dictionary<string, string> knownChecksums()
         {
             // These are the checksums for Windows 32 bit installers from
-            // https://archive.mozilla.org/pub/seamonkey/releases/2.53.1/SHA1SUMS.txt
+            // https://archive.mozilla.org/pub/seamonkey/releases/2.53.3/SHA1SUMS.txt
             var result = new Dictionary<string, string>();
-            result.Add("cs", "47be5df45e736c008813b39502549b368839588d");
-            result.Add("de", "d0417163e5252ef2e5cdbe6c847319584c4834d8");
-            result.Add("en-GB", "0f48cfc823ed6ba8efae664ffc304bc0da20e75e");
-            result.Add("en-US", "ea91230f2ca82be62a476ff4c06d0453187c8799");
-            result.Add("es-AR", "40d5dc371faff043b562c7da97b2b7dd58af5798");
-            result.Add("es-ES", "fa1565fef55b31b77fe1b2f0394422f55726c515");
-            result.Add("fr", "05ca3f15872d77cef27ff2db9fc3b85e11ebc0f6");
-            result.Add("hu", "53a64c1c6e560eda3333a102c01c070efd5a1bf4");
-            result.Add("it", "ffea8d1015391ac745f8df9b775b60b56c466f3e");
-            result.Add("ja", "79a36542fcf3f0ea2a96d7b30998f6e0cf6d2568");
-            result.Add("nb-NO", "375163fd45908271d7af71ffc7351867a320c9fe");
-            result.Add("nl", "398316404782758a91a88885f5131224158098f3");
-            result.Add("pl", "a67cd8e1d6aad30f5880b4ffc0ba73ad6a2b5dc7");
-            result.Add("pt-BR", "772ae389b154a9e8dd8237fa7f812720e7cfb44e");
-            result.Add("pt-PT", "2eb1e52548ddeb5939b7d8a5f510dd4dcda58eb4");
-            result.Add("ru", "ef407292195662554373f9430d1b2553cbb247ee");
-            result.Add("sk", "9129c82ca3568dc22b59e859965377c727b5192d");
-            result.Add("sv-SE", "bd1afea4b7ef181ab1d0520e01ea4dc024e2d242");
-            result.Add("zh-CN", "3f7129d568e4abffd94a3cfd8b053af9aa652cee");
-            result.Add("zh-TW", "22326454b6bd802b1a81fdf28bec1b2c843b2654");
+            result.Add("cs", "eff5ba2a5cac21044d8ac507afd73dd88c9e0301");
+            result.Add("de", "9afc6c48b29faab1348c08128e9ef46f789f5611");
+            result.Add("en-GB", "312ccc8d3a627bbae45683f2b6dfb187d0c23dca");
+            result.Add("en-US", "9d8afcf5095b1f925841abee549acff72a3e396b");
+            result.Add("es-AR", "3363237b6abc36deb9e4baed7e29d4fc613f51af");
+            result.Add("es-ES", "4d774a8af4333cb2465196fc20ad97f4378b61b2");
+            result.Add("fi", "b0592451c6e2bd6db7c6d0a522b998bc3f2a139c");
+            result.Add("fr", "77838d6c0f8d060c93730f036ef67beba15d03d8");
+            result.Add("hu", "598b3615263f3d843cc956c11ba392008b171025");
+            result.Add("it", "0129da6d9e023e5d73227f3f27d1220fe55e1b9a");
+            result.Add("ja", "96ca2ba0ec114450a08c40c3f99901c7c3714101");
+            result.Add("ka", "b2e5a7d60790bdc67b450d42310fa09478537dc4");
+            result.Add("nb-NO", "264bce7fa9974208a5f6a616b7337ab40b6af3a8");
+            result.Add("nl", "a5d9dda8294d400d606c94c647a98ba11e0f2c03");
+            result.Add("pl", "36ecc8729697acea3dc9221b8f7345ab1a49b0a6");
+            result.Add("pt-BR", "143dfc487d39e0536aa544a9c2bab512652dae49");
+            result.Add("pt-PT", "3c71bb196e9ab2c2948987f1fb6f0b9a25d6bc98");
+            result.Add("ru", "3a3cd4a4fd8e5c53ae2cf43263471f949fc2012e");
+            result.Add("sk", "6cb5ac50afaf2af8f7faa9b19a46f82ba08901f6");
+            result.Add("sv-SE", "1c6eb203dc0c455a034fb0226dc8811411cede76");
+            result.Add("zh-CN", "66c0f83a6321df4caa1663ec6e971107bf6ee5fc");
+            result.Add("zh-TW", "1411fe36dfc0d2b909078bef59ebe9fa235d15b0");
 
             return result;
         }
@@ -116,7 +118,7 @@ namespace updater.software
         /// details about the software.</returns>
         public override AvailableSoftware knownInfo()
         {
-            const string knownVersion = "2.53.1";
+            const string knownVersion = "2.53.3";
             return new AvailableSoftware("SeaMonkey (" + languageCode + ")",
                 knownVersion,
                 "^SeaMonkey [0-9]+\\.[0-9]+(\\.[0-9]+)? \\(x86 " + Regex.Escape(languageCode) + "\\)$",
