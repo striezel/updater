@@ -19,7 +19,7 @@ namespace updater.Properties {
     // -Klasse über ein Tool wie ResGen oder Visual Studio automatisch generiert.
     // Um einen Member hinzuzufügen oder zu entfernen, bearbeiten Sie die .ResX-Datei und führen dann ResGen
     // mit der /str-Option erneut aus, oder Sie erstellen Ihr VS-Projekt neu.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Resources {
@@ -71,7 +71,7 @@ namespace updater.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die 2017-04-22 00:02:01 +0200
+        ///   Sucht eine lokalisierte Zeichenfolge, die 2020-08-25 20:11:09 +0200
         /// ähnelt.
         /// </summary>
         internal static string date {
@@ -81,7 +81,7 @@ namespace updater.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die 88701a6
+        ///   Sucht eine lokalisierte Zeichenfolge, die v2020.06.05.0-15-gd778134
         /// ähnelt.
         /// </summary>
         internal static string description {
@@ -91,7 +91,7 @@ namespace updater.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die 88701a6d25b2cb0796eadfc15d8eadabd3146b6b
+        ///   Sucht eine lokalisierte Zeichenfolge, die d778134439ea363956850b0d054e8e6b0d57c805
         /// ähnelt.
         /// </summary>
         internal static string hash {
@@ -101,7 +101,7 @@ namespace updater.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die 88701a6
+        ///   Sucht eine lokalisierte Zeichenfolge, die d778134
         /// ähnelt.
         /// </summary>
         internal static string hash_short {
