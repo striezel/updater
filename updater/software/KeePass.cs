@@ -105,7 +105,7 @@ namespace updater.software
             {
                 try
                 {
-                    htmlCode = client.DownloadString("http://keepass.info/integrity.html");
+                    htmlCode = client.DownloadString("https://keepass.info/integrity.html");
                 }
                 catch (Exception ex)
                 {
