@@ -68,6 +68,10 @@ namespace updater_test.software
         }
 
 
+        /// <summary>
+        /// Checks whether the regular expression for Firefox ESR matches a
+        /// typical version of Firefox ESR.
+        /// </summary>
         [TestMethod]
         public void Test_matchTest()
         {
@@ -78,6 +82,23 @@ namespace updater_test.software
             Assert.IsTrue(re.IsMatch("Mozilla Firefox 45.7.0 ESR (x64 de)"));
             re = new Regex(info.match32Bit);
             Assert.IsTrue(re.IsMatch("Mozilla Firefox 45.7.0 ESR (x86 de)"));
+        }
+
+
+        /// <summary>
+        /// Checks whether the regular expression for Firefox ESR also matches
+        /// versions where the minor version has more than one digit.
+        /// </summary>
+        [TestMethod]
+        public void Test_matchTest_twoDigitMinorVersion()
+        {
+            var fx = new FirefoxESR("de", false);
+            var info = fx.info();
+
+            Regex re = new Regex(info.match64Bit);
+            Assert.IsTrue(re.IsMatch("Mozilla Firefox 68.12.0 ESR (x64 de)"));
+            re = new Regex(info.match32Bit);
+            Assert.IsTrue(re.IsMatch("Mozilla Firefox 68.12.0 ESR (x86 de)"));
         }
 
 
