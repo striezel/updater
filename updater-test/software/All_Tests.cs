@@ -35,9 +35,11 @@ namespace updater_test.software
         [TestMethod]
         public void Test_get()
         {
-            var opts = new Options();
-            opts.autoGetNewer = false;
-            opts.excluded = null;
+            var opts = new Options
+            {
+                autoGetNewer = false,
+                excluded = null
+            };
             var result = All.get(opts);
             Assert.IsNotNull(result);
             Assert.IsTrue(result.Count > 0);
@@ -54,9 +56,11 @@ namespace updater_test.software
         [TestMethod]
         public void Test_get_NullEmpty()
         {
-            var opts = new Options();
-            opts.autoGetNewer = false;
-            opts.excluded = null;
+            var opts = new Options
+            {
+                autoGetNewer = false,
+                excluded = null
+            };
             var result = All.get(opts);
             Assert.IsNotNull(result);
             Assert.IsTrue(result.Count > 0);
@@ -78,19 +82,23 @@ namespace updater_test.software
         [TestMethod]
         public void Test_get_WithExclusionList()
         {
-            var opts = new Options();
-            opts.autoGetNewer = false;
-            opts.excluded = null;
+            var opts = new Options
+            {
+                autoGetNewer = false,
+                excluded = null
+            };
 
             var result = All.get(opts);
             Assert.IsNotNull(result);
             Assert.IsTrue(result.Count > 0);
 
 
-            var excluded = new List<string>();
-            excluded.Add(new CCleaner(false).id()[0]);
-            excluded.Add(new CDBurnerXP(false).id()[0]);
-            excluded.Add(new Pidgin(false).id()[0]);
+            var excluded = new List<string>()
+            {
+                new CCleaner(false).id()[0],
+                new CDBurnerXP(false).id()[0],
+                new Pidgin(false).id()[0]
+            };
             opts.excluded = excluded;
 
             var result2 = All.get(opts);

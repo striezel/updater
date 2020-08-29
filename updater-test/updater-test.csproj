@@ -54,7 +54,6 @@
   </Choose>
   <ItemGroup>
     <Compile Include="algorithm\SoftwareStatus_Tests.cs" />
-    <Compile Include="BasicTest.cs" />
     <Compile Include="detection\DetectorMSI_Tests.cs" />
     <Compile Include="detection\DetectorRegistry_Tests.cs" />
     <Compile Include="git-info\GitInfo_Tests.cs" />

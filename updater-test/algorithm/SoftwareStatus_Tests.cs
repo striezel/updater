@@ -25,20 +25,22 @@ using updater.cli;
 namespace updater_test.algorithm
 {
     /// <summary>
-    /// unit tests for algorithm.SoftwareStatus class
+    /// unit tests for operations.SoftwareStatus class
     /// </summary>
     [TestClass]
     public class SoftwareStatus_Tests
     {
         /// <summary>
-        /// Checks whether algorithm.SoftwareStatus.query() returns something.
+        /// Checks whether operations.SoftwareStatus.query() returns something.
         /// </summary>
         [TestMethod]
         public void Test_query()
         {
-            var opts = new Options();
-            opts.excluded = null;
-            opts.autoGetNewer = false;
+            var opts = new Options()
+            {
+                excluded = null,
+                autoGetNewer = false
+            };
             var q = SoftwareStatus.query(opts);
             Assert.IsNotNull(q);
             Assert.IsTrue(q.Count >= 0);
@@ -53,14 +55,16 @@ namespace updater_test.algorithm
 
 
         /// <summary>
-        /// Checks whether algorithm.SoftwareStatus.toConsoleOutput() works.
+        /// Checks whether operations.SoftwareStatus.toConsoleOutput() works.
         /// </summary>
         [TestMethod]
         public void Test_toConsoleOutput()
         {
-            var opts = new Options();
-            opts.excluded = null;
-            opts.autoGetNewer = false;
+            var opts = new Options()
+            {
+                excluded = null,
+                autoGetNewer = false
+            };
             var q = SoftwareStatus.query(opts);
             Assert.IsTrue(q.Count > 0);
 
@@ -71,15 +75,15 @@ namespace updater_test.algorithm
 
 
         /// <summary>
-        /// Checks whether algorithm.SoftwareStatus.toConsoleOutput() can handle
+        /// Checks whether operations.SoftwareStatus.toConsoleOutput() can handle
         /// null and empty input.
         /// </summary>
         [TestMethod]
         public void Test_toConsoleOutput_NullEmpty()
         {
-            //null
+            // null
             Assert.IsNull(SoftwareStatus.toConsoleOutput(null));
-            //empty
+            // empty
             var data = SoftwareStatus.toConsoleOutput(new List<updater.data.QueryEntry>());
             Assert.IsNotNull(data);
             Assert.AreEqual<int>(1, data.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries).Length);
