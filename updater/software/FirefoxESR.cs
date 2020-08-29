@@ -358,7 +358,7 @@ namespace updater.software
                 string newLocation = response.Headers[HttpResponseHeader.Location];
                 request = null;
                 response = null;
-                Regex reVersion = new Regex("[0-9]{2}\\.[0-9](\\.[0-9])?");
+                Regex reVersion = new Regex("[0-9]+\\.[0-9]+(\\.[0-9]+)?");
                 Match matchVersion = reVersion.Match(newLocation);
                 if (!matchVersion.Success)
                     return null;
@@ -458,7 +458,9 @@ namespace updater.software
                 return null;
             // If versions match, we can return the current information.
             var currentInfo = knownInfo();
-            if (newerVersion == currentInfo.newestVersion)
+            var newTriple = new versions.Triple(newerVersion);
+            var currentTriple = new versions.Triple(currentInfo.newestVersion);
+            if (newerVersion == currentInfo.newestVersion || newTriple < currentTriple)
                 // fallback to known information
                 return currentInfo;
             string[] newerChecksums = determineNewestChecksums(newerVersion);

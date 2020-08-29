@@ -203,7 +203,7 @@ namespace updater.software
                 string newLocation = response.Headers[HttpResponseHeader.Location];
                 request = null;
                 response = null;
-                Regex reVersion = new Regex("[0-9]+\\.[0-9](\\.[0-9])?");
+                Regex reVersion = new Regex("[0-9]+\\.[0-9]+(\\.[0-9]+)?");
                 Match matchVersion = reVersion.Match(newLocation);
                 if (!matchVersion.Success)
                     return null;
@@ -284,7 +284,9 @@ namespace updater.software
             if (string.IsNullOrWhiteSpace(newerVersion))
                 return null;
             var currentInfo = knownInfo();
-            if (newerVersion == currentInfo.newestVersion)
+            var newTriple = new versions.Triple(newerVersion);
+            var currentTriple = new versions.Triple(currentInfo.newestVersion);
+            if (newerVersion == currentInfo.newestVersion || newTriple < currentTriple)
                 // fallback to known information
                 return currentInfo;
             string newerChecksum = determineNewestChecksum(newerVersion);
