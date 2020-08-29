@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017, 2018  Dirk Stolle
+    Copyright (C) 2017, 2018, 2020  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -29,7 +29,7 @@ namespace updater.software
         /// <summary>
         /// NLog.Logger for Pdf24Creator class
         /// </summary>
-        private static NLog.Logger logger = NLog.LogManager.GetLogger(typeof(Pdf24Creator).FullName);
+        private static readonly NLog.Logger logger = NLog.LogManager.GetLogger(typeof(Pdf24Creator).FullName);
 
 
         /// <summary>
@@ -81,14 +81,14 @@ namespace updater.software
         public override AvailableSoftware knownInfo()
         {
             return new AvailableSoftware("PDF24 Creator",
-                "8.4.2",
+                "9.2.0",
                 "^PDF24 Creator$",
                 null, // no 64 bit version
                 new InstallInfoMsi(
-                    "https://en.pdf24.org/products/pdf-creator/download/pdf24-creator-8.4.2.msi",
+                    "https://en.pdf24.org/products/pdf-creator/download/pdf24-creator-9.2.0.msi",
                     HashAlgorithm.SHA512,
-                    "7047f7209e6573ce0de6edca681d2694b506bf7c74af1d06cbc5673676e54bbcc264460eb8fd662d841cb74ab84e24f4fa21cd7c900cb9bcacc082b61fdffed4",
-                    "CN=Geek Software GmbH, O=Geek Software GmbH, STREET=Friedrichstr 171, L=Berlin, S=Berlin, PostalCode=10117, C=DE",
+                    "760b5ac124715f3e823a24e111e99e6bfbede6250ba7e2abd6d55cabd77669f630bfc279c4827dd24071ad6ec81d0a32d7b39603dd5606efc86435ac3730eef6",
+                    "CN=Geek Software GmbH, O=Geek Software GmbH, STREET=Friedrichstr. 171, L=Berlin, S=Berlin, PostalCode=10117, C=DE",
                     getOptions() + " /qn /norestart"),
                 // There is no 64 bit installer.
                 null);
@@ -189,7 +189,7 @@ namespace updater.software
         {
             versions.Triple verDetected = new versions.Triple(detected.displayVersion);
             versions.Triple verNewest = new versions.Triple(info().newestVersion);
-            return (verNewest.CompareTo(verDetected) > 0);
+            return verNewest.CompareTo(verDetected) > 0;
         }
 
 
