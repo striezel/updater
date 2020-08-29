@@ -32,7 +32,7 @@ namespace updater.software
         /// <summary>
         /// NLog.Logger for Mumble class
         /// </summary>
-        private static NLog.Logger logger = NLog.LogManager.GetLogger(typeof(Mumble).FullName);
+        private static readonly NLog.Logger logger = NLog.LogManager.GetLogger(typeof(Mumble).FullName);
 
 
         /// <summary>
@@ -79,7 +79,7 @@ namespace updater.software
 
 
         /// <summary>
-        /// list of IDs to identify the software
+        /// Gets a list of IDs to identify the software.
         /// </summary>
         /// <returns>Returns a non-empty array of IDs, where at least one entry is unique to the software.</returns>
         public override string[] id()
@@ -131,7 +131,7 @@ namespace updater.software
                 logger.Warn("Error while looking for newer Mumble version: " + ex.Message);
                 return null;
             }
-            //Use known info, if version has not changed.
+            // Use known info, if version has not changed.
             if (currentVersion == knownInfo().newestVersion)
                 return knownInfo();
 
@@ -159,8 +159,8 @@ namespace updater.software
 
 
         /// <summary>
-        /// lists names of processes that might block an update, e.g. because
-        /// the application cannot be update while it is running
+        /// Lists names of processes that might block an update, e.g. because
+        /// the application cannot be update while it is running.
         /// </summary>
         /// <param name="detected">currently installed / detected software version</param>
         /// <returns>Returns a list of process names that block the upgrade.</returns>
@@ -171,7 +171,7 @@ namespace updater.software
 
 
         /// <summary>
-        /// whether the detected software is older than the newest known software
+        /// Determines whether the detected software is older than the newest known software.
         /// </summary>
         /// <param name="detected">the corresponding detected software</param>
         /// <returns>Returns true, if the detected software version is older
@@ -183,5 +183,5 @@ namespace updater.software
             versions.Triple verNewest = new versions.Triple(info().newestVersion);
             return (verNewest.CompareTo(verDetected) > 0);
         }
-    } //class
-} //namespace
+    } // class
+} // namespace
