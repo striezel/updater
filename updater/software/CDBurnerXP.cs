@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017, 2018  Dirk Stolle
+    Copyright (C) 2017, 2018, 2020  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -29,7 +29,7 @@ namespace updater.software
         /// <summary>
         /// NLog.Logger for CDBurnerXP class
         /// </summary>
-        private static NLog.Logger logger = NLog.LogManager.GetLogger(typeof(CDBurnerXP).FullName);
+        private static readonly NLog.Logger logger = NLog.LogManager.GetLogger(typeof(CDBurnerXP).FullName);
 
 
         /// <summary>
@@ -45,30 +45,30 @@ namespace updater.software
         /// <summary>
         /// publisher of signed installer files
         /// </summary>
-        private const string publisherX509 = "CN=Canneverbe Limited, O=Canneverbe Limited, L=Goch, C=DE";
+        private const string publisherX509 = "CN=Canneverbe Limited, OU=Canneverbe Limited, O=Canneverbe Limited, L=Goch, S=North Rhine-Westphalia, C=DE";
 
 
         /// <summary>
-        /// gets the currently known information about the software
+        /// Gets the currently known information about the software.
         /// </summary>
         /// <returns>Returns an AvailableSoftware instance with the known
         /// details about the software.</returns>
         public override AvailableSoftware knownInfo()
         {
             return new AvailableSoftware("CDBurnerXP",
-                "4.5.8.6795",
+                "4.5.8.7128",
                 "^CDBurnerXP$",
                 "^CDBurnerXP \\(64 Bit\\)$",
                 new InstallInfoMsi(
-                    "https://download.cdburnerxp.se/msi/cdbxp_setup_4.5.8.6795.msi",
+                    "https://download.cdburnerxp.se/msi/cdbxp_setup_4.5.8.7128.msi",
                     HashAlgorithm.SHA256,
-                    "fbf9772ecf2d2829f097d33013f5c3b9a01ba9f7c1345dc494a7d913afdd2810",
+                    "e92450832b09e32fc769bc94d3b00b04ef5c05d7542cec77a63603c562b757d1",
                     publisherX509,
                     "/qn /norestart"),
                 new InstallInfoMsi(
-                    "https://download.cdburnerxp.se/msi/cdbxp_setup_x64_4.5.8.6795.msi",
+                    "https://download.cdburnerxp.se/msi/cdbxp_setup_x64_4.5.8.7128.msi",
                     HashAlgorithm.SHA256,
-                    "49002f2f802dda8b8e86882601c78620fb0740878ada46f5158bc95034fa3738",
+                    "af80a5b901100d73855dd1f04845c79511cc2f1299c0ca38dfac8d03ce8fed00",
                     publisherX509,
                     "/qn /norestart")
                     );
@@ -76,7 +76,7 @@ namespace updater.software
 
 
         /// <summary>
-        /// list of IDs to identify the software
+        /// Gets a list of IDs to identify the software.
         /// </summary>
         /// <returns>Returns a non-empty array of IDs, where at least one entry is unique to the software.</returns>
         public override string[] id()
@@ -86,7 +86,7 @@ namespace updater.software
 
 
         /// <summary>
-        /// whether or not the method searchForNewer() is implemented
+        /// Determines whether or not the method searchForNewer() is implemented.
         /// </summary>
         /// <returns>Returns true, if searchForNewer() is implemented for that
         /// class. Returns false, if not. Calling searchForNewer() may throw an
@@ -98,7 +98,7 @@ namespace updater.software
 
 
         /// <summary>
-        /// looks for newer versions of the software than the currently known version
+        /// Looks for newer versions of the software than the currently known version.
         /// </summary>
         /// <returns>Returns an AvailableSoftware instance with the information
         /// that was retrieved from the net.</returns>
@@ -118,7 +118,7 @@ namespace updater.software
                     return null;
                 }
                 client.Dispose();
-            } //using
+            }
 
             Regex reMsi = new Regex("cdbxp_setup_[1-9]\\.[0-9]\\.[0-9]\\.[0-9]{4}\\.msi");
             Match matchMsi = reMsi.Match(htmlCode);
@@ -126,21 +126,21 @@ namespace updater.software
                 return null;
             string newVersion = matchMsi.Value.Replace("cdbxp_setup_", "").Replace(".msi", "");
             
-            //construct new version information
+            // construct new version information
             var newInfo = knownInfo();
             // ... but use known information, if versions match. That way we
             // have valid checksums for the files after download.
             if (newInfo.newestVersion == newVersion)
                 return newInfo;
-            //replace version number - both as newest version and in URL for download
+            // replace version number - both as newest version and in URL for download
             string oldVersion = newInfo.newestVersion;
             newInfo.newestVersion = newVersion;
             newInfo.install32Bit.downloadUrl = newInfo.install32Bit.downloadUrl.Replace(oldVersion, newVersion);
-            //no checksums are provided on the official site, but binaries are signed
+            // no checksums are provided on the official site, but binaries are signed
             newInfo.install32Bit.checksum = null;
             newInfo.install32Bit.algorithm = HashAlgorithm.Unknown;
             newInfo.install64Bit.downloadUrl = newInfo.install64Bit.downloadUrl.Replace(oldVersion, newVersion);
-            //no checksums are provided on the official site, but binaries are signed
+            // no checksums are provided on the official site, but binaries are signed
             newInfo.install64Bit.checksum = null;
             newInfo.install64Bit.algorithm = HashAlgorithm.Unknown;
             return newInfo;
@@ -148,8 +148,8 @@ namespace updater.software
 
 
         /// <summary>
-        /// lists names of processes that might block an update, e.g. because
-        /// the application cannot be update while it is running
+        /// Lists names of processes that might block an update, e.g. because
+        /// the application cannot be update while it is running.
         /// </summary>
         /// <param name="detected">currently installed / detected software version</param>
         /// <returns>Returns a list of process names that block the upgrade.</returns>
@@ -158,5 +158,5 @@ namespace updater.software
             return new List<string>();
         }
 
-    } //class
-} //namespace
+    } // class
+} // namespace
