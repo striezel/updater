@@ -35,16 +35,14 @@ Source: "..\updater\bin\Debug\updater.exe"; DestDir: "{app}"; Flags: ignoreversi
 ; NLog configuration file (logging)
 Source: "..\updater\bin\Debug\NLog.config"; DestDir: "{app}"; Flags: ignoreversion
 ; NLog main assembly (logging)
-Source: "..\updater\packages\NLog.4.7.3\lib\net45\NLog.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\updater\packages\NLog.4.7.4\lib\net45\NLog.dll"; DestDir: "{app}"; Flags: ignoreversion
 ; GPL 3 license text
 Source: "..\LICENSE"; DestDir: "{app}"; Flags: ignoreversion
 
 [Icons]
 ; Start Menu entry for updater: check for new updates
-;Name: "{group}\Check for new updates"; Filename: "{app}\updater.exe"; Parameters: "check"
 Name: "{group}\Check for new updates"; Filename: "cmd.exe"; Parameters: "/k ""{app}\updater.exe"" check"
 ; Start Menu entry for updater: install updates
-;Name: "{group}\Download and install new updates"; Filename: "{app}\updater.exe"; Parameters: "update"
 Name: "{group}\Download and install new updates (needs admin privileges)"; Filename: "cmd.exe"; Parameters: "/k ""{app}\updater.exe"" update"
 ; Start Menu entry for Uninstaller
 Name: "{group}\Uninstall updater"; Filename: "{app}\unins000.exe"
