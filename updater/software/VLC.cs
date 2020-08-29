@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017, 2018, 2019  Dirk Stolle
+    Copyright (C) 2017, 2018, 2019, 2020  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -30,7 +30,7 @@ namespace updater.software
         /// <summary>
         /// NLog.Logger for VLC class
         /// </summary>
-        private static NLog.Logger logger = NLog.LogManager.GetLogger(typeof(VLC).FullName);
+        private static readonly NLog.Logger logger = NLog.LogManager.GetLogger(typeof(VLC).FullName);
 
 
         /// <summary>
@@ -56,7 +56,7 @@ namespace updater.software
         /// details about the software.</returns>
         public override AvailableSoftware knownInfo()
         {
-            const string version = "3.0.10";
+            const string version = "3.0.11";
             return new AvailableSoftware("VLC media player",
                 version,
                 "^VLC media player$",
@@ -65,14 +65,14 @@ namespace updater.software
                 new InstallInfoExe(
                     "https://get.videolan.org/vlc/" + version + "/win32/vlc-" + version + "-win32.exe",
                     HashAlgorithm.SHA256,
-                    "ccfb91146cba92a3ec5274fee90d2cee35cfda7fd38240b3f65da26d53d28a0b",
+                    "86a95690916f9f5b86593ef3f146c101d11f5d5e55670613bf88211ca3036aca",
                     publisherX509,
                     "/S"),
                 // 64 bit installer
                 new InstallInfoExe(
                     "https://get.videolan.org/vlc/" + version + "/win64/vlc-" + version + "-win64.exe",
                     HashAlgorithm.SHA256,
-                    "e0a0883cd6c29aee23ecfc63573bc09e09f78de0da78a6f55ab13fab1c65850b",
+                    "2e41f1959ad77c34746715da5027c5ed554c35361397c9984a9ef78bc0b5e937",
                     publisherX509,
                     "/S")
                 );
