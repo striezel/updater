@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017, 2018, 2019  Dirk Stolle
+    Copyright (C) 2017, 2018, 2019, 2020  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -30,7 +30,7 @@ namespace updater.software
         /// <summary>
         /// NLog.Logger for Putty class
         /// </summary>
-        private static NLog.Logger logger = NLog.LogManager.GetLogger(typeof(Putty).FullName);
+        private static readonly NLog.Logger logger = NLog.LogManager.GetLogger(typeof(Putty).FullName);
 
 
         /// <summary>
@@ -57,21 +57,21 @@ namespace updater.software
         public override AvailableSoftware knownInfo()
         {
             return new AvailableSoftware("PuTTY",
-                "0.73",
+                "0.74",
                 "^PuTTY release [0-9]\\.[0-9]+$",
                 "^PuTTY release [0-9]\\.[0-9]+ \\(64\\-bit\\)$",
                 // 32 bit installer
                 new InstallInfoMsi(
-                    "https://the.earth.li/~sgtatham/putty/0.73/w32/putty-0.73-installer.msi",
+                    "https://the.earth.li/~sgtatham/putty/0.74/w32/putty-0.74-installer.msi",
                     HashAlgorithm.SHA512,
-                    "fbbcef32d2bb04a64e90fd71734b2fea8f7356e1fc32205c30df10ba19a0f9ee3489fe091fbc1f7e109ad594181e842765d58064c80714790ee210010d49733e",
+                    "3d5f4e7a6fe8082f11b89286872076d3e85bd6136529e4f38eebc2af21edc329550610ade283e7d0118baa0057f595dc271950e25408971f87105d0c7361ff2b",
                     publisherX509,
                     "/qn /norestart"),
                 // 64 bit installer
                 new InstallInfoMsi(
-                    "https://the.earth.li/~sgtatham/putty/0.73/w64/putty-64bit-0.73-installer.msi",
+                    "https://the.earth.li/~sgtatham/putty/0.74/w64/putty-64bit-0.74-installer.msi",
                     HashAlgorithm.SHA512,
-                    "63065b4022a29f36ed73f327282af264b7f71573da4969b8bc07553e6c0e00c3e87c6ee01fe45d8457ff3f28d1852880d85ad627b31aef36386d9281766529ae",
+                    "150cc16d228cae7f09ad34afe3f5386685a6be44775d6000e838906d98dff6abccd4047134b041935469ba28bb999d6ae7f00f0a8e9a7f5f10ff4952c6f846e3",
                     publisherX509,
                     "/qn /norestart")
                 );
@@ -79,7 +79,7 @@ namespace updater.software
 
 
         /// <summary>
-        /// list of IDs to identify the software
+        /// Gets a list of IDs to identify the software.
         /// </summary>
         /// <returns>Returns a non-empty array of IDs, where at least one entry is unique to the software.</returns>
         public override string[] id()
@@ -89,7 +89,7 @@ namespace updater.software
 
 
         /// <summary>
-        /// whether or not the method searchForNewer() is implemented
+        /// Determines whether or not the method searchForNewer() is implemented.
         /// </summary>
         /// <returns>Returns true, if searchForNewer() is implemented for that
         /// class. Returns false, if not. Calling searchForNewer() may throw an
@@ -101,7 +101,7 @@ namespace updater.software
 
 
         /// <summary>
-        /// looks for newer versions of the software than the currently known version
+        /// Looks for newer versions of the software than the currently known version.
         /// </summary>
         /// <returns>Returns an AvailableSoftware instance with the information
         /// that was retrieved from the net.</returns>
@@ -111,7 +111,7 @@ namespace updater.software
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://the.earth.li/~sgtatham/putty/latest/");
             request.Method = WebRequestMethods.Http.Head;
             request.AllowAutoRedirect = false;
-            string newLocation = null;
+            string newLocation;
             try
             {
                 HttpWebResponse response = (HttpWebResponse)request.GetResponse();
@@ -147,7 +147,7 @@ namespace updater.software
                     return null;
                 }
                 client.Dispose();
-            } //using
+            } // using
 
             Regex reHash32 = new Regex("[0-9a-f]{128}  w32/putty\\-" + Regex.Escape(newVersion) + "\\-installer\\.msi");
             Match matchHash32 = reHash32.Match(sha512sums);
@@ -187,7 +187,7 @@ namespace updater.software
 
 
         /// <summary>
-        /// whether or not a separate process must be run before the update
+        /// Determines whether or not a separate process must be run before the update.
         /// </summary>
         /// <param name="detected">currently installed / detected software version</param>
         /// <returns>Returns true, if a separate proess returned by
