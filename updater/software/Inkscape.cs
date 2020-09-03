@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017, 2018  Dirk Stolle
+    Copyright (C) 2017, 2018, 2020  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -26,12 +26,15 @@ using System.Collections.Generic;
 
 namespace updater.software
 {
+    /// <summary>
+    /// Manages updates for Inkscape.
+    /// </summary>
     public class Inkscape : AbstractSoftware
     {
         /// <summary>
         /// NLog.Logger for Inkscape class
         /// </summary>
-        private static NLog.Logger logger = NLog.LogManager.GetLogger(typeof(Inkscape).FullName);
+        private static readonly NLog.Logger logger = NLog.LogManager.GetLogger(typeof(Inkscape).FullName);
 
 
         /// <summary>
@@ -52,19 +55,19 @@ namespace updater.software
         public override AvailableSoftware knownInfo()
         {
             return new AvailableSoftware("Inkscape",
-                "0.92.4",
+                "1.0",
                 "^Inkscape [0-9]\\.[0-9]+(\\.[0-9]+)?$",
                 "^Inkscape [0-9]\\.[0-9]+(\\.[0-9]+)?$",
                 new InstallInfoMsi(
-                    "https://media.inkscape.org/dl/resources/file/inkscape-0.92.4-x86.msi",
-                    HashAlgorithm.MD5,
-                    "2c8016038f63398bafd3474737d21d09",
+                    "https://media.inkscape.org/dl/resources/file/inkscape-1.0-x86.msi",
+                    HashAlgorithm.SHA256,
+                    "c0d5f7f58d42611fbcff2ac232c48aad6574d8a1d9a25b18d0a081969b1fdeac",
                     null,
                     "/qn /norestart"),
                 new InstallInfoMsi(
-                    "https://media.inkscape.org/dl/resources/file/inkscape-0.92.4-x64.msi",
-                    HashAlgorithm.MD5,
-                    "8a867a3ebaac8c17c3294e3aea0b61c5 ",
+                    "https://media.inkscape.org/dl/resources/file/inkscape-1.0-x64.msi",
+                    HashAlgorithm.SHA256,
+                    "0cd3efa6a6b61f7906152a2d7a221ee1b69598649fc8ca6482be9c3bf6db8679 ",
                     null,
                     "/qn /norestart")
                     );
@@ -72,7 +75,7 @@ namespace updater.software
 
 
         /// <summary>
-        /// list of IDs to identify the software
+        /// Gets a list of IDs to identify the software.
         /// </summary>
         /// <returns>Returns a non-empty array of IDs, where at least one entry is unique to the software.</returns>
         public override string[] id()
@@ -82,7 +85,7 @@ namespace updater.software
 
 
         /// <summary>
-        /// whether or not the method searchForNewer() is implemented
+        /// Determines whether or not the method searchForNewer() is implemented.
         /// </summary>
         /// <returns>Returns true, if searchForNewer() is implemented for that
         /// class. Returns false, if not. Calling searchForNewer() may throw an
@@ -94,7 +97,7 @@ namespace updater.software
 
 
         /// <summary>
-        /// looks for newer versions of the software than the currently known version
+        /// Looks for newer versions of the software than the currently known version.
         /// </summary>
         /// <returns>Returns an AvailableSoftware instance with the information
         /// that was retrieved from the net.</returns>
@@ -114,7 +117,7 @@ namespace updater.software
                     return null;
                 }
                 client.Dispose();
-            } //using
+            }
 
             // Search for URL part like "/release/0.92.4/windows/".
             Regex reVersion = new Regex("/release/[0-9]\\.[0-9]+(\\.[0-9]+)?/windows/");
@@ -153,7 +156,7 @@ namespace updater.software
                         return null;
                     }
                     client.Dispose();
-                } //using
+                }
 
                 // Search for URL part like '<a href="/gallery/item/13322/inkscape-0.92.4-x86.msi">'.
                 //     or
@@ -189,7 +192,7 @@ namespace updater.software
                             return null;
                         }
                         client.Dispose();
-                    } //using
+                    }
                 }
 
                 Regex reHash = new Regex("[0-9a-f]{64} [ \\*]inkscape\\-" + Regex.Escape(newVersion) + "\\-" + arch + "\\.msi");
@@ -214,8 +217,8 @@ namespace updater.software
 
 
         /// <summary>
-        /// lists names of processes that might block an update, e.g. because
-        /// the application cannot be update while it is running
+        /// Lists names of processes that might block an update, e.g. because
+        /// the application cannot be update while it is running.
         /// </summary>
         /// <param name="detected">currently installed / detected software version</param>
         /// <returns>Returns a list of process names that block the upgrade.</returns>
@@ -226,7 +229,7 @@ namespace updater.software
 
 
         /// <summary>
-        /// whether or not a separate process must be run before the update
+        /// Determines whether or not a separate process must be run before the update.
         /// </summary>
         /// <param name="detected">currently installed / detected software version</param>
         /// <returns>Returns true, if a separate proess returned by
@@ -240,7 +243,7 @@ namespace updater.software
 
 
         /// <summary>
-        /// returns a process that must be run before the update
+        /// Returns a process that must be run before the update.
         /// </summary>
         /// <param name="detected">currently installed / detected software version</param>
         /// <returns>Returns a Process ready to start that should be run before
@@ -248,9 +251,9 @@ namespace updater.software
         /// returned false.</returns>
         public override List<Process> preUpdateProcess(DetectedSoftware detected)
         {
-            //The pre-update processes basically need to uninstall all older
+            // The pre-update processes basically need to uninstall all older
             // versions before installing the newest version.
-            //It is a requirement for the older .exe installer-based versions,
+            // It is a requirement for the older .exe installer-based versions,
             // because they are incompatible with MSI. On the other hand the
             // MSI installers do not allow to install/update, if another MSI
             // version is already installed.
@@ -260,7 +263,7 @@ namespace updater.software
             var processes = new List<Process>();
             //Versions before 0.91 (i.e. exe-installers) can be uninstalled via
             // "%PROGRAMFILES%\Inkscape\uninstall.exe" /S
-            string path = null;
+            string path;
             if (!string.IsNullOrWhiteSpace(detected.installPath))
                 path = Path.Combine(detected.installPath, "uninstall.exe");
             else
@@ -281,7 +284,7 @@ namespace updater.software
             }
             else
             {
-                //MSI GUIDs to uninstall older MSI builds
+                // MSI GUIDs to uninstall older MSI builds
                 string[] guids = {
                     "{81922150-317E-4BB0-A31D-FF1C14F707C5}" //0.91 MSI (x86 and x64), 0.92 MSI
                 };
@@ -291,8 +294,8 @@ namespace updater.software
                     proc.StartInfo.FileName = "msiexec.exe";
                     proc.StartInfo.Arguments = "/qn /x" + id;
                     processes.Add(proc);
-                } //foreach
-            } //else
+                } // foreach
+            } // else
             return processes;
         }
 
@@ -310,17 +313,17 @@ namespace updater.software
             Match m = re.Match(detected.displayName);
             if (m.Success)
             {
-                //Use version number from name, because it is more accurate.
+                // Use version number from name, because it is more accurate.
                 return (string.Compare(m.Value, info().newestVersion, true) < 0);
             }
             else
             {
-                //Fall back to displayed version. However, this is inaccurate,
-                //because versions like 0.92.1 will only show up as 0.92, thus
-                //always triggering an update.
+                // Fall back to displayed version. However, this is inaccurate,
+                // because versions like 0.92.1 will only show up as 0.92, thus
+                // always triggering an update.
                 return (string.Compare(detected.displayVersion, info().newestVersion, true) < 0);
             }
         }
 
-    } //class
-} //namespace
+    } // class
+} // namespace
