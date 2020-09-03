@@ -174,11 +174,7 @@ namespace updater.software
                 // <a href="https://media.inkscape.org/media/resources/sigs/inkscape-0.92.4-x86.msi_v1j6SnA.md5"> or
                 // <a href="https://media.inkscape.org/media/resources/sigs/inkscape-0.92.4-x64.msi_8a41Ccz.md5">.
                 {
-                    Regex reSigUrl = new Regex(Regex.Escape("<a href=\"https://media.inkscape.org/media/resources/sigs/inkscape-" + newVersion + "-" + arch + ".msi_") + "[A-Za-z0-9]+\\.md5\">");
-                    Match matchSigUrl = reSigUrl.Match(htmlCode);
-                    if (!matchSigUrl.Success)
-                        return null;
-                    string signatureUrl = matchSigUrl.Value.Replace("<a href=\"", "").Replace("\">", "");
+                    string signatureUrl = "https://media.inkscape.org/media/resources/sigs/inkscape-" + newVersion + "-" + arch + ".msi.sha256";
 
                     htmlCode = null;
                     using (var client = new WebClient())
@@ -196,20 +192,20 @@ namespace updater.software
                     } //using
                 }
 
-                Regex reHash = new Regex("[0-9a-f]{32} \\*inkscape\\-" + Regex.Escape(newVersion) + "\\-" + arch + "\\.msi");
+                Regex reHash = new Regex("[0-9a-f]{64} [ \\*]inkscape\\-" + Regex.Escape(newVersion) + "\\-" + arch + "\\.msi");
                 Match matchHash = reHash.Match(htmlCode);
                 if (!matchHash.Success)
                     return null;
-                string newHash = matchHash.Value.Substring(0, 32); // MD5 is 32 characters in hex.
+                string newHash = matchHash.Value.Substring(0, 64); // SHA256 is 64 characters in hex.
                 if (bits == "32")
                 {
                     newInfo.install32Bit.checksum = newHash;
-                    newInfo.install32Bit.algorithm = HashAlgorithm.MD5;
+                    newInfo.install32Bit.algorithm = HashAlgorithm.SHA256;
                 }
                 else
                 {
                     newInfo.install64Bit.checksum = newHash;
-                    newInfo.install64Bit.algorithm = HashAlgorithm.MD5;
+                    newInfo.install64Bit.algorithm = HashAlgorithm.SHA256;
                 }
             } // foreach
 
