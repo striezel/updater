@@ -59,15 +59,18 @@ namespace updater.software
         public override AvailableSoftware knownInfo()
         {
             return new AvailableSoftware("Pidgin",
-                "2.13.0",
+                "2.14.1",
                 "^Pidgin$",
                 null,
                 // Pidgin only has an installer for 32 bit.
                 new InstallInfoPidgin(
-                    "https://netcologne.dl.sourceforge.net/project/pidgin/Pidgin/2.13.0/pidgin-2.13.0-offline.exe",
+                    "https://netcologne.dl.sourceforge.net/project/pidgin/Pidgin/2.14.1/pidgin-2.14.1-offline.exe",
                     HashAlgorithm.SHA256,
-                    "ce8a11594b74ac6aebb691d6791f776593aa315f161e7571b199ba9eebd1f099",
-                    publisherX509,
+                    "a9125e18ae7e219c01137a36e4c7379e1606f5db8fe7de223e3d67e8c1b533fc",
+                    // Certificate is only valid until 2020-06-12 12:00:00 UTC, so do not use it afterwards.
+                    // I wish people would sign binaries with certificates that do not expire one day after
+                    // the binary was released, but ... well, here we are.
+                    DateTime.UtcNow > new DateTime(2020, 6, 12, 12, 0, 0, DateTimeKind.Utc) ? null : publisherX509,
                     "/DS=1 /SMS=1 /S"),
                 null
                 );
@@ -142,6 +145,7 @@ namespace updater.software
             newInfo.install32Bit.downloadUrl = newInfo.install32Bit.downloadUrl.Replace(oldVersion, version);
             newInfo.install32Bit.checksum = null;
             newInfo.install32Bit.algorithm = HashAlgorithm.Unknown;
+            newInfo.install32Bit.publisher = publisherX509;
             return newInfo;
         }
 
