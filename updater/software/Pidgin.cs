@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017, 2018, 2019  Dirk Stolle
+    Copyright (C) 2017, 2018, 2019, 2020  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -24,12 +24,15 @@ using updater.data;
 
 namespace updater.software
 {
+    /// <summary>
+    /// Handles updates of Pidgin instant messaging client.
+    /// </summary>
     public class Pidgin : NoPreUpdateProcessSoftware
     {
         /// <summary>
         /// NLog.Logger for Pidgin class
         /// </summary>
-        private static NLog.Logger logger = NLog.LogManager.GetLogger(typeof(Pidgin).FullName);
+        private static readonly NLog.Logger logger = NLog.LogManager.GetLogger(typeof(Pidgin).FullName);
 
 
         /// <summary>
@@ -40,6 +43,12 @@ namespace updater.software
         public Pidgin(bool autoGetNewer)
             : base(autoGetNewer)
         { }
+
+
+        /// <summary>
+        /// publisher of signed binaries
+        /// </summary>
+        private const string publisherX509 = "CN=Eion Robb, O=Eion Robb, L=Christchurch, C=NZ";
 
 
         /// <summary>
@@ -58,7 +67,7 @@ namespace updater.software
                     "https://netcologne.dl.sourceforge.net/project/pidgin/Pidgin/2.13.0/pidgin-2.13.0-offline.exe",
                     HashAlgorithm.SHA256,
                     "ce8a11594b74ac6aebb691d6791f776593aa315f161e7571b199ba9eebd1f099",
-                    null,
+                    publisherX509,
                     "/DS=1 /SMS=1 /S"),
                 null
                 );
@@ -83,7 +92,7 @@ namespace updater.software
         /// exception in the later case.</returns>
         public override bool implementsSearchForNewer()
         {
-            return false;
+            return true;
         }
 
 
@@ -100,7 +109,7 @@ namespace updater.software
             {
                 try
                 {
-                    htmlCode = client.DownloadString("https://pidgin.im/");
+                    htmlCode = client.DownloadString("https://pidgin.im/install/");
                 }
                 catch (Exception ex)
                 {
@@ -108,13 +117,20 @@ namespace updater.software
                     return null;
                 }
                 client.Dispose();
-            } //using
+            } // using
 
-            Regex reVersion = new Regex("<span class=\"number\">[0-9]+\\.[0-9]+\\.[0-9]+</span>");
+            Regex reVersion = new Regex("href=\"https://sourceforge\\.net/projects/pidgin/files/Pidgin/([0-9]+\\.[0-9]+\\.[0-9]+)/pidgin\\-([0-9]+\\.[0-9]+\\.[0-9]+)\\.exe/download\"");
             Match matchVersion = reVersion.Match(htmlCode);
             if (!matchVersion.Success)
                 return null;
-            string version = matchVersion.Value.Replace("<span class=\"number\">", "").Replace("</span>", "");
+            string v1 = matchVersion.Groups[1].Value;
+            string v2 = matchVersion.Groups[2].Value;
+            if (v1 != v2)
+            {
+                logger.Debug("Error: There are two different version numbers in Pidgin's download URL!");
+                return null;
+            }
+            string version = v1;
             
             // No checksum, only signature.
 
@@ -138,7 +154,7 @@ namespace updater.software
         /// <returns>Returns a list of process names that block the upgrade.</returns>
         public override List<string> blockerProcesses(DetectedSoftware detected)
         {
-            return new List<string>(new string[1] { "pidgin" });
+            return new List<string>(1) { "pidgin" };
         }
 
     } // class
