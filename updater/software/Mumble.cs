@@ -58,9 +58,10 @@ namespace updater.software
         /// details about the software.</returns>
         public override AvailableSoftware knownInfo()
         {
-            return new AvailableSoftware("Mumble", "1.3.0",
+            return new AvailableSoftware("Mumble",
+                "1.3.0",
                 "^Mumble [0-9]\\.[0-9]+\\.[0-9]+$",
-                null,
+                "^Mumble [0-9]\\.[0-9]+\\.[0-9]+$",
                 new InstallInfoMsi(
                     "https://github.com/mumble-voip/mumble/releases/download/1.3.0/mumble-1.3.0.msi",
                     HashAlgorithm.SHA256,
