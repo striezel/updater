@@ -24,6 +24,9 @@ using updater.data;
 
 namespace updater.software
 {
+    /// <summary>
+    /// Handles updates for LibreOffice.
+    /// </summary>
     public class LibreOffice : NoPreUpdateProcessSoftware
     {
         /// <summary>
@@ -35,7 +38,7 @@ namespace updater.software
         /// <summary>
         /// publisher name for signed executables of LibreOffice
         /// </summary>
-        private const string publisherX509 = "E=info@documentfoundation.org, C=DE, S=Berlin, L=Berlin, OU=LibreOffice Build Team, O=The Document Foundation, CN=The Document Foundation";
+        private const string publisherX509 = "E=info@documentfoundation.org, CN=The Document Foundation, O=The Document Foundation, OU=LibreOffice Build Team, L=Berlin, S=Berlin, C=DE";
 
 
         /// <summary>
@@ -56,19 +59,19 @@ namespace updater.software
         public override AvailableSoftware knownInfo()
         {
             return new AvailableSoftware("LibreOffice",
-                "7.0.0.3",
+                "7.0.1.2",
                 "^LibreOffice [0-9]+\\.[0-9]\\.[0-9]\\.[0-9]$",
                 "^LibreOffice [0-9]+\\.[0-9]\\.[0-9]\\.[0-9]$",
                 new InstallInfoLibO(
-                    "https://download.documentfoundation.org/libreoffice/stable/7.0.0/win/x86/LibreOffice_7.0.0_Win_x86.msi",
+                    "https://download.documentfoundation.org/libreoffice/stable/7.0.1/win/x86/LibreOffice_7.0.1_Win_x86.msi",
                     HashAlgorithm.SHA256,
-                    "6aa63e23906d466de9e1971f80e5b3dc5350cbcf0d8342eba4e0bfa62cf61b04",
+                    "d0fb0f789daee4e1b0cd84371145b122dcdf4c179a2ae81c25703a089f9c828e",
                     publisherX509,
                     "/qn /norestart"),
                 new InstallInfoLibO(
-                    "https://download.documentfoundation.org/libreoffice/stable/7.0.0/win/x86_64/LibreOffice_7.0.0_Win_x64.msi",
+                    "https://download.documentfoundation.org/libreoffice/stable/7.0.1/win/x86_64/LibreOffice_7.0.1_Win_x64.msi",
                     HashAlgorithm.SHA256,
-                    "7e779fc8e0ec162fc3c6bbd96779ea7c4578e4ae43c2591516a24043752b78f6",
+                    "a98ee61f915eb50853d08b0cfbefbb35bf610c0da4db8d4287415c64abce8c3c",
                     publisherX509,
                     "/qn /norestart")
                     );
