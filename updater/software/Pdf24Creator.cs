@@ -168,7 +168,7 @@ namespace updater.software
 
         /// <summary>
         /// Lists names of processes that might block an update, e.g. because
-        /// the application cannot be update while it is running.
+        /// the application cannot be updated while it is running.
         /// </summary>
         /// <param name="detected">currently installed / detected software version</param>
         /// <returns>Returns a list of process names that block the upgrade.</returns>

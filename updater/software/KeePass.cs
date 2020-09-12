@@ -48,7 +48,7 @@ namespace updater.software
         /// <summary>
         /// publisher of signed binaries
         /// </summary>
-        private readonly string publisherX509 = "E=cert@dominik-reichl.de, CN=\"Open Source Developer, Dominik Reichl\", O=Open Source Developer, L=Metzingen, C=DE";
+        private const string publisherX509 = "E=cert@dominik-reichl.de, CN=\"Open Source Developer, Dominik Reichl\", O=Open Source Developer, L=Metzingen, C=DE";
 
 
         /// <summary>
@@ -158,7 +158,7 @@ namespace updater.software
 
         /// <summary>
         /// Lists names of processes that might block an update, e.g. because
-        /// the application cannot be update while it is running.
+        /// the application cannot be updated while it is running.
         /// </summary>
         /// <param name="detected">currently installed / detected software version</param>
         /// <returns>Returns a list of process names that block the upgrade.</returns>

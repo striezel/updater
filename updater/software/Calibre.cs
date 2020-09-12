@@ -24,12 +24,15 @@ using updater.data;
 
 namespace updater.software
 {
+    /// <summary>
+    /// Handles update for Calibre e-book reader.
+    /// </summary>
     public class Calibre : NoPreUpdateProcessSoftware
     {
         /// <summary>
         /// NLog.Logger for Calibre class
         /// </summary>
-        private static NLog.Logger logger = NLog.LogManager.GetLogger(typeof(Calibre).FullName);
+        private static readonly NLog.Logger logger = NLog.LogManager.GetLogger(typeof(Calibre).FullName);
 
 
         /// <summary>
@@ -76,7 +79,7 @@ namespace updater.software
 
 
         /// <summary>
-        /// list of IDs to identify the software
+        /// Gets a list of IDs to identify the software.
         /// </summary>
         /// <returns>Returns a non-empty array of IDs, where at least one entry is unique to the software.</returns>
         public override string[] id()
@@ -185,8 +188,8 @@ namespace updater.software
 
 
         /// <summary>
-        /// lists names of processes that might block an update, e.g. because
-        /// the application cannot be update while it is running
+        /// Lists names of processes that might block an update, e.g. because
+        /// the application cannot be updated while it is running.
         /// </summary>
         /// <param name="detected">currently installed / detected software version</param>
         /// <returns>Returns a list of process names that block the upgrade.</returns>

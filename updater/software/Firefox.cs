@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017, 2018  Dirk Stolle
+    Copyright (C) 2017, 2018, 2020  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -32,8 +32,7 @@ namespace updater.software
         /// <summary>
         /// NLog.Logger for Firefox class
         /// </summary>
-        private static NLog.Logger logger = NLog.LogManager.GetLogger(typeof(Firefox).FullName);
-
+        private static readonly NLog.Logger logger = NLog.LogManager.GetLogger(typeof(Firefox).FullName);
 
 
         /// <summary>
@@ -284,7 +283,7 @@ namespace updater.software
 
 
         /// <summary>
-        /// gets an enumerable collection of valid language codes
+        /// Gets an enumerable collection of valid language codes.
         /// </summary>
         /// <returns>Returns an enumerable collection of valid language codes.</returns>
         public static IEnumerable<string> validLanguageCodes()
@@ -295,7 +294,7 @@ namespace updater.software
 
 
         /// <summary>
-        /// gets the currently known information about the software
+        /// Gets the currently known information about the software.
         /// </summary>
         /// <returns>Returns an AvailableSoftware instance with the known
         /// details about the software.</returns>
@@ -306,14 +305,14 @@ namespace updater.software
                 knownVersion,
                 "^Mozilla Firefox [0-9]{2}\\.[0-9](\\.[0-9])? \\(x86 " + Regex.Escape(languageCode) + "\\)$",
                 "^Mozilla Firefox [0-9]{2}\\.[0-9](\\.[0-9])? \\(x64 " + Regex.Escape(languageCode) + "\\)$",
-                //32 bit installer
+                // 32 bit installer
                 new InstallInfoExe(
                     "https://ftp.mozilla.org/pub/firefox/releases/" + knownVersion + "/win32/" + languageCode + "/Firefox%20Setup%20" + knownVersion + ".exe",
                     HashAlgorithm.SHA512,
                     checksum32Bit,
                     null,
                     "-ms -ma"),
-                //64 bit installer
+                // 64 bit installer
                 new InstallInfoExe(
                     "https://ftp.mozilla.org/pub/firefox/releases/" + knownVersion + "/win64/" + languageCode + "/Firefox%20Setup%20" + knownVersion + ".exe",
                     HashAlgorithm.SHA512,
@@ -325,7 +324,7 @@ namespace updater.software
 
 
         /// <summary>
-        /// list of IDs to identify the software
+        /// Gets a list of IDs to identify the software.
         /// </summary>
         /// <returns>Returns a non-empty array of IDs, where at least one entry is unique to the software.</returns>
         public override string[] id()
@@ -335,7 +334,7 @@ namespace updater.software
 
 
         /// <summary>
-        /// tries to find the newest version number of Firefox
+        /// Tries to find the newest version number of Firefox.
         /// </summary>
         /// <returns>Returns a string containing the newest version number on success.
         /// Returns null, if an error occurred.</returns>
@@ -370,7 +369,7 @@ namespace updater.software
 
 
         /// <summary>
-        /// tries to get the checksums of the newer version
+        /// Tries to get the checksums of the newer version.
         /// </summary>
         /// <returns>Returns a string array containing the checksums for 32 bit an 64 bit (in that order), if successfull.
         /// Returns null, if an error occurred.</returns>
@@ -398,14 +397,15 @@ namespace updater.software
                     return null;
                 }
                 client.Dispose();
-            } //using
-            //look for line with the correct language code and version for 32 bit
+            } // using
+
+            // look for line with the correct language code and version for 32 bit
             Regex reChecksum32Bit = new Regex("[0-9a-f]{128}  win32/" + languageCode.Replace("-", "\\-")
                 + "/Firefox Setup " + Regex.Escape(newerVersion) + "\\.exe");
             Match matchChecksum32Bit = reChecksum32Bit.Match(sha512SumsContent);
             if (!matchChecksum32Bit.Success)
                 return null;
-            //look for line with the correct language code and version for 64 bit
+            // look for line with the correct language code and version for 64 bit
             Regex reChecksum64Bit = new Regex("[0-9a-f]{128}  win64/" + languageCode.Replace("-", "\\-")
                 + "/Firefox Setup " + Regex.Escape(newerVersion) + "\\.exe");
             Match matchChecksum64Bit = reChecksum64Bit.Match(sha512SumsContent);
@@ -417,7 +417,7 @@ namespace updater.software
 
 
         /// <summary>
-        /// whether or not the method searchForNewer() is implemented
+        /// Determines whether or not the method searchForNewer() is implemented.
         /// </summary>
         /// <returns>Returns true, if searchForNewer() is implemented for that
         /// class. Returns false, if not. Calling searchForNewer() may throw an
@@ -429,7 +429,7 @@ namespace updater.software
 
 
         /// <summary>
-        /// looks for newer versions of the software than the currently known version
+        /// Looks for newer versions of the software than the currently known version.
         /// </summary>
         /// <returns>Returns an AvailableSoftware instance with the information
         /// that was retrieved from the net.</returns>
@@ -439,7 +439,7 @@ namespace updater.software
             string newerVersion = determineNewestVersion();
             if (string.IsNullOrWhiteSpace(newerVersion))
                 return null;
-            //If versions match, we can return the current information.
+            // If versions match, we can return the current information.
             var currentInfo = knownInfo();
             if (newerVersion == currentInfo.newestVersion)
                 // fallback to known information
@@ -450,7 +450,7 @@ namespace updater.software
                 || string.IsNullOrWhiteSpace(newerChecksums[1]))
                 // failure occurred
                 return null;
-            //replace all stuff
+            // replace all stuff
             string oldVersion = currentInfo.newestVersion;
             currentInfo.newestVersion = newerVersion;
             currentInfo.install32Bit.downloadUrl = currentInfo.install32Bit.downloadUrl.Replace(oldVersion, newerVersion);
@@ -462,8 +462,8 @@ namespace updater.software
 
 
         /// <summary>
-        /// lists names of processes that might block an update, e.g. because
-        /// the application cannot be update while it is running
+        /// Lists names of processes that might block an update, e.g. because
+        /// the application cannot be updated while it is running.
         /// </summary>
         /// <param name="detected">currently installed / detected software version</param>
         /// <returns>Returns a list of process names that block the upgrade.</returns>
@@ -489,5 +489,5 @@ namespace updater.software
         /// checksum for the 64 bit installer
         /// </summary>
         private string checksum64Bit;
-    } //class
-} //namespace
+    } // class
+} // namespace

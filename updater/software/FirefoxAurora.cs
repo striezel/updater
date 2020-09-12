@@ -540,7 +540,7 @@ namespace updater.software
 
         /// <summary>
         /// Lists names of processes that might block an update, e.g. because
-        /// the application cannot be update while it is running.
+        /// the application cannot be updated while it is running.
         /// </summary>
         /// <param name="detected">currently installed / detected software version</param>
         /// <returns>Returns a list of process names that block the upgrade.</returns>
@@ -553,19 +553,19 @@ namespace updater.software
         /// <summary>
         /// language code for the Firefox Developer Edition version
         /// </summary>
-        private string languageCode;
+        private readonly string languageCode;
 
 
         /// <summary>
         /// checksum for the 32 bit installer
         /// </summary>
-        private string checksum32Bit;
+        private readonly string checksum32Bit;
 
 
         /// <summary>
         /// checksum for the 64 bit installer
         /// </summary>
-        private string checksum64Bit;
+        private readonly string checksum64Bit;
 
 
         /// <summary>

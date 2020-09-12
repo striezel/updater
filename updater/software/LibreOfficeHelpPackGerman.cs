@@ -24,12 +24,15 @@ using updater.data;
 
 namespace updater.software
 {
+    /// <summary>
+    /// Handles update for the German version of the LibreOffice offline help.
+    /// </summary>
     public class LibreOfficeHelpPackGerman : NoPreUpdateProcessSoftware
     {
         /// <summary>
         /// NLog.Logger for LibreOfficeHelpPackGerman class
         /// </summary>
-        private static NLog.Logger logger = NLog.LogManager.GetLogger(typeof(LibreOfficeHelpPackGerman).FullName);
+        private static readonly NLog.Logger logger = NLog.LogManager.GetLogger(typeof(LibreOfficeHelpPackGerman).FullName);
 
 
         /// <summary>
@@ -39,7 +42,7 @@ namespace updater.software
 
 
         /// <summary>
-        /// default constructor
+        /// Default constructor.
         /// </summary>
         /// <param name="autoGetNewer">whether to automatically get
         /// newer information about the software when calling the info() method</param>
@@ -119,6 +122,7 @@ namespace updater.software
                 }
                 client.Dispose();
             } // using
+
             // Link is something like <a href="5.3.0/">5.3.0/</a>, no fourth digit.
             Regex reVersion = new Regex("<a href=\"[0-9]\\.[0-9]\\.[0-9]/\">[0-9]\\.[0-9]\\.[0-9]/</a>");
             Match matchVersion = reVersion.Match(htmlCode);
@@ -193,7 +197,7 @@ namespace updater.software
 
         /// <summary>
         /// Lists names of processes that might block an update, e.g. because
-        /// the application cannot be update while it is running.
+        /// the application cannot be updated while it is running.
         /// </summary>
         /// <param name="detected">currently installed / detected software version</param>
         /// <returns>Returns a list of process names that block the upgrade.</returns>

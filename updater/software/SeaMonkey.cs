@@ -35,11 +35,11 @@ namespace updater.software
         /// <summary>
         /// NLog.Logger for SeaMonkey class
         /// </summary>
-        private static NLog.Logger logger = NLog.LogManager.GetLogger(typeof(SeaMonkey).FullName);
+        private static readonly NLog.Logger logger = NLog.LogManager.GetLogger(typeof(SeaMonkey).FullName);
 
 
         /// <summary>
-        /// constructor with language code
+        /// Constructor with language code.
         /// </summary>
         /// <param name="langCode">the language code for the SeaMonkey software,
         /// e.g. "de" for German, "en-GB" for British English, "fr" for French, etc.</param>
@@ -65,7 +65,7 @@ namespace updater.software
 
 
         /// <summary>
-        /// gets a dictionary with the known checksums for the installers (key: language, value: checksum)
+        /// Gets a dictionary with the known checksums for the installers (key: language, value: checksum).
         /// </summary>
         /// <returns>Returns a dictionary where keys are the language codes and values are the associated checksums.</returns>
         private static Dictionary<string, string> knownChecksums()
@@ -101,7 +101,7 @@ namespace updater.software
 
 
         /// <summary>
-        /// gets an enumerable collection of valid language codes
+        /// Gets an enumerable collection of valid language codes.
         /// </summary>
         /// <returns>Returns an enumerable collection of valid language codes.</returns>
         public static IEnumerable<string> validLanguageCodes()
@@ -112,7 +112,7 @@ namespace updater.software
 
 
         /// <summary>
-        /// gets the currently known information about the software
+        /// Gets the currently known information about the software.
         /// </summary>
         /// <returns>Returns an AvailableSoftware instance with the known
         /// details about the software.</returns>
@@ -129,13 +129,13 @@ namespace updater.software
                     checksum,
                     null,
                     "-ms -ma"),
-                //There is no 64 bit installer yet.
+                // There is no 64 bit installer yet.
                 null);
         }
 
 
         /// <summary>
-        /// list of IDs to identify the software
+        /// Gets a list of IDs to identify the software.
         /// </summary>
         /// <returns>Returns a non-empty array of IDs, where at least one entry is unique to the software.</returns>
         public override string[] id()
@@ -145,7 +145,7 @@ namespace updater.software
 
 
         /// <summary>
-        /// tries to find the newest version number of SeaMonkey
+        /// Tries to find the newest version number of SeaMonkey.
         /// </summary>
         /// <returns>Returns a string containing the newest version number on success.
         /// Returns null, if an error occurred.</returns>
@@ -165,7 +165,7 @@ namespace updater.software
                     return null;
                 }
                 client.Dispose();
-            } //using
+            } // using
             
             Regex reVersion = new Regex("/[0-9]+\\.[0-9]+(\\.[0-9]+)?/");
             MatchCollection matches = reVersion.Matches(htmlCode);
@@ -189,7 +189,7 @@ namespace updater.software
 
 
         /// <summary>
-        /// tries to get the checksum of the newer version
+        /// Tries to get the checksum of the newer version.
         /// </summary>
         /// <returns>Returns a string containing the checksum, if successfull.
         /// Returns null, if an error occurred.</returns>
@@ -220,8 +220,9 @@ namespace updater.software
                     return null;
                 }
                 client.Dispose();
-            } //using
-            //look for line with the correct language code and version
+            } // using
+
+            // look for line with the correct language code and version
             // File name looks like seamonkey-2.53.1.de.win32.installer.exe now.
             Regex reChecksum = new Regex("[0-9a-f]{40} sha1 [0-9]+ .*seamonkey\\-" + Regex.Escape(newerVersion)
                 + "\\." + languageCode.Replace("-", "\\-") + "\\.win32\\.installer\\.exe");
@@ -234,7 +235,7 @@ namespace updater.software
 
 
         /// <summary>
-        /// whether or not the method searchForNewer() is implemented
+        /// Determines whether or not the method searchForNewer() is implemented.
         /// </summary>
         /// <returns>Returns true, if searchForNewer() is implemented for that
         /// class. Returns false, if not. Calling searchForNewer() may throw an
@@ -246,7 +247,7 @@ namespace updater.software
 
 
         /// <summary>
-        /// looks for newer versions of the software than the currently known version
+        /// Looks for newer versions of the software than the currently known version.
         /// </summary>
         /// <returns>Returns an AvailableSoftware instance with the information
         /// that was retrieved from the net.</returns>
@@ -263,7 +264,7 @@ namespace updater.software
             string newerChecksum = determineNewestChecksum(newerVersion);
             if (string.IsNullOrWhiteSpace(newerChecksum))
                 return null;
-            //replace all stuff
+            // replace all stuff
             string oldVersion = currentInfo.newestVersion;
             currentInfo.newestVersion = newerVersion;
             currentInfo.install32Bit.downloadUrl = currentInfo.install32Bit.downloadUrl.Replace(oldVersion, newerVersion);
@@ -273,8 +274,8 @@ namespace updater.software
 
 
         /// <summary>
-        /// lists names of processes that might block an update, e.g. because
-        /// the application cannot be update while it is running
+        /// Lists names of processes that might block an update, e.g. because
+        /// the application cannot be updated while it is running.
         /// </summary>
         /// <param name="detected">currently installed / detected software version</param>
         /// <returns>Returns a list of process names that block the upgrade.</returns>
@@ -285,7 +286,7 @@ namespace updater.software
 
 
         /// <summary>
-        /// whether or not a separate process must be run before the update
+        /// Determines whether or not a separate process must be run before the update.
         /// </summary>
         /// <param name="detected">currently installed / detected software version</param>
         /// <returns>Returns true, if a separate proess returned by
@@ -299,7 +300,7 @@ namespace updater.software
 
 
         /// <summary>
-        /// returns a process that must be run before the update
+        /// Returns a process that must be run before the update.
         /// </summary>
         /// <param name="detected">currently installed / detected software version</param>
         /// <returns>Returns a Process ready to start that should be run before
@@ -310,7 +311,7 @@ namespace updater.software
             if (string.IsNullOrWhiteSpace(detected.installPath))
                 return null;
             var processes = new List<Process>();
-            //uninstall previous version to avoid having two SeaMonkey entries in control panel
+            // uninstall previous version to avoid having two SeaMonkey entries in control panel
             var proc = new Process();
             proc.StartInfo.FileName = Path.Combine(detected.installPath , "uninstall", "helper.exe");
             proc.StartInfo.Arguments = "/SILENT";
@@ -320,7 +321,7 @@ namespace updater.software
 
 
         /// <summary>
-        /// whether the detected software is older than the newest known software
+        /// Checks whether the detected software is older than the newest known software.
         /// </summary>
         /// <param name="detected">the corresponding detected software</param>
         /// <returns>Returns true, if the detected software version is older
@@ -330,20 +331,20 @@ namespace updater.software
         {
             Triple verDetected = new Triple(detected.displayVersion);
             Triple verNewest = new Triple(info().newestVersion);
-            return (verDetected < verNewest);
+            return verDetected < verNewest;
         }
 
 
         /// <summary>
         /// language code for the SeaMonkey version
         /// </summary>
-        private string languageCode;
+        private readonly string languageCode;
 
 
         /// <summary>
         /// checksum for the installer
         /// </summary>
-        private string checksum;
+        private readonly string checksum;
 
-    } //class
-} //namespace
+    } // class
+} // namespace

@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017, 2018  Dirk Stolle
+    Copyright (C) 2017, 2018, 2020  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -24,16 +24,19 @@ using updater.data;
 
 namespace updater.software
 {
+    /// <summary>
+    /// Handles updates for the GNU Image Manipulation Program (GIMP).
+    /// </summary>
     public class GIMP : NoPreUpdateProcessSoftware
     {
         /// <summary>
         /// NLog.Logger for GIMP class
         /// </summary>
-        private static NLog.Logger logger = NLog.LogManager.GetLogger(typeof(GIMP).FullName);
+        private static readonly NLog.Logger logger = NLog.LogManager.GetLogger(typeof(GIMP).FullName);
 
 
         /// <summary>
-        /// default constructor
+        /// Constructor.
         /// </summary>
         /// <param name="autoGetNewer">whether to automatically get
         /// newer information about the software when calling the info() method</param>
@@ -43,7 +46,7 @@ namespace updater.software
 
 
         /// <summary>
-        /// gets the currently known information about the software
+        /// Gets the currently known information about the software.
         /// </summary>
         /// <returns>Returns an AvailableSoftware instance with the known
         /// details about the software.</returns>
@@ -53,7 +56,7 @@ namespace updater.software
                 "2.8.22",
                 "^GIMP [0-9]+\\.[0-9]+\\.[0-9]+$",
                 "^GIMP [0-9]+\\.[0-9]+\\.[0-9]+$",
-                //The GIMP uses the same installer for 32 and 64 bit.
+                // The GIMP uses the same installer for 32 and 64 bit.
                 new InstallInfoExe(
                     "https://download.gimp.org/mirror/pub/gimp/v2.8/windows/gimp-2.8.22-setup.exe",
                     HashAlgorithm.SHA256,
@@ -71,7 +74,7 @@ namespace updater.software
 
 
         /// <summary>
-        /// list of IDs to identify the software
+        /// Gets a list of IDs to identify the software.
         /// </summary>
         /// <returns>Returns a non-empty array of IDs, where at least one entry is unique to the software.</returns>
         public override string[] id()
@@ -81,7 +84,7 @@ namespace updater.software
 
 
         /// <summary>
-        /// whether or not the method searchForNewer() is implemented
+        /// Determines whether or not the method searchForNewer() is implemented.
         /// </summary>
         /// <returns>Returns true, if searchForNewer() is implemented for that
         /// class. Returns false, if not. Calling searchForNewer() may throw an
@@ -93,7 +96,7 @@ namespace updater.software
 
 
         /// <summary>
-        /// looks for newer versions of the software than the currently known version
+        /// Looks for newer versions of the software than the currently known version.
         /// </summary>
         /// <returns>Returns an AvailableSoftware instance with the information
         /// that was retrieved from the net.</returns>
@@ -113,7 +116,7 @@ namespace updater.software
                     return null;
                 }
                 client.Dispose();
-            } //using
+            } // using
 
             const string stableRelease = "The current stable release of GIMP is";
             int idx = htmlCode.IndexOf(stableRelease);
@@ -127,7 +130,7 @@ namespace updater.software
                 return null;
             string version = matchVersion.Value;
 
-            //SHA-256 checksum is in a file like
+            // SHA-256 checksum is in a file like
             // https://download.gimp.org/pub/gimp/v2.8/windows/gimp-2.8.20-setup.exe.sha256
             string shortVersion = string.Join(".", version.Split(new char[] { '.' }), 0, 2);
             htmlCode = null;
@@ -143,7 +146,7 @@ namespace updater.software
                     if ((webEx.Response is HttpWebResponse)
                         && ((webEx.Response as HttpWebResponse).StatusCode == HttpStatusCode.NotFound))
                     {
-                        //try SHA256 file for whole directory instead
+                        // try SHA256 file for whole directory instead
                         try
                         {
                             string sha256Url = "https://download.gimp.org/pub/gimp/v" + shortVersion + "/windows/SHA256SUMS";
@@ -153,22 +156,23 @@ namespace updater.software
                         {
                             logger.Warn("Exception occurred while checking for newer version of GIMP: " + ex.Message);
                             return null;
-                        } //try-catch (inner)
-                    } //if 404 Not Found
-                    //Other web exceptions are still errors.
+                        } // try-catch (inner)
+                    } // if 404 Not Found
+
+                    // Other web exceptions are still errors.
                     else
                     {
                         logger.Warn("Exception occurred while checking for newer version of GIMP: " + webEx.Message);
                         return null;
                     }
-                } //catch WebException
+                } // catch WebException
                 catch (Exception ex)
                 {
                     logger.Warn("Exception occurred while checking for newer version of GIMP: " + ex.Message);
                     return null;
                 }
                 client.Dispose();
-            } //using
+            } // using
 
             Regex reChecksum = new Regex("[0-9a-f]{64}  gimp\\-" + Regex.Escape(version) + "\\-setup\\.exe");
             Match m = reChecksum.Match(htmlCode);
@@ -176,12 +180,12 @@ namespace updater.software
                 return null;
             string checksum = m.Value.Substring(0, 64);
 
-            //construct new information
+            // construct new information
             var newInfo = knownInfo();
             string oldVersion = newInfo.newestVersion;
             string oldShortVersion = string.Join(".", oldVersion.Split(new char[] { '.' }), 0, 2);
             newInfo.newestVersion = version;
-            //32 bit
+            // 32 bit
             newInfo.install32Bit.downloadUrl = newInfo.install32Bit.downloadUrl.Replace(oldVersion, version).Replace(oldShortVersion, shortVersion);
             newInfo.install32Bit.checksum = checksum;
             // 64 bit - same installer, same checksum
@@ -192,8 +196,8 @@ namespace updater.software
 
 
         /// <summary>
-        /// lists names of processes that might block an update, e.g. because
-        /// the application cannot be update while it is running
+        /// Lists names of processes that might block an update, e.g. because
+        /// the application cannot be updated while it is running.
         /// </summary>
         /// <param name="detected">currently installed / detected software version</param>
         /// <returns>Returns a list of process names that block the upgrade.</returns>
@@ -201,5 +205,5 @@ namespace updater.software
         {
             return new List<string>();
         }
-    } //class
-} //namespace
+    } // class
+} // namespace
