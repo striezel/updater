@@ -24,12 +24,15 @@ using System.Collections.Generic;
 
 namespace updater.software
 {
+    /// <summary>
+    /// Handles updates for KeePass 2 Password Manager.
+    /// </summary>
     public class KeePass : NoPreUpdateProcessSoftware
     {
         /// <summary>
         /// NLog.Logger for KeePass class
         /// </summary>
-        private static NLog.Logger logger = NLog.LogManager.GetLogger(typeof(KeePass).FullName);
+        private static readonly NLog.Logger logger = NLog.LogManager.GetLogger(typeof(KeePass).FullName);
 
 
         /// <summary>
@@ -45,7 +48,7 @@ namespace updater.software
         /// <summary>
         /// publisher of signed binaries
         /// </summary>
-        private string publisherX509 = "E=cert@dominik-reichl.de, CN=\"Open Source Developer, Dominik Reichl\", O=Open Source Developer, L=Metzingen, C=DE";
+        private readonly string publisherX509 = "E=cert@dominik-reichl.de, CN=\"Open Source Developer, Dominik Reichl\", O=Open Source Developer, L=Metzingen, C=DE";
 
 
         /// <summary>
@@ -56,13 +59,13 @@ namespace updater.software
         public override AvailableSoftware knownInfo()
         {
             return new AvailableSoftware("KeePass",
-                "2.45",
+                "2.46",
                 "^KeePass Password Safe [2-9]\\.[0-9]{2}(\\.[0-9]+)?$",
                 null,
                 new InstallInfoExe(
-                    "https://netcologne.dl.sourceforge.net/project/keepass/KeePass%202.x/2.45/KeePass-2.45-Setup.exe",
+                    "https://netcologne.dl.sourceforge.net/project/keepass/KeePass%202.x/2.46/KeePass-2.46-Setup.exe",
                     HashAlgorithm.SHA256,
-                    "9058CC9D 44129E8C 2C902E21 F8678974 B789ECD8 F9D6ADD8 1C98FBEA F9794E23",
+                    "F01157E9 70AD1D23 0BC99E19 ADF9C79F 8A97EBE8 47F8BFDE 5D2D076A 062B2A68",
                     publisherX509,
                     "/VERYSILENT"),
                 // There is no 64 bit installer yet.
