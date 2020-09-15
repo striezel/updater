@@ -57,19 +57,19 @@ namespace updater.software
             // The last version that still supports Windows XP is 3.8.0
             if (utility.OS.isWin7OrNewer())
                 return new AvailableSoftware("FileZilla FTP Client",
-                    "3.35.2",
+                    "3.50.0",
                     "^FileZilla Client [0-9]+\\.[0-9]+(\\.[0-9]+(\\.[0-9]+)?)?$",
                     "^FileZilla Client [0-9]+\\.[0-9]+(\\.[0-9]+(\\.[0-9]+)?)?$",
                     new InstallInfoExe(
-                        "https://dl3.cdn.filezilla-project.org/client/FileZilla_3.35.2_win32-setup.exe",
+                        "https://dl3.cdn.filezilla-project.org/client/FileZilla_3.50.0_win32-setup.exe",
                         HashAlgorithm.SHA512,
-                        "58485635b757432ae1a17e8b35141f8cd28352096f5c82e6a64de00f7773b7abf2940b1dc1246e031f046085ee37b0d0f65b9a172ff8f46e79d9c6c9d9fa342a",
+                        "b01011fc76745ed94a2b4eb87554bbdddfa110df88f643cd5aedf5ea5bb3430a48f931ee25198106ccb0acd9e641db22a57add78e800ebc377a0f98041727ee4",
                         null,
                         "/S"),
                     new InstallInfoExe(
-                        "https://dl3.cdn.filezilla-project.org/client/FileZilla_3.35.2_win64-setup.exe",
+                        "https://dl3.cdn.filezilla-project.org/client/FileZilla_3.50.0_win64-setup.exe",
                         HashAlgorithm.SHA512,
-                        "cbff51bbe05e9e2a543d2e31e0736908f85bb0e1d1bf6a7bb2367a1651c2d81c0810244fcd31aecea739adc04cbd07fc58f5577229b4876a6cc416d8f55426a7",
+                        "8989de93d9fc9273762fadfc3144150154ebfaee5ed87107280525995c74109e5082678f82fff3c40d6b8d3ed0aa2402988915d56767b9987116451807f1a861",
                         null,
                         "/S")
                     );
@@ -195,8 +195,8 @@ namespace updater.software
                 if (!matchVersion.Success)
                     return null;
                 string version = matchVersion.Value.Replace("FileZilla_", "").Replace("_win64-setup.exe", "");
-                if (version == knownInfo().newestVersion)
-                    return knownInfo();
+                /* if (version == knownInfo().newestVersion)
+                    return knownInfo(); */
 
                 // find hashes
                 int idx64 = htmlCode.IndexOf("FileZilla_" + version + "_win64-setup.exe");
@@ -206,8 +206,8 @@ namespace updater.software
                 if (idx32 < 0)
                     return null;
 
-                string checksum64 = null;
-                string checksum32 = null;
+                string checksum64;
+                string checksum32;
                 Regex reSha512 = new Regex("[0-9a-f]{128}");
                 if (idx64 < idx32)
                 {
@@ -236,13 +236,24 @@ namespace updater.software
                     checksum64 = sha512.Value;
                 } // else
 
+                // find download URL
+                // URL is something like "https://dl4.cdn.filezilla-project.org/client/FileZilla_3.50.0_win64-setup.exe?h=wJDamKbB9lkk6abFtg1Lig&x=1600204244"
+                // for the 64 bit binary. Similar pattern is applied for 32 bit binary.
+                Regex reDownload64 = new Regex("href=\"(https://dl[0-9]+\\.cdn\\.filezilla\\-project\\.org/client/FileZilla_[0-9]+\\.[0-9]+(\\.[0-9]+(\\.[0-9]+)?)?_win64\\-setup\\.exe\\?h=[A-Za-z0-9_\\-]+&x=[0-9]+)\"");
+                Match dl64 = reDownload64.Match(htmlCode);
+                if (!dl64.Success)
+                    return null;
+                Regex reDownload32 = new Regex("href=\"(https://dl[0-9]+\\.cdn\\.filezilla\\-project\\.org/client/FileZilla_[0-9]+\\.[0-9]+(\\.[0-9]+(\\.[0-9]+)?)?_win32\\-setup\\.exe\\?h=[A-Za-z0-9_\\-]+&x=[0-9]+)\"");
+                Match dl32 = reDownload32.Match(htmlCode);
+                if (!dl32.Success)
+                    return null;
+
                 // construct new information
                 var newInfo = knownInfo();
-                string oldVersion = newInfo.newestVersion;
                 newInfo.newestVersion = version;
-                newInfo.install32Bit.downloadUrl = newInfo.install32Bit.downloadUrl.Replace(oldVersion, version);
+                newInfo.install32Bit.downloadUrl = dl32.Groups[1].Value;
                 newInfo.install32Bit.checksum = checksum32;
-                newInfo.install64Bit.downloadUrl = newInfo.install64Bit.downloadUrl.Replace(oldVersion, version);
+                newInfo.install64Bit.downloadUrl = dl64.Groups[1].Value;
                 newInfo.install64Bit.checksum = checksum64;
                 return newInfo;
             }
