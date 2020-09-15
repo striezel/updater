@@ -24,6 +24,9 @@ using updater.data;
 
 namespace updater.software
 {
+    /// <summary>
+    /// Handles updates for PDF24 Creator.
+    /// </summary>
     public class Pdf24Creator : NoPreUpdateProcessSoftware
     {
         /// <summary>
@@ -81,13 +84,13 @@ namespace updater.software
         public override AvailableSoftware knownInfo()
         {
             return new AvailableSoftware("PDF24 Creator",
-                "9.2.0",
+                "9.2.1",
                 "^PDF24 Creator$",
                 null, // no 64 bit version
                 new InstallInfoMsi(
-                    "https://en.pdf24.org/products/pdf-creator/download/pdf24-creator-9.2.0.msi",
+                    "https://en.pdf24.org/products/pdf-creator/download/pdf24-creator-9.2.1.msi",
                     HashAlgorithm.SHA512,
-                    "760b5ac124715f3e823a24e111e99e6bfbede6250ba7e2abd6d55cabd77669f630bfc279c4827dd24071ad6ec81d0a32d7b39603dd5606efc86435ac3730eef6",
+                    "6120c169cd1c000ea0e477af987193a726229d3aaeace2a1b1638aadf27f06eb2a166fbbffc5364c48247a0cc7acbdc8a2932b7806a10f61d6a7980a16ded40f",
                     "CN=Geek Software GmbH, O=Geek Software GmbH, STREET=Friedrichstr. 171, L=Berlin, S=Berlin, PostalCode=10117, C=DE",
                     getOptions() + " /qn /norestart"),
                 // There is no 64 bit installer.
