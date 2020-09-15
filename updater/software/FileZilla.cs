@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017, 2018  Dirk Stolle
+    Copyright (C) 2017, 2018, 2020  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -32,11 +32,11 @@ namespace updater.software
         /// <summary>
         /// NLog.Logger for FileZilla class
         /// </summary>
-        private static NLog.Logger logger = NLog.LogManager.GetLogger(typeof(FileZilla).FullName);
+        private static readonly NLog.Logger logger = NLog.LogManager.GetLogger(typeof(FileZilla).FullName);
 
 
         /// <summary>
-        /// Default constructor.
+        /// Constructor.
         /// </summary>
         /// <param name="autoGetNewer">whether to automatically get
         /// newer information about the software when calling the info() method</param>
@@ -174,6 +174,9 @@ namespace updater.software
                 string htmlCode = null;
                 using (var client = new WebClient())
                 {
+                    // Looks like we have to add a user agent to get a valid reponse.
+                    // Without user agent the server returns "403 Forbidden".
+                    client.Headers.Add("User-Agent", "curl/7.72.0");
                     try
                     {
                         htmlCode = client.DownloadString("https://filezilla-project.org/download.php?show_all=1");
