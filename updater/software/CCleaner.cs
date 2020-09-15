@@ -32,7 +32,7 @@ namespace updater.software
         /// <summary>
         /// NLog.Logger for CCleaner class
         /// </summary>
-        private static NLog.Logger logger = NLog.LogManager.GetLogger(typeof(CCleaner).FullName);
+        private static readonly NLog.Logger logger = NLog.LogManager.GetLogger(typeof(CCleaner).FullName);
 
 
         /// <summary>
@@ -59,20 +59,20 @@ namespace updater.software
         public override AvailableSoftware knownInfo()
         {
             return new AvailableSoftware("CCleaner",
-                "5.70",
+                "5.71",
                 "^CCleaner+$",
                 "^CCleaner+$",
                 // CCleaner uses the same installer for 32 and 64 bit.
                 new InstallInfoExe(
-                    "https://download.ccleaner.com/ccsetup570.exe",
+                    "https://download.ccleaner.com/ccsetup571.exe",
                     HashAlgorithm.SHA256,
-                    "825e7adc69360a9820be17603ec93aace7e998d3278b33b16048d9452f1ba860",
+                    "8280c68138eea0e3ebe6c1d37f8b644b28750b2ad1c6e959ad8b7a0da5d63508",
                     publisherX509,
                     "/S"),
                 new InstallInfoExe(
-                    "https://download.ccleaner.com/ccsetup570.exe",
+                    "https://download.ccleaner.com/ccsetup571.exe",
                     HashAlgorithm.SHA256,
-                    "825e7adc69360a9820be17603ec93aace7e998d3278b33b16048d9452f1ba860",
+                    "8280c68138eea0e3ebe6c1d37f8b644b28750b2ad1c6e959ad8b7a0da5d63508",
                     publisherX509,
                     "/S")
                 );
@@ -122,7 +122,7 @@ namespace updater.software
                     return null;
                 }
                 client.Dispose();
-            } //using
+            }
 
             // extract download URL
             Regex reg = new Regex("http(s)?://download\\.ccleaner\\.com/ccsetup[0-9]+\\.exe");
