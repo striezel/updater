@@ -59,20 +59,20 @@ namespace updater.software
         public override AvailableSoftware knownInfo()
         {
             return new AvailableSoftware("Mumble",
-                "1.3.0",
+                "1.3.3",
                 "^Mumble [0-9]\\.[0-9]+\\.[0-9]+$",
                 "^Mumble [0-9]\\.[0-9]+\\.[0-9]+$",
                 new InstallInfoMsi(
-                    "https://github.com/mumble-voip/mumble/releases/download/1.3.0/mumble-1.3.0.msi",
+                    "https://github.com/mumble-voip/mumble/releases/download/1.3.3/mumble-1.3.3.msi",
                     HashAlgorithm.SHA256,
-                    "e54f1343a9c40652d8e999eb1aebaf3b625e00accb671b84fb0d3f31b2885294",
+                    "3f3038e7aaf87cdc6e1fa4658b399a7a5ed5a0f8c69c31cc4324363e3eb986d0",
                     publisherX509,
                     "/qn /norestart"),
                 // 64 bit MSI installer started with 1.3.0.
                 new InstallInfoMsi(
-                    "https://github.com/mumble-voip/mumble/releases/download/1.3.0/mumble-1.3.0.winx64.msi",
+                    "https://github.com/mumble-voip/mumble/releases/download/1.3.3/mumble-1.3.3.winx64.msi",
                     HashAlgorithm.SHA256,
-                    "83dd36754e7369f2df5c540786784dd98d3095f21879e6602d079eaf27158a01",
+                    "3b9a13ea760d416654e16af9e892dd389e1ea8c4521430c507707ecc1aa80704",
                     publisherX509,
                     "/qn /norestart")
                 );
