@@ -21,7 +21,7 @@ using System;
 namespace updater.data
 {
     /// <summary>
-    /// struct that represents a detected software
+    /// Represents a detected software.
     /// </summary>
     public struct DetectedSoftware: IComparable<DetectedSoftware>
     {
@@ -91,6 +91,19 @@ namespace updater.data
                     return 0;
             }   
             return installPath.CompareTo(other.installPath);
+        }
+
+
+        /// <summary>
+        /// Converts the struct into a string value, representing (parts of) its content.
+        /// </summary>
+        /// <returns>Returns a more readable string value.</returns>
+        public override string ToString()
+        {
+            string result = displayName;
+            if (!string.IsNullOrWhiteSpace(displayVersion))
+                result += ", " + displayVersion;
+            return result + ", " + appType.ToString();
         }
 
 
