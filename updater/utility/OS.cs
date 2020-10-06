@@ -23,7 +23,7 @@ namespace updater.utility
     /// <summary>
     /// Utility class to get operating system information.
     /// </summary>
-    public class OS
+    public static class OS
     {
         /// <summary>
         /// information about the current operating system

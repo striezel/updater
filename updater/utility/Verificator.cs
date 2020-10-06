@@ -23,12 +23,12 @@ namespace updater.utility
     /// <summary>
     /// Class to verify signed binary files.
     /// </summary>
-    public class Verificator
+    public static class Verificator
     {
         /// <summary>
         /// NLog.Logger for Verificator class
         /// </summary>
-        private static NLog.Logger logger = NLog.LogManager.GetLogger(typeof(Verificator).FullName);
+        private static readonly NLog.Logger logger = NLog.LogManager.GetLogger(typeof(Verificator).FullName);
 
 
         /// <summary>
@@ -56,11 +56,10 @@ namespace updater.utility
         /// Returns false otherwise.</returns>
         public static bool verifiyPublisher(string fileName, string publisher)
         {
-            X509Certificate2 cert = null;
             string sub = null;
             try
             {
-                cert = new X509Certificate2(fileName);
+                X509Certificate2 cert = new X509Certificate2(fileName);
                 X509Chain certChain = new X509Chain();
                 bool chainValid = certChain.Build(cert);
                 if (!chainValid)

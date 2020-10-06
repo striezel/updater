@@ -22,12 +22,12 @@ using System.IO;
 namespace updater.utility
 {
     /// <summary>
-    /// class to handle some logging-related tasks
+    /// Handles some logging-related tasks.
     /// </summary>
-    internal class Logging
+    internal static class Logging
     {
         /// <summary>
-        /// initializes the configuration of NLog.LogManager with logging to console + file
+        /// Initializes the configuration of NLog.LogManager with logging to console + file.
         /// </summary>
         public static void initialize()
         {
@@ -47,7 +47,7 @@ namespace updater.utility
             fileTarget.FileName = getLogFileName();
             fileTarget.Layout = @"${date:format=yyyy-MM-dd HH\:mm\:ss} [${logger}] ${message}";
 
-            //define rules
+            // define rules
             var rule1 = new NLog.Config.LoggingRule("*", NLog.LogLevel.Debug, consoleTarget);
             config.LoggingRules.Add(rule1);
             var rule2 = new NLog.Config.LoggingRule("*", NLog.LogLevel.Debug, fileTarget);
@@ -59,13 +59,13 @@ namespace updater.utility
 
 
         /// <summary>
-        /// gets a log file name for the application
+        /// Gets a log file name for the application.
         /// </summary>
-        /// <returns>returns a log file name that includes the current date / time</returns>
+        /// <returns>Returns a log file name that includes the current date / time.</returns>
         private static string getLogFileName()
         {
             string datePart = DateTime.Now.ToString("yyyyMMdd_HHmmss");
             return Path.Combine(Path.GetTempPath(), "updater-cli-log_" + datePart + ".txt");
         }
-    } //class
-} //namespace
+    } // class
+} // namespace

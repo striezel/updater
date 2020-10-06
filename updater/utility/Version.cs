@@ -21,10 +21,10 @@ namespace updater.utility
     /// <summary>
     /// utility class to handle version information
     /// </summary>
-    internal class Version
+    internal static class Version
     {
         /// <summary>
-        /// gets the version of the program
+        /// Gets the version of the program.
         /// </summary>
         /// <returns>Returns a string containing the version number.</returns>
         public static string get()
@@ -36,5 +36,5 @@ namespace updater.utility
                 ver.Build.ToString().PadLeft(2, '0')});
         }
 
-    } //class
-} //namespace
+    } // class
+} // namespace

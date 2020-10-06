@@ -24,10 +24,10 @@ namespace updater.utility
     /// <summary>
     /// utility class to handle checksums
     /// </summary>
-    public class Checksum
+    public static class Checksum
     {
         /// <summary>
-        /// calculates the checksum of a string
+        /// Calculates the checksum of a file.
         /// </summary>
         /// <param name="fileName">name of the file for which the checksum will be calculated</param>
         /// <param name="algorithm">hashing/checksum algorithm</param>
@@ -39,7 +39,7 @@ namespace updater.utility
                 || (algorithm == data.HashAlgorithm.Unknown))
                 return null;
 
-            HashAlgorithm hasher = null;
+            HashAlgorithm hasher;
             switch (algorithm)
             {
                 case data.HashAlgorithm.MD5:
@@ -60,7 +60,7 @@ namespace updater.utility
                 case data.HashAlgorithm.Unknown:
                 default:
                     return null;
-            } //switch
+            }
 
 
             byte[] hash = null;
@@ -77,7 +77,7 @@ namespace updater.utility
 
 
         /// <summary>
-        /// gets the hexadecimal string representation of a hash value
+        /// Gets the hexadecimal string representation of a hash value.
         /// </summary>
         /// <param name="hash">the hash value</param>
         /// <returns>Returns the hexadecimal string representation of the hash,
@@ -93,13 +93,13 @@ namespace updater.utility
             {
                 result += digits[hash[i] / 16];
                 result += digits[hash[i] % 16];
-            } //for
+            }
             return result;
         }
 
 
         /// <summary>
-        /// normalises a hexadecimal checksum string
+        /// Normalises a hexadecimal checksum string.
         /// </summary>
         /// <param name="cs">hexadecimal string representation of a checksum</param>
         /// <returns>Returns normalised checksum representation.</returns>
@@ -131,18 +131,18 @@ namespace updater.utility
                     case 'f':
                         break;
                     default:
-                        //removes invalid character
+                        // removes invalid character
                         cs = cs.Remove(i, 1);
                         break;
-                } //switch
-            } //for
+                } // switch
+            } // for
 
             return cs;
         }
 
 
         /// <summary>
-        /// compares two checksum values
+        /// Compares two checksum values.
         /// </summary>
         /// <param name="checksum1">first checksum</param>
         /// <param name="checksum2">second checksum</param>
@@ -155,9 +155,9 @@ namespace updater.utility
             // Null or empty values are never a match.
             if (string.IsNullOrWhiteSpace(checksum1) || string.IsNullOrWhiteSpace(checksum2))
                 return false;
-            //Simple equality checks will do after normalisation.
-            return (checksum1 == checksum2);
+            // Simple equality checks will do after normalisation.
+            return checksum1 == checksum2;
         }
 
-    } //class
-} //namespace
+    } // class
+} // namespace

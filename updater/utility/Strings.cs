@@ -21,10 +21,10 @@ namespace updater.utility
     /// <summary>
     /// utility class for string handling
     /// </summary>
-    public class Strings
+    public static class Strings
     {
         /// <summary>
-        /// returns a string representation of a boolean value
+        /// Returns a string representation of a boolean value.
         /// </summary>
         /// <param name="b">a boolean value</param>
         /// <returns>Returns "yes", if b is true.
@@ -39,7 +39,7 @@ namespace updater.utility
 
 
         /// <summary>
-        /// returns a string representation of the application type
+        /// Returns a string representation of the application type.
         /// </summary>
         /// <param name="appT">the application type</param>
         /// <returns>Returns a string indicating the appliation type.</returns>
@@ -55,12 +55,12 @@ namespace updater.utility
                 case data.ApplicationType.Unknown:
                 default:
                     return "unknown";
-            } //switch
+            }
         }
 
 
         /// <summary>
-        /// removes a backslash from the end of the string
+        /// Removes a backslash from the end of the string.
         /// </summary>
         /// <param name="val">the string</param>
         /// <returns>Returns the string with the backslash removed.</returns>
@@ -75,5 +75,5 @@ namespace updater.utility
             else
                 return val;
         }
-    } //class
-} //namespace
+    } // class
+} // namespace

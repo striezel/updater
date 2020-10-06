@@ -21,6 +21,9 @@ using System.IO;
 
 namespace updater.utility
 {
+    /// <summary>
+    /// eumeration type for Portable Executable formats (32 / 64 bit)
+    /// </summary>
     public enum PEFormat
     {
         /// <summary>
@@ -46,18 +49,18 @@ namespace updater.utility
 
 
     /// <summary>
-    /// class to determine format of portable executables
+    /// Utility class to determine format of portable executables.
     /// </summary>
-    public class PortableExecutable
+    public static class PortableExecutable
     {
         /// <summary>
         /// NLog.Logger for PortableExecutable class
         /// </summary>
-        private static NLog.Logger logger = NLog.LogManager.GetLogger(typeof(PortableExecutable).FullName);
+        private static readonly NLog.Logger logger = NLog.LogManager.GetLogger(typeof(PortableExecutable).FullName);
 
 
         /// <summary>
-        /// determines the executable format of the given file
+        /// Determines the executable format of the given file.
         /// </summary>
         /// <param name="fileName">path and name of the executable file</param>
         /// <returns>Returns enumeration value to indicate the executable format.</returns>
@@ -90,21 +93,21 @@ namespace updater.utility
 
                         if (peHead != 0x00004550) // "PE\0\0", little-endian
                             return PEFormat.NotPE;
-                        //read machine type field
+                        // read machine type field
                         machineType = br.ReadUInt16();
-                    } //try-fin
+                    } // try-fin
                     finally
                     {
                         br.Close();
                         br = null;
-                    } //finally
-                } //try-fin
+                    }
+                } // try-fin
                 finally
                 {
                     fs.Close();
                     fs = null;
-                } //finally
-            } //try-catch
+                }
+            } // try-catch
             catch (Exception ex)
             {
                 logger.Error("Error ("+ ex.GetType().Name + ") while determining executable type of \""
@@ -116,15 +119,15 @@ namespace updater.utility
             {
                 case 0:
                     return PEFormat.Unknown;
-                case 0x8664: //AMD 64
-                case 0x200: //Itanium 64
+                case 0x8664: // AMD 64
+                case 0x200: // Itanium 64
                     return PEFormat.PE64;
-                case 0x14c: //i386
+                case 0x14c: // i386
                     return PEFormat.PE32;
                 default:
                     return PEFormat.Unknown;
-            } //switch
+            }
         }
 
-    } //class
-} //namespace
+    } // class
+} // namespace
