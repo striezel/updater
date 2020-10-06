@@ -48,7 +48,7 @@ namespace updater.software
         /// <summary>
         /// publisher name for signed binaries
         /// </summary>
-        private const string publisherX509 = "CN=mkrautz.dk, O=mkrautz.dk, STREET=Kirkegade 6, L=Esbjerg, S=Region of Southern Denmark, PostalCode=6700, C=DK";
+        private const string publisherX509 = "E=contact@davidebeatrici.dev, CN=\"Open Source Developer, Davide Beatrici\", O=Open Source Developer, S=Lombardia, C=IT";
 
 
         /// <summary>
@@ -97,7 +97,7 @@ namespace updater.software
         /// exception in the later case.</returns>
         public override bool implementsSearchForNewer()
         {
-            return false;
+            return true;
         }
 
 
@@ -167,6 +167,8 @@ namespace updater.software
         /// <returns>Returns a list of process names that block the upgrade.</returns>
         public override List<string> blockerProcesses(DetectedSoftware detected)
         {
+            // Technically, mumble.exe is a blocker, but the installer just closes it,
+            // if it is running.
             return new List<string>();
         }
 
@@ -182,7 +184,7 @@ namespace updater.software
         {
             versions.Triple verDetected = new versions.Triple(detected.displayVersion);
             versions.Triple verNewest = new versions.Triple(info().newestVersion);
-            return (verNewest.CompareTo(verDetected) > 0);
+            return verNewest.CompareTo(verDetected) > 0;
         }
     } // class
 } // namespace
