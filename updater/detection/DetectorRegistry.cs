@@ -23,7 +23,7 @@ using Microsoft.Win32;
 namespace updater.detection
 {
     /// <summary>
-    /// class to detect installed software via registry
+    /// Detects installed software via Windows registry.
     /// </summary>
     public class DetectorRegistry
     {
@@ -50,7 +50,7 @@ namespace updater.detection
 
 
         /// <summary>
-        /// gets a list of installed software from the registry, using a specified registry view
+        /// Gets a list of installed software from the registry, using a specified registry view.
         /// </summary>
         /// <param name="view">the registry view (64 bit or 32 bit)</param>
         /// <returns>Returns a list of installed software.</returns>
@@ -109,5 +109,5 @@ namespace updater.detection
             baseKey = null;
             return entries;
         }
-    } //class
-} //namespace
+    } // class
+} // namespace

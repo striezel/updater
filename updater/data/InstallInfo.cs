@@ -17,14 +17,12 @@
 */
 
 using System.Diagnostics;
-using System.Xml.Serialization;
 
 namespace updater.data
 {
     /// <summary>
-    /// holds information about an installer
+    /// Holds information about an installer.
     /// </summary>
-    [XmlRoot(ElementName = "installinfo")]
     public abstract class InstallInfo
     {
         /// <summary>
@@ -59,7 +57,7 @@ namespace updater.data
 
 
         /// <summary>
-        /// determines whether or not this instance has checksum information
+        /// Determines whether or not this instance has checksum information.
         /// </summary>
         /// <returns>Returns true, if there is a checksum.
         /// Returns false, if there is no checksum.</returns>
@@ -71,7 +69,7 @@ namespace updater.data
 
 
         /// <summary>
-        /// determines whether or not this instance has signature publisher information
+        /// Determines whether or not this instance has signature publisher information.
         /// </summary>
         /// <returns>Returns true, if there is information about a publisher.
         /// Returns false otherwise.</returns>
@@ -82,7 +80,7 @@ namespace updater.data
 
 
         /// <summary>
-        /// checks whether there is a way to verify the downloaded file
+        /// Checks whether there is a way to verify the downloaded file.
         /// </summary>
         /// <returns>Returns true, if sufficient information is present.
         /// Returns false, if there is no verification information.</returns>
@@ -93,7 +91,7 @@ namespace updater.data
 
 
         /// <summary>
-        /// creates a process instance that can be used to perform the update
+        /// Creates a process instance that can be used to perform the update.
         /// </summary>
         /// <param name="downloadedFile">path to the downloaded installer file</param>
         /// <param name="detected">info about the detected software</param>
@@ -105,14 +103,12 @@ namespace updater.data
         /// <summary>
         /// URL where the installer can be downloaded
         /// </summary>
-        [XmlElement(ElementName = "url", IsNullable = true)]
         public string downloadUrl;
 
 
         /// <summary>
         /// hash algorithm that was used to create or verify the checksum
         /// </summary>
-        [XmlElement(ElementName = "algorithm", IsNullable = false)]
         public HashAlgorithm algorithm;
 
 
@@ -120,21 +116,18 @@ namespace updater.data
         /// checksum for the installer - hexadecimal representation
         /// (e.g. "7772433567cb18608519f649f981e38a0be12c26" for a SHA1 checksum)
         /// </summary>
-        [XmlElement(ElementName = "checksum", IsNullable = true)]
         public string checksum;
 
 
         /// <summary>
         /// common name of the publisher, if file is signed
         /// </summary>
-        [XmlElement(ElementName = "publisher", IsNullable = true)]
         public string publisher;
 
 
         /// <summary>
         /// switches for silent installation
         /// </summary>
-        [XmlElement(ElementName = "silent_switches", IsNullable = true)]
         public string silentSwitches;
-    } //class
-} //namespace
+    } // class
+} // namespace

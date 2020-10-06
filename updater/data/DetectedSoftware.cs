@@ -17,14 +17,12 @@
 */
 
 using System;
-using System.Xml.Serialization;
 
 namespace updater.data
 {
     /// <summary>
     /// struct that represents a detected software
     /// </summary>
-    [XmlRoot(ElementName = "detected_software")]
     public struct DetectedSoftware: IComparable<DetectedSoftware>
     {
         /// <summary>
@@ -40,7 +38,7 @@ namespace updater.data
 
 
         /// <summary>
-        /// checks whether the entry contains some basic information
+        /// Checks whether the entry contains some basic information.
         /// </summary>
         /// <returns>Returns true, if at least the name of the software is set.</returns>
         public bool containsInformation()
@@ -60,7 +58,7 @@ namespace updater.data
         {
             if (ReferenceEquals(this, other))
                 return 0;
-            //First compare by display name.
+            // First compare by display name.
             if (null == displayName)
             {
                 if (null != other.displayName)
@@ -72,7 +70,7 @@ namespace updater.data
                 if (rc != 0)
                     return rc;
             }
-            //Compare by display version, if display names are equal.
+            // Compare by display version, if display names are equal.
             if (null == displayVersion)
             {
                 if (null != other.displayVersion)
@@ -84,7 +82,7 @@ namespace updater.data
                 if (rc != 0)
                     return rc;
             }
-            //Finally compare by install path.
+            // Finally compare by install path.
             if (null == installPath)
             {
                 if (null != other.installPath)
@@ -99,28 +97,24 @@ namespace updater.data
         /// <summary>
         /// displayed name of the software
         /// </summary>
-        [XmlElement(ElementName = "name", IsNullable = true)]
         public string displayName;
 
 
         /// <summary>
         /// displayed version of the software
         /// </summary>
-        [XmlElement(ElementName = "version", IsNullable = true)]
         public string displayVersion;
 
 
         /// <summary>
         /// path where the software is installed
         /// </summary>
-        [XmlElement(ElementName = "path", IsNullable = true)]
         public string installPath;
 
 
         /// <summary>
         /// whether this is a 32 bit or 64 bit app
         /// </summary>
-        [XmlElement(ElementName = "appType", IsNullable = true)]
         public ApplicationType appType;
-    } //struct
-} //namespace
+    } // struct
+} // namespace

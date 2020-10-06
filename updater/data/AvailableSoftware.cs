@@ -17,14 +17,12 @@
 */
 
 using System;
-using System.Xml.Serialization;
 
 namespace updater.data
 {
     /// <summary>
     /// holds information about an available piece of software
     /// </summary>
-    [XmlRoot(ElementName = "available_software")]
     public class AvailableSoftware : IComparable<AvailableSoftware>
     {
         /// <summary>
@@ -66,28 +64,24 @@ namespace updater.data
         /// <summary>
         /// generic name of the software
         /// </summary>
-        [XmlElement(ElementName = "name", IsNullable = false)]
         public string Name;
 
 
         /// <summary>
         /// newest version of the software
         /// </summary>
-        [XmlElement(ElementName = "newest", IsNullable = false)]
         public string newestVersion;
 
 
         /// <summary>
         /// regular expression to match for the 32 bit version
         /// </summary>
-        [XmlElement(ElementName = "regex32", IsNullable = true)]
         public string match32Bit;
 
 
         /// <summary>
         /// regular expression to match for the 64 bit version
         /// </summary>
-        [XmlElement(ElementName = "regex64", IsNullable = true)]
         public string match64Bit;
 
 
@@ -95,7 +89,6 @@ namespace updater.data
         /// installer information for the 32 bit variant of the software
         /// (Might be null, if there is no 32 bit variant.)
         /// </summary>
-        [XmlElement(ElementName = "install32", IsNullable = true)]
         public InstallInfo install32Bit;
 
 
@@ -103,7 +96,6 @@ namespace updater.data
         /// installer information for the 64 bit variant of the software
         /// (Might be null, if there is no 64 bit variant.)
         /// </summary>
-        [XmlElement(ElementName = "install64", IsNullable = true)]
         public InstallInfo install64Bit;
 
 
@@ -119,7 +111,7 @@ namespace updater.data
         {
             if (ReferenceEquals(this, other))
                 return 0;
-            //First compare by name.
+            // First compare by name.
             if (null == Name)
             {
                 if (null != other.Name)
@@ -131,7 +123,7 @@ namespace updater.data
                 if (rc != 0)
                     return rc;
             }
-            //Now compare by version.
+            // Now compare by version.
             if (null == newestVersion)
             {
                 if (null != other.newestVersion)
@@ -144,5 +136,5 @@ namespace updater.data
                 return newestVersion.CompareTo(other.newestVersion);
             }
         }
-    } //class
-} //namespace
+    } // class
+} // namespace

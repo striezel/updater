@@ -25,7 +25,7 @@ namespace updater
         /// <summary>
         /// NLog.Logger for Program
         /// </summary>
-        private static NLog.Logger logger = NLog.LogManager.GetLogger(typeof(Program).FullName);
+        private static readonly NLog.Logger logger = NLog.LogManager.GetLogger(typeof(Program).FullName);
 
 
         static int Main(string[] args)
@@ -37,14 +37,14 @@ namespace updater
             if (rc != 0)
                 return rc;
 
-            //There has to be an operation at least.
+            // There has to be an operation at least.
             if (options.op == Operation.Unknown)
             {
                 logger.Error("Error: No operation was specified!");
                 return ReturnCodes.rcInvalidParameter;
             }
 
-            IOperation operation = null;
+            IOperation operation;
             switch (options.op)
             {
                 case Operation.Detect:
@@ -72,8 +72,8 @@ namespace updater
                 default:
                     logger.Error("Unknown operation was specified! Exiting program.");
                     return ReturnCodes.rcUnknownOperation;
-            } //switch
+            } // switch
             return operation.perform();
-        } //Main
-    } //class
-} //namespace
+        } // Main
+    } // class
+} // namespace

@@ -24,12 +24,15 @@ using System.Collections.Generic;
 
 namespace updater.software
 {
+    /// <summary>
+    /// Manages updates for Opera browser.
+    /// </summary>
     public class Opera : NoPreUpdateProcessSoftware
     {
         /// <summary>
         /// NLog.Logger for Opera class
         /// </summary>
-        private static NLog.Logger logger = NLog.LogManager.GetLogger(typeof(Opera).FullName);
+        private static readonly NLog.Logger logger = NLog.LogManager.GetLogger(typeof(Opera).FullName);
 
 
         /// <summary>
@@ -127,7 +130,7 @@ namespace updater.software
                     return null;
                 string version = match.Value.Substring(1).Replace("/\"", "");
                 versions.Add(new versions.Quartet(version));
-            } //foreach
+            }
             // ... and sort them from earliest to latest.
             versions.Sort();
 
@@ -135,7 +138,6 @@ namespace updater.software
             string newVersion = null;
             for (int i = versions.Count - 1; i >= 0; i--)
             {
-                htmlCode = null;
                 bool exists = false;
                 using (var client = new WebClient())
                 {

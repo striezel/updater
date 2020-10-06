@@ -69,7 +69,6 @@
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.Transactions" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="cli\ArgumentParser.cs" />
@@ -79,7 +78,6 @@
     <Compile Include="data\InstallInfoLibO.cs" />
     <Compile Include="data\InstallInfoMsi.cs" />
     <Compile Include="git-info\GitInfo.cs" />
-    <Compile Include="io\GenericXmlSerializer.cs" />
     <Compile Include="operations\Help.cs" />
     <Compile Include="operations\IdList.cs" />
     <Compile Include="operations\IOperation.cs" />
