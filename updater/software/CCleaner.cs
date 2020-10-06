@@ -59,20 +59,20 @@ namespace updater.software
         public override AvailableSoftware knownInfo()
         {
             return new AvailableSoftware("CCleaner",
-                "5.71",
+                "5.72",
                 "^CCleaner+$",
                 "^CCleaner+$",
                 // CCleaner uses the same installer for 32 and 64 bit.
                 new InstallInfoExe(
-                    "https://download.ccleaner.com/ccsetup571.exe",
+                    "https://download.ccleaner.com/ccsetup572.exe",
                     HashAlgorithm.SHA256,
-                    "8280c68138eea0e3ebe6c1d37f8b644b28750b2ad1c6e959ad8b7a0da5d63508",
+                    "e6b3ca474de0d73383e64d36633f4ffab4c665985c397499e4c42889c0fec113",
                     publisherX509,
                     "/S"),
                 new InstallInfoExe(
-                    "https://download.ccleaner.com/ccsetup571.exe",
+                    "https://download.ccleaner.com/ccsetup572.exe",
                     HashAlgorithm.SHA256,
-                    "8280c68138eea0e3ebe6c1d37f8b644b28750b2ad1c6e959ad8b7a0da5d63508",
+                    "e6b3ca474de0d73383e64d36633f4ffab4c665985c397499e4c42889c0fec113",
                     publisherX509,
                     "/S")
                 );
