@@ -32,7 +32,7 @@ namespace updater.software
         /// <summary>
         /// NLog.Logger for WinSCP class
         /// </summary>
-        private static NLog.Logger logger = NLog.LogManager.GetLogger(typeof(WinSCP).FullName);
+        private static readonly NLog.Logger logger = NLog.LogManager.GetLogger(typeof(WinSCP).FullName);
 
 
         /// <summary>
@@ -53,12 +53,12 @@ namespace updater.software
         public override AvailableSoftware knownInfo()
         {
             return new AvailableSoftware("WinSCP",
-                "5.17.7",
+                "5.17.8",
                 "^WinSCP [1-9]+\\.[0-9]+\\.[0-9]+$", null,
                 new InstallInfoExe(
-                    "https://netcologne.dl.sourceforge.net/project/winscp/WinSCP/5.17.7/WinSCP-5.17.7-Setup.exe",
+                    "https://netcologne.dl.sourceforge.net/project/winscp/WinSCP/5.17.8/WinSCP-5.17.8-Setup.exe",
                     HashAlgorithm.SHA256,
-                    "a2e3addddbd37f2869b136775bada6249538f20553a8aa6006e7828669a4f77b",
+                    "28e6df3e28a3999d1dd72214d8ce8b619ec2e6820601d8b7cb04334d9deff9f1",
                     "CN=Martin Prikryl, O=Martin Prikryl, L=Prague, C=CZ, SERIALNUMBER=87331519, OID.2.5.4.15=Private Organization, OID.1.3.6.1.4.1.311.60.2.1.3=CZ",
                     "/VERYSILENT /NORESTART"),
                 // There is no 64 bit installer yet.
