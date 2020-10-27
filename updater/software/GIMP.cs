@@ -53,20 +53,20 @@ namespace updater.software
         public override AvailableSoftware knownInfo()
         {
             return new AvailableSoftware("The GIMP",
-                "2.8.22",
+                "2.10.22",
                 "^GIMP [0-9]+\\.[0-9]+\\.[0-9]+$",
                 "^GIMP [0-9]+\\.[0-9]+\\.[0-9]+$",
                 // The GIMP uses the same installer for 32 and 64 bit.
                 new InstallInfoExe(
-                    "https://download.gimp.org/mirror/pub/gimp/v2.8/windows/gimp-2.8.22-setup.exe",
+                    "https://download.gimp.org/pub/gimp/v2.10/windows/gimp-2.10.22-setup.exe",
                     HashAlgorithm.SHA256,
-                    "a2e52129a28feec1ee3f22f5aaf9bdecbb02d51af6da408ace0a2ac2e0365c8b",
+                    "f7851c348584ce432dfd8e69b74a168c7dec33ebfddc29c96ad2d6b83aded083",
                     null,
                     "/VERYSILENT /NORESTART"),
                 new InstallInfoExe(
-                    "https://download.gimp.org/mirror/pub/gimp/v2.8/windows/gimp-2.8.22-setup.exe",
+                    "https://download.gimp.org/pub/gimp/v2.10/windows/gimp-2.10.22-setup.exe",
                     HashAlgorithm.SHA256,
-                    "a2e52129a28feec1ee3f22f5aaf9bdecbb02d51af6da408ace0a2ac2e0365c8b",
+                    "f7851c348584ce432dfd8e69b74a168c7dec33ebfddc29c96ad2d6b83aded083",
                     null,
                     "/VERYSILENT /NORESTART")
                 );
