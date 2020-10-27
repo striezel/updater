@@ -71,7 +71,7 @@ namespace updater.software
         {
             // These are the checksums for Windows 32 bit installers from
             // https://ftp.mozilla.org/pub/thunderbird/releases/78.4.0/SHA512SUMS
-            var result = new Dictionary<string, string>(66)
+            return new Dictionary<string, string>(66)
             {
                 { "af", "3b0e704cc4294f89913829bf5017fa34a739bcd8db69e79d9c38d67ac10795dbfe1018118908c16f0c76fd434f42cf23c838d6a0a93a6cb2668ec41b006e2d2b" },
                 { "ar", "384a4d0caa43c0d414fe5ce8691bdca9591d07d28cb826e9149f11d933a759a4fc6d69438e2001559909a6ac42046693ce54aaa4dd5e341a9c3e3f16f4a65353" },
@@ -140,8 +140,6 @@ namespace updater.software
                 { "zh-CN", "a4b3f7fb2e7812ac02810b532ea08a333dd12f2c6ddd427626df94a300e54813d8f2be7b8be556ca732409045021e8047099cb4e8c8969a9a411b133529d6847" },
                 { "zh-TW", "e64b30872444222e4acfc4aa60674836f738736fec14fb3c5b430a45ee157e9d687f2ef235d7dfa2a65d0009df4b2199baa9419c8dda78e3506ad4aebb338ebc" }
             };
-
-            return result;
         }
 
 
