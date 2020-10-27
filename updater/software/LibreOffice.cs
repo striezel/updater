@@ -32,7 +32,7 @@ namespace updater.software
         /// <summary>
         /// NLog.Logger for LibreOffice class
         /// </summary>
-        private static NLog.Logger logger = NLog.LogManager.GetLogger(typeof(LibreOffice).FullName);
+        private static readonly NLog.Logger logger = NLog.LogManager.GetLogger(typeof(LibreOffice).FullName);
 
 
         /// <summary>
@@ -59,19 +59,19 @@ namespace updater.software
         public override AvailableSoftware knownInfo()
         {
             return new AvailableSoftware("LibreOffice",
-                "7.0.1.2",
+                "7.0.2.2",
                 "^LibreOffice [0-9]+\\.[0-9]\\.[0-9]\\.[0-9]$",
                 "^LibreOffice [0-9]+\\.[0-9]\\.[0-9]\\.[0-9]$",
                 new InstallInfoLibO(
-                    "https://download.documentfoundation.org/libreoffice/stable/7.0.1/win/x86/LibreOffice_7.0.1_Win_x86.msi",
+                    "https://download.documentfoundation.org/libreoffice/stable/7.0.2/win/x86/LibreOffice_7.0.2_Win_x86.msi",
                     HashAlgorithm.SHA256,
-                    "d0fb0f789daee4e1b0cd84371145b122dcdf4c179a2ae81c25703a089f9c828e",
+                    "4dfc0d13e42a70009df7028233e94524157a7263a45be016e89b84337031ff24",
                     publisherX509,
                     "/qn /norestart"),
                 new InstallInfoLibO(
-                    "https://download.documentfoundation.org/libreoffice/stable/7.0.1/win/x86_64/LibreOffice_7.0.1_Win_x64.msi",
+                    "https://download.documentfoundation.org/libreoffice/stable/7.0.2/win/x86_64/LibreOffice_7.0.2_Win_x64.msi",
                     HashAlgorithm.SHA256,
-                    "a98ee61f915eb50853d08b0cfbefbb35bf610c0da4db8d4287415c64abce8c3c",
+                    "898feb8c784d049d646dae443ef49d55ffe2db78ebde73c963f84f77363e864e",
                     publisherX509,
                     "/qn /norestart")
                     );
