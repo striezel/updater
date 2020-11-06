@@ -58,7 +58,7 @@ namespace updater.software
         /// details about the software.</returns>
         public override AvailableSoftware knownInfo()
         {
-            string version = "7.8.9";
+            string version = "7.9.1";
             return new AvailableSoftware("Notepad++",
                 version,
                 "^Notepad\\+\\+ \\(32\\-bit x86\\)$|^Notepad\\+\\+$",
@@ -66,13 +66,13 @@ namespace updater.software
                 new InstallInfoExe(
                     "http://download.notepad-plus-plus.org/repository/7.x/" + version + "/npp." + version + ".Installer.exe",
                     HashAlgorithm.SHA256,
-                    "e7585df965054954d8d786f62f316c06739a44e7dd6bfe0eff79596e3979a790",
+                    "f7ea8518e21e42f500684c3be35bfa10d1dff17d7343a67d310ff0afcc465621",
                     publisherX509,
                     "/S"),
                 new InstallInfoExe(
                     "http://download.notepad-plus-plus.org/repository/7.x/" + version + "/npp." + version + ".Installer.x64.exe",
                     HashAlgorithm.SHA256,
-                    "e8e866aca5672e91446ce9d965250317e95d2a3d238ea32fa2c378cd315cb85f",
+                    "751d3634a76ea518f6e0a63575aac8d6a384eacf789f40eac6becf8dc859840b",
                     publisherX509,
                     "/S")
                 );
@@ -216,7 +216,10 @@ namespace updater.software
         /// <returns>Returns a list of process names that block the upgrade.</returns>
         public override List<string> blockerProcesses(DetectedSoftware detected)
         {
-            return new List<string>();
+            return new List<string>(1)
+            {
+                "notepad++"
+            };
         }
 
     } // class
