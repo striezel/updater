@@ -33,7 +33,7 @@ namespace updater_test.software
             mVersion = version;
         }
 
-        private string mVersion;
+        private readonly string mVersion;
 
         public override AvailableSoftware knownInfo()
         {
@@ -99,10 +99,11 @@ namespace updater_test.software
         public void Test_needsUpdate()
         {
             var fz = new FileZilla(false);
-            DetectedSoftware det = new DetectedSoftware();
-
+            DetectedSoftware det = new DetectedSoftware()
+            {
+                displayVersion = fz.knownInfo().newestVersion
+            };
             // equal numbers does not need update
-            det.displayVersion = fz.knownInfo().newestVersion;
             Assert.IsFalse(fz.needsUpdate(det));
 
             // some older version numbers in ascending order
