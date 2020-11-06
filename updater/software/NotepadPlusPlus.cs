@@ -165,11 +165,17 @@ namespace updater.software
 
             // download checksum file, e.g. "http://download.notepad-plus-plus.org/repository/7.x/7.7/npp.7.7.checksums.sha256"
             //                           or "http://download.notepad-plus-plus.org/repository/7.x/7.8.9/npp.7.8.9.checksums.sha256.txt"
+            //                           or for GitHub releases: "https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v7.9.1/npp.7.9.1.checksums.sha256" 
             using (var client = new WebClient())
             {
                 try
                 {
-                    htmlCode = client.DownloadString("http://download.notepad-plus-plus.org/repository/" + directoryMajor + "/" + directoryDetailed + "/npp." + directoryDetailed + ".checksums.sha256.txt");
+                    // Use GitHub releases for download of checksum file,
+                    // because GitHub has a valid TLS certificate for HTTPS
+                    // while the domain download.notepad-plus-plus.org does
+                    // not and can only be accessed via HTTP.
+                    // But we want HTTPS / TLS for the checksum download.
+                    htmlCode = client.DownloadString("https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v" + directoryDetailed + "/npp." + directoryDetailed + ".checksums.sha256");
                 }
                 catch (Exception ex)
                 {
