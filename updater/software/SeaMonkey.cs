@@ -71,32 +71,32 @@ namespace updater.software
         private static Dictionary<string, string> knownChecksums()
         {
             // These are the checksums for Windows 32 bit installers from
-            // https://archive.mozilla.org/pub/seamonkey/releases/2.53.4/SHA1SUMS.txt
-            var result = new Dictionary<string, string>();
-            result.Add("cs", "b52aced79c51624769789595bad9784a08839735");
-            result.Add("de", "cab4fae77e536a42536783e48fd70aa91c52ecbf");
-            result.Add("en-GB", "e9eafcf144a7456c4771267a8ec3d9a22798c079");
-            result.Add("en-US", "2255bf90f2b35761d6b80b730776d337cc622e4a");
-            result.Add("es-AR", "e0072b3422b08e554a4a4531559a3bfd9bb7fe7a");
-            result.Add("es-ES", "4074357de2df40aaaf998629f2ebc0a66ca490ab");
-            result.Add("fi", "f1a5ab7a2111c4ce62a29e050cefa0a582cac6bb");
-            result.Add("fr", "fd6e74ac23bd69259c79258c0a1808225a116a0d");
-            result.Add("hu", "0c51ef2fe9e111609529f702f989bbebbf4e2392");
-            result.Add("it", "144260bf8b60e32f24e19f02f28cdff10c4ba5ad");
-            result.Add("ja", "340be7d50feaf5c11d6be0d35ed1555891bf96c3");
-            result.Add("ka", "99eb34f2bb4ec2548e607b6f50d73c4bfa694f7d");
-            result.Add("nb-NO", "2f07265ac7ec3b300afe0fd3734646fb5add26e9");
-            result.Add("nl", "fea87ec17a715bf5588d3b67b027c7ae2467fba5");
-            result.Add("pl", "57615922426155142cf34c99a880d0ed1128aff0");
-            result.Add("pt-BR", "32b47787e32b30654cd85706f1bff6f4aa3bd260");
-            result.Add("pt-PT", "9e03915fa06f30538b6fa06557a06eebb801ea24");
-            result.Add("ru", "eb61efb06085515b6c59b63649eb9b52ccbb0c62");
-            result.Add("sk", "f197c1aae315bc0a2cf5af08df09b0ee70b2b9bf");
-            result.Add("sv-SE", "b36f988acd78bec46664da8dd85a6a8bbbfe8c4b");
-            result.Add("zh-CN", "4ea147ef5867d6905a9e1ae4f388ae1b84aa515e");
-            result.Add("zh-TW", "85e31dfe1bc7f3eed66875f5475ea0890ca454d6");
-
-            return result;
+            // https://archive.mozilla.org/pub/seamonkey/releases/2.53.5/SHA1SUMS.txt
+            return new Dictionary<string, string>(22)
+            {
+                { "cs", "e1dfc3ba25c8456be191e4154304d9ddd63c3535" },
+                { "de", "f435220758269c118b0a88ce74f68ff5c34d9aed" },
+                { "en-GB", "7b2837d03e7aac7045ec60b63acf030a6a6920ff" },
+                { "en-US", "0682bdffc389670b7fc689c4894535c9f9dce2aa" },
+                { "es-AR", "8067775d635b30980d0806bd6fe843bdb98e5879" },
+                { "es-ES", "7d8a9fccb2ebbd8dcdcde037ccfcff56dca174d6" },
+                { "fi", "a5b8ce90f1c57221f412b618f2fc477688a54d72" },
+                { "fr", "aa580ac07a0ac3c3694da72803496550feee7b9a" },
+                { "hu", "524a0ccef19a8cdd71e4b82d93e32597bf332906" },
+                { "it", "d3645a38bcbc67948059e1e7e24443931d0a2b85" },
+                { "ja", "033e76b5b8a89652c6a54821326b1926fbe04528" },
+                { "ka", "986fe5d6938df7bc0b5364108923f334e9ba69a0" },
+                { "nb-NO", "d9f3933fb928504b32055226771954ca8a203f5a" },
+                { "nl", "fc563a34b8b832d0678c40b42c38bef76ebeb5ef" },
+                { "pl", "a52d459d2715fe7b5676243e45b32517ab587d23" },
+                { "pt-BR", "13db742f8b5699da29054ef4c3e2ab89469c73dd" },
+                { "pt-PT", "cbff2cf40a7698d79b52b5f7329846fe858e9171" },
+                { "ru", "e63b7e749735dc9f304c8e0e6c209c9f2c989a95" },
+                { "sk", "5dc2865c7b2c7a63fa44d3ac2f333a272336afee" },
+                { "sv-SE", "ead76e7b28cfbbe591b1cb78dc29777877c83ff5" },
+                { "zh-CN", "509320498edbd7ebb7f439fe2cc6abb82ae83d92" },
+                { "zh-TW", "9af11810a5d1bed18f9724e6e481b995856c077b" }
+            };
         }
 
 
@@ -118,7 +118,7 @@ namespace updater.software
         /// details about the software.</returns>
         public override AvailableSoftware knownInfo()
         {
-            const string knownVersion = "2.53.4";
+            const string knownVersion = "2.53.5";
             return new AvailableSoftware("SeaMonkey (" + languageCode + ")",
                 knownVersion,
                 "^SeaMonkey [0-9]+\\.[0-9]+(\\.[0-9]+)? \\(x86 " + Regex.Escape(languageCode) + "\\)$",
