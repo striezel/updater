@@ -7,6 +7,13 @@ easily.
 The applications that can currently be updated with this application are listed
 [here](./supported_applications.md).
 
+## Build status
+
+* GitHub Actions:
+[![GitHub CI](https://github.com/striezel/updater/workflows/Build%20with%20Mono%20on%20Ubuntu%2020.04/badge.svg)](https://github.com/striezel/updater/actions)
+* GitLab CI:
+[![GitLab pipeline status](https://gitlab.com/striezel/updater/badges/master/pipeline.svg)](https://gitlab.com/striezel/updater/)
+
 ## Usage
 
 The update is a command-line program, there is no graphical user interface yet
