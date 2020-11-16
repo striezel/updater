@@ -28,7 +28,7 @@ namespace updater.cli
         /// <summary>
         /// NLog.Logger for ArgumentParser
         /// </summary>
-        private static NLog.Logger logger = NLog.LogManager.GetLogger(typeof(ArgumentParser).FullName);
+        private static readonly NLog.Logger logger = NLog.LogManager.GetLogger(typeof(ArgumentParser).FullName);
 
 
         /// <summary>

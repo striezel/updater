@@ -24,12 +24,12 @@ namespace updater.io
     /// <summary>
     /// class to write an Entry list to a CSV file
     /// </summary>
-    public class CSVWriter
+    public static class CSVWriter
     {
         /// <summary>
         /// NLog.Logger for CSVWriter class
         /// </summary>
-        private static NLog.Logger logger = NLog.LogManager.GetLogger(typeof(CSVWriter).FullName);
+        private static readonly NLog.Logger logger = NLog.LogManager.GetLogger(typeof(CSVWriter).FullName);
 
 
         /// <summary>
@@ -53,7 +53,7 @@ namespace updater.io
             if (char.IsControl(separator) || (separator == ' ')
                 || (separator == '\n') || (separator == '\r'))
                 return false;
-            //generate CSV content
+            // generate CSV content
             string csv = "";
             foreach (var item in entries)
             {
@@ -70,7 +70,7 @@ namespace updater.io
                 else
                     csv += separator;
                 csv += Environment.NewLine;
-            } //foreach
+            }
 
             try
             {
@@ -88,5 +88,5 @@ namespace updater.io
             }
         }
 
-    } //class
-} //namespace
+    } // class
+} // namespace

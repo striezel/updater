@@ -24,10 +24,10 @@ namespace updater.utility
     /// <summary>
     /// utility class to handle process-related stuff
     /// </summary>
-    public class Processes
+    public static class Processes
     {
         /// <summary>
-        /// checks whether any processes with the given names exist
+        /// Checks whether any processes with the given names exist.
         /// </summary>
         /// <param name="names">list of process names (may be empty)</param>
         /// <returns>Returns true, if at least one matching process was found.
@@ -43,8 +43,9 @@ namespace updater.utility
                     return true;
                 if (c < 0)
                     throw new System.Exception("Could not check processes with name " + item + "!");
-            } //foreach
-            //No matching processes have been found.
+            }
+
+            // No matching processes have been found.
             return false;
         }
         
@@ -57,18 +58,17 @@ namespace updater.utility
         /// name in case of success. Returns -1 in case of failure.</returns>
         private static int countAllByName(string name)
         {
-            int result = 0;
             try
             {
-                Process[] pProcess = Process.GetProcessesByName(name);
-                result = pProcess.Length;
-                pProcess = null;
+                Process[] processes = Process.GetProcessesByName(name);
+                int result = processes.Length;
+                processes = null;
                 return result;
-            } //try
+            }
             catch
             {
                 return -1;
-            } //catch
+            }
         }
 
 
@@ -99,5 +99,5 @@ namespace updater.utility
             return result;
         }
         */
-    } //class
-} //namespace
+    } // class
+} // namespace
