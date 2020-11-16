@@ -5,3 +5,6 @@
 # Visual Studio's stuff
 *.suo
 .vs/
+
+# NuGet packages
+updater/packages/

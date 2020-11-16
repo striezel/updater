@@ -1,8 +1,0 @@
-# ignore NLog package files, they can be downloaded by NuGet
-NLog.*/
-
-# ignore MSTest package files, they can be downloaded by NuGet
-MSTest.*/
-
-# ignore .nupkg files
-*.nupkg
