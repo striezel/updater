@@ -9,5 +9,4 @@ build:
     - apt-get update && apt-get -y install git
   script: 
     - nuget restore ./updater/updater.sln
-    - msbuild ./updater/updater.csproj
-    - msbuild ./moz-checksum-generator/moz-checksum-generator.csproj
+    - msbuild ./updater/updater.sln
