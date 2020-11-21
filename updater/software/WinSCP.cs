@@ -53,12 +53,12 @@ namespace updater.software
         public override AvailableSoftware knownInfo()
         {
             return new AvailableSoftware("WinSCP",
-                "5.17.8",
+                "5.17.9",
                 "^WinSCP [1-9]+\\.[0-9]+\\.[0-9]+$", null,
                 new InstallInfoExe(
-                    "https://netcologne.dl.sourceforge.net/project/winscp/WinSCP/5.17.8/WinSCP-5.17.8-Setup.exe",
+                    "https://netcologne.dl.sourceforge.net/project/winscp/WinSCP/5.17.9/WinSCP-5.17.9-Setup.exe",
                     HashAlgorithm.SHA256,
-                    "28e6df3e28a3999d1dd72214d8ce8b619ec2e6820601d8b7cb04334d9deff9f1",
+                    "2bb9918c3400ec02be20e9c57bbf816dce46149a752b354cae10240e5d4751fd",
                     "CN=Martin Prikryl, O=Martin Prikryl, L=Prague, C=CZ, SERIALNUMBER=87331519, OID.2.5.4.15=Private Organization, OID.1.3.6.1.4.1.311.60.2.1.3=CZ",
                     "/VERYSILENT /NORESTART"),
                 // There is no 64 bit installer yet.
@@ -195,9 +195,10 @@ namespace updater.software
         /// <returns>Returns a list of process names that block the upgrade.</returns>
         public override List<string> blockerProcesses(DetectedSoftware detected)
         {
-            var li = new List<string>();
-            li.Add("WinSCP");
-            return li;
+            return new List<string>(1)
+            {
+                "WinSCP"
+            };
         }
 
     } // class
