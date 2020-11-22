@@ -32,7 +32,19 @@ namespace updater.software
         /// <summary>
         /// NLog.Logger for Audacity class
         /// </summary>
-        private static NLog.Logger logger = NLog.LogManager.GetLogger(typeof(Audacity).FullName);
+        private static readonly NLog.Logger logger = NLog.LogManager.GetLogger(typeof(Audacity).FullName);
+
+
+        /// <summary>
+        /// publisher of the certificate used to sign binary files
+        /// </summary>
+        private const string publisherX509 = "E=james.k.crook@gmail.com, C=IE, L=Dublin, O=James Crook, CN=James Crook";
+
+
+        /// <summary>
+        /// date before which the certificate is valid.
+        /// </summary>
+        private readonly DateTime certiValidBefore = new DateTime(2021, 9, 17, 11, 41, 34, DateTimeKind.Utc);
 
 
         /// <summary>
@@ -53,15 +65,15 @@ namespace updater.software
         public override AvailableSoftware knownInfo()
         {
             return new AvailableSoftware("Audacity",
-                "2.2.0",
+                "2.4.2",
                 "^Audacity [0-9]+\\.[0-9]+\\.[0-9]+$",
                 null,
                 // Audacity only has an installer for 32 bit.
                 new InstallInfoExe(
-                    "https://www.fosshub.com/Audacity.html/audacity-win-2.2.0.exe",
+                    "https://www.fosshub.com/Audacity.html?dwl=audacity-win-2.4.2.exe",
                     HashAlgorithm.SHA256,
-                    "adb0907d3be543f789bfa1dee10429d761ba858e320acf1b98ca5b4ef50b327a",
-                    "E=james.k.crook@gmail.com, CN=James Crook, O=James Crook, C=IE",
+                    "1f20cd153b2c322bf1ff9941e4e5204098abdc7da37250ce3fb38612b3e927ba",
+                    (DateTime.UtcNow < certiValidBefore) ? publisherX509 : null,
                     "/VERYSILENT /NORESTART"),
                 null
                 );
