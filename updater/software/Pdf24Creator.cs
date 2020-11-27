@@ -84,13 +84,13 @@ namespace updater.software
         public override AvailableSoftware knownInfo()
         {
             return new AvailableSoftware("PDF24 Creator",
-                "9.2.2",
+                "10.0.3",
                 "^PDF24 Creator$",
                 null, // no 64 bit version
                 new InstallInfoMsi(
-                    "https://en.pdf24.org/products/pdf-creator/download/pdf24-creator-9.2.2.msi",
+                    "https://en.pdf24.org/products/pdf-creator/download/pdf24-creator-10.0.3.msi",
                     HashAlgorithm.SHA512,
-                    "a0114fc5adaf37012abd6e80ded104da86876e6e0f762bef7c310b81c04863c65f5f8a6315c7ecb1d87ba7be5bb57ba3f40fed34476540cec73900c138a7a89f",
+                    "86b33047b6455104ad93d61338301a257469571fcef3efb354c7e76c7b0b44e49b9d6c3e0de40d2d71627d0ac3c8e755b7b5bba9207cdb54ce49b71316403515",
                     "CN=geek software GmbH, O=geek software GmbH, STREET=Friedrichstr. 171, L=Berlin, PostalCode=10117, C=DE",
                     getOptions() + " /qn /norestart"),
                 // There is no 64 bit installer.
