@@ -144,7 +144,7 @@ namespace updater.software
             } // using
 
             // version number occurs three times on the site (private exe, business exe, msi)
-            Regex reVersion = new Regex("[1-9]+\\.[0-9]+\\.[0-9]+");
+            Regex reVersion = new Regex("[0-9]+\\.[0-9]+\\.[0-9]+");
             Match versionMatch = reVersion.Match(htmlCode);
             if (!versionMatch.Success)
                 return null;

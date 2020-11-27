@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017  Dirk Stolle
+    Copyright (C) 2017, 2020  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -18,6 +18,7 @@
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using updater.software;
+using updater.versions;
 
 namespace updater_test.software
 {
@@ -64,7 +65,19 @@ namespace updater_test.software
         [TestMethod]
         public void Test_upToDate_info()
         {
-            _upToDate_info(new Pdf24Creator(false, false, false, false));
+            var sw = new Pdf24Creator(false, false, false, false);
+            Assert.IsNotNull(sw);
+            var info = sw.info();
+            var newerInfo = sw.searchForNewer();
+            Assert.IsNotNull(newerInfo, "searchForNewer() returned null!");
+            var known = new Triple(info.newestVersion);
+            var newest = new Triple(newerInfo.newestVersion);
+            if (known < newest)
+            {
+                Assert.Inconclusive(
+                    "Known newest version of " + info.Name + " is " + info.newestVersion
+                    + ", but the current newest version is " + newerInfo.newestVersion + "!");
+            }
         }
 
     } // class
