@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017, 2018  Dirk Stolle
+    Copyright (C) 2017, 2018, 2020  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -168,15 +168,38 @@ namespace updater.software
             if (newVersion == newInfo.newestVersion)
                 return newInfo;
 
-            // Look into "https://get.geo.opera.com/ftp/pub/opera/info/md5sum.txt".
-            // Yes, MD5 is weak and broken, but that is the only checksum that
-            // Opera provides via FTP. Still better than nothing.
+            // Look into "https://get.geo.opera.com/ftp/pub/opera/desktop/<version>/win/Opera_<version>_Setup_x64.exe.sha256sum"
+            // to get the checksum for 64 bit installer.
             htmlCode = null;
             using (var client = new WebClient())
             {
                 try
                 {
-                    htmlCode = client.DownloadString("https://get.geo.opera.com/ftp/pub/opera/info/md5sum.txt");
+                    htmlCode = client.DownloadString("https://get.geo.opera.com/ftp/pub/opera/desktop/" + newVersion + "/win/Opera_" + newVersion + "_Setup_x64.exe.sha256sum");
+                }
+                catch (Exception ex)
+                {
+                    logger.Warn("Exception occurred while finding checksums for newer version of Opera: " + ex.Message);
+                    return null;
+                }
+                client.Dispose();
+            } // using
+
+            // checksum for 64 bit installer
+            Regex reg = new Regex("[0-9a-f]{64}");
+            Match m = reg.Match(htmlCode);
+            if (!m.Success)
+                return null;
+            string checksum64 = m.Value;
+
+            // Look into "https://get.geo.opera.com/ftp/pub/opera/desktop/<version>/win/Opera_<version>_Setup.exe.sha256sum"
+            // to get the checksum for 32 bit installer.
+            htmlCode = null;
+            using (var client = new WebClient())
+            {
+                try
+                {
+                    htmlCode = client.DownloadString("https://get.geo.opera.com/ftp/pub/opera/desktop/" + newVersion + "/win/Opera_" + newVersion + "_Setup.exe.sha256sum");
                 }
                 catch (Exception ex)
                 {
@@ -187,18 +210,10 @@ namespace updater.software
             } // using
 
             // checksum for 32 bit installer
-            Regex reg = new Regex("[0-9a-f]{32}  pub/opera/desktop/" + Regex.Escape(newVersion) + "/win/Opera_" + Regex.Escape(newVersion) + "_Setup\\.exe");
-            Match m = reg.Match(htmlCode);
-            if (!m.Success)
-                return null;
-            string checksum32 = m.Value.Substring(0, 32);
-
-            // checksum for 64 bit installer
-            reg = new Regex("[0-9a-f]{32}  pub/opera/desktop/" + Regex.Escape(newVersion) + "/win/Opera_" + Regex.Escape(newVersion) + "_Setup_x64\\.exe");
             m = reg.Match(htmlCode);
             if (!m.Success)
                 return null;
-            string checksum64 = m.Value.Substring(0, 32);
+            string checksum32 = m.Value;
 
             // Construct new version information based on old information.
             // Replace version number - both as newest version and in URL for download.
@@ -206,10 +221,10 @@ namespace updater.software
             newInfo.newestVersion = newVersion;
             newInfo.install32Bit.downloadUrl = newInfo.install32Bit.downloadUrl.Replace(oldVersion, newVersion);
             newInfo.install32Bit.checksum = checksum32;
-            newInfo.install32Bit.algorithm = HashAlgorithm.MD5;
+            newInfo.install32Bit.algorithm = HashAlgorithm.SHA256;
             newInfo.install64Bit.downloadUrl = newInfo.install64Bit.downloadUrl.Replace(oldVersion, newVersion);
             newInfo.install64Bit.checksum = checksum64;
-            newInfo.install64Bit.algorithm = HashAlgorithm.MD5;
+            newInfo.install64Bit.algorithm = HashAlgorithm.SHA256;
             return newInfo;
         }
 
