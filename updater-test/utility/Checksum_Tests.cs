@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017  Dirk Stolle
+    Copyright (C) 2017, 2020  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -36,11 +36,15 @@ namespace updater_test.utility
         [TestMethod]
         public void Test_areEqual_positive()
         {
-            Dictionary<string, string> cases = new Dictionary<string, string>();
-            cases.Add("a61f9380255bb154f001cc15f27374ea30de1013", "a61f9380255bb154f001cc15f27374ea30de1013");
-            cases.Add("a61f 9380 255b b154 f001 cc15 f273 74ea 30de 1013", "a61f9380255bb154f001cc15f27374ea30de1013");
-            cases.Add("6274E8CB 0358EF3E 3906A910 36BC8413 8A8FDE60 6A6E926B 9A580C79 F9CFC489",
-                "6274e8cb0358ef3e3906a91036bc84138a8fde606a6e926b9a580c79f9cfc489");
+            Dictionary<string, string> cases = new Dictionary<string, string>(3)
+            {
+                { "a61f9380255bb154f001cc15f27374ea30de1013", "a61f9380255bb154f001cc15f27374ea30de1013" },
+                { "a61f 9380 255b b154 f001 cc15 f273 74ea 30de 1013", "a61f9380255bb154f001cc15f27374ea30de1013" },
+                {
+                    "6274E8CB 0358EF3E 3906A910 36BC8413 8A8FDE60 6A6E926B 9A580C79 F9CFC489",
+                    "6274e8cb0358ef3e3906a91036bc84138a8fde606a6e926b9a580c79f9cfc489"
+                }
+            };
 
             foreach (var item in cases)
             {
@@ -73,13 +77,17 @@ namespace updater_test.utility
         [TestMethod]
         public void Test_calculate()
         {
-            Dictionary<HashAlgorithm, string> cases = new Dictionary<HashAlgorithm, string>();
-            cases.Add(HashAlgorithm.Unknown, null);
-            cases.Add(HashAlgorithm.SHA1, "da39a3ee5e6b4b0d3255bfef95601890afd80709");
-            cases.Add(HashAlgorithm.SHA256, "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855");
-            cases.Add(HashAlgorithm.SHA384, "38b060a751ac96384cd9327eb1b1e36a21fdb71114be07434c0cc7bf63f6e1da274edebfe76f65fbd51ad2f14898b95b");
-            cases.Add(HashAlgorithm.SHA512,
-                "cf83e1357eefb8bdf1542850d66d8007d620e4050b5715dc83f4a921d36ce9ce47d0d13c5d85f2b0ff8318d2877eec2f63b931bd47417a81a538327af927da3e");
+            Dictionary<HashAlgorithm, string> cases = new Dictionary<HashAlgorithm, string>(5)
+            {
+                { HashAlgorithm.Unknown, null },
+                { HashAlgorithm.SHA1, "da39a3ee5e6b4b0d3255bfef95601890afd80709" },
+                { HashAlgorithm.SHA256, "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855" },
+                { HashAlgorithm.SHA384, "38b060a751ac96384cd9327eb1b1e36a21fdb71114be07434c0cc7bf63f6e1da274edebfe76f65fbd51ad2f14898b95b" },
+                {
+                    HashAlgorithm.SHA512,
+                    "cf83e1357eefb8bdf1542850d66d8007d620e4050b5715dc83f4a921d36ce9ce47d0d13c5d85f2b0ff8318d2877eec2f63b931bd47417a81a538327af927da3e"
+                }
+            };
 
             // Create temporary file of zero bytes size.
             string fileName = Path.GetTempFileName();
@@ -128,12 +136,16 @@ namespace updater_test.utility
         [TestMethod]
         public void Test_normalise()
         {
-            Dictionary<string, string> cases = new Dictionary<string, string>();
-            cases.Add("a61f9380255bb154f001cc15f27374ea30de1013", "a61f9380255bb154f001cc15f27374ea30de1013");
-            cases.Add("a61f 9380 255b b154 f001 cc15 f273 74ea 30de 1013", "a61f9380255bb154f001cc15f27374ea30de1013");
-            cases.Add("6274E8CB 0358EF3E 3906A910 36BC8413 8A8FDE60 6A6E926B 9A580C79 F9CFC489",
-                "6274e8cb0358ef3e3906a91036bc84138a8fde606a6e926b9a580c79f9cfc489");
-            cases.Add("   a61f   ghijklmnopqrstuvwxyz \t \\ / ", "a61f");
+            Dictionary<string, string> cases = new Dictionary<string, string>(4)
+            {
+                { "a61f9380255bb154f001cc15f27374ea30de1013", "a61f9380255bb154f001cc15f27374ea30de1013" },
+                { "a61f 9380 255b b154 f001 cc15 f273 74ea 30de 1013", "a61f9380255bb154f001cc15f27374ea30de1013" },
+                {
+                    "6274E8CB 0358EF3E 3906A910 36BC8413 8A8FDE60 6A6E926B 9A580C79 F9CFC489",
+                    "6274e8cb0358ef3e3906a91036bc84138a8fde606a6e926b9a580c79f9cfc489"
+                },
+                { "   a61f   ghijklmnopqrstuvwxyz \t \\ / ", "a61f" }
+            };
 
             foreach (var item in cases)
             {

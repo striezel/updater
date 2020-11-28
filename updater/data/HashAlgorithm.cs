@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017  Dirk Stolle
+    Copyright (C) 2017, 2020  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -27,13 +27,6 @@ namespace updater.data
         /// unknown or no hash algorithm
         /// </summary>
         Unknown,
-
-        /// <summary>
-        /// Message Digest 5, 128 bits
-        /// (This algoritm is weak and practically broken. But some vendors use
-        ///  it as the only checksum for their setups/installers.)
-        /// </summary>
-        MD5,
         
         /// <summary>
         /// secure hash algorithm 1, 160 bits
@@ -54,5 +47,5 @@ namespace updater.data
         /// secure hash algorithm 2, 512 bits
         /// </summary>
         SHA512
-    } //enum
-} //namespace
+    } // enum
+} // namespace
