@@ -83,18 +83,20 @@ namespace updater.software
         /// details about the software.</returns>
         public override AvailableSoftware knownInfo()
         {
+            var pdf24 = new InstallInfoMsi(
+                "https://en.pdf24.org/products/pdf-creator/download/pdf24-creator-10.0.6.msi",
+                HashAlgorithm.SHA512,
+                "1a52552e59681e1235fe4a65a024efc8fb5d97e66969e7bea5650db49a3fe31c8eeeff40b64caf301074aacdf653dd5bd33baff4a485043f6570802a8fc19068",
+                "CN=geek software GmbH, O=geek software GmbH, STREET=Friedrichstr. 171, L=Berlin, PostalCode=10117, C=DE",
+                getOptions() + " /qn /norestart");
+
             return new AvailableSoftware("PDF24 Creator",
-                "10.0.3",
+                "10.0.6",
                 "^PDF24 Creator$",
-                null, // no 64 bit version
-                new InstallInfoMsi(
-                    "https://en.pdf24.org/products/pdf-creator/download/pdf24-creator-10.0.3.msi",
-                    HashAlgorithm.SHA512,
-                    "86b33047b6455104ad93d61338301a257469571fcef3efb354c7e76c7b0b44e49b9d6c3e0de40d2d71627d0ac3c8e755b7b5bba9207cdb54ce49b71316403515",
-                    "CN=geek software GmbH, O=geek software GmbH, STREET=Friedrichstr. 171, L=Berlin, PostalCode=10117, C=DE",
-                    getOptions() + " /qn /norestart"),
-                // There is no 64 bit installer.
-                null);
+                "^PDF24 Creator$", // 64 bit version uses same pattern as 32 bit.
+                pdf24,
+                pdf24 // Newer MSI (>=10.x.x) is 64 bit only, but who does not have a 64 bit Windows these days?
+                );
         }
 
 
