@@ -24,10 +24,10 @@ namespace updater.operations
     public interface IOperation
     {
         /// <summary>
-        /// performs the given operation
+        /// Performs the given operation.
         /// </summary>
         /// <returns>Returns zero in case of success.
         /// Returns a non-zero error code in case of failure.</returns>
         int perform();
-    } //interface
-} //namespace
+    } // interface
+} // namespace

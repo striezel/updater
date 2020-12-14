@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017  Dirk Stolle
+    Copyright (C) 2017, 2020  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -21,16 +21,19 @@ using updater.cli;
 
 namespace updater.operations
 {
+    /// <summary>
+    /// Lists the IDs of softwares.
+    /// </summary>
     public class IdList : IOperation
     {
         /// <summary>
-        /// default constructor
+        /// Constructor.
         /// </summary>
         /// <param name="_opts">parameters / options from command line</param>
         public IdList(Options _opts)
         {
             opts = _opts;
-            //no need to get newer versions, if user just wants the ID list
+            // no need to get newer versions, if user just wants the ID list
             opts.autoGetNewer = false;
         }
 
@@ -41,7 +44,7 @@ namespace updater.operations
             foreach (var sw in all)
             {
                 Console.WriteLine(sw.info().Name + ": " + string.Join(", ", sw.id()));
-            } //foreach
+            } // foreach
             return 0;
         }
 
@@ -49,6 +52,6 @@ namespace updater.operations
         /// <summary>
         /// all command line options parsed
         /// </summary>
-        private Options opts;
-    } //class
-} //namespace
+        private readonly Options opts;
+    } // class
+} // namespace

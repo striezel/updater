@@ -25,19 +25,22 @@ using updater.data;
 
 namespace updater.operations
 {
+    /// <summary>
+    /// Operation implementation that performs software updates.
+    /// </summary>
     public class Update : IOperation
     {
         /// <summary>
         /// NLog.Logger for Update class
         /// </summary>
-        private static NLog.Logger logger = NLog.LogManager.GetLogger(typeof(Update).FullName);
+        private static readonly NLog.Logger logger = NLog.LogManager.GetLogger(typeof(Update).FullName);
 
 
         /// <summary>
         /// default timeout (in seconds) after which an update of a single
         /// application will be cancelled, if it is still in progress
         /// </summary>
-        public const uint defaultTimeout = 1800; //1800 s = 30 min
+        public const uint defaultTimeout = 1800; // 1800 s = 30 min
 
 
         /// <summary>
@@ -49,17 +52,17 @@ namespace updater.operations
 
 
         /// <summary>
-        /// default constructor
+        /// Constructor.
         /// </summary>
         /// <param name="_options">all programm options</param>
         public Update(Options _options)
         {
             opts = _options;
         }
-        
-        
+
+
         /// <summary>
-        /// performs software updates
+        /// Performs software updates.
         /// </summary>
         /// <param name="status">software status, as retrieved via SoftwareStatus.query()</param>
         /// <param name="timeoutPerUpdate">maximum time in seconds to wait per update</param>
@@ -74,7 +77,7 @@ namespace updater.operations
                 logger.Info("No known software was found, so no update will be performed.");
                 return -1;
             }
-            //set some reasonable timeout, if necessary
+            // set some reasonable timeout, if necessary
             if (timeoutPerUpdate <= minimumTimeout)
             {
                 timeoutPerUpdate = defaultTimeout;
@@ -89,7 +92,6 @@ namespace updater.operations
                 InstallInfo instInfo = null;
                 switch (entry.type)
                 {
-                    
                     case ApplicationType.Bit32:
                         instInfo = entry.software.info().install32Bit;
                         break;
@@ -104,9 +106,9 @@ namespace updater.operations
                         logger.Warn("Warning: Unknown application type detected for "
                             + entry.software.info().Name + "! Update will be aborted.");
                         return -1 - updatedApplications;
-                } //switch
+                }
 
-                //If no verification method is provided, we do not even try to download the file.
+                // If no verification method is provided, we do not even try to download the file.
                 if (!instInfo.canBeVerified())
                 {
                     logger.Error("Error: No checksum and no signature information for download of "
@@ -116,7 +118,7 @@ namespace updater.operations
                     return -1 - updatedApplications;
                 }
 
-                //check for blocking processes
+                // check for blocking processes
                 if (utility.Processes.processesExist(entry.software.blockerProcesses(entry.detected)))
                 {
                     logger.Warn("Warning: At least one process was found that "
@@ -125,7 +127,7 @@ namespace updater.operations
                     continue;
                 }
 
-                //download file
+                // download file
                 if (string.IsNullOrWhiteSpace(instInfo.downloadUrl))
                 {
                     logger.Error("Error: No known download URL for " + entry.software.info().Name + "!");
@@ -139,13 +141,13 @@ namespace updater.operations
                     return -1 - updatedApplications;
                 }
 
-                //file verification
+                // file verification
                 bool verifiedChecksum = false;
                 bool verifiedSignature = false;
-                //checksum verification
+                // checksum verification
                 if (instInfo.hasChecksum())
                 {
-                    //calculate checksum
+                    // calculate checksum
                     logger.Info("Calculating checksum of " + downloadedFile + " ...");
                     string hash = utility.Checksum.calculate(downloadedFile, instInfo.algorithm);
                     if (string.IsNullOrWhiteSpace(hash))
@@ -163,8 +165,9 @@ namespace updater.operations
                     }
                     logger.Info("Info: Checksum of " + downloadedFile + " is correct.");
                     verifiedChecksum = true;
-                } //if checksum
-                //signature verification
+                } // if checksum
+
+                // signature verification
                 if (instInfo.hasSignature())
                 {
                     logger.Info("Verifying signature of " + downloadedFile + " ...");
@@ -177,7 +180,7 @@ namespace updater.operations
                     }
                     logger.Info("Info: Signature and publisher of " + downloadedFile + " are correct.");
                     verifiedSignature = true;
-                } //if signature
+                } // if signature
                 if (!verifiedChecksum && !verifiedSignature)
                 {
                     logger.Error("Error: Downloaded file " + downloadedFile
@@ -188,8 +191,8 @@ namespace updater.operations
                     return -1 - updatedApplications;
                 }
 
-                //check for blocking processes - again, because download can take
-                // enough time to start some new processes
+                // Check for blocking processes - again, because download can take
+                // enough time to start some new processes.
                 if (utility.Processes.processesExist(entry.software.blockerProcesses(entry.detected)))
                 {
                     logger.Warn("Warning: At least one process was found that "
@@ -198,10 +201,10 @@ namespace updater.operations
                     continue;
                 }
 
-                //start update process
+                // start update process
                 try
                 {
-                    //preparational process needed?
+                    // preparational process needed?
                     if (entry.software.needsPreUpdateProcess(entry.detected))
                     {
                         var preProcs = entry.software.preUpdateProcess(entry.detected);
@@ -231,10 +234,10 @@ namespace updater.operations
                                             + preProc.ExitCode.ToString() + ".");
                                         break;
                                     }
-                                    //only wait up to timeoutPerUpdate seconds
+                                    // only wait up to timeoutPerUpdate seconds
                                 } while (intervalCounter <= timeoutPerUpdate);
                                 bool success = preProc.HasExited && (preProc.ExitCode == 0);
-                                //Kill it, if it is not done yet.
+                                // Kill it, if it is not done yet.
                                 if (!preProc.HasExited)
                                 {
                                     logger.Error("Error: Killing pre-update process, because timeout has been reached.");
@@ -247,20 +250,20 @@ namespace updater.operations
                                         + entry.software.info().Name + ".");
                                     return -1 - updatedApplications;
                                 }
-                            } //try-c
+                            } // try-c
                             catch (Exception ex)
                             {
                                 logger.Error("Error: An exception occurred while running a pre-update tast for "
                                     + entry.software.info().Name + ": " + ex.Message);
                                 return -1 - updatedApplications;
                             }
-                        } //foreach
-                    } //if preparational process is needed
+                        } // foreach
+                    } // if preparational process is needed
 
                     var proc = instInfo.createInstallProccess(downloadedFile, entry.detected);
                     if (null == proc)
                     {
-                        //error while creating install process - should never happen
+                        // error while creating install process - should never happen
                         logger.Error("Error: Could not create install process for "
                             + entry.software.info().Name + "!");
                         return -1 - updatedApplications;
@@ -283,7 +286,7 @@ namespace updater.operations
                                     + proc.ExitCode.ToString() + ".");
                                 break;
                             }
-                            //only wait up to timeoutPerUpdate seconds
+                            // only wait up to timeoutPerUpdate seconds
                         } while (intervalCounter <= timeoutPerUpdate);
                         // Update was successful, if process has exited already,
                         // i.e. there was no timeout.
@@ -293,7 +296,7 @@ namespace updater.operations
                         bool success = proc.HasExited
                             && ((proc.ExitCode == 0)
                             || ((proc.ExitCode == InstallInfoMsi.successRebootRequired) && (instInfo is InstallInfoMsi)));
-                        //Kill it, if it is not done yet.
+                        // Kill it, if it is not done yet.
                         if (!proc.HasExited)
                         {
                             logger.Warn("Warning: Killing update process, because timeout has been reached.");
@@ -306,22 +309,22 @@ namespace updater.operations
                             if ((instInfo is InstallInfoMsi) && (proc.ExitCode == InstallInfoMsi.successRebootRequired))
                             {
                                 logger.Warn("Warning: A reboot is required to"
-                                    +" finish the update of " + entry.software.info().Name + ".");
-                            } //if MSI installer requires reboot
-                        } //if success
+                                    + " finish the update of " + entry.software.info().Name + ".");
+                            } // if MSI installer requires reboot
+                        } // if success
                         else
                         {
                             logger.Error("Error: Could not update " + entry.software.info().Name + ".");
                             return -1 - updatedApplications;
                         }
-                    } //try-c
+                    } // try-c
                     catch (Exception ex)
                     {
                         logger.Error("Error: Exception occurred while updating "
                             + entry.software.info().Name + ": " + ex.Message);
                         return -1 - updatedApplications;
-                    } //try-catch
-                } //try-fin
+                    } // try-catch
+                } // try-fin
                 finally
                 {
                     try
@@ -333,15 +336,15 @@ namespace updater.operations
                         logger.Error("Error: Could not delete installer file "
                             + downloadedFile + " after update: " + ex.Message);
                     }
-                } //try-finally
-            } //foreach
+                } // try-finally
+            } // foreach
 
             return updatedApplications;
         }
 
 
         /// <summary>
-        /// downloads a given file to the local cache directory
+        /// Downloads a given file to the local cache directory.
         /// </summary>
         /// <param name="url">URL of the file</param>
         /// <returns>Returns path of the local file, if successful.
@@ -356,12 +359,12 @@ namespace updater.operations
             {
                 Uri uri = new Uri(url);
                 int segCount = uri.Segments.Length;
-                if (!string.IsNullOrWhiteSpace(uri.Segments[segCount-1]))
+                if (!string.IsNullOrWhiteSpace(uri.Segments[segCount - 1]))
                     basename = Path.GetFileName(uri.LocalPath);
             }
             catch (Exception)
             {
-                //ignore
+                // ignore it, cannot fix failed download
             }
             if (string.IsNullOrWhiteSpace(basename))
                 basename = Path.GetRandomFileName() + ".exe";
@@ -379,7 +382,7 @@ namespace updater.operations
                     logger.Error("Error while creating cache directory: " + ex.Message);
                     return null;
                 }
-            } //if
+            }
             string localFile = Path.Combine(cacheDirectory, basename);
             using (WebClient wc = new WebClient())
             {
@@ -394,13 +397,13 @@ namespace updater.operations
                     wc.Dispose();
                     return null;
                 }
-            } //using
+            } // using
             return localFile;
         }
 
 
         /// <summary>
-        /// get the path of the download cache directory
+        /// Get the path of the download cache directory.
         /// </summary>
         /// <returns>Returns path of the download cache directory on success.
         /// Returns null, if an error occurred.</returns>
@@ -417,7 +420,7 @@ namespace updater.operations
             }
             catch (Exception)
             {
-                //ignore
+                // ignore
             }
             if (!string.IsNullOrWhiteSpace(path))
                 return Path.Combine(path, ".updaterCache");
@@ -428,7 +431,7 @@ namespace updater.operations
         /// <summary>
         /// program options
         /// </summary>
-        private Options opts;
+        private readonly Options opts;
 
 
         public int perform()
@@ -452,5 +455,5 @@ namespace updater.operations
                 logger.Info("No applications were updated.");
             return 0;
         }
-    } //class
-} //namespace
+    } // class
+} // namespace

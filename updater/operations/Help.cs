@@ -21,7 +21,7 @@ using System;
 namespace updater.operations
 {
     /// <summary>
-    /// displays help message with info about parameters
+    /// Displays help message with info about parameters.
     /// </summary>
     public class Help : IOperation
     {

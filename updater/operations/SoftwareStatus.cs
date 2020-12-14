@@ -153,7 +153,7 @@ namespace updater.operations
         /// <summary>
         /// all necessary options
         /// </summary>
-        private Options opts;
+        private readonly Options opts;
 
 
         /// <summary>

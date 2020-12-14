@@ -64,5 +64,5 @@ namespace updater.operations
         /// shows help message
         /// </summary>
         Help
-    } //enum
-} //namespace
+    } // enum
+} // namespace
