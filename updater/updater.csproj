@@ -84,7 +84,6 @@
     <Compile Include="operations\IOperation.cs" />
     <Compile Include="operations\License.cs" />
     <Compile Include="operations\Operation.cs" />
-    <Compile Include="operations\Detect.cs" />
     <Compile Include="operations\SoftwareStatus.cs" />
     <Compile Include="operations\Version.cs" />
     <Compile Include="operations\Update.cs" />
@@ -96,7 +95,6 @@
     <Compile Include="detection\DetectorMSI.cs" />
     <Compile Include="data\DetectedSoftware.cs" />
     <Compile Include="detection\DetectorRegistry.cs" />
-    <Compile Include="io\CSVWriter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">

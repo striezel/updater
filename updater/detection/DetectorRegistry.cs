@@ -28,9 +28,10 @@ namespace updater.detection
     public class DetectorRegistry
     {
         /// <summary>
-        /// tries to get a list of installed software from the registry
+        /// Tries to get a list of installed software from the registry.
         /// </summary>
-        /// <returns>Returns a list of installed software.</returns>
+        /// <returns>Returns a list of installed software.
+        /// Returns null, if an error occurred.</returns>
         public static List<data.DetectedSoftware> detect()
         {
             if (Environment.Is64BitOperatingSystem)
@@ -41,7 +42,7 @@ namespace updater.detection
                     return null;
                 data64.AddRange(data32);
                 return data64;
-            } //if 64 bit OS
+            } // if 64 bit OS
             else
             {
                 return detectSingleView(RegistryView.Registry32);
@@ -62,7 +63,6 @@ namespace updater.detection
             if (null == rKey)
             {
                 baseKey.Close();
-                baseKey = null;
                 return null;
             }
 
@@ -97,16 +97,13 @@ namespace updater.detection
                         case RegistryView.Default:
                         default:
                             throw new ArgumentOutOfRangeException(nameof(view), "Unknown registry view type!");
-                    } //switch
+                    }
                     if (e.containsInformation())
                         entries.Add(e);
-                } //if subKey was opened
-            } //foreach
-            subKeys = null;
+                } // if subKey was opened
+            } // foreach
             rKey.Close();
-            rKey = null;
             baseKey.Close();
-            baseKey = null;
             return entries;
         }
     } // class

@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017, 2018  Dirk Stolle
+    Copyright (C) 2017, 2018, 2020  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -60,9 +60,6 @@ namespace updater.cli
                     case "query":
                     case "status":
                         opts.op = Operation.Check;
-                        break;
-                    case "detect":
-                        opts.op = Operation.Detect;
                         break;
                     case "update":
                     case "upgrade":
@@ -128,7 +125,7 @@ namespace updater.cli
                             logger.Warn("Hint: Specified timeout was less than two minutes / 120 seconds."
                                 + " It has been set to " + opts.timeout.ToString() + " seconds intead.");
                         }
-                        ++i; //skip next argument, because that is the timeout
+                        ++i; // skip next argument, because that is the timeout
                         break;
                     case "--exclude":
                     case "--except":
@@ -151,9 +148,9 @@ namespace updater.cli
                             return ReturnCodes.rcInvalidParameter;
                         }
                         opts.excluded.Add(id);
-                        ++i; //skip next argument, because that is the ID
+                        ++i; // skip next argument, because that is the ID
                         break;
-                    //options for PDF24 Creator
+                    // options for PDF24 Creator
                     case "--pdf24-creator-autoupdate":
                     case "--pdf24-autoupdate":
                         opts.pdf24autoUpdate = true;
@@ -189,10 +186,9 @@ namespace updater.cli
                     default:
                         logger.Error("Error: " + param + " is not a valid command line option!");
                         return ReturnCodes.rcInvalidParameter;
-                } //switch
-            } //for
+                } // switch
+            } // for
             return 0;
         }
-
-    } //class
-} //namespace
+    } // class
+} // namespace

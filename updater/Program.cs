@@ -1,6 +1,6 @@
 ﻿/*
     updater, command line interface
-    Copyright (C) 2016, 2017  Dirk Stolle
+    Copyright (C) 2016, 2017, 2020  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -47,9 +47,6 @@ namespace updater
             IOperation operation;
             switch (options.op)
             {
-                case Operation.Detect:
-                    operation = new Detect();
-                    break;
                 case Operation.Check:
                     operation = new SoftwareStatus(options);
                     break;
