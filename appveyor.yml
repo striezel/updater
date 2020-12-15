@@ -1,4 +1,4 @@
-version: 2020.10.06.{build}
+version: 2020.12.15.{build}
 skip_tags: true
 image: Visual Studio 2019
 configuration: Debug
