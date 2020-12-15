@@ -92,7 +92,6 @@
     <Compile Include="data\HashAlgorithm.cs" />
     <Compile Include="data\InstallInfo.cs" />
     <Compile Include="data\QueryEntry.cs" />
-    <Compile Include="detection\DetectorMSI.cs" />
     <Compile Include="data\DetectedSoftware.cs" />
     <Compile Include="detection\DetectorRegistry.cs" />
     <Compile Include="Program.cs" />
