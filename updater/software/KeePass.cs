@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017, 2018, 2019, 2020  Dirk Stolle
+    Copyright (C) 2017, 2018, 2019, 2020, 2021  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -59,13 +59,13 @@ namespace updater.software
         public override AvailableSoftware knownInfo()
         {
             return new AvailableSoftware("KeePass",
-                "2.46",
+                "2.47",
                 "^KeePass Password Safe [2-9]\\.[0-9]{2}(\\.[0-9]+)?$",
                 null,
                 new InstallInfoExe(
-                    "https://netcologne.dl.sourceforge.net/project/keepass/KeePass%202.x/2.46/KeePass-2.46-Setup.exe",
+                    "https://netcologne.dl.sourceforge.net/project/keepass/KeePass%202.x/2.47/KeePass-2.47-Setup.exe",
                     HashAlgorithm.SHA256,
-                    "F01157E9 70AD1D23 0BC99E19 ADF9C79F 8A97EBE8 47F8BFDE 5D2D076A 062B2A68",
+                    "3EB2723A E5363C84 00B494A5 C2BB24D9 11E622EC BC15B20A AA32526A 7BB45E42",
                     publisherX509,
                     "/VERYSILENT"),
                 // There is no 64 bit installer yet.
