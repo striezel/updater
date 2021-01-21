@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017, 2018, 2019, 2020  Dirk Stolle
+    Copyright (C) 2017, 2018, 2019, 2020, 2021  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -58,21 +58,21 @@ namespace updater.software
         /// details about the software.</returns>
         public override AvailableSoftware knownInfo()
         {
-            string version = "7.9.1";
+            string version = "7.9.2";
             return new AvailableSoftware("Notepad++",
                 version,
                 "^Notepad\\+\\+ \\(32\\-bit x86\\)$|^Notepad\\+\\+$",
                 "^Notepad\\+\\+ \\(64\\-bit x64\\)$",
                 new InstallInfoExe(
-                    "http://download.notepad-plus-plus.org/repository/7.x/" + version + "/npp." + version + ".Installer.exe",
+                    "https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v" + version + "/npp." + version + ".Installer.exe",
                     HashAlgorithm.SHA256,
-                    "f7ea8518e21e42f500684c3be35bfa10d1dff17d7343a67d310ff0afcc465621",
+                    "a797da6e8cebe364becc30d3d5d540897166e7674a0fc8e386fd9593d0838f43",
                     publisherX509,
                     "/S"),
                 new InstallInfoExe(
-                    "http://download.notepad-plus-plus.org/repository/7.x/" + version + "/npp." + version + ".Installer.x64.exe",
+                    "https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v" + version + "/npp." + version + ".Installer.x64.exe",
                     HashAlgorithm.SHA256,
-                    "751d3634a76ea518f6e0a63575aac8d6a384eacf789f40eac6becf8dc859840b",
+                    "9eb36c992f1d4bb2d27cb9c0d14b9b0c762d59e544b27754afc2bc0a9b219dcd",
                     publisherX509,
                     "/S")
                 );
