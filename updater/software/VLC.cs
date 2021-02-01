@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017, 2018, 2019, 2020  Dirk Stolle
+    Copyright (C) 2017, 2018, 2019, 2020, 2021  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -25,6 +25,9 @@ using updater.versions;
 
 namespace updater.software
 {
+    /// <summary>
+    /// Handles updates for VLC media player.
+    /// </summary>
     public class VLC : NoPreUpdateProcessSoftware
     {
         /// <summary>
@@ -56,7 +59,7 @@ namespace updater.software
         /// details about the software.</returns>
         public override AvailableSoftware knownInfo()
         {
-            const string version = "3.0.11";
+            const string version = "3.0.12";
             return new AvailableSoftware("VLC media player",
                 version,
                 "^VLC media player$",
@@ -65,14 +68,14 @@ namespace updater.software
                 new InstallInfoExe(
                     "https://get.videolan.org/vlc/" + version + "/win32/vlc-" + version + "-win32.exe",
                     HashAlgorithm.SHA256,
-                    "86a95690916f9f5b86593ef3f146c101d11f5d5e55670613bf88211ca3036aca",
+                    "85511f1ba0d4b61a6bf1a5a6aa2811d56b2b0b6919bf06dc2bce0d37027e45d1",
                     publisherX509,
                     "/S"),
                 // 64 bit installer
                 new InstallInfoExe(
                     "https://get.videolan.org/vlc/" + version + "/win64/vlc-" + version + "-win64.exe",
                     HashAlgorithm.SHA256,
-                    "2e41f1959ad77c34746715da5027c5ed554c35361397c9984a9ef78bc0b5e937",
+                    "d6e211c71c3f2ddebd950770779bb3fd71c2d977c04ff40ea9e3e5ee9d9d0ec9",
                     publisherX509,
                     "/S")
                 );
