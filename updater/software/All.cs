@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017, 2018, 2019  Dirk Stolle
+    Copyright (C) 2017, 2018, 2019, 2021  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -29,7 +29,7 @@ namespace updater.software
         /// <summary>
         /// NLog.Logger for class All
         /// </summary>
-        private static NLog.Logger logger = NLog.LogManager.GetLogger(typeof(All).FullName);
+        private static readonly NLog.Logger logger = NLog.LogManager.GetLogger(typeof(All).FullName);
 
 
         /// <summary>
@@ -41,32 +41,35 @@ namespace updater.software
         private static List<ISoftware> getUnfiltered(Options opts)
         {
             bool autoGetNewer = opts.autoGetNewer;
-            var result = new List<ISoftware>();
-            result.Add(new Audacity(autoGetNewer));
-            result.Add(new Calibre(autoGetNewer));
-            result.Add(new CCleaner(autoGetNewer));
-            result.Add(new CDBurnerXP(autoGetNewer));
+            var result = new List<ISoftware>()
+            {
+                new Audacity(autoGetNewer),
+                new Calibre(autoGetNewer),
+                new CCleaner(autoGetNewer),
+                new CDBurnerXP(autoGetNewer),
+                new CMake(autoGetNewer)
+            };
 
             // Firefox (release channel)
             var languages = Firefox.validLanguageCodes();
             foreach (var lang in languages)
             {
                 result.Add(new Firefox(lang, autoGetNewer));
-            } //foreach
+            }
 
             // Firefox ESR
             languages = FirefoxESR.validLanguageCodes();
             foreach (var lang in languages)
             {
                 result.Add(new FirefoxESR(lang, autoGetNewer));
-            } //foreach
+            }
 
             // Firefox Developer Edition
             languages = FirefoxAurora.validLanguageCodes();
             foreach (var lang in languages)
             {
                 result.Add(new FirefoxAurora(lang, autoGetNewer));
-            } //foreach
+            }
 
             result.Add(new FileZilla(autoGetNewer));
             result.Add(new GIMP(autoGetNewer));
@@ -86,7 +89,7 @@ namespace updater.software
             foreach (var lang in languages)
             {
                 result.Add(new SeaMonkey(lang, autoGetNewer));
-            } //foreach
+            }
             
             // old SeaMonkey languages (available until SeaMonkey 2.46 and
             // dropped in SeaMonkey 2.48)
@@ -94,7 +97,7 @@ namespace updater.software
             foreach (var lang in languages)
             {
                 result.Add(new SeaMonkey246(lang, autoGetNewer));
-            } //foreach
+            }
 
             result.Add(new SevenZip(autoGetNewer));
             
@@ -103,7 +106,7 @@ namespace updater.software
             foreach (var lang in languages)
             {
                 result.Add(new Thunderbird(lang, autoGetNewer));
-            } //foreach
+            }
 
             result.Add(new VLC(autoGetNewer));
             result.Add(new WinSCP(autoGetNewer));
@@ -138,7 +141,7 @@ namespace updater.software
                 }
                 if (!removed)
                     ++i;
-            } //for
+            } // for
 
             return result;
         }

@@ -168,7 +168,7 @@ namespace updater.software
             // parsed version numbers instead.
             Quartet verDetected = new Quartet(detected.displayVersion);
             Quartet verNewest = new Quartet(info().newestVersion);
-            return (verDetected < verNewest);
+            return verDetected < verNewest;
         }
 
 

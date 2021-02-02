@@ -6,11 +6,11 @@ updater application.
 ## Implemented
 
 * 7-Zip
-* Adobe Shockwave
 * Audacity
 * Calibre
 * CCleaner
 * CDBurnerXP
+* CMake
 * FileZilla FTP Client
 * GIMP
 * Inkscape
