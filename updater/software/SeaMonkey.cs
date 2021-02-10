@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017, 2018, 2020  Dirk Stolle
+    Copyright (C) 2017, 2018, 2020, 2021  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -71,31 +71,32 @@ namespace updater.software
         private static Dictionary<string, string> knownChecksums()
         {
             // These are the checksums for Windows 32 bit installers from
-            // https://archive.mozilla.org/pub/seamonkey/releases/2.53.5/SHA1SUMS.txt
-            return new Dictionary<string, string>(22)
+            // https://archive.mozilla.org/pub/seamonkey/releases/2.53.6/SHA1SUMS.txt
+            return new Dictionary<string, string>(23)
             {
-                { "cs", "e1dfc3ba25c8456be191e4154304d9ddd63c3535" },
-                { "de", "f435220758269c118b0a88ce74f68ff5c34d9aed" },
-                { "en-GB", "7b2837d03e7aac7045ec60b63acf030a6a6920ff" },
-                { "en-US", "0682bdffc389670b7fc689c4894535c9f9dce2aa" },
-                { "es-AR", "8067775d635b30980d0806bd6fe843bdb98e5879" },
-                { "es-ES", "7d8a9fccb2ebbd8dcdcde037ccfcff56dca174d6" },
-                { "fi", "a5b8ce90f1c57221f412b618f2fc477688a54d72" },
-                { "fr", "aa580ac07a0ac3c3694da72803496550feee7b9a" },
-                { "hu", "524a0ccef19a8cdd71e4b82d93e32597bf332906" },
-                { "it", "d3645a38bcbc67948059e1e7e24443931d0a2b85" },
-                { "ja", "033e76b5b8a89652c6a54821326b1926fbe04528" },
-                { "ka", "986fe5d6938df7bc0b5364108923f334e9ba69a0" },
-                { "nb-NO", "d9f3933fb928504b32055226771954ca8a203f5a" },
-                { "nl", "fc563a34b8b832d0678c40b42c38bef76ebeb5ef" },
-                { "pl", "a52d459d2715fe7b5676243e45b32517ab587d23" },
-                { "pt-BR", "13db742f8b5699da29054ef4c3e2ab89469c73dd" },
-                { "pt-PT", "cbff2cf40a7698d79b52b5f7329846fe858e9171" },
-                { "ru", "e63b7e749735dc9f304c8e0e6c209c9f2c989a95" },
-                { "sk", "5dc2865c7b2c7a63fa44d3ac2f333a272336afee" },
-                { "sv-SE", "ead76e7b28cfbbe591b1cb78dc29777877c83ff5" },
-                { "zh-CN", "509320498edbd7ebb7f439fe2cc6abb82ae83d92" },
-                { "zh-TW", "9af11810a5d1bed18f9724e6e481b995856c077b" }
+                { "cs", "5ab46fe9a3be4471331b77935997d2a4c1b4377d" },
+                { "de", "4aaa79bdbdb70883f0d0c05d797b8263f8965df2" },
+                { "el", "6d72f105856e8db9480490d1e07ff91c6f13b161" },
+                { "en-GB", "7ccee70c54580c0c0949a9bc86737fbcb35c46ed" },
+                { "en-US", "1a07d66427a12d4bd0aa51c63a25d90cccaf2c46" },
+                { "es-AR", "bb000840310fd0e65abbd1abb0f05251bcd85ca8" },
+                { "es-ES", "a789a74d3fa204ca8a94e046ef963be0187d899a" },
+                { "fi", "4df54613f90568491088e2b9c9d2285b7d21267e" },
+                { "fr", "a9fa40bd316063a2b8e0389046e626e36840e9e5" },
+                { "hu", "c6f8ec692095272c5f5c79ef9423b9185a0098cc" },
+                { "it", "ffd03fb94a115b65de1272a064ebf6d2e3fa4f09" },
+                { "ja", "5b31eb61cd08a3e3cfdf700fa926da33f0a9451e" },
+                { "ka", "7fc9e29843b4fadbfca0841fb66ef3fe1db9b74b" },
+                { "nb-NO", "0a9a08543120b798822428c03be7c264b6448820" },
+                { "nl", "8055d149d0bc98faa79c9a56de884fe13fd5ff26" },
+                { "pl", "c486210ce0f6bed21b78cdc291633d3d05b2ea6e" },
+                { "pt-BR", "79fdf02ee2301a2bff8ba76fd4379fae3f518d99" },
+                { "pt-PT", "2b40a950ed51213f8a76ca6986df2c246721b5aa" },
+                { "ru", "b37f9a7e0d1c339a756fa6317d424fbf9c14c9d5" },
+                { "sk", "c401c1a0d611bcd498b2bb66ac9346f34e51cc19" },
+                { "sv-SE", "396c1520f77c8762d84a6fe17ce3c6a7f9c85703" },
+                { "zh-CN", "f6cbfc1ddf13cac9f98812d8eda8ac34b2b9c0d6" },
+                { "zh-TW", "a968fd14ce825ab0a2a157b8565c03aeb1d6d062" }
             };
         }
 
@@ -118,7 +119,7 @@ namespace updater.software
         /// details about the software.</returns>
         public override AvailableSoftware knownInfo()
         {
-            const string knownVersion = "2.53.5";
+            const string knownVersion = "2.53.6";
             return new AvailableSoftware("SeaMonkey (" + languageCode + ")",
                 knownVersion,
                 "^SeaMonkey [0-9]+\\.[0-9]+(\\.[0-9]+)? \\(x86 " + Regex.Escape(languageCode) + "\\)$",
