@@ -379,7 +379,7 @@ namespace updater.software
         /// <summary>
         /// Tries to get the checksums of the newer version.
         /// </summary>
-        /// <returns>Returns a string array containing the checksums for 32 bit an 64 bit (in that order), if successfull.
+        /// <returns>Returns a string array containing the checksums for 32 bit and 64 bit (in that order), if successfull.
         /// Returns null, if an error occurred.</returns>
         private string[] determineNewestChecksums(string newerVersion)
         {
