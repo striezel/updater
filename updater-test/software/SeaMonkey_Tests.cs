@@ -100,7 +100,7 @@ namespace updater_test.software
             var dect = new DetectedSoftware();
             foreach (var item in versions)
             {
-                dect.displayVersion = "2.9";
+                dect.displayVersion = item;
                 Assert.IsTrue(sm.needsUpdate(dect));
             }
         }

@@ -54,21 +54,23 @@ namespace updater.software
                 throw new ArgumentNullException("langCode", "The language code must not be null, empty or whitespace!");
             }
             languageCode = langCode.Trim();
-            var d = knownChecksums();
-            if (!d.ContainsKey(languageCode))
+            var d32 = knownChecksums32Bit();
+            var d64 = knownChecksums64Bit();
+            if (!d32.ContainsKey(languageCode) || !d64.ContainsKey(languageCode))
             {
                 logger.Error("The string '" + langCode + "' does not represent a valid language code for SeaMonkey!");
                 throw new ArgumentOutOfRangeException("langCode", "The string '" + langCode + "' does not represent a valid language code!");
             }
-            checksum = d[languageCode];
+            checksum32Bit = d32[languageCode];
+            checksum64Bit = d64[languageCode];
         }
 
 
         /// <summary>
-        /// Gets a dictionary with the known checksums for the installers (key: language, value: checksum).
+        /// Gets a dictionary with the known checksums for the 32 bit installers (key: language, value: checksum).
         /// </summary>
         /// <returns>Returns a dictionary where keys are the language codes and values are the associated checksums.</returns>
-        private static Dictionary<string, string> knownChecksums()
+        private static Dictionary<string, string> knownChecksums32Bit()
         {
             // These are the checksums for Windows 32 bit installers from
             // https://archive.mozilla.org/pub/seamonkey/releases/2.53.6/SHA1SUMS.txt
@@ -102,12 +104,51 @@ namespace updater.software
 
 
         /// <summary>
+        /// Gets a dictionary with the known checksums for the 64 bit installers (key: language, value: checksum).
+        /// </summary>
+        /// <returns>Returns a dictionary where keys are the language codes and values are the associated checksums.</returns>
+        private static Dictionary<string, string> knownChecksums64Bit()
+        {
+            // These are the checksums for Windows 64 bit installers from
+            // https://archive.mozilla.org/pub/seamonkey/releases/2.53.6/SHA1SUMS.txt
+            return new Dictionary<string, string>(23)
+            {
+                { "cs", "b0d9f0fdb0f7ff6922ce2a01a2c3a35e6ed80dd3" },
+                { "de", "de2a3931f195831b6df3d3c18094b3d7cacff619" },
+                { "el", "a7bc7962ebd58f67c25952918e6ee42e69e43ae1" },
+                { "en-GB", "c6a9d874dcaa0dabdd01f242b610cb47565e91fc" },
+                { "en-US", "405f32644e8bd162836fc3db52beb0f46bc2bf56" },
+                { "es-AR", "306fb01ce5c501e598f8e4ef5e829e5b6319fd79" },
+                { "es-ES", "a6ac51932b1241dee9679a70a00679ecccf0f7b1" },
+                { "fi", "0903c23de9d5a83ee45ee5caf234554ffd4b254c" },
+                { "fr", "d77a3c9436819fa0fb196404e6eb1f0c31b9ce31" },
+                { "hu", "6c206bf6ab792c7400262a88a17f7d79ae651c5a" },
+                { "it", "a53cafc97cdf36d90225c942ed8f6567afadd6cf" },
+                { "ja", "8de8e410e0e9126f160db6caf58b77c477b588fd" },
+                { "ka", "f9b9ae22d1cd95e798cea98f28a47a5346ee79a6" },
+                { "nb-NO", "8234ebc9109ed77c9ea342cd5218b5142b3c41de" },
+                { "nl", "ab8a82d4591a352162dae309e5761550ce3e633e" },
+                { "pl", "f27730ada264cba1ccc8a6f9e2907fc05105eeb9" },
+                { "pt-BR", "5ae8f8516cf90443dec983800b610f6c46969d1b" },
+                { "pt-PT", "4d055e601563284fe8ed33588e7c7471cf8d90f4" },
+                { "ru", "ef3377c48dcec060b7a04165ea4c2d4d2e84ed05" },
+                { "sk", "78ff21c14356e752afb73c9050704b3cfedefe5d" },
+                { "sv-SE", "6efff41668cfbbe4548dfa9bc37cf754da25c3ad" },
+                { "zh-CN", "de6af74a84e9ae9cb865a7ab84c3b8be88ec1e41" },
+                { "zh-TW", "f776de15463dfbe3a2714f1d350503e60b2409f3" }
+            };
+        }
+
+
+        /// <summary>
         /// Gets an enumerable collection of valid language codes.
         /// </summary>
         /// <returns>Returns an enumerable collection of valid language codes.</returns>
         public static IEnumerable<string> validLanguageCodes()
         {
-            var d = knownChecksums();
+            // Just go for the 32 bit installers here. We could also use the
+            // 64 bit installers, but they have the same languages anyway.
+            var d = knownChecksums32Bit();
             return d.Keys;
         }
 
@@ -123,15 +164,19 @@ namespace updater.software
             return new AvailableSoftware("SeaMonkey (" + languageCode + ")",
                 knownVersion,
                 "^SeaMonkey [0-9]+\\.[0-9]+(\\.[0-9]+)? \\(x86 " + Regex.Escape(languageCode) + "\\)$",
-                null,
+                "^SeaMonkey [0-9]+\\.[0-9]+(\\.[0-9]+)? \\(x64 " + Regex.Escape(languageCode) + "\\)$",
                 new InstallInfoExe(
                     "https://archive.mozilla.org/pub/seamonkey/releases/" + knownVersion + "/win32/" + languageCode + "/seamonkey-" + knownVersion + "." + languageCode + ".win32.installer.exe",
                     HashAlgorithm.SHA1,
-                    checksum,
+                    checksum32Bit,
                     null,
                     "-ms -ma"),
-                // There is no 64 bit installer yet.
-                null);
+                new InstallInfoExe(
+                    "https://archive.mozilla.org/pub/seamonkey/releases/" + knownVersion + "/win64/" + languageCode + "/seamonkey-" + knownVersion + "." + languageCode + ".win64.installer.exe",
+                    HashAlgorithm.SHA1,
+                    checksum64Bit,
+                    null,
+                    "-ms -ma"));
         }
 
 
@@ -190,21 +235,24 @@ namespace updater.software
 
 
         /// <summary>
-        /// Tries to get the checksum of the newer version.
+        /// Tries to get the checksums of the newer version.
         /// </summary>
-        /// <returns>Returns a string containing the checksum, if successfull.
+        /// <returns>Returns a string array containing the checksums for 32 bit and 64 bit (in that order), if successfull.
         /// Returns null, if an error occurred.</returns>
-        private string determineNewestChecksum(string newerVersion)
+        private string[] determineNewestChecksums(string newerVersion)
         {
             if (string.IsNullOrWhiteSpace(newerVersion))
                 return null;
             /* Checksums are found in a file like
-             * https://archive.mozilla.org/pub/seamonkey/releases/2.46/SHA1SUMS
+             * https://archive.mozilla.org/pub/seamonkey/releases/2.53.6/SHA1SUMS.txt
              * Common lines look like
              * "7219....f4b4d  win32/en-GB/SeaMonkey Setup 2.46.exe"
              * 
-             * Version 2.53.1 uses a new format, the line looks like 
-             * "ea91...8799 sha1 36062460 platform/win32/en-US/seamonkey-2.53.1.en-US.win32.installer.exe"
+             * Version 2.53.1 uses a new format. Common lines look like
+             * 7ccee70c54580c0c0949a9bc86737fbcb35c46ed sha1 38851663 win32/en-GB/seamonkey-2.53.6.en-GB.win32.installer.exe
+             * for the 32 bit installer, or like
+             * c6a9d874dcaa0dabdd01f242b610cb47565e91fc sha1 41802858 win64/en-GB/seamonkey-2.53.6.en-GB.win64.installer.exe
+             * for the 64 bit installer.
              */
 
             string url = "https://archive.mozilla.org/pub/seamonkey/releases/" + newerVersion + "/SHA1SUMS.txt";
@@ -221,17 +269,26 @@ namespace updater.software
                     return null;
                 }
                 client.Dispose();
-            } // using
+            }
 
             // look for line with the correct language code and version
             // File name looks like seamonkey-2.53.1.de.win32.installer.exe now.
-            Regex reChecksum = new Regex("[0-9a-f]{40} sha1 [0-9]+ .*seamonkey\\-" + Regex.Escape(newerVersion)
+            Regex reChecksum32Bit = new Regex("[0-9a-f]{40} sha1 [0-9]+ .*seamonkey\\-" + Regex.Escape(newerVersion)
                 + "\\." + languageCode.Replace("-", "\\-") + "\\.win32\\.installer\\.exe");
-            Match matchChecksum = reChecksum.Match(sha1SumsContent);
-            if (!matchChecksum.Success)
+            Match matchChecksum32Bit = reChecksum32Bit.Match(sha1SumsContent);
+            if (!matchChecksum32Bit.Success)
                 return null;
-            // checksum is the first 40 characters of the match
-            return matchChecksum.Value.Substring(0, 40);
+            // look for line with the correct language code and version for 64 bit
+            Regex reChecksum64Bit = new Regex("[0-9a-f]{40} sha1 [0-9]+ .*seamonkey\\-" + Regex.Escape(newerVersion)
+                + "\\." + languageCode.Replace("-", "\\-") + "\\.win64\\.installer\\.exe");
+            Match matchChecksum64Bit = reChecksum64Bit.Match(sha1SumsContent);
+            if (!matchChecksum64Bit.Success)
+                return null;
+            // Checksum is in the first 40 characters of each match.
+            return new string[] {
+                matchChecksum32Bit.Value.Substring(0, 40),
+                matchChecksum64Bit.Value.Substring(0, 40)
+            };
         }
 
 
@@ -262,14 +319,18 @@ namespace updater.software
             if (newerVersion == currentInfo.newestVersion)
                 // fallback to known information
                 return currentInfo;
-            string newerChecksum = determineNewestChecksum(newerVersion);
-            if (string.IsNullOrWhiteSpace(newerChecksum))
+            string[] newerChecksums = determineNewestChecksums(newerVersion);
+            if (null == newerChecksums || newerChecksums.Length != 2
+                || string.IsNullOrWhiteSpace(newerChecksums[0])
+                || string.IsNullOrWhiteSpace(newerChecksums[1]))
                 return null;
             // replace all stuff
             string oldVersion = currentInfo.newestVersion;
             currentInfo.newestVersion = newerVersion;
             currentInfo.install32Bit.downloadUrl = currentInfo.install32Bit.downloadUrl.Replace(oldVersion, newerVersion);
-            currentInfo.install32Bit.checksum = newerChecksum;
+            currentInfo.install32Bit.checksum = newerChecksums[0];
+            currentInfo.install64Bit.downloadUrl = currentInfo.install64Bit.downloadUrl.Replace(oldVersion, newerVersion);
+            currentInfo.install64Bit.checksum = newerChecksums[1];
             return currentInfo;
         }
 
@@ -343,9 +404,15 @@ namespace updater.software
 
 
         /// <summary>
-        /// checksum for the installer
+        /// checksum for the 32 bit installer
         /// </summary>
-        private readonly string checksum;
+        private readonly string checksum32Bit;
+
+
+        /// <summary>
+        /// checksum for the 64 bit installer
+        /// </summary>
+        private readonly string checksum64Bit;
 
     } // class
 } // namespace
