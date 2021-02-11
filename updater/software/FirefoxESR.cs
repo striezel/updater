@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017, 2018, 2019, 2020  Dirk Stolle
+    Copyright (C) 2017, 2018, 2019, 2020, 2021  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -59,12 +59,7 @@ namespace updater.software
             languageCode = langCode.Trim();
             var d32 = knownChecksums32Bit();
             var d64 = knownChecksums64Bit();
-            if (!d32.ContainsKey(languageCode))
-            {
-                logger.Error("The string '" + langCode + "' does not represent a valid language code!");
-                throw new ArgumentOutOfRangeException("langCode", "The string '" + langCode + "' does not represent a valid language code!");
-            }
-            if (!d64.ContainsKey(languageCode))
+            if (!d32.ContainsKey(languageCode) || !d64.ContainsKey(languageCode))
             {
                 logger.Error("The string '" + langCode + "' does not represent a valid language code!");
                 throw new ArgumentOutOfRangeException("langCode", "The string '" + langCode + "' does not represent a valid language code!");
@@ -487,18 +482,18 @@ namespace updater.software
         /// <summary>
         /// language code for the Firefox ESR version
         /// </summary>
-        private string languageCode;
+        private readonly string languageCode;
 
 
         /// <summary>
         /// checksum for the 32 bit installer
         /// </summary>
-        private string checksum32Bit;
+        private readonly string checksum32Bit;
 
 
         /// <summary>
         /// checksum for the 64 bit installer
         /// </summary>
-        private string checksum64Bit;
+        private readonly string checksum64Bit;
     } // class
 } // namespace

@@ -474,12 +474,12 @@ namespace updater.software
                     {
                         string language = matches[i].Value.Substring(136).Replace("/Firefox Setup " + currentVersion + ".exe", "");
                         cs32.Add(language, matches[i].Value.Substring(0, 128));
-                    } //for
+                    }
                 }
 
                 if ((null == cs64) || (cs64.Count == 0))
                 {
-                    //look for line with the correct language code and version for 64 bit
+                    // look for line with the correct language code and version for 64 bit
                     Regex reChecksum64Bit = new Regex("[0-9a-f]{128}  win64/[a-z]{2,3}(\\-[A-Z]+)?/Firefox Setup " + Regex.Escape(currentVersion) + "\\.exe");
                     cs64 = new SortedDictionary<string, string>();
                     MatchCollection matches = reChecksum64Bit.Matches(checksumsText);
@@ -487,7 +487,7 @@ namespace updater.software
                     {
                         string language = matches[i].Value.Substring(136).Replace("/Firefox Setup " + currentVersion + ".exe", "");
                         cs64.Add(language, matches[i].Value.Substring(0, 128));
-                    } //for
+                    }
                 }
             }
         }
