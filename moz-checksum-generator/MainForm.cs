@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017, 2018, 2020  Dirk Stolle
+    Copyright (C) 2017, 2018, 2020, 2021  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -276,9 +276,12 @@ namespace moz_checksum_generator
             lblVersion.Text = "Version " + version;
 
             /* Checksums are found in a file like
-             * https://archive.mozilla.org/pub/seamonkey/releases/2.46/SHA1SUMS
+             * https://archive.mozilla.org/pub/seamonkey/releases/2.53.6/SHA1SUMS.txt
              * Common lines look like
-             * bcf9b6828d3143adbfe46066e94650aa67726a02  win32/en-GB/SeaMonkey Setup 2.48.exe"
+             * 7ccee70c54580c0c0949a9bc86737fbcb35c46ed sha1 38851663 win32/en-GB/seamonkey-2.53.6.en-GB.win32.installer.exe
+             * for the 32 bit installer, or like
+             * c6a9d874dcaa0dabdd01f242b610cb47565e91fc sha1 41802858 win64/en-GB/seamonkey-2.53.6.en-GB.win64.installer.exe
+             * for the 64 bit installer.
              */
 
             string url = "https://archive.mozilla.org/pub/seamonkey/releases/" + version + "/SHA1SUMS.txt";
@@ -296,10 +299,9 @@ namespace moz_checksum_generator
                     return;
                 }
                 client.Dispose();
-            } //using
+            }
 
             // look for line with language code and version for 32 bit
-            //Regex reChecksum = new Regex("[0-9a-f]{40} sha1 [0-9]+ .*win32/[a-z]{2,3}(\\-[A-Z]+)?/SeaMonkey Setup " + Regex.Escape(version) + "\\.exe");
             Regex reChecksum = new Regex("[0-9a-f]{40} sha1 [0-9]+ .*seamonkey\\-" + Regex.Escape(version) + "\\.[a-z]{2,3}(\\-[A-Z]+)?\\.win32\\.installer\\.exe");
             var data = new SortedDictionary<string, string>();
             MatchCollection matches = reChecksum.Matches(sha1SumsContent);
@@ -312,12 +314,13 @@ namespace moz_checksum_generator
             rtbBit32.Text = getChecksumCode(data);
 
             // look for line with the correct language code and version for 64 bit
-            Regex reChecksum64Bit = new Regex("[0-9a-f]{40}  win64/[a-z]{2,3}(\\-[A-Z]+)?/SeaMonkey Setup " + Regex.Escape(version) + "\\.exe");
+            Regex reChecksum64Bit = new Regex("[0-9a-f]{40} sha1 [0-9]+ .*seamonkey\\-" + Regex.Escape(version) + "\\.[a-z]{2,3}(\\-[A-Z]+)?\\.win64\\.installer\\.exe");
             data.Clear();
             matches = reChecksum64Bit.Matches(sha1SumsContent);
             for (int i = 0; i < matches.Count; i++)
             {
-                string language = matches[i].Value.Substring(48).Replace("/SeaMonkey Setup " + version + ".exe", "");
+                string[] parts = matches[i].Value.Split(new char[] { '.' });
+                string language = parts[parts.Length - 4];
                 data.Add(language, matches[i].Value.Substring(0, 40));
             }
             rtbBit64.Text = getChecksumCode(data);
