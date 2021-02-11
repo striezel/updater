@@ -21,27 +21,27 @@ using System;
 namespace updater.versions
 {
     /// <summary>
-    /// utility class to represent a four-part version, e.g. "11.23.4.5"
+    /// Utility class to represent a four-part version, e.g. "11.23.4.5".
     /// </summary>
     public struct Quartet : IComparable<Quartet>, IEquatable<Quartet>
     {
         /// <summary>
-        /// major version number
+        /// major version number, e. g. the 11 in 11.23.4.5
         /// </summary>
         public uint major;
 
         /// <summary>
-        /// minor version number
+        /// minor version number, e. g. the 23 in 11.23.4.5
         /// </summary>
         public uint minor;
 
         /// <summary>
-        /// patch level
+        /// patch level, e. g. the 4 in 11.23.4.5
         /// </summary>
         public uint patch;
 
         /// <summary>
-        /// build number
+        /// build number, e. g. the 5 in 11.23.4.5
         /// </summary>
         public uint build;
 
@@ -57,7 +57,7 @@ namespace updater.versions
             patch = 0;
             build = 0;
             string[] parts = value.Split(new char[] { '.' });
-            //If there are less than four parts, we just assume zero.
+            // If there are less than four parts, we just assume zero.
             uint.TryParse(parts[0], out major);
             if (parts.Length >= 2)
                 uint.TryParse(parts[1], out minor);
@@ -70,7 +70,7 @@ namespace updater.versions
 
 
         /// <summary>
-        /// gets the full version
+        /// Gets the full version.
         /// </summary>
         /// <returns>Returns a string containing the full version number.</returns>
         public string full()
@@ -120,5 +120,5 @@ namespace updater.versions
         {
             return a.CompareTo(b) > 0;
         }
-    } //class
-} //namespace
+    } // class
+} // namespace

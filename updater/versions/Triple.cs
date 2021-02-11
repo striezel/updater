@@ -21,28 +21,28 @@ using System;
 namespace updater.versions
 {
     /// <summary>
-    /// utility class to represent a three-part numeric version, e.g. "11.2.3"
+    /// Utility class to represent a three-part numeric version, e.g. "11.2.3".
     /// </summary>
     public struct Triple : IComparable<Triple>, IEquatable<Triple>
     {
         /// <summary>
-        /// major version number
+        /// major version number, e. g. the 11 in 11.2.3
         /// </summary>
         public uint major;
 
         /// <summary>
-        /// minor version number
+        /// minor version number, e. g. the 2 in 11.2.3
         /// </summary>
         public uint minor;
 
         /// <summary>
-        /// patch level
+        /// patch level, e. g. the 3 in 11.2.3
         /// </summary>
         public uint patch;
 
 
         /// <summary>
-        /// construct triple from string value
+        /// Constructs a Triple from string value.
         /// </summary>
         /// <param name="value">string value containing a dot-separated version, e.g. "11.2.7"</param>
         public Triple(string value)
@@ -51,7 +51,7 @@ namespace updater.versions
             minor = 0;
             patch = 0;
             string[] parts = value.Split(new char[] { '.' });
-            //If there are not enough parts, we just use zero instead.
+            // If there are not enough parts, we just use zero instead.
             if (parts.Length >= 1)
                 uint.TryParse(parts[0], out major);
             if (parts.Length >= 2)
@@ -62,7 +62,7 @@ namespace updater.versions
 
 
         /// <summary>
-        /// gets the full version
+        /// Gets the full version.
         /// </summary>
         /// <returns>Returns a string containing the full version number.</returns>
         public string full()
@@ -109,5 +109,5 @@ namespace updater.versions
         {
             return a.CompareTo(b) > 0;
         }
-    } //class
-} //namespace
+    } // class
+} // namespace

@@ -22,34 +22,34 @@ using System.Text.RegularExpressions;
 namespace updater.versions
 {
     /// <summary>
-    /// Utility class to represent a four part version as seen in Firefox Aurora, e.g. "60.0b8".
+    /// Utility class to represent a four part version as seen in Firefox Aurora, e.g. "61.0b8".
     /// </summary>
     public class QuartetAurora : IComparable<QuartetAurora>, IEquatable<QuartetAurora>
     {
         /// <summary>
-        /// major version number
+        /// major version number, e.g. the 61 in "61.0b8"
         /// </summary>
         public uint major;
 
         /// <summary>
-        /// minor version number
+        /// minor version number, e.g. the 0 (zero) in "61.0b8"
         /// </summary>
         public uint minor;
 
         /// <summary>
-        /// patch letter
+        /// patch letter, e.g. the b in "61.0b8"
         /// </summary>
         public char patch;
 
         /// <summary>
-        /// build number
+        /// build number, e.g. the 8 in "61.0b8"
         /// </summary>
         public uint build;
 
         /// <summary>
         /// regular expression for splitting the second part of the version number
         /// </summary>
-        private static Regex reg = new Regex("^([0-9]+)([a-z])([0-9]+)$");
+        private static readonly Regex reg = new Regex("^([0-9]+)([a-z])([0-9]+)$");
 
 
         /// <summary>
@@ -67,11 +67,11 @@ namespace updater.versions
         /// <summary>
         /// Constructs a quartet from string value.
         /// </summary>
-        /// <param name="value">string value containing a dot-separated version, e.g. "60.0b8"</param>
+        /// <param name="value">string value containing a dot-separated version, e.g. "61.0b8"</param>
         public QuartetAurora(string value)
         {
             string[] parts = value.Split(new char[] { '.' });
-            //If there are not enough parts or parsing fails, we just assume zero.
+            // If there are not enough parts or parsing fails, we just assume zero.
             if (!uint.TryParse(parts[0], out major))
             {
                 major = 0;
