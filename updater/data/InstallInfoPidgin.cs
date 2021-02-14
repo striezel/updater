@@ -21,7 +21,7 @@ using System.Diagnostics;
 namespace updater.data
 {
     /// <summary>
-    /// special case of .exe installation for Pidgin
+    /// Special case of .exe installation for Pidgin.
     /// </summary>
     public class InstallInfoPidgin : InstallInfoExe
     {
@@ -31,7 +31,7 @@ namespace updater.data
         public InstallInfoPidgin()
             : base()
         {
-            //base class constructor does initialization
+            // Base class constructor does initialization.
         }
 
 
@@ -46,7 +46,7 @@ namespace updater.data
         public InstallInfoPidgin(string _downloadUrl, HashAlgorithm _algo, string _check, string _pub, string _silent)
             : base(_downloadUrl, _algo, _check, _pub, _silent)
         {
-            //base class constructor does initialization
+            // Base class constructor does initialization.
         }
 
 

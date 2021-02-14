@@ -26,7 +26,7 @@ namespace updater.data
     public abstract class InstallInfo
     {
         /// <summary>
-        /// default constructor
+        /// Default constructor.
         /// </summary>
         public InstallInfo()
         {
@@ -39,7 +39,7 @@ namespace updater.data
 
 
         /// <summary>
-        /// constructor with initial value parameters
+        /// Constructor with initial value parameters.
         /// </summary>
         /// <param name="_downloadUrl">URL where the installer can be downloaded</param>
         /// <param name="_algo">hash algorithm that was used to create or verify the checksum</param>
@@ -63,8 +63,8 @@ namespace updater.data
         /// Returns false, if there is no checksum.</returns>
         public bool hasChecksum()
         {
-            return ((algorithm != HashAlgorithm.Unknown)
-                && !string.IsNullOrWhiteSpace(checksum));
+            return (algorithm != HashAlgorithm.Unknown)
+                && !string.IsNullOrWhiteSpace(checksum);
         }
 
 

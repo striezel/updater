@@ -21,12 +21,12 @@ using updater.software;
 namespace updater.data
 {
     /// <summary>
-    /// represents an entry in a status query
+    /// Represents an entry in a status query.
     /// </summary>
     public class QueryEntry
     {
         /// <summary>
-        /// constructor
+        /// Constructor.
         /// </summary>
         public QueryEntry(ISoftware sw, DetectedSoftware _detected, bool _needsUpdate, ApplicationType _type)
         {
@@ -59,5 +59,5 @@ namespace updater.data
         /// application type (32 or 64 bit)
         /// </summary>
         public ApplicationType type;
-    } //class
+    } // class
 }

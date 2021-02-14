@@ -21,22 +21,22 @@ using System.Diagnostics;
 namespace updater.data
 {
     /// <summary>
-    /// holds information about an .exe installer
+    /// Holds information about an .exe installer.
     /// </summary>
     public class InstallInfoExe : InstallInfo
     {
         /// <summary>
-        /// default constructor
+        /// Default constructor.
         /// </summary>
         public InstallInfoExe()
             : base()
         {
-            //base class constructor does initialization
+            // Base class constructor does initialization.
         }
 
 
         /// <summary>
-        /// constructor with initial value parameters
+        /// Constructor with initial value parameters.
         /// </summary>
         /// <param name="_downloadUrl">URL where the installer can be downloaded</param>
         /// <param name="_algo">hash algorithm that was used to create or verify the checksum</param>
@@ -46,12 +46,12 @@ namespace updater.data
         public InstallInfoExe(string _downloadUrl, HashAlgorithm _algo, string _check, string _pub, string _silent)
             : base(_downloadUrl, _algo, _check, _pub, _silent)
         {
-            //base class constructor does initialization
+            // Base class constructor does initialization.
         }
 
 
         /// <summary>
-        /// creates a process instance that can be used to perform the update
+        /// Creates a process instance that can be used to perform the update.
         /// </summary>
         /// <param name="downloadedFile">path to the downloaded installer file</param>
         /// <param name="detected">info about the detected software</param>
@@ -67,5 +67,5 @@ namespace updater.data
             proc.StartInfo.Arguments = silentSwitches;
             return proc;
         }
-    } //class
-} //namespace
+    } // class
+} // namespace

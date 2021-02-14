@@ -26,17 +26,17 @@ namespace updater.data
     public class InstallInfoLibO : InstallInfoMsi
     {
         /// <summary>
-        /// default constructor
+        /// Default constructor.
         /// </summary>
         public InstallInfoLibO()
             : base()
         {
-            //base class constructor does initialization
+            // Base class constructor does initialization.
         }
 
 
         /// <summary>
-        /// constructor with initial value parameters
+        /// Constructor with initial value parameters.
         /// </summary>
         /// <param name="_downloadUrl">URL where the installer can be downloaded</param>
         /// <param name="_algo">hash algorithm that was used to create or verify the checksum</param>
@@ -46,12 +46,12 @@ namespace updater.data
         public InstallInfoLibO(string _downloadUrl, HashAlgorithm _algo, string _check, string _pub, string _silent)
             : base(_downloadUrl, _algo, _check, _pub, _silent)
         {
-            //base class constructor does initialization
+            // Base class constructor does initialization.
         }
 
 
         /// <summary>
-        /// creates a process instance that can be used to perform the update
+        /// Creates a process instance that can be used to perform the update.
         /// </summary>
         /// <param name="downloadedFile">path to the downloaded installer file</param>
         /// <param name="detected">info about detected software</param>
@@ -71,5 +71,5 @@ namespace updater.data
                 proc.StartInfo.Arguments = "/i \"" + downloadedFile + "\" " + silentSwitches;
             return proc;
         }
-    } //class
-} //namespace
+    } // class
+} // namespace
