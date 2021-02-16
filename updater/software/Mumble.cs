@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017, 2018, 2020  Dirk Stolle
+    Copyright (C) 2017, 2018, 2020, 2021  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -59,20 +59,20 @@ namespace updater.software
         public override AvailableSoftware knownInfo()
         {
             return new AvailableSoftware("Mumble",
-                "1.3.3",
+                "1.3.4",
                 "^Mumble [0-9]\\.[0-9]+\\.[0-9]+$",
                 "^Mumble [0-9]\\.[0-9]+\\.[0-9]+$",
                 new InstallInfoMsi(
-                    "https://github.com/mumble-voip/mumble/releases/download/1.3.3/mumble-1.3.3.msi",
+                    "https://github.com/mumble-voip/mumble/releases/download/1.3.4/mumble-1.3.4.msi",
                     HashAlgorithm.SHA256,
-                    "3f3038e7aaf87cdc6e1fa4658b399a7a5ed5a0f8c69c31cc4324363e3eb986d0",
+                    "eb2f452dccaa60f64409356815f7ee834aa07823f92410eefe3a2628cf90d52e",
                     publisherX509,
                     "/qn /norestart"),
                 // 64 bit MSI installer started with 1.3.0.
                 new InstallInfoMsi(
-                    "https://github.com/mumble-voip/mumble/releases/download/1.3.3/mumble-1.3.3.winx64.msi",
+                    "https://github.com/mumble-voip/mumble/releases/download/1.3.4/mumble-1.3.4.winx64.msi",
                     HashAlgorithm.SHA256,
-                    "3b9a13ea760d416654e16af9e892dd389e1ea8c4521430c507707ecc1aa80704",
+                    "14e58074269ae32d1678738fb66fc9551c2aac2e789439157081886860802e02",
                     publisherX509,
                     "/qn /norestart")
                 );
