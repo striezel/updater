@@ -78,6 +78,7 @@ namespace updater.software
             result.Add(new LibreOffice(autoGetNewer));
             result.Add(new LibreOfficeHelpPackGerman(autoGetNewer));
             result.Add(new Mumble(autoGetNewer));
+            result.Add(new NodeJS(autoGetNewer));
             result.Add(new NotepadPlusPlus(autoGetNewer));
             result.Add(new Opera(autoGetNewer));
             result.Add(new Pdf24Creator(autoGetNewer, opts.pdf24autoUpdate, opts.pdf24desktopIcons, opts.pdf24faxPrinter));

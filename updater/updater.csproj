@@ -106,6 +106,7 @@
     <Compile Include="software\All.cs" />
     <Compile Include="software\Calibre.cs" />
     <Compile Include="software\CMake.cs" />
+    <Compile Include="software\NodeJS.cs" />
     <Compile Include="software\Pdf24Creator.cs" />
     <Compile Include="software\Pidgin.cs" />
     <Compile Include="software\Audacity.cs" />

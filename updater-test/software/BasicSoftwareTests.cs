@@ -18,6 +18,7 @@
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using updater.software;
+using updater.versions;
 
 namespace updater_test.software
 {
@@ -70,7 +71,9 @@ namespace updater_test.software
             var newerInfo = sw.searchForNewer();
             Assert.IsNotNull(newerInfo, "searchForNewer() returned null!");
             int comp = string.Compare(info.newestVersion, newerInfo.newestVersion);
-            if (comp < 0)
+            var older = new Quartet(info.newestVersion);
+            var newer = new Quartet(newerInfo.newestVersion);
+            if (comp < 0 || older < newer)
             {
                 Assert.Inconclusive(
                     "Known newest version of " + info.Name + " is " + info.newestVersion

@@ -20,6 +20,7 @@ updater application.
 * Mozilla Firefox ESR
 * Mozilla Thunderbird
 * Mumble (client only)
+* Node.js LTS
 * Notepad++
 * Opera
 * PDF24 Creator
