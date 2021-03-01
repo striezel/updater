@@ -58,20 +58,21 @@ namespace updater.software
         /// details about the software.</returns>
         public override AvailableSoftware knownInfo()
         {
+            const string version = "3.19.6";
             return new AvailableSoftware("CMake",
-                "3.19.4",
+                version,
                 "^CMake$",
                 "^CMake$",
                 new InstallInfoMsi(
-                    "https://github.com/Kitware/CMake/releases/download/v3.19.4/cmake-3.19.4-win32-x86.msi",
+                    "https://github.com/Kitware/CMake/releases/download/v"+ version + "/cmake-" + version + "-win32-x86.msi",
                     HashAlgorithm.SHA256,
-                    "2dce32e37c161441a899735c3398ea21aff2745e2f3db516ceb0085817a657ed",
+                    "860768c5f71e747164d4fe22e041aea17f4aece3248ad56a881e982dc253ca97",
                     publisherX509,
                     "/qn /norestart"),
                 new InstallInfoMsi(
-                    "https://github.com/Kitware/CMake/releases/download/v3.19.4/cmake-3.19.4-win64-x64.msi",
+                    "https://github.com/Kitware/CMake/releases/download/v" + version + "/cmake-" + version + "-win64-x64.msi",
                     HashAlgorithm.SHA256,
-                    "e531812198235ac51c846dba636d719e6f6870523a423b7b993377e91ee57ef8",
+                    "c3d48a91dc1637e7fd832620ae6de8c252f71d4d3f3013f935cb018e14fc7a45",
                     publisherX509,
                     "/qn /norestart")
                     );
