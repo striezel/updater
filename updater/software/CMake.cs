@@ -21,6 +21,7 @@ using System.Collections.Generic;
 using System.Net;
 using System.Text.RegularExpressions;
 using updater.data;
+using updater.versions;
 
 namespace updater.software
 {
@@ -109,30 +110,33 @@ namespace updater.software
         public override AvailableSoftware searchForNewer()
         {
             logger.Debug("Searching for newer version of CMake...");
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://github.com/Kitware/CMake/releases/latest");
-            request.Method = WebRequestMethods.Http.Head;
-            request.AllowAutoRedirect = false;
-            string currentVersion;
-            try
+            // Just getting the latest release does not work here, because that may also be a release candidate, and we do not want that.
+            string html;
+            using (var client = new WebClient())
             {
-                HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-                if (response.StatusCode != HttpStatusCode.Found)
+                try
+                {
+                    html = client.DownloadString("https://github.com/Kitware/CMake/releases");
+                }
+                catch (Exception ex)
+                {
+                    logger.Warn("Exception occurred while checking for newer version of CMake: " + ex.Message);
                     return null;
-                string newLocation = response.Headers[HttpResponseHeader.Location];
-                request = null;
-                response = null;
-                // Location header will point to something like "https://github.com/Kitware/CMake/releases/tag/v3.19.4".
-                Regex reVersion = new Regex("v[0-9]+\\.[0-9]+\\.[0-9]$");
-                Match matchVersion = reVersion.Match(newLocation);
-                if (!matchVersion.Success)
-                    return null;
-                currentVersion = matchVersion.Value.Remove(0, 1);
+                }
             }
-            catch (Exception ex)
-            {
-                logger.Warn("Exception occurred while checking for newer version of CMake: " + ex.Message);
+
+            // HTML text will contain links to releases like "https://github.com/Kitware/CMake/releases/tag/v3.19.4".
+            Regex reVersion = new Regex("CMake/releases/tag/v([0-9]+\\.[0-9]+\\.[0-9])\"");
+            var matchesVersion = reVersion.Matches(html);
+            if (matchesVersion.Count == 0)
                 return null;
+            var versions = new List<Triple>(matchesVersion.Count);
+            foreach (Match item in matchesVersion)
+            {
+                versions.Add(new Triple(item.Groups[1].Value));
             }
+            versions.Sort();
+            string currentVersion = versions[versions.Count-1].full();
 
             // download checksum file, e.g. "https://github.com/Kitware/CMake/releases/download/v3.19.4/cmake-3.19.4-SHA-256.txt"
             string htmlCode = null;
