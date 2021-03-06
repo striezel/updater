@@ -58,7 +58,7 @@ namespace updater.software
         /// details about the software.</returns>
         public override AvailableSoftware knownInfo()
         {
-            string version = "7.9.2";
+            string version = "7.9.3";
             return new AvailableSoftware("Notepad++",
                 version,
                 "^Notepad\\+\\+ \\(32\\-bit x86\\)$|^Notepad\\+\\+$",
@@ -66,13 +66,13 @@ namespace updater.software
                 new InstallInfoExe(
                     "https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v" + version + "/npp." + version + ".Installer.exe",
                     HashAlgorithm.SHA256,
-                    "a797da6e8cebe364becc30d3d5d540897166e7674a0fc8e386fd9593d0838f43",
+                    "9daaf00b40e848eaebeb6df515f681bc9c70bea01c52df3ecd69910c2d3be66d",
                     publisherX509,
                     "/S"),
                 new InstallInfoExe(
                     "https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v" + version + "/npp." + version + ".Installer.x64.exe",
                     HashAlgorithm.SHA256,
-                    "9eb36c992f1d4bb2d27cb9c0d14b9b0c762d59e544b27754afc2bc0a9b219dcd",
+                    "942a5fa284df6018aec19110b0d9e68742194bfd44dd984b515adf103d99775a",
                     publisherX509,
                     "/S")
                 );
