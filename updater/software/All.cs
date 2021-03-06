@@ -73,6 +73,7 @@ namespace updater.software
 
             result.Add(new FileZilla(autoGetNewer));
             result.Add(new GIMP(autoGetNewer));
+            result.Add(new Git(autoGetNewer));
             result.Add(new Inkscape(autoGetNewer));
             result.Add(new KeePass(autoGetNewer));
             result.Add(new LibreOffice(autoGetNewer));

@@ -55,6 +55,7 @@
     <Compile Include="software\All_Tests.cs" />
     <Compile Include="software\Calibre_Tests.cs" />
     <Compile Include="software\CMake_Tests.cs" />
+    <Compile Include="software\Git_Tests.cs" />
     <Compile Include="software\NodeJS_Tests.cs" />
     <Compile Include="software\Pdf24Creator_Tests.cs" />
     <Compile Include="software\Pidgin_Tests.cs" />

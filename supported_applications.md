@@ -13,6 +13,7 @@ updater application.
 * CMake
 * FileZilla FTP Client
 * GIMP
+* Git for Windows
 * Inkscape
 * KeePass 2
 * LibreOffice
