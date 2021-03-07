@@ -4,7 +4,9 @@ Updater _(working title, final name may change)_ is a command line application
 that can update popular third party software on Windows operating systems
 easily.
 
-The applications that can currently be updated with this application are listed
+Among the supported applications are Mozilla Firefox, Node.js LTS, 7-Zip,
+LibreOffice, just to name a few. A complete list of applications that can
+currently be updated with this application is available
 [here](./supported_applications.md).
 
 ## Build status
