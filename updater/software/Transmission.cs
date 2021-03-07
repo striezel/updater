@@ -1,0 +1,176 @@
+﻿/*
+    This file is part of the updater command line interface.
+    Copyright (C) 2021  Dirk Stolle
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
+using System;
+using System.Collections.Generic;
+using System.Net;
+using System.Text.RegularExpressions;
+using updater.data;
+
+namespace updater.software
+{
+    /// <summary>
+    /// Manages updates for Transmission, a BitTorrent client.
+    /// </summary>
+    public class Transmission : NoPreUpdateProcessSoftware
+    {
+        /// <summary>
+        /// NLog.Logger for Transmission class
+        /// </summary>
+        private static readonly NLog.Logger logger = NLog.LogManager.GetLogger(typeof(Transmission).FullName);
+
+
+        /// <summary>
+        /// publisher name for signed installers
+        /// </summary>
+        private const string publisherX509 = "CN=SignPath Foundation, OU=sig.fo/Transmission, O=SignPath Foundation, L=Lewes, S=Delaware, C=US";
+
+
+        /// <summary>
+        /// expiration date for the publisher certificate
+        /// </summary>
+        private readonly DateTime publisherExpiryDate = new DateTime(2023, 5, 13, 18, 16, 53, DateTimeKind.Utc);
+
+
+        /// <summary>
+        /// Default constructor.
+        /// </summary>
+        /// <param name="autoGetNewer">whether to automatically get newer
+        /// information about the software when calling the info() method</param>
+        public Transmission(bool autoGetNewer)
+            : base(autoGetNewer)
+        { }
+
+
+        /// <summary>
+        /// Gets the currently known information about the software.
+        /// </summary>
+        /// <returns>Returns an AvailableSoftware instance with the known
+        /// details about the software.</returns>
+        public override AvailableSoftware knownInfo()
+        {
+            return new AvailableSoftware("Transmission",
+                "3.00",
+                "^Transmission [0-9]+\\.[0-9]+ \\([0-9a-f]+\\) \\(x86\\)$",
+                "^Transmission [0-9]+\\.[0-9]+ \\([0-9a-f]+\\) \\(x64\\)$",
+                new InstallInfoMsi(
+                    "https://github.com/transmission/transmission/releases/download/3.00/transmission-3.00-x86.msi",
+                    HashAlgorithm.SHA256,
+                    "eeab85327fa8a1299bb133d5f60f6674ca9e76522297202bbe39aae92dad4f32",
+                    DateTime.UtcNow < publisherExpiryDate ? publisherX509 : null,
+                    "/qn /norestart"),
+                new InstallInfoMsi(
+                    "https://github.com/transmission/transmission/releases/download/3.00/transmission-3.00-x64.msi",
+                    HashAlgorithm.SHA256,
+                    "c34828a6d2c50c7c590d05ca50249b511d46e9a2a7223323fb3d1421e3f6b9d1",
+                    DateTime.UtcNow < publisherExpiryDate ? publisherX509 : null,
+                    "/qn /norestart")
+                    );
+        }
+
+
+        /// <summary>
+        /// Gets a list of IDs to identify the software.
+        /// </summary>
+        /// <returns>Returns a non-empty array of IDs, where at least one entry is unique to the software.</returns>
+        public override string[] id()
+        {
+            return new string[] { "transmission", "transmission-qt" };
+        }
+
+
+        /// <summary>
+        /// Determines whether or not the method searchForNewer() is implemented.
+        /// </summary>
+        /// <returns>Returns true, if searchForNewer() is implemented for that
+        /// class. Returns false, if not. Calling searchForNewer() may throw an
+        /// exception in the later case.</returns>
+        public override bool implementsSearchForNewer()
+        {
+            return true;
+        }
+
+
+        /// <summary>
+        /// Looks for newer versions of the software than the currently known version.
+        /// </summary>
+        /// <returns>Returns an AvailableSoftware instance with the information
+        /// that was retrieved from the net.</returns>
+        public override AvailableSoftware searchForNewer()
+        {
+            logger.Debug("Searching for newer version of Transmission...");
+            string html;
+            using (var client = new WebClient())
+            {
+                try
+                {
+                    html = client.DownloadString("https://transmissionbt.com/includes/js/constants.js");
+                }
+                catch (Exception ex)
+                {
+                    logger.Warn("Exception occurred while checking for newer version of Transmission: " + ex.Message);
+                    return null;
+                }
+            }
+
+            Regex reVersion = new Regex("current_version_msi: \"([0-9]+\\.[0-9]+)\"");
+            var matchVersion = reVersion.Match(html);
+            if (!matchVersion.Success)
+                return null;
+            string currentVersion = matchVersion.Groups[1].Value;
+
+            // find SHA256 hash for 32 bit installer
+            Regex reHash = new Regex("sha256_msi32: \"([a-f0-9]{64})\"");
+            Match matchHash = reHash.Match(html);
+            if (!matchHash.Success)
+                return null;
+            string newHash32Bit = matchHash.Groups[1].Value;
+            // find SHA256 hash for 64 bit installer
+            reHash = new Regex("sha256_msi64: \"([a-f0-9]{64})\"");
+            matchHash = reHash.Match(html);
+            if (!matchHash.Success)
+                return null;
+            string newHash64Bit = matchHash.Groups[1].Value;
+            // construct new information
+            var newInfo = knownInfo();
+            newInfo.newestVersion = currentVersion;
+            // e. g. https://github.com/transmission/transmission/releases/download/3.00/transmission-3.00-x86.msi
+            newInfo.install32Bit.downloadUrl = "https://github.com/transmission/transmission/releases/download/" + currentVersion + "/transmission-" + currentVersion + "-x86.msi";
+            newInfo.install32Bit.checksum = newHash32Bit;
+            // e. g. https://github.com/transmission/transmission/releases/download/3.00/transmission-3.00-x64.msi
+            newInfo.install64Bit.downloadUrl = "https://github.com/transmission/transmission/releases/download/" + currentVersion + "/transmission-" + currentVersion + "-x64.msi";
+            newInfo.install64Bit.checksum = newHash64Bit;
+            return newInfo;
+        }
+
+
+        /// <summary>
+        /// Lists names of processes that might block an update, e.g. because
+        /// the application cannot be updated while it is running.
+        /// </summary>
+        /// <param name="detected">currently installed / detected software version</param>
+        /// <returns>Returns a list of process names that block the upgrade.</returns>
+        public override List<string> blockerProcesses(DetectedSoftware detected)
+        {
+            return new List<string>(1)
+            {
+                "transmission-qt"
+            };
+        }
+    } // class
+} // namespace

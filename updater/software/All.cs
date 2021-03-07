@@ -110,6 +110,7 @@ namespace updater.software
                 result.Add(new Thunderbird(lang, autoGetNewer));
             }
 
+            result.Add(new Transmission(autoGetNewer));
             result.Add(new VLC(autoGetNewer));
             result.Add(new WinSCP(autoGetNewer));
             return result;

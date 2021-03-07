@@ -28,6 +28,7 @@ updater application.
 * Pidgin
 * PuTTY
 * SeaMonkey
+* Transmission (BitTorrent client)
 * VLC media player
 * WinSCP
 
