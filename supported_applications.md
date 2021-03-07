@@ -34,7 +34,6 @@ updater application.
 ## Planned
 
 * Adobe Acrobat Reader
-* Adobe AIR
 * Google Chrome
 * IrfanView
 * Java Development Kit
