@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017, 2018  Dirk Stolle
+    Copyright (C) 2017, 2018, 2021  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -47,6 +47,16 @@ namespace updater_test.software
                 Assert.IsTrue(info.install32Bit.hasChecksum());
             if (null != info.install64Bit)
                 Assert.IsTrue(info.install64Bit.hasChecksum());
+            // check whether signature data has expired
+            // Expiration is not an error though, because some people publish signed binaries that expire the day after the release.
+            if (null != info.install32Bit && info.install32Bit.signature.containsData() && info.install32Bit.signature.hasExpired())
+            {
+                Assert.Inconclusive("Signature data of 32 bit installer is past its expiration date!");
+            }
+            if (null != info.install64Bit && info.install64Bit.signature.containsData() && info.install64Bit.signature.hasExpired())
+            {
+                Assert.Inconclusive("Signature data of 64 bit installer is past its expiration date!");
+            }
         }
 
 

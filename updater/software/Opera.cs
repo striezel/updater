@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017, 2018, 2020  Dirk Stolle
+    Copyright (C) 2017, 2018, 2020, 2021  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -61,13 +61,13 @@ namespace updater.software
                     "https://get.geo.opera.com/pub/opera/desktop/72.0.3815.400/win/Opera_72.0.3815.400_Setup.exe",
                     HashAlgorithm.SHA256,
                     "43578aea78de99b8526870c7df7dcb3edd737a00cd55bbf164330fe90dbd792f",
-                    null,
+                    Signature.None,
                     silentOptions),
                 new InstallInfoExe(
                     "https://get.geo.opera.com/pub/opera/desktop/72.0.3815.400/win/Opera_72.0.3815.400_Setup_x64.exe",
                     HashAlgorithm.SHA256,
                     "07584ea951ced1d8fa0f8373ba05b9a79a0782e138d10fc68bf86f436b7d0337",
-                    null,
+                    Signature.None,
                     silentOptions)
                     );
         }

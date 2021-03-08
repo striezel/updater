@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017, 2018, 2019, 2020  Dirk Stolle
+    Copyright (C) 2017, 2018, 2019, 2020, 2021  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -25,6 +25,9 @@ using System.Collections.Generic;
 
 namespace updater.software
 {
+    /// <summary>
+    /// Handles updates of PuTTY.
+    /// </summary>
     public class Putty : AbstractSoftware
     {
         /// <summary>
@@ -50,12 +53,19 @@ namespace updater.software
 
 
         /// <summary>
+        /// expiration date of certificate
+        /// </summary>
+        private static readonly DateTime certificateExpiration = new DateTime(2021, 11, 8, 23, 59, 59, DateTimeKind.Utc);
+
+
+        /// <summary>
         /// Gets the currently known information about the software.
         /// </summary>
         /// <returns>Returns an AvailableSoftware instance with the known
         /// details about the software.</returns>
         public override AvailableSoftware knownInfo()
         {
+            var signature = new Signature(publisherX509, certificateExpiration);
             return new AvailableSoftware("PuTTY",
                 "0.74",
                 "^PuTTY release [0-9]\\.[0-9]+$",
@@ -65,14 +75,14 @@ namespace updater.software
                     "https://the.earth.li/~sgtatham/putty/0.74/w32/putty-0.74-installer.msi",
                     HashAlgorithm.SHA512,
                     "3d5f4e7a6fe8082f11b89286872076d3e85bd6136529e4f38eebc2af21edc329550610ade283e7d0118baa0057f595dc271950e25408971f87105d0c7361ff2b",
-                    publisherX509,
+                    signature,
                     "/qn /norestart"),
                 // 64 bit installer
                 new InstallInfoMsi(
                     "https://the.earth.li/~sgtatham/putty/0.74/w64/putty-64bit-0.74-installer.msi",
                     HashAlgorithm.SHA512,
                     "150cc16d228cae7f09ad34afe3f5386685a6be44775d6000e838906d98dff6abccd4047134b041935469ba28bb999d6ae7f00f0a8e9a7f5f10ff4952c6f846e3",
-                    publisherX509,
+                    signature,
                     "/qn /norestart")
                 );
         }

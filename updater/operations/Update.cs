@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017  Dirk Stolle
+    Copyright (C) 2017, 2021  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -168,10 +168,10 @@ namespace updater.operations
                 } // if checksum
 
                 // signature verification
-                if (instInfo.hasSignature())
+                if (instInfo.hasVerifiableSignature())
                 {
                     logger.Info("Verifying signature of " + downloadedFile + " ...");
-                    if (!utility.Verificator.verifySignature(downloadedFile, instInfo.publisher))
+                    if (!utility.Verificator.verifySignature(downloadedFile, instInfo.signature.publisher))
                     {
                         logger.Error("Error: Signature of file " + downloadedFile
                             + " is invalid or missing! The file may also have the wrong publisher.");

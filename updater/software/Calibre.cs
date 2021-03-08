@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017, 2018, 2019  Dirk Stolle
+    Copyright (C) 2017, 2018, 2019, 2021  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -51,12 +51,18 @@ namespace updater.software
         private const string publisherX509 = "CN=Kovid Goyal, O=Kovid Goyal, L=Mumbai, S=Maharashtra, C=IN";
 
         /// <summary>
+        /// expiration date of certificate
+        /// </summary>
+        private static readonly DateTime certificateExpiration = new DateTime(2020, 8, 25, 12, 0, 0, DateTimeKind.Utc);
+
+        /// <summary>
         /// Gets the currently known information about the software.
         /// </summary>
         /// <returns>Returns an AvailableSoftware instance with the known
         /// details about the software.</returns>
         public override AvailableSoftware knownInfo()
         {
+            var signature = new Signature(publisherX509, certificateExpiration);
             const string knownVersion = "4.5.0";
             return new AvailableSoftware("Calibre",
                 knownVersion,
@@ -66,13 +72,13 @@ namespace updater.software
                     "https://download.calibre-ebook.com/" + knownVersion + "/calibre-" + knownVersion + ".msi",
                     HashAlgorithm.SHA256,
                     "67e2184be260a0330f7fa29268e422aebab872a471ec7a807e28967641576661",
-                    publisherX509,
+                    signature,
                     "/qn /norestart"),
                 new InstallInfoMsi(
                     "https://download.calibre-ebook.com/" + knownVersion + "/calibre-64bit-" + knownVersion + ".msi",
                     HashAlgorithm.SHA256,
                     "82e0a37fbb556792ce091e63177260d47662a757b21c768e0fe9f7dd4c1b1c06",
-                    publisherX509,
+                    signature,
                     "/qn /norestart")
                     );
         }

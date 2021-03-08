@@ -314,7 +314,7 @@ namespace updater.software
                     "https://ftp.mozilla.org/pub/devedition/releases/" + currentVersion + "/win32/" + languageCode + "/Firefox%20Setup%20" + currentVersion + ".exe",
                     HashAlgorithm.SHA512,
                     checksum32Bit,
-                    null,
+                    Signature.None,
                     "-ms -ma"),
                 // 64 bit installer
                 new InstallInfoExe(
@@ -322,7 +322,7 @@ namespace updater.software
                     "https://ftp.mozilla.org/pub/devedition/releases/" + currentVersion + "/win64/" + languageCode + "/Firefox%20Setup%20" + currentVersion + ".exe",
                     HashAlgorithm.SHA512,
                     checksum64Bit,
-                    null,
+                    Signature.None,
                     "-ms -ma")
                     );
         }

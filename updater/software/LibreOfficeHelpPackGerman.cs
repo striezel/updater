@@ -42,6 +42,12 @@ namespace updater.software
 
 
         /// <summary>
+        /// expiration date of the certificate
+        /// </summary>
+        private static readonly DateTime certificateExpiration = new DateTime(2021, 8, 19, 10, 13, 59, DateTimeKind.Utc);
+
+
+        /// <summary>
         /// Default constructor.
         /// </summary>
         /// <param name="autoGetNewer">whether to automatically get
@@ -58,6 +64,7 @@ namespace updater.software
         /// details about the software.</returns>
         public override AvailableSoftware knownInfo()
         {
+            var signature = new Signature(publisherX509, certificateExpiration);
             return new AvailableSoftware("LibreOffice Help Pack German",
                 "7.1.0.3",
                 "^LibreOffice [0-9]+\\.[0-9] Help Pack \\(German\\)$",
@@ -66,13 +73,13 @@ namespace updater.software
                     "https://download.documentfoundation.org/libreoffice/stable/7.1.0/win/x86/LibreOffice_7.1.0_Win_x86_helppack_de.msi",
                     HashAlgorithm.SHA256,
                     "d36b21fe287a60e9405ff05503867909bd570bc45ff90a799008d8e3ce65cd4d",
-                    publisherX509,
+                    signature,
                     "/qn /norestart"),
                 new InstallInfoLibO(
                     "https://download.documentfoundation.org/libreoffice/stable/7.1.0/win/x86_64/LibreOffice_7.1.0_Win_x64_helppack_de.msi",
                     HashAlgorithm.SHA256,
                     "b46ac2b9fda5a02e9dd01f817297d449bdfe4264b1b0e28379c45c8cdf415c67",
-                    publisherX509,
+                    signature,
                     "/qn /norestart")
                     );
         }

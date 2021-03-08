@@ -78,6 +78,7 @@
     <Compile Include="data\InstallInfoPidgin.cs" />
     <Compile Include="data\InstallInfoLibO.cs" />
     <Compile Include="data\InstallInfoMsi.cs" />
+    <Compile Include="data\Signature.cs" />
     <Compile Include="git-info\GitInfo.cs" />
     <Compile Include="operations\Help.cs" />
     <Compile Include="operations\IdList.cs" />

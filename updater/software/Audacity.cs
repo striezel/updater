@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017, 2018, 2020  Dirk Stolle
+    Copyright (C) 2017, 2018, 2020, 2021  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -73,7 +73,7 @@ namespace updater.software
                     "https://www.fosshub.com/Audacity.html?dwl=audacity-win-2.4.2.exe",
                     HashAlgorithm.SHA256,
                     "1f20cd153b2c322bf1ff9941e4e5204098abdc7da37250ce3fb38612b3e927ba",
-                    (DateTime.UtcNow < certiValidBefore) ? publisherX509 : null,
+                    new Signature(publisherX509, certiValidBefore),
                     "/VERYSILENT /NORESTART"),
                 null
                 );

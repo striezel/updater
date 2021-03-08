@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017, 2018, 2020  Dirk Stolle
+    Copyright (C) 2017, 2018, 2020, 2021  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -64,13 +64,13 @@ namespace updater.software
                         "https://dl3.cdn.filezilla-project.org/client/FileZilla_3.51.0_win32-setup.exe",
                         HashAlgorithm.SHA512,
                         "ebb411b4af261cccb622ff39b991090e70d9d7dc6dea22d45c0805fe7ae415fc35ded455ec508b73b0d7cf95193ec38642b254707d13a4159674c1ddef871602",
-                        null,
+                        Signature.None,
                         "/S"),
                     new InstallInfoExe(
                         "https://dl3.cdn.filezilla-project.org/client/FileZilla_3.51.0_win64-setup.exe",
                         HashAlgorithm.SHA512,
                         "2d0cd7c9775315d7094eff3c0c1a05f72f8199bed1732ba3236bd83feba30a4bb58e602fa38d9427eb5b7854a19f4eaa40752f5fd82776d018e549ad6ffc0749",
-                        null,
+                        Signature.None,
                         "/S")
                     );
             // Windows Vista
@@ -101,13 +101,13 @@ namespace updater.software
                     "https://netcologne.dl.sourceforge.net/project/filezilla/FileZilla_Client/3.25.1/FileZilla_3.25.1_win32-setup.exe",
                     HashAlgorithm.SHA512,
                     "c87ad1c6379374efdb11c4176dfc9237164ce4218d8add3fb65dd9f459ab695405580e357806d2f7cb0140589dcb2599106ad52c615af3501d1702fd51c41895",
-                    null,
+                    Signature.None,
                     "/S"),
                 new InstallInfoExe(
                     "https://netcologne.dl.sourceforge.net/project/filezilla/FileZilla_Client/3.25.1/FileZilla_3.25.1_win64-setup.exe",
                     HashAlgorithm.SHA512,
                     "929e8c6a12dc1fc3e77eb17efe5cd860e5a263b97facd1fd2d9a427277d515dad7dd14516341d600b271b1013cc1d966ad36560edd619a401571caacce94e1b1",
-                    null,
+                    Signature.None,
                     "/S")
                 );
         }
@@ -131,7 +131,7 @@ namespace updater.software
                     "https://netcologne.dl.sourceforge.net/project/filezilla/FileZilla_Client/3.8.0/FileZilla_3.8.0_win32-setup.exe",
                     HashAlgorithm.SHA512,
                     "48089aad2da20b49b2d6ad1baf450a14cd20ed2b65b681c469b2b9c943f20970d48cf73008e4ff427ed9743af0c257cfca1b6bdeecdd2153b6531c1449ab8353",
-                    null,
+                    Signature.None,
                     "/S"),
                 // There was no 64 bit version as of version 3.8.0.
                 null

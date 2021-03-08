@@ -42,6 +42,12 @@ namespace updater.software
 
 
         /// <summary>
+        /// expiration date of certificate
+        /// </summary>
+        private static readonly DateTime certificateExpiration = new DateTime(2021, 5, 12, 12, 0, 0, DateTimeKind.Utc);
+
+
+        /// <summary>
         /// constructor with language code
         /// </summary>
         /// <param name="langCode">the language code for the Firefox ESR software,
@@ -305,6 +311,7 @@ namespace updater.software
         /// details about the software.</returns>
         public override AvailableSoftware knownInfo()
         {
+            var signature = new Signature(publisherX509, certificateExpiration);
             const string knownVersion = "78.4.1";
             return new AvailableSoftware("Mozilla Firefox ESR (" + languageCode + ")",
                 knownVersion,
@@ -315,14 +322,14 @@ namespace updater.software
                     "https://ftp.mozilla.org/pub/firefox/releases/" + knownVersion + "esr/win32/" + languageCode + "/Firefox%20Setup%20" + knownVersion + "esr.exe",
                     HashAlgorithm.SHA512,
                     checksum32Bit,
-                    publisherX509,
+                    signature,
                     "-ms -ma"),
                 // 64 bit installer
                 new InstallInfoExe(
                     "https://ftp.mozilla.org/pub/firefox/releases/" + knownVersion + "esr/win64/" + languageCode + "/Firefox%20Setup%20" + knownVersion + "esr.exe",
                     HashAlgorithm.SHA512,
                     checksum64Bit,
-                    publisherX509,
+                    signature,
                     "-ms -ma")
                     );
         }

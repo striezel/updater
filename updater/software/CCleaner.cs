@@ -58,6 +58,7 @@ namespace updater.software
         /// details about the software.</returns>
         public override AvailableSoftware knownInfo()
         {
+            var signature = Signature.NeverExpires(publisherX509);
             return new AvailableSoftware("CCleaner",
                 "5.77",
                 "^CCleaner+$",
@@ -67,13 +68,13 @@ namespace updater.software
                     "https://download.ccleaner.com/ccsetup577.exe",
                     HashAlgorithm.SHA256,
                     "6cb450c7ef4e505bfe080c6c6e0ce61845d952a9887b00b69e711ec3ddb781b3",
-                    publisherX509,
+                    signature,
                     "/S"),
                 new InstallInfoExe(
                     "https://download.ccleaner.com/ccsetup577.exe",
                     HashAlgorithm.SHA256,
                     "6cb450c7ef4e505bfe080c6c6e0ce61845d952a9887b00b69e711ec3ddb781b3",
-                    publisherX509,
+                    signature,
                     "/S")
                 );
         }

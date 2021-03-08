@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017, 2018, 2020  Dirk Stolle
+    Copyright (C) 2017, 2018, 2020, 2021  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -24,6 +24,9 @@ using updater.data;
 
 namespace updater.software
 {
+    /// <summary>
+    /// Handles updates of CDBurnerXP.
+    /// </summary>
     public class CDBurnerXP : NoPreUpdateProcessSoftware
     {
         /// <summary>
@@ -55,6 +58,7 @@ namespace updater.software
         /// details about the software.</returns>
         public override AvailableSoftware knownInfo()
         {
+            var signature = Signature.NeverExpires(publisherX509);
             return new AvailableSoftware("CDBurnerXP",
                 "4.5.8.7128",
                 "^CDBurnerXP$",
@@ -63,13 +67,13 @@ namespace updater.software
                     "https://download.cdburnerxp.se/msi/cdbxp_setup_4.5.8.7128.msi",
                     HashAlgorithm.SHA256,
                     "e92450832b09e32fc769bc94d3b00b04ef5c05d7542cec77a63603c562b757d1",
-                    publisherX509,
+                    signature,
                     "/qn /norestart"),
                 new InstallInfoMsi(
                     "https://download.cdburnerxp.se/msi/cdbxp_setup_x64_4.5.8.7128.msi",
                     HashAlgorithm.SHA256,
                     "af80a5b901100d73855dd1f04845c79511cc2f1299c0ca38dfac8d03ce8fed00",
-                    publisherX509,
+                    signature,
                     "/qn /norestart")
                     );
         }

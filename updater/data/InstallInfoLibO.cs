@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017, 2018  Dirk Stolle
+    Copyright (C) 2017, 2018, 2021  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -41,10 +41,10 @@ namespace updater.data
         /// <param name="_downloadUrl">URL where the installer can be downloaded</param>
         /// <param name="_algo">hash algorithm that was used to create or verify the checksum</param>
         /// <param name="_check">checksum for the installer - hexadecimal representation</param>
-        /// <param name="_pub">publisher name</param>
+        /// <param name="_sig">signature information</param>
         /// <param name="_silent">switches for silent installation</param>
-        public InstallInfoLibO(string _downloadUrl, HashAlgorithm _algo, string _check, string _pub, string _silent)
-            : base(_downloadUrl, _algo, _check, _pub, _silent)
+        public InstallInfoLibO(string _downloadUrl, HashAlgorithm _algo, string _check, Signature _sig, string _silent)
+            : base(_downloadUrl, _algo, _check, _sig, _silent)
         {
             // Base class constructor does initialization.
         }

@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017, 2018  Dirk Stolle
+    Copyright (C) 2017, 2018, 2021  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -33,7 +33,7 @@ namespace updater.data
             downloadUrl = null;
             algorithm = HashAlgorithm.Unknown;
             checksum = null;
-            publisher = null;
+            signature = Signature.None;
             silentSwitches = null;
         }
 
@@ -44,14 +44,14 @@ namespace updater.data
         /// <param name="_downloadUrl">URL where the installer can be downloaded</param>
         /// <param name="_algo">hash algorithm that was used to create or verify the checksum</param>
         /// <param name="_check">checksum for the installer - hexadecimal representation</param>
-        /// <param name="_publisher">common name of publisher, if file is signed</param>
+        /// <param name="_signature">common name of publisher and expiration date, if file is signed</param>
         /// <param name="_silent">switches for silent installation</param>
-        public InstallInfo(string _downloadUrl, HashAlgorithm _algo, string _check, string _publisher, string _silent)
+        public InstallInfo(string _downloadUrl, HashAlgorithm _algo, string _check, Signature _signature, string _silent)
         {
             downloadUrl = _downloadUrl;
             algorithm = _algo;
             checksum = _check;
-            publisher = _publisher;
+            signature = _signature;
             silentSwitches = _silent;
         }
 
@@ -69,13 +69,14 @@ namespace updater.data
 
 
         /// <summary>
-        /// Determines whether or not this instance has signature publisher information.
+        /// Determines whether or not this instance has signature information
+        /// that can be used for verification.
         /// </summary>
-        /// <returns>Returns true, if there is information about a publisher.
+        /// <returns>Returns true, if there is useable information.
         /// Returns false otherwise.</returns>
-        public bool hasSignature()
+        public bool hasVerifiableSignature()
         {
-            return !string.IsNullOrWhiteSpace(publisher);
+            return signature.containsData() && !signature.hasExpired();
         }
 
 
@@ -86,7 +87,7 @@ namespace updater.data
         /// Returns false, if there is no verification information.</returns>
         public bool canBeVerified()
         {
-            return hasChecksum() || hasSignature();
+            return hasChecksum() || hasVerifiableSignature();
         }
 
 
@@ -120,9 +121,9 @@ namespace updater.data
 
 
         /// <summary>
-        /// common name of the publisher, if file is signed
+        /// signature information, if file is signed
         /// </summary>
-        public string publisher;
+        public Signature signature;
 
 
         /// <summary>

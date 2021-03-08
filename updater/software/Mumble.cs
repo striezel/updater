@@ -52,12 +52,19 @@ namespace updater.software
 
 
         /// <summary>
+        /// expiration date of certificate
+        /// </summary>
+        private static readonly DateTime certificateExpiration = new DateTime(2021, 4, 18, 10, 18, 35, DateTimeKind.Utc);
+
+
+        /// <summary>
         /// Gets the currently known information about the software.
         /// </summary>
         /// <returns>Returns an AvailableSoftware instance with the known
         /// details about the software.</returns>
         public override AvailableSoftware knownInfo()
         {
+            var signature = new Signature(publisherX509, certificateExpiration);
             return new AvailableSoftware("Mumble",
                 "1.3.4",
                 "^Mumble [0-9]\\.[0-9]+\\.[0-9]+$",
@@ -66,14 +73,14 @@ namespace updater.software
                     "https://github.com/mumble-voip/mumble/releases/download/1.3.4/mumble-1.3.4.msi",
                     HashAlgorithm.SHA256,
                     "eb2f452dccaa60f64409356815f7ee834aa07823f92410eefe3a2628cf90d52e",
-                    publisherX509,
+                    signature,
                     "/qn /norestart"),
                 // 64 bit MSI installer started with 1.3.0.
                 new InstallInfoMsi(
                     "https://github.com/mumble-voip/mumble/releases/download/1.3.4/mumble-1.3.4.winx64.msi",
                     HashAlgorithm.SHA256,
                     "14e58074269ae32d1678738fb66fc9551c2aac2e789439157081886860802e02",
-                    publisherX509,
+                    signature,
                     "/qn /norestart")
                 );
         }
@@ -155,6 +162,9 @@ namespace updater.software
             newInfo.install32Bit.algorithm = HashAlgorithm.Unknown;
             newInfo.install64Bit.checksum = null;
             newInfo.install64Bit.algorithm = HashAlgorithm.Unknown;
+            // Fall back to known old signature data, but extend it into future.
+            newInfo.install32Bit.signature = Signature.NeverExpires(publisherX509);
+            newInfo.install64Bit.signature = newInfo.install32Bit.signature;
             return newInfo;
         }
 

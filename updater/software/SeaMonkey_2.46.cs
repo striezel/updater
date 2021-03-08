@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017, 2018, 2020  Dirk Stolle
+    Copyright (C) 2017, 2018, 2020, 2021  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -118,7 +118,7 @@ namespace updater.software
                     "https://archive.mozilla.org/pub/seamonkey/releases/2.46/win32/" + languageCode + "/SeaMonkey%20Setup%202.46.exe",
                     HashAlgorithm.SHA1,
                     checksum,
-                    null,
+                    Signature.None,
                     "-ms -ma"),
                 //There is no 64 bit installer yet.
                 null);

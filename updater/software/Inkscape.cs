@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017, 2018, 2020  Dirk Stolle
+    Copyright (C) 2017, 2018, 2020, 2021  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -48,7 +48,7 @@ namespace updater.software
 
 
         /// <summary>
-        /// gets the currently known information about the software
+        /// Gets the currently known information about the software.
         /// </summary>
         /// <returns>Returns an AvailableSoftware instance with the known
         /// details about the software.</returns>
@@ -62,13 +62,13 @@ namespace updater.software
                     "https://media.inkscape.org/dl/resources/file/inkscape-1.0-x86.msi",
                     HashAlgorithm.SHA256,
                     "c0d5f7f58d42611fbcff2ac232c48aad6574d8a1d9a25b18d0a081969b1fdeac",
-                    null,
+                    Signature.None,
                     "/qn /norestart"),
                 new InstallInfoMsi(
                     "https://media.inkscape.org/dl/resources/file/inkscape-1.0-x64.msi",
                     HashAlgorithm.SHA256,
                     "0cd3efa6a6b61f7906152a2d7a221ee1b69598649fc8ca6482be9c3bf6db8679 ",
-                    null,
+                    Signature.None,
                     "/qn /norestart")
                     );
         }

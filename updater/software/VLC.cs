@@ -53,12 +53,19 @@ namespace updater.software
 
 
         /// <summary>
+        /// certificate expiration date
+        /// </summary>
+        private static readonly DateTime certificateExpiration = new DateTime(2023, 12, 18, 23, 59, 59, DateTimeKind.Utc);
+
+
+        /// <summary>
         /// Gets the currently known information about the software.
         /// </summary>
         /// <returns>Returns an AvailableSoftware instance with the known
         /// details about the software.</returns>
         public override AvailableSoftware knownInfo()
         {
+            var signature = new Signature(publisherX509, certificateExpiration);
             const string version = "3.0.12";
             return new AvailableSoftware("VLC media player",
                 version,
@@ -69,14 +76,14 @@ namespace updater.software
                     "https://get.videolan.org/vlc/" + version + "/win32/vlc-" + version + "-win32.exe",
                     HashAlgorithm.SHA256,
                     "85511f1ba0d4b61a6bf1a5a6aa2811d56b2b0b6919bf06dc2bce0d37027e45d1",
-                    publisherX509,
+                    signature,
                     "/S"),
                 // 64 bit installer
                 new InstallInfoExe(
                     "https://get.videolan.org/vlc/" + version + "/win64/vlc-" + version + "-win64.exe",
                     HashAlgorithm.SHA256,
                     "d6e211c71c3f2ddebd950770779bb3fd71c2d977c04ff40ea9e3e5ee9d9d0ec9",
-                    publisherX509,
+                    signature,
                     "/S")
                 );
         }

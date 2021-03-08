@@ -169,13 +169,13 @@ namespace updater.software
                     "https://archive.mozilla.org/pub/seamonkey/releases/" + knownVersion + "/win32/" + languageCode + "/seamonkey-" + knownVersion + "." + languageCode + ".win32.installer.exe",
                     HashAlgorithm.SHA1,
                     checksum32Bit,
-                    null,
+                    Signature.None,
                     "-ms -ma"),
                 new InstallInfoExe(
                     "https://archive.mozilla.org/pub/seamonkey/releases/" + knownVersion + "/win64/" + languageCode + "/seamonkey-" + knownVersion + "." + languageCode + ".win64.installer.exe",
                     HashAlgorithm.SHA1,
                     checksum64Bit,
-                    null,
+                    Signature.None,
                     "-ms -ma"));
         }
 

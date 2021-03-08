@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017, 2018, 2020  Dirk Stolle
+    Copyright (C) 2017, 2018, 2020, 2021  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -61,13 +61,13 @@ namespace updater.software
                     "https://download.gimp.org/pub/gimp/v2.10/windows/gimp-2.10.22-setup.exe",
                     HashAlgorithm.SHA256,
                     "f7851c348584ce432dfd8e69b74a168c7dec33ebfddc29c96ad2d6b83aded083",
-                    null,
+                    Signature.None,
                     "/VERYSILENT /NORESTART"),
                 new InstallInfoExe(
                     "https://download.gimp.org/pub/gimp/v2.10/windows/gimp-2.10.22-setup.exe",
                     HashAlgorithm.SHA256,
                     "f7851c348584ce432dfd8e69b74a168c7dec33ebfddc29c96ad2d6b83aded083",
-                    null,
+                    Signature.None,
                     "/VERYSILENT /NORESTART")
                 );
         }

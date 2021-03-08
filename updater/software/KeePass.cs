@@ -52,12 +52,19 @@ namespace updater.software
 
 
         /// <summary>
+        /// expiration date of certificate
+        /// </summary>
+        private static readonly DateTime certificateExpiration = new DateTime(2021, 1, 28, 06, 44, 42, DateTimeKind.Utc);
+
+
+        /// <summary>
         /// Gets the currently known information about the software.
         /// </summary>
         /// <returns>Returns an AvailableSoftware instance with the known
         /// details about the software.</returns>
         public override AvailableSoftware knownInfo()
         {
+            var signature = new Signature(publisherX509, certificateExpiration);
             return new AvailableSoftware("KeePass",
                 "2.47",
                 "^KeePass Password Safe [2-9]\\.[0-9]{2}(\\.[0-9]+)?$",
@@ -66,7 +73,7 @@ namespace updater.software
                     "https://netcologne.dl.sourceforge.net/project/keepass/KeePass%202.x/2.47/KeePass-2.47-Setup.exe",
                     HashAlgorithm.SHA256,
                     "3EB2723A E5363C84 00B494A5 C2BB24D9 11E622EC BC15B20A AA32526A 7BB45E42",
-                    publisherX509,
+                    signature,
                     "/VERYSILENT"),
                 // There is no 64 bit installer yet.
                 null);

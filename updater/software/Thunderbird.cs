@@ -44,6 +44,12 @@ namespace updater.software
 
 
         /// <summary>
+        /// certificate expiration date
+        /// </summary>
+        private static readonly DateTime certificateExpiration = new DateTime(2021, 5, 12, 12, 0, 0, DateTimeKind.Utc);
+
+
+        /// <summary>
         /// constructor with language code
         /// </summary>
         /// <param name="langCode">the language code for the Thunderbird software,
@@ -249,6 +255,7 @@ namespace updater.software
         /// details about the software.</returns>
         public override AvailableSoftware knownInfo()
         {
+            var signature = new Signature(publisherX509, certificateExpiration);
             const string version = "78.8.0";
             return new AvailableSoftware("Mozilla Thunderbird (" + languageCode + ")",
                 version,
@@ -259,14 +266,14 @@ namespace updater.software
                     "https://ftp.mozilla.org/pub/thunderbird/releases/" + version + "/win32/" + languageCode + "/Thunderbird%20Setup%20" + version + ".exe",
                     HashAlgorithm.SHA512,
                     checksum32Bit,
-                    publisherX509,
+                    signature,
                     "-ms -ma"),
                 // 64 bit installer
                 new InstallInfoExe(
                     "https://ftp.mozilla.org/pub/thunderbird/releases/" + version + "/win64/" + languageCode + "/Thunderbird%20Setup%20" + version + ".exe",
                     HashAlgorithm.SHA512,
                     checksum64Bit,
-                    publisherX509,
+                    signature,
                     "-ms -ma"));
         }
 

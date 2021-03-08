@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017, 2018, 2020  Dirk Stolle
+    Copyright (C) 2017, 2018, 2020, 2021  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -33,6 +33,16 @@ namespace updater.software
         /// NLog.Logger for Pdf24Creator class
         /// </summary>
         private static readonly NLog.Logger logger = NLog.LogManager.GetLogger(typeof(Pdf24Creator).FullName);
+
+        /// <summary>
+        /// publisher of signed binaries
+        /// </summary>
+        private const string publisherX509 = "CN=geek software GmbH, O=geek software GmbH, STREET=Friedrichstr. 171, L=Berlin, PostalCode=10117, C=DE";
+
+        /// <summary>
+        /// certificate expiration date
+        /// </summary>
+        private static readonly DateTime certificateExpiration = new DateTime(2023, 9, 23, 23, 59, 59, DateTimeKind.Utc);
 
 
         /// <summary>
@@ -87,7 +97,7 @@ namespace updater.software
                 "https://en.pdf24.org/products/pdf-creator/download/pdf24-creator-10.0.7.msi",
                 HashAlgorithm.SHA512,
                 "963d790d629fd6638e569d9142fbad816c14db8502778c0d457043333771071a955ee93c4feb6fd3a3ba636b54a0715c6eee6a9f920eba7a018a960d2bb46fa1",
-                "CN=geek software GmbH, O=geek software GmbH, STREET=Friedrichstr. 171, L=Berlin, PostalCode=10117, C=DE",
+                new Signature(publisherX509, certificateExpiration),
                 getOptions() + " /qn /norestart");
 
             return new AvailableSoftware("PDF24 Creator",

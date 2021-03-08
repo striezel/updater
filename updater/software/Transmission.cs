@@ -64,6 +64,7 @@ namespace updater.software
         /// details about the software.</returns>
         public override AvailableSoftware knownInfo()
         {
+            var signature = new Signature(publisherX509, publisherExpiryDate);
             return new AvailableSoftware("Transmission",
                 "3.00",
                 "^Transmission [0-9]+\\.[0-9]+ \\([0-9a-f]+\\) \\(x86\\)$",
@@ -72,13 +73,13 @@ namespace updater.software
                     "https://github.com/transmission/transmission/releases/download/3.00/transmission-3.00-x86.msi",
                     HashAlgorithm.SHA256,
                     "eeab85327fa8a1299bb133d5f60f6674ca9e76522297202bbe39aae92dad4f32",
-                    DateTime.UtcNow < publisherExpiryDate ? publisherX509 : null,
+                    signature,
                     "/qn /norestart"),
                 new InstallInfoMsi(
                     "https://github.com/transmission/transmission/releases/download/3.00/transmission-3.00-x64.msi",
                     HashAlgorithm.SHA256,
                     "c34828a6d2c50c7c590d05ca50249b511d46e9a2a7223323fb3d1421e3f6b9d1",
-                    DateTime.UtcNow < publisherExpiryDate ? publisherX509 : null,
+                    signature,
                     "/qn /norestart")
                     );
         }

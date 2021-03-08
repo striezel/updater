@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017, 2018, 2019  Dirk Stolle
+    Copyright (C) 2017, 2018, 2019, 2021  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -60,13 +60,13 @@ namespace updater.software
                     "http://www.7-zip.org/a/7z1900.exe",
                     HashAlgorithm.SHA256,
                     "759aa04d5b03ebeee13ba01df554e8c962ca339c74f56627c8bed6984bb7ef80",
-                    null,
+                    Signature.None,
                     "/S"),
                 new InstallInfoExe(
                     "http://www.7-zip.org/a/7z1900-x64.exe",
                     HashAlgorithm.SHA256,
                     "0f5d4dbbe5e55b7aa31b91e5925ed901fdf46a367491d81381846f05ad54c45e",
-                    null,
+                    Signature.None,
                     "/S")
                 );
         }

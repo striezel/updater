@@ -62,13 +62,13 @@ namespace updater.software
                     "https://nodejs.org/download/release/v" + version + "/node-v" + version + "-x86.msi",
                     HashAlgorithm.SHA256,
                     "61d549ed39fc264df9978f824042f3f4cac90a866e933c5088384d5dedf283fe",
-                    null,
+                    Signature.None,
                     "/qn /norestart"),
                 new InstallInfoMsi(
                     "https://nodejs.org/download/release/v" + version + "/node-v" + version + "-x64.msi",
                     HashAlgorithm.SHA256,
                     "d9243c9d02f5e4801b8b3ab848f45ce0da2882b5fff448191548ca49af434066",
-                    null,
+                    Signature.None,
                     "/qn /norestart")
                     );
         }

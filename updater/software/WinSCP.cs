@@ -34,6 +34,16 @@ namespace updater.software
         /// </summary>
         private static readonly NLog.Logger logger = NLog.LogManager.GetLogger(typeof(WinSCP).FullName);
 
+        /// <summary>
+        /// publisher of signed binaries
+        /// </summary>
+        private const string publisherX509 = "CN=Martin Prikryl, O=Martin Prikryl, L=Prague, C=CZ, SERIALNUMBER=87331519, OID.2.5.4.15=Private Organization, OID.1.3.6.1.4.1.311.60.2.1.3=CZ";
+        
+        /// <summary>
+        /// expiration date of certificate in signature of binary installer
+        /// </summary>
+        private static readonly DateTime certificateExpiration = new DateTime(2023, 2, 17, 12, 0, 0, DateTimeKind.Utc);
+
 
         /// <summary>
         /// Constructor.
@@ -59,7 +69,7 @@ namespace updater.software
                     "https://netcologne.dl.sourceforge.net/project/winscp/WinSCP/5.17.10/WinSCP-5.17.10-Setup.exe",
                     HashAlgorithm.SHA256,
                     "16caaceb26e654d1ffebe159751bbd46840ad0eba4e0f5da2c4e105c3da44d1d",
-                    "CN=Martin Prikryl, O=Martin Prikryl, L=Prague, C=CZ, SERIALNUMBER=87331519, OID.2.5.4.15=Private Organization, OID.1.3.6.1.4.1.311.60.2.1.3=CZ",
+                    new Signature(publisherX509, certificateExpiration),
                     "/VERYSILENT /NORESTART"),
                 // There is no 64 bit installer yet.
                 null);
@@ -67,7 +77,7 @@ namespace updater.software
 
 
         /// <summary>
-        /// list of IDs to identify the software
+        /// Gets a list of IDs to identify the software.
         /// </summary>
         /// <returns>Returns a non-empty array of IDs, where at least one entry is unique to the software.</returns>
         public override string[] id()

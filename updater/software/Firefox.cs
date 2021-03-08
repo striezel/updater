@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017, 2018, 2020  Dirk Stolle
+    Copyright (C) 2017, 2018, 2020, 2021  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -314,14 +314,14 @@ namespace updater.software
                     "https://ftp.mozilla.org/pub/firefox/releases/" + knownVersion + "/win32/" + languageCode + "/Firefox%20Setup%20" + knownVersion + ".exe",
                     HashAlgorithm.SHA512,
                     checksum32Bit,
-                    null,
+                    Signature.None,
                     "-ms -ma"),
                 // 64 bit installer
                 new InstallInfoExe(
                     "https://ftp.mozilla.org/pub/firefox/releases/" + knownVersion + "/win64/" + languageCode + "/Firefox%20Setup%20" + knownVersion + ".exe",
                     HashAlgorithm.SHA512,
                     checksum64Bit,
-                    null,
+                    Signature.None,
                     "-ms -ma")
                     );
         }

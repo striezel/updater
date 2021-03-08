@@ -52,13 +52,20 @@ namespace updater.software
 
 
         /// <summary>
+        /// expiration date of certificate
+        /// </summary>
+        private static readonly DateTime certificateExpiration = new DateTime(2022, 5, 11, 12, 0, 0, DateTimeKind.Utc);
+
+
+        /// <summary>
         /// Gets the currently known information about the software.
         /// </summary>
         /// <returns>Returns an AvailableSoftware instance with the known
         /// details about the software.</returns>
         public override AvailableSoftware knownInfo()
         {
-            string version = "7.9.3";
+            var signature = new Signature(publisherX509, certificateExpiration);
+            const string version = "7.9.3";
             return new AvailableSoftware("Notepad++",
                 version,
                 "^Notepad\\+\\+ \\(32\\-bit x86\\)$|^Notepad\\+\\+$",
@@ -67,13 +74,13 @@ namespace updater.software
                     "https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v" + version + "/npp." + version + ".Installer.exe",
                     HashAlgorithm.SHA256,
                     "9daaf00b40e848eaebeb6df515f681bc9c70bea01c52df3ecd69910c2d3be66d",
-                    publisherX509,
+                    signature,
                     "/S"),
                 new InstallInfoExe(
                     "https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v" + version + "/npp." + version + ".Installer.x64.exe",
                     HashAlgorithm.SHA256,
                     "942a5fa284df6018aec19110b0d9e68742194bfd44dd984b515adf103d99775a",
-                    publisherX509,
+                    signature,
                     "/S")
                 );
         }

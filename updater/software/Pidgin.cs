@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017, 2018, 2019, 2020  Dirk Stolle
+    Copyright (C) 2017, 2018, 2019, 2020, 2021  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -52,6 +52,12 @@ namespace updater.software
 
 
         /// <summary>
+        /// certificate expiration date
+        /// </summary>
+        private static readonly DateTime certificateExpiration = new DateTime(2020, 6, 12, 12, 0, 0, DateTimeKind.Utc);
+
+
+        /// <summary>
         /// Gets the currently known information about the software.
         /// </summary>
         /// <returns>Returns an AvailableSoftware instance with the known
@@ -70,7 +76,7 @@ namespace updater.software
                     // Certificate is only valid until 2020-06-12 12:00:00 UTC, so do not use it afterwards.
                     // I wish people would sign binaries with certificates that do not expire one day after
                     // the binary was released, but ... well, here we are.
-                    DateTime.UtcNow > new DateTime(2020, 6, 12, 12, 0, 0, DateTimeKind.Utc) ? null : publisherX509,
+                    new Signature(publisherX509, certificateExpiration),
                     "/DS=1 /SMS=1 /S"),
                 null
                 );
@@ -145,7 +151,7 @@ namespace updater.software
             newInfo.install32Bit.downloadUrl = newInfo.install32Bit.downloadUrl.Replace(oldVersion, version);
             newInfo.install32Bit.checksum = null;
             newInfo.install32Bit.algorithm = HashAlgorithm.Unknown;
-            newInfo.install32Bit.publisher = publisherX509;
+            newInfo.install32Bit.signature = Signature.NeverExpires(publisherX509);
             return newInfo;
         }
 
