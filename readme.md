@@ -60,13 +60,6 @@ Options can change behaviour of the update process. Available options are:
       the ID for a specific software, run the program with the --list-id
       option which lists all software IDs. You can use this option several
       times to exclude more than one software from the update process.
-    --aurora | --with-aurora
-      Include updates for Firefox Aurora, i.e. the developer edition of
-      Firefox. This option is disabled by default, because it increases the
-      time for initial version checks by several seconds.
-    --no-aurora | --without-aurora
-      Do not include updates for Firefox Aurora. This option is enabled by
-      default.
     --pdf24-autoupdate
       Enable automatic updates for PDF24 Creator after update. This option is
       enabled by default.
