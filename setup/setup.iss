@@ -25,6 +25,16 @@ SolidCompression=yes
 [Languages]
 Name: "en"; MessagesFile: "compiler:Default.isl"
 Name: "de"; MessagesFile: "compiler:Languages\German.isl"
+Name: "nl"; MessagesFile: "compiler:Languages\Dutch.isl"
+Name: "fi"; MessagesFile: "compiler:Languages\Finnish.isl"
+Name: "fr"; MessagesFile: "compiler:Languages\French.isl"
+Name: "he"; MessagesFile: "compiler:Languages\Hebrew.isl"
+Name: "it"; MessagesFile: "compiler:Languages\Italian.isl"
+Name: "jp"; MessagesFile: "compiler:Languages\Japanese.isl"
+Name: "pt"; MessagesFile: "compiler:Languages\Portuguese.isl"
+Name: "ru"; MessagesFile: "compiler:Languages\Russian.isl"
+Name: "es"; MessagesFile: "compiler:Languages\Spanish.isl"
+Name: "tr"; MessagesFile: "compiler:Languages\Turkish.isl"
 
 ; [Tasks]
 ; Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked

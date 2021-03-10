@@ -1,6 +1,7 @@
 # bin and obj directories
 [Bb]in/
 [Oo]bj/
+*.exe
 
 # Visual Studio's stuff
 *.suo
