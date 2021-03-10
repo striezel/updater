@@ -198,6 +198,7 @@ namespace updater.operations
                     logger.Warn("Warning: At least one process was found that "
                         + "blocks the update of " + entry.software.info().Name
                         + "! Update will be omitted.");
+                    File.Delete(downloadedFile);
                     continue;
                 }
 
