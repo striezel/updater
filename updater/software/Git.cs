@@ -43,7 +43,7 @@ namespace updater.software
         /// <summary>
         /// expiration date for the publisher certificate
         /// </summary>
-        private static readonly DateTime publisherExpiryDate = new DateTime(2021, 5, 21, 0, 0, 0, DateTimeKind.Utc);
+        private static readonly DateTime publisherExpiryDate = new DateTime(2021, 5, 20, 0, 0, 0, DateTimeKind.Utc);
 
 
         /// <summary>
@@ -65,19 +65,19 @@ namespace updater.software
         {
             var signature = new Signature(publisherX509, publisherExpiryDate);
             return new AvailableSoftware("Git",
-                "2.30.1",
+                "2.30.2",
                 "^Git version [0-9]+\\.[0-9]+\\.[0-9]+$",
                 "^Git version [0-9]+\\.[0-9]+\\.[0-9]+$",
                 new InstallInfoExe(
-                    "https://github.com/git-for-windows/git/releases/download/v2.30.1.windows.1/Git-2.30.1-32-bit.exe",
+                    "https://github.com/git-for-windows/git/releases/download/v2.30.2.windows.1/Git-2.30.2-32-bit.exe",
                     HashAlgorithm.SHA256,
-                    "cd0e3b2f468be76fbf0f1e8b233c97a299726fc20f8122fd992e00097a76b17e",
+                    "5129a8073c74fdd42a47cab0e0c421c4d51f36648b7ebd1e4e5771631d0ae1f7",
                     signature,
                     "/VERYSILENT /NORESTART"),
                 new InstallInfoExe(
-                    "https://github.com/git-for-windows/git/releases/download/v2.30.1.windows.1/Git-2.30.1-64-bit.exe",
+                    "https://github.com/git-for-windows/git/releases/download/v2.30.2.windows.1/Git-2.30.2-64-bit.exe",
                     HashAlgorithm.SHA256,
-                    "f1358ec93e8975fb4eaacbb71e010fadcb097fb00b8af9ab6d003ba69c08367d",
+                    "ae84c1965034527158fb0faca3e32430f51a34140a929135180e4dc0eddf3c30",
                     signature,
                     "/VERYSILENT /NORESTART")
                     );
