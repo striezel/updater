@@ -53,7 +53,7 @@ namespace updater.software
         /// <summary>
         /// expiration date of certificate
         /// </summary>
-        private static readonly DateTime certificateExpiration = new DateTime(2020, 8, 25, 12, 0, 0, DateTimeKind.Utc);
+        private static readonly DateTime certificateExpiration = new DateTime(2022, 9, 29, 12, 0, 0, DateTimeKind.Utc);
 
         /// <summary>
         /// Gets the currently known information about the software.
@@ -63,7 +63,7 @@ namespace updater.software
         public override AvailableSoftware knownInfo()
         {
             var signature = new Signature(publisherX509, certificateExpiration);
-            const string knownVersion = "4.5.0";
+            const string knownVersion = "5.13.0";
             return new AvailableSoftware("Calibre",
                 knownVersion,
                 "^calibre$",
@@ -71,13 +71,13 @@ namespace updater.software
                 new InstallInfoMsi(
                     "https://download.calibre-ebook.com/" + knownVersion + "/calibre-" + knownVersion + ".msi",
                     HashAlgorithm.SHA256,
-                    "67e2184be260a0330f7fa29268e422aebab872a471ec7a807e28967641576661",
+                    "c6f9194211ab1675851ef2cdfdc97988a38276c051ed6bd2815c93f34ba83123",
                     signature,
                     "/qn /norestart"),
                 new InstallInfoMsi(
                     "https://download.calibre-ebook.com/" + knownVersion + "/calibre-64bit-" + knownVersion + ".msi",
                     HashAlgorithm.SHA256,
-                    "82e0a37fbb556792ce091e63177260d47662a757b21c768e0fe9f7dd4c1b1c06",
+                    "c6e2ebb2b0ce89f0f55dd4c478d5b78e88372b78fe4f94dbddba81e43ad5225e",
                     signature,
                     "/qn /norestart")
                     );
