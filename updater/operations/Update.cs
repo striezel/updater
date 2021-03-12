@@ -247,9 +247,17 @@ namespace updater.operations
                                 }
                                 if (!success)
                                 {
-                                    logger.Error("Error: Could not perform pre-update task for "
-                                        + entry.software.info().Name + ".");
-                                    return -1 - updatedApplications;
+                                    if (!entry.software.allowPreUpdateProcessFailure(entry.detected, preProc))
+                                    {
+                                        logger.Error("Error: Could not perform pre-update task for "
+                                            + entry.software.info().Name + ".");
+                                        return -1 - updatedApplications;
+                                    }
+                                    else
+                                    {
+                                        logger.Warn("Info: Pre-update task for "
+                                            + entry.software.info().Name + " failed, but that is allowed.");
+                                    }
                                 }
                             } // try-c
                             catch (Exception ex)

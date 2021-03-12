@@ -304,6 +304,22 @@ namespace updater.software
 
 
         /// <summary>
+        /// Determines whether or not the pre-update processes are allowed to fail.
+        /// </summary>
+        /// <param name="detected">currently installed / detected software version</param>
+        /// <param name="preProc">the current pre-update process</param>
+        /// <returns>Returns true, if the separate processes returned by
+        /// preUpdateProcess() are allowed to fail.</returns>
+        public override bool allowPreUpdateProcessFailure(DetectedSoftware detected, Process preProc)
+        {
+            // Preparational processes are allowed to fail, because usually not
+            // all of the older MSI installations are present, but we need to
+            // try to uninstall them before installing the current version.
+            return preProc.StartInfo.FileName.ToLower().Contains("msiexec.exe");
+        }
+
+
+        /// <summary>
         /// whether the detected software is older than the newest known software
         /// </summary>
         /// <param name="detected">the corresponding detected software</param>

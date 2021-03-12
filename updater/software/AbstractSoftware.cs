@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017, 2020  Dirk Stolle
+    Copyright (C) 2017, 2020, 2021  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -153,6 +153,20 @@ namespace updater.software
         /// the update. May return null or may throw, if needsPreUpdateProcess()
         /// returned false.</returns>
         abstract public List<Process> preUpdateProcess(DetectedSoftware detected);
+
+
+        /// <summary>
+        /// Determines whether or not the pre-update processes are allowed to fail.
+        /// </summary>
+        /// <param name="detected">currently installed / detected software version</param>
+        /// <param name="preProc">the current pre-update process</param>
+        /// <returns>Returns true, if the separate processes returned by
+        /// preUpdateProcess() are allowed to fail.</returns>
+        public virtual bool allowPreUpdateProcessFailure(DetectedSoftware detected, Process preProc)
+        {
+            // Preparational processes should never fail.
+            return false;
+        }
 
 
         /// <summary>
