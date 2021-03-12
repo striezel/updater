@@ -55,19 +55,19 @@ namespace updater.software
         public override AvailableSoftware knownInfo()
         {
             return new AvailableSoftware("Inkscape",
-                "1.0",
-                "^Inkscape [0-9]\\.[0-9]+(\\.[0-9]+)?$",
-                "^Inkscape [0-9]\\.[0-9]+(\\.[0-9]+)?$",
+                "1.0.2",
+                "^Inkscape( [0-9]\\.[0-9]+(\\.[0-9]+)?)?$",
+                "^Inkscape( [0-9]\\.[0-9]+(\\.[0-9]+)?)?$",
                 new InstallInfoMsi(
-                    "https://media.inkscape.org/dl/resources/file/inkscape-1.0-x86.msi",
+                    "https://media.inkscape.org/dl/resources/file/inkscape-1.0.2-2-x86.msi",
                     HashAlgorithm.SHA256,
-                    "c0d5f7f58d42611fbcff2ac232c48aad6574d8a1d9a25b18d0a081969b1fdeac",
+                    "9eebc8b9e47b04ffb95f7b620031a5728e84479e87546d35c4ee0a2ecf53dac8",
                     Signature.None,
                     "/qn /norestart"),
                 new InstallInfoMsi(
-                    "https://media.inkscape.org/dl/resources/file/inkscape-1.0-x64.msi",
+                    "https://media.inkscape.org/dl/resources/file/inkscape-1.0.2-2-x64.msi",
                     HashAlgorithm.SHA256,
-                    "0cd3efa6a6b61f7906152a2d7a221ee1b69598649fc8ca6482be9c3bf6db8679 ",
+                    "febffbb398a27999c1275df1bc0c3073c62b1f791cbd842e9345874351132166 ",
                     Signature.None,
                     "/qn /norestart")
                     );
@@ -286,7 +286,10 @@ namespace updater.software
             {
                 // MSI GUIDs to uninstall older MSI builds
                 string[] guids = {
-                    "{81922150-317E-4BB0-A31D-FF1C14F707C5}" //0.91 MSI (x86 and x64), 0.92 MSI
+                    "{81922150-317E-4BB0-A31D-FF1C14F707C5}", // 0.91 MSI (x86 and x64), 0.92 MSI
+                    "{1E74336F-9E7A-4070-BAA7-716A504FB9B0}", // 1.0 MSI
+                    "{776C087E-B714-4153-9414-79592EC61B4A}", // 1.0.1 MSI
+                    "{DBDA3649-0685-4067-ADB6-7A3B9B30720F}", // 1.0.2-2 MSI
                 };
                 foreach (var id in guids)
                 {
