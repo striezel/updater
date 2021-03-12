@@ -128,7 +128,7 @@ namespace updater.software
                 client.Dispose();
             } // using
 
-            Regex reVersion = new Regex("href=\"https://sourceforge\\.net/projects/pidgin/files/Pidgin/([0-9]+\\.[0-9]+\\.[0-9]+)/pidgin\\-([0-9]+\\.[0-9]+\\.[0-9]+)\\.exe/download\"");
+            Regex reVersion = new Regex("href=\"https://sourceforge\\.net/projects/pidgin/files/Pidgin/([0-9]+\\.[0-9]+\\.[0-9]+)/pidgin\\-([0-9]+\\.[0-9]+\\.[0-9]+)\\.exe\"");
             Match matchVersion = reVersion.Match(htmlCode);
             if (!matchVersion.Success)
                 return null;
@@ -140,15 +140,18 @@ namespace updater.software
                 return null;
             }
             string version = v1;
-            
-            // No checksum, only signature.
 
             // construct new information
             var newInfo = knownInfo();
             string oldVersion = newInfo.newestVersion;
+            // If newest version is the same as the old version, then keep the known information.
+            // That way the known checksum will be preserved.
+            if (version == oldVersion)
+                return newInfo;
             newInfo.newestVersion = version;
             // 32 bit
             newInfo.install32Bit.downloadUrl = newInfo.install32Bit.downloadUrl.Replace(oldVersion, version);
+            // No checksum, only signature.
             newInfo.install32Bit.checksum = null;
             newInfo.install32Bit.algorithm = HashAlgorithm.Unknown;
             newInfo.install32Bit.signature = Signature.NeverExpires(publisherX509);
