@@ -42,7 +42,7 @@ namespace updater.software
         /// whether or not a separate process must be run before the update
         /// </summary>
         /// <param name="detected">currently installed / detected software version</param>
-        /// <returns>Returns true, if a separate proess returned by
+        /// <returns>Returns true, if a separate process returned by
         /// preUpdateProcess() needs to run in preparation of the update.
         /// Returns false, if not. Calling preUpdateProcess() may throw an
         /// exception in the later case.</returns>
