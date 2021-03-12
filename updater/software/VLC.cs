@@ -195,8 +195,14 @@ namespace updater.software
         {
             logger.Debug("Searching for newer version of VLC media player...");
             // get new version number
-            Triple lastVersion = new Triple(getLastVersion());
-            Triple availableVersion = new Triple(getLatestAvailableVersion());
+            string lastVersionString = getLastVersion();
+            if (null == lastVersionString)
+                return null;
+            Triple lastVersion = new Triple(lastVersionString);
+            string availableVersionString = getLatestAvailableVersion();
+            if (null == availableVersionString)
+                return null;
+            Triple availableVersion = new Triple(availableVersionString);
             Triple newVersion = new Triple()
             {
                 major = lastVersion.major,
