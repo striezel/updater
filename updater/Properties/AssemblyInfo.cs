@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("updater")]
-[assembly: AssemblyCopyright("Copyright © 2016, 2017, 2018, 2019, 2020 Dirk Stolle")]
+[assembly: AssemblyCopyright("Copyright © 2016, 2017, 2018, 2019, 2020, 2021 Dirk Stolle")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -32,5 +32,5 @@ using System.Runtime.InteropServices;
 // Sie können alle Werte angeben oder die standardmäßigen Build- und Revisionsnummern 
 // übernehmen, indem Sie "*" eingeben:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("2020.12.15.0")]
-[assembly: AssemblyFileVersion("2020.12.15.0")]
+[assembly: AssemblyVersion("2021.03.12.0")]
+[assembly: AssemblyFileVersion("2021.03.12.0")]
