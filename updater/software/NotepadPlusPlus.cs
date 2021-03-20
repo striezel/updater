@@ -65,7 +65,7 @@ namespace updater.software
         public override AvailableSoftware knownInfo()
         {
             var signature = new Signature(publisherX509, certificateExpiration);
-            const string version = "7.9.3";
+            const string version = "7.9.4";
             return new AvailableSoftware("Notepad++",
                 version,
                 "^Notepad\\+\\+ \\(32\\-bit x86\\)$|^Notepad\\+\\+$",
@@ -73,13 +73,13 @@ namespace updater.software
                 new InstallInfoExe(
                     "https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v" + version + "/npp." + version + ".Installer.exe",
                     HashAlgorithm.SHA256,
-                    "9daaf00b40e848eaebeb6df515f681bc9c70bea01c52df3ecd69910c2d3be66d",
+                    "2561bb7ece69440d3f61fa149147332daad9ab3ba5da8d0e5f66272a4ac51c11",
                     signature,
                     "/S"),
                 new InstallInfoExe(
                     "https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v" + version + "/npp." + version + ".Installer.x64.exe",
                     HashAlgorithm.SHA256,
-                    "942a5fa284df6018aec19110b0d9e68742194bfd44dd984b515adf103d99775a",
+                    "e96394aba4e37d5f1a087da672e28010585c9af1f2a1e2ec43189a063ca20c45",
                     signature,
                     "/S")
                 );
