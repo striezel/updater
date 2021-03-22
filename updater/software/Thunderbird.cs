@@ -299,6 +299,7 @@ namespace updater.software
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
             request.Method = WebRequestMethods.Http.Head;
             request.AllowAutoRedirect = false;
+            request.Timeout = 30000; // 30_000 ms / 30 seconds
             try
             {
                 HttpWebResponse response = (HttpWebResponse)request.GetResponse();

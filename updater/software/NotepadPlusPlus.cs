@@ -119,6 +119,7 @@ namespace updater.software
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://github.com/notepad-plus-plus/notepad-plus-plus/releases/latest");
             request.Method = WebRequestMethods.Http.Head;
             request.AllowAutoRedirect = false;
+            request.Timeout = 30000; // 30_000 ms / 30 seconds
             string currentVersion;
             try
             {
