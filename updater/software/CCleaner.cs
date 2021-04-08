@@ -59,23 +59,19 @@ namespace updater.software
         public override AvailableSoftware knownInfo()
         {
             var signature = Signature.NeverExpires(publisherX509);
+            var installer = new InstallInfoExe(
+                "https://download.ccleaner.com/ccsetup578.exe",
+                HashAlgorithm.SHA256,
+                "4b06edb1a0cc2eee860d84877f27185bd2ff944f4817600a57d8a235d2596be6",
+                signature,
+                "/S");
             return new AvailableSoftware("CCleaner",
-                "5.77",
+                "5.78",
                 "^CCleaner+$",
                 "^CCleaner+$",
                 // CCleaner uses the same installer for 32 and 64 bit.
-                new InstallInfoExe(
-                    "https://download.ccleaner.com/ccsetup577.exe",
-                    HashAlgorithm.SHA256,
-                    "6cb450c7ef4e505bfe080c6c6e0ce61845d952a9887b00b69e711ec3ddb781b3",
-                    signature,
-                    "/S"),
-                new InstallInfoExe(
-                    "https://download.ccleaner.com/ccsetup577.exe",
-                    HashAlgorithm.SHA256,
-                    "6cb450c7ef4e505bfe080c6c6e0ce61845d952a9887b00b69e711ec3ddb781b3",
-                    signature,
-                    "/S")
+                installer,
+                installer
                 );
         }
 
