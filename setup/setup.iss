@@ -45,7 +45,7 @@ Source: "..\updater\bin\Release\updater.exe"; DestDir: "{app}"; Flags: ignorever
 ; NLog configuration file (logging)
 Source: "..\updater\bin\Release\NLog.config"; DestDir: "{app}"; Flags: ignoreversion
 ; NLog main assembly (logging)
-Source: "..\updater\packages\NLog.4.7.8\lib\net45\NLog.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\updater\packages\NLog.4.7.9\lib\net45\NLog.dll"; DestDir: "{app}"; Flags: ignoreversion
 ; GPL 3 license text
 Source: "..\LICENSE"; DestDir: "{app}"; Flags: ignoreversion
 
