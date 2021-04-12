@@ -48,13 +48,13 @@ namespace updater.software
         /// <summary>
         /// publisher of signed binaries
         /// </summary>
-        private const string publisherX509 = "CN=Eion Robb, O=Eion Robb, L=Christchurch, C=NZ";
+        private const string publisherX509 = "CN=Gary Kramlich, O=Gary Kramlich, STREET=2653 N 54TH ST, L=MILWAUKEE, S=Wisconsin, PostalCode=53210, C=US";
 
 
         /// <summary>
         /// certificate expiration date
         /// </summary>
-        private static readonly DateTime certificateExpiration = new DateTime(2020, 6, 12, 12, 0, 0, DateTimeKind.Utc);
+        private static readonly DateTime certificateExpiration = new DateTime(2024, 3, 22, 1, 0, 0, DateTimeKind.Utc);
 
 
         /// <summary>
@@ -65,14 +65,14 @@ namespace updater.software
         public override AvailableSoftware knownInfo()
         {
             return new AvailableSoftware("Pidgin",
-                "2.14.1",
+                "2.14.3",
                 "^Pidgin$",
                 null,
                 // Pidgin only has an installer for 32 bit.
                 new InstallInfoPidgin(
-                    "https://netcologne.dl.sourceforge.net/project/pidgin/Pidgin/2.14.1/pidgin-2.14.1-offline.exe",
+                    "https://netcologne.dl.sourceforge.net/project/pidgin/Pidgin/2.14.3/pidgin-2.14.3-offline.exe",
                     HashAlgorithm.SHA256,
-                    "a9125e18ae7e219c01137a36e4c7379e1606f5db8fe7de223e3d67e8c1b533fc",
+                    "e9cf873c7c0f772f682425a2f52e60d8a6d928ee06f770ad06905b3f2d736ffe",
                     // Certificate is only valid until 2020-06-12 12:00:00 UTC, so do not use it afterwards.
                     // I wish people would sign binaries with certificates that do not expire one day after
                     // the binary was released, but ... well, here we are.
