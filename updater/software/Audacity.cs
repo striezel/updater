@@ -65,14 +65,14 @@ namespace updater.software
         public override AvailableSoftware knownInfo()
         {
             return new AvailableSoftware("Audacity",
-                "2.4.2",
+                "3.0.0",
                 "^Audacity [0-9]+\\.[0-9]+\\.[0-9]+$",
                 null,
                 // Audacity only has an installer for 32 bit.
                 new InstallInfoExe(
-                    "https://www.fosshub.com/Audacity.html?dwl=audacity-win-2.4.2.exe",
+                    "https://github.com/audacity/audacity/releases/download/Audacity-3.0.0/audacity-win-3.0.0.exe",
                     HashAlgorithm.SHA256,
-                    "1f20cd153b2c322bf1ff9941e4e5204098abdc7da37250ce3fb38612b3e927ba",
+                    "6a0cfed327b00cf8fefef4bd5c8ba85b5364f3e56345772410572f2d821ca14d",
                     new Signature(publisherX509, certiValidBefore),
                     "/VERYSILENT /NORESTART"),
                 null
