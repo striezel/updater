@@ -65,7 +65,7 @@ namespace updater.software
         public override AvailableSoftware knownInfo()
         {
             return new AvailableSoftware("Audacity",
-                "2.4.2",
+                "3.0.0",
                 "^Audacity [0-9]+\\.[0-9]+\\.[0-9]+$",
                 null,
                 // Audacity only has an installer for 32 bit.
