@@ -162,13 +162,13 @@ namespace updater.software
             } // using
 
             // find SHA256 hash for 32 bit installer
-            Regex reHash = new Regex("[a-f0-9]{64}  cmake.+win32\\-x86\\.msi");
+            Regex reHash = new Regex("[a-f0-9]{64}  cmake.+windows\\-i386\\.msi");
             Match matchHash = reHash.Match(htmlCode);
             if (!matchHash.Success)
                 return null;
             string newHash32Bit = matchHash.Value.Substring(0, 64);
             // find SHA256 hash for 64 bit installer
-            reHash = new Regex("[a-f0-9]{64}  cmake.+win64\\-x64\\.msi");
+            reHash = new Regex("[a-f0-9]{64}  cmake.+windows\\-x86_64\\.msi");
             matchHash = reHash.Match(htmlCode);
             if (!matchHash.Success)
                 return null;
@@ -176,11 +176,13 @@ namespace updater.software
             // construct new information
             var newInfo = knownInfo();
             newInfo.newestVersion = currentVersion;
-            // e. g. https://github.com/Kitware/CMake/releases/download/v3.19.4/cmake-3.19.4-win32-x86.msi
-            newInfo.install32Bit.downloadUrl = "https://github.com/Kitware/CMake/releases/download/v" + currentVersion + "/cmake-" + currentVersion + "-win32-x86.msi";
+            // e. g. https://github.com/Kitware/CMake/releases/download/v3.19.4/cmake-3.19.4-win32-x86.msi (until 3.19.8)
+            //    or https://github.com/Kitware/CMake/releases/download/v3.20.2/cmake-3.20.2-windows-i386.msi (since 3.20.0)
+            newInfo.install32Bit.downloadUrl = "https://github.com/Kitware/CMake/releases/download/v" + currentVersion + "/cmake-" + currentVersion + "-windows-i386.msi";
             newInfo.install32Bit.checksum = newHash32Bit;
-            // e. g. https://github.com/Kitware/CMake/releases/download/v3.19.4/cmake-3.19.4-win64-x64.msi
-            newInfo.install64Bit.downloadUrl = "https://github.com/Kitware/CMake/releases/download/v" + currentVersion + "/cmake-" + currentVersion + "-win64-x64.msi";
+            // e. g. https://github.com/Kitware/CMake/releases/download/v3.19.4/cmake-3.19.4-win64-x64.msi (until 3.19.8)
+            //    or https://github.com/Kitware/CMake/releases/download/v3.20.1/cmake-3.20.1-windows-x86_64.msi (since 3.20.0)
+            newInfo.install64Bit.downloadUrl = "https://github.com/Kitware/CMake/releases/download/v" + currentVersion + "/cmake-" + currentVersion + "-windows-x86_64.msi";
             newInfo.install64Bit.checksum = newHash64Bit;
             return newInfo;
         }
