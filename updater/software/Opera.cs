@@ -46,6 +46,18 @@ namespace updater.software
 
 
         /// <summary>
+        /// publisher of signed binaries
+        /// </summary>
+        private const string publisherX509 = "CN=Opera Software AS, O=Opera Software AS, L=Oslo, C=NO, SERIALNUMBER=916 368 127, OID.2.5.4.15=Private Organization, OID.1.3.6.1.4.1.311.60.2.1.3=NO";
+
+
+        /// <summary>
+        /// expiration date of certificate
+        /// </summary>
+        private static readonly DateTime certificateExpiration = new DateTime(2022, 8, 3, 12, 0, 0, DateTimeKind.Utc);
+
+
+        /// <summary>
         /// Gets the currently known information about the software.
         /// </summary>
         /// <returns>Returns an AvailableSoftware instance with the known
@@ -53,21 +65,22 @@ namespace updater.software
         public override AvailableSoftware knownInfo()
         {
             const string silentOptions = "/silent /norestart /launchopera 0 /setdefaultbrowser 0 /enable-stats 0 /enable-installer-stats 0 /pintotaskbar 0 /pin-additional-shortcuts 0 /allusers";
+            var signature = new Signature(publisherX509, certificateExpiration);
             return new AvailableSoftware("Opera",
-                "72.0.3815.400",
+                "76.0.4017.107",
                 "^Opera Stable [0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+$",
                 "^Opera Stable [0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+$",
                 new InstallInfoExe(
-                    "https://get.geo.opera.com/pub/opera/desktop/72.0.3815.400/win/Opera_72.0.3815.400_Setup.exe",
+                    "https://get.geo.opera.com/pub/opera/desktop/76.0.4017.107/win/Opera_76.0.4017.107_Setup.exe",
                     HashAlgorithm.SHA256,
-                    "43578aea78de99b8526870c7df7dcb3edd737a00cd55bbf164330fe90dbd792f",
-                    Signature.None,
+                    "308916bb762ba265664f143279f4bb3f95d2bf3b2b090c79822a665e88e4e83c",
+                    signature,
                     silentOptions),
                 new InstallInfoExe(
-                    "https://get.geo.opera.com/pub/opera/desktop/72.0.3815.400/win/Opera_72.0.3815.400_Setup_x64.exe",
+                    "https://get.geo.opera.com/pub/opera/desktop/76.0.4017.107/win/Opera_76.0.4017.107_Setup_x64.exe",
                     HashAlgorithm.SHA256,
-                    "07584ea951ced1d8fa0f8373ba05b9a79a0782e138d10fc68bf86f436b7d0337",
-                    Signature.None,
+                    "a5b68b2fda7a77438d1fa36fea43607c0ad0a23b6add75bd12f84b428a65aa81",
+                    signature,
                     silentOptions)
                     );
         }
