@@ -46,13 +46,26 @@ namespace updater.software
 
 
         /// <summary>
+        /// publisher of signed binaries
+        /// </summary>
+        private const string publisherX509 = "CN=OpenJS Foundation, O=OpenJS Foundation, L=San Francisco, S=California, C=US";
+
+
+        /// <summary>
+        /// expiration date of certificate
+        /// </summary>
+        private static readonly DateTime certificateExpiration = new DateTime(2023, 12, 18, 12, 0, 0, DateTimeKind.Utc);
+
+
+        /// <summary>
         /// Gets the currently known information about the software.
         /// </summary>
         /// <returns>Returns an AvailableSoftware instance with the known
         /// details about the software.</returns>
         public override AvailableSoftware knownInfo()
         {
-            const string version = "14.16.1";
+            const string version = "14.17.0";
+            var signature = new Signature(publisherX509, certificateExpiration);
             return new AvailableSoftware(
                 "Node.js",
                 version,
@@ -61,14 +74,14 @@ namespace updater.software
                 new InstallInfoMsi(
                     "https://nodejs.org/download/release/v" + version + "/node-v" + version + "-x86.msi",
                     HashAlgorithm.SHA256,
-                    "d9cad1fbbe479f39949b36ff10df9c9afe3498621d50426e7dc8eff1c6740636",
-                    Signature.None,
+                    "c3d7bb267ead2548746092a7e31fb59cb7828d1fe9f97d9628ed6ea4977b4c35",
+                    signature,
                     "/qn /norestart"),
                 new InstallInfoMsi(
                     "https://nodejs.org/download/release/v" + version + "/node-v" + version + "-x64.msi",
                     HashAlgorithm.SHA256,
-                    "c90d32952154eb1ef3ebef5a5d6ec4b752e5d0f1520f9d2ebdef6685a2d3a4ec",
-                    Signature.None,
+                    "6d4c7457a210b867ca5b1c4a4465b4065ae6708dfd917383fe61f6860dba2128",
+                    signature,
                     "/qn /norestart")
                     );
         }
