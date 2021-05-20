@@ -46,6 +46,18 @@ namespace updater.software
 
 
         /// <summary>
+        /// publisher of the signed binaries
+        /// </summary>
+        private const string publisherX509 = "CN=Tim Kosse, O=Tim Kosse, STREET=Lukasstr. 10, L=Köln, S=NRW, PostalCode=50823, C=DE";
+
+
+        /// <summary>
+        /// certificate expiration date
+        /// </summary>
+        private static readonly DateTime certificateExpiration = new DateTime(2022, 2, 12, 23, 59, 59, DateTimeKind.Utc);
+
+
+        /// <summary>
         /// Gets the currently known information about the software.
         /// </summary>
         /// <returns>Returns an AvailableSoftware instance with the known
@@ -56,23 +68,26 @@ namespace updater.software
             // The last version for Windows Vista is 3.25.1.
             // The last version that still supports Windows XP is 3.8.0
             if (utility.OS.isWin7OrNewer())
+            {
+                var signature = new Signature(publisherX509, certificateExpiration);
                 return new AvailableSoftware("FileZilla FTP Client",
-                    "3.51.0",
+                    "3.54.1",
                     "^FileZilla Client [0-9]+\\.[0-9]+(\\.[0-9]+(\\.[0-9]+)?)?$",
                     "^FileZilla Client [0-9]+\\.[0-9]+(\\.[0-9]+(\\.[0-9]+)?)?$",
                     new InstallInfoExe(
-                        "https://dl3.cdn.filezilla-project.org/client/FileZilla_3.51.0_win32-setup.exe",
+                        "https://download.filezilla-project.org/client/FileZilla_3.54.1_win32-setup.exe",
                         HashAlgorithm.SHA512,
-                        "ebb411b4af261cccb622ff39b991090e70d9d7dc6dea22d45c0805fe7ae415fc35ded455ec508b73b0d7cf95193ec38642b254707d13a4159674c1ddef871602",
-                        Signature.None,
+                        "dab209e076c63f5b8f6aa3b2f86f7fb1dc09a16419eb81d9d40bc70e860a07aeb338ea8121f103e5b103ad1bd022e9cbdf685ec0e2a4b8a94bf29062de41a9aa",
+                        signature,
                         "/S"),
                     new InstallInfoExe(
-                        "https://dl3.cdn.filezilla-project.org/client/FileZilla_3.51.0_win64-setup.exe",
+                        "https://download.filezilla-project.org/client/FileZilla_3.54.1_win64-setup.exe",
                         HashAlgorithm.SHA512,
-                        "2d0cd7c9775315d7094eff3c0c1a05f72f8199bed1732ba3236bd83feba30a4bb58e602fa38d9427eb5b7854a19f4eaa40752f5fd82776d018e549ad6ffc0749",
-                        Signature.None,
+                        "0a9110fa6552ce75025c96a5816295a0d18355deecbd5506b4e59c88f68c039486145c50e4c0273f5a4f6226d59932175a0e844c31f6b5d1cff83364357c1fc2",
+                        signature,
                         "/S")
                     );
+            }
             // Windows Vista
             if (utility.OS.isWinVistaOrNewer())
                 return latestSupportedVersionWinVista();
