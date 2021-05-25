@@ -52,21 +52,27 @@ namespace updater.software
 
 
         /// <summary>
+        /// expiration date of certificate
+        /// </summary>
+        private static readonly DateTime certificateExpiration = new DateTime(2022, 10, 18, 12, 0, 0, DateTimeKind.Utc);
+
+
+        /// <summary>
         /// Gets the currently known information about the software.
         /// </summary>
         /// <returns>Returns an AvailableSoftware instance with the known
         /// details about the software.</returns>
         public override AvailableSoftware knownInfo()
         {
-            var signature = Signature.NeverExpires(publisherX509);
+            var signature = new Signature(publisherX509, certificateExpiration);
             var installer = new InstallInfoExe(
-                "https://download.ccleaner.com/ccsetup579.exe",
+                "https://download.ccleaner.com/ccsetup580.exe",
                 HashAlgorithm.SHA256,
-                "09602c2dc165452f64c6225840b9880b4fa3cbee47f23d3d37f6503464b7e1ab",
+                "aeb20eec5600175f4f8cc1f5d38dbd98c54f1664cb44e8f18a579fe1f59c1d45",
                 signature,
                 "/S");
             return new AvailableSoftware("CCleaner",
-                "5.79",
+                "5.80",
                 "^CCleaner+$",
                 "^CCleaner+$",
                 // CCleaner uses the same installer for 32 and 64 bit.
