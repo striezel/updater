@@ -21,6 +21,7 @@ using System;
 using System.Net;
 using System.Text.RegularExpressions;
 using System.Collections.Generic;
+using updater.utility;
 
 namespace updater.software
 {
@@ -145,7 +146,7 @@ namespace updater.software
             // download checksum file, e.g. "http://download.notepad-plus-plus.org/repository/7.x/7.7/npp.7.7.checksums.sha256"
             //                           or for GitHub releases: "https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v7.9.1/npp.7.9.1.checksums.sha256"
             string htmlCode = null;
-            using (var client = new WebClient())
+            using (var client = new TimelyWebClient())
             {
                 try
                 {

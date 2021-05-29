@@ -16,12 +16,13 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-using updater.data;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Net;
 using System.Text.RegularExpressions;
-using System.Collections.Generic;
+using updater.data;
+using updater.utility;
 
 namespace updater.software
 {
@@ -146,7 +147,7 @@ namespace updater.software
 
             // Checksums are in a file like https://the.earth.li/~sgtatham/putty/0.68/sha512sums
             string sha512sums = null;
-            using (var client = new WebClient())
+            using (var client = new TimelyWebClient())
             {
                 try
                 {

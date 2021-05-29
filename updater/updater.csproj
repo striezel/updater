@@ -142,6 +142,7 @@
     <Compile Include="utility\PortableExecutable.cs" />
     <Compile Include="utility\Processes.cs" />
     <Compile Include="utility\Strings.cs" />
+    <Compile Include="utility\TimelyWebClient.cs" />
     <Compile Include="utility\trust\AuxiliaryClasses.cs" />
     <Compile Include="utility\Verificator.cs" />
     <Compile Include="utility\Version.cs" />
