@@ -55,19 +55,19 @@ namespace updater.software
         public override AvailableSoftware knownInfo()
         {
             return new AvailableSoftware("Inkscape",
-                "1.0.2",
+                "1.1",
                 "^Inkscape( [0-9]\\.[0-9]+(\\.[0-9]+)?)?$",
                 "^Inkscape( [0-9]\\.[0-9]+(\\.[0-9]+)?)?$",
                 new InstallInfoMsi(
-                    "https://media.inkscape.org/dl/resources/file/inkscape-1.0.2-2-x86.msi",
+                    "https://media.inkscape.org/dl/resources/file/inkscape-1.1-x86.msi",
                     HashAlgorithm.SHA256,
-                    "9eebc8b9e47b04ffb95f7b620031a5728e84479e87546d35c4ee0a2ecf53dac8",
+                    "1d02a124e39f906bb6bab7a7867967e12ecf1a8493a3718d3090392e54811ab9",
                     Signature.None,
                     "/qn /norestart"),
                 new InstallInfoMsi(
-                    "https://media.inkscape.org/dl/resources/file/inkscape-1.0.2-2-x64.msi",
+                    "https://media.inkscape.org/dl/resources/file/inkscape-1.1-x64.msi",
                     HashAlgorithm.SHA256,
-                    "febffbb398a27999c1275df1bc0c3073c62b1f791cbd842e9345874351132166 ",
+                    "56d60c447e4758ada94cbf7a4f1cf827b6b4e7064e1ee0c2084fc92f65c16bdf ",
                     Signature.None,
                     "/qn /norestart")
                     );
@@ -290,6 +290,7 @@ namespace updater.software
                     "{1E74336F-9E7A-4070-BAA7-716A504FB9B0}", // 1.0 MSI
                     "{776C087E-B714-4153-9414-79592EC61B4A}", // 1.0.1 MSI
                     "{DBDA3649-0685-4067-ADB6-7A3B9B30720F}", // 1.0.2-2 MSI
+                    "{BB039842-4166-4A3C-90BC-316F6E6BDC83}", // 1.1.0 MSI
                 };
                 foreach (var id in guids)
                 {
