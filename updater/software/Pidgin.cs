@@ -54,7 +54,7 @@ namespace updater.software
         /// <summary>
         /// certificate expiration date
         /// </summary>
-        private static readonly DateTime certificateExpiration = new DateTime(2024, 3, 22, 1, 0, 0, DateTimeKind.Utc);
+        private static readonly DateTime certificateExpiration = new DateTime(2024, 3, 21, 23, 59, 59, DateTimeKind.Utc);
 
 
         /// <summary>
@@ -65,14 +65,14 @@ namespace updater.software
         public override AvailableSoftware knownInfo()
         {
             return new AvailableSoftware("Pidgin",
-                "2.14.4",
+                "2.14.5",
                 "^Pidgin$",
                 null,
                 // Pidgin only has an installer for 32 bit.
                 new InstallInfoPidgin(
-                    "https://netcologne.dl.sourceforge.net/project/pidgin/Pidgin/2.14.4/pidgin-2.14.4-offline.exe",
+                    "https://netcologne.dl.sourceforge.net/project/pidgin/Pidgin/2.14.5/pidgin-2.14.5-offline.exe",
                     HashAlgorithm.SHA256,
-                    "e930eeb3c9099c73920a8f7257edaadcdf9fc55533c4f6c30d7be3b9cce06c5b",
+                    "797b12150d565d602a2cdea1626ba988094e8b15aedc03b3e7c45d941c23b850",
                     // Certificate is only valid until 2020-06-12 12:00:00 UTC, so do not use it afterwards.
                     // I wish people would sign binaries with certificates that do not expire one day after
                     // the binary was released, but ... well, here we are.
