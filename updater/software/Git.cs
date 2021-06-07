@@ -38,12 +38,13 @@ namespace updater.software
         /// <summary>
         /// publisher name for signed installers of Git for Windows
         /// </summary>
-        private const string publisherX509 = "CN=Johannes Schindelin, O=Johannes Schindelin, STREET=Raderberger Str. 178, L=Köln, S=North Rhine-Westphalia, PostalCode=50968, C=DE";
+        private const string publisherX509 = "CN=Johannes Schindelin, O=Johannes Schindelin, L=Köln, S=North Rhine-Westphalia, C=DE";
+
 
         /// <summary>
         /// expiration date for the publisher certificate
         /// </summary>
-        private static readonly DateTime publisherExpiryDate = new DateTime(2021, 5, 20, 0, 0, 0, DateTimeKind.Utc);
+        private static readonly DateTime publisherExpiryDate = new DateTime(2022, 5, 17, 23, 59, 59, DateTimeKind.Utc);
 
 
         /// <summary>
@@ -65,19 +66,19 @@ namespace updater.software
         {
             var signature = new Signature(publisherX509, publisherExpiryDate);
             return new AvailableSoftware("Git",
-                "2.31.1",
+                "2.32.0",
                 "^Git version [0-9]+\\.[0-9]+\\.[0-9]+$",
                 "^Git version [0-9]+\\.[0-9]+\\.[0-9]+$",
                 new InstallInfoExe(
-                    "https://github.com/git-for-windows/git/releases/download/v2.31.1.windows.1/Git-2.31.1-32-bit.exe",
+                    "https://github.com/git-for-windows/git/releases/download/v2.32.0.windows.1/Git-2.32.0-32-bit.exe",
                     HashAlgorithm.SHA256,
-                    "6abc8c83945ee8046c7337d2376c4dcb1e4d63ed9614e161b42a30a5fe9dc6ec",
+                    "5239b465b893ea595f6a73fde20691bcfc9c65661fa1b74441d9ce7b98848ade",
                     signature,
                     "/VERYSILENT /NORESTART"),
                 new InstallInfoExe(
-                    "https://github.com/git-for-windows/git/releases/download/v2.31.1.windows.1/Git-2.31.1-64-bit.exe",
+                    "https://github.com/git-for-windows/git/releases/download/v2.32.0.windows.1/Git-2.32.0-64-bit.exe",
                     HashAlgorithm.SHA256,
-                    "c43611eb73ad1f17f5c8cc82ae51c3041a2e7279e0197ccf5f739e9129ce426e",
+                    "eed601ef835c3dac08d2e27f6f38b5db7998747c753c87a45b326fbd6c710309",
                     signature,
                     "/VERYSILENT /NORESTART")
                     );
