@@ -67,18 +67,19 @@ namespace updater.software
         {
             var signature = new Signature(publisherX509, certificateExpiration);
             const string version = "7.9.5";
+            const string tag = version;
             return new AvailableSoftware("Notepad++",
                 version,
                 "^Notepad\\+\\+ \\(32\\-bit x86\\)$|^Notepad\\+\\+$",
                 "^Notepad\\+\\+ \\(64\\-bit x64\\)$",
                 new InstallInfoExe(
-                    "https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v" + version + "/npp." + version + ".Installer.exe",
+                    "https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v" + tag + "/npp." + version + ".Installer.exe",
                     HashAlgorithm.SHA256,
                     "e44caeefeed617d7b791fae64a7724b73eeda1c9f96254bdf0e2cc48bd69a792",
                     signature,
                     "/S"),
                 new InstallInfoExe(
-                    "https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v" + version + "/npp." + version + ".Installer.x64.exe",
+                    "https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v" + tag + "/npp." + version + ".Installer.x64.exe",
                     HashAlgorithm.SHA256,
                     "4881548cd86491b453520e83c19292c93b9c6ce485a1f9eb9301e3913a9baced",
                     signature,
@@ -131,7 +132,7 @@ namespace updater.software
                 request = null;
                 response = null;
                 // Location header will point to something like "https://github.com/notepad-plus-plus/notepad-plus-plus/releases/tag/v7.9.1".
-                Regex reVersion = new Regex("v[0-9]+\\.[0-9]+(\\.[0-9]+)?$");
+                Regex reVersion = new Regex("v[0-9]+(\\.[0-9]+(\\.[0-9]+)?)?$");
                 Match matchVersion = reVersion.Match(newLocation);
                 if (!matchVersion.Success)
                     return null;
@@ -142,6 +143,8 @@ namespace updater.software
                 logger.Warn("Exception occurred while checking for newer version of Notepad++: " + ex.Message);
                 return null;
             }
+
+            string versionNumber = currentVersion.Contains(".") ? currentVersion : currentVersion + ".0";
 
             // download checksum file, e.g. "http://download.notepad-plus-plus.org/repository/7.x/7.7/npp.7.7.checksums.sha256"
             //                           or for GitHub releases: "https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v7.9.1/npp.7.9.1.checksums.sha256"
@@ -155,7 +158,7 @@ namespace updater.software
                     // while the domain download.notepad-plus-plus.org does
                     // not and can only be accessed via HTTP.
                     // But we want HTTPS / TLS for the checksum download.
-                    htmlCode = client.DownloadString("https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v" + currentVersion + "/npp." + currentVersion + ".checksums.sha256");
+                    htmlCode = client.DownloadString("https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v" + currentVersion + "/npp." + versionNumber + ".checksums.sha256");
                 }
                 catch (Exception ex)
                 {
@@ -179,12 +182,12 @@ namespace updater.software
             string newHash64Bit = matchHash.Value.Substring(0, 64);
             // construct new information
             var newInfo = knownInfo();
-            newInfo.newestVersion = currentVersion;
+            newInfo.newestVersion = versionNumber;
             // e. g. https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v7.9.1/npp.7.9.1.Installer.exe
-            newInfo.install32Bit.downloadUrl = "https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v" + currentVersion + "/npp." + currentVersion + ".Installer.exe";
+            newInfo.install32Bit.downloadUrl = "https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v" + currentVersion + "/npp." + versionNumber + ".Installer.exe";
             newInfo.install32Bit.checksum = newHash32Bit;
             // e. g. https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v7.9.1/npp.7.9.1.Installer.x64.exe
-            newInfo.install64Bit.downloadUrl = "https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v" + currentVersion + "/npp." + currentVersion + ".Installer.x64.exe";
+            newInfo.install64Bit.downloadUrl = "https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v" + versionNumber + "/npp." + versionNumber + ".Installer.x64.exe";
             newInfo.install64Bit.checksum = newHash64Bit;
             return newInfo;
         }
