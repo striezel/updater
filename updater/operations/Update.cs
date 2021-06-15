@@ -262,9 +262,18 @@ namespace updater.operations
                             } // try-c
                             catch (Exception ex)
                             {
-                                logger.Error("Error: An exception occurred while running a pre-update tast for "
-                                    + entry.software.info().Name + ": " + ex.Message);
-                                return -1 - updatedApplications;
+                                if (!entry.software.allowPreUpdateProcessFailure(entry.detected, preProc))
+                                {
+                                    logger.Error("Error: An exception occurred while running a pre-update tast for "
+                                        + entry.software.info().Name + ": " + ex.Message);
+                                    return -1 - updatedApplications;
+                                }
+                                else
+                                {
+                                    logger.Info("Info: An exception occurred while running a pre-update tast for "
+                                        + entry.software.info().Name + ": " + ex.Message + Environment.NewLine
+                                        + "However, that is allowed, so the update will continue.");
+                                }
                             }
                         } // foreach
                     } // if preparational process is needed
