@@ -87,7 +87,6 @@ namespace updater.detection
                     subKey = null;
                     switch (view)
                     {
-
                         case RegistryView.Registry64:
                             e.appType = data.ApplicationType.Bit64;
                             break;
