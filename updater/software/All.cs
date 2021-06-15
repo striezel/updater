@@ -102,7 +102,8 @@ namespace updater.software
             }
 
             result.Add(new SevenZip(autoGetNewer));
-            
+            result.Add(new Shotcut(autoGetNewer));
+
             // Thunderbird
             languages = Thunderbird.validLanguageCodes();
             foreach (var lang in languages)

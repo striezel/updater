@@ -28,6 +28,7 @@ updater application.
 * Pidgin
 * PuTTY
 * SeaMonkey
+* Shotcut
 * Transmission (BitTorrent client)
 * TreeSize Free
 * VLC media player
