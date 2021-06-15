@@ -44,7 +44,7 @@ namespace updater.software
         /// <summary>
         /// expiration date for the publisher certificate
         /// </summary>
-        private readonly DateTime publisherExpiryDate = new DateTime(2023, 5, 13, 18, 16, 53, DateTimeKind.Utc);
+        private readonly DateTime certificateExpiration = new DateTime(2023, 5, 13, 18, 16, 53, DateTimeKind.Utc);
 
 
         /// <summary>
@@ -64,7 +64,7 @@ namespace updater.software
         /// details about the software.</returns>
         public override AvailableSoftware knownInfo()
         {
-            var signature = new Signature(publisherX509, publisherExpiryDate);
+            var signature = new Signature(publisherX509, certificateExpiration);
             return new AvailableSoftware("Transmission",
                 "3.00",
                 "^Transmission [0-9]+\\.[0-9]+ \\([0-9a-f]+\\) \\(x86\\)$",

@@ -44,7 +44,7 @@ namespace updater.software
         /// <summary>
         /// expiration date for the publisher certificate
         /// </summary>
-        private static readonly DateTime publisherExpiryDate = new DateTime(2022, 5, 17, 23, 59, 59, DateTimeKind.Utc);
+        private static readonly DateTime certificateExpiration = new DateTime(2022, 5, 17, 23, 59, 59, DateTimeKind.Utc);
 
 
         /// <summary>
@@ -64,7 +64,7 @@ namespace updater.software
         /// details about the software.</returns>
         public override AvailableSoftware knownInfo()
         {
-            var signature = new Signature(publisherX509, publisherExpiryDate);
+            var signature = new Signature(publisherX509, certificateExpiration);
             return new AvailableSoftware("Git",
                 "2.32.0",
                 "^Git version [0-9]+\\.[0-9]+\\.[0-9]+$",
