@@ -42,11 +42,11 @@ namespace updater_test.software
             Assert.AreEqual<bool>(info.install32Bit != null, !string.IsNullOrWhiteSpace(info.match32Bit));
             // 64 bit information should match
             Assert.AreEqual<bool>(info.install64Bit != null, !string.IsNullOrWhiteSpace(info.match64Bit));
-            // checksums should always be present
+            // checksums should always be present, or at least a signature for verification
             if (null != info.install32Bit)
-                Assert.IsTrue(info.install32Bit.hasChecksum());
+                Assert.IsTrue(info.install32Bit.hasChecksum() || info.install32Bit.hasVerifiableSignature());
             if (null != info.install64Bit)
-                Assert.IsTrue(info.install64Bit.hasChecksum());
+                Assert.IsTrue(info.install64Bit.hasChecksum() || info.install64Bit.hasVerifiableSignature());
             // check whether signature data has expired
             // Expiration is not an error though, because some people publish signed binaries that expire the day after the release.
             if (null != info.install32Bit && info.install32Bit.signature.containsData() && info.install32Bit.signature.hasExpired())
