@@ -103,6 +103,7 @@ namespace updater.software
 
             result.Add(new SevenZip(autoGetNewer));
             result.Add(new Shotcut(autoGetNewer));
+            result.Add(new TeamViewer(autoGetNewer));
 
             // Thunderbird
             languages = Thunderbird.validLanguageCodes();

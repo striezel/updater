@@ -29,6 +29,7 @@ updater application.
 * PuTTY
 * SeaMonkey
 * Shotcut
+* TeamViewer
 * Transmission (BitTorrent client)
 * TreeSize Free
 * VLC media player
