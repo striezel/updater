@@ -112,7 +112,7 @@ namespace updater.software
         /// that was retrieved from the net.</returns>
         public override AvailableSoftware searchForNewer()
         {
-            logger.Debug("Searching for newer version of Pidgin...");
+            logger.Info("Searching for newer version of Pidgin...");
             string htmlCode = null;
             using (var client = new WebClient())
             {
@@ -136,7 +136,7 @@ namespace updater.software
             string v2 = matchVersion.Groups[2].Value;
             if (v1 != v2)
             {
-                logger.Debug("Error: There are two different version numbers in Pidgin's download URL!");
+                logger.Error("Error: There are two different version numbers in Pidgin's download URL!");
                 return null;
             }
             string version = v1;

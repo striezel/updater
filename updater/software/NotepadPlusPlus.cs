@@ -117,7 +117,7 @@ namespace updater.software
         /// that was retrieved from the net.</returns>
         public override AvailableSoftware searchForNewer()
         {
-            logger.Debug("Searching for newer version of Notepad++...");
+            logger.Info("Searching for newer version of Notepad++...");
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://github.com/notepad-plus-plus/notepad-plus-plus/releases/latest");
             request.Method = WebRequestMethods.Http.Head;
             request.AllowAutoRedirect = false;

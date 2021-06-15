@@ -102,7 +102,7 @@ namespace updater.software
         /// that was retrieved from the net.</returns>
         public override AvailableSoftware searchForNewer()
         {
-            logger.Debug("Searching for newer version of GIMP...");
+            logger.Info("Searching for newer version of GIMP...");
             string htmlCode = null;
             using (var client = new WebClient())
             {

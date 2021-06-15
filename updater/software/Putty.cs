@@ -118,7 +118,7 @@ namespace updater.software
         /// that was retrieved from the net.</returns>
         public override AvailableSoftware searchForNewer()
         {
-            logger.Debug("Searching for newer version of PuTTY...");
+            logger.Info("Searching for newer version of PuTTY...");
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://the.earth.li/~sgtatham/putty/latest/");
             request.Method = WebRequestMethods.Http.Head;
             request.AllowAutoRedirect = false;

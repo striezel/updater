@@ -454,7 +454,7 @@ namespace updater.software
         /// that was retrieved from the net.</returns>
         public override AvailableSoftware searchForNewer()
         {
-            logger.Debug("Searcing for newer version of Firefox...");
+            logger.Info("Searcing for newer version of Firefox...");
             string newerVersion = determineNewestVersion();
             if (string.IsNullOrWhiteSpace(newerVersion))
                 return null;

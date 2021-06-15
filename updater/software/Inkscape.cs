@@ -103,7 +103,7 @@ namespace updater.software
         /// that was retrieved from the net.</returns>
         public override AvailableSoftware searchForNewer()
         {
-            logger.Debug("Searching for newer version of Inkscape...");
+            logger.Info("Searching for newer version of Inkscape...");
             string htmlCode = null;
             using (var client = new WebClient())
             {

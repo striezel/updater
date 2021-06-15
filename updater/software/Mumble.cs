@@ -115,7 +115,7 @@ namespace updater.software
         /// that was retrieved from the net.</returns>
         public override AvailableSoftware searchForNewer()
         {
-            logger.Debug("Searching for newer version of Mumble...");
+            logger.Info("Searching for newer version of Mumble...");
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://github.com/mumble-voip/mumble/releases/latest");
             request.Method = WebRequestMethods.Http.Head;
             request.AllowAutoRedirect = false;

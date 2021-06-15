@@ -116,7 +116,7 @@ namespace updater.software
         /// that was retrieved from the net.</returns>
         public override AvailableSoftware searchForNewer()
         {
-            logger.Debug("Searching for newer version of CMake...");
+            logger.Info("Searching for newer version of CMake...");
             // Just getting the latest release does not work here, because that may also be a release candidate, and we do not want that.
             string html;
             using (var client = new WebClient())

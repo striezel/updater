@@ -183,7 +183,7 @@ namespace updater.software
         /// that was retrieved from the net.</returns>
         public override AvailableSoftware searchForNewer()
         {
-            logger.Debug("Searching for newer version of FileZilla FTP Client...");
+            logger.Info("Searching for newer version of FileZilla FTP Client...");
             if (utility.OS.isWin7OrNewer())
             {
                 string htmlCode = null;

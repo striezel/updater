@@ -111,7 +111,7 @@ namespace updater.software
         /// that was retrieved from the net.</returns>
         public override AvailableSoftware searchForNewer()
         {
-            logger.Debug("Searching for newer version of CCleaner...");
+            logger.Info("Searching for newer version of CCleaner...");
             string htmlCode = null;
             using (var client = new WebClient())
             {

@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017  Dirk Stolle
+    Copyright (C) 2017, 2021  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -48,7 +48,11 @@ namespace updater.utility
             fileTarget.Layout = @"${date:format=yyyy-MM-dd HH\:mm\:ss} [${logger}] ${message}";
 
             // define rules
+#if DEBUG
             var rule1 = new NLog.Config.LoggingRule("*", NLog.LogLevel.Debug, consoleTarget);
+#else
+            var rule1 = new NLog.Config.LoggingRule("*", NLog.LogLevel.Info, consoleTarget);
+#endif
             config.LoggingRules.Add(rule1);
             var rule2 = new NLog.Config.LoggingRule("*", NLog.LogLevel.Debug, fileTarget);
             config.LoggingRules.Add(rule2);
