@@ -16,8 +16,11 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using System.Net;
 using System.Text.RegularExpressions;
 using updater.data;
@@ -28,7 +31,7 @@ namespace updater.software
     /// <summary>
     /// Handles updates of Shotcut video editor.
     /// </summary>
-    public class Shotcut : NoPreUpdateProcessSoftware
+    public class Shotcut : AbstractSoftware
     {
         /// <summary>
         /// NLog.Logger for Shotcut class
@@ -225,6 +228,101 @@ namespace updater.software
             {
                 "shotcut"
             };
+        }
+
+
+        /// <summary>
+        /// Determines whether or not a separate process must be run before the update.
+        /// </summary>
+        /// <param name="detected">currently installed / detected software version</param>
+        /// <returns>Returns true, if a separate process returned by
+        /// preUpdateProcess() needs to run in preparation of the update.
+        /// Returns false, if not. Calling preUpdateProcess() may throw an
+        /// exception in the later case.</returns>
+        public override bool needsPreUpdateProcess(DetectedSoftware detected)
+        {
+            return true;
+        }
+
+
+        /// <summary>
+        /// Returns a process that must be run before the update.
+        /// </summary>
+        /// <param name="detected">currently installed / detected software version</param>
+        /// <returns>Returns a Process ready to start that should be run before
+        /// the update. May return null or may throw, if needsPreUpdateProcess()
+        /// returned false.</returns>
+        public override List<Process> preUpdateProcess(DetectedSoftware detected)
+        {
+            var processes = new List<Process>();
+            if (!string.IsNullOrWhiteSpace(detected.installPath))
+            {
+                // Uninstall previous version to avoid having two Shotcut entries in control panel.
+                var proc = new Process();
+                proc.StartInfo.FileName = Path.Combine(detected.installPath, "uninstall.exe");
+                proc.StartInfo.Arguments = "/S";
+                processes.Add(proc);
+                return processes;
+            }
+
+            var views = new List<RegistryView>(2) { RegistryView.Registry32 };
+            if (Environment.Is64BitOperatingSystem)
+            {
+                views.Add(RegistryView.Registry64);
+            }
+            foreach (var view in views)
+            {
+                RegistryKey baseKey = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, view);
+                try
+                {
+                    const string keyName = "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\Shotcut";
+                    RegistryKey rKey = baseKey.OpenSubKey(keyName);
+                    if (null == rKey)
+                    {
+                        continue;
+                    }
+                    try
+                    {
+                        object obj = rKey.GetValue("UninstallString");
+                        if (null == obj)
+                            continue;
+                        string path = obj.ToString().Trim();
+                        // Remove enclosing quotes.
+                        if (path.StartsWith("\"") && path.EndsWith("\""))
+                            path = path.Substring(1, path.Length - 2);
+                        if (File.Exists(path))
+                        {
+                            var proc = new Process();
+                            proc.StartInfo.FileName = path;
+                            proc.StartInfo.Arguments = "/S";
+                            processes.Add(proc);
+                        }
+                    }
+                    finally
+                    {
+                        rKey.Close();
+                    }
+                }
+                finally
+                {
+                    baseKey.Close();
+                }
+            } // foreach
+
+            return processes;
+        }
+
+
+        /// <summary>
+        /// Determines whether or not the pre-update processes are allowed to fail.
+        /// </summary>
+        /// <param name="detected">currently installed / detected software version</param>
+        /// <param name="preProc">the current pre-update process</param>
+        /// <returns>Returns true, if the separate processes returned by
+        /// preUpdateProcess() are allowed to fail.</returns>
+        public override bool allowPreUpdateProcessFailure(DetectedSoftware detected, Process preProc)
+        {
+            return true;
         }
     } // class
 } // namespace
