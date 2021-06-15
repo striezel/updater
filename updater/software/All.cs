@@ -111,6 +111,7 @@ namespace updater.software
             }
 
             result.Add(new Transmission(autoGetNewer));
+            result.Add(new TreeSizeFree(autoGetNewer));
             result.Add(new VLC(autoGetNewer));
             result.Add(new WinSCP(autoGetNewer));
             return result;
