@@ -64,7 +64,7 @@ namespace updater.software
         {
             return new AvailableSoftware("WinSCP",
                 "5.17.10",
-                "^WinSCP [1-9]+\\.[0-9]+\\.[0-9]+$", null,
+                "^WinSCP [1-9]+\\.[0-9]+(\\.[0-9]+)?$", null,
                 new InstallInfoExe(
                     "https://netcologne.dl.sourceforge.net/project/winscp/WinSCP/5.17.10/WinSCP-5.17.10-Setup.exe",
                     HashAlgorithm.SHA256,
@@ -121,7 +121,7 @@ namespace updater.software
                 client.Dispose();
             }
 
-            Regex reExe = new Regex("WinSCP\\-[1-9]+\\.[0-9]+\\.[0-9]+\\-Setup\\.exe");
+            Regex reExe = new Regex("WinSCP\\-[1-9]+\\.[0-9]+(\\.[0-9]+)?\\-Setup\\.exe");
             Match matchExe = reExe.Match(htmlCode);
             if (!matchExe.Success)
                 return null;
@@ -132,7 +132,7 @@ namespace updater.software
             if (newTriple < oldTriple)
                 return null;
             // version number should match usual scheme, e.g. 5.x.y, where x and y are digits
-            Regex version = new Regex("^[1-9]+\\.[0-9]+\\.[0-9]+$");
+            Regex version = new Regex("^[1-9]+\\.[0-9]+(\\.[0-9]+)?$");
             if (!version.IsMatch(newVersion))
                 return null;
 
