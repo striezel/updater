@@ -44,6 +44,7 @@ namespace updater.software
             var result = new List<ISoftware>()
             {
                 new OpenJDK8(autoGetNewer),
+                new OpenJDK11(autoGetNewer),
                 new Audacity(autoGetNewer),
                 new Calibre(autoGetNewer),
                 new CCleaner(autoGetNewer),
