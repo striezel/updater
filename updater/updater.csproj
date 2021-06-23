@@ -57,6 +57,9 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
       <HintPath>packages\NLog.4.7.10\lib\net45\NLog.dll</HintPath>
     </Reference>
@@ -75,6 +78,7 @@
     <Compile Include="cli\ArgumentParser.cs" />
     <Compile Include="cli\Options.cs" />
     <Compile Include="data\InstallInfoExe.cs" />
+    <Compile Include="data\InstallInfoMsiNoLocation.cs" />
     <Compile Include="data\InstallInfoPidgin.cs" />
     <Compile Include="data\InstallInfoLibO.cs" />
     <Compile Include="data\InstallInfoMsi.cs" />
@@ -109,6 +113,11 @@
     <Compile Include="software\CMake.cs" />
     <Compile Include="software\Git.cs" />
     <Compile Include="software\NodeJS.cs" />
+    <Compile Include="software\OpenJDK8.cs" />
+    <Compile Include="software\openjdk_api\Binary.cs" />
+    <Compile Include="software\openjdk_api\Installer.cs" />
+    <Compile Include="software\openjdk_api\Release.cs" />
+    <Compile Include="software\openjdk_api\VersionData.cs" />
     <Compile Include="software\Pdf24Creator.cs" />
     <Compile Include="software\Pidgin.cs" />
     <Compile Include="software\Audacity.cs" />

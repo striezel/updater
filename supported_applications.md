@@ -6,6 +6,7 @@ updater application.
 ## Implemented
 
 * 7-Zip
+* AdoptOpenJDK JDK 8 (LTS)
 * Audacity
 * Calibre
 * CCleaner
