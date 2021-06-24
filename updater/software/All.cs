@@ -141,6 +141,9 @@ namespace updater.software
                 {
                     if (opts.excluded.Contains(id))
                     {
+                        // Prevent update of information, it will be removed anyway.
+                        result[i].autoGetNewer(false);
+                        // Inform user about removed software and remove it.
                         logger.Info("Excluding " + result[i].info().Name + " from software list as requested.");
                         result.RemoveAt(i);
                         removed = true;
