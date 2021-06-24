@@ -16,17 +16,19 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-using System;
 using System.Collections.Generic;
 using updater.operations;
 
 namespace updater.cli
 {
     /// <summary>
-    /// holds program options that were given on the command line
+    /// Holds program options that were given on the command line.
     /// </summary>
     public class Options
     {
+        /// <summary>
+        /// Default constructor.
+        /// </summary>
         public Options()
         {
             op = Operation.Unknown;
