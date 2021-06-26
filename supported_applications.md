@@ -9,6 +9,7 @@ updater application.
 * AdoptOpenJDK JDK 8 (LTS)
 * AdoptOpenJDK JDK 11 (LTS)
 * AdoptOpenJDK JRE 8 (LTS)
+* AdoptOpenJDK JRE 11 (LTS)
 * Audacity
 * Calibre
 * CCleaner
@@ -43,4 +44,3 @@ updater application.
 * Adobe Acrobat Reader
 * Google Chrome
 * IrfanView
-* Java Runtime Environment

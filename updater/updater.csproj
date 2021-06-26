@@ -119,6 +119,7 @@
     <Compile Include="software\openjdk_api\Installer.cs" />
     <Compile Include="software\openjdk_api\Release.cs" />
     <Compile Include="software\openjdk_api\VersionData.cs" />
+    <Compile Include="software\OpenJRE11.cs" />
     <Compile Include="software\OpenJRE8.cs" />
     <Compile Include="software\Pdf24Creator.cs" />
     <Compile Include="software\Pidgin.cs" />
