@@ -8,6 +8,7 @@ updater application.
 * 7-Zip
 * AdoptOpenJDK JDK 8 (LTS)
 * AdoptOpenJDK JDK 11 (LTS)
+* AdoptOpenJDK JRE 8 (LTS)
 * Audacity
 * Calibre
 * CCleaner

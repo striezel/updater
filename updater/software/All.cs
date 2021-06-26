@@ -45,6 +45,7 @@ namespace updater.software
             {
                 new OpenJDK8(autoGetNewer),
                 new OpenJDK11(autoGetNewer),
+                new OpenJRE8(autoGetNewer),
                 new Audacity(autoGetNewer),
                 new Calibre(autoGetNewer),
                 new CCleaner(autoGetNewer),
