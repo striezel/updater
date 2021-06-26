@@ -135,12 +135,12 @@ namespace updater.software
             var releases = JsonConvert.DeserializeObject<IList<Release>>(json);
             if (releases == null)
             {
-                logger.Error("Error: Could not deserialize OpenJDK API response!");
+                logger.Error("Error: Could not deserialize AdoptOpenJDK API response!");
                 return null;
             }
             if (releases.Count == 0)
             {
-                logger.Error("Error: OpenJDK API returned empty response!");
+                logger.Error("Error: AdoptOpenJDK API returned empty response!");
                 return null;
             }
 
@@ -151,7 +151,7 @@ namespace updater.software
                 || release.version_data.security == VersionData.MissingBuildNumber
                 || release.version_data.build == VersionData.MissingBuildNumber)
             {
-                logger.Error("Error: OpenJDK API response does not contain complete version data!");
+                logger.Error("Error: AdoptOpenJDK API response does not contain complete version data!");
                 return null;
             }
 
@@ -169,7 +169,7 @@ namespace updater.software
                 if (string.IsNullOrEmpty(bin.architecture) || null == bin.installer
                     || string.IsNullOrEmpty(bin.installer.link) || string.IsNullOrEmpty(bin.installer.checksum))
                 {
-                    logger.Error("Error: OpenJDK API response contains incomplete data!");
+                    logger.Error("Error: AdoptOpenJDK API response contains incomplete data!");
                     return null;
                 }
                 if (bin.architecture == "x64")
@@ -186,7 +186,7 @@ namespace updater.software
                 }
                 else
                 {
-                    logger.Error("Error: unknown architecture '" + bin.architecture + "' in OpenJDK API response!");
+                    logger.Error("Error: unknown architecture '" + bin.architecture + "' in AdoptOpenJDK API response!");
                     return null;
                 }
             }
@@ -194,7 +194,7 @@ namespace updater.software
             // Do we have all the data we need?
             if (!hasBuild32 || !hasBuild64)
             {
-                logger.Error("Either 32 bit build or 64 bit build information of OpenJDK was not found!");
+                logger.Error("Either 32 bit build or 64 bit build information of AdoptOpenJDK was not found!");
                 return null;
             }
             return newInfo;
