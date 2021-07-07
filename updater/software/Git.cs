@@ -67,8 +67,8 @@ namespace updater.software
             var signature = new Signature(publisherX509, certificateExpiration);
             return new AvailableSoftware("Git",
                 "2.32.0",
-                "^Git version [0-9]+\\.[0-9]+\\.[0-9]+$",
-                "^Git version [0-9]+\\.[0-9]+\\.[0-9]+$",
+                "^Git version [0-9]+\\.[0-9]+\\.[0-9]+(\\.[0-9]+)?$",
+                "^Git version [0-9]+\\.[0-9]+\\.[0-9]+(\\.[0-9]+)?$",
                 new InstallInfoExe(
                     "https://github.com/git-for-windows/git/releases/download/v2.32.0.windows.1/Git-2.32.0-32-bit.exe",
                     HashAlgorithm.SHA256,
@@ -131,11 +131,12 @@ namespace updater.software
             }
 
             // HTML text will contain links to releases like "https://github.com/git-for-windows/git/releases/tag/v2.30.1.windows.1".
-            Regex reVersion = new Regex("git/releases/tag/v([0-9]+\\.[0-9]+\\.[0-9])\\.windows\\.[0-9]+\"");
+            Regex reVersion = new Regex("git/releases/tag/v([0-9]+\\.[0-9]+\\.[0-9])\\.windows\\.([0-9]+)\"");
             var matchVersion = reVersion.Match(html);
             if (!matchVersion.Success)
                 return null;
             string currentVersion = matchVersion.Groups[1].Value;
+            string fourthDigit = matchVersion.Groups[2].Value;
             string tag = matchVersion.Value.Remove(0, "git/releases/tag/".Length).Replace("\"", "");
 
             // Get checksum from release page, e.g. "https://github.com/git-for-windows/git/releases/tag/v2.30.1.windows.1"
@@ -160,25 +161,41 @@ namespace updater.software
              * <td>e41b7d0e1c88a023ecd42a1e7339c39a8e906cd51ea9ae9aefdb42c513103f57</td>
              */
             string escapedVersion = Regex.Escape(currentVersion);
-            Regex reHash = new Regex("<td>Git\\-" + escapedVersion + "\\-32\\-bit\\.exe</td>\r?\n<td>([a-f0-9]{64})</td>");
+            bool needsFourthDigit = fourthDigit != "1";
+            Regex reHash = needsFourthDigit ?
+                new Regex("<td>Git\\-" + escapedVersion + "\\." + fourthDigit + "\\-32\\-bit\\.exe</td>\r?\n<td>([a-f0-9]{64})</td>")
+                : new Regex("<td>Git\\-" + escapedVersion + "\\-32\\-bit\\.exe</td>\r?\n<td>([a-f0-9]{64})</td>");
             Match matchHash = reHash.Match(htmlCode);
             if (!matchHash.Success)
                 return null;
             string newHash32Bit = matchHash.Groups[1].Value;
             // find SHA256 hash for 64 bit installer
-            reHash = new Regex("<td>Git\\-" + escapedVersion + "\\-64\\-bit\\.exe</td>\r?\n<td>([a-f0-9]{64})</td>");
+            reHash = needsFourthDigit ?
+                new Regex("<td>Git\\-" + escapedVersion + "\\." + fourthDigit + "\\-64\\-bit\\.exe</td>\r?\n<td>([a-f0-9]{64})</td>")
+                : new Regex("<td>Git\\-" + escapedVersion + "\\-64\\-bit\\.exe</td>\r?\n<td>([a-f0-9]{64})</td>");
             matchHash = reHash.Match(htmlCode);
             if (!matchHash.Success)
                 return null;
             string newHash64Bit = matchHash.Groups[1].Value;
             // construct new information
             var newInfo = knownInfo();
-            newInfo.newestVersion = currentVersion;
-            // e. g. https://github.com/git-for-windows/git/releases/download/v2.30.0.windows.1/Git-2.30.0-32-bit.exe
-            newInfo.install32Bit.downloadUrl = "https://github.com/git-for-windows/git/releases/download/" + tag + "/Git-" + currentVersion + "-32-bit.exe";
+            if (needsFourthDigit)
+            {
+                newInfo.newestVersion = currentVersion + "." + fourthDigit;
+                // e. g. https://github.com/git-for-windows/git/releases/download/v2.32.0.windows.2/Git-2.32.0.2-32-bit.exe
+                newInfo.install32Bit.downloadUrl = "https://github.com/git-for-windows/git/releases/download/" + tag + "/Git-" + currentVersion + "." + fourthDigit + "-32-bit.exe";
+                // e. g. https://github.com/git-for-windows/git/releases/download/v2.32.0.windows.2/Git-2.32.0.2-64-bit.exe
+                newInfo.install64Bit.downloadUrl = "https://github.com/git-for-windows/git/releases/download/" + tag + "/Git-" + currentVersion + "." + fourthDigit + "-64-bit.exe";
+            }
+            else
+            {
+                newInfo.newestVersion = currentVersion;
+                // e. g. https://github.com/git-for-windows/git/releases/download/v2.30.0.windows.1/Git-2.30.0-32-bit.exe
+                newInfo.install32Bit.downloadUrl = "https://github.com/git-for-windows/git/releases/download/" + tag + "/Git-" + currentVersion + "-32-bit.exe";
+                // e. g. https://github.com/git-for-windows/git/releases/download/v2.30.0.windows.1/Git-2.30.0-64-bit.exe
+                newInfo.install64Bit.downloadUrl = "https://github.com/git-for-windows/git/releases/download/" + tag + "/Git-" + currentVersion + "-64-bit.exe";
+            }
             newInfo.install32Bit.checksum = newHash32Bit;
-            // e. g. https://github.com/git-for-windows/git/releases/download/v2.30.0.windows.1/Git-2.30.0-64-bit.exe
-            newInfo.install64Bit.downloadUrl = "https://github.com/git-for-windows/git/releases/download/" + tag + "/Git-" + currentVersion + "-64-bit.exe";
             newInfo.install64Bit.checksum = newHash64Bit;
             return newInfo;
         }
