@@ -21,6 +21,7 @@ using System.Collections.Generic;
 using System.Net;
 using System.Text.RegularExpressions;
 using updater.data;
+using updater.utility;
 
 namespace updater.software
 {
@@ -64,18 +65,16 @@ namespace updater.software
         /// details about the software.</returns>
         public override AvailableSoftware knownInfo()
         {
+            const string version = "2.14.6";
             return new AvailableSoftware("Pidgin",
-                "2.14.5",
+                version,
                 "^Pidgin$",
                 null,
                 // Pidgin only has an installer for 32 bit.
                 new InstallInfoPidgin(
-                    "https://netcologne.dl.sourceforge.net/project/pidgin/Pidgin/2.14.5/pidgin-2.14.5-offline.exe",
+                    "https://netcologne.dl.sourceforge.net/project/pidgin/Pidgin/" + version + "/pidgin-" + version + "-offline.exe",
                     HashAlgorithm.SHA256,
-                    "797b12150d565d602a2cdea1626ba988094e8b15aedc03b3e7c45d941c23b850",
-                    // Certificate is only valid until 2020-06-12 12:00:00 UTC, so do not use it afterwards.
-                    // I wish people would sign binaries with certificates that do not expire one day after
-                    // the binary was released, but ... well, here we are.
+                    "d031f64236c1de4e9d91bc51cdc604e8ca29953f453898ef047f2e785390d426",
                     new Signature(publisherX509, certificateExpiration),
                     "/DS=1 /SMS=1 /S"),
                 null
@@ -149,12 +148,44 @@ namespace updater.software
             if (version == oldVersion)
                 return newInfo;
             newInfo.newestVersion = version;
+            // Try to get checksum.
+            htmlCode = null;
+            using (var client = new TimelyWebClient())
+            {
+                try
+                {
+                    htmlCode = client.DownloadString("https://netcologne.dl.sourceforge.net/project/pidgin/Pidgin/" + version + "/pidgin-" + version + "-offline.exe.sha256sum");
+                }
+                catch (Exception ex)
+                {
+                    logger.Warn("Exception occurred while retrieving checksum for newer version of Pidgin: " + ex.Message);
+                }
+                client.Dispose();
+            } // using
+            string checksum32 = null;
+            if (htmlCode != null)
+            {
+                var hashRegEx = new Regex("[0-9a-f]{64} [ \\*]pidgin-" + Regex.Escape(version) + "-offline.exe");
+                var match = hashRegEx.Match(htmlCode);
+                if (match.Success)
+                {
+                    checksum32 = match.Value.Substring(0, 64);
+                }
+            }
             // 32 bit
             newInfo.install32Bit.downloadUrl = newInfo.install32Bit.downloadUrl.Replace(oldVersion, version);
-            // No checksum, only signature.
-            newInfo.install32Bit.checksum = null;
-            newInfo.install32Bit.algorithm = HashAlgorithm.Unknown;
-            newInfo.install32Bit.signature = Signature.NeverExpires(publisherX509);
+            if (checksum32 != null)
+            {
+                newInfo.install32Bit.checksum = checksum32;
+                newInfo.install32Bit.algorithm = HashAlgorithm.SHA256;
+            }
+            else
+            {
+                // No checksum, only signature.
+                newInfo.install32Bit.checksum = null;
+                newInfo.install32Bit.algorithm = HashAlgorithm.Unknown;
+                newInfo.install32Bit.signature = Signature.NeverExpires(publisherX509);
+            }
             return newInfo;
         }
 
