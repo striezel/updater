@@ -83,11 +83,15 @@ namespace updater_test.software
             Assert.IsTrue(re.IsMatch("Firefox Developer Edition 53.0a2 (x64 de)"));
             // newer naming convention
             Assert.IsTrue(re.IsMatch("Firefox Developer Edition 59.0 (x64 de)"));
+            // next newer naming convention without version number
+            Assert.IsTrue(re.IsMatch("Firefox Developer Edition (x64 de)"));
             re = new Regex(info.match32Bit);
             // older naming convention
             Assert.IsTrue(re.IsMatch("Firefox Developer Edition 53.0a2 (x86 de)"));
             // newer naming convention
             Assert.IsTrue(re.IsMatch("Firefox Developer Edition 59.0 (x86 de)"));
+            // next newer naming convention without version number
+            Assert.IsTrue(re.IsMatch("Firefox Developer Edition (x86 de)"));
         }
 
 
