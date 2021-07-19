@@ -171,7 +171,7 @@ namespace updater.software
         {
             string message = "Language support for " + languageCode + " has been "
                 + "dropped in SeaMonkey 2.48, because the language is no longer"
-                + " updated for SeaMonkey. To recieve further updates switch "
+                + " updated for SeaMonkey. To receive further updates switch "
                 + "to another, still supported language.";
             var langs = SeaMonkey.validLanguageCodes();
             var enumerator = langs.GetEnumerator();
@@ -186,7 +186,7 @@ namespace updater.software
                 {
                     message += Environment.NewLine + "    " + lang;
                 } // foreach
-            } // if enumerator move was successfull
+            } // if enumerator move was successful
             logger.Warn(message);
         }
 

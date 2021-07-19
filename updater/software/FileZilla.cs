@@ -107,7 +107,7 @@ namespace updater.software
         {
             // The last version for Windows Vista is 3.25.1.
             // Additionally, Windows Vista is not officially supported by Microsoft anymore.
-            logger.Warn("Windows Vista cannot use newer FileZilla versions than 3.25.1. Please consider updating your operating sytem!");
+            logger.Warn("Windows Vista cannot use newer FileZilla versions than 3.25.1. Please consider updating your operating system!");
             return new AvailableSoftware("FileZilla FTP Client",
                 "3.25.1",
                 "^FileZilla Client [0-9]+\\.[0-9]+(\\.[0-9]+(\\.[0-9]+)?)?$",
@@ -137,7 +137,7 @@ namespace updater.software
         {
             // The last version that still supports Windows XP is 3.8.0.
             // Additionally, WinXP is not officially supported by Microsoft anymore.
-            logger.Warn("Windows XP cannot use newer FileZilla versions than 3.8.0. Please consider updating your operating sytem!");
+            logger.Warn("Windows XP cannot use newer FileZilla versions than 3.8.0. Please consider updating your operating system!");
             return new AvailableSoftware("FileZilla FTP Client",
                 "3.8.0",
                 "^FileZilla Client [0-9]+\\.[0-9]+(\\.[0-9]+(\\.[0-9]+)?)?$",
@@ -189,7 +189,7 @@ namespace updater.software
                 string htmlCode = null;
                 using (var client = new WebClient())
                 {
-                    // Looks like we have to add a user agent to get a valid reponse.
+                    // Looks like we have to add a user agent to get a valid response.
                     // Without user agent the server returns "403 Forbidden".
                     client.Headers.Add("User-Agent", "curl/7.73.0");
                     try

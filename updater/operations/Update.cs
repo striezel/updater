@@ -54,7 +54,7 @@ namespace updater.operations
         /// <summary>
         /// Constructor.
         /// </summary>
-        /// <param name="_options">all programm options</param>
+        /// <param name="_options">all program options</param>
         public Update(Options _options)
         {
             opts = _options;
@@ -264,13 +264,13 @@ namespace updater.operations
                             {
                                 if (!entry.software.allowPreUpdateProcessFailure(entry.detected, preProc))
                                 {
-                                    logger.Error("Error: An exception occurred while running a pre-update tast for "
+                                    logger.Error("Error: An exception occurred while running a pre-update task for "
                                         + entry.software.info().Name + ": " + ex.Message);
                                     return -1 - updatedApplications;
                                 }
                                 else
                                 {
-                                    logger.Info("Info: An exception occurred while running a pre-update tast for "
+                                    logger.Info("Info: An exception occurred while running a pre-update task for "
                                         + entry.software.info().Name + ": " + ex.Message + Environment.NewLine
                                         + "However, that is allowed, so the update will continue.");
                                 }

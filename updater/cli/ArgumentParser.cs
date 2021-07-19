@@ -123,7 +123,7 @@ namespace updater.cli
                         {
                             opts.timeout = Update.defaultTimeout;
                             logger.Warn("Hint: Specified timeout was less than two minutes / 120 seconds."
-                                + " It has been set to " + opts.timeout.ToString() + " seconds intead.");
+                                + " It has been set to " + opts.timeout.ToString() + " seconds instead.");
                         }
                         ++i; // skip next argument, because that is the timeout
                         break;

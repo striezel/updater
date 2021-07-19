@@ -57,7 +57,7 @@ namespace updater.data
         /// <summary>
         /// Checks whether the structure contains data that can be used for verification.
         /// </summary>
-        /// <returns>Returns true, if the structure contains useable data.</returns>
+        /// <returns>Returns true, if the structure contains usable data.</returns>
         public bool containsData()
         {
             return !string.IsNullOrWhiteSpace(publisher) && expiresAt > DateTime.MinValue;

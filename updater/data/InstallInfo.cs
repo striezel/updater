@@ -72,7 +72,7 @@ namespace updater.data
         /// Determines whether or not this instance has signature information
         /// that can be used for verification.
         /// </summary>
-        /// <returns>Returns true, if there is useable information.
+        /// <returns>Returns true, if there is usable information.
         /// Returns false otherwise.</returns>
         public bool hasVerifiableSignature()
         {

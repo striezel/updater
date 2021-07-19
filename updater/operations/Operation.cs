@@ -50,7 +50,7 @@ namespace updater.operations
 
 
         /// <summary>
-        /// show lincense information of the programm
+        /// show license information of the program
         /// </summary>
         License,
 

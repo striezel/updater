@@ -327,7 +327,7 @@ namespace updater.software
         /// <summary>
         /// Tries to get the checksum of the newer version.
         /// </summary>
-        /// <returns>Returns a string containing the checksum, if successfull.
+        /// <returns>Returns a string containing the checksum, if successful.
         /// Returns null, if an error occurred.</returns>
         private string[] determineNewestChecksums(string newerVersion)
         {
