@@ -79,9 +79,15 @@ namespace updater_test.software
             var info = fx.info();
 
             Regex re = new Regex(info.match64Bit);
+            // match old style, including version number
             Assert.IsTrue(re.IsMatch("Mozilla Firefox 45.7.0 ESR (x64 de)"));
+            // match new style, without version number
+            Assert.IsTrue(re.IsMatch("Mozilla Firefox ESR (x64 de)"));
             re = new Regex(info.match32Bit);
+            // match old style, including version number
             Assert.IsTrue(re.IsMatch("Mozilla Firefox 45.7.0 ESR (x86 de)"));
+            // match new style, without version number
+            Assert.IsTrue(re.IsMatch("Mozilla Firefox ESR (x86 de)"));
         }
 
 
