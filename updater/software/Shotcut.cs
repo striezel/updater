@@ -186,32 +186,14 @@ namespace updater.software
             string htmlCode = null;
             using (var client = new TimelyWebClient())
             {
-                // First requests almost always times out, even when limit is one hundred seconds. Therefore the method will
-                // try two requests: one with only five seconds timeout (this one usually hangs, so it should fail fast) and
-                // one with 20 seconds timeout. The later one almost always seems to work.
-                client.TimeoutMillis = 5000;
-                var uri = "https://github.com/mltframework/shotcut/releases/download/v" + currentVersion + "/sha256sums.txt";
                 try
                 {
-                    
-                    htmlCode = client.DownloadString(uri);
+                    htmlCode = client.DownloadString("https://github.com/mltframework/shotcut/releases/download/v" + currentVersion + "/sha256sums.txt");
                 }
-                catch (Exception ex1)
+                catch (Exception ex)
                 {
-                    // First attempt failed. Log it, but only in debug mode.
-                    logger.Debug("Exception occurred while retrieving checksums for newer version of Shotcut (1st attempt): " + ex1.Message);
-                    // Try again, second attempt usually works.
-                    try
-                    {
-                        client.TimeoutMillis = 20000;
-                        htmlCode = client.DownloadString(uri);
-                    }
-                    catch (Exception ex2)
-                    {
-                        // If the second attempt also failed, then there is no reasonable way to get the data.
-                        logger.Warn("Exception occurred while retrieving checksums for newer version of Shotcut: " + ex2.Message);
-                        return null;
-                    }
+                    logger.Warn("Exception occurred while retrieving checksums for newer version of Shotcut: " + ex.Message);
+                    return null;
                 }
                 client.Dispose();
             } // using
