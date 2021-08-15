@@ -147,6 +147,7 @@
     <Compile Include="software\Shotcut.cs" />
     <Compile Include="software\TeamViewer.cs" />
     <Compile Include="software\Thunderbird.cs" />
+    <Compile Include="software\Thunderbird_78.cs" />
     <Compile Include="software\Transmission.cs" />
     <Compile Include="software\TreeSizeFree.cs" />
     <Compile Include="software\VLC.cs" />

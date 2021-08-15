@@ -116,6 +116,13 @@ namespace updater.software
                 result.Add(new Thunderbird(lang, autoGetNewer));
             }
 
+            // Thunderbird 78 legacy (Farsi + Sinhalese)
+            languages = Thunderbird78.validLanguageCodes();
+            foreach (var lang in languages)
+            {
+                result.Add(new Thunderbird78(lang, autoGetNewer));
+            }
+
             result.Add(new Transmission(autoGetNewer));
             result.Add(new TreeSizeFree(autoGetNewer));
             result.Add(new VLC(autoGetNewer));
