@@ -67,8 +67,8 @@ namespace updater.software
             var signature = new Signature(publisherX509, certificateExpiration);
             return new AvailableSoftware("Git",
                 "2.33.0",
-                "^Git version [0-9]+\\.[0-9]+\\.[0-9]+(\\.[0-9]+)?$",
-                "^Git version [0-9]+\\.[0-9]+\\.[0-9]+(\\.[0-9]+)?$",
+                "^(Git|Git version [0-9]+\\.[0-9]+\\.[0-9]+(\\.[0-9]+)?)$",
+                "^(Git|Git version [0-9]+\\.[0-9]+\\.[0-9]+(\\.[0-9]+)?)$",
                 new InstallInfoExe(
                     "https://github.com/git-for-windows/git/releases/download/v2.33.0.windows.1/Git-2.33.0-32-bit.exe",
                     HashAlgorithm.SHA256,

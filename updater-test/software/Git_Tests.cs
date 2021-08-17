@@ -17,6 +17,7 @@
 */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Text.RegularExpressions;
 using updater.software;
 
 namespace updater_test.software
@@ -65,6 +66,35 @@ namespace updater_test.software
         public void Test_upToDate_info()
         {
             _upToDate_info(new Git(false));
+        }
+
+
+        /// <summary>
+        /// Checks whether the regular expressions match common names.
+        /// </summary>
+        [TestMethod]
+        public void Test_match()
+        {
+            var info = new Git(false).info();
+            Regex re = new Regex(info.match64Bit);
+            // match old style, including version number
+            Assert.IsTrue(re.IsMatch("Git version 2.32.0"));
+            Assert.IsTrue(re.IsMatch("Git version 2.32.0.2"));
+            // match new style, without version number
+            Assert.IsTrue(re.IsMatch("Git"));
+            // non-match
+            Assert.IsFalse(re.IsMatch("Git foo"));
+            Assert.IsFalse(re.IsMatch("foo Git"));
+
+            re = new Regex(info.match32Bit);
+            // match old style, including version number
+            Assert.IsTrue(re.IsMatch("Git version 2.32.0"));
+            Assert.IsTrue(re.IsMatch("Git version 2.32.0.2"));
+            // match new style, without version number
+            Assert.IsTrue(re.IsMatch("Git"));
+            // non-match
+            Assert.IsFalse(re.IsMatch("Git foo"));
+            Assert.IsFalse(re.IsMatch("foo Git"));
         }
     }
 }
