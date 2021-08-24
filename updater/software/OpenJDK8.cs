@@ -26,7 +26,7 @@ using updater.utility;
 namespace updater.software
 {
     /// <summary>
-    /// Handles updates of AdoptOpenJDK JDK 8 with Hotspot JVM.
+    /// Handles updates of Eclipse Temurin (formerly AdoptOpenJDK) JDK 8 with Hotspot JVM.
     /// </summary>
     public class OpenJDK8 : NoPreUpdateProcessSoftware
     {
@@ -39,13 +39,13 @@ namespace updater.software
         /// <summary>
         /// publisher of signed binaries
         /// </summary>
-        private const string publisherX509 = "CN=London Jamocha Community CIC, O=London Jamocha Community CIC, L=Camberley, C=GB";
+        private const string publisherX509 = "E=webmaster@eclipse.org, CN=\"Eclipse.org Foundation, Inc.\", OU=IT, O=\"Eclipse.org Foundation, Inc.\", L=Ottawa, S=Ontario, C=CA";
 
 
         /// <summary>
         /// expiration date for the publisher certificate
         /// </summary>
-        private static readonly DateTime certificateExpiration = new DateTime(2021, 10, 13, 12, 0, 0, DateTimeKind.Utc);
+        private static readonly DateTime certificateExpiration = new DateTime(2022, 5, 18, 23, 59, 59, DateTimeKind.Utc);
 
 
         /// <summary>
@@ -66,24 +66,24 @@ namespace updater.software
         public override AvailableSoftware knownInfo()
         {
             var signature = new Signature(publisherX509, certificateExpiration);
-            const string version = "8.0.292.10";
-            return new AvailableSoftware("AdoptOpenJDK JDK 8 with Hotspot",
+            const string version = "8.0.302.8";
+            return new AvailableSoftware("Eclipse Temurin JDK 8 with Hotspot",
                 version,
-                "^AdoptOpenJDK JDK [a-z]+ Hotspot 8u[0-9]+\\-b[0-9]+ \\(x86\\)$",
-                "^AdoptOpenJDK JDK [a-z]+ Hotspot 8u[0-9]+\\-b[0-9]+ \\(x64\\)$",
+                "^(Eclipse Temurin JDK [a-z]+ Hotspot 8u[0-9]+\\-b[0-9]+ \\(x86\\)|AdoptOpenJDK JDK [a-z]+ Hotspot 8u[0-9]+\\-b[0-9]+ \\(x86\\))$",
+                "^(Eclipse Temurin JDK [a-z]+ Hotspot 8u[0-9]+\\-b[0-9]+ \\(x64\\)|AdoptOpenJDK JDK [a-z]+ Hotspot 8u[0-9]+\\-b[0-9]+ \\(x64\\))$",
                 new InstallInfoMsiNoLocation(
-                    "https://github.com/AdoptOpenJDK/openjdk8-binaries/releases/download/jdk8u292-b10/OpenJDK8U-jdk_x86-32_windows_hotspot_8u292b10.msi",
+                    "https://github.com/adoptium/temurin8-binaries/releases/download/jdk8u302-b08/OpenJDK8U-jdk_x86-32_windows_hotspot_8u302b08.msi",
                     HashAlgorithm.SHA256,
-                    "b4077f910a9c612314ab12e9eda29cca2658171fe21f14bb5222dd614447c9ad",
+                    "c650ada25e5a9080564ee32a1ee24c0bf6c67931bab7372cfabe8a2562153aed",
                     signature,
                     "INSTALLLEVEL=3 /qn /norestart"),
                 new InstallInfoMsiNoLocation(
-                    "https://github.com/AdoptOpenJDK/openjdk8-binaries/releases/download/jdk8u292-b10/OpenJDK8U-jdk_x64_windows_hotspot_8u292b10.msi",
+                    "https://github.com/adoptium/temurin8-binaries/releases/download/jdk8u302-b08.1/OpenJDK8U-jdk_x64_windows_hotspot_8u302b08.msi",
                     HashAlgorithm.SHA256,
-                    "f6bd2e351a451b8dc7ed19d44b18a27ff8a0602016625fac5134c4defe5e560c",
+                    "fe3546a8e8dd7d4e929028ef3794431748caddf7fc1cf481618e8d6f8aa15427",
                     signature,
                     "INSTALLLEVEL=3 /qn /norestart")
-                    );
+                );
         }
 
 
@@ -123,7 +123,7 @@ namespace updater.software
             {
                 try
                 {
-                    json = client.DownloadString("https://api.adoptopenjdk.net/v3/assets/feature_releases/8/ga?heap_size=normal&image_type=jdk&jvm_impl=hotspot&os=windows&page=0&page_size=1&project=jdk&sort_method=DEFAULT&sort_order=DESC&vendor=adoptopenjdk");
+                    json = client.DownloadString("https://api.adoptopenjdk.net/v3/assets/feature_releases/8/ga?heap_size=normal&image_type=jdk&jvm_impl=hotspot&os=windows&page=0&page_size=5&project=jdk&sort_method=DEFAULT&sort_order=DESC&vendor=adoptopenjdk");
                 }
                 catch (Exception ex)
                 {
@@ -145,50 +145,64 @@ namespace updater.software
                 return null;
             }
 
-            var release = releases[0];
-            if (release.version_data == null
-                || release.version_data.major == VersionData.MissingBuildNumber
-                || release.version_data.minor == VersionData.MissingBuildNumber
-                || release.version_data.security == VersionData.MissingBuildNumber
-                || release.version_data.build == VersionData.MissingBuildNumber)
-            {
-                logger.Error("Error: AdoptOpenJDK API response does not contain complete version data!");
-                return null;
-            }
-
             // Construct new information.
             var newInfo = knownInfo();
-            newInfo.newestVersion = release.version_data.major.ToString() + "."
-                + release.version_data.minor.ToString() + "."
-                + release.version_data.security.ToString() + "."
-                + release.version_data.build.ToString();
             bool hasBuild32 = false;
             bool hasBuild64 = false;
-
-            foreach (Binary bin in release.binaries)
+            // The logic here is a bit complicated, because Eclipse Adoptium (formerly AdoptOpenJDK)
+            // may release versions like jdk8u302-b08.1 on top of the proper jdk8u302-b08 to include
+            // fixes, but the fix may not be available for all architectures. So it is possible that
+            // x86 and x64 may need to be downloaded from different tags.
+            foreach (var release in releases)
             {
-                if (string.IsNullOrEmpty(bin.architecture) || null == bin.installer
-                    || string.IsNullOrEmpty(bin.installer.link) || string.IsNullOrEmpty(bin.installer.checksum))
+                if (release.version_data == null
+                    || release.version_data.major == VersionData.MissingBuildNumber
+                    || release.version_data.minor == VersionData.MissingBuildNumber
+                    || release.version_data.security == VersionData.MissingBuildNumber
+                    || release.version_data.build == VersionData.MissingBuildNumber)
                 {
-                    logger.Error("Error: AdoptOpenJDK API response contains incomplete data!");
-                    return null;
+                    logger.Error("Error: AdoptOpenJDK API response does not contain complete version data!");
+                    continue;
                 }
-                if (bin.architecture == "x64")
+                newInfo.newestVersion = release.version_data.major.ToString() + "."
+                    + release.version_data.minor.ToString() + "."
+                    + release.version_data.security.ToString() + "."
+                    + release.version_data.build.ToString();
+
+                foreach (Binary bin in release.binaries)
                 {
-                    newInfo.install64Bit.checksum = bin.installer.checksum;
-                    newInfo.install64Bit.downloadUrl = bin.installer.link;
-                    hasBuild64 = true;
-                }
-                else if (bin.architecture == "x32")
-                {
-                    newInfo.install32Bit.checksum = bin.installer.checksum;
-                    newInfo.install32Bit.downloadUrl = bin.installer.link;
-                    hasBuild32 = true;
-                }
-                else
-                {
-                    logger.Error("Error: unknown architecture '" + bin.architecture + "' in AdoptOpenJDK API response!");
-                    return null;
+                    if (string.IsNullOrEmpty(bin.architecture) || null == bin.installer
+                        || string.IsNullOrEmpty(bin.installer.link) || string.IsNullOrEmpty(bin.installer.checksum))
+                    {
+                        logger.Error("Error: AdoptOpenJDK API response contains incomplete data!");
+                        continue;
+                    }
+                    if (bin.architecture == "x64")
+                    {
+                        if (!hasBuild64)
+                        {
+                            newInfo.install64Bit.checksum = bin.installer.checksum;
+                            newInfo.install64Bit.downloadUrl = bin.installer.link;
+                            hasBuild64 = true;
+                        }
+                    }
+                    else if (bin.architecture == "x32")
+                    {
+                        if (!hasBuild32)
+                        {
+                            newInfo.install32Bit.checksum = bin.installer.checksum;
+                            newInfo.install32Bit.downloadUrl = bin.installer.link;
+                            hasBuild32 = true;
+                        }
+                    }
+                    else
+                    {
+                        logger.Error("Error: unknown architecture '" + bin.architecture + "' in AdoptOpenJDK API response!");
+                        return null;
+                    }
+
+                    if (hasBuild32 && hasBuild64)
+                        return newInfo;
                 }
             }
 
@@ -198,6 +212,7 @@ namespace updater.software
                 logger.Error("Either 32 bit build or 64 bit build information of AdoptOpenJDK was not found!");
                 return null;
             }
+
             return newInfo;
         }
 
