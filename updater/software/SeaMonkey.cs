@@ -73,32 +73,32 @@ namespace updater.software
         private static Dictionary<string, string> knownChecksums32Bit()
         {
             // These are the checksums for Windows 32 bit installers from
-            // https://archive.mozilla.org/pub/seamonkey/releases/2.53.8/SHA1SUMS.txt
+            // https://archive.mozilla.org/pub/seamonkey/releases/2.53.9/SHA1SUMS.txt
             return new Dictionary<string, string>(23)
             {
-                { "cs", "1cccd6d2b7b8b99136fd2a03743bd21996366fd1" },
-                { "de", "5aea69c6754c31ecde6235c322d5b2811f299a85" },
-                { "el", "16f199fec3760a915318f56c6e0767a7598e7836" },
-                { "en-GB", "53e4a10505250d3e19dcf752d1ac3302bf85f866" },
-                { "en-US", "ff6766e800415d86944d5abe5d933fbfd0993f75" },
-                { "es-AR", "cc61aebc6ae3218ee18ca3ea4c6ed78b92d838c3" },
-                { "es-ES", "5af9dac31acb0da5a2786a0e9f67b1586eb437da" },
-                { "fi", "17a338be90a43687cfbf76ef82281a5802958a96" },
-                { "fr", "0f7dececbcbdb1a372bd861d150bbd81333b1325" },
-                { "hu", "3613454e55982bda18e28c07daf95fba474228ec" },
-                { "it", "6c2ad2dc31946dca1ce3fe92b2b497811542a01c" },
-                { "ja", "3c2c928db2ef201a0671c0ca469f4594d8568871" },
-                { "ka", "29d57ab1ae8efc555c9962cdeb107d825f9b1180" },
-                { "nb-NO", "c79a2ed026881264fb572ded46902e2ed47beca7" },
-                { "nl", "085535c30b135136f5aded5b835d894e0cbab92d" },
-                { "pl", "ecccc2c874962c7b0ef2813139204590ec7008bb" },
-                { "pt-BR", "b6d8e73ed57a622f5b50f091608eb807b2da9148" },
-                { "pt-PT", "41483f99deaa2c3dc0101e303d6476d0494c5b55" },
-                { "ru", "d1a43825fdb9cfe172144bc8e20191dccf6ed77c" },
-                { "sk", "2c703a3cc1cdd177b3d6418ba61e7521772aab1a" },
-                { "sv-SE", "db164a82abe73b7ec2ab8f5af8c5e0346b587ae2" },
-                { "zh-CN", "a42131bce6b481a067055f2e89aad8bc9188944e" },
-                { "zh-TW", "c16aabb4983050d6614196d29a97c4b5b9aec3ec" }
+                { "cs", "ba646dd31460fd7be2af5401ab8d97062dd38909" },
+                { "de", "5ce6679b126c48714df3363b2628c8e05dc3b1f0" },
+                { "el", "6a6a94f484e22ccf315af80248dd1f1efbdab6ff" },
+                { "en-GB", "6040b3bcae3e52381e564b84e9051dc0c419ea1a" },
+                { "en-US", "0e9a2d8d4996fbc68292404618a1868f6a859c92" },
+                { "es-AR", "124116c45285f154e522fbdd962ef8a21edc97ad" },
+                { "es-ES", "dd5dc57d69ee3da44ef80f088d4c8b25c2e1d2de" },
+                { "fi", "9f7d78252695fe3e9f911b7c3426a4c496fc7717" },
+                { "fr", "7945bc368bdb53f3759dfd6f714db90963fcb799" },
+                { "hu", "bef8dcc9afa3a589e4f45bb2ff5a03c74d72b767" },
+                { "it", "a49f0cc9a6c3de238b31a5d2fdd15edf38354c65" },
+                { "ja", "c60e7d49a3d615b28a528ac5b973f89b8338fa4c" },
+                { "ka", "7788b6115b6071a65fb5f523f161f288e6927549" },
+                { "nb-NO", "c9abe287f2c634b20e15e5f9983b82c3f01146b2" },
+                { "nl", "825be42ac34a96a739c7ff6f613dddd694df27a6" },
+                { "pl", "c3476fb34d37c079ac5ffe2e057caf41fc48a773" },
+                { "pt-BR", "6fe16e61a5aeacde521b071654785ba516d30b37" },
+                { "pt-PT", "a5557196dbf1735896c6442fd41455a771211f50" },
+                { "ru", "f4d235b52bf6ac439f109d515d414b46f1e832c9" },
+                { "sk", "784e8c06e885129620c00d9bcf480a3cc3e69c36" },
+                { "sv-SE", "4ea3c7a832f53bd1e2b6cd2dc111074b291b440c" },
+                { "zh-CN", "a8fa72833d495ecbcc227942b59548a9fd8308d1" },
+                { "zh-TW", "e5480d9c4410ee8b3226a261e5c9c3621636a44b" }
             };
         }
 
@@ -110,32 +110,32 @@ namespace updater.software
         private static Dictionary<string, string> knownChecksums64Bit()
         {
             // These are the checksums for Windows 64 bit installers from
-            // https://archive.mozilla.org/pub/seamonkey/releases/2.53.8/SHA1SUMS.txt
+            // https://archive.mozilla.org/pub/seamonkey/releases/2.53.9/SHA1SUMS.txt
             return new Dictionary<string, string>(23)
             {
-                { "cs", "a27bc5b6a7b644ab647a293d10c3af616e020fd0" },
-                { "de", "58094d6dc2d380196558bc8c696889d1621150ee" },
-                { "el", "a1a23c420273757a5f418b49acc9b4f211302e3c" },
-                { "en-GB", "0a42a5aaf1c7441bab16cf9d013968c0b14b3327" },
-                { "en-US", "d11c9dd2a0a38b9f03e7e69e46cfc6dbbe15df18" },
-                { "es-AR", "2cfba818a49b556d3aecf54c3a0d47535f5ed4be" },
-                { "es-ES", "f5eea14e5e1e91f19f020178dc5dce2b7eefc38d" },
-                { "fi", "d6f874d6a9e8359126e7550924de483c145b73a8" },
-                { "fr", "86672664379b3212e98559b34a2986aaf59e527a" },
-                { "hu", "eb0164158dd6ef75ee26c55cae77f5789c94440c" },
-                { "it", "8a8010cc865cc5fedb64ca4dc5ba4cbfabef7c8a" },
-                { "ja", "76151ea6561372733402ab368da12750f7a0804c" },
-                { "ka", "3782998898316381cf0ad4454736a0749e80743e" },
-                { "nb-NO", "6f042ceebf90f61aecea49a5a1bebff26f39fc05" },
-                { "nl", "ea56ca2007b86c6363f7ebf785d9d4aec527ce33" },
-                { "pl", "78c2682208cd743df5c8dae7aece240049deaa6e" },
-                { "pt-BR", "e8442c85bff8bde2da963f7ef43483e545154d26" },
-                { "pt-PT", "e6d320665fcbabb122053118bca6e55bffd672ee" },
-                { "ru", "f4b6924704197fcd3f9367dd4f883eab0d4c20d3" },
-                { "sk", "d75a6bd0c2bd9a5dc96b9a270d7261fcf6ce3981" },
-                { "sv-SE", "66dfab8a6cc4119d487ec622fcb155e4741e5e30" },
-                { "zh-CN", "7ab6427a28b2239c10ef4f7f05def75d913b8673" },
-                { "zh-TW", "72de9bc13cbb72e6d0b1068870cad01631854f60" }
+                { "cs", "eb4e2b786f98fee3bd4529dc011eddc3e46a65c5" },
+                { "de", "7048a20e5a341450e1889b5dabfd9ebd8b8f1bc5" },
+                { "el", "f257318b032443b0f97eaf2d98354b2961786e32" },
+                { "en-GB", "80d5cfb079b2052b2daff7592213d773a8b5a69a" },
+                { "en-US", "42228160ee465d043c834e7a11a7c62a2e9fc47f" },
+                { "es-AR", "549ccfe7f6b37f584d6e1d0f8b20302749d0a15e" },
+                { "es-ES", "70b7a3a6656b646269a2161dd9169ba37008fb94" },
+                { "fi", "715dba5b4653879cb059df23dd0ddc8094ef8301" },
+                { "fr", "8d02be8d73116e553d8263f17e40343940811065" },
+                { "hu", "040290a15381d9b9e278ad6c704f80674c567a65" },
+                { "it", "9269e7495e38e9e2d479a6dd6bda9aef24173222" },
+                { "ja", "2c34feb7f944fd2a70bee4c0701ccedadd12ff7e" },
+                { "ka", "507f3effafff79d3146fdc6f09f96941cf41a0bd" },
+                { "nb-NO", "9517758bcdf0afdd5b3793c99173eb5f74c600fd" },
+                { "nl", "a3a3215e21bc342df3d5a3db7522446ad83ff647" },
+                { "pl", "1f36932863dd051dd1b53d4a860d167cf77f6ad7" },
+                { "pt-BR", "753dbf672af982a68e822c09e91201551a424121" },
+                { "pt-PT", "9d038edc5739fcb6080026aba9708d4c06ea4dcb" },
+                { "ru", "af8a6b447c9cbcbd49480b45925682502b74603b" },
+                { "sk", "6c3941b35f60b85df9210cd33d2954d33c8da531" },
+                { "sv-SE", "60ecdcf1280f29c8e8449d0258d1feecc8225fb2" },
+                { "zh-CN", "a721af900f53e9e25d349bc0428dac0c00ffdea5" },
+                { "zh-TW", "d627630a31ea70a0fafb9ac0c3882e134ee7a83b" }
             };
         }
 
@@ -160,7 +160,7 @@ namespace updater.software
         /// details about the software.</returns>
         public override AvailableSoftware knownInfo()
         {
-            const string knownVersion = "2.53.8";
+            const string knownVersion = "2.53.9";
             return new AvailableSoftware("SeaMonkey (" + languageCode + ")",
                 knownVersion,
                 "^SeaMonkey [0-9]+\\.[0-9]+(\\.[0-9]+)? \\(x86 " + Regex.Escape(languageCode) + "\\)$",
