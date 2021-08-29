@@ -112,41 +112,44 @@ namespace updater.software
         public override AvailableSoftware searchForNewer()
         {
             logger.Info("Searching for newer version of CCleaner...");
-            string htmlCode = null;
-            using (var client = new WebClient())
+            const string cdnUrl = "https://bits.avcdn.net/productfamily_CCLEANER/insttype_FREE/platform_WIN_PIR/installertype_ONLINE/build_RELEASE";
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(cdnUrl);
+            request.Method = WebRequestMethods.Http.Head;
+            request.AllowAutoRedirect = false;
+            request.Timeout = 30000; // 30_000 ms / 30 seconds
+            string contentDisposition;
+            try
             {
-                try
-                {
-                    htmlCode = client.DownloadString("http://www.ccleaner.com/ccleaner/download/standard");
-                }
-                catch (Exception ex)
-                {
-                    logger.Error("Exception occurred while checking for newer version of CCleaner: " + ex.Message);
+                HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+                if (response.StatusCode != HttpStatusCode.OK)
                     return null;
-                }
-                client.Dispose();
+                contentDisposition = response.Headers.Get("Content-Disposition");
+                if (contentDisposition == null)
+                    return null;
+                request = null;
+                response.Dispose();
+                response = null;
+            }
+            catch (Exception ex)
+            {
+                logger.Error("Exception occurred while checking for newer version of CCleaner: " + ex.Message);
+                return null;
             }
 
-            // extract download URL
-            Regex reg = new Regex("http(s)?://download\\.ccleaner\\.com/ccsetup[0-9]+\\.exe");
-            Match match = reg.Match(htmlCode);
-            if (!match.Success)
+            Regex reVersion = new Regex("attachment; filename=\"ccsetup([0-9]+)\\.exe\"");
+            Match matchVersion = reVersion.Match(contentDisposition);
+            if (!matchVersion.Success)
                 return null;
-            // switch to HTTPS, if URL is HTTP only
-            string newUrl = match.Value.Replace("http://", "https://");
-            // extract version
-            reg = new Regex("[0-9]+");
-            match = reg.Match(newUrl);
-            if (!match.Success)
-                return null;
-            string newVersion = match.Value;
+
+            string newVersion = matchVersion.Groups[1].Value;
             // new version should be at least three digits long
             if (newVersion.Length < 3)
                 return null;
             newVersion = newVersion.Substring(0, newVersion.Length - 2) + "." + newVersion.Substring(newVersion.Length - 2);
             if (newVersion == knownInfo().newestVersion)
                 return knownInfo();
-
+            string newUrl = "https://download.ccleaner.com/ccsetup" + matchVersion.Groups[1].Value + ".exe";
+            
             // No checksums are provided, but binary is signed.
 
             // construct new information
