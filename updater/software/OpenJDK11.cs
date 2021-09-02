@@ -26,7 +26,7 @@ using updater.utility;
 namespace updater.software
 {
     /// <summary>
-    /// Handles updates of AdoptOpenJDK JDK 11 with Hotspot JVM.
+    /// Handles updates of Eclipse Temurin (formerly AdoptOpenJDK) JDK 11 with Hotspot JVM.
     /// </summary>
     public class OpenJDK11 : NoPreUpdateProcessSoftware
     {
@@ -115,7 +115,7 @@ namespace updater.software
         /// that was retrieved from the net.</returns>
         public override AvailableSoftware searchForNewer()
         {
-            logger.Info("Searching for newer version of AdoptOpenJDK 11 JDK...");
+            logger.Info("Searching for newer version of Eclipse Temurin 11 JDK...");
             // Just getting the latest release does not work here, because that may also be a release candidate, and we do not want that.
             string json;
             using (var client = new TimelyWebClient())
@@ -126,7 +126,7 @@ namespace updater.software
                 }
                 catch (Exception ex)
                 {
-                    logger.Warn("Exception occurred while checking for newer version of AdoptOpenJDK 11 JDK: " + ex.Message);
+                    logger.Warn("Exception occurred while checking for newer version of Eclipse Temurin 11 JDK: " + ex.Message);
                     return null;
                 }
             }
@@ -194,7 +194,7 @@ namespace updater.software
             // Do we have all the data we need?
             if (!hasBuild32 || !hasBuild64)
             {
-                logger.Error("Either 32 bit build or 64 bit build information of AdoptOpenJDK was not found!");
+                logger.Error("Either 32 bit build or 64 bit build information of Eclipse Temurin JDK was not found!");
                 return null;
             }
             return newInfo;

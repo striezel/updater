@@ -116,7 +116,7 @@ namespace updater.software
         /// that was retrieved from the net.</returns>
         public override AvailableSoftware searchForNewer()
         {
-            logger.Info("Searching for newer version of AdoptOpenJDK 8 JDK...");
+            logger.Info("Searching for newer version of Eclipse Temurin 8 JDK...");
             // Just getting the latest release does not work here, because that may also be a release candidate, and we do not want that.
             string json;
             using (var client = new TimelyWebClient())
@@ -127,7 +127,7 @@ namespace updater.software
                 }
                 catch (Exception ex)
                 {
-                    logger.Warn("Exception occurred while checking for newer version of AdoptOpenJDK 8 JDK: " + ex.Message);
+                    logger.Warn("Exception occurred while checking for newer version of Eclipse Temurin 8 JDK: " + ex.Message);
                     return null;
                 }
             }
@@ -209,7 +209,7 @@ namespace updater.software
             // Do we have all the data we need?
             if (!hasBuild32 || !hasBuild64)
             {
-                logger.Error("Either 32 bit build or 64 bit build information of AdoptOpenJDK was not found!");
+                logger.Error("Either 32 bit build or 64 bit build information of Eclipse Temurin 8 JDK was not found!");
                 return null;
             }
 
