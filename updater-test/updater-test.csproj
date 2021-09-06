@@ -82,6 +82,7 @@
     <Compile Include="software\SevenZip_Tests.cs" />
     <Compile Include="software\SeaMonkey_Tests.cs" />
     <Compile Include="software\Shotcut_Tests.cs" />
+    <Compile Include="software\TeamSpeakClient_Tests.cs" />
     <Compile Include="software\TeamViewer_Tests.cs" />
     <Compile Include="software\Thunderbird_Tests.cs" />
     <Compile Include="software\CDBurnerXP_Tests.cs" />

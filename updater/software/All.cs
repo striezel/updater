@@ -107,6 +107,7 @@ namespace updater.software
 
             result.Add(new SevenZip(autoGetNewer));
             result.Add(new Shotcut(autoGetNewer));
+            result.Add(new TeamSpeakClient(autoGetNewer));
             result.Add(new TeamViewer(autoGetNewer));
 
             // Thunderbird

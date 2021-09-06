@@ -33,6 +33,7 @@ updater application.
 * PuTTY
 * SeaMonkey
 * Shotcut
+* TeamSpeak Client
 * TeamViewer
 * Transmission (BitTorrent client)
 * TreeSize Free
