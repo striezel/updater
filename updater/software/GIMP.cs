@@ -52,24 +52,20 @@ namespace updater.software
         /// details about the software.</returns>
         public override AvailableSoftware knownInfo()
         {
+            var installer = new InstallInfoExe(
+                "https://download.gimp.org/pub/gimp/v2.10/windows/gimp-2.10.28-setup.exe",
+                HashAlgorithm.SHA256,
+                "2c2e081ce541682be1abdd8bc6df13768ad9482d68000b4a7a60c764d6cec74e",
+                Signature.None,
+                "/VERYSILENT /NORESTART");
+
             return new AvailableSoftware("The GIMP",
-                "2.10.22",
+                "2.10.28",
                 "^GIMP [0-9]+\\.[0-9]+\\.[0-9]+$",
                 "^GIMP [0-9]+\\.[0-9]+\\.[0-9]+$",
                 // The GIMP uses the same installer for 32 and 64 bit.
-                new InstallInfoExe(
-                    "https://download.gimp.org/pub/gimp/v2.10/windows/gimp-2.10.22-setup.exe",
-                    HashAlgorithm.SHA256,
-                    "f7851c348584ce432dfd8e69b74a168c7dec33ebfddc29c96ad2d6b83aded083",
-                    Signature.None,
-                    "/VERYSILENT /NORESTART"),
-                new InstallInfoExe(
-                    "https://download.gimp.org/pub/gimp/v2.10/windows/gimp-2.10.22-setup.exe",
-                    HashAlgorithm.SHA256,
-                    "f7851c348584ce432dfd8e69b74a168c7dec33ebfddc29c96ad2d6b83aded083",
-                    Signature.None,
-                    "/VERYSILENT /NORESTART")
-                );
+                installer,
+                installer);
         }
 
 
