@@ -66,19 +66,19 @@ namespace updater.software
         {
             var signature = new Signature(publisherX509, certificateExpiration);
             return new AvailableSoftware("LibreOffice",
-                "7.2.0.4",
+                "7.2.1.2",
                 "^LibreOffice [0-9]+\\.[0-9]\\.[0-9]\\.[0-9]$",
                 "^LibreOffice [0-9]+\\.[0-9]\\.[0-9]\\.[0-9]$",
                 new InstallInfoLibO(
-                    "https://download.documentfoundation.org/libreoffice/stable/7.2.0/win/x86/LibreOffice_7.2.0_Win_x86.msi",
+                    "https://download.documentfoundation.org/libreoffice/stable/7.2.1/win/x86/LibreOffice_7.2.1_Win_x86.msi",
                     HashAlgorithm.SHA256,
-                    "e3d5ff07a7e2aa0a8775c1ca303618d645ecce1496a1c179c232e38caa691cae",
+                    "64289bb449af1b20b3874fd91c24599299e8d8ef9517468a8ed781ec724b6db1",
                     signature,
                     "/qn /norestart"),
                 new InstallInfoLibO(
-                    "https://download.documentfoundation.org/libreoffice/stable/7.2.0/win/x86_64/LibreOffice_7.2.0_Win_x64.msi",
+                    "https://download.documentfoundation.org/libreoffice/stable/7.2.1/win/x86_64/LibreOffice_7.2.1_Win_x64.msi",
                     HashAlgorithm.SHA256,
-                    "d2969415c10ca60a9dbcfe175df48bc38209690f69326af2639c3c75853db590",
+                    "f7e0b30399ebfe52d4ab9c81cdb5dd3a015f1837cad898ad520221b12f06c694",
                     signature,
                     "/qn /norestart")
                     );
