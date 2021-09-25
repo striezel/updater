@@ -98,10 +98,10 @@ namespace updater_test.software
             Assert.IsTrue(re32.IsMatch("AdoptOpenJDK JDK mit Hotspot 11.0.10+9 (x86)"), "German product name (32 bit) does not match!");
             Assert.IsTrue(re32.IsMatch("AdoptOpenJDK JDK con Hotspot 11.0.10+9 (x86)"), "Spanish product name (32 bit) does not match!");
             // Match new Eclipse Temurin product names.
-            Assert.IsTrue(re32.IsMatch("Eclipse Temurin JDK with Hotspot 11.0.12+7 (x86)"), "English product name (64 bit) does not match!");
-            Assert.IsTrue(re32.IsMatch("Eclipse Temurin JDK avec Hotspot 11.0.12+7 (x86)"), "French product name (64 bit) does not match!");
-            Assert.IsTrue(re32.IsMatch("Eclipse Temurin JDK mit Hotspot 11.0.12+7 (x86)"), "German product name (64 bit) does not match!");
-            Assert.IsTrue(re32.IsMatch("Eclipse Temurin JDK con Hotspot 11.0.12+7 (x86)"), "Spanish product name (64 bit) does not match!");
+            Assert.IsTrue(re32.IsMatch("Eclipse Temurin JDK with Hotspot 11.0.12+7 (x86)"), "English product name (32 bit) does not match!");
+            Assert.IsTrue(re32.IsMatch("Eclipse Temurin JDK avec Hotspot 11.0.12+7 (x86)"), "French product name (32 bit) does not match!");
+            Assert.IsTrue(re32.IsMatch("Eclipse Temurin JDK mit Hotspot 11.0.12+7 (x86)"), "German product name (32 bit) does not match!");
+            Assert.IsTrue(re32.IsMatch("Eclipse Temurin JDK con Hotspot 11.0.12+7 (x86)"), "Spanish product name (32 bit) does not match!");
         }
     } // class
 } // namespace
