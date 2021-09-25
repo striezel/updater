@@ -31,7 +31,7 @@ namespace updater.software
     public class OpenJRE8 : NoPreUpdateProcessSoftware
     {
         /// <summary>
-        /// NLog.Logger for OpenJDK8 class
+        /// NLog.Logger for OpenJRE8 class
         /// </summary>
         private static readonly NLog.Logger logger = NLog.LogManager.GetLogger(typeof(OpenJRE8).FullName);
 
@@ -39,13 +39,13 @@ namespace updater.software
         /// <summary>
         /// publisher of signed binaries
         /// </summary>
-        private const string publisherX509 = "CN=London Jamocha Community CIC, O=London Jamocha Community CIC, L=Camberley, C=GB";
+        private const string publisherX509 = "E=webmaster@eclipse.org, CN=\"Eclipse.org Foundation, Inc.\", OU=IT, O=\"Eclipse.org Foundation, Inc.\", L=Ottawa, S=Ontario, C=CA";
 
 
         /// <summary>
         /// expiration date for the publisher certificate
         /// </summary>
-        private static readonly DateTime certificateExpiration = new DateTime(2021, 10, 13, 12, 0, 0, DateTimeKind.Utc);
+        private static readonly DateTime certificateExpiration = new DateTime(2022, 5, 18, 23, 59, 59, DateTimeKind.Utc);
 
 
         /// <summary>
@@ -66,21 +66,21 @@ namespace updater.software
         public override AvailableSoftware knownInfo()
         {
             var signature = new Signature(publisherX509, certificateExpiration);
-            const string version = "8.0.292.10";
-            return new AvailableSoftware("AdoptOpenJDK JRE 8 with Hotspot",
+            const string version = "8.0.302.8";
+            return new AvailableSoftware("Eclipse Temurin JRE 8 with Hotspot",
                 version,
-                "^AdoptOpenJDK JRE [a-z]+ Hotspot 8u[0-9]+\\-b[0-9]+ \\(x86\\)$",
-                "^AdoptOpenJDK JRE [a-z]+ Hotspot 8u[0-9]+\\-b[0-9]+ \\(x64\\)$",
+                "^(Eclipse Temurin|AdoptOpenJDK) JRE [a-z]+ Hotspot 8u[0-9]+\\-b[0-9]+ \\(x86\\)$",
+                "^(Eclipse Temurin|AdoptOpenJDK) JRE [a-z]+ Hotspot 8u[0-9]+\\-b[0-9]+ \\(x64\\)$",
                 new InstallInfoMsiNoLocation(
-                    "https://github.com/AdoptOpenJDK/openjdk8-binaries/releases/download/jdk8u292-b10/OpenJDK8U-jre_x86-32_windows_hotspot_8u292b10.msi",
+                    "https://github.com/adoptium/temurin8-binaries/releases/download/jdk8u302-b08/OpenJDK8U-jre_x86-32_windows_hotspot_8u302b08.msi",
                     HashAlgorithm.SHA256,
-                    "5a88e9dec77a3a109362e07cd44eda467b0f0549223bad4d15a9f75d13c63dfe",
+                    "4f0a1ed3b20bc3458bfc87f2dabe5418d56742c87c044bcbec70498113fc0384",
                     signature,
                     "INSTALLLEVEL=3 /qn /norestart"),
                 new InstallInfoMsiNoLocation(
-                    "https://github.com/AdoptOpenJDK/openjdk8-binaries/releases/download/jdk8u292-b10/OpenJDK8U-jre_x64_windows_hotspot_8u292b10.msi",
+                    "https://github.com/adoptium/temurin8-binaries/releases/download/jdk8u302-b08/OpenJDK8U-jre_x64_windows_hotspot_8u302b08.msi",
                     HashAlgorithm.SHA256,
-                    "4365ea6d753ce61ce809fcd94e6cda1723673b3a79b4ca71a01599eb0aecef0a",
+                    "34e5eea737dfaca57ec5162e6fece5259f403fa419c7bcab572e9cdd2bcf8dd1",
                     signature,
                     "INSTALLLEVEL=3 /qn /norestart")
                     );
@@ -116,7 +116,7 @@ namespace updater.software
         /// that was retrieved from the net.</returns>
         public override AvailableSoftware searchForNewer()
         {
-            logger.Info("Searching for newer version of AdoptOpenJDK 8 JRE...");
+            logger.Info("Searching for newer version of Eclipse Temurin 8 JRE...");
             string json;
             using (var client = new TimelyWebClient())
             {
@@ -126,7 +126,7 @@ namespace updater.software
                 }
                 catch (Exception ex)
                 {
-                    logger.Warn("Exception occurred while checking for newer version of AdoptOpenJDK 8 JRE: " + ex.Message);
+                    logger.Warn("Exception occurred while checking for newer version of Eclipse Temurin 8 JRE: " + ex.Message);
                     return null;
                 }
             }
@@ -194,7 +194,7 @@ namespace updater.software
             // Do we have all the data we need?
             if (!hasBuild32 || !hasBuild64)
             {
-                logger.Error("Either 32 bit build or 64 bit build information of AdoptOpenJDK JRE was not found!");
+                logger.Error("Either 32 bit build or 64 bit build information of Eclipse Temurin JRE was not found!");
                 return null;
             }
             return newInfo;

@@ -43,7 +43,6 @@ namespace updater.software
             bool autoGetNewer = opts.autoGetNewer;
             var result = new List<ISoftware>()
             {
-                new OpenJRE8(autoGetNewer),
                 new OpenJRE11(autoGetNewer),
                 new Audacity(autoGetNewer),
                 new Calibre(autoGetNewer),
@@ -52,6 +51,7 @@ namespace updater.software
                 new CMake(autoGetNewer),
                 new OpenJDK8(autoGetNewer),
                 new OpenJDK11(autoGetNewer),
+                new OpenJRE8(autoGetNewer)
             };
 
             // Firefox (release channel)
