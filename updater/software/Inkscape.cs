@@ -158,26 +158,28 @@ namespace updater.software
                     client.Dispose();
                 }
 
-                // Search for URL part like '<a href="/gallery/item/13322/inkscape-0.92.4-x86.msi">'.
+                // Search for URL part like '<a href="/gallery/item/29346/inkscape-1.1.1_2021-09-20_3bf5ae0d25-x86.msi">'.
                 //     or
-                // Search for URL part like '<a href="/gallery/item/13321/inkscape-0.92.4-x64.msi">'.
+                // Search for URL part like '<a href="/gallery/item/29350/inkscape-1.1.1_2021-09-20_3bf5ae0d25-x64.msi">'.
                 string arch = (bits == "32") ? "x86" : "x64";
+                string dateAndHash = null;
                 {
-                    Regex reUrl = new Regex("<a href=\"([a-zA-Z0-9\\/]+)/inkscape\\-" + Regex.Escape(newVersion) + "\\-" + arch + "\\.msi\">");
+                    Regex reUrl = new Regex("<a href=\"([a-zA-Z0-9\\/]+)/inkscape\\-" + Regex.Escape(newVersion) + "(_2[0-9]{3}\\-[0-9]{2}\\-[0-9]{2}_[0-9a-f]+)\\-" + arch + "\\.msi\">");
                     Match matchUrl = reUrl.Match(htmlCode);
                     if (!matchUrl.Success)
                         return null;
                     if (bits == "32")
-                        newInfo.install32Bit.downloadUrl = "https://inkscape.org/" + matchUrl.Groups[1].Value + "inkscape-" + newVersion + "-x86.msi";
+                        newInfo.install32Bit.downloadUrl = "https://inkscape.org/" + matchUrl.Groups[1].Value + "inkscape-" + newVersion + matchUrl.Groups[2].Value + "-x86.msi";
                     else
-                        newInfo.install64Bit.downloadUrl = "https://inkscape.org/" + matchUrl.Groups[1].Value + "inkscape-" + newVersion + "-x64.msi";
+                        newInfo.install64Bit.downloadUrl = "https://inkscape.org/" + matchUrl.Groups[1].Value + "inkscape-" + newVersion + matchUrl.Groups[2].Value + "-x64.msi";
+                    dateAndHash = matchUrl.Groups[2].Value;
                 }
 
                 // Signature files are given in HTML elements like
-                // <a href="https://media.inkscape.org/media/resources/sigs/inkscape-0.92.4-x86.msi_v1j6SnA.md5"> or
-                // <a href="https://media.inkscape.org/media/resources/sigs/inkscape-0.92.4-x64.msi_8a41Ccz.md5">.
+                // <a href="https://media.inkscape.org/media/resources/sigs/inkscape-1.1.1_2021-09-20_3bf5ae0d25-x86.msi.sha256"> or
+                // <a href="https://media.inkscape.org/media/resources/sigs/inkscape-1.1.1_2021-09-20_3bf5ae0d25-x64.msi.sha256">.
                 {
-                    string signatureUrl = "https://media.inkscape.org/media/resources/sigs/inkscape-" + newVersion + "-" + arch + ".msi.sha256";
+                    string signatureUrl = "https://media.inkscape.org/media/resources/sigs/inkscape-" + newVersion + dateAndHash + "-" + arch + ".msi.sha256";
 
                     htmlCode = null;
                     using (var client = new WebClient())
@@ -195,7 +197,7 @@ namespace updater.software
                     }
                 }
 
-                Regex reHash = new Regex("[0-9a-f]{64} [ \\*]inkscape\\-" + Regex.Escape(newVersion) + "\\-" + arch + "\\.msi");
+                Regex reHash = new Regex("[0-9a-f]{64} [ \\*]inkscape\\-" + Regex.Escape(newVersion + dateAndHash) + "\\-" + arch + "\\.msi");
                 Match matchHash = reHash.Match(htmlCode);
                 if (!matchHash.Success)
                     return null;
