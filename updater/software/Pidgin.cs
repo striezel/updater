@@ -65,7 +65,7 @@ namespace updater.software
         /// details about the software.</returns>
         public override AvailableSoftware knownInfo()
         {
-            const string version = "2.14.7";
+            const string version = "2.14.8";
             return new AvailableSoftware("Pidgin",
                 version,
                 "^Pidgin$",
@@ -74,7 +74,7 @@ namespace updater.software
                 new InstallInfoPidgin(
                     "https://netcologne.dl.sourceforge.net/project/pidgin/Pidgin/" + version + "/pidgin-" + version + "-offline.exe",
                     HashAlgorithm.SHA256,
-                    "4dbb02aee3769c3e6dcf7c286d83e387b48cc37d3e58e3a1c99652ecf3436dd5",
+                    "b237de10d4fe5d44eabe97a7640d2a74b4d722a7cb2376cf5df2be632eda3f51",
                     new Signature(publisherX509, certificateExpiration),
                     "/DS=1 /SMS=1 /S"),
                 null
