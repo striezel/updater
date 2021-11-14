@@ -67,8 +67,8 @@ namespace updater.software
         {
             var signature = new Signature(publisherX509, certificateExpiration);
             // Both version and tag are usually the same, except for major releases like 8.0.
-            const string version = "8.1.9";
-            const string tag = "8.1.9";
+            const string version = "8.1.9.1";
+            const string tag = "8.1.9.1";
             return new AvailableSoftware("Notepad++",
                 version,
                 "^Notepad\\+\\+ \\(32\\-bit x86\\)$|^Notepad\\+\\+$",
@@ -76,13 +76,13 @@ namespace updater.software
                 new InstallInfoExe(
                     "https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v" + tag + "/npp." + version + ".Installer.exe",
                     HashAlgorithm.SHA256,
-                    "38ab72d6a356f5f057030fca1e0614303d1fc2e4b587402ff9174b622decc2a0",
+                    "45b22f2148c5f0fc5ae36182df435854eaa6d7af53804220eb37f134c139ce34",
                     signature,
                     "/S"),
                 new InstallInfoExe(
                     "https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v" + tag + "/npp." + version + ".Installer.x64.exe",
                     HashAlgorithm.SHA256,
-                    "23bde004114ee4d17b11608da2c78fda365874fd64194a6ea167dd3050576b42",
+                    "5c65894c0de1326df5ca68c84280d3c39a0ec9f79489f8611f76e4e0e60b922e",
                     signature,
                     "/S")
                 );
@@ -133,7 +133,7 @@ namespace updater.software
                 request = null;
                 response = null;
                 // Location header will point to something like "https://github.com/notepad-plus-plus/notepad-plus-plus/releases/tag/v7.9.1".
-                Regex reVersion = new Regex("v[0-9]+(\\.[0-9]+(\\.[0-9]+)?)?$");
+                Regex reVersion = new Regex("v[0-9]+(\\.[0-9]+(\\.[0-9]+(\\.[0-9]+)?)?)?$");
                 Match matchVersion = reVersion.Match(newLocation);
                 if (!matchVersion.Success)
                     return null;
