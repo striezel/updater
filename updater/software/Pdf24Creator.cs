@@ -94,14 +94,14 @@ namespace updater.software
         public override AvailableSoftware knownInfo()
         {
             var pdf24 = new InstallInfoMsi(
-                "https://en.pdf24.org/products/pdf-creator/download/pdf24-creator-10.6.3.msi",
+                "https://en.pdf24.org/products/pdf-creator/download/pdf24-creator-10.7.0.msi",
                 HashAlgorithm.SHA512,
-                "d88f5e071ba3bbc544d52b3a338304c284527a859a77ac572b578f0d39f71e4fe4d77d25e19aec6b0945c56042a215904288a435ea4f0c822509d62d38bd1c2f",
+                "2476baac98dfe767eb59f3c52a9bd814d000e47c9e13d5bddd8df8b8c19ffd909dda308033de69735494484e96b5f4a15110b049468141767e48049ab14d347e",
                 new Signature(publisherX509, certificateExpiration),
                 getOptions() + " /qn /norestart");
 
             return new AvailableSoftware("PDF24 Creator",
-                "10.6.3",
+                "10.7.0",
                 "^PDF24 Creator$",
                 "^PDF24 Creator$", // 64 bit version uses same pattern as 32 bit.
                 pdf24,
