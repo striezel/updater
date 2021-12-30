@@ -32,7 +32,7 @@ namespace updater.software
         /// <summary>
         /// NLog.Logger for SevenZip class
         /// </summary>
-        private static NLog.Logger logger = NLog.LogManager.GetLogger(typeof(SevenZip).FullName);
+        private static readonly NLog.Logger logger = NLog.LogManager.GetLogger(typeof(SevenZip).FullName);
 
 
         /// <summary>
@@ -53,19 +53,19 @@ namespace updater.software
         public override AvailableSoftware knownInfo()
         {
             return new AvailableSoftware("7-Zip",
-                "19.00",
+                "21.07",
                 "^7\\-Zip [0-9]+\\.[0-9]{2}$",
                 "^7\\-Zip [0-9]+\\.[0-9]{2} \\(x64\\)$",
                 new InstallInfoExe(
-                    "http://www.7-zip.org/a/7z1900.exe",
+                    "http://www.7-zip.org/a/7z2107.exe",
                     HashAlgorithm.SHA256,
-                    "759aa04d5b03ebeee13ba01df554e8c962ca339c74f56627c8bed6984bb7ef80",
+                    "71e94e6038f4d42ed8f0f38c0e6c3846f21d13527139efa9ef8b8f6312ab6c90",
                     Signature.None,
                     "/S"),
                 new InstallInfoExe(
-                    "http://www.7-zip.org/a/7z1900-x64.exe",
+                    "http://www.7-zip.org/a/7z2107-x64.exe",
                     HashAlgorithm.SHA256,
-                    "0f5d4dbbe5e55b7aa31b91e5925ed901fdf46a367491d81381846f05ad54c45e",
+                    "0b461f0a0eccfc4f39733a80d70fd1210fdd69f600fb6b657e03940a734e5fc1",
                     Signature.None,
                     "/S")
                 );
