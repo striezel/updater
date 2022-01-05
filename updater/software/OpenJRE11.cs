@@ -31,7 +31,7 @@ namespace updater.software
     public class OpenJRE11 : NoPreUpdateProcessSoftware
     {
         /// <summary>
-        /// NLog.Logger for OpenJDK8 class
+        /// NLog.Logger for OpenJRE11 class
         /// </summary>
         private static readonly NLog.Logger logger = NLog.LogManager.GetLogger(typeof(OpenJRE11).FullName);
 
