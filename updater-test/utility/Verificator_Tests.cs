@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017, 2019  Dirk Stolle
+    Copyright (C) 2017, 2019, 2022  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -36,9 +36,9 @@ namespace updater_test.utility
 
 
         /// <summary>
-        /// subject in signature for PuTTY installer
+        /// subject in signature for LibreOffice Help Pack installer
         /// </summary>
-        private const string puttyPublisherX509 = "CN=Simon Tatham, O=Simon Tatham, L=Cambridge, S=Cambridgeshire, C=GB";
+        private const string libreOfficePublisherX509 = "E=info@documentfoundation.org, CN=The Document Foundation, O=The Document Foundation, OU=LibreOffice Build Team, L=Berlin, S=Berlin, C=DE";
 
 
         /// <summary>
@@ -75,7 +75,7 @@ namespace updater_test.utility
         [ClassInitialize()]
         public static void DownloadExampleFile(TestContext testContext)
         {
-            downloadFileLocation = download("https://the.earth.li/~sgtatham/putty/0.71/w32/putty-0.71-installer.msi");
+            downloadFileLocation = download("https://download.documentfoundation.org/libreoffice/stable/7.2.4/win/x86_64/LibreOffice_7.2.4_Win_x64_helppack_de.msi");
         }
 
 
@@ -120,7 +120,7 @@ namespace updater_test.utility
                     stream.Close();
                 }
                 // check signature
-                verified = updater.utility.Verificator.verifySignature(copyLocation, puttyPublisherX509);
+                verified = updater.utility.Verificator.verifySignature(copyLocation, libreOfficePublisherX509);
             }
             finally
             {
@@ -140,7 +140,9 @@ namespace updater_test.utility
         {
             Assert.IsNotNull(downloadFileLocation);
 
-            bool s = updater.utility.Verificator.verifySignature(downloadFileLocation, puttyPublisherX509);
+            bool s = updater.utility.Verificator.verifySignature(downloadFileLocation, libreOfficePublisherX509);
+            // If this assertion fails and it is the 8th September 2023 or later,
+            // then this is because the certificate has expired.
             Assert.IsTrue(s);
         }
     }
