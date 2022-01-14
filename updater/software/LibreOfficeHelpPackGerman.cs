@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017, 2018, 2019, 2020, 2021  Dirk Stolle
+    Copyright (C) 2017, 2018, 2019, 2020, 2021, 2022  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -66,19 +66,19 @@ namespace updater.software
         {
             var signature = new Signature(publisherX509, certificateExpiration);
             return new AvailableSoftware("LibreOffice Help Pack German",
-                "7.2.4.1",
+                "7.2.5.2",
                 "^LibreOffice [0-9]+\\.[0-9] Help Pack \\(German\\)$",
                 "^LibreOffice [0-9]+\\.[0-9] Help Pack \\(German\\)$",
                 new InstallInfoLibO(
-                    "https://download.documentfoundation.org/libreoffice/stable/7.2.4/win/x86/LibreOffice_7.2.4_Win_x86_helppack_de.msi",
+                    "https://download.documentfoundation.org/libreoffice/stable/7.2.5/win/x86/LibreOffice_7.2.5_Win_x86_helppack_de.msi",
                     HashAlgorithm.SHA256,
-                    "4f19b91723f51988fd6edeca46f6ef25abd646c0a58067e3df756b16df54ff1c",
+                    "4cc1f499acb24eca99c6b09baad948c8c9d42a7397d3b3d1ba2a803aee11b226",
                     signature,
                     "/qn /norestart"),
                 new InstallInfoLibO(
-                    "https://download.documentfoundation.org/libreoffice/stable/7.2.4/win/x86_64/LibreOffice_7.2.4_Win_x64_helppack_de.msi",
+                    "https://download.documentfoundation.org/libreoffice/stable/7.2.5/win/x86_64/LibreOffice_7.2.5_Win_x64_helppack_de.msi",
                     HashAlgorithm.SHA256,
-                    "7f05b366559934d98939a7fec3029912d2ef736adc0711e23c996529698a97b9",
+                    "3ba2811e1ed5d9c5532219da4b7d3e27ee65e115bd6f8b1efabd5cc536d58196",
                     signature,
                     "/qn /norestart")
                     );
