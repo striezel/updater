@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017  Dirk Stolle
+    Copyright (C) 2017, 2022  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -17,6 +17,7 @@
 */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Text.RegularExpressions;
 using updater.software;
 
 namespace updater_test.software
@@ -68,5 +69,37 @@ namespace updater_test.software
             _upToDate_info(new Mumble(false));
         }
 
+
+        /// <summary>
+        /// Checks whether the regular expression for the software name matches known names.
+        /// </summary>
+        [TestMethod]
+        public void Test_regexMatches()
+        {
+            var info = new Mumble(false).knownInfo();
+            Assert.IsNotNull(info, "knownInfo() returned null!");
+
+            Regex re64 = new Regex(info.match64Bit, RegexOptions.IgnoreCase);
+            // Match old pre-1.4.0 product names.
+            Assert.IsTrue(re64.IsMatch("Mumble 1.3.4"));
+            Assert.IsTrue(re64.IsMatch("Mumble 1.3.3"));
+            Assert.IsTrue(re64.IsMatch("Mumble 1.3.2"));
+            Assert.IsTrue(re64.IsMatch("Mumble 1.3.1"));
+            Assert.IsTrue(re64.IsMatch("Mumble 1.3.0"));
+            // Match new post-1.4.0 name.
+            Assert.IsTrue(re64.IsMatch("Mumble (client)"));
+
+            Regex re32 = new Regex(info.match32Bit, RegexOptions.IgnoreCase);
+            // Match old pre-1.4.0 product names.
+            Assert.IsTrue(re32.IsMatch("Mumble 1.3.4"));
+            Assert.IsTrue(re32.IsMatch("Mumble 1.3.3"));
+            Assert.IsTrue(re32.IsMatch("Mumble 1.3.2"));
+            Assert.IsTrue(re32.IsMatch("Mumble 1.3.1"));
+            Assert.IsTrue(re32.IsMatch("Mumble 1.3.0"));
+            Assert.IsTrue(re32.IsMatch("Mumble 1.2.16"));
+            Assert.IsTrue(re32.IsMatch("Mumble 1.1.8"));
+            // Match new post-1.4.0 name.
+            Assert.IsTrue(re32.IsMatch("Mumble (client)"));
+        }
     } // class
 } // namespace
