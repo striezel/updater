@@ -18,7 +18,7 @@ currently be updated with this application is available
 
 ## Usage
 
-The update is a command-line program, there is no graphical user interface yet
+The updater is a command-line program, there is no graphical user interface yet
 (and maybe there never will be one). Basic invocation is as follows:
 
     updater.exe operation [options]
