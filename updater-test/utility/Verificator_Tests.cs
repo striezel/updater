@@ -75,7 +75,7 @@ namespace updater_test.utility
         [ClassInitialize()]
         public static void DownloadExampleFile(TestContext testContext)
         {
-            downloadFileLocation = download("https://download.documentfoundation.org/libreoffice/stable/7.2.4/win/x86_64/LibreOffice_7.2.4_Win_x64_helppack_de.msi");
+            downloadFileLocation = download("https://download.documentfoundation.org/libreoffice/stable/7.2.5/win/x86_64/LibreOffice_7.2.5_Win_x64_helppack_de.msi");
         }
 
 
@@ -105,6 +105,8 @@ namespace updater_test.utility
         [TestMethod]
         public void Test_verifySignature_negative()
         {
+            Assert.IsNotNull(downloadFileLocation, "The test file was not downloaded!");
+
             bool verified = true;
             string copyLocation = downloadFileLocation + "_copy";
             try
@@ -138,7 +140,7 @@ namespace updater_test.utility
         [TestMethod]
         public void Test_verifySignature_positive()
         {
-            Assert.IsNotNull(downloadFileLocation);
+            Assert.IsNotNull(downloadFileLocation, "The test file was not downloaded!");
 
             bool s = updater.utility.Verificator.verifySignature(downloadFileLocation, libreOfficePublisherX509);
             // If this assertion fails and it is the 8th September 2023 or later,
