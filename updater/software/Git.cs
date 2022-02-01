@@ -66,19 +66,19 @@ namespace updater.software
         {
             var signature = new Signature(publisherX509, certificateExpiration);
             return new AvailableSoftware("Git",
-                "2.35.0",
+                "2.35.1",
                 "^(Git|Git version [0-9]+\\.[0-9]+\\.[0-9]+(\\.[0-9]+)?)$",
                 "^(Git|Git version [0-9]+\\.[0-9]+\\.[0-9]+(\\.[0-9]+)?)$",
                 new InstallInfoExe(
-                    "https://github.com/git-for-windows/git/releases/download/v2.35.0.windows.1/Git-2.35.0-32-bit.exe",
+                    "https://github.com/git-for-windows/git/releases/download/v2.35.1.windows.1/Git-2.35.1-32-bit.exe",
                     HashAlgorithm.SHA256,
-                    "3655a3fad05398f6971ca46f49a00b0e4e3ff15141e73e1016c5524403fa7639",
+                    "5e45b1226b106dd241de0be0b350052afe53bd61dce80ac6044600dc85fbfa0b",
                     signature,
                     "/VERYSILENT /NORESTART"),
                 new InstallInfoExe(
-                    "https://github.com/git-for-windows/git/releases/download/v2.35.0.windows.1/Git-2.35.0-64-bit.exe",
+                    "https://github.com/git-for-windows/git/releases/download/v2.35.1.windows.1/Git-2.35.1-64-bit.exe",
                     HashAlgorithm.SHA256,
-                    "1f59a96ca29c98260c36ccac594cf5c362160d442e0c7197d36cc99ecc6c3447",
+                    "5d66948e7ada0ab184b2745fdf6e11843443a97655891c3c6268b5985b88bf4f",
                     signature,
                     "/VERYSILENT /NORESTART")
                     );
