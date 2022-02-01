@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2021  Dirk Stolle
+    Copyright (C) 2021, 2022  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -79,13 +79,13 @@ namespace updater.software
 
             var signature = new Signature(publisherX509, certificateExpiration);
             var info = new InstallInfoExe(
-                "https://github.com/mltframework/shotcut/releases/download/v21.12.24/shotcut-win64-211224.exe",
+                "https://github.com/mltframework/shotcut/releases/download/v22.01.30/shotcut-win64-220130.exe",
                 HashAlgorithm.SHA256,
-                "59eff4025d5a653bbf5b046df509f57fde9b3b9cc6c5ceea0c7dc34d8ac086cc",
+                "58c14618d8e6ceb60f5fafaebbb70a953cc8e607514695ecd3431b75edc5e7cf",
                 signature,
                 "/S");
             return new AvailableSoftware("Shotcut",
-                "21.12.24",
+                "22.01.30",
                 "^Shotcut$",
                 "^Shotcut$",
                 info,
