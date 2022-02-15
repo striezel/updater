@@ -94,14 +94,14 @@ namespace updater.software
         public override AvailableSoftware knownInfo()
         {
             var pdf24 = new InstallInfoMsi(
-                "https://en.pdf24.org/products/pdf-creator/download/pdf24-creator-10.7.2.msi",
+                "https://en.pdf24.org/products/pdf-creator/download/pdf24-creator-10.8.0.msi",
                 HashAlgorithm.SHA512,
-                "7d344f6843deb8594b0d991275bd189c4f093abf21f47bfc0237f078ea4b111ef8f2841ef0045913b50250db9afdcdd3b1eb93482cab9be914e77cb6f97baaa3",
+                "ad67d51b28f3401ced49c53394f4726a0068b018098a24b8bd7790d49ea2ea73980680005a23f29bf7e9c2a5343c6a99ea3e157260199458020090d1ab8efee8",
                 new Signature(publisherX509, certificateExpiration),
                 getOptions() + " /qn /norestart");
 
             return new AvailableSoftware("PDF24 Creator",
-                "10.7.2",
+                "10.8.0",
                 "^PDF24 Creator$",
                 "^PDF24 Creator$", // 64 bit version uses same pattern as 32 bit.
                 pdf24,
@@ -189,7 +189,7 @@ namespace updater.software
         /// <returns>Returns a list of process names that block the upgrade.</returns>
         public override List<string> blockerProcesses(DetectedSoftware detected)
         {
-            return new List<string>();
+            return new List<string>(0);
         }
 
 
