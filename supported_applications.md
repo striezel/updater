@@ -6,8 +6,6 @@ updater application.
 ## Implemented
 
 * 7-Zip
-* AdoptOpenJDK JRE 8 (LTS)
-* AdoptOpenJDK JRE 11 (LTS)
 * Audacity
 * Calibre
 * CCleaner
@@ -15,6 +13,8 @@ updater application.
 * CMake
 * Eclipse Temurin JDK 8 LTS (formerly AdoptOpenJDK JDK 8)
 * Eclipse Temurin JDK 11 LTS (formerly AdoptOpenJDK JDK 11)
+* Eclipse Temurin JRE 8 LTS (formerly AdoptOpenJDK JRE 8)
+* Eclipse Temurin JRE 11 LTS (formerly AdoptOpenJDK JRE 11)
 * FileZilla FTP Client
 * GIMP
 * Git for Windows
