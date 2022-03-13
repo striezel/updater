@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2021  Dirk Stolle
+    Copyright (C) 2021, 2022  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -26,7 +26,7 @@ using updater.utility;
 namespace updater.software
 {
     /// <summary>
-    /// Handles updates of AdoptOpenJDK JRE 8 with Hotspot JVM.
+    /// Handles updates of Eclipse Temurin (formerly AdoptOpenJDK) JRE 8 with Hotspot JVM.
     /// </summary>
     public class OpenJRE8 : NoPreUpdateProcessSoftware
     {
@@ -66,21 +66,21 @@ namespace updater.software
         public override AvailableSoftware knownInfo()
         {
             var signature = new Signature(publisherX509, certificateExpiration);
-            const string version = "8.0.302.8";
+            const string version = "8.0.322.6";
             return new AvailableSoftware("Eclipse Temurin JRE 8 with Hotspot",
                 version,
                 "^(Eclipse Temurin|AdoptOpenJDK) JRE [a-z]+ Hotspot 8u[0-9]+\\-b[0-9]+ \\(x86\\)$",
                 "^(Eclipse Temurin|AdoptOpenJDK) JRE [a-z]+ Hotspot 8u[0-9]+\\-b[0-9]+ \\(x64\\)$",
                 new InstallInfoMsiNoLocation(
-                    "https://github.com/adoptium/temurin8-binaries/releases/download/jdk8u302-b08/OpenJDK8U-jre_x86-32_windows_hotspot_8u302b08.msi",
+                    "https://github.com/adoptium/temurin8-binaries/releases/download/jdk8u322-b06/OpenJDK8U-jre_x86-32_windows_hotspot_8u322b06.msi",
                     HashAlgorithm.SHA256,
-                    "4f0a1ed3b20bc3458bfc87f2dabe5418d56742c87c044bcbec70498113fc0384",
+                    "31dfd837364956c74d06d0947fc25e631f29ebc34cbbda77ce788d997415f252",
                     signature,
                     "INSTALLLEVEL=3 /qn /norestart"),
                 new InstallInfoMsiNoLocation(
-                    "https://github.com/adoptium/temurin8-binaries/releases/download/jdk8u302-b08/OpenJDK8U-jre_x64_windows_hotspot_8u302b08.msi",
+                    "https://github.com/adoptium/temurin8-binaries/releases/download/jdk8u322-b06/OpenJDK8U-jre_x64_windows_hotspot_8u322b06.msi",
                     HashAlgorithm.SHA256,
-                    "34e5eea737dfaca57ec5162e6fece5259f403fa419c7bcab572e9cdd2bcf8dd1",
+                    "74eb66d2d6aefdc42f95681616c94f6a41b1e133d899131719cf8c2f0cbf0a25",
                     signature,
                     "INSTALLLEVEL=3 /qn /norestart")
                     );
