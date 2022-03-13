@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2021  Dirk Stolle
+    Copyright (C) 2021, 2022  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -26,7 +26,7 @@ using updater.utility;
 namespace updater.software
 {
     /// <summary>
-    /// Handles updates of AdoptOpenJDK JRE 11 with Hotspot JVM.
+    /// Handles updates of Eclipse Temurin (formerly AdoptOpenJDK) JRE 11 with Hotspot JVM.
     /// </summary>
     public class OpenJRE11 : NoPreUpdateProcessSoftware
     {
@@ -39,13 +39,13 @@ namespace updater.software
         /// <summary>
         /// publisher of signed binaries
         /// </summary>
-        private const string publisherX509 = "CN=London Jamocha Community CIC, O=London Jamocha Community CIC, L=Camberley, C=GB";
+        private const string publisherX509 = "E=webmaster@eclipse.org, CN=\"Eclipse.org Foundation, Inc.\", OU=IT, O=\"Eclipse.org Foundation, Inc.\", L=Ottawa, S=Ontario, C=CA";
 
 
         /// <summary>
         /// expiration date for the publisher certificate
         /// </summary>
-        private static readonly DateTime certificateExpiration = new DateTime(2021, 10, 13, 12, 0, 0, DateTimeKind.Utc);
+        private static readonly DateTime certificateExpiration = new DateTime(2022, 5, 18, 23, 59, 59, DateTimeKind.Utc);
 
 
         /// <summary>
@@ -66,21 +66,21 @@ namespace updater.software
         public override AvailableSoftware knownInfo()
         {
             var signature = new Signature(publisherX509, certificateExpiration);
-            const string version = "11.0.11.9";
-            return new AvailableSoftware("AdoptOpenJDK JRE 11 with Hotspot",
+            const string version = "11.0.14.101";
+            return new AvailableSoftware("Eclipse Temurin JRE 11 with Hotspot",
                 version,
-                "^AdoptOpenJDK JRE [a-z]+ Hotspot 11\\.[0-9]+\\.[0-9]+\\+[0-9]+(\\.[0-9]+)? \\(x86\\)$",
-                "^AdoptOpenJDK JRE [a-z]+ Hotspot 11\\.[0-9]+\\.[0-9]+\\+[0-9]+(\\.[0-9]+)? \\(x64\\)$",
+                "^(Eclipse Temurin|AdoptOpenJDK) JRE [a-z]+ Hotspot 11\\.[0-9]+\\.[0-9]+(\\.[0-9]+)?\\+[0-9]+(\\.[0-9]+)? \\(x86\\)$",
+                "^(Eclipse Temurin|AdoptOpenJDK) JRE [a-z]+ Hotspot 11\\.[0-9]+\\.[0-9]+(\\.[0-9]+)?\\+[0-9]+(\\.[0-9]+)? \\(x64\\)$",
                 new InstallInfoMsiNoLocation(
-                    "https://github.com/AdoptOpenJDK/openjdk11-binaries/releases/download/jdk-11.0.11%2B9/OpenJDK11U-jre_x86-32_windows_hotspot_11.0.11_9.msi",
+                    "https://github.com/adoptium/temurin11-binaries/releases/download/jdk-11.0.14.1%2B1/OpenJDK11U-jre_x86-32_windows_hotspot_11.0.14.1_1.msi",
                     HashAlgorithm.SHA256,
-                    "401e991b96d676705214c88de9e447c65e13ef4647793de5da77924724951bcf",
+                    "142db8fe66fa910beeb7c28a4da3df464a51f2b813c7d07995b63e9ec3355190",
                     signature,
                     "INSTALLLEVEL=3 /qn /norestart"),
                 new InstallInfoMsiNoLocation(
-                    "https://github.com/AdoptOpenJDK/openjdk11-binaries/releases/download/jdk-11.0.11%2B9/OpenJDK11U-jre_x64_windows_hotspot_11.0.11_9.msi",
+                    "https://github.com/adoptium/temurin11-binaries/releases/download/jdk-11.0.14.1%2B1/OpenJDK11U-jre_x64_windows_hotspot_11.0.14.1_1.msi",
                     HashAlgorithm.SHA256,
-                    "d52262a1ac6d86326cd071b687dcc5bb546bedda6d03c6bd26a046070a013df3",
+                    "8559c143021508f70885adc84b5be4ce56e4fe7d9d2b74ac45fc2effc841b92d",
                     signature,
                     "INSTALLLEVEL=3 /qn /norestart")
                     );
@@ -116,7 +116,7 @@ namespace updater.software
         /// that was retrieved from the net.</returns>
         public override AvailableSoftware searchForNewer()
         {
-            logger.Info("Searching for newer version of AdoptOpenJDK 11 JRE...");
+            logger.Info("Searching for newer version of Eclipse Temurin 11 JRE...");
             string json;
             using (var client = new TimelyWebClient())
             {
@@ -126,7 +126,7 @@ namespace updater.software
                 }
                 catch (Exception ex)
                 {
-                    logger.Warn("Exception occurred while checking for newer version of AdoptOpenJDK 11 JRE: " + ex.Message);
+                    logger.Warn("Exception occurred while checking for newer version of Eclipse Temurin 11 JRE: " + ex.Message);
                     return null;
                 }
             }
@@ -194,7 +194,7 @@ namespace updater.software
             // Do we have all the data we need?
             if (!hasBuild32 || !hasBuild64)
             {
-                logger.Error("Either 32 bit build or 64 bit build information of AdoptOpenJDK JRE was not found!");
+                logger.Error("Either 32 bit build or 64 bit build information of Eclipse Temurin JRE was not found!");
                 return null;
             }
             return newInfo;

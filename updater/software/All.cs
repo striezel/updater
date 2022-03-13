@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017, 2018, 2019, 2021  Dirk Stolle
+    Copyright (C) 2017, 2018, 2019, 2021, 2022  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -43,7 +43,6 @@ namespace updater.software
             bool autoGetNewer = opts.autoGetNewer;
             var result = new List<ISoftware>()
             {
-                new OpenJRE11(autoGetNewer),
                 new Audacity(autoGetNewer),
                 new Calibre(autoGetNewer),
                 new CCleaner(autoGetNewer),
@@ -51,7 +50,8 @@ namespace updater.software
                 new CMake(autoGetNewer),
                 new OpenJDK8(autoGetNewer),
                 new OpenJDK11(autoGetNewer),
-                new OpenJRE8(autoGetNewer)
+                new OpenJRE8(autoGetNewer),
+                new OpenJRE11(autoGetNewer)
             };
 
             // Firefox (release channel)
