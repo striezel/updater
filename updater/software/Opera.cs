@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017, 2018, 2020, 2021  Dirk Stolle
+    Copyright (C) 2017, 2018, 2020, 2021, 2022  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -54,7 +54,7 @@ namespace updater.software
         /// <summary>
         /// expiration date of certificate
         /// </summary>
-        private static readonly DateTime certificateExpiration = new DateTime(2022, 8, 3, 12, 0, 0, DateTimeKind.Utc);
+        private static readonly DateTime certificateExpiration = new DateTime(2022, 6, 17, 12, 0, 0, DateTimeKind.Utc);
 
 
         /// <summary>
@@ -67,17 +67,17 @@ namespace updater.software
             const string silentOptions = "/silent /norestart /launchopera 0 /setdefaultbrowser 0 /enable-stats 0 /enable-installer-stats 0 /pintotaskbar 0 /pin-additional-shortcuts 0 /allusers";
             var signature = new Signature(publisherX509, certificateExpiration);
             return new AvailableSoftware("Opera",
-                "76.0.4017.107",
+                "85.0.4341.18",
                 "^Opera Stable [0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+$",
                 "^Opera Stable [0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+$",
                 new InstallInfoExe(
-                    "https://get.geo.opera.com/pub/opera/desktop/76.0.4017.107/win/Opera_76.0.4017.107_Setup.exe",
+                    "https://get.geo.opera.com/pub/opera/desktop/85.0.4341.18/win/Opera_85.0.4341.18_Setup.exe",
                     HashAlgorithm.SHA256,
-                    "308916bb762ba265664f143279f4bb3f95d2bf3b2b090c79822a665e88e4e83c",
+                    "45cb7e3f0dcf1d91b3a6b0f9a0ee79d6d7e7cf171ec3ced6d63c2df294344ca4",
                     signature,
                     silentOptions),
                 new InstallInfoExe(
-                    "https://get.geo.opera.com/pub/opera/desktop/76.0.4017.107/win/Opera_76.0.4017.107_Setup_x64.exe",
+                    "https://get.geo.opera.com/pub/opera/desktop/85.0.4341.18/win/Opera_85.0.4341.18_Setup_x64.exe",
                     HashAlgorithm.SHA256,
                     "a5b68b2fda7a77438d1fa36fea43607c0ad0a23b6add75bd12f84b428a65aa81",
                     signature,
