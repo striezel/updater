@@ -66,19 +66,19 @@ namespace updater.software
         {
             var signature = new Signature(publisherX509, certificateExpiration);
             return new AvailableSoftware("LibreOffice Help Pack German",
-                "7.3.1.3",
+                "7.3.2.2",
                 "^LibreOffice [0-9]+\\.[0-9] Help Pack \\(German\\)$",
                 "^LibreOffice [0-9]+\\.[0-9] Help Pack \\(German\\)$",
                 new InstallInfoLibO(
-                    "https://download.documentfoundation.org/libreoffice/stable/7.3.1/win/x86/LibreOffice_7.3.1_Win_x86_helppack_de.msi",
+                    "https://download.documentfoundation.org/libreoffice/stable/7.3.2/win/x86/LibreOffice_7.3.2_Win_x86_helppack_de.msi",
                     HashAlgorithm.SHA256,
-                    "58bceddcccae92884e680f258d286cc9574783b7c9e51045b8a541276a6dd796",
+                    "7373516013f71906ebf212b3bb864bbdd72f861c5ad4e939dca2d36ff41dbfa5",
                     signature,
                     "/qn /norestart"),
                 new InstallInfoLibO(
-                    "https://download.documentfoundation.org/libreoffice/stable/7.3.1/win/x86_64/LibreOffice_7.3.1_Win_x64_helppack_de.msi",
+                    "https://download.documentfoundation.org/libreoffice/stable/7.3.2/win/x86_64/LibreOffice_7.3.2_Win_x64_helppack_de.msi",
                     HashAlgorithm.SHA256,
-                    "5858540e594581dc70d902199acc5f91be5f48819054f930f14c935862810b27",
+                    "37fd338ca737ebd8caedf0e28ffca27bc21e4a5a14e6ad15bf928ca7ce76a464",
                     signature,
                     "/qn /norestart")
                     );
