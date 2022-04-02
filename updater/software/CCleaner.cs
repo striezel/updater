@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017, 2018, 2019, 2020, 2021  Dirk Stolle
+    Copyright (C) 2017, 2018, 2019, 2020, 2021, 2022  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -66,13 +66,13 @@ namespace updater.software
         {
             var signature = new Signature(publisherX509, certificateExpiration);
             var installer = new InstallInfoExe(
-                "https://download.ccleaner.com/ccsetup589.exe",
+                "https://download.ccleaner.com/ccsetup591.exe",
                 HashAlgorithm.SHA256,
-                "0d0282a7c084b7ef46618573d8fced2482f59815f7cba1508e67daa0ceb04a6e",
+                "e67f0cdc3779c76e7e03a61fbd0db92a76bc2e1acf7c7febc27aa875d57998e5",
                 signature,
                 "/S");
             return new AvailableSoftware("CCleaner",
-                "5.89",
+                "5.91",
                 "^CCleaner+$",
                 "^CCleaner+$",
                 // CCleaner uses the same installer for 32 and 64 bit.
