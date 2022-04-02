@@ -63,7 +63,7 @@ namespace updater.software
         public override AvailableSoftware knownInfo()
         {
             var signature = new Signature(publisherX509, certificateExpiration);
-            const string knownVersion = "5.39.1";
+            const string knownVersion = "5.40.0";
             return new AvailableSoftware("Calibre",
                 knownVersion,
                 "^calibre$",
@@ -71,13 +71,13 @@ namespace updater.software
                 new InstallInfoMsi(
                     "https://download.calibre-ebook.com/" + knownVersion + "/calibre-" + knownVersion + ".msi",
                     HashAlgorithm.SHA256,
-                    "9715bf2d4066539de8b646a49da9581294d7d9d334644c5e0eefcb7337fa457e",
+                    "3e5e5dc0140c81871056cc5a5ee17e79be7301a2007e46e83824558c0f1e0e8e",
                     signature,
                     "/qn /norestart"),
                 new InstallInfoMsi(
                     "https://download.calibre-ebook.com/" + knownVersion + "/calibre-64bit-" + knownVersion + ".msi",
                     HashAlgorithm.SHA256,
-                    "0774877169b76dd0e76b0f7b1288e6ea7292395ad3b10f6653cc620969985cd1",
+                    "cb12880054527f846f66d60d22746a865b1018107fc091afa28d41b7d592046b",
                     signature,
                     "/qn /norestart")
                     );
