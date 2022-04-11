@@ -48,13 +48,13 @@ namespace updater.software
         /// <summary>
         /// publisher of the signed binaries
         /// </summary>
-        private const string publisherX509 = "CN=Tim Kosse, O=Tim Kosse, STREET=Lukasstr. 10, L=Köln, S=NRW, PostalCode=50823, C=DE";
+        private const string publisherX509 = "E=tim.kosse@filezilla-project.org, CN=Tim Kosse, O=Tim Kosse, L=Köln, S=Nordrhein-Westfalen, C=DE";
 
 
         /// <summary>
         /// certificate expiration date
         /// </summary>
-        private static readonly DateTime certificateExpiration = new DateTime(2022, 2, 12, 23, 59, 59, DateTimeKind.Utc);
+        private static readonly DateTime certificateExpiration = new DateTime(2022, 4, 28, 14, 58, 8, DateTimeKind.Utc);
 
 
         /// <summary>
@@ -71,19 +71,19 @@ namespace updater.software
             {
                 var signature = new Signature(publisherX509, certificateExpiration);
                 return new AvailableSoftware("FileZilla FTP Client",
-                    "3.58.0",
+                    "3.59.0",
                     "^FileZilla Client [0-9]+\\.[0-9]+(\\.[0-9]+(\\.[0-9]+)?)?$",
                     "^FileZilla Client [0-9]+\\.[0-9]+(\\.[0-9]+(\\.[0-9]+)?)?$",
                     new InstallInfoExe(
-                        "https://download.filezilla-project.org/client/FileZilla_3.58.0_win32-setup.exe",
+                        "https://download.filezilla-project.org/client/FileZilla_3.59.0_win32-setup.exe",
                         HashAlgorithm.SHA512,
-                        "f27d2276434123edcd28039c4e11aae1effd10d2b51b55d4ba36313ca5f92f155765224c21d75818362d64ef56aad23cfc65bc07e2ff9ba6bbff54da7c3aa833",
+                        "b5d1224305eed92b6c10a011d42051e238fadb499b66c8cbd57b9d03b60209b8791f9321b6fba4ddab2bc06c83b920bfb469ea472dbe42539ee7018d0018a283",
                         signature,
                         "/S"),
                     new InstallInfoExe(
-                        "https://download.filezilla-project.org/client/FileZilla_3.58.0_win64-setup.exe",
+                        "https://download.filezilla-project.org/client/FileZilla_3.59.0_win64-setup.exe",
                         HashAlgorithm.SHA512,
-                        "0309ccbc69c0fb8a76c256628da8db651cecc59aeaacaa025c5ce642a7e8acec90c81340f98c093af8deab0b3d2d92a58a1ed0010c81b0b00af51cfe2e8e0adf",
+                        "bbdf8674704729bda9fbaeedcdfb3155312ad2b2e2d56ac72b66e9348803d4820efa66081ec49a8518ed667450e9da62c7d7b40273b86448c9f4454a2cfaec15",
                         signature,
                         "/S")
                     );
