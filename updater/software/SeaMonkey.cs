@@ -84,32 +84,32 @@ namespace updater.software
         private static Dictionary<string, string> knownChecksums32Bit()
         {
             // These are the checksums for Windows 32 bit installers from
-            // https://archive.mozilla.org/pub/seamonkey/releases/2.53.11/SHA1SUMS.txt
+            // https://archive.mozilla.org/pub/seamonkey/releases/2.53.11.1/SHA1SUMS.txt
             return new Dictionary<string, string>(23)
             {
-                { "cs", "ed31a15e7c03fd3b40f3c356db1a4efbebfa4a61" },
-                { "de", "6b39a2e5439d09d4deeae22c45435b49b208e765" },
-                { "el", "bfcf346e2ba598b4d5ad946eefbca51c1f3cf692" },
-                { "en-GB", "69d0fbed18923e16a356bcb143900026fa88bc33" },
-                { "en-US", "f58e0506b5f889fdeaa1fc212198a7f12db82491" },
-                { "es-AR", "75ee004f9611553545f36ee13d7b5b0d06282b7f" },
-                { "es-ES", "1bc1f1552fabc618034f09817f42e5cf49e9b71c" },
-                { "fi", "a5e0f4c458868151dcc1fa925fa96530d7abf4fe" },
-                { "fr", "43323cb97b43762ddfe15b7cc9d674e37cdda7d1" },
-                { "hu", "468886972d0e1fb284ca8c5caf521c6e4f252c35" },
-                { "it", "5f4045a5570034e560843556302d2ad7d07a5465" },
-                { "ja", "62134b18576f3ba940f1d238c3ff03234e2f55ed" },
-                { "ka", "04dcdf69929012015e2a90a5b8dff81352639a21" },
-                { "nb-NO", "dcce89d93dc40324e69dce8ce5390b593deaf302" },
-                { "nl", "239b9dbe662c21bae5454a10b4177ea58edb4c02" },
-                { "pl", "f25ddd1a9fa84fee0259b7e6ab3574e34d2bbe3a" },
-                { "pt-BR", "b7c437d5d58d55926b78c77a193786ab1935c3cd" },
-                { "pt-PT", "19b4c50dfbe716e8b9528cfdf0fc3bb12084d44d" },
-                { "ru", "e18b1840e6870038d54020ed827a6d2a714bdc07" },
-                { "sk", "42f8bb58eb1dbbaaa83fb8facd08461bbb64e68d" },
-                { "sv-SE", "8e402fe918e8c170422af922ccda85dfa355fc71" },
-                { "zh-CN", "42498d5e20679a2daafc426f1762145a4b90b959" },
-                { "zh-TW", "bb6d7a4ee5d999ca870f169304fca0ed7109cfab" }
+                { "cs", "4b887f2960f6e681c9371a12eb17ee6d8cb31f8c" },
+                { "de", "136398692eaa7d6dc0f186b579c20fabef2c470a" },
+                { "el", "902edc31ad0d44a65333c97e6e7d1ced440a86a7" },
+                { "en-GB", "9bb9bc663dda8f4b5c8b8ae1e1a9e12f4a99851e" },
+                { "en-US", "4cba8c66d615eaf3b9b6b9b3745ee68681fe0021" },
+                { "es-AR", "9a159da7325bfa8c0765f34e6b6096a7e78fba84" },
+                { "es-ES", "ee2ab6b64d10c1c4d7e3d0b95676dfe645417202" },
+                { "fi", "579ea908b4606c5a03dba78bf045692d20f93c24" },
+                { "fr", "0adf4b91fa96c6cdfdbed6d80de4a374eacbb57b" },
+                { "hu", "e6ded9f9dcf3eb669c2e49723cbb6f32d06ea540" },
+                { "it", "ca2b6cbc4800efa44019bf2d6f0a3a8f43cfbed7" },
+                { "ja", "74316f0322052c20d4d0b678864b0e6b58b24c0d" },
+                { "ka", "e413c7294a8c24261f6372959571fdbcd174f01d" },
+                { "nb-NO", "cfcf607941c36458cc2c9dadd8e57082ba51d9e8" },
+                { "nl", "325133be493833d2e3d0f173ec3a669011ca10f8" },
+                { "pl", "889ac0b9cf1abba6fe3ac7aa34b0c171b9af3f29" },
+                { "pt-BR", "e018efbed7d19e38d4fd9d8e76fbb828b116b00b" },
+                { "pt-PT", "e40c5805cd2787eb501a604793a5c830a012bf2c" },
+                { "ru", "1c43f819405822df2f9110270dbde1fe52e674cd" },
+                { "sk", "5a25e97d195856165386afd6bdad1874fe843016" },
+                { "sv-SE", "8f8f3e98f55ed2dc43ed4bfeb86c17b324153eab" },
+                { "zh-CN", "7ffa18e44f837a1b6cf9f44c44a6ab88e36ef914" },
+                { "zh-TW", "be1a36ba8e94a73001d247fa47c6385fae75d3a3" }
             };
         }
 
@@ -121,32 +121,32 @@ namespace updater.software
         private static Dictionary<string, string> knownChecksums64Bit()
         {
             // These are the checksums for Windows 64 bit installers from
-            // https://archive.mozilla.org/pub/seamonkey/releases/2.53.11/SHA1SUMS.txt
+            // https://archive.mozilla.org/pub/seamonkey/releases/2.53.11.1/SHA1SUMS.txt
             return new Dictionary<string, string>(23)
             {
-                { "cs", "5bf4e619639f3f4efc0c05d22f178c2828a24618" },
-                { "de", "939992273d9dc3de68cdc8617047e7975a1381a0" },
-                { "el", "9b572ec21e7d76b9302d2d12ceadcbd239e8eebd" },
-                { "en-GB", "14438ff727179c24cae9c2858b256acbf2afe9fb" },
-                { "en-US", "3d397fd2abd4878e2a3eed27629c129b0e1d10ee" },
-                { "es-AR", "137c090a9cabc08d852b7d21c6e5cfdc99e51ab1" },
-                { "es-ES", "5fe61be2ad8f185ce65ad78d393648917294f787" },
-                { "fi", "252f423cfe44744d79ffc9d1daddf677e0696fa4" },
-                { "fr", "082e77dd7d9ec236c0cb1bfb9e9182ae3c29b0f3" },
-                { "hu", "d28d3c48780ce1e281e8bce93d2d0c5ef5a76457" },
-                { "it", "0e96cbb103b74764b29eea6191197dd4bc3b0670" },
-                { "ja", "0ace7fb27948d7df160f1273ba3fc9ed3ca057b4" },
-                { "ka", "dbec74206f7ca8a673390e1b96edfeba8229c33e" },
-                { "nb-NO", "486f4f7482529a88c8f1afa23c36364a8308fda1" },
-                { "nl", "ce2a294e3e3de613c0eff7903c0cc4ed903c25b5" },
-                { "pl", "02e3f50cecd08a7fce2fe92c6aa4441b9996396e" },
-                { "pt-BR", "f26ec04d07cbbaf082d2eb2793afb93984daeca3" },
-                { "pt-PT", "47dad6e9edabca7a7d547d59a8305b4f6b855207" },
-                { "ru", "c48ae87c0ac0aecfe935e08f6a1568df2940366c" },
-                { "sk", "af8fd497bfd218b70be1b4cc84407bf34659147d" },
-                { "sv-SE", "a9fedd61433a14a367fb29e42269e0a956d70de7" },
-                { "zh-CN", "77bfabb1df52d4e7fa6eeb47a714f7a24eca88b6" },
-                { "zh-TW", "47329c9186b119864c080cbda1dbd3e194c2f7a2" }
+                { "cs", "8df206fcedcc5dd1481bf6c627d16516f60ce116" },
+                { "de", "cdfa4a6c5a2adcd2429f4536c9d5eb5562afa826" },
+                { "el", "51b5d5333773261a7b1f3734c1c3d3f802228e67" },
+                { "en-GB", "170f9e06e35e3950c0b84374bf57d5a6a97b10a9" },
+                { "en-US", "90e2e4ec4df94ee8ec50ad0f663ad1d6b59cecf8" },
+                { "es-AR", "c867008091b2ea668e2d1baaeaa18ab97c112fde" },
+                { "es-ES", "cb28d56ade07d91015e8496a240653489cf66c78" },
+                { "fi", "413f912d0ac4c5cd761e11c7a84c9416bc32a57e" },
+                { "fr", "35c53ea9de7f291dfd573735e51f63b439bdc5f6" },
+                { "hu", "0943c18390a74d52e847074c700f8be66fbc012c" },
+                { "it", "5458998a09c771407022c4eb62abd45b3e5c304d" },
+                { "ja", "32d8e52b37c059e2572a6dc6abca396a27cb0209" },
+                { "ka", "d3c91f2f5d8f9f9d4b81f005f5aa3afaf7c60960" },
+                { "nb-NO", "2d801b883abbbc43b4547b5145243023c98238f1" },
+                { "nl", "364778452aab20e0ad20251f4167284ff08a462f" },
+                { "pl", "d98849da87282e7e419851796ff6635fdc1fc5df" },
+                { "pt-BR", "ac2c2228afe506e1c8eb961c9bafb12ee7469c6f" },
+                { "pt-PT", "1ce530433ec6349dead07e23c3171c61e7c57bf6" },
+                { "ru", "6e5f653b5050443ba54cd59319b884978ec58894" },
+                { "sk", "15ddbeeb640f9ccd8ea011fec26e7ca3ca1ed450" },
+                { "sv-SE", "fcfd6a3ef51acdd75be904268667b70f9d68799f" },
+                { "zh-CN", "445caf3a8f60c33d85ea886a32dac7afe7e0458d" },
+                { "zh-TW", "1dcf20cf70e149300ef0be1934e62c16adee17a9" }
             };
         }
 
@@ -171,12 +171,12 @@ namespace updater.software
         /// details about the software.</returns>
         public override AvailableSoftware knownInfo()
         {
-            const string knownVersion = "2.53.11";
+            const string knownVersion = "2.53.11.1";
             var signature = new Signature(publisherX509, certificateExpiration);
             return new AvailableSoftware("SeaMonkey (" + languageCode + ")",
                 knownVersion,
-                "^SeaMonkey [0-9]+\\.[0-9]+(\\.[0-9]+)? \\(x86 " + Regex.Escape(languageCode) + "\\)$",
-                "^SeaMonkey [0-9]+\\.[0-9]+(\\.[0-9]+)? \\(x64 " + Regex.Escape(languageCode) + "\\)$",
+                "^SeaMonkey [0-9]+\\.[0-9]+(\\.[0-9]+(\\.[0-9]+)?)? \\(x86 " + Regex.Escape(languageCode) + "\\)$",
+                "^SeaMonkey [0-9]+\\.[0-9]+(\\.[0-9]+(\\.[0-9]+)?)? \\(x64 " + Regex.Escape(languageCode) + "\\)$",
                 new InstallInfoExe(
                     "https://archive.mozilla.org/pub/seamonkey/releases/" + knownVersion + "/win32/" + languageCode + "/seamonkey-" + knownVersion + "." + languageCode + ".win32.installer.exe",
                     HashAlgorithm.SHA1,
@@ -225,22 +225,25 @@ namespace updater.software
                 client.Dispose();
             } // using
             
-            Regex reVersion = new Regex("/[0-9]+\\.[0-9]+(\\.[0-9]+)?/");
+            Regex reVersion = new Regex("/[0-9]+\\.[0-9]+(\\.[0-9]+(\\.[0-9]+)?)?/");
             MatchCollection matches = reVersion.Matches(htmlCode);
             if (matches.Count <= 0)
                 return null;
 
-            List<Triple> releaseList = new List<Triple>();
+            List<Quartet> releaseList = new List<Quartet>();
             foreach (Match item in matches)
             {
-                var trip = new Triple(item.Value.Replace("/", ""));
-                releaseList.Add(trip);
+                var quart = new Quartet(item.Value.Replace("/", ""));
+                releaseList.Add(quart);
             }
             releaseList.Sort();
             var newest = releaseList[releaseList.Count - 1];
 
             if (htmlCode.Contains("/" + newest.full() + "/"))
                 return newest.full();
+            var trip = new Triple(newest.full());
+            if (htmlCode.Contains("/" + trip.full() + "/"))
+                return trip.full();
             else
                 return newest.major.ToString() + "." + newest.minor.ToString();
         }
@@ -391,21 +394,6 @@ namespace updater.software
             proc.StartInfo.Arguments = "/SILENT";
             processes.Add(proc);
             return processes;
-        }
-
-
-        /// <summary>
-        /// Checks whether the detected software is older than the newest known software.
-        /// </summary>
-        /// <param name="detected">the corresponding detected software</param>
-        /// <returns>Returns true, if the detected software version is older
-        /// than the newest software version, thus needing an update.
-        /// Returns false, if no update is necessary.</returns>
-        public override bool needsUpdate(DetectedSoftware detected)
-        {
-            Triple verDetected = new Triple(detected.displayVersion);
-            Triple verNewest = new Triple(info().newestVersion);
-            return verDetected < verNewest;
         }
 
 
