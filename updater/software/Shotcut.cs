@@ -79,13 +79,13 @@ namespace updater.software
 
             var signature = new Signature(publisherX509, certificateExpiration);
             var info = new InstallInfoExe(
-                "https://github.com/mltframework/shotcut/releases/download/v22.04.22/shotcut-win64-220422.exe",
+                "https://github.com/mltframework/shotcut/releases/download/v22.04.25/shotcut-win64-220425.exe",
                 HashAlgorithm.SHA256,
-                "4f0ea028d9558eb9befa8cdea5c92f3471d54603c4e14873811343fdf7d9efe8",
+                "a491e73eeba9a43aa5c472c90b19471c68fdebc5122804316ad81127edc8bfa7",
                 signature,
                 "/S");
             return new AvailableSoftware("Shotcut",
-                "22.04.22",
+                "22.04.25",
                 "^Shotcut$",
                 "^Shotcut$",
                 info,
