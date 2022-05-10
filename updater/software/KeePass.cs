@@ -66,13 +66,13 @@ namespace updater.software
         {
             var signature = new Signature(publisherX509, certificateExpiration);
             return new AvailableSoftware("KeePass",
-                "2.51",
+                "2.51.1",
                 "^KeePass Password Safe [2-9]\\.[0-9]{2}(\\.[0-9]+)?$",
                 null,
                 new InstallInfoExe(
-                    "https://netcologne.dl.sourceforge.net/project/keepass/KeePass%202.x/2.51/KeePass-2.51-Setup.exe",
+                    "https://netcologne.dl.sourceforge.net/project/keepass/KeePass%202.x/2.51.1/KeePass-2.51.1-Setup.exe",
                     HashAlgorithm.SHA256,
-                    "84790D4C CA415348 BA32574C FEEAD51B 225410A5 B1DCB605 6A8C2194 413F3BDF",
+                    "6FB6A206 C2C68514 DAD5048E 82B28105 FC7FA5A9 67033C6D 402AEACF E09A974A",
                     signature,
                     "/VERYSILENT"),
                 // There is no 64 bit installer yet.
