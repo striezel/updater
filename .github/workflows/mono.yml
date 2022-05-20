@@ -1,4 +1,4 @@
-name: Build with Mono on Ubuntu 20.04
+name: Mono on Ubuntu
 
 on: push
 
