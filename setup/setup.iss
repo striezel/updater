@@ -44,10 +44,8 @@ Name: "tr"; MessagesFile: "compiler:Languages\Turkish.isl"
 Source: "..\updater\bin\Release\updater.exe"; DestDir: "{app}"; Flags: ignoreversion
 ; Newtonsoft.Json assembly (JSON deserialization)
 Source: "..\updater\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll"; DestDir: "{app}"; Flags: ignoreversion
-; NLog configuration file (logging)
-Source: "..\updater\bin\Release\NLog.config"; DestDir: "{app}"; Flags: ignoreversion
 ; NLog main assembly (logging)
-Source: "..\updater\packages\NLog.4.7.15\lib\net45\NLog.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\updater\packages\NLog.5.0.0\lib\net46\NLog.dll"; DestDir: "{app}"; Flags: ignoreversion
 ; GPL 3 license text
 Source: "..\LICENSE"; DestDir: "{app}"; Flags: ignoreversion
 
