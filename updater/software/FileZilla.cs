@@ -48,13 +48,13 @@ namespace updater.software
         /// <summary>
         /// publisher of the signed binaries
         /// </summary>
-        private const string publisherX509 = "E=tim.kosse@filezilla-project.org, CN=Tim Kosse, O=Tim Kosse, L=Köln, S=Nordrhein-Westfalen, C=DE";
+        private const string publisherX509 = "CN=Tim Kosse, O=Tim Kosse, S=Nordrhein-Westfalen, C=DE";
 
 
         /// <summary>
         /// certificate expiration date
         /// </summary>
-        private static readonly DateTime certificateExpiration = new DateTime(2022, 4, 28, 14, 58, 8, DateTimeKind.Utc);
+        private static readonly DateTime certificateExpiration = new DateTime(2025, 2, 17, 23, 59, 59, DateTimeKind.Utc);
 
 
         /// <summary>
@@ -64,26 +64,26 @@ namespace updater.software
         /// details about the software.</returns>
         public override AvailableSoftware knownInfo()
         {
-            //Note: This only works on Windows 7 or newer.
+            // Note: This only works on Windows 7 or newer.
             // The last version for Windows Vista is 3.25.1.
             // The last version that still supports Windows XP is 3.8.0
             if (utility.OS.isWin7OrNewer())
             {
                 var signature = new Signature(publisherX509, certificateExpiration);
                 return new AvailableSoftware("FileZilla FTP Client",
-                    "3.59.0",
-                    "^FileZilla Client [0-9]+\\.[0-9]+(\\.[0-9]+(\\.[0-9]+)?)?$",
-                    "^FileZilla Client [0-9]+\\.[0-9]+(\\.[0-9]+(\\.[0-9]+)?)?$",
+                    "3.60.0",
+                    "^FileZilla (Client )?[0-9]+\\.[0-9]+(\\.[0-9]+(\\.[0-9]+)?)?$",
+                    "^FileZilla (Client )?[0-9]+\\.[0-9]+(\\.[0-9]+(\\.[0-9]+)?)?$",
                     new InstallInfoExe(
-                        "https://download.filezilla-project.org/client/FileZilla_3.59.0_win32-setup.exe",
+                        "https://download.filezilla-project.org/client/FileZilla_3.60.0_win32-setup.exe",
                         HashAlgorithm.SHA512,
-                        "b5d1224305eed92b6c10a011d42051e238fadb499b66c8cbd57b9d03b60209b8791f9321b6fba4ddab2bc06c83b920bfb469ea472dbe42539ee7018d0018a283",
+                        "a2028ce94c85874ebab8a8073135608ea756d97fa1435126f29674ac718222da48c80e56d2a5c3164abf33b14f68704a1fc98afeaa880c6baa3da00a066efc0d",
                         signature,
                         "/S"),
                     new InstallInfoExe(
-                        "https://download.filezilla-project.org/client/FileZilla_3.59.0_win64-setup.exe",
+                        "https://download.filezilla-project.org/client/FileZilla_3.60.0_win64-setup.exe",
                         HashAlgorithm.SHA512,
-                        "bbdf8674704729bda9fbaeedcdfb3155312ad2b2e2d56ac72b66e9348803d4820efa66081ec49a8518ed667450e9da62c7d7b40273b86448c9f4454a2cfaec15",
+                        "c899de1cc061e794e345e0734f8bd6ed31300126c9c17b8f5280a3898314fe019465e827136bc481fd4c2601fe1d405d856da9f723f277d9b3b6a03c63f9a0b1",
                         signature,
                         "/S")
                     );

@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017  Dirk Stolle
+    Copyright (C) 2017, 2022  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -17,6 +17,7 @@
 */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Text.RegularExpressions;
 using updater.data;
 using updater.software;
 
@@ -37,8 +38,9 @@ namespace updater_test.software
 
         public override AvailableSoftware knownInfo()
         {
-            // inject different version number for tests
+            // Use information of base class, ...
             var baseValue = base.knownInfo();
+            // ... but inject different version number for tests.
             baseValue.newestVersion = mVersion;
             return baseValue;
         }
@@ -89,6 +91,26 @@ namespace updater_test.software
         public void Test_upToDate_info()
         {
             _upToDate_info(new FileZilla(false));
+        }
+
+
+        /// <summary>
+        /// Checks whether the regular expressions match usual software name / description.
+        /// </summary>
+        [TestMethod]
+        public void Test_name_matches()
+        {
+            var fz = new FileZilla(false);
+
+            var regEx32 = new Regex(fz.info().match32Bit, RegexOptions.IgnoreCase);
+            var regEx64 = new Regex(fz.info().match64Bit, RegexOptions.IgnoreCase);
+
+            // Test long name of earlier versions.
+            Assert.IsTrue(regEx32.IsMatch("FileZilla Client 3.25.1"));
+            Assert.IsTrue(regEx64.IsMatch("FileZilla Client 3.25.1"));
+            // Test shortened name of version 3.60.0.
+            Assert.IsTrue(regEx32.IsMatch("FileZilla 3.60.0"));
+            Assert.IsTrue(regEx64.IsMatch("FileZilla 3.60.0"));
         }
 
 
