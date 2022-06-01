@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017, 2018, 2019, 2020, 2021  Dirk Stolle
+    Copyright (C) 2017, 2018, 2019, 2020, 2021, 2022  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -50,13 +50,13 @@ namespace updater.software
         /// <summary>
         /// publisher name on signed binaries
         /// </summary>
-        private const string publisherX509 = "CN=Simon Tatham, O=Simon Tatham, L=Cambridge, S=Cambridgeshire, C=GB";
+        private const string publisherX509 = "CN=Simon Tatham, O=Simon Tatham, S=Cambridgeshire, C=GB";
 
 
         /// <summary>
         /// expiration date of certificate
         /// </summary>
-        private static readonly DateTime certificateExpiration = new DateTime(2021, 11, 8, 23, 59, 59, DateTimeKind.Utc);
+        private static readonly DateTime certificateExpiration = new DateTime(2024, 11, 5, 23, 59, 59, DateTimeKind.Utc);
 
 
         /// <summary>
@@ -68,21 +68,21 @@ namespace updater.software
         {
             var signature = new Signature(publisherX509, certificateExpiration);
             return new AvailableSoftware("PuTTY",
-                "0.76",
+                "0.77",
                 "^PuTTY release [0-9]\\.[0-9]+$",
                 "^PuTTY release [0-9]\\.[0-9]+ \\(64\\-bit\\)$",
                 // 32 bit installer
                 new InstallInfoMsi(
-                    "https://the.earth.li/~sgtatham/putty/0.76/w32/putty-0.76-installer.msi",
+                    "https://the.earth.li/~sgtatham/putty/0.77/w32/putty-0.77-installer.msi",
                     HashAlgorithm.SHA512,
-                    "b06f709e6d5fef752ac12289cd8c800cd778a8f7b2a1f4201135a8b650a410d4dc360864572d50ae594345c7d87be0b8e1b4f4a5459b8f60028776c6db34f54a",
+                    "9e2126aaa8b204122e4f4bb3f8f17f53ddc3a35cd41070a24060ebb09127fb191e64851f2c93c852b689df7d1fa8596f4849f980dbf733466f954203839f898e",
                     signature,
                     "/qn /norestart"),
                 // 64 bit installer
                 new InstallInfoMsi(
-                    "https://the.earth.li/~sgtatham/putty/0.76/w64/putty-64bit-0.76-installer.msi",
+                    "https://the.earth.li/~sgtatham/putty/0.77/w64/putty-64bit-0.77-installer.msi",
                     HashAlgorithm.SHA512,
-                    "6f0a459a5ec901b1cb541b44cab35e106691189cb9feff2e609181aa71f02d1219e7870e567cd17367c554ec2060b950cc7252e515739030455dfdb6ec8a3ccd",
+                    "a2aeb3448820ca105d15297576ecab7da33731fc924d6b3f028c045fe3978f3a30a422d828bb65536bbd445b5918eebdd37f6d1fd4648406440c29a81fb01ebe",
                     signature,
                     "/qn /norestart")
                 );
