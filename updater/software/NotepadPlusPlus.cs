@@ -55,7 +55,7 @@ namespace updater.software
         /// <summary>
         /// expiration date of certificate
         /// </summary>
-        private static readonly DateTime certificateExpiration = new DateTime(2022, 5, 11, 12, 0, 0, DateTimeKind.Utc);
+        private static readonly DateTime certificateExpiration = new DateTime(2025, 5, 14, 23, 59, 59, DateTimeKind.Utc);
 
 
         /// <summary>
@@ -67,8 +67,8 @@ namespace updater.software
         {
             var signature = new Signature(publisherX509, certificateExpiration);
             // Both version and tag are usually the same, except for major releases like 8.0.
-            const string version = "8.4.1";
-            const string tag = "8.4.1";
+            const string version = "8.4.2";
+            const string tag = "8.4.2";
             return new AvailableSoftware("Notepad++",
                 version,
                 "^Notepad\\+\\+ \\(32\\-bit x86\\)$|^Notepad\\+\\+$",
@@ -76,13 +76,13 @@ namespace updater.software
                 new InstallInfoExe(
                     "https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v" + tag + "/npp." + version + ".Installer.exe",
                     HashAlgorithm.SHA256,
-                    "400a8349194bca17b21505a66ab588c12291625c15f9345ce38d1747b72167f8",
+                    "0cf1468b174c735f41403ef0a94cb4f9600a3760b79e492d34b0cefe85b51ea7",
                     signature,
                     "/S"),
                 new InstallInfoExe(
                     "https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v" + tag + "/npp." + version + ".Installer.x64.exe",
                     HashAlgorithm.SHA256,
-                    "6d80dcfdb5a979eb11de1ebbf5733a101fbe4cd8f7c1ac10f651e71fadf52e4a",
+                    "a34a30aab41929ca6de366025baf1d993c269aaece7ee04a031977c38eaf8c17",
                     signature,
                     "/S")
                 );
