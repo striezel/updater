@@ -410,7 +410,7 @@ namespace updater.operations
                     // Add User-Agent header, because some servers deny downloads otherwise.
                     // (Yes, I am pointing at you, FileZilla download server!)
                     // Let's pretend we are Firefox ESR downloading the file.
-                    wc.Headers.Add(HttpRequestHeader.UserAgent, "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101 Firefox/78.0");
+                    wc.Headers.Add(HttpRequestHeader.UserAgent, "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101 Firefox/91.0");
                 }
                 try
                 {
