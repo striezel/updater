@@ -404,7 +404,8 @@ namespace updater.operations
             string localFile = Path.Combine(cacheDirectory, basename);
             using (WebClient wc = new WebClient())
             {
-                if (url.ToLowerInvariant().Contains("filezilla"))
+                var lowerCaseUrl = url.ToLowerInvariant();
+                if (lowerCaseUrl.Contains("filezilla") || lowerCaseUrl.Contains("mariadb"))
                 {
                     // Add User-Agent header, because some servers deny downloads otherwise.
                     // (Yes, I am pointing at you, FileZilla download server!)

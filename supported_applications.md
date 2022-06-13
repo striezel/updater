@@ -21,6 +21,7 @@ updater application.
 * Inkscape
 * KeePass 2
 * LibreOffice
+* MariaDB 10.5
 * Mozilla Firefox
 * Mozilla Firefox ESR
 * Mozilla Thunderbird

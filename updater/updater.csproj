@@ -112,12 +112,17 @@
     <Compile Include="software\Calibre.cs" />
     <Compile Include="software\CMake.cs" />
     <Compile Include="software\Git.cs" />
+    <Compile Include="software\MariaDB.cs" />
+    <Compile Include="software\mariadb_api\Checksum.cs" />
+    <Compile Include="software\mariadb_api\File.cs" />
+    <Compile Include="software\mariadb_api\Release.cs" />
     <Compile Include="software\NodeJS.cs" />
     <Compile Include="software\OpenJDK11.cs" />
     <Compile Include="software\OpenJDK8.cs" />
     <Compile Include="software\openjdk_api\Binary.cs" />
     <Compile Include="software\openjdk_api\Installer.cs" />
     <Compile Include="software\openjdk_api\Release.cs" />
+    <Compile Include="software\mariadb_api\Release_Wrapper.cs" />
     <Compile Include="software\openjdk_api\VersionData.cs" />
     <Compile Include="software\OpenJRE11.cs" />
     <Compile Include="software\OpenJRE8.cs" />
