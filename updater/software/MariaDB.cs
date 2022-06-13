@@ -200,7 +200,14 @@ namespace updater.software
         /// <returns>Returns a list of process names that block the upgrade.</returns>
         public override List<string> blockerProcesses(DetectedSoftware detected)
         {
-            return new List<string>();
+            return new List<string>(1)
+            {
+                // Technically, having the MariaDB client command-line tool
+                // running is not a blocker, because the server is forced into
+                // shutdown during the upgrade, but that will also kill any
+                // possibly running queries, so better don't do it.
+                "mariadb"
+            };
         }
     }
 }
