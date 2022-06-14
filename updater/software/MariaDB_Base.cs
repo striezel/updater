@@ -29,24 +29,24 @@ namespace updater.software
     /// <summary>
     /// Handles updates of MariaDB server.
     /// </summary>
-    public class MariaDB: NoPreUpdateProcessSoftware
+    public abstract class MariaDB_Base: NoPreUpdateProcessSoftware
     {
         /// <summary>
         /// NLog.Logger for MariaDB class
         /// </summary>
-        private static readonly NLog.Logger logger = NLog.LogManager.GetLogger(typeof(MariaDB).FullName);
+        private static readonly NLog.Logger logger = NLog.LogManager.GetLogger(typeof(MariaDB_Base).FullName);
 
 
         /// <summary>
         /// publisher of signed binaries
         /// </summary>
-        private const string publisherX509 = "CN=MariaDB Corporation Ab, OU=Connectors, O=MariaDB Corporation Ab, L=Espoo, C=FI";
+        protected const string publisherX509 = "CN=MariaDB Corporation Ab, OU=Connectors, O=MariaDB Corporation Ab, L=Espoo, C=FI";
 
 
         /// <summary>
         /// expiration date of the certificate
         /// </summary>
-        private static readonly DateTime certificateExpiration = new DateTime(2024, 1, 4, 23, 59, 59, DateTimeKind.Utc);
+        protected static readonly DateTime certificateExpiration = new DateTime(2024, 1, 4, 23, 59, 59, DateTimeKind.Utc);
 
 
         /// <summary>
@@ -54,9 +54,12 @@ namespace updater.software
         /// </summary>
         /// <param name="autoGetNewer">whether to automatically get newer
         /// information about the software when calling the info() method</param>
-        public MariaDB(bool autoGetNewer)
+        /// /// <param name="_branch">the MariaDB branch to handle, e. g. "10.5"</param>
+        public MariaDB_Base(bool autoGetNewer, string _branch)
             : base(autoGetNewer)
-        { }
+        {
+            branch = _branch;
+        }
 
 
         /// <summary>
@@ -64,22 +67,7 @@ namespace updater.software
         /// </summary>
         /// <returns>Returns an AvailableSoftware instance with the known
         /// details about the software.</returns>
-        public override AvailableSoftware knownInfo()
-        {
-            var signature = new Signature(publisherX509, certificateExpiration);
-            return new AvailableSoftware("MariaDB Server 10.5",
-                "10.5.16",
-                null, // no 32 bit installer
-                "^MariaDB 10.5 \\(x64\\)$",
-                null, // no 32 bit installer
-                new InstallInfoMsi(
-                    "https://downloads.mariadb.org/rest-api/mariadb/10.5.16/mariadb-10.5.16-winx64.msi",
-                    HashAlgorithm.SHA256,
-                    "535e398cb2e0ee34cc7dfebcc241afb5632bc1ca3d99f2be3cf8b184274f9339",
-                    signature,
-                    "/qn /norestart")
-                );
-        }
+        abstract public override AvailableSoftware knownInfo();
 
 
         /// <summary>
@@ -88,7 +76,7 @@ namespace updater.software
         /// <returns>Returns a non-empty array of IDs, where at least one entry is unique to the software.</returns>
         public override string[] id()
         {
-            return new string[] { "mariadb", "mariadb-server" };
+            return new string[] { "mariadb", "mariadb-server", "mariadb-" + branch, "mariadb-server-" + branch };
         }
 
 
@@ -111,17 +99,17 @@ namespace updater.software
         /// that was retrieved from the net.</returns>
         public override AvailableSoftware searchForNewer()
         {
-            logger.Info("Searching for newer version of MariaDB Server...");
+            logger.Info("Searching for newer version of MariaDB Server " + branch + "...");
             string json = null;
             using (var client = new WebClient())
             {
                 try
                 {
-                    json = client.DownloadString("https://downloads.mariadb.org/rest-api/mariadb/10.5/");
+                    json = client.DownloadString("https://downloads.mariadb.org/rest-api/mariadb/" + branch + "/");
                 }
                 catch (Exception ex)
                 {
-                    logger.Warn("Exception occurred while checking for newer version of MariaDB Server: " + ex.Message);
+                    logger.Warn("Exception occurred while checking for newer version of MariaDB Server " + branch + ": " + ex.Message);
                     return null;
                 }
                 client.Dispose();
@@ -209,5 +197,10 @@ namespace updater.software
                 "mariadb"
             };
         }
+
+        /// <summary>
+        /// the MariaDB server branch to use, e. g. "10.5" or "10.6"
+        /// </summary>
+        private readonly string branch;
     }
 }

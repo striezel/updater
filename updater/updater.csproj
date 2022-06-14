@@ -112,7 +112,8 @@
     <Compile Include="software\Calibre.cs" />
     <Compile Include="software\CMake.cs" />
     <Compile Include="software\Git.cs" />
-    <Compile Include="software\MariaDB.cs" />
+    <Compile Include="software\MariaDB_Base.cs" />
+    <Compile Include="software\MariaDB_10_5.cs" />
     <Compile Include="software\mariadb_api\Checksum.cs" />
     <Compile Include="software\mariadb_api\File.cs" />
     <Compile Include="software\mariadb_api\Release.cs" />

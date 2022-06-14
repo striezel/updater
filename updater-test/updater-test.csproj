@@ -56,7 +56,7 @@
     <Compile Include="software\Calibre_Tests.cs" />
     <Compile Include="software\CMake_Tests.cs" />
     <Compile Include="software\Git_Tests.cs" />
-    <Compile Include="software\MariaDB_Tests.cs" />
+    <Compile Include="software\MariaDB_10_5_Tests.cs" />
     <Compile Include="software\NodeJS_Tests.cs" />
     <Compile Include="software\OpenJDK11_Tests.cs" />
     <Compile Include="software\OpenJDK8_Tests.cs" />
