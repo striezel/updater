@@ -76,7 +76,7 @@ namespace updater.software
         /// <returns>Returns a non-empty array of IDs, where at least one entry is unique to the software.</returns>
         public override string[] id()
         {
-            return new string[] { "mariadb", "mariadb-server", "mariadb-" + branch, "mariadb-server-" + branch };
+            return new string[] { "mariadb-" + branch, "mariadb-server-" + branch, "mariadb", "mariadb-server" };
         }
 
 
@@ -100,6 +100,7 @@ namespace updater.software
         public override AvailableSoftware searchForNewer()
         {
             logger.Info("Searching for newer version of MariaDB Server " + branch + "...");
+            checkForEndOfLife();
             string json = null;
             using (var client = new WebClient())
             {
@@ -174,6 +175,11 @@ namespace updater.software
             var newInfo = knownInfo();
             newInfo.newestVersion = release.release_id;
             newInfo.install64Bit.downloadUrl = release.files[idx].file_download_url;
+            if (!newInfo.install64Bit.downloadUrl.StartsWith("https://"))
+            {
+                // Always use HTTPS, download server of MariaDB supports that.
+                newInfo.install64Bit.downloadUrl = newInfo.install64Bit.downloadUrl.Replace("http://", "https://");
+            }
             newInfo.install64Bit.checksum = release.files[idx].checksum.sha256sum;
             newInfo.install64Bit.algorithm = HashAlgorithm.SHA256;
             return newInfo;
@@ -188,15 +194,46 @@ namespace updater.software
         /// <returns>Returns a list of process names that block the upgrade.</returns>
         public override List<string> blockerProcesses(DetectedSoftware detected)
         {
-            return new List<string>(1)
+            return new List<string>(2)
             {
                 // Technically, having the MariaDB client command-line tool
                 // running is not a blocker, because the server is forced into
                 // shutdown during the upgrade, but that will also kill any
                 // possibly running queries, so better don't do it.
-                "mariadb"
+                "mariadb",
+                "mysql",
             };
         }
+
+
+        /// <summary>
+        /// Gets the date when this branch of MariaDB reaches its end of life.
+        /// </summary>
+        /// <returns>Returns the end of life date for this release branch.</returns>
+        public abstract DateTime EndOfLife();
+
+
+        /// <summary>
+        /// Checks whether this release branch of MariaDB has reached its EOL
+        /// and will log a warning message, if that is the case.
+        /// </summary>
+        private void checkForEndOfLife()
+        {
+            if (DateTime.UtcNow > EndOfLife())
+            {
+                string msg = "MariaDB " + branch + " has reached its end of life."
+                    + " It will no longer receive any updates or security fixes."
+                    + " Please consider switching to a newer release of MariaDB,"
+                    + " e.g. possibly MariaDB ";
+                var current = new Triple(branch);
+                var minorUpdate = current.major.ToString() + "." + (current.minor + 1).ToString();
+                var majorUpdate = (current.major + 1).ToString() + ".0";
+                msg += minorUpdate + " or MariaDB " + majorUpdate
+                    + " - whichever of those versions is released for general availability.";
+                logger.Warn(msg);
+            }
+        }
+
 
         /// <summary>
         /// the MariaDB server branch to use, e. g. "10.5" or "10.6"

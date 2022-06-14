@@ -22,10 +22,10 @@ using updater.software;
 namespace updater_test.software
 {
     /// <summary>
-    /// Contains tests for MariaDB_10_5.
+    /// Contains tests for MariaDB_10_6.
     /// </summary>
     [TestClass]
-    public class MariaDB_10_5_Tests: BasicSoftwareTests
+    public class MariaDB_10_6_Tests : BasicSoftwareTests
     {
         /// <summary>
         /// Checks whether info() returns some meaningful data.
@@ -33,7 +33,7 @@ namespace updater_test.software
         [TestMethod]
         public void Test_info()
         {
-            _info(new MariaDB_10_5(false));
+            _info(new MariaDB_10_6(false));
         }
 
 
@@ -43,7 +43,7 @@ namespace updater_test.software
         [TestMethod]
         public void Test_implementsSearchForNewer()
         {
-            var mdb = new MariaDB_10_5(false);
+            var mdb = new MariaDB_10_6(false);
             Assert.IsTrue(mdb.implementsSearchForNewer());
         }
 
@@ -54,7 +54,7 @@ namespace updater_test.software
         [TestMethod]
         public void Test_searchForNewer()
         {
-            _searchForNewer(new MariaDB_10_5(false));
+            _searchForNewer(new MariaDB_10_6(false));
         }
 
 
@@ -64,7 +64,7 @@ namespace updater_test.software
         [TestMethod]
         public void Test_upToDate_info()
         {
-            _upToDate_info(new MariaDB_10_5(false));
+            _upToDate_info(new MariaDB_10_6(false));
         }
     }
 }

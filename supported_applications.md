@@ -22,6 +22,7 @@ updater application.
 * KeePass 2
 * LibreOffice
 * MariaDB 10.5
+* MariaDB 10.6
 * Mozilla Firefox
 * Mozilla Firefox ESR
 * Mozilla Thunderbird

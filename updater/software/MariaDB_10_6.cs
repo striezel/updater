@@ -22,17 +22,17 @@ using updater.data;
 namespace updater.software
 {
     /// <summary>
-    /// Handles updates of MariaDB 10.5.
+    /// Handles updates of MariaDB 10.6.
     /// </summary>
-    public sealed class MariaDB_10_5: MariaDB_Base
+    public sealed class MariaDB_10_6: MariaDB_Base
     {
         /// <summary>
         /// Default constructor.
         /// </summary>
         /// <param name="autoGetNewer">whether to automatically get newer
         /// information about the software when calling the info() method</param>
-        public MariaDB_10_5(bool autoGetNewer)
-            : base(autoGetNewer, "10.5")
+        public MariaDB_10_6(bool autoGetNewer)
+            : base(autoGetNewer, "10.6")
         { }
 
 
@@ -44,15 +44,15 @@ namespace updater.software
         public override AvailableSoftware knownInfo()
         {
             var signature = new Signature(publisherX509, certificateExpiration);
-            return new AvailableSoftware("MariaDB Server 10.5",
-                "10.5.16",
+            return new AvailableSoftware("MariaDB Server 10.6",
+                "10.6.8",
                 null, // no 32 bit installer
-                "^MariaDB 10\\.5 \\(x64\\)$",
+                "^MariaDB 10\\.6 \\(x64\\)$",
                 null, // no 32 bit installer
                 new InstallInfoMsi(
-                    "https://downloads.mariadb.org/rest-api/mariadb/10.5.16/mariadb-10.5.16-winx64.msi",
+                    "https://downloads.mariadb.org/rest-api/mariadb/10.6.8/mariadb-10.6.8-winx64.msi",
                     HashAlgorithm.SHA256,
-                    "535e398cb2e0ee34cc7dfebcc241afb5632bc1ca3d99f2be3cf8b184274f9339",
+                    "18842f568885f77f37c53a467c3381a887f58cad9a12d50fbbe68a82cc95e60e",
                     signature,
                     "/qn /norestart")
                 );
@@ -65,7 +65,7 @@ namespace updater.software
         /// <returns>Returns the end of life date for this release branch.</returns>
         public override DateTime EndOfLife()
         {
-            return new DateTime(2025, 6, 24, 23, 59, 59, DateTimeKind.Utc);
+            return new DateTime(2026, 7, 6, 23, 59, 59, DateTimeKind.Utc);
         }
     }
 }
