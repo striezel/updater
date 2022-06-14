@@ -217,6 +217,9 @@ namespace updater.software
         /// Checks whether this release branch of MariaDB has reached its EOL
         /// and will log a warning message, if that is the case.
         /// </summary>
+        /// <remarks>For EOL dates of various MariaDB release branches see
+        /// https://mariadb.org/about/#maintenance-policy.
+        /// </remarks>
         private void checkForEndOfLife()
         {
             if (DateTime.UtcNow > EndOfLife())
