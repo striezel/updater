@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017, 2018, 2020, 2021  Dirk Stolle
+    Copyright (C) 2017, 2018, 2020, 2021, 2022  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -36,6 +36,18 @@ namespace updater.software
 
 
         /// <summary>
+        /// publisher of signed binaries
+        /// </summary>
+        private const string publisherX509 = "CN=Jernej Simončič, O=Jernej Simončič, STREET=Herbersteinova 29, L=Ljubljana, C=SI";
+
+
+        /// <summary>
+        /// expiration date of the certificate
+        /// </summary>
+        private static readonly DateTime certificateExpiration = new DateTime(2024, 2, 24, 23, 59, 59, DateTimeKind.Utc);
+
+
+        /// <summary>
         /// Constructor.
         /// </summary>
         /// <param name="autoGetNewer">whether to automatically get
@@ -53,14 +65,14 @@ namespace updater.software
         public override AvailableSoftware knownInfo()
         {
             var installer = new InstallInfoExe(
-                "https://download.gimp.org/pub/gimp/v2.10/windows/gimp-2.10.30-setup.exe",
+                "https://download.gimp.org/pub/gimp/v2.10/windows/gimp-2.10.32-setup.exe",
                 HashAlgorithm.SHA256,
-                "5b8db574966d2427fa02202b591173905f64806559e37fbdca4654e55b568c8e",
-                Signature.None,
+                "5503c3057a023f781e32e6b8fec83dfc45263b9005e76626b4c43cb257295a67",
+                new Signature(publisherX509, certificateExpiration),
                 "/VERYSILENT /NORESTART");
 
             return new AvailableSoftware("The GIMP",
-                "2.10.30",
+                "2.10.32",
                 "^GIMP [0-9]+\\.[0-9]+\\.[0-9]+$",
                 "^GIMP [0-9]+\\.[0-9]+\\.[0-9]+$",
                 // The GIMP uses the same installer for 32 and 64 bit.
