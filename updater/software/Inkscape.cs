@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017, 2018, 2020, 2021  Dirk Stolle
+    Copyright (C) 2017, 2018, 2020, 2021, 2022  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -259,8 +259,6 @@ namespace updater.software
             // because they are incompatible with MSI. On the other hand the
             // MSI installers do not allow to install/update, if another MSI
             // version is already installed.
-            if (string.IsNullOrWhiteSpace(detected.displayVersion))
-                return null;
 
             var processes = new List<Process>();
             //Versions before 0.91 (i.e. exe-installers) can be uninstalled via
@@ -289,11 +287,20 @@ namespace updater.software
                 // MSI GUIDs to uninstall older MSI builds
                 string[] guids = {
                     "{81922150-317E-4BB0-A31D-FF1C14F707C5}", // 0.91 MSI (x86 and x64), 0.92 MSI
-                    "{1E74336F-9E7A-4070-BAA7-716A504FB9B0}", // 1.0 MSI
-                    "{776C087E-B714-4153-9414-79592EC61B4A}", // 1.0.1 MSI
-                    "{DBDA3649-0685-4067-ADB6-7A3B9B30720F}", // 1.0.2-2 MSI
-                    "{BB039842-4166-4A3C-90BC-316F6E6BDC83}", // 1.1.0 MSI
-                    "{2B0B7E83-63A3-4B06-B501-F01ED3A14D64}", // 1.1.1 MSI
+                    "{E56DDAE7-A35C-4A91-BB61-A90AD84A225A}", // 1.0 MSI (x86)
+                    "{1E74336F-9E7A-4070-BAA7-716A504FB9B0}", // 1.0 MSI (x64)
+                    "{A62CAF34-21D1-493D-B6CD-05E806940B3D}", // 1.0.1 MSI (x86)
+                    "{776C087E-B714-4153-9414-79592EC61B4A}", // 1.0.1 MSI (x64)
+                    "{B201FF3A-FE1D-4A12-A18B-23EDEE4B173E}", // 1.0.2-2 MSI (x86)
+                    "{DBDA3649-0685-4067-ADB6-7A3B9B30720F}", // 1.0.2-2 MSI (x64)
+                    "{4125D700-D9BE-48D7-BB27-2484E42FC58B}", // 1.1.0 MSI (x86)
+                    "{BB039842-4166-4A3C-90BC-316F6E6BDC83}", // 1.1.0 MSI (x64)
+                    "{10064B29-2F3B-46E5-B4DC-52669BA36A2D}", // 1.1.1 MSI (x86)
+                    "{2B0B7E83-63A3-4B06-B501-F01ED3A14D64}", // 1.1.1 MSI (x64)
+                    "{10ED2B07-05ED-4473-93BB-611B0C346785}", // 1.1.2 MSI (x86)
+                    "{C58DF5E8-47B7-4EC4-9045-19F23D540E4C}", // 1.1.2 MSI (x64)
+                    "{95BBB0BB-700E-45FB-8BB9-B24CE6A89E81}", // 1.2 MSI (x86)
+                    "{8D6DECA5-17F9-42AF-A62B-8D7C5C11069B}", // 1.2 MSI (x64)
                 };
                 foreach (var id in guids)
                 {
