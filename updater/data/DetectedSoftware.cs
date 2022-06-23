@@ -23,7 +23,7 @@ namespace updater.data
     /// <summary>
     /// Represents a detected software.
     /// </summary>
-    public struct DetectedSoftware: IComparable<DetectedSoftware>
+    public struct DetectedSoftware : IComparable<DetectedSoftware>
     {
         /// <summary>
         /// default constructor
