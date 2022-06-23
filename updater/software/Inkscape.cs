@@ -137,7 +137,7 @@ namespace updater.software
             newInfo.install64Bit.checksum = null;
             newInfo.install64Bit.algorithm = HashAlgorithm.Unknown;
 
-            foreach (string bits in new string[] {"32", "64" })
+            foreach (string bits in new string[] { "32", "64" })
             {
                 // Find download URL for 32 bit version.
                 // https://inkscape.org/release/inkscape-0.92.4/windows/32-bit/msi/dl/
@@ -158,28 +158,36 @@ namespace updater.software
                     client.Dispose();
                 }
 
-                // Search for URL part like '<a href="/gallery/item/29346/inkscape-1.1.1_2021-09-20_3bf5ae0d25-x86.msi">'.
+                // Search for URL part like '<a href="/gallery/item/33460/inkscape-1.2_2022-05-15_dc2aedaf03-x86_4JZVqba.msi">'.
                 //     or
-                // Search for URL part like '<a href="/gallery/item/29350/inkscape-1.1.1_2021-09-20_3bf5ae0d25-x64.msi">'.
+                // Search for URL part like '<a href="/gallery/item/33463/inkscape-1.2_2022-05-15_dc2aedaf03-x64_5iRsplS.msi">'.
                 string arch = (bits == "32") ? "x86" : "x64";
                 string dateAndHash = null;
                 {
-                    Regex reUrl = new Regex("<a href=\"([a-zA-Z0-9\\/]+)/inkscape\\-" + Regex.Escape(newVersion) + "(_2[0-9]{3}\\-[0-9]{2}\\-[0-9]{2}_[0-9a-f]+)\\-" + arch + "\\.msi\">");
+                    Regex reUrl = new Regex("<a href=\"([a-zA-Z0-9\\/]+)/inkscape\\-" + Regex.Escape(newVersion) + "(_2[0-9]{3}\\-[0-9]{2}\\-[0-9]{2}_[0-9a-f]+)\\-" + arch + "(_[a-zA-Z0-9]+)\\.msi\">");
                     Match matchUrl = reUrl.Match(htmlCode);
                     if (!matchUrl.Success)
                         return null;
-                    if (bits == "32")
-                        newInfo.install32Bit.downloadUrl = "https://inkscape.org/" + matchUrl.Groups[1].Value + "inkscape-" + newVersion + matchUrl.Groups[2].Value + "-x86.msi";
-                    else
-                        newInfo.install64Bit.downloadUrl = "https://inkscape.org/" + matchUrl.Groups[1].Value + "inkscape-" + newVersion + matchUrl.Groups[2].Value + "-x64.msi";
                     dateAndHash = matchUrl.Groups[2].Value;
+                    string bogus = matchUrl.Groups[3].Value;
+                    if (bits == "32")
+                        newInfo.install32Bit.downloadUrl = "https://inkscape.org/" + matchUrl.Groups[1].Value + "inkscape-" + newVersion + dateAndHash + "-x86" + bogus + ".msi";
+                    else
+                        newInfo.install64Bit.downloadUrl = "https://inkscape.org/" + matchUrl.Groups[1].Value + "inkscape-" + newVersion + dateAndHash + "-x64" + bogus + ".msi";
                 }
 
                 // Signature files are given in HTML elements like
-                // <a href="https://media.inkscape.org/media/resources/sigs/inkscape-1.1.1_2021-09-20_3bf5ae0d25-x86.msi.sha256"> or
-                // <a href="https://media.inkscape.org/media/resources/sigs/inkscape-1.1.1_2021-09-20_3bf5ae0d25-x64.msi.sha256">.
+                // <a href="https://media.inkscape.org/media/resources/sigs/inkscape-1.2_2022-05-15_dc2aedaf03-x86.msi_eACymJl.sha256"> or
+                // <a href="https://media.inkscape.org/media/resources/sigs/inkscape-1.2_2022-05-15_dc2aedaf03-x64.msi_p22hkKC.sha256">.
                 {
-                    string signatureUrl = "https://media.inkscape.org/media/resources/sigs/inkscape-" + newVersion + dateAndHash + "-" + arch + ".msi.sha256";
+                    Regex reUrl = new Regex("<a href=\"https://media\\.inkscape\\.org/media/resources/sigs/inkscape\\-"
+                        + Regex.Escape(newVersion + dateAndHash) + "\\-" + arch + "\\.msi(_[a-zA-Z0-9]+)\\.sha256\">");
+                    Match matchUrl = reUrl.Match(htmlCode);
+                    if (!matchUrl.Success)
+                        return null;
+                    string bogus = matchUrl.Groups[1].Value;
+                    string signatureUrl = "https://media.inkscape.org/media/resources/sigs/inkscape-"
+                        + newVersion + dateAndHash + "-" + arch + ".msi" + bogus + ".sha256";
 
                     htmlCode = null;
                     using (var client = new WebClient())
