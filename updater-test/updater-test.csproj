@@ -63,6 +63,7 @@
     <Compile Include="software\OpenJDK17_Tests.cs" />
     <Compile Include="software\OpenJDK8_Tests.cs" />
     <Compile Include="software\OpenJRE11_Tests.cs" />
+    <Compile Include="software\OpenJRE17_Tests.cs" />
     <Compile Include="software\OpenJRE8_Tests.cs" />
     <Compile Include="software\Pdf24Creator_Tests.cs" />
     <Compile Include="software\Pidgin_Tests.cs" />
