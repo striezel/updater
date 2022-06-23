@@ -55,19 +55,19 @@ namespace updater.software
         public override AvailableSoftware knownInfo()
         {
             return new AvailableSoftware("Inkscape",
-                "1.1.1",
+                "1.2",
                 "^Inkscape( [0-9]\\.[0-9]+(\\.[0-9]+)?)?$",
                 "^Inkscape( [0-9]\\.[0-9]+(\\.[0-9]+)?)?$",
                 new InstallInfoMsi(
-                    "https://media.inkscape.org/dl/resources/file/inkscape-1.1.1_2021-09-20_3bf5ae0d25-x86.msi",
+                    "https://media.inkscape.org/dl/resources/file/inkscape-1.2_2022-05-15_dc2aedaf03-x86_4JZVqba.msi",
                     HashAlgorithm.SHA256,
-                    "a0cd0295cd94961684c3f29dd6185116e8fd04876b60d43220ad467e5bb173f3",
+                    "f9a220c9d3d84e4dd1358062fe6c2e82324dd4a66540a3735e628f2f5c829454",
                     Signature.None,
                     "/qn /norestart"),
                 new InstallInfoMsi(
-                    "https://media.inkscape.org/dl/resources/file/inkscape-1.1.1_2021-09-20_3bf5ae0d25-x64.msi",
+                    "https://media.inkscape.org/dl/resources/file/inkscape-1.2_2022-05-15_dc2aedaf03-x64_5iRsplS.msi",
                     HashAlgorithm.SHA256,
-                    "60260f865f1a0ca9e538cf24a7999276281b130810c792dce131f73df4914cbc",
+                    "74904664d2b9bcacbe562c12367d1abfb38d2f710788b48422f4a73659b5816d",
                     Signature.None,
                     "/qn /norestart")
                     );
