@@ -120,6 +120,7 @@
     <Compile Include="software\mariadb_api\Release.cs" />
     <Compile Include="software\NodeJS.cs" />
     <Compile Include="software\OpenJDK11.cs" />
+    <Compile Include="software\OpenJDK17.cs" />
     <Compile Include="software\OpenJDK8.cs" />
     <Compile Include="software\openjdk_api\Binary.cs" />
     <Compile Include="software\openjdk_api\Installer.cs" />
