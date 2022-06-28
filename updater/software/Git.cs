@@ -38,13 +38,13 @@ namespace updater.software
         /// <summary>
         /// publisher name for signed installers of Git for Windows
         /// </summary>
-        private const string publisherX509 = "CN=Johannes Schindelin, O=Johannes Schindelin, L=Köln, S=North Rhine-Westphalia, C=DE";
+        private const string publisherX509 = "CN=Johannes Schindelin, O=Johannes Schindelin, S=Nordrhein-Westfalen, C=DE";
 
 
         /// <summary>
         /// expiration date for the publisher certificate
         /// </summary>
-        private static readonly DateTime certificateExpiration = new DateTime(2022, 5, 17, 23, 59, 59, DateTimeKind.Utc);
+        private static readonly DateTime certificateExpiration = new DateTime(2023, 5, 19, 23, 59, 59, DateTimeKind.Utc);
 
 
         /// <summary>
@@ -66,19 +66,19 @@ namespace updater.software
         {
             var signature = new Signature(publisherX509, certificateExpiration);
             return new AvailableSoftware("Git",
-                "2.36.1",
+                "2.37.0",
                 "^(Git|Git version [0-9]+\\.[0-9]+\\.[0-9]+(\\.[0-9]+)?)$",
                 "^(Git|Git version [0-9]+\\.[0-9]+\\.[0-9]+(\\.[0-9]+)?)$",
                 new InstallInfoExe(
-                    "https://github.com/git-for-windows/git/releases/download/v2.36.1.windows.1/Git-2.36.1-32-bit.exe",
+                    "https://github.com/git-for-windows/git/releases/download/v2.37.0.windows.1/Git-2.37.0-32-bit.exe",
                     HashAlgorithm.SHA256,
-                    "0a50735bd088698e6015265d9373cb0cc859f46a0689d3073f91da0dc0fe66aa",
+                    "558c76cb118b6392f4a48d957e1062031a019fd80788d8db71c5702173a8f2f5",
                     signature,
                     "/VERYSILENT /NORESTART"),
                 new InstallInfoExe(
-                    "https://github.com/git-for-windows/git/releases/download/v2.36.1.windows.1/Git-2.36.1-64-bit.exe",
+                    "https://github.com/git-for-windows/git/releases/download/v2.37.0.windows.1/Git-2.37.0-64-bit.exe",
                     HashAlgorithm.SHA256,
-                    "08a0c20374d13d1b448d2c5713222ff55dd1f4bffa15093b85772cc0fc5f30e7",
+                    "f234cbcb7bc123b8219bc1692b1a44acc0fd805b1c6fccacd1e28d4672499ef8",
                     signature,
                     "/VERYSILENT /NORESTART")
                     );
