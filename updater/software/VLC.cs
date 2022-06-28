@@ -66,7 +66,7 @@ namespace updater.software
         public override AvailableSoftware knownInfo()
         {
             var signature = new Signature(publisherX509, certificateExpiration);
-            const string version = "3.0.17";
+            const string version = "3.0.17.4";
             return new AvailableSoftware("VLC media player",
                 version,
                 "^VLC media player$",
@@ -75,14 +75,14 @@ namespace updater.software
                 new InstallInfoExe(
                     "https://get.videolan.org/vlc/" + version + "/win32/vlc-" + version + "-win32.exe",
                     HashAlgorithm.SHA256,
-                    "8485d10c64d85686882b60ebb094bfb07c3d2c54f43cd8d5a7eb3d24ec6d03d4",
+                    "514b0bf5ac82e7132ecac31da64c38fc85cd0ff76e2dcbcf904b6e2028c6749f",
                     signature,
                     "/S"),
                 // 64 bit installer
                 new InstallInfoExe(
                     "https://get.videolan.org/vlc/" + version + "/win64/vlc-" + version + "-win64.exe",
                     HashAlgorithm.SHA256,
-                    "b1179e9833bdc01d3d7c31451532b992edf358c2d9705fc1976e1e8e57208188",
+                    "fda8cbf2ee876be4eb14d7affca3a0746ef4ae78341dbb589cbdddcf912db85c",
                     signature,
                     "/S")
                 );
@@ -198,21 +198,22 @@ namespace updater.software
             string lastVersionString = getLastVersion();
             if (null == lastVersionString)
                 return null;
-            Triple lastVersion = new Triple(lastVersionString);
+            ShrinkingQuartet lastVersion = new ShrinkingQuartet(lastVersionString);
             string availableVersionString = getLatestAvailableVersion();
             if (null == availableVersionString)
                 return null;
-            Triple availableVersion = new Triple(availableVersionString);
-            Triple newVersion = new Triple()
+            ShrinkingQuartet availableVersion = new ShrinkingQuartet(availableVersionString);
+            ShrinkingQuartet newVersion = new ShrinkingQuartet()
             {
                 major = lastVersion.major,
                 minor = lastVersion.minor,
-                patch = lastVersion.patch
+                patch = lastVersion.patch,
+                build = lastVersion.build
             };
             if (lastVersion < availableVersion)
                 newVersion = availableVersion;
             // should not be lesser than known newest version
-            if (newVersion < new Triple(knownInfo().newestVersion))
+            if (newVersion < new ShrinkingQuartet(knownInfo().newestVersion))
                 return null;
             // version number should match usual scheme, e.g. 5.x.y, where x and y are digits
             Regex version = new Regex("^[1-9]+\\.[0-9]+\\.[0-9]+(\\.[0-9]+)?$");

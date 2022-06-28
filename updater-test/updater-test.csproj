@@ -102,6 +102,7 @@
     <Compile Include="utility\Verificator_Tests.cs" />
     <Compile Include="versions\QuartetAurora_Tests.cs" />
     <Compile Include="versions\Quartet_Tests.cs" />
+    <Compile Include="versions\ShrinkingQuartet_Tests.cs" />
     <Compile Include="versions\Triple_Tests.cs" />
   </ItemGroup>
   <ItemGroup>
