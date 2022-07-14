@@ -6,11 +6,11 @@ using System.Runtime.InteropServices;
 // Attribute gesteuert. Ändern Sie diese Attributwerte, um die Informationen zu ändern,
 // die mit einer Assembly verknüpft sind.
 [assembly: AssemblyTitle("updater")]
-[assembly: AssemblyDescription("Finds third party software that can be updated.")]
+[assembly: AssemblyDescription("Finds / updates third party software that can be updated.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("updater")]
-[assembly: AssemblyCopyright("Copyright © 2016, 2017, 2018, 2019, 2020, 2021 Dirk Stolle")]
+[assembly: AssemblyCopyright("Copyright © 2016, 2017, 2018, 2019, 2020, 2021, 2022 Dirk Stolle")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
