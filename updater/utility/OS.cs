@@ -82,5 +82,19 @@ namespace updater.utility
                 && ((os.Version.Major > 6)
                 || ((os.Version.Major == 6) && (os.Version.Minor >= 1)));
         }
+
+        /// <summary>
+        /// Checks whether the system is Windows 10 or newer.
+        /// </summary>
+        /// <param name="os">operating system information
+        /// (Leave this at null, if you want to examine the current OS.)</param>
+        /// <returns>Returns true, if the OS is Win10 or a newer version.</returns>
+        public static bool isWin10OrNewer(OperatingSystem os = null)
+        {
+            if (null == os)
+                os = thisOS;
+            // Internal version of Windows 10 is 10.*.
+            return (os.Platform == PlatformID.Win32NT) && (os.Version.Major >= 10);
+        }
     } // class
 } // namespace
