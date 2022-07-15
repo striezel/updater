@@ -60,3 +60,74 @@ downloads time out.
 __[maintenance]__
 
 * NLog library is updated from 4.7.8 to 4.7.10.
+
+## Version 2021.03.12.0
+
+__[new features]__
+
+Update support for the following applications is added:
+
+* CMake
+* Git for Windows
+* Node.js LTS
+* Transmission _(BitTorrent client)_
+
+__[changes]__
+
+* The installer does now support the following additional languages:
+  Dutch, Finnish, French, Hebrew, Italian, Japanese, Portuguese, Russian,
+  Spanish, and Turkish. (Previous installer versions only supported German and
+  English.)
+* Integrity checks for downloads of Opera will now use SHA-256 instead of MD5
+  checksums.
+* Support for using MD5 checksums in integrity checks of downloads is removed.
+
+__[maintenance]__
+
+* NLog library is updated from 4.7.5 to 4.7.8.
+
+## Version 2020.10.06.0
+
+__[breaking change]__
+
+The required version of the .NET Framework is bumped from 4.0 Client Profile to
+4.6.1.
+
+__[changes]__
+
+* Integrity checks for downloads of Inkspace will now use SHA-256 instead of MD5
+  checksums, because Inkspace provides those starting with version 1.0.
+
+__[maintenance]__
+
+* NLog library is updated from 4.7.2 to 4.7.5.
+
+## Version 2020.06.05.0
+
+__[maintenance]__
+
+* NLog library is updated from 4.4.12 to 4.7.2.
+* Remove NuGet package artifacts from repository.
+
+## Version 2019.08.22.0
+
+__[breaking change]__
+
+Update support for Adobe Shockwave is removed. Adobe has discontinued support
+for Shockwave on April 9, 2019, according to
+<https://helpx.adobe.com/shockwave/shockwave-end-of-life-faq.html>.
+
+## Version 2019.02.28.0
+
+__[new features]__
+
+Update support for the following applications is added:
+
+* Adobe Shockwave
+
+## Version 2018.03.28.0
+
+__[changes]__
+
+* Update search for KeePass 2 is adjusted to changes on its website.
+* A problem with the update search for newest Opera browser version is fixed.
