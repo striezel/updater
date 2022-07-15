@@ -122,6 +122,10 @@ After that, open Visual Studio (2015 Community Edition or later recommended)
 and just build the solution **updater/updater.sln** from the checked out
 sources.
 
+## Version history
+
+A changelog is available in [changelog.md](./changelog.md).
+
 ## Copyright and Licensing
 
 Copyright 2016, 2017, 2018, 2019, 2020, 2021, 2022  Dirk Stolle
