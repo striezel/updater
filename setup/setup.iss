@@ -41,11 +41,11 @@ Name: "tr"; MessagesFile: "compiler:Languages\Turkish.isl"
 
 [Files]
 ;main executable
-Source: "..\updater\bin\Release\updater.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\updater\bin\Release\net6.0-windows\updater.exe"; DestDir: "{app}"; Flags: ignoreversion
 ; Newtonsoft.Json assembly (JSON deserialization)
-Source: "..\updater\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "{%USERPROFILE}\.nuget\packages\newtonsoft.json\13.0.1\lib\netstandard2.0\Newtonsoft.Json.dll"; DestDir: "{app}"; Flags: external ignoreversion
 ; NLog main assembly (logging)
-Source: "..\updater\packages\NLog.5.0.1\lib\net46\NLog.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "{%USERPROFILE}\.nuget\packages\nlog\5.0.1\lib\netstandard2.0\NLog.dll"; DestDir: "{app}"; Flags: external ignoreversion
 ; GPL 3 license text
 Source: "..\LICENSE"; DestDir: "{app}"; Flags: ignoreversion
 
