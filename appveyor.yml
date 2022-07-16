@@ -1,8 +1,8 @@
 version: 2022.07.14.{build}
 skip_tags: true
-image: Visual Studio 2019
+image: Visual Studio 2022
 configuration: Debug
-platform: x86
+platform: Any CPU
 before_build:
   - nuget restore updater\updater.sln
 build:
