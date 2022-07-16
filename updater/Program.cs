@@ -57,7 +57,7 @@ namespace updater
                     operation = new IdList(options);
                     break;
                 case Operation.Version:
-                    operation = new Version();
+                    operation = new operations.Version();
                     break;
                 case Operation.License:
                     operation = new License();
