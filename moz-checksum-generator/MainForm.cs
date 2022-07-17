@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017, 2018, 2020, 2021  Dirk Stolle
+    Copyright (C) 2017, 2018, 2020, 2021, 2022  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
 
 using System;
 using System.Collections.Generic;
-using System.Net;
+using System.Net.Http;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
@@ -97,11 +97,13 @@ namespace moz_checksum_generator
 
             string url = "https://ftp.mozilla.org/pub/firefox/releases/" + version + "/SHA512SUMS";
             string sha512SumsContent = null;
-            using (var client = new WebClient())
+            using (var client = new HttpClient())
             {
                 try
                 {
-                    sha512SumsContent = client.DownloadString(url);
+                    var task = client.GetStringAsync(url);
+                    task.Wait();
+                    sha512SumsContent = task.Result;
                 }
                 catch (Exception ex)
                 {
@@ -159,11 +161,13 @@ namespace moz_checksum_generator
 
             string url = "https://ftp.mozilla.org/pub/devedition/releases/" + version + "/SHA512SUMS";
             string sha512SumsContent = null;
-            using (var client = new WebClient())
+            using (var client = new HttpClient())
             {
                 try
                 {
-                    sha512SumsContent = client.DownloadString(url);
+                    var task = client.GetStringAsync(url);
+                    task.Wait();
+                    sha512SumsContent = task.Result;
                 }
                 catch (Exception ex)
                 {
@@ -221,11 +225,13 @@ namespace moz_checksum_generator
 
             string url = "https://ftp.mozilla.org/pub/firefox/releases/" + version + "esr/SHA512SUMS";
             string sha512SumsContent = null;
-            using (var client = new WebClient())
+            using (var client = new HttpClient())
             {
                 try
                 {
-                    sha512SumsContent = client.DownloadString(url);
+                    var task = client.GetStringAsync(url);
+                    task.Wait();
+                    sha512SumsContent = task.Result;
                 }
                 catch (Exception ex)
                 {
@@ -286,11 +292,13 @@ namespace moz_checksum_generator
 
             string url = "https://archive.mozilla.org/pub/seamonkey/releases/" + version + "/SHA1SUMS.txt";
             string sha1SumsContent = null;
-            using (var client = new WebClient())
+            using (var client = new HttpClient())
             {
                 try
                 {
-                    sha1SumsContent = client.DownloadString(url);
+                    var task = client.GetStringAsync(url);
+                    task.Wait();
+                    sha1SumsContent = task.Result;
                 }
                 catch (Exception ex)
                 {
@@ -350,11 +358,13 @@ namespace moz_checksum_generator
 
             string url = "https://ftp.mozilla.org/pub/thunderbird/releases/" + version + "/SHA512SUMS";
             string sha512SumsContent = null;
-            using (var client = new WebClient())
+            using (var client = new HttpClient())
             {
                 try
                 {
-                    sha512SumsContent = client.DownloadString(url);
+                    var task = client.GetStringAsync(url);
+                    task.Wait();
+                    sha512SumsContent = task.Result;
                 }
                 catch (Exception ex)
                 {
