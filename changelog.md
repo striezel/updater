@@ -10,6 +10,10 @@ __[breaking change]__
 
 The required version of the .NET Framework is bumped from 4.7.2 to .NET 6.
 
+__[changes]__
+
+Downloads for 7-Zip will now use HTTPS (instead of HTTP) consistently.
+
 ## Version 2022.07.14.0
 
 __[new features]__

@@ -18,7 +18,7 @@
 
 using System;
 using System.Collections.Generic;
-using System.Net;
+using System.Net.Http;
 using System.Text.RegularExpressions;
 using updater.data;
 
@@ -53,19 +53,19 @@ namespace updater.software
         public override AvailableSoftware knownInfo()
         {
             return new AvailableSoftware("7-Zip",
-                "22.00",
+                "22.01",
                 "^7\\-Zip [0-9]+\\.[0-9]{2}$",
                 "^7\\-Zip [0-9]+\\.[0-9]{2} \\(x64\\)$",
                 new InstallInfoExe(
-                    "http://www.7-zip.org/a/7z2200.exe",
+                    "https://www.7-zip.org/a/7z2201.exe",
                     HashAlgorithm.SHA256,
-                    "a26fb79fa3bda06fc1df3a362539259f8335b9ad1c0b05a6efc58c44b22baae5",
+                    "8c8fbcf80f0484b48a07bd20e512b103969992dbf81b6588832b08205e3a1b43",
                     Signature.None,
                     "/S"),
                 new InstallInfoExe(
-                    "http://www.7-zip.org/a/7z2200-x64.exe",
+                    "https://www.7-zip.org/a/7z2201-x64.exe",
                     HashAlgorithm.SHA256,
-                    "0b01c258a2e9857de86bd845deef59953cff283e6ed030dba3da529262484b00",
+                    "b055fee85472921575071464a97a79540e489c1c3a14b9bdfbdbab60e17f36e4",
                     Signature.None,
                     "/S")
                 );
@@ -103,11 +103,13 @@ namespace updater.software
         {
             logger.Info("Searching for newer version of 7-Zip...");
             string htmlCode = null;
-            using (var client = new WebClient())
+            using (var client = new HttpClient())
             {
                 try
                 {
-                    htmlCode = client.DownloadString("http://www.7-zip.org/");
+                    var task = client.GetStringAsync("https://www.7-zip.org/");
+                    task.Wait();
+                    htmlCode = task.Result;
                 }
                 catch (Exception ex)
                 {
@@ -117,7 +119,7 @@ namespace updater.software
                 client.Dispose();
             } // using
 
-            Regex reVersion = new Regex("<A href=\"a/7z[0-9]{4}.exe\">Download</A>", RegexOptions.IgnoreCase);
+            var reVersion = new Regex("<A href=\"a/7z[0-9]{4}.exe\">Download</A>", RegexOptions.IgnoreCase);
             Match matchVersion = reVersion.Match(htmlCode);
             if (!matchVersion.Success)
                 return null;
@@ -136,13 +138,13 @@ namespace updater.software
             newInfo.newestVersion = version;
             string newVersionWithoutDot = version.Replace(".", "");
             // 32 bit
-            newInfo.install32Bit.downloadUrl = "http://www.7-zip.org/a/7z" + newVersionWithoutDot + ".exe";
+            newInfo.install32Bit.downloadUrl = "https://www.7-zip.org/a/7z" + newVersionWithoutDot + ".exe";
             // The official 7-zip.org site does not provide any checksums,
             // so we have to do without.
             newInfo.install32Bit.algorithm = HashAlgorithm.Unknown;
             newInfo.install32Bit.checksum = null;
             // 64 bit
-            newInfo.install64Bit.downloadUrl = "http://www.7-zip.org/a/7z" + newVersionWithoutDot + "-x64.exe";
+            newInfo.install64Bit.downloadUrl = "https://www.7-zip.org/a/7z" + newVersionWithoutDot + "-x64.exe";
             // The official 7-zip.org site does not provide any checksums,
             // so we have to do without.
             newInfo.install64Bit.algorithm = HashAlgorithm.Unknown;
