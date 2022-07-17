@@ -33,6 +33,11 @@ namespace moz_checksum_generator
 
         private void rbFirefoxRelease_CheckedChanged(object sender, EventArgs e)
         {
+            clearExistingData();
+        }
+
+        private void clearExistingData()
+        {
             rtbBit32.Clear();
             rtbBit64.Clear();
             lblVersion.Text = "";
@@ -40,19 +45,27 @@ namespace moz_checksum_generator
 
         private void btnChecksums_Click(object sender, EventArgs e)
         {
-            if (rbFirefoxRelease.Checked)
-                getFxChecksums();
-            else if (rbFirefoxESR.Checked)
-                getFxEsrChecksums();
-            else if (rbFirefoxAurora.Checked)
-                getFxAuroraChecksums();
-            else if (rbThunderbird.Checked)
-                getTbChecksums();
-            else if (rbSeaMonkey.Checked)
-                getSmChecksums();
-            else
-                MessageBox.Show("No product has been selected!", "Hint",
-                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+            btnChecksums.Enabled = false;
+            try
+            {
+                if (rbFirefoxRelease.Checked)
+                    getFxChecksums();
+                else if (rbFirefoxESR.Checked)
+                    getFxEsrChecksums();
+                else if (rbFirefoxAurora.Checked)
+                    getFxAuroraChecksums();
+                else if (rbThunderbird.Checked)
+                    getTbChecksums();
+                else if (rbSeaMonkey.Checked)
+                    getSmChecksums();
+                else
+                    MessageBox.Show("No product has been selected!", "Hint",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            finally
+            {
+                btnChecksums.Enabled = true;
+            }
         }
 
         /// <summary>
