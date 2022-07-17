@@ -28,24 +28,38 @@ namespace updater.detection
     public class DetectorRegistry
     {
         /// <summary>
+        /// NLog.Logger for DetectorRegistry class
+        /// </summary>
+        private static readonly NLog.Logger logger = NLog.LogManager.GetLogger(typeof(DetectorRegistry).FullName);
+
+
+        /// <summary>
         /// Tries to get a list of installed software from the registry.
         /// </summary>
         /// <returns>Returns a list of installed software.
         /// Returns null, if an error occurred.</returns>
         public static List<data.DetectedSoftware> detect()
         {
-            if (Environment.Is64BitOperatingSystem)
+            try
             {
-                var data64 = detectSingleView(RegistryView.Registry64);
-                var data32 = detectSingleView(RegistryView.Registry32);
-                if ((data64 == null) || (data32 == null))
-                    return null;
-                data64.AddRange(data32);
-                return data64;
-            } // if 64 bit OS
-            else
+                if (Environment.Is64BitOperatingSystem)
+                {
+                    var data64 = detectSingleView(RegistryView.Registry64);
+                    var data32 = detectSingleView(RegistryView.Registry32);
+                    if ((data64 == null) || (data32 == null))
+                        return null;
+                    data64.AddRange(data32);
+                    return data64;
+                } // if 64 bit OS
+                else
+                {
+                    return detectSingleView(RegistryView.Registry32);
+                }
+            }
+            catch (PlatformNotSupportedException)
             {
-                return detectSingleView(RegistryView.Registry32);
+                logger.Error("Error: This platform does not support or have a Windows Registry, so no installed software can be detected that way.");
+                return null;
             }
         }
 
