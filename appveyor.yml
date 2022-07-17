@@ -4,7 +4,10 @@ image: Visual Studio 2022
 configuration: Debug
 platform: Any CPU
 before_build:
+  - dotnet add updater-test\updater-test.csproj package Appveyor.TestLogger --version 2.0.0
   - nuget restore updater\updater.sln
 build:
   project: updater/updater.sln
   verbosity: normal
+test_script:
+  - dotnet test updater-test\updater-test.csproj --configuration Debug --no-build /property:Platform=AnyCPU --test-adapter-path:. --logger:Appveyor
