@@ -21,6 +21,7 @@ using System.Collections.Generic;
 using System.Net;
 using System.Text.RegularExpressions;
 using updater.data;
+using updater.utility;
 
 namespace updater.software
 {
@@ -62,20 +63,67 @@ namespace updater.software
         /// details about the software.</returns>
         public override AvailableSoftware knownInfo()
         {
+            if (!Environment.Is64BitOperatingSystem)
+            {
+                logger.Warn("Calibre does not provide 32 bit binaries from version 6.0.0 onwards.");
+                logger.Warn("Please consider switching to an 64 bit operating system to get newer Calibre updates.");
+                return latestSupported32BitVersion();
+            }
+            if (!OS.isWin10OrNewer())
+            {
+                logger.Warn("Support for Windows 8 (and older Windows versions) has been dropped in Calibre 6.0.0.");
+                logger.Warn("Please consider upgrading to Windows 10 or better to get newer Calibre updates.");
+                return latestSupported32BitVersion();
+            }
+            
             var signature = new Signature(publisherX509, certificateExpiration);
+            const string knownVersion = "6.1.0";
+            InstallInfo info64 = new InstallInfoMsi(
+                "https://download.calibre-ebook.com/" + knownVersion + "/calibre-64bit-" + knownVersion + ".msi",
+                HashAlgorithm.SHA256,
+                "7efc763180b88ceebb2cbe273204e6e13830ae2b576b9d51f08fcf0f6b7f5310",
+                signature,
+                "/qn /norestart"
+                );
+            
+            return new AvailableSoftware("Calibre",
+                knownVersion,
+                "^calibre$",
+                "^(calibre 64 bit)|(calibre 64bit)$",
+                // There are no 32 bit builds from version 6.0.0 onwards,
+                // but the 64 bit installer will detect and remove 32 bit
+                // versions of Calibre as part of its installation. So we
+                // force the switch from 32 bit to the 64 bit version here.
+                info64,
+                // 64 bit installer
+                info64);
+        }
+
+
+        /// <summary>
+        /// Gets the information about the latest Calibre version that still has 32 bit builds.
+        /// By coincidence, that is also the last version that still supports Windows 8.
+        /// </summary>
+        /// <returns>Returns an AvailableSoftware instance with the known
+        /// details about the software.</returns>
+        public AvailableSoftware latestSupported32BitVersion()
+        {
+            var signature = new Signature(
+                "CN=Kovid Goyal, O=Kovid Goyal, L=Mumbai, S=Maharashtra, C=IN",
+                new DateTime(2022, 9, 29, 12, 0, 0, DateTimeKind.Utc));
             const string knownVersion = "5.44.0";
             return new AvailableSoftware("Calibre",
                 knownVersion,
                 "^calibre$",
                 "^(calibre 64 bit)|(calibre 64bit)$",
                 new InstallInfoMsi(
-                    "https://download.calibre-ebook.com/" + knownVersion + "/calibre-" + knownVersion + ".msi",
+                    "https://download.calibre-ebook.com/5.44.0/calibre-5.44.0.msi",
                     HashAlgorithm.SHA256,
                     "21903563b5bb5817ee33f3a3ea6b0f3b71c3eac1793069f89674d70a99f0f080",
                     signature,
                     "/qn /norestart"),
                 new InstallInfoMsi(
-                    "https://download.calibre-ebook.com/" + knownVersion + "/calibre-64bit-" + knownVersion + ".msi",
+                    "https://download.calibre-ebook.com/5.44.0/calibre-64bit-5.44.0.msi",
                     HashAlgorithm.SHA256,
                     "708ba7db84ae9db684b643f81a4fb6b1c65f5e6dac0adc4721e6ed7d20677798",
                     signature,
@@ -114,6 +162,18 @@ namespace updater.software
         public override AvailableSoftware searchForNewer()
         {
             logger.Info("Searching for newer version of Calibre...");
+            if (!Environment.Is64BitOperatingSystem)
+            {
+                logger.Warn("Calibre does not provide 32 bit binaries from version 6.0.0 onwards.");
+                logger.Warn("Please consider switching to an 64 bit operating system to get newer Calibre updates.");
+                return latestSupported32BitVersion();
+            }
+            if (!OS.isWin10OrNewer())
+            {
+                logger.Warn("Support for Windows 8 (and older Windows versions) has been dropped in Calibre 6.0.0.");
+                logger.Warn("Please consider upgrading to Windows 10 or better to get newer Calibre updates.");
+                return latestSupported32BitVersion();
+            }
             string htmlCode = null;
             using (var client = new WebClient())
             {
@@ -167,28 +227,16 @@ namespace updater.software
                 return null;
             string checksum64 = match.Value.Substring(match.Value.Length - 65, 64);
 
-            // checksum for Windows 32bit installer
-            idx = htmlCode.IndexOf("\"n\":\"calibre-" + newVersion + ".msi");
-            if (idx < 0)
-                return null;
-            match = exprSha256.Match(htmlCode, idx);
-            if (!match.Success)
-                return null;
-            string checksum32 = match.Value.Substring(match.Value.Length - 65, 64);
-
             // construct new version information
             var newInfo = knownInfo();
             // replace version number - both as newest version and in URL for download
             string oldVersion = newInfo.newestVersion;
             newInfo.newestVersion = newVersion;
-            newInfo.install32Bit.downloadUrl = newInfo.install32Bit.downloadUrl.Replace(oldVersion, newVersion);
-            // no checksums are provided on the official site, but binaries are signed
-            newInfo.install32Bit.checksum = checksum32;
-            newInfo.install32Bit.algorithm = HashAlgorithm.SHA256;
             newInfo.install64Bit.downloadUrl = newInfo.install64Bit.downloadUrl.Replace(oldVersion, newVersion);
-            // no checksums are provided on the official site, but binaries are signed
             newInfo.install64Bit.checksum = checksum64;
             newInfo.install64Bit.algorithm = HashAlgorithm.SHA256;
+            // Use same info for "32 bit" build, forcing switch to 64 bit build on 64 bit OS.
+            newInfo.install32Bit = newInfo.install64Bit;
             return newInfo;
         }
 
