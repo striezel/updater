@@ -1,133 +1,27 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\updater\packages\MSTest.TestAdapter.2.1.2\build\net45\MSTest.TestAdapter.props" Condition="Exists('..\updater\packages\MSTest.TestAdapter.2.1.2\build\net45\MSTest.TestAdapter.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{F1F55187-4CED-43A0-A9C9-920DDBD7FF76}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <TargetFramework>net6.0-windows</TargetFramework>
     <RootNamespace>updater_test</RootNamespace>
-    <AssemblyName>updater-test</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
-    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
-    <ReferencePath>$(ProgramFiles)\Common Files\microsoft shared\VSTT\$(VisualStudioVersion)\UITestExtensionPackages</ReferencePath>
-    <IsCodedUITest>False</IsCodedUITest>
-    <TestProjectType>UnitTest</TestProjectType>
-    <TargetFrameworkProfile />
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <IsPackable>false</IsPackable>
+    <Description>Unit tests for updater application</Description>
+    <Copyright>Copyright ©  2017-2022 Dirk Stolle</Copyright>
+    <AssemblyVersion>1.1.2.0</AssemblyVersion>
+    <FileVersion>1.1.2.0</FileVersion>
+    <PackageLicenseExpression>GPL-3.0-or-later</PackageLicenseExpression>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
+
   <ItemGroup>
-    <Reference Include="Microsoft.VisualStudio.TestPlatform.TestFramework, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\updater\packages\MSTest.TestFramework.2.1.2\lib\net45\Microsoft.VisualStudio.TestPlatform.TestFramework.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\updater\packages\MSTest.TestFramework.2.1.2\lib\net45\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.dll</HintPath>
-    </Reference>
-    <Reference Include="System" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.1.0" />
+    <PackageReference Include="MSTest.TestAdapter" Version="2.2.8" />
+    <PackageReference Include="MSTest.TestFramework" Version="2.2.8" />
+    <PackageReference Include="coverlet.collector" Version="3.1.2" />
   </ItemGroup>
+
   <ItemGroup>
-    <Compile Include="algorithm\SoftwareStatus_Tests.cs" />
-    <Compile Include="detection\DetectorRegistry_Tests.cs" />
-    <Compile Include="git-info\GitInfo_Tests.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="software\All_Tests.cs" />
-    <Compile Include="software\Calibre_Tests.cs" />
-    <Compile Include="software\CMake_Tests.cs" />
-    <Compile Include="software\Git_Tests.cs" />
-    <Compile Include="software\MariaDB_10_5_Tests.cs" />
-    <Compile Include="software\MariaDB_10_6_Tests.cs" />
-    <Compile Include="software\NodeJS_Tests.cs" />
-    <Compile Include="software\OpenJDK11_Tests.cs" />
-    <Compile Include="software\OpenJDK17_Tests.cs" />
-    <Compile Include="software\OpenJDK8_Tests.cs" />
-    <Compile Include="software\OpenJRE11_Tests.cs" />
-    <Compile Include="software\OpenJRE17_Tests.cs" />
-    <Compile Include="software\OpenJRE8_Tests.cs" />
-    <Compile Include="software\Pdf24Creator_Tests.cs" />
-    <Compile Include="software\Pidgin_Tests.cs" />
-    <Compile Include="software\BasicSoftwareTests.cs" />
-    <Compile Include="software\Audacity_Tests.cs" />
-    <Compile Include="software\SeaMonkey246_Tests.cs" />
-    <Compile Include="software\CCleaner_Tests.cs" />
-    <Compile Include="software\Mumble_Tests.cs" />
-    <Compile Include="software\FirefoxAurora_Tests.cs" />
-    <Compile Include="software\Firefox_Tests.cs" />
-    <Compile Include="software\Opera_Tests.cs" />
-    <Compile Include="software\Inkscape_Tests.cs" />
-    <Compile Include="software\KeePass_Tests.cs" />
-    <Compile Include="software\LibreOfficeHelpPackGerman_Tests.cs" />
-    <Compile Include="software\LibreOffice_Tests.cs" />
-    <Compile Include="software\NotepadPlusPlus_Tests.cs" />
-    <Compile Include="software\FileZilla_Tests.cs" />
-    <Compile Include="software\Putty_Tests.cs" />
-    <Compile Include="software\Gimp_Tests.cs" />
-    <Compile Include="software\SevenZip_Tests.cs" />
-    <Compile Include="software\SeaMonkey_Tests.cs" />
-    <Compile Include="software\Shotcut_Tests.cs" />
-    <Compile Include="software\TeamSpeakClient_Tests.cs" />
-    <Compile Include="software\TeamViewer_Tests.cs" />
-    <Compile Include="software\Thunderbird_Tests.cs" />
-    <Compile Include="software\CDBurnerXP_Tests.cs" />
-    <Compile Include="software\FirefoxESR_Tests.cs" />
-    <Compile Include="software\Transmission_Tests.cs" />
-    <Compile Include="software\TreeSizeFree_Tests.cs" />
-    <Compile Include="software\VLC_Tests.cs" />
-    <Compile Include="software\WinSCP_Tests.cs" />
-    <Compile Include="utility\Checksum_Tests.cs" />
-    <Compile Include="utility\OS_Tests.cs" />
-    <Compile Include="utility\PortableExecutable_Tests.cs" />
-    <Compile Include="utility\Strings_Tests.cs" />
-    <Compile Include="utility\Verificator_Tests.cs" />
-    <Compile Include="versions\QuartetAurora_Tests.cs" />
-    <Compile Include="versions\Quartet_Tests.cs" />
-    <Compile Include="versions\ShrinkingQuartet_Tests.cs" />
-    <Compile Include="versions\Triple_Tests.cs" />
+    <ProjectReference Include="..\updater\updater.csproj" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\updater\updater.csproj">
-      <Project>{6ce74677-6889-4e18-af1a-c933ae211ab6}</Project>
-      <Name>updater</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>Dieses Projekt verweist auf mindestens ein NuGet-Paket, das auf diesem Computer fehlt. Verwenden Sie die Wiederherstellung von NuGet-Paketen, um die fehlenden Dateien herunterzuladen. Weitere Informationen finden Sie unter "http://go.microsoft.com/fwlink/?LinkID=322105". Die fehlende Datei ist "{0}".</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('..\updater\packages\MSTest.TestAdapter.2.1.2\build\net45\MSTest.TestAdapter.props')" Text="$([System.String]::Format('$(ErrorText)', '..\updater\packages\MSTest.TestAdapter.2.1.2\build\net45\MSTest.TestAdapter.props'))" />
-    <Error Condition="!Exists('..\updater\packages\MSTest.TestAdapter.2.1.2\build\net45\MSTest.TestAdapter.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\updater\packages\MSTest.TestAdapter.2.1.2\build\net45\MSTest.TestAdapter.targets'))" />
-  </Target>
-  <Import Project="..\updater\packages\MSTest.TestAdapter.2.1.2\build\net45\MSTest.TestAdapter.targets" Condition="Exists('..\updater\packages\MSTest.TestAdapter.2.1.2\build\net45\MSTest.TestAdapter.targets')" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
+
 </Project>

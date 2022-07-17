@@ -272,7 +272,19 @@ namespace updater.software
             }
             foreach (var view in views)
             {
-                RegistryKey baseKey = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, view);
+                RegistryKey baseKey;
+                try
+                {
+                    baseKey = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, view);
+                }
+                catch (PlatformNotSupportedException)
+                {
+                    // Should only happen on non-Windows platforms, but there we
+                    // should not get to this point in the first place.
+                    // But better be safe than sorry here.
+                    logger.Warn("Error: This platform does not support or have a Windows Registry, so no information can be retrieved from it.");
+                    continue;
+                }
                 try
                 {
                     const string keyName = "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\Shotcut";

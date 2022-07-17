@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017, 2020  Dirk Stolle
+    Copyright (C) 2017, 2020, 2022  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -36,7 +36,7 @@ namespace updater_test.utility
         [TestMethod]
         public void Test_areEqual_positive()
         {
-            Dictionary<string, string> cases = new Dictionary<string, string>(3)
+            var cases = new Dictionary<string, string>(3)
             {
                 { "a61f9380255bb154f001cc15f27374ea30de1013", "a61f9380255bb154f001cc15f27374ea30de1013" },
                 { "a61f 9380 255b b154 f001 cc15 f273 74ea 30de 1013", "a61f9380255bb154f001cc15f27374ea30de1013" },
@@ -75,9 +75,9 @@ namespace updater_test.utility
         /// Tests whether Checksum.calculate() can calculate checksums.
         /// </summary>
         [TestMethod]
-        public void Test_calculate()
+        public void Test_calculate_size_zero()
         {
-            Dictionary<HashAlgorithm, string> cases = new Dictionary<HashAlgorithm, string>(5)
+            var cases = new Dictionary<HashAlgorithm, string>(5)
             {
                 { HashAlgorithm.Unknown, null },
                 { HashAlgorithm.SHA1, "da39a3ee5e6b4b0d3255bfef95601890afd80709" },
@@ -91,6 +91,43 @@ namespace updater_test.utility
 
             // Create temporary file of zero bytes size.
             string fileName = Path.GetTempFileName();
+            try
+            {
+                foreach (var item in cases)
+                {
+                    Assert.AreEqual<string>(item.Value, Checksum.calculate(fileName, item.Key));
+                }
+            }
+            finally
+            {
+                // Always clean up.
+                File.Delete(fileName);
+            }
+        }
+
+
+        /// <summary>
+        /// Tests whether Checksum.calculate() can calculate checksums.
+        /// </summary>
+        [TestMethod]
+        public void Test_calculate_with_content()
+        {
+            var cases = new Dictionary<HashAlgorithm, string>(5)
+            {
+                { HashAlgorithm.Unknown, null },
+                { HashAlgorithm.SHA1, "8843d7f92416211de9ebb963ff4ce28125932878" },
+                { HashAlgorithm.SHA256, "c3ab8ff13720e8ad9047dd39466b3c8974e592c2fa383d4a3960714caef0c4f2" },
+                { HashAlgorithm.SHA384, "3c9c30d9f665e74d515c842960d4a451c83a0125fd3de7392d7b37231af10c72ea58aedfcdf89a5765bf902af93ecf06" },
+                {
+                    HashAlgorithm.SHA512,
+                    "0a50261ebd1a390fed2bf326f2673c145582a6342d523204973d0219337f81616a8069b012587cf5635f6925f1b56c360230c19b273500ee013e030601bf2425"
+                }
+            };
+
+            // Create temporary file of zero bytes size.
+            string fileName = Path.GetTempFileName();
+            byte[] data = new byte[] { 0x66, 0x6f, 0x6f, 0x62, 0x61, 0x72 }; // "foobar"
+            File.WriteAllBytes(fileName, data);
             try
             {
                 foreach (var item in cases)
@@ -136,7 +173,7 @@ namespace updater_test.utility
         [TestMethod]
         public void Test_normalise()
         {
-            Dictionary<string, string> cases = new Dictionary<string, string>(4)
+            var cases = new Dictionary<string, string>(4)
             {
                 { "a61f9380255bb154f001cc15f27374ea30de1013", "a61f9380255bb154f001cc15f27374ea30de1013" },
                 { "a61f 9380 255b b154 f001 cc15 f273 74ea 30de 1013", "a61f9380255bb154f001cc15f27374ea30de1013" },

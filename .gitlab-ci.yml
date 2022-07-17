@@ -1,12 +1,18 @@
-# Use the official mono image, based on debian.
+# Use the official .NET image, based on Debian.
 # It can use version tags as well, like mono:5.
-# See https://hub.docker.com/_/mono/ for more info.
-image: mono:6
+# See https://hub.docker.com/_/microsoft-dotnet-sdk/ for more info.
+image: mcr.microsoft.com/dotnet/sdk:6.0
 
 build:
   stage: build
   before_script:
     - apt-get update && apt-get -y install git
   script: 
-    - nuget restore ./updater/updater.sln
-    - msbuild ./updater/updater.sln
+    # Restore any NuGet packages.
+    - dotnet restore ./updater/updater.csproj
+    - dotnet restore ./updater-test/updater-test.csproj
+    # Build updater and the test project.
+    - dotnet build ./updater/updater.csproj
+    - dotnet build ./updater-test/updater-test.csproj
+    # Note: The moz-checksum-generator project cannot be built here, because it
+    # uses Windows Forms and those need a Windows OS to build properly.

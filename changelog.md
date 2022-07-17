@@ -4,6 +4,12 @@ _(Note: This changelog focuses on the major changes between the different
 versions. Therefore, it may not contain all changes. Especially smaller fixes or
 improvements may be omitted.)_
 
+## Version NEXT
+
+__[breaking change]__
+
+The required version of the .NET Framework is bumped from 4.7.2 to .NET 6.
+
 ## Version 2022.07.14.0
 
 __[new features]__

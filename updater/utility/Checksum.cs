@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017, 2020  Dirk Stolle
+    Copyright (C) 2017, 2020, 2022  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -43,16 +43,16 @@ namespace updater.utility
             switch (algorithm)
             {
                 case data.HashAlgorithm.SHA1:
-                    hasher = new SHA1Managed();
+                    hasher = SHA1.Create();
                     break;
                 case data.HashAlgorithm.SHA256:
-                    hasher = new SHA256Managed();
+                    hasher = SHA256.Create();
                     break;
                 case data.HashAlgorithm.SHA384:
-                    hasher = new SHA384Managed();
+                    hasher = SHA384.Create();
                     break;
                 case data.HashAlgorithm.SHA512:
-                    hasher = new SHA512Managed();
+                    hasher = SHA512.Create();
                     break;
                 case data.HashAlgorithm.Unknown:
                 default:

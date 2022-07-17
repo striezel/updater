@@ -16,12 +16,18 @@ jobs:
     strategy:
       matrix:
         os:
-          - windows-2019
+          # - windows-2019 - Visual Studio 2019 does not support .NET 6.
           - windows-2022
     runs-on: ${{ matrix.os }}
 
     steps:
-    - uses: actions/checkout@v3
+    - name: Code checkout
+      uses: actions/checkout@v3
+
+    - name: Install .NET Core
+      uses: actions/setup-dotnet@v2
+      with:
+        dotnet-version: 6.0.x
 
     - name: Add MSBuild to PATH
       uses: microsoft/setup-msbuild@v1
@@ -36,7 +42,7 @@ jobs:
       # See https://docs.microsoft.com/visualstudio/msbuild/msbuild-command-line-reference
       run: msbuild /m /p:Configuration=${{env.BUILD_CONFIGURATION}} ${{env.SOLUTION_FILE_PATH}}
 
-    # InnoSetup 6.1.2 is already installed on the Windows 2019 image. See
+    # InnoSetup 6.2.1 is already installed on the Windows 2019 image. See
     # <https://github.com/actions/virtual-environments/blob/main/images/win/Windows2019-Readme.md>
     # for pre-installed software.
 
