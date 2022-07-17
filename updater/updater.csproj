@@ -1,10 +1,15 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>net6.0-windows</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <AssemblyVersion>2022.07.14.0</AssemblyVersion>
+    <FileVersion>2022.07.14.0</FileVersion>
+    <Copyright>Copyright © 2016, 2017, 2018, 2019, 2020, 2021, 2022 Dirk Stolle</Copyright>
+    <Description>Finds / updates third party software that can be updated.</Description>
+    <PackageLicenseExpression>GPL-3.0-or-later</PackageLicenseExpression>
   </PropertyGroup>
 
   <ItemGroup>
