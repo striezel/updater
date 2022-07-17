@@ -3,19 +3,13 @@
   <PropertyGroup>
     <TargetFramework>net6.0-windows</TargetFramework>
     <RootNamespace>updater_test</RootNamespace>
-    <ImplicitUsings>enable</ImplicitUsings>
+    <ImplicitUsings>disable</ImplicitUsings>
     <Nullable>enable</Nullable>
-
     <IsPackable>false</IsPackable>
-
     <Description>Unit tests for updater application</Description>
-
     <Copyright>Copyright ©  2017-2022 Dirk Stolle</Copyright>
-
     <AssemblyVersion>1.1.2.0</AssemblyVersion>
-
     <FileVersion>1.1.2.0</FileVersion>
-
     <PackageLicenseExpression>GPL-3.0-or-later</PackageLicenseExpression>
   </PropertyGroup>
 

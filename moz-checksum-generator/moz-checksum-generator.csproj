@@ -6,7 +6,7 @@
     <RootNamespace>moz_checksum_generator</RootNamespace>
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
-    <ImplicitUsings>enable</ImplicitUsings>
+    <ImplicitUsings>disable</ImplicitUsings>
     <Description>Utility to generates checksums for Mozilla Firefox / SeaMonkey / Thunderbird setups.</Description>
     <Copyright>Copyright ©  2017-2022 Dirk Stolle</Copyright>
     <FileVersion>1.1.1.0</FileVersion>
