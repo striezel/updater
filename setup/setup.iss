@@ -42,6 +42,8 @@ Name: "tr"; MessagesFile: "compiler:Languages\Turkish.isl"
 [Files]
 ;main executable
 Source: "..\updater\bin\Release\net6.0-windows\updater.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\updater\bin\Release\net6.0-windows\updater.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\updater\bin\Release\net6.0-windows\updater.runtimeconfig.json"; DestDir: "{app}"; Flags: ignoreversion
 ; Newtonsoft.Json assembly (JSON deserialization)
 Source: "{%USERPROFILE}\.nuget\packages\newtonsoft.json\13.0.1\lib\netstandard2.0\Newtonsoft.Json.dll"; DestDir: "{app}"; Flags: external ignoreversion
 ; NLog main assembly (logging)
