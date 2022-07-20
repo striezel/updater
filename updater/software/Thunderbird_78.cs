@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017, 2018, 2019, 2020, 2021  Dirk Stolle
+    Copyright (C) 2017, 2018, 2019, 2020, 2021, 2022  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -87,11 +87,11 @@ namespace updater.software
         private static Dictionary<string, string> knownChecksums32Bit()
         {
             // These are the checksums for Windows 32 bit installers from
-            // https://ftp.mozilla.org/pub/thunderbird/releases/78.13.0/SHA512SUMS
+            // https://ftp.mozilla.org/pub/thunderbird/releases/78.14.0/SHA512SUMS
             return new Dictionary<string, string>(2)
             {
-                { "fa", "0b6e2067b006c999299b88fc7af7f705758fd6278cab25cc489c9f8db091f94f7e73b77164602fa9d59f92bf388334d2a98ee30e748fd620ea21d03a588712fd" },
-                { "si", "3ef8594bd791cffe26ca08273ebcd3cb4d6a590d22284d1cb27a4696c9c48a26260e27bd582e3c7d5a40a4539fc326dd9edefbfcbf402212c22e108bae41f955" }
+                { "fa", "167ac33239b9d0cfec1d80b3eac5118890a00c857e6bfdf071d04c5192b29ad33a83871b96986162185699320be1818df749275d3ae16423be879910eb9fd18c" },
+                { "si", "20f38e5b254e9688ede8c1454366cea089c12f42ee8c82b3f48d74113b403ac1d9533a48581f84ae395b942b9d3be61938b149b7044b80ac55e52a047fba101f" }
             };
         }
 
@@ -103,11 +103,11 @@ namespace updater.software
         private static Dictionary<string, string> knownChecksums64Bit()
         {
             // These are the checksums for Windows 64 bit installers from
-            // https://ftp.mozilla.org/pub/thunderbird/releases/78.13.0/SHA512SUMS
+            // https://ftp.mozilla.org/pub/thunderbird/releases/78.14.0/SHA512SUMS
             return new Dictionary<string, string>(2)
             {
-                { "fa", "2e55878bc5d226f7af38bb66673a8e88153cf54920ea59429f79a2910c9062a123accc191cbf7a3515ff7c23387dc7102bc999eec10b0386e6bdf96b2faa3f87" },
-                { "si", "83be272c2e5f1c935af386ab72c75661308c7506f3334b8b5a3709322ca2028abda898f9b92fd27f32e46f7f4aa69c71597ab128889220871ad5b758dff221f0" }
+                { "fa", "327b374f261b320002cd64dd8a09aaf82c535d094bee03eac10402835261c5ea9a6501d6a3ac0ad4b3dd115665486044d0ff4e485c07ddb1f80b340ff3ab4bbc" },
+                { "si", "05fea4f38360d264a6b494e01fd9d8fe063ef0be3b681948bed64263751079a78c44bba475a6e9928c3b7a2bf593863cd24ffeaf60f649e9f345c5e5e7b1b92b" }
             };
         }
 
@@ -131,7 +131,7 @@ namespace updater.software
         public override AvailableSoftware knownInfo()
         {
             var signature = new Signature(publisherX509, certificateExpiration);
-            const string version = "78.13.0";
+            const string version = "78.14.0";
             return new AvailableSoftware("Mozilla Thunderbird 78 (" + languageCode + ")",
                 version,
                 "^Mozilla Thunderbird [0-9]+\\.[0-9]+(\\.[0-9]+)? \\(x86 " + Regex.Escape(languageCode) + "\\)$",
