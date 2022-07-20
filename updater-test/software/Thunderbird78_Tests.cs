@@ -23,10 +23,10 @@ using updater.software;
 namespace updater_test.software
 {
     /// <summary>
-    /// Contains tests for the Thunderbird class.
+    /// Contains tests for the Thunderbird78 class.
     /// </summary>
     [TestClass]
-    public class Thunderbird_Tests : BasicSoftwareTests
+    public class Thunderbird78_Tests : BasicSoftwareTests
     {
         /// <summary>
         /// Checks return value of the validLanguageCodes() method.
@@ -34,7 +34,7 @@ namespace updater_test.software
         [TestMethod]
         public void Test_validLanguageCodes()
         {
-            var list = Thunderbird.validLanguageCodes();
+            var list = Thunderbird78.validLanguageCodes();
             Assert.IsNotNull(list);
 
             int items = 0;
@@ -43,7 +43,7 @@ namespace updater_test.software
                 Assert.IsFalse(string.IsNullOrWhiteSpace(item));
                 ++items;
             }
-            Assert.IsTrue(items > 50);
+            Assert.IsTrue(items == 2);
         }
 
 
@@ -53,10 +53,10 @@ namespace updater_test.software
         [TestMethod]
         public void Test_info()
         {
-            var languages = Thunderbird.validLanguageCodes();
+            var languages = Thunderbird78.validLanguageCodes();
             foreach (var languageCode in languages)
             {
-                _info(new Thunderbird(languageCode, false));
+                _info(new Thunderbird78(languageCode, false));
             }
         }
 
@@ -67,28 +67,8 @@ namespace updater_test.software
         [TestMethod]
         public void Test_implementsSearchForNewer()
         {
-            var tb = new Thunderbird("de", false);
+            var tb = new Thunderbird78("fa", false);
             Assert.IsTrue(tb.implementsSearchForNewer());
-        }
-
-
-        /// <summary>
-        /// Checks whether searchForNewer() returns something.
-        /// </summary>
-        [TestMethod]
-        public void Test_searchForNewer()
-        {
-            _searchForNewer(new Thunderbird("de", false));
-        }
-
-
-        /// <summary>
-        /// Checks whether the class info is up to date.
-        /// </summary>
-        [TestMethod]
-        public void Test_upToDate_info()
-        {
-            _upToDate_info(new Thunderbird("de", false));
         }
 
 
@@ -97,21 +77,36 @@ namespace updater_test.software
         /// typical version of Thunderbird.
         /// </summary>
         [TestMethod]
-        public void Test_matchTest()
+        public void Test_matchTest_fa()
         {
-            var tb = new Thunderbird("de", false);
+            var tb = new Thunderbird78("fa", false);
             var info = tb.info();
 
             var re = new Regex(info.match64Bit);
             // match old style, including version number
-            Assert.IsTrue(re.IsMatch("Mozilla Thunderbird 45.7.0 (x64 de)"));
-            // match new style, without version number
-            Assert.IsTrue(re.IsMatch("Mozilla Thunderbird (x64 de)"));
+            Assert.IsTrue(re.IsMatch("Mozilla Thunderbird 45.7.0 (x64 fa)"));
             re = new Regex(info.match32Bit);
             // match old style, including version number
-            Assert.IsTrue(re.IsMatch("Mozilla Thunderbird 45.7.0 (x86 de)"));
-            // match new style, without version number
-            Assert.IsTrue(re.IsMatch("Mozilla Thunderbird (x86 de)"));
+            Assert.IsTrue(re.IsMatch("Mozilla Thunderbird 45.7.0 (x86 fa)"));
+        }
+
+
+        /// <summary>
+        /// Checks whether the regular expression for Thunderbird matches a
+        /// typical version of Thunderbird.
+        /// </summary>
+        [TestMethod]
+        public void Test_matchTest_si()
+        {
+            var tb = new Thunderbird78("si", false);
+            var info = tb.info();
+
+            var re = new Regex(info.match64Bit);
+            // match old style, including version number
+            Assert.IsTrue(re.IsMatch("Mozilla Thunderbird 45.7.0 (x64 si)"));
+            re = new Regex(info.match32Bit);
+            // match old style, including version number
+            Assert.IsTrue(re.IsMatch("Mozilla Thunderbird 45.7.0 (x86 si)"));
         }
 
 
@@ -122,13 +117,13 @@ namespace updater_test.software
         [TestMethod]
         public void Test_matchTest_twoDigitMinorVersion()
         {
-            var fx = new Thunderbird("de", false);
-            var info = fx.info();
+            var tb = new Thunderbird78("fa", false);
+            var info = tb.info();
 
             var re = new Regex(info.match64Bit);
-            Assert.IsTrue(re.IsMatch("Mozilla Thunderbird 78.13.0 (x64 de)"));
+            Assert.IsTrue(re.IsMatch("Mozilla Thunderbird 78.13.0 (x64 fa)"));
             re = new Regex(info.match32Bit);
-            Assert.IsTrue(re.IsMatch("Mozilla Thunderbird 78.13.0 (x86 de)"));
+            Assert.IsTrue(re.IsMatch("Mozilla Thunderbird 78.13.0 (x86 fa)"));
         }
     } // class
 } // namespace
