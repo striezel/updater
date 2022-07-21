@@ -66,13 +66,13 @@ namespace updater.software
         {
             var signature = new Signature(publisherX509, certificateExpiration);
             var installer = new InstallInfoExe(
-                "https://download.ccleaner.com/ccsetup601.exe",
+                "https://download.ccleaner.com/ccsetup602.exe",
                 HashAlgorithm.SHA256,
-                "244d3009a48f6699948f8bd2a7abbe3c8c246c5d580de493c9a666ebcf8d0560",
+                "7c94dd6ac48c238b1f1f606eec6d3455d9190d33e7864ae0df4316f8e7f96876",
                 signature,
                 "/S");
             return new AvailableSoftware("CCleaner",
-                "6.01",
+                "6.02",
                 "^CCleaner+$",
                 "^CCleaner+$",
                 // CCleaner uses the same installer for 32 and 64 bit.
@@ -136,7 +136,7 @@ namespace updater.software
                 return null;
             }
 
-            Regex reVersion = new Regex("attachment; filename=\"ccsetup([0-9]+)\\.exe\"");
+            var reVersion = new Regex("attachment; filename=\"ccsetup([0-9]+)\\.exe\"");
             Match matchVersion = reVersion.Match(contentDisposition);
             if (!matchVersion.Success)
                 return null;
