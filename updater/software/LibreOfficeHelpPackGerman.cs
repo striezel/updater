@@ -18,7 +18,7 @@
 
 using System;
 using System.Collections.Generic;
-using System.Net;
+using System.Net.Http;
 using System.Text.RegularExpressions;
 using updater.data;
 
@@ -66,19 +66,19 @@ namespace updater.software
         {
             var signature = new Signature(publisherX509, certificateExpiration);
             return new AvailableSoftware("LibreOffice Help Pack German",
-                "7.3.4.2",
+                "7.3.5.2",
                 "^LibreOffice [0-9]+\\.[0-9] Help Pack \\(German\\)$",
                 "^LibreOffice [0-9]+\\.[0-9] Help Pack \\(German\\)$",
                 new InstallInfoLibO(
-                    "https://download.documentfoundation.org/libreoffice/stable/7.3.4/win/x86/LibreOffice_7.3.4_Win_x86_helppack_de.msi",
+                    "https://download.documentfoundation.org/libreoffice/stable/7.3.5/win/x86/LibreOffice_7.3.5_Win_x86_helppack_de.msi",
                     HashAlgorithm.SHA256,
-                    "a75cd9a41716b450fad987e841048220c3eb8ea6e7ba9e652bfbb0882076ff9b",
+                    "a745a997bf71e25629954d02d03b4140d24ca4fc64bbecfdbe2c7dc316bfb633",
                     signature,
                     "/qn /norestart"),
                 new InstallInfoLibO(
-                    "https://download.documentfoundation.org/libreoffice/stable/7.3.4/win/x86_64/LibreOffice_7.3.4_Win_x64_helppack_de.msi",
+                    "https://download.documentfoundation.org/libreoffice/stable/7.3.5/win/x86_64/LibreOffice_7.3.5_Win_x64_helppack_de.msi",
                     HashAlgorithm.SHA256,
-                    "10242af07031a18e921c1a07eede085dd4bbe22fa0d931344edf29817e90203b",
+                    "9eb0ef5b4e6725d3ac09e77efac12f3a6630bad640a7a3e9ad0201bc48892d63",
                     signature,
                     "/qn /norestart")
                     );
@@ -116,11 +116,13 @@ namespace updater.software
         {
             logger.Info("Searching for newer version of LibreOffice Help Pack (German)...");
             string htmlCode = null;
-            using (var client = new WebClient())
+            using (var client = new HttpClient())
             {
                 try
                 {
-                    htmlCode = client.DownloadString("https://download.documentfoundation.org/libreoffice/stable/?C=N;O=D");
+                    var task = client.GetStringAsync("https://download.documentfoundation.org/libreoffice/stable/?C=N;O=D");
+                    task.Wait();
+                    htmlCode = task.Result;
                 }
                 catch (Exception ex)
                 {
@@ -131,7 +133,7 @@ namespace updater.software
             } // using
 
             // Link is something like <a href="5.3.0/">5.3.0/</a>, no fourth digit.
-            Regex reVersion = new Regex("<a href=\"[0-9]\\.[0-9]\\.[0-9]/\">[0-9]\\.[0-9]\\.[0-9]/</a>");
+            var reVersion = new Regex("<a href=\"[0-9]\\.[0-9]\\.[0-9]/\">[0-9]\\.[0-9]\\.[0-9]/</a>");
             Match matchVersion = reVersion.Match(htmlCode);
             if (!matchVersion.Success)
                 return null;
@@ -145,12 +147,14 @@ namespace updater.software
             // https://download.documentfoundation.org/libreoffice/stable/5.3.0/win/x86/LibreOffice_5.3.0_Win_x86_helppack_de.msi.sha256
             // https://download.documentfoundation.org/libreoffice/stable/5.3.0/win/x86_64/LibreOffice_5.3.0_Win_x64_helppack_de.msi.sha256
             htmlCode = null;
-            using (var client = new WebClient())
+            using (var client = new HttpClient())
             {
                 try
                 {
-                    htmlCode = client.DownloadString("https://download.documentfoundation.org/libreoffice/stable/"
+                    var task = client.GetStringAsync("https://download.documentfoundation.org/libreoffice/stable/"
                         + newVersion + "/win/x86/LibreOffice_" + newVersion + "_Win_x86_helppack_de.msi.sha256");
+                    task.Wait();
+                    htmlCode = task.Result;
                 }
                 catch (Exception ex)
                 {
@@ -160,19 +164,21 @@ namespace updater.software
                 client.Dispose();
             } // using
 
-            Regex reHash32 = new Regex("[0-9a-f]{64}  LibreOffice_" + Regex.Escape(newVersion) + "_Win_x86_helppack_de\\.msi");
+            var reHash32 = new Regex("[0-9a-f]{64}  LibreOffice_" + Regex.Escape(newVersion) + "_Win_x86_helppack_de\\.msi");
             Match matchHash32 = reHash32.Match(htmlCode);
             if (!matchHash32.Success)
                 return null;
             string hash32 = matchHash32.Value.Substring(0, 64);
 
             htmlCode = null;
-            using (var client = new WebClient())
+            using (var client = new HttpClient())
             {
                 try
                 {
-                    htmlCode = client.DownloadString("https://download.documentfoundation.org/libreoffice/stable/"
+                    var task = client.GetStringAsync("https://download.documentfoundation.org/libreoffice/stable/"
                         + newVersion + "/win/x86_64/LibreOffice_" + newVersion + "_Win_x64_helppack_de.msi.sha256");
+                    task.Wait();
+                    htmlCode = task.Result;
                 }
                 catch (Exception ex)
                 {
@@ -182,7 +188,7 @@ namespace updater.software
                 client.Dispose();
             } // using
 
-            Regex reHash64 = new Regex("[0-9a-f]{64}  LibreOffice_" + Regex.Escape(newVersion) + "_Win_x64_helppack_de\\.msi");
+            var reHash64 = new Regex("[0-9a-f]{64}  LibreOffice_" + Regex.Escape(newVersion) + "_Win_x64_helppack_de\\.msi");
             Match matchHash64 = reHash64.Match(htmlCode);
             if (!matchHash64.Success)
                 return null;
