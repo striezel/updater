@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "updater", "updater.csproj",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "updater-test", "..\updater-test\updater-test.csproj", "{F1F55187-4CED-43A0-A9C9-920DDBD7FF76}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "moz-checksum-generator", "..\moz-checksum-generator\moz-checksum-generator.csproj", "{555625FB-731F-462A-A30A-9B71DCDB1737}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "moz-checksum-generator", "..\moz-checksum-generator\moz-checksum-generator.csproj", "{555625FB-731F-462A-A30A-9B71DCDB1737}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
