@@ -71,19 +71,19 @@ namespace updater.software
             {
                 var signature = new Signature(publisherX509, certificateExpiration);
                 return new AvailableSoftware("FileZilla FTP Client",
-                    "3.60.1",
+                    "3.60.2",
                     "^FileZilla (Client )?[0-9]+\\.[0-9]+(\\.[0-9]+(\\.[0-9]+)?)?$",
                     "^FileZilla (Client )?[0-9]+\\.[0-9]+(\\.[0-9]+(\\.[0-9]+)?)?$",
                     new InstallInfoExe(
-                        "https://download.filezilla-project.org/client/FileZilla_3.60.1_win32-setup.exe",
+                        "https://download.filezilla-project.org/client/FileZilla_3.60.2_win32-setup.exe",
                         HashAlgorithm.SHA512,
-                        "6c7320f097163d801d72d8354b29bd577190db2ead1d0e627b98dee995874e4c71e03e245d8bfbc3eb056a4d19a0350aeeff0a7627653977f9bb798192c47623",
+                        "577eed8771a95479429521fb883c4c84a036d3171c0d73495a71fe0059ad63093fc49166db9159af5dd929009a6dd5b0f328e8db96d59479d31ddf0b5f08d07f",
                         signature,
                         "/S"),
                     new InstallInfoExe(
-                        "https://download.filezilla-project.org/client/FileZilla_3.60.1_win64-setup.exe",
+                        "https://download.filezilla-project.org/client/FileZilla_3.60.2_win64-setup.exe",
                         HashAlgorithm.SHA512,
-                        "3c9e5f3cbedf9f97cc26880ea5203fb8f6051cdd5bd80c8e61fed26d8d2b09301c224535c8202403bf2bcb483948d35b7e78cd74b49850190faa69b9a22849c7",
+                        "b532c9e82016dedbc04714ed659f459d1e87db926f4eed6eef5ff7daba450f91ea1558e247c87a7727c9cf8ec96d7cee3a6cd5159e7dc0ccd28ceb87f05e722a",
                         signature,
                         "/S")
                     );
@@ -205,7 +205,7 @@ namespace updater.software
                 } // using
 
                 // find version number
-                Regex reVersion = new Regex("FileZilla_[0-9]+\\.[0-9]+(\\.[0-9]+(\\.[0-9]+)?)?_win64\\-setup\\.exe");
+                var reVersion = new Regex("FileZilla_[0-9]+\\.[0-9]+(\\.[0-9]+(\\.[0-9]+)?)?_win64\\-setup\\.exe");
                 Match matchVersion = reVersion.Match(htmlCode);
                 if (!matchVersion.Success)
                     return null;
@@ -223,7 +223,7 @@ namespace updater.software
 
                 string checksum64;
                 string checksum32;
-                Regex reSha512 = new Regex("[0-9a-f]{128}");
+                var reSha512 = new Regex("[0-9a-f]{128}");
                 if (idx64 < idx32)
                 {
                     // 64 bit first
@@ -254,11 +254,11 @@ namespace updater.software
                 // find download URL
                 // URL is something like "https://dl4.cdn.filezilla-project.org/client/FileZilla_3.50.0_win64-setup.exe?h=wJDamKbB9lkk6abFtg1Lig&x=1600204244"
                 // for the 64 bit binary. Similar pattern is applied for 32 bit binary.
-                Regex reDownload64 = new Regex("href=\"(https://dl[0-9]+\\.cdn\\.filezilla\\-project\\.org/client/FileZilla_[0-9]+\\.[0-9]+(\\.[0-9]+(\\.[0-9]+)?)?_win64\\-setup\\.exe\\?h=[A-Za-z0-9_\\-]+&x=[0-9]+)\"");
+                var reDownload64 = new Regex("href=\"(https://dl[0-9]+\\.cdn\\.filezilla\\-project\\.org/client/FileZilla_[0-9]+\\.[0-9]+(\\.[0-9]+(\\.[0-9]+)?)?_win64\\-setup\\.exe\\?h=[A-Za-z0-9_\\-]+&x=[0-9]+)\"");
                 Match dl64 = reDownload64.Match(htmlCode);
                 if (!dl64.Success)
                     return null;
-                Regex reDownload32 = new Regex("href=\"(https://dl[0-9]+\\.cdn\\.filezilla\\-project\\.org/client/FileZilla_[0-9]+\\.[0-9]+(\\.[0-9]+(\\.[0-9]+)?)?_win32\\-setup\\.exe\\?h=[A-Za-z0-9_\\-]+&x=[0-9]+)\"");
+                var reDownload32 = new Regex("href=\"(https://dl[0-9]+\\.cdn\\.filezilla\\-project\\.org/client/FileZilla_[0-9]+\\.[0-9]+(\\.[0-9]+(\\.[0-9]+)?)?_win32\\-setup\\.exe\\?h=[A-Za-z0-9_\\-]+&x=[0-9]+)\"");
                 Match dl32 = reDownload32.Match(htmlCode);
                 if (!dl32.Success)
                     return null;
@@ -303,9 +303,9 @@ namespace updater.software
         /// Returns false, if no update is necessary.</returns>
         public override bool needsUpdate(DetectedSoftware detected)
         {
-            versions.Quartet verDetected = new versions.Quartet(detected.displayVersion);
-            versions.Quartet verNewest = new versions.Quartet(info().newestVersion);
-            return (verNewest.CompareTo(verDetected) > 0);
+            var verDetected = new versions.Quartet(detected.displayVersion);
+            var verNewest = new versions.Quartet(info().newestVersion);
+            return verNewest.CompareTo(verDetected) > 0;
         }
 
 
