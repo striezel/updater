@@ -45,7 +45,7 @@ namespace updater.software
         /// <summary>
         /// expiration date for the publisher certificate
         /// </summary>
-        private static readonly DateTime certificateExpiration = new DateTime(2022, 5, 18, 23, 59, 59, DateTimeKind.Utc);
+        private static readonly DateTime certificateExpiration = new DateTime(2024, 5, 21, 23, 59, 59, DateTimeKind.Utc);
 
 
         /// <summary>
@@ -67,19 +67,19 @@ namespace updater.software
         {
             var signature = new Signature(publisherX509, certificateExpiration);
             return new AvailableSoftware("Eclipse Temurin JDK 17 with Hotspot",
-                "17.0.3.7",
+                "17.0.4.8",
                 "^Eclipse Temurin JDK [a-z]+ Hotspot 17\\.[0-9]+\\.[0-9]+\\+[0-9]+(\\.[0-9]+)? \\(x86\\)$",
                 "^Eclipse Temurin JDK [a-z]+ Hotspot 17\\.[0-9]+\\.[0-9]+\\+[0-9]+(\\.[0-9]+)? \\(x64\\)$",
                 new InstallInfoMsiNoLocation(
-                    "https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.3%2B7/OpenJDK17U-jdk_x86-32_windows_hotspot_17.0.3_7.msi",
+                    "https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.4%2B8/OpenJDK17U-jdk_x86-32_windows_hotspot_17.0.4_8.msi",
                     HashAlgorithm.SHA256,
-                    "5038d831bed9e1dc47d4042fb4ae04a02166a11d40bc5549e6b0db85a7b486ee",
+                    "fe9c055e6240ed0f3a0eefc0aeda8d7169d363393f66a003ba7f7fb6c4d792fa",
                     signature,
                     "INSTALLLEVEL=3 /qn /norestart"),
                 new InstallInfoMsiNoLocation(
-                    "https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.3%2B7/OpenJDK17U-jdk_x64_windows_hotspot_17.0.3_7.msi",
+                    "https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.4%2B8/OpenJDK17U-jdk_x64_windows_hotspot_17.0.4_8.msi",
                     HashAlgorithm.SHA256,
-                    "835096edc9e5e3e10b2d02eaaa66e3fa821db1288876edab75297a70a7b7718b",
+                    "fa761092862406d93b07c20c63b705728f3b3604a0e87bd4d909c0c63eee72c9",
                     signature,
                     "INSTALLLEVEL=3 /qn /norestart")
                     );
