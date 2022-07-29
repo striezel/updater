@@ -18,7 +18,7 @@
 
 using System;
 using System.Collections.Generic;
-using System.Net;
+using System.Net.Http;
 using System.Text.RegularExpressions;
 using updater.data;
 using updater.versions;
@@ -66,7 +66,7 @@ namespace updater.software
         public override AvailableSoftware knownInfo()
         {
             var signature = new Signature(publisherX509, certificateExpiration);
-            const string version = "3.23.2";
+            const string version = "3.23.3";
             return new AvailableSoftware("CMake",
                 version,
                 "^CMake$",
@@ -74,13 +74,13 @@ namespace updater.software
                 new InstallInfoMsi(
                     "https://github.com/Kitware/CMake/releases/download/v"+ version + "/cmake-" + version + "-windows-i386.msi",
                     HashAlgorithm.SHA256,
-                    "b575d5dcf6480e150ada98bdd01b70f7355af2a21ccd8a901a0221f89cde3c8f",
+                    "dc4ebf9230eca4ff86d7f8b6339f738cf31dd89535f62df0d0145abc6ff3a46f",
                     signature,
                     "/qn /norestart"),
                 new InstallInfoMsi(
                     "https://github.com/Kitware/CMake/releases/download/v" + version + "/cmake-" + version + "-windows-x86_64.msi",
                     HashAlgorithm.SHA256,
-                    "df80df25b197431ef8ef6e46d6cc522e28b8790e13f19aea9f78aa3e22f00174",
+                    "696d7a9c09c9510a1df72502856bf950a09c899ee983781537dd3e1d60746bbc",
                     signature,
                     "/qn /norestart")
                     );
@@ -119,11 +119,13 @@ namespace updater.software
             logger.Info("Searching for newer version of CMake...");
             // Just getting the latest release does not work here, because that may also be a release candidate, and we do not want that.
             string html;
-            using (var client = new WebClient())
+            using (var client = new HttpClient())
             {
                 try
                 {
-                    html = client.DownloadString("https://github.com/Kitware/CMake/releases");
+                    var task = client.GetStringAsync("https://github.com/Kitware/CMake/releases");
+                    task.Wait();
+                    html = task.Result;
                 }
                 catch (Exception ex)
                 {
@@ -133,7 +135,7 @@ namespace updater.software
             }
 
             // HTML text will contain links to releases like "https://github.com/Kitware/CMake/releases/tag/v3.19.4".
-            Regex reVersion = new Regex("CMake/releases/tag/v([0-9]+\\.[0-9]+\\.[0-9])\"");
+            var reVersion = new Regex("CMake/releases/tag/v([0-9]+\\.[0-9]+\\.[0-9])\"");
             var matchesVersion = reVersion.Matches(html);
             if (matchesVersion.Count == 0)
                 return null;
@@ -147,11 +149,13 @@ namespace updater.software
 
             // download checksum file, e.g. "https://github.com/Kitware/CMake/releases/download/v3.19.4/cmake-3.19.4-SHA-256.txt"
             string htmlCode = null;
-            using (var client = new WebClient())
+            using (var client = new HttpClient())
             {
                 try
                 {
-                    htmlCode = client.DownloadString("https://github.com/Kitware/CMake/releases/download/v" + currentVersion + "/cmake-" + currentVersion + "-SHA-256.txt");
+                    var task = client.GetStringAsync("https://github.com/Kitware/CMake/releases/download/v" + currentVersion + "/cmake-" + currentVersion + "-SHA-256.txt");
+                    task.Wait();
+                    htmlCode = task.Result;
                 }
                 catch (Exception ex)
                 {
@@ -162,7 +166,7 @@ namespace updater.software
             } // using
 
             // find SHA256 hash for 32 bit installer
-            Regex reHash = new Regex("[a-f0-9]{64}  cmake.+windows\\-i386\\.msi");
+            var reHash = new Regex("[a-f0-9]{64}  cmake.+windows\\-i386\\.msi");
             Match matchHash = reHash.Match(htmlCode);
             if (!matchHash.Success)
                 return null;
