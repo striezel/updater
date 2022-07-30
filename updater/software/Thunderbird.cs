@@ -309,7 +309,7 @@ namespace updater.software
                 string newLocation = response.Headers[HttpResponseHeader.Location];
                 request = null;
                 response = null;
-                Regex reVersion = new Regex("[0-9]+\\.[0-9]+(\\.[0-9]+)?");
+                var reVersion = new Regex("[0-9]+\\.[0-9]+(\\.[0-9]+)?");
                 Match matchVersion = reVersion.Match(newLocation);
                 if (!matchVersion.Success)
                     return null;

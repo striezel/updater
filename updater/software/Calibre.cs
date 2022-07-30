@@ -18,7 +18,7 @@
 
 using System;
 using System.Collections.Generic;
-using System.Net;
+using System.Net.Http;
 using System.Text.RegularExpressions;
 using updater.data;
 using updater.utility;
@@ -77,11 +77,11 @@ namespace updater.software
             }
             
             var signature = new Signature(publisherX509, certificateExpiration);
-            const string knownVersion = "6.1.0";
+            const string knownVersion = "6.2.1";
             InstallInfo info64 = new InstallInfoMsi(
                 "https://download.calibre-ebook.com/" + knownVersion + "/calibre-64bit-" + knownVersion + ".msi",
                 HashAlgorithm.SHA256,
-                "7efc763180b88ceebb2cbe273204e6e13830ae2b576b9d51f08fcf0f6b7f5310",
+                "c95ab094cdf954c7d54c887434b5d77df121ed2a09bf1840712e7a1b23eb308a",
                 signature,
                 "/qn /norestart"
                 );
@@ -175,11 +175,13 @@ namespace updater.software
                 return latestSupported32BitVersion();
             }
             string htmlCode = null;
-            using (var client = new WebClient())
+            using (var client = new HttpClient())
             {
                 try
                 {
-                    htmlCode = client.DownloadString("https://calibre-ebook.com/download_windows64");
+                    var task = client.GetStringAsync("https://calibre-ebook.com/download_windows64");
+                    task.Wait();
+                    htmlCode = task.Result;
                 }
                 catch (Exception ex)
                 {
@@ -190,7 +192,7 @@ namespace updater.software
             } // using
 
             // get new version from alternative MSI path on GitHub
-            Regex reMsi = new Regex("https://github.com/kovidgoyal/calibre/releases/download/v[0-9]+\\.[0-9]+\\.[0-9]+/calibre\\-64bit\\-[0-9]+\\.[0-9]+\\.[0-9]+\\.msi");
+            var reMsi = new Regex("https://github.com/kovidgoyal/calibre/releases/download/v[0-9]+\\.[0-9]+\\.[0-9]+/calibre\\-64bit\\-[0-9]+\\.[0-9]+\\.[0-9]+\\.msi");
             Match matchMsi = reMsi.Match(htmlCode);
             if (!matchMsi.Success)
                 return null;
@@ -202,11 +204,13 @@ namespace updater.software
 
             // get SHA-256 sums from FossHub (official site provides no hashes)
             htmlCode = null;
-            using (var client = new WebClient())
+            using (var client = new HttpClient())
             {
                 try
                 {
-                    htmlCode = client.DownloadString("https://www.fosshub.com/Calibre.html");
+                    var task = client.GetStringAsync("https://www.fosshub.com/Calibre.html");
+                    task.Wait();
+                    htmlCode = task.Result;
                 }
                 catch (Exception ex)
                 {
@@ -221,7 +225,7 @@ namespace updater.software
             if (idx < 0)
                 return null;
             // "sha256":"82e0a37fbb556792ce091e63177260d47662a757b21c768e0fe9f7dd4c1b1c06"
-            Regex exprSha256 = new Regex("\"sha256\":\"[0-9a-f]{64}\"");
+            var exprSha256 = new Regex("\"sha256\":\"[0-9a-f]{64}\"");
             Match match = exprSha256.Match(htmlCode, idx);
             if (!match.Success)
                 return null;
