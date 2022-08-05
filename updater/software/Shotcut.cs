@@ -169,7 +169,7 @@ namespace updater.software
                 string newLocation = response.Headers[HttpResponseHeader.Location];
                 request = null;
                 response = null;
-                Regex reVersion = new Regex("tag/v[0-9]+\\.[0-9]+\\.[0-9]+$");
+                var reVersion = new Regex("tag/v[0-9]+\\.[0-9]+\\.[0-9]+$");
                 Match matchVersion = reVersion.Match(newLocation);
                 if (!matchVersion.Success)
                     return null;
@@ -199,7 +199,7 @@ namespace updater.software
             } // using
 
             // find SHA256 hash for 64 bit installer
-            Regex reHash = new Regex("[a-f0-9]{64}  shotcut\\-win64\\-[0-9]{6}.exe");
+            var reHash = new Regex("[a-f0-9]{64}  shotcut\\-win64\\-[0-9]{6}.exe");
             Match matchHash = reHash.Match(htmlCode);
             if (!matchHash.Success)
                 return null;

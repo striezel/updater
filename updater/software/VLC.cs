@@ -134,7 +134,7 @@ namespace updater.software
                 client.Dispose();
             } // using
 
-            Regex reTarXz = new Regex("vlc\\-[0-9]+\\.[0-9]+\\.[0-9]+(\\.[0-9]+)?\\.tar\\.xz");
+            var reTarXz = new Regex("vlc\\-[0-9]+\\.[0-9]+\\.[0-9]+(\\.[0-9]+)?\\.tar\\.xz");
             Match matchTarXz = reTarXz.Match(htmlCode);
             if (!matchTarXz.Success)
                 return null;
@@ -167,7 +167,7 @@ namespace updater.software
                 client.Dispose();
             } // using
 
-            Regex reVersion = new Regex("\"[0-9]+\\.[0-9]+\\.[0-9]+(\\.[0-9]+)?/\"");
+            var reVersion = new Regex("\"[0-9]+\\.[0-9]+\\.[0-9]+(\\.[0-9]+)?/\"");
             var matches = reVersion.Matches(htmlCode);
             var latestVersion = new Quartet("0.0.0.0");
             string latestVersionString = null;
@@ -198,12 +198,12 @@ namespace updater.software
             string lastVersionString = getLastVersion();
             if (null == lastVersionString)
                 return null;
-            ShrinkingQuartet lastVersion = new ShrinkingQuartet(lastVersionString);
+            var lastVersion = new ShrinkingQuartet(lastVersionString);
             string availableVersionString = getLatestAvailableVersion();
             if (null == availableVersionString)
                 return null;
-            ShrinkingQuartet availableVersion = new ShrinkingQuartet(availableVersionString);
-            ShrinkingQuartet newVersion = new ShrinkingQuartet()
+            var availableVersion = new ShrinkingQuartet(availableVersionString);
+            var newVersion = new ShrinkingQuartet()
             {
                 major = lastVersion.major,
                 minor = lastVersion.minor,
@@ -216,7 +216,7 @@ namespace updater.software
             if (newVersion < new ShrinkingQuartet(knownInfo().newestVersion))
                 return null;
             // version number should match usual scheme, e.g. 5.x.y, where x and y are digits
-            Regex version = new Regex("^[1-9]+\\.[0-9]+\\.[0-9]+(\\.[0-9]+)?$");
+            var version = new Regex("^[1-9]+\\.[0-9]+\\.[0-9]+(\\.[0-9]+)?$");
             if (!version.IsMatch(newVersion.full()))
                 return null;
 
@@ -268,7 +268,7 @@ namespace updater.software
                 } // using
 
                 // extract hash
-                Regex reHash = new Regex("^[0-9a-f]{64} [\\* ]vlc\\-" + Regex.Escape(newVersion.full()) + "\\-win" + bits + ".exe");
+                var reHash = new Regex("^[0-9a-f]{64} [\\* ]vlc\\-" + Regex.Escape(newVersion.full()) + "\\-win" + bits + ".exe");
                 Match matchHash = reHash.Match(htmlCode);
                 if (!matchHash.Success)
                     return null;

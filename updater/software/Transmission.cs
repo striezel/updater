@@ -18,7 +18,7 @@
 
 using System;
 using System.Collections.Generic;
-using System.Net;
+using System.Net.Http;
 using System.Text.RegularExpressions;
 using updater.data;
 
@@ -116,11 +116,13 @@ namespace updater.software
         {
             logger.Info("Searching for newer version of Transmission...");
             string html;
-            using (var client = new WebClient())
+            using (var client = new HttpClient())
             {
                 try
                 {
-                    html = client.DownloadString("https://transmissionbt.com/includes/js/constants.js");
+                    var task = client.GetStringAsync("https://transmissionbt.com/includes/js/constants.js");
+                    task.Wait();
+                    html = task.Result;
                 }
                 catch (Exception ex)
                 {
@@ -129,14 +131,14 @@ namespace updater.software
                 }
             }
 
-            Regex reVersion = new Regex("current_version_msi: \"([0-9]+\\.[0-9]+)\"");
+            var reVersion = new Regex("current_version_msi: \"([0-9]+\\.[0-9]+)\"");
             var matchVersion = reVersion.Match(html);
             if (!matchVersion.Success)
                 return null;
             string currentVersion = matchVersion.Groups[1].Value;
 
             // find SHA256 hash for 32 bit installer
-            Regex reHash = new Regex("sha256_msi32: \"([a-f0-9]{64})\"");
+            var reHash = new Regex("sha256_msi32: \"([a-f0-9]{64})\"");
             Match matchHash = reHash.Match(html);
             if (!matchHash.Success)
                 return null;

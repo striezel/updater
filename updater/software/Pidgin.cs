@@ -18,7 +18,7 @@
 
 using System;
 using System.Collections.Generic;
-using System.Net;
+using System.Net.Http;
 using System.Text.RegularExpressions;
 using updater.data;
 using updater.utility;
@@ -113,11 +113,13 @@ namespace updater.software
         {
             logger.Info("Searching for newer version of Pidgin...");
             string htmlCode = null;
-            using (var client = new WebClient())
+            using (var client = new HttpClient())
             {
                 try
                 {
-                    htmlCode = client.DownloadString("https://pidgin.im/install/");
+                    var task = client.GetStringAsync("https://pidgin.im/install/");
+                    task.Wait();
+                    htmlCode = task.Result;
                 }
                 catch (Exception ex)
                 {
@@ -127,7 +129,7 @@ namespace updater.software
                 client.Dispose();
             } // using
 
-            Regex reVersion = new Regex("href=\"https://sourceforge\\.net/projects/pidgin/files/Pidgin/([0-9]+\\.[0-9]+\\.[0-9]+)/pidgin\\-([0-9]+\\.[0-9]+\\.[0-9]+)\\.exe\"");
+            var reVersion = new Regex("href=\"https://sourceforge\\.net/projects/pidgin/files/Pidgin/([0-9]+\\.[0-9]+\\.[0-9]+)/pidgin\\-([0-9]+\\.[0-9]+\\.[0-9]+)\\.exe\"");
             Match matchVersion = reVersion.Match(htmlCode);
             if (!matchVersion.Success)
                 return null;

@@ -18,7 +18,7 @@
 
 using System;
 using System.Collections.Generic;
-using System.Net;
+using System.Net.Http;
 using System.Text.RegularExpressions;
 using updater.data;
 
@@ -112,11 +112,13 @@ namespace updater.software
             logger.Info("Searching for newer version of TreeSize Free...");
             // Just getting the latest release does not work here, because that may also be a release candidate, and we do not want that.
             string html;
-            using (var client = new WebClient())
+            using (var client = new HttpClient())
             {
                 try
                 {
-                    html = client.DownloadString("https://customers.jam-software.de/downloadTrial.php?language=DE&article_no=80");
+                    var task = client.GetStringAsync("https://customers.jam-software.de/downloadTrial.php?language=DE&article_no=80");
+                    task.Wait();
+                    html = task.Result;
                 }
                 catch (Exception ex)
                 {
@@ -126,7 +128,7 @@ namespace updater.software
             }
 
             // HTML text will contain something like "<b>TreeSize Free V4.42</b>".
-            Regex reVersion = new Regex("<b>TreeSize Free V([0-9]+\\.[0-9]+)</b>");
+            var reVersion = new Regex("<b>TreeSize Free V([0-9]+\\.[0-9]+)</b>");
             var matchVersion = reVersion.Match(html);
             if (!matchVersion.Success)
                 return null;

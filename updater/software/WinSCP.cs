@@ -121,18 +121,18 @@ namespace updater.software
                 client.Dispose();
             }
 
-            Regex reExe = new Regex("WinSCP\\-[1-9]+\\.[0-9]+(\\.[0-9]+)?\\-Setup\\.exe");
+            var reExe = new Regex("WinSCP\\-[1-9]+\\.[0-9]+(\\.[0-9]+)?\\-Setup\\.exe");
             Match matchExe = reExe.Match(htmlCode);
             if (!matchExe.Success)
                 return null;
             // extract new version number
             string newVersion = matchExe.Value.Replace("WinSCP-", "").Replace("-Setup.exe", "");
-            versions.Triple newTriple = new versions.Triple(newVersion);
-            versions.Triple oldTriple = new versions.Triple(knownInfo().newestVersion);
+            var newTriple = new versions.Triple(newVersion);
+            var oldTriple = new versions.Triple(knownInfo().newestVersion);
             if (newTriple < oldTriple)
                 return null;
             // version number should match usual scheme, e.g. 5.x.y, where x and y are digits
-            Regex version = new Regex("^[1-9]+\\.[0-9]+(\\.[0-9]+)?$");
+            var version = new Regex("^[1-9]+\\.[0-9]+(\\.[0-9]+)?$");
             if (!version.IsMatch(newVersion))
                 return null;
 
@@ -180,7 +180,7 @@ namespace updater.software
             // URL for direct download is something like
             // https://winscp.net/download/files/201704212143f42467fc64e4c84259bce4a07a98edbd/WinSCP-5.9.5-Setup.exe,
             // where the middle part (date plus random MD5 hash?) varies.
-            Regex downloadUrl = new Regex(Regex.Escape("https://winscp.net/download/files/")
+            var downloadUrl = new Regex(Regex.Escape("https://winscp.net/download/files/")
                 + "[0-9]{12}[0-9a-f]{32}" + "/WinSCP\\-" + Regex.Escape(newVersion)
                 + "\\-Setup\\.exe");
             Match matchUrl = downloadUrl.Match(htmlCode);

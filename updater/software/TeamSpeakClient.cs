@@ -135,7 +135,7 @@ namespace updater.software
                 client.Dispose();
             }
 
-            Regex reExe = new Regex("https://files\\.teamspeak\\-services\\.com/releases/client/[0-9]+\\.[0-9]+\\.[0-9]+/TeamSpeak3-Client-win32-([0-9]+\\.[0-9]+\\.[0-9]+).exe");
+            var reExe = new Regex("https://files\\.teamspeak\\-services\\.com/releases/client/[0-9]+\\.[0-9]+\\.[0-9]+/TeamSpeak3-Client-win32-([0-9]+\\.[0-9]+\\.[0-9]+).exe");
             Match match = reExe.Match(htmlCode);
             if (!match.Success)
             {
@@ -156,7 +156,7 @@ namespace updater.software
                 return null;
             }
 
-            Regex reHash = new Regex("SHA256\\: ([0-9a-f]{64})");
+            var reHash = new Regex("SHA256\\: ([0-9a-f]{64})");
             match = reHash.Match(htmlCode.Substring(idx32));
             if (!match.Success)
                 return null;
