@@ -18,7 +18,7 @@
 
 using updater.data;
 using System;
-using System.Net;
+using System.Net.Http;
 using System.Text.RegularExpressions;
 using System.Collections.Generic;
 
@@ -63,12 +63,12 @@ namespace updater.software
         public override AvailableSoftware knownInfo()
         {
             return new AvailableSoftware("WinSCP",
-                "5.21.1",
+                "5.21.2",
                 "^WinSCP [1-9]+\\.[0-9]+(\\.[0-9]+)?$", null,
                 new InstallInfoExe(
-                    "https://netcologne.dl.sourceforge.net/project/winscp/WinSCP/5.21.1/WinSCP-5.21.1-Setup.exe",
+                    "https://netcologne.dl.sourceforge.net/project/winscp/WinSCP/5.21.2/WinSCP-5.21.2-Setup.exe",
                     HashAlgorithm.SHA256,
-                    "f751678639d904704084257c88a7e042d0850b89403f7fb6ed157ac1270d59b5",
+                    "0e06b3649c3e7f26b415c4b6f5b1ae8f8f754d361204f81e0f2654fd8abd5516",
                     new Signature(publisherX509, certificateExpiration),
                     "/VERYSILENT /NORESTART"),
                 // There is no 64 bit installer yet.
@@ -107,11 +107,13 @@ namespace updater.software
         {
             logger.Info("Searching for newer version of WinSCP...");
             string htmlCode = null;
-            using (var client = new WebClient())
+            using (var client = new HttpClient())
             {
                 try
                 {
-                    htmlCode = client.DownloadString("https://winscp.net/eng/download.php");
+                    var task = client.GetStringAsync("https://winscp.net/eng/download.php");
+                    task.Wait();
+                    htmlCode = task.Result;
                 }
                 catch (Exception ex)
                 {
@@ -138,11 +140,13 @@ namespace updater.software
 
             // Readme (e.g. https://winscp.net/download/WinSCP-5.9.5-ReadMe.txt) contains hash.
             htmlCode = null;
-            using (var client = new WebClient())
+            using (var client = new HttpClient())
             {
                 try
                 {
-                    htmlCode = client.DownloadString("https://winscp.net/download/WinSCP-" + newVersion + "-ReadMe.txt");
+                    var task = client.GetStringAsync("https://winscp.net/download/WinSCP-" + newVersion + "-ReadMe.txt");
+                    task.Wait();
+                    htmlCode = task.Result;
                 }
                 catch (Exception ex)
                 {
@@ -152,7 +156,7 @@ namespace updater.software
                 client.Dispose();
             } // using
             // extract hash - .exe occurs first, so first hash is the one we want
-            Regex hash = new Regex("SHA\\-256\\: [0-9a-f]{64}");
+            var hash = new Regex("SHA\\-256\\: [0-9a-f]{64}");
             Match matchHash = hash.Match(htmlCode);
             if (!matchHash.Success)
                 return null;
@@ -163,11 +167,13 @@ namespace updater.software
             // file after a few seconds, so we have to parse the direct link of
             // the download and use that.
             htmlCode = null;
-            using (var client = new WebClient())
+            using (var client = new HttpClient())
             {
                 try
                 {
-                    htmlCode = client.DownloadString("https://winscp.net/download/WinSCP-" + newVersion + "-Setup.exe");
+                    var task = client.GetStringAsync("https://winscp.net/download/WinSCP-" + newVersion + "-Setup.exe");
+                    task.Wait();
+                    htmlCode = task.Result;
                 }
                 catch (Exception ex)
                 {
