@@ -18,7 +18,7 @@
 
 using System;
 using System.Collections.Generic;
-using System.Net;
+using System.Net.Http;
 using System.Text.RegularExpressions;
 using updater.data;
 
@@ -66,19 +66,19 @@ namespace updater.software
         {
             var signature = new Signature(publisherX509, certificateExpiration);
             return new AvailableSoftware("Git",
-                "2.37.1",
+                "2.37.2.2",
                 "^(Git|Git version [0-9]+\\.[0-9]+\\.[0-9]+(\\.[0-9]+)?)$",
                 "^(Git|Git version [0-9]+\\.[0-9]+\\.[0-9]+(\\.[0-9]+)?)$",
                 new InstallInfoExe(
-                    "https://github.com/git-for-windows/git/releases/download/v2.37.1.windows.1/Git-2.37.1-32-bit.exe",
+                    "https://github.com/git-for-windows/git/releases/download/v2.37.2.windows.2/Git-2.37.2.2-32-bit.exe",
                     HashAlgorithm.SHA256,
-                    "714069fe4291c4ca7a51f7e7e81b0c94038590294f3b9e0981456a664c92966b",
+                    "672569b7041024b1fdb5c29cc9a775658be78f7d3afea025973e07954f5070fa",
                     signature,
                     "/VERYSILENT /NORESTART"),
                 new InstallInfoExe(
-                    "https://github.com/git-for-windows/git/releases/download/v2.37.1.windows.1/Git-2.37.1-64-bit.exe",
+                    "https://github.com/git-for-windows/git/releases/download/v2.37.2.windows.2/Git-2.37.2.2-64-bit.exe",
                     HashAlgorithm.SHA256,
-                    "1966761ad2c9e4cbd38f9e583b1125949b011a5a250a99d65e9bb21958e6ef8b",
+                    "6f91f1bb28b222f30c13f905a5e9b0ad491e67c28a37a238000def19f86e0a2f",
                     signature,
                     "/VERYSILENT /NORESTART")
                     );
@@ -117,11 +117,13 @@ namespace updater.software
             logger.Info("Searching for newer version of Git for Windows...");
             // Just getting the latest release does not work here, because that may also be a release candidate, and we do not want that.
             string html;
-            using (var client = new WebClient())
+            using (var client = new HttpClient())
             {
                 try
                 {
-                    html = client.DownloadString("https://github.com/git-for-windows/git/releases");
+                    var task = client.GetStringAsync("https://github.com/git-for-windows/git/releases");
+                    task.Wait();
+                    html = task.Result;
                 }
                 catch (Exception ex)
                 {
@@ -131,7 +133,7 @@ namespace updater.software
             }
 
             // HTML text will contain links to releases like "https://github.com/git-for-windows/git/releases/tag/v2.30.1.windows.1".
-            Regex reVersion = new Regex("git/releases/tag/v([0-9]+\\.[0-9]+\\.[0-9])\\.windows\\.([0-9]+)\"");
+            var reVersion = new Regex("git/releases/tag/v([0-9]+\\.[0-9]+\\.[0-9])\\.windows\\.([0-9]+)\"");
             var matchVersion = reVersion.Match(html);
             if (!matchVersion.Success)
                 return null;
@@ -141,11 +143,13 @@ namespace updater.software
 
             // Get checksum from release page, e.g. "https://github.com/git-for-windows/git/releases/tag/v2.30.1.windows.1"
             string htmlCode = null;
-            using (var client = new WebClient())
+            using (var client = new HttpClient())
             {
                 try
                 {
-                    htmlCode = client.DownloadString("https://github.com/git-for-windows/git/releases/tag/" + tag);
+                    var task = client.GetStringAsync("https://github.com/git-for-windows/git/releases/tag/" + tag);
+                    task.Wait();
+                    htmlCode = task.Result;
                 }
                 catch (Exception ex)
                 {
