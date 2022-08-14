@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017, 2018, 2020, 2021  Dirk Stolle
+    Copyright (C) 2017, 2018, 2020, 2021, 2022  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
 
 using System;
 using System.Collections.Generic;
-using System.Net;
+using System.Net.Http;
 using System.Text.RegularExpressions;
 using updater.data;
 
@@ -110,11 +110,13 @@ namespace updater.software
         {
             logger.Info("Searching for newer version of CDBurnerXP...");
             string htmlCode = null;
-            using (var client = new WebClient())
+            using (var client = new HttpClient())
             {
                 try
                 {
-                    htmlCode = client.DownloadString("https://cdburnerxp.se/download");
+                    var task = client.GetStringAsync("https://cdburnerxp.se/download");
+                    task.Wait();
+                    htmlCode = task.Result;
                 }
                 catch (Exception ex)
                 {
@@ -124,7 +126,7 @@ namespace updater.software
                 client.Dispose();
             }
 
-            Regex reMsi = new Regex("cdbxp_setup_[1-9]\\.[0-9]\\.[0-9]\\.[0-9]{4}\\.msi");
+            var reMsi = new Regex("cdbxp_setup_[1-9]\\.[0-9]\\.[0-9]\\.[0-9]{4}\\.msi");
             Match matchMsi = reMsi.Match(htmlCode);
             if (!matchMsi.Success)
                 return null;

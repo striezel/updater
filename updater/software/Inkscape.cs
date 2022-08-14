@@ -18,7 +18,7 @@
 
 using System;
 using System.IO;
-using System.Net;
+using System.Net.Http;
 using System.Text.RegularExpressions;
 using System.Diagnostics;
 using updater.data;
@@ -105,11 +105,13 @@ namespace updater.software
         {
             logger.Info("Searching for newer version of Inkscape...");
             string htmlCode = null;
-            using (var client = new WebClient())
+            using (var client = new HttpClient())
             {
                 try
                 {
-                    htmlCode = client.DownloadString("https://inkscape.org/release/");
+                    var task = client.GetStringAsync("https://inkscape.org/release/");
+                    task.Wait();
+                    htmlCode = task.Result;
                 }
                 catch (Exception ex)
                 {
@@ -120,7 +122,7 @@ namespace updater.software
             }
 
             // Search for URL part like "/release/0.92.4/windows/".
-            Regex reVersion = new Regex("/release/[0-9]\\.[0-9]+(\\.[0-9]+)?/windows/");
+            var reVersion = new Regex("/release/[0-9]\\.[0-9]+(\\.[0-9]+)?/windows/");
             Match matchVersion = reVersion.Match(htmlCode);
             if (!matchVersion.Success)
                 return null;
@@ -144,11 +146,13 @@ namespace updater.software
                 // 64 bit version is at an URL like
                 // https://inkscape.org/release/inkscape-0.92.4/windows/64-bit/msi/dl/
                 htmlCode = null;
-                using (var client = new WebClient())
+                using (var client = new HttpClient())
                 {
                     try
                     {
-                        htmlCode = client.DownloadString("https://inkscape.org/release/inkscape-" + newVersion + "/windows/" + bits + "-bit/msi/dl/");
+                        var task = client.GetStringAsync("https://inkscape.org/release/inkscape-" + newVersion + "/windows/" + bits + "-bit/msi/dl/");
+                        task.Wait();
+                        htmlCode = task.Result;
                     }
                     catch (Exception ex)
                     {
@@ -164,7 +168,7 @@ namespace updater.software
                 string arch = (bits == "32") ? "x86" : "x64";
                 string dateAndHash = null;
                 {
-                    Regex reUrl = new Regex("<a href=\"([a-zA-Z0-9\\/]+)/inkscape\\-" + Regex.Escape(newVersion) + "(_2[0-9]{3}\\-[0-9]{2}\\-[0-9]{2}_[0-9a-f]+)\\-" + arch + "(_[a-zA-Z0-9]+)\\.msi\">");
+                    var reUrl = new Regex("<a href=\"([a-zA-Z0-9\\/]+)/inkscape\\-" + Regex.Escape(newVersion) + "(_2[0-9]{3}\\-[0-9]{2}\\-[0-9]{2}_[0-9a-f]+)\\-" + arch + "(_[a-zA-Z0-9]+)\\.msi\">");
                     Match matchUrl = reUrl.Match(htmlCode);
                     if (!matchUrl.Success)
                         return null;
@@ -180,7 +184,7 @@ namespace updater.software
                 // <a href="https://media.inkscape.org/media/resources/sigs/inkscape-1.2_2022-05-15_dc2aedaf03-x86.msi_eACymJl.sha256"> or
                 // <a href="https://media.inkscape.org/media/resources/sigs/inkscape-1.2_2022-05-15_dc2aedaf03-x64.msi_p22hkKC.sha256">.
                 {
-                    Regex reUrl = new Regex("<a href=\"https://media\\.inkscape\\.org/media/resources/sigs/inkscape\\-"
+                    var reUrl = new Regex("<a href=\"https://media\\.inkscape\\.org/media/resources/sigs/inkscape\\-"
                         + Regex.Escape(newVersion + dateAndHash) + "\\-" + arch + "\\.msi(_[a-zA-Z0-9]+)\\.sha256\">");
                     Match matchUrl = reUrl.Match(htmlCode);
                     if (!matchUrl.Success)
@@ -190,11 +194,13 @@ namespace updater.software
                         + newVersion + dateAndHash + "-" + arch + ".msi" + bogus + ".sha256";
 
                     htmlCode = null;
-                    using (var client = new WebClient())
+                    using (var client = new HttpClient())
                     {
                         try
                         {
-                            htmlCode = client.DownloadString(signatureUrl);
+                            var task = client.GetStringAsync(signatureUrl);
+                            task.Wait();
+                            htmlCode = task.Result;
                         }
                         catch (Exception ex)
                         {
@@ -205,7 +211,7 @@ namespace updater.software
                     }
                 }
 
-                Regex reHash = new Regex("[0-9a-f]{64} [ \\*]inkscape\\-" + Regex.Escape(newVersion + dateAndHash) + "\\-" + arch + "\\.msi");
+                var reHash = new Regex("[0-9a-f]{64} [ \\*]inkscape\\-" + Regex.Escape(newVersion + dateAndHash) + "\\-" + arch + "\\.msi");
                 Match matchHash = reHash.Match(htmlCode);
                 if (!matchHash.Success)
                     return null;
@@ -347,7 +353,7 @@ namespace updater.software
         /// Returns false, if no update is necessary.</returns>
         public override bool needsUpdate(DetectedSoftware detected)
         {
-            Regex re = new Regex("[0-9]\\.[0-9]+(\\.[0-9]+)?");
+            var re = new Regex("[0-9]\\.[0-9]+(\\.[0-9]+)?");
             Match m = re.Match(detected.displayName);
             if (m.Success)
             {

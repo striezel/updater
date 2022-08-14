@@ -19,6 +19,7 @@
 using System;
 using System.Collections.Generic;
 using System.Net;
+using System.Net.Http;
 using System.Text.RegularExpressions;
 using updater.data;
 
@@ -60,7 +61,7 @@ namespace updater.software
             if (string.IsNullOrWhiteSpace(langCode))
             {
                 logger.Error("The language code must not be null, empty or whitespace!");
-                throw new ArgumentNullException("langCode", "The language code must not be null, empty or whitespace!");
+                throw new ArgumentNullException(nameof(langCode), "The language code must not be null, empty or whitespace!");
             }
             languageCode = langCode.Trim();
             var d32 = knownChecksums32Bit();
@@ -68,12 +69,12 @@ namespace updater.software
             if (!d32.ContainsKey(languageCode))
             {
                 logger.Error("The string '" + langCode + "' does not represent a valid language code!");
-                throw new ArgumentOutOfRangeException("langCode", "The string '" + langCode + "' does not represent a valid language code!");
+                throw new ArgumentOutOfRangeException(nameof(langCode), "The string '" + langCode + "' does not represent a valid language code!");
             }
             if (!d64.ContainsKey(languageCode))
             {
                 logger.Error("The string '" + langCode + "' does not represent a valid language code!");
-                throw new ArgumentOutOfRangeException("langCode", "The string '" + langCode + "' does not represent a valid language code!");
+                throw new ArgumentOutOfRangeException(nameof(langCode), "The string '" + langCode + "' does not represent a valid language code!");
             }
             checksum32Bit = d32[languageCode];
             checksum64Bit = d64[languageCode];
@@ -374,7 +375,7 @@ namespace updater.software
                 string newLocation = response.Headers[HttpResponseHeader.Location];
                 request = null;
                 response = null;
-                Regex reVersion = new Regex("[0-9]{2,3}\\.[0-9](\\.[0-9])?");
+                var reVersion = new Regex("[0-9]{2,3}\\.[0-9](\\.[0-9])?");
                 Match matchVersion = reVersion.Match(newLocation);
                 if (!matchVersion.Success)
                     return null;
@@ -407,11 +408,13 @@ namespace updater.software
 
             string url = "https://ftp.mozilla.org/pub/firefox/releases/" + newerVersion + "/SHA512SUMS";
             string sha512SumsContent = null;
-            using (var client = new WebClient())
+            using (var client = new HttpClient())
             {
                 try
                 {
-                    sha512SumsContent = client.DownloadString(url);
+                    var task = client.GetStringAsync(url);
+                    task.Wait();
+                    sha512SumsContent = task.Result;
                 }
                 catch (Exception ex)
                 {
@@ -422,13 +425,13 @@ namespace updater.software
             } // using
 
             // look for line with the correct language code and version for 32 bit
-            Regex reChecksum32Bit = new Regex("[0-9a-f]{128}  win32/" + languageCode.Replace("-", "\\-")
+            var reChecksum32Bit = new Regex("[0-9a-f]{128}  win32/" + languageCode.Replace("-", "\\-")
                 + "/Firefox Setup " + Regex.Escape(newerVersion) + "\\.exe");
             Match matchChecksum32Bit = reChecksum32Bit.Match(sha512SumsContent);
             if (!matchChecksum32Bit.Success)
                 return null;
             // look for line with the correct language code and version for 64 bit
-            Regex reChecksum64Bit = new Regex("[0-9a-f]{128}  win64/" + languageCode.Replace("-", "\\-")
+            var reChecksum64Bit = new Regex("[0-9a-f]{128}  win64/" + languageCode.Replace("-", "\\-")
                 + "/Firefox Setup " + Regex.Escape(newerVersion) + "\\.exe");
             Match matchChecksum64Bit = reChecksum64Bit.Match(sha512SumsContent);
             if (!matchChecksum64Bit.Success)

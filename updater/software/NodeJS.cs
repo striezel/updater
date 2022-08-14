@@ -18,7 +18,7 @@
 
 using System;
 using System.Collections.Generic;
-using System.Net;
+using System.Net.Http;
 using System.Text.RegularExpressions;
 using updater.data;
 
@@ -118,11 +118,13 @@ namespace updater.software
         {
             logger.Info("Searching for newer version of Node.js...");
             string htmlCode = null;
-            using (var client = new WebClient())
+            using (var client = new HttpClient())
             {
                 try
                 {
-                    htmlCode = client.DownloadString("https://nodejs.org/en/download/");
+                    var task = client.GetStringAsync("https://nodejs.org/en/download/");
+                    task.Wait();
+                    htmlCode = task.Result;
                 }
                 catch (Exception ex)
                 {
@@ -132,7 +134,7 @@ namespace updater.software
                 client.Dispose();
             }
 
-            Regex reMsi = new Regex("https://nodejs\\.org/dist/v([0-9]+\\.[0-9]+\\.[0-9]+)/node\\-v([0-9]+\\.[0-9]+\\.[0-9]+)\\-x64\\.msi");
+            var reMsi = new Regex("https://nodejs\\.org/dist/v([0-9]+\\.[0-9]+\\.[0-9]+)/node\\-v([0-9]+\\.[0-9]+\\.[0-9]+)\\-x64\\.msi");
             Match matchMsi = reMsi.Match(htmlCode);
             if (!matchMsi.Success)
                 return null;
@@ -145,11 +147,13 @@ namespace updater.software
 
             // Now get SHA-256 checksum file from server.
             // URL is something like https://nodejs.org/download/release/v14.16.0/SHASUMS256.txt.
-            using (var client = new WebClient())
+            using (var client = new HttpClient())
             {
                 try
                 {
-                    htmlCode = client.DownloadString("https://nodejs.org/download/release/v" + newVersion + "/SHASUMS256.txt");
+                    var task = client.GetStringAsync("https://nodejs.org/download/release/v" + newVersion + "/SHASUMS256.txt");
+                    task.Wait();
+                    htmlCode = task.Result;
                 }
                 catch (Exception ex)
                 {
@@ -161,12 +165,12 @@ namespace updater.software
 
             // Line looks like "61d549ed39fc264df9978f824042f3f4cac90a866e933c5088384d5dedf283fe  node-v14.16.0-x86.msi".
             string escapedVersion = Regex.Escape(newVersion);
-            Regex reChecksum32 = new Regex("[0-9a-f]{64}  node\\-v" + escapedVersion + "\\-x86\\.msi");
+            var reChecksum32 = new Regex("[0-9a-f]{64}  node\\-v" + escapedVersion + "\\-x86\\.msi");
             Match match32 = reChecksum32.Match(htmlCode);
             if (!match32.Success)
                 return null;
             // Line looks like "d9243c9d02f5e4801b8b3ab848f45ce0da2882b5fff448191548ca49af434066  node-v14.16.0-x64.msi".
-            Regex reChecksum64 = new Regex("[0-9a-f]{64}  node\\-v" + escapedVersion + "\\-x64\\.msi");
+            var reChecksum64 = new Regex("[0-9a-f]{64}  node\\-v" + escapedVersion + "\\-x64\\.msi");
             Match match64 = reChecksum64.Match(htmlCode);
             if (!match64.Success)
                 return null;

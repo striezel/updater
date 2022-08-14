@@ -375,7 +375,7 @@ namespace updater.operations
             string basename = null;
             try
             {
-                Uri uri = new Uri(url);
+                var uri = new Uri(url);
                 int segCount = uri.Segments.Length;
                 if (!string.IsNullOrWhiteSpace(uri.Segments[segCount - 1]))
                     basename = Path.GetFileName(uri.LocalPath);

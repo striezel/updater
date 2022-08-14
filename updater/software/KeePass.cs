@@ -18,7 +18,7 @@
 
 using updater.data;
 using System;
-using System.Net;
+using System.Net.Http;
 using System.Text.RegularExpressions;
 using System.Collections.Generic;
 
@@ -111,11 +111,13 @@ namespace updater.software
         {
             logger.Info("Searching for newer version of KeePass...");
             string htmlCode = null;
-            using (var client = new WebClient())
+            using (var client = new HttpClient())
             {
                 try
                 {
-                    htmlCode = client.DownloadString("https://keepass.info/integrity.html");
+                    var task = client.GetStringAsync("https://keepass.info/integrity.html");
+                    task.Wait();
+                    htmlCode = task.Result;
                 }
                 catch (Exception ex)
                 {
@@ -125,12 +127,12 @@ namespace updater.software
                 client.Dispose();
             } // using
 
-            Regex reExe = new Regex(">KeePass\\-[2-9]\\.[0-9]{2}(\\.[0-9]+)?\\-Setup\\.exe<");
+            var reExe = new Regex(">KeePass\\-[2-9]\\.[0-9]{2}(\\.[0-9]+)?\\-Setup\\.exe<");
             Match matchExe = reExe.Match(htmlCode);
             if (!matchExe.Success)
                 return null;
             // MSI follows after .exe
-            Regex reMsi = new Regex(">KeePass\\-[2-9]\\.[0-9]{2}(\\.[0-9]+)?\\.msi<");
+            var reMsi = new Regex(">KeePass\\-[2-9]\\.[0-9]{2}(\\.[0-9]+)?\\.msi<");
             Match matchMsi = reMsi.Match(htmlCode, matchExe.Index + 1);
             if (!matchMsi.Success)
                 return null;
@@ -140,12 +142,12 @@ namespace updater.software
                 return null;
             // Version number should match usual scheme, e.g. 2.xx, where xx are two digits.
             // In some rarer cases it can also have three parts, e.g. 2.xx.y.
-            Regex version = new Regex("^[2-9]\\.[0-9]{2}(\\.[0-9]+)?$");
+            var version = new Regex("^[2-9]\\.[0-9]{2}(\\.[0-9]+)?$");
             if (!version.IsMatch(newVersion))
                 return null;
 
             // extract hash
-            Regex hash = new Regex("([0-9A-F]{8} ){7}[0-9A-F]{8}");
+            var hash = new Regex("([0-9A-F]{8} ){7}[0-9A-F]{8}");
             Match matchHash = hash.Match(htmlCode, matchExe.Index + 1);
             if (!matchHash.Success)
                 return null;

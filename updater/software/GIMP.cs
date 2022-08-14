@@ -19,6 +19,7 @@
 using System;
 using System.Collections.Generic;
 using System.Net;
+using System.Net.Http;
 using System.Text.RegularExpressions;
 using updater.data;
 
@@ -112,11 +113,13 @@ namespace updater.software
         {
             logger.Info("Searching for newer version of GIMP...");
             string htmlCode = null;
-            using (var client = new WebClient())
+            using (var client = new HttpClient())
             {
                 try
                 {
-                    htmlCode = client.DownloadString("https://www.gimp.org/downloads/");
+                    var task = client.GetStringAsync("https://www.gimp.org/downloads/");
+                    task.Wait();
+                    htmlCode = task.Result;
                 }
                 catch (Exception ex)
                 {
@@ -132,7 +135,7 @@ namespace updater.software
                 return null;
             htmlCode = htmlCode.Remove(0, idx);
 
-            Regex reVersion = new Regex("[0-9]+\\.[0-9]+\\.[0-9]+");
+            var reVersion = new Regex("[0-9]+\\.[0-9]+\\.[0-9]+");
             Match matchVersion = reVersion.Match(htmlCode);
             if (!matchVersion.Success)
                 return null;
@@ -182,7 +185,7 @@ namespace updater.software
                 client.Dispose();
             } // using
 
-            Regex reChecksum = new Regex("[0-9a-f]{64}  gimp\\-" + Regex.Escape(version) + "\\-setup\\.exe");
+            var reChecksum = new Regex("[0-9a-f]{64}  gimp\\-" + Regex.Escape(version) + "\\-setup\\.exe");
             Match m = reChecksum.Match(htmlCode);
             if (!m.Success)
                 return null;

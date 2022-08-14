@@ -19,6 +19,7 @@
 using updater.data;
 using System;
 using System.Net;
+using System.Net.Http;
 using System.Text.RegularExpressions;
 using System.Collections.Generic;
 using updater.versions;
@@ -120,11 +121,13 @@ namespace updater.software
         private string getLastVersion()
         {
             string htmlCode = null;
-            using (var client = new WebClient())
+            using (var client = new HttpClient())
             {
                 try
                 {
-                    htmlCode = client.DownloadString("https://get.videolan.org/vlc/last/");
+                    var task = client.GetStringAsync("https://get.videolan.org/vlc/last/");
+                    task.Wait();
+                    htmlCode = task.Result;
                 }
                 catch (Exception ex)
                 {
@@ -153,11 +156,13 @@ namespace updater.software
         {
             // See https://get.videolan.org/vlc/ for available versions.
             string htmlCode = null;
-            using (var client = new WebClient())
+            using (var client = new HttpClient())
             {
                 try
                 {
-                    htmlCode = client.DownloadString("https://get.videolan.org/vlc/");
+                    var task = client.GetStringAsync("https://get.videolan.org/vlc/");
+                    task.Wait();
+                    htmlCode = task.Result;
                 }
                 catch (Exception ex)
                 {

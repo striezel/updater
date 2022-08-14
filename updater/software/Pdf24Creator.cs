@@ -18,7 +18,7 @@
 
 using System;
 using System.Collections.Generic;
-using System.Net;
+using System.Net.Http;
 using System.Text.RegularExpressions;
 using updater.data;
 
@@ -141,11 +141,13 @@ namespace updater.software
         {
             logger.Info("Searching for newer version of PDF24 Creator...");
             string htmlCode = null;
-            using (var client = new WebClient())
+            using (var client = new HttpClient())
             {
                 try
                 {
-                    htmlCode = client.DownloadString("https://en.pdf24.org/pdf-creator-download.html");
+                    var task = client.GetStringAsync("https://en.pdf24.org/pdf-creator-download.html");
+                    task.Wait();
+                    htmlCode = task.Result;
                 }
                 catch (Exception ex)
                 {
@@ -156,7 +158,7 @@ namespace updater.software
             } // using
 
             // version number occurs three times on the site (private exe, business exe, msi)
-            Regex reVersion = new Regex("[0-9]+\\.[0-9]+\\.[0-9]+");
+            var reVersion = new Regex("[0-9]+\\.[0-9]+\\.[0-9]+");
             Match versionMatch = reVersion.Match(htmlCode);
             if (!versionMatch.Success)
                 return null;
@@ -202,8 +204,8 @@ namespace updater.software
         /// Returns false, if no update is necessary.</returns>
         public override bool needsUpdate(DetectedSoftware detected)
         {
-            versions.Triple verDetected = new versions.Triple(detected.displayVersion);
-            versions.Triple verNewest = new versions.Triple(info().newestVersion);
+            var verDetected = new versions.Triple(detected.displayVersion);
+            var verNewest = new versions.Triple(info().newestVersion);
             return verNewest.CompareTo(verDetected) > 0;
         }
 

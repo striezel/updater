@@ -19,7 +19,7 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Net;
+using System.Net.Http;
 using updater.data;
 using updater.software.mariadb_api;
 using updater.versions;
@@ -102,11 +102,13 @@ namespace updater.software
             logger.Info("Searching for newer version of MariaDB Server " + branch + "...");
             checkForEndOfLife();
             string json = null;
-            using (var client = new WebClient())
+            using (var client = new HttpClient())
             {
                 try
                 {
-                    json = client.DownloadString("https://downloads.mariadb.org/rest-api/mariadb/" + branch + "/");
+                    var task = client.GetStringAsync("https://downloads.mariadb.org/rest-api/mariadb/" + branch + "/");
+                    task.Wait();
+                    json = task.Result;
                 }
                 catch (Exception ex)
                 {
