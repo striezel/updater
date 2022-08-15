@@ -47,7 +47,7 @@ Source: "..\updater\bin\Release\net6.0-windows\updater.runtimeconfig.json"; Dest
 ; Newtonsoft.Json assembly (JSON deserialization)
 Source: "{%USERPROFILE}\.nuget\packages\newtonsoft.json\13.0.1\lib\netstandard2.0\Newtonsoft.Json.dll"; DestDir: "{app}"; Flags: external ignoreversion
 ; NLog main assembly (logging)
-Source: "{%USERPROFILE}\.nuget\packages\nlog\5.0.1\lib\netstandard2.0\NLog.dll"; DestDir: "{app}"; Flags: external ignoreversion
+Source: "{%USERPROFILE}\.nuget\packages\nlog\5.0.2\lib\netstandard2.0\NLog.dll"; DestDir: "{app}"; Flags: external ignoreversion
 ; GPL 3 license text
 Source: "..\LICENSE"; DestDir: "{app}"; Flags: ignoreversion
 

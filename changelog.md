@@ -14,6 +14,10 @@ __[changes]__
 
 Downloads for 7-Zip will now use HTTPS (instead of HTTP) consistently.
 
+__[maintenance]__
+
+* NLog library is updated from 5.0.1 to 5.0.2.
+
 ## Version 2022.07.14.0
 
 __[new features]__
