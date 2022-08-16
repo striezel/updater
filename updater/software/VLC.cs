@@ -118,7 +118,7 @@ namespace updater.software
         /// </summary>
         /// <returns>Returns a version number, if successful.
         /// Returns null, if an error occurred.</returns>
-        private string getLastVersion()
+        private static string getLastVersion()
         {
             string htmlCode = null;
             using (var client = new HttpClient())
@@ -152,7 +152,7 @@ namespace updater.software
         /// </summary>
         /// <returns>Returns latest available version number, if successful.
         /// Returns null, if an error occurred.</returns>
-        private string getLatestAvailableVersion()
+        private static string getLatestAvailableVersion()
         {
             // See https://get.videolan.org/vlc/ for available versions.
             string htmlCode = null;
