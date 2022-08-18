@@ -43,16 +43,17 @@ namespace updater.software
         /// details about the software.</returns>
         public override AvailableSoftware knownInfo()
         {
+            const string version = "10.6.9";
             var signature = new Signature(publisherX509, certificateExpiration);
             return new AvailableSoftware("MariaDB Server 10.6",
-                "10.6.8",
+                version,
                 null, // no 32 bit installer
                 "^MariaDB 10\\.6 \\(x64\\)$",
                 null, // no 32 bit installer
                 new InstallInfoMsi(
-                    "https://downloads.mariadb.org/rest-api/mariadb/10.6.8/mariadb-10.6.8-winx64.msi",
+                    "https://downloads.mariadb.org/rest-api/mariadb/" + version + "/mariadb-" + version + "-winx64.msi",
                     HashAlgorithm.SHA256,
-                    "18842f568885f77f37c53a467c3381a887f58cad9a12d50fbbe68a82cc95e60e",
+                    "803ebfc01e6b83cfff2ebcb3e94a49687c2f22e1328bbab833d08eda8dbc9072",
                     signature,
                     "/qn /norestart")
                 );
