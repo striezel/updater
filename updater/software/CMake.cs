@@ -66,7 +66,7 @@ namespace updater.software
         public override AvailableSoftware knownInfo()
         {
             var signature = new Signature(publisherX509, certificateExpiration);
-            const string version = "3.24.0";
+            const string version = "3.24.1";
             return new AvailableSoftware("CMake",
                 version,
                 "^CMake$",
@@ -74,13 +74,13 @@ namespace updater.software
                 new InstallInfoMsi(
                     "https://github.com/Kitware/CMake/releases/download/v"+ version + "/cmake-" + version + "-windows-i386.msi",
                     HashAlgorithm.SHA256,
-                    "7522802ad14d354c051e1e945e81fa592038b179f4a776d06a0bf663bfc4e38c",
+                    "96862eaf218d9da4ce1fe15d2594d1163cb5f87212862a9afc9526ce9224d53d",
                     signature,
                     "/qn /norestart"),
                 new InstallInfoMsi(
                     "https://github.com/Kitware/CMake/releases/download/v" + version + "/cmake-" + version + "-windows-x86_64.msi",
                     HashAlgorithm.SHA256,
-                    "57113e3ea7f4df89b7f3af17ef0fcea81592ce9c661ea1018fcfe40795b50229",
+                    "04f1d47172b69d39cf178d0e7d9100b536c2b4b5f3c7302c7140800d9c2fa220",
                     signature,
                     "/qn /norestart")
                     );
@@ -200,9 +200,12 @@ namespace updater.software
         /// <returns>Returns a list of process names that block the upgrade.</returns>
         public override List<string> blockerProcesses(DetectedSoftware detected)
         {
-            return new List<string>(1)
+            return new List<string>(3)
             {
-                "cmake"
+                "cmake",
+                "cmake-gui",
+                "cpack",
+                "ctest"
             };
         }
     } // class
