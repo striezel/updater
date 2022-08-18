@@ -8,7 +8,7 @@ improvements may be omitted.)_
 
 __[breaking change]__
 
-The required version of the .NET Framework is bumped from 4.7.2 to .NET 6.
+The required version of the .NET is bumped from .NET Framework 4.7.2 to .NET 6.
 
 __[changes]__
 
