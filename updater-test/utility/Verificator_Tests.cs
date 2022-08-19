@@ -50,7 +50,7 @@ namespace updater_test.utility
         private static string download(string url)
         {
             string localFile = Path.Combine(Path.GetTempPath(), "test_original.msi");
-            using (WebClient wc = new WebClient())
+            using (var wc = new WebClient())
             {
                 try
                 {
@@ -75,7 +75,7 @@ namespace updater_test.utility
         [ClassInitialize()]
         public static void DownloadExampleFile(TestContext testContext)
         {
-            downloadFileLocation = download("https://download.documentfoundation.org/libreoffice/stable/7.3.5/win/x86_64/LibreOffice_7.3.5_Win_x64_helppack_de.msi");
+            downloadFileLocation = download("https://download.documentfoundation.org/libreoffice/stable/7.4.0/win/x86_64/LibreOffice_7.4.0_Win_x64_helppack_de.msi");
         }
 
 
