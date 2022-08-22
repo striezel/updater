@@ -10,6 +10,14 @@ __[breaking change]__
 
 The required version of the .NET is bumped from .NET Framework 4.7.2 to .NET 6.
 
+__[breaking change]__
+
+Update support for Audacity is removed.
+Primary reason for the removal are some concerns over the telemetry options that
+got introduced in newer versions of Audacity. For the (rather long) discussion
+about Audacity's telemetry stuff see
+<https://github.com/audacity/audacity/pull/835>.
+
 __[changes]__
 
 Downloads for 7-Zip will now use HTTPS (instead of HTTP) consistently.

@@ -6,7 +6,6 @@ updater application.
 ## Implemented
 
 * 7-Zip
-* Audacity
 * Calibre
 * CCleaner
 * CDBurnerXP

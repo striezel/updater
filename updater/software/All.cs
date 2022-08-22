@@ -43,7 +43,6 @@ namespace updater.software
             bool autoGetNewer = opts.autoGetNewer;
             var result = new List<ISoftware>()
             {
-                new Audacity(autoGetNewer),
                 new Calibre(autoGetNewer),
                 new CCleaner(autoGetNewer),
                 new CDBurnerXP(autoGetNewer),
