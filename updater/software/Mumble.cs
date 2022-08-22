@@ -129,7 +129,7 @@ namespace updater.software
                 string newLocation = response.Headers[HttpResponseHeader.Location];
                 request = null;
                 response = null;
-                Regex reVersion = new Regex("tag/v[0-9]+\\.[0-9]+\\.[0-9]+$");
+                var reVersion = new Regex("tag/v[0-9]+\\.[0-9]+\\.[0-9]+$");
                 Match matchVersion = reVersion.Match(newLocation);
                 if (!matchVersion.Success)
                     return null;
@@ -195,8 +195,8 @@ namespace updater.software
             // a clean installation, i. e. uninstallation before installation of a new
             // version. See <https://github.com/mumble-voip/mumble/issues/5076> for more
             // background information on that.
-            versions.Triple detectedVersion = new versions.Triple(detected.displayVersion);
-            versions.Triple v1_4_0 = new versions.Triple("1.4.0");
+            var detectedVersion = new versions.Triple(detected.displayVersion);
+            var v1_4_0 = new versions.Triple("1.4.0");
             return detectedVersion < v1_4_0;
         }
 
@@ -418,8 +418,8 @@ namespace updater.software
         /// Returns false, if no update is necessary.</returns>
         public override bool needsUpdate(DetectedSoftware detected)
         {
-            versions.Triple verDetected = new versions.Triple(detected.displayVersion);
-            versions.Triple verNewest = new versions.Triple(info().newestVersion);
+            var verDetected = new versions.Triple(detected.displayVersion);
+            var verNewest = new versions.Triple(info().newestVersion);
             return verNewest.CompareTo(verDetected) > 0;
         }
     } // class
