@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017  Dirk Stolle
+    Copyright (C) 2017, 2022  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -23,8 +23,8 @@ using updater.data;
 namespace updater.software
 {
     /// <summary>
-    /// abstract base class for software that needs no separate task in
-    /// preparation for the update
+    /// Abstract base class for software that needs no separate task in
+    /// preparation for the update.
     /// </summary>
     public abstract class NoPreUpdateProcessSoftware : AbstractSoftware
     {
@@ -39,7 +39,7 @@ namespace updater.software
 
 
         /// <summary>
-        /// whether or not a separate process must be run before the update
+        /// Determines whether or not a separate process must be run before the update.
         /// </summary>
         /// <param name="detected">currently installed / detected software version</param>
         /// <returns>Returns true, if a separate process returned by
@@ -53,7 +53,8 @@ namespace updater.software
 
 
         /// <summary>
-        /// returns a process that must be run before the update
+        /// Returns a list of processes that must be run before the update.
+        /// This can be an empty list.
         /// </summary>
         /// <param name="detected">currently installed / detected software version</param>
         /// <returns>Returns a Process ready to start that should be run before
@@ -63,5 +64,5 @@ namespace updater.software
         {
             return null;
         }
-    } //class
-} //namespace
+    } // class
+} // namespace
