@@ -17,6 +17,7 @@
 */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Text.RegularExpressions;
 using updater.software;
 
 namespace updater_test.software
@@ -65,6 +66,44 @@ namespace updater_test.software
         public void Test_upToDate_info()
         {
             _upToDate_info(new TreeSizeFree(false));
+        }
+
+        /// <summary>
+        /// Checks whether the regular expression for TreeSize Free matches a
+        /// typical 64 bit version of it.
+        /// </summary>
+        [TestMethod]
+        public void Test_matchTest_64bit()
+        {
+            var tsf = new TreeSizeFree(false);
+            var info = tsf.info();
+
+            var re = new Regex(info.match64Bit);
+            // match old style, without bits
+            Assert.IsTrue(re.IsMatch("TreeSize Free V4.5"));
+            Assert.IsTrue(re.IsMatch("TreeSize Free V4.5.3"));
+            // match new style, with bits
+            Assert.IsTrue(re.IsMatch("TreeSize Free V4.6 (64 bit)"));
+            Assert.IsTrue(re.IsMatch("TreeSize Free V4.6.2 (64 bit)"));
+            // match new style, with bits after failed update
+            Assert.IsTrue(re.IsMatch("TreeSize Free V4.6 (64 bit) (64 Bit)"));
+            Assert.IsTrue(re.IsMatch("TreeSize Free V4.6.2 (64 bit) (64 Bit)"));
+        }
+
+        /// <summary>
+        /// Checks whether the regular expression for TreeSize Free matches a
+        /// typical 32 bit version of it.
+        /// </summary>
+        [TestMethod]
+        public void Test_matchTest_32bit()
+        {
+            var tsf = new TreeSizeFree(false);
+            var info = tsf.info();
+
+            var re = new Regex(info.match32Bit);
+            // match old style, without bits
+            Assert.IsTrue(re.IsMatch("TreeSize Free V4.5"));
+            Assert.IsTrue(re.IsMatch("TreeSize Free V4.5.3"));
         }
     }
 }

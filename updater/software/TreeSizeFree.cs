@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2021  Dirk Stolle
+    Copyright (C) 2021, 2022  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -18,6 +18,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Net.Http;
 using System.Text.RegularExpressions;
 using updater.data;
@@ -27,7 +28,7 @@ namespace updater.software
     /// <summary>
     /// Handles updates of TreeSize Free.
     /// </summary>
-    public class TreeSizeFree : NoPreUpdateProcessSoftware
+    public class TreeSizeFree : AbstractSoftware
     {
         /// <summary>
         /// NLog.Logger for TreeSizeFree class
@@ -44,7 +45,7 @@ namespace updater.software
         /// <summary>
         /// expiration date of certificate
         /// </summary>
-        private static readonly DateTime certificateExpiration = new DateTime(2022, 1, 29, 16, 49, 49, DateTimeKind.Utc);
+        private static readonly DateTime certificateExpiration = new DateTime(2025, 2, 28, 16, 49, 49, DateTimeKind.Utc);
 
 
         /// <summary>
@@ -68,13 +69,13 @@ namespace updater.software
             var info = new InstallInfoExe(
                 "https://downloads.jam-software.de/treesize_free/TreeSizeFreeSetup.exe",
                 HashAlgorithm.SHA256,
-                "4de19445df877ef4df981fbead9440cf4a8832a284ea0e753ff1e7dd41dc10fa",
+                "df63e1f730978d1cd70d93eae16d96ff705418a998e9e2c38899f6f8df5fb436",
                 signature,
                 "/VERYSILENT /NORESTART");
             return new AvailableSoftware("TreeSize Free",
-                "4.5.3",
+                "4.6.0",
                 "^TreeSize Free V[0-9]+\\.[0-9]+(\\.[0-9]+)?$",
-                "^TreeSize Free V[0-9]+\\.[0-9]+(\\.[0-9]+)?$",
+                "^TreeSize Free V[0-9]+\\.[0-9]+(\\.[0-9]+)?( \\(64 bit\\)( \\(64 Bit\\))?)?$",
                 info,
                 info);
         }
@@ -172,6 +173,53 @@ namespace updater.software
             {
                 "TreeSizeFree"
             };
+        }
+
+        /// <summary>
+        /// Determines whether or not a separate process must be run before the update.
+        /// </summary>
+        /// <param name="detected">currently installed / detected software version</param>
+        /// <returns>Returns true, if a separate process returned by
+        /// preUpdateProcess() needs to run in preparation of the update.
+        /// Returns false, if not. Calling preUpdateProcess() may throw an
+        /// exception in the later case.</returns>
+        public override bool needsPreUpdateProcess(DetectedSoftware detected)
+        {
+            if (string.IsNullOrWhiteSpace(detected.displayVersion))
+            {
+                throw new ArgumentNullException("detected.displayVersion",
+                    "detected.displayVersion of current TreeSize Free version "
+                    + "is not set! Pre-update process cannot be determined.");
+            }
+            // Versions before 4.6.0 need to be uninstalled before installation
+            // of new version.
+            var v4_6_0 = new versions.Triple("4.6.0");
+            var prev = new versions.Triple(detected.displayVersion);
+            return prev < v4_6_0;
+        }
+
+
+        /// <summary>
+        /// Returns a list of processes that must be run before the update.
+        /// This can be an empty list.
+        /// </summary>
+        /// <param name="detected">currently installed / detected software version</param>
+        /// <returns>Returns a Process ready to start that should be run before
+        /// the update. May return null or may throw, if needsPreUpdateProcess()
+        /// returned false.</returns>
+        public override List<Process> preUpdateProcess(DetectedSoftware detected)
+        {
+            // Versions before 4.6.0 need to be uninstalled before installation
+            // of new version.
+            var v4_6_0 = new versions.Triple("4.6.0");
+            var prev = new versions.Triple(detected.displayVersion);
+            if (!(prev < v4_6_0))
+                return null;
+
+            var proc = new Process();
+            proc.StartInfo.FileName = System.IO.Path.Combine(detected.installPath, "unins000.exe");
+            proc.StartInfo.Arguments = "/VERYSILENT /NORESTART";
+            return new List<Process>(1) { proc };
         }
     } // class
 } // namespace
