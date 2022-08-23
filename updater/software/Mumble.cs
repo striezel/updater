@@ -65,22 +65,22 @@ namespace updater.software
         /// details about the software.</returns>
         public override AvailableSoftware knownInfo()
         {
-            var signature = new Signature(publisherX509, certificateExpiration);
-            return new AvailableSoftware("Mumble",
-                "1.4.230",
+            var signature = Signature.None;
+            return new AvailableSoftware("Mumble Client",
+                "1.4.274",
                 "^(Mumble [0-9]\\.[0-9]+\\.[0-9]+|Mumble \\(client\\))$",
                 "^(Mumble [0-9]\\.[0-9]+\\.[0-9]+|Mumble \\(client\\))$",
                 new InstallInfoMsi(
-                    "https://github.com/mumble-voip/mumble/releases/download/v1.4.230/mumble_client-1.4.230.x86.msi",
+                    "https://github.com/mumble-voip/mumble/releases/download/v1.4.274/mumble_client-1.4.274.x86.msi",
                     HashAlgorithm.SHA256,
-                    "e6392b070c57d9da6e07c8883490eaef16f01bf15a9a976477f9970323fe3954",
+                    "c290fc19eda2a040720881b7984fb4e7c7a6623492aa588403d745ca271b4126",
                     signature,
                     "/qn /norestart"),
                 // 64 bit MSI installer started with 1.3.0.
                 new InstallInfoMsi(
-                    "https://github.com/mumble-voip/mumble/releases/download/v1.4.230/mumble_client-1.4.230.x64.msi",
+                    "https://github.com/mumble-voip/mumble/releases/download/v1.4.274/mumble_client-1.4.274.x64.msi",
                     HashAlgorithm.SHA256,
-                    "ac08a69b88442b5f0d5b4566c0241f4a6f12ceff4406b0355fa78ff6630e73f6",
+                    "adc85d87abcb22c7316c6fed84116ab7651519eeaa0c725c05effa1038958e61",
                     signature,
                     "/qn /norestart")
                 );
@@ -164,8 +164,8 @@ namespace updater.software
             newInfo.install32Bit.algorithm = HashAlgorithm.Unknown;
             newInfo.install64Bit.checksum = null;
             newInfo.install64Bit.algorithm = HashAlgorithm.Unknown;
-            // Fall back to known old signature data, but extend it into future.
-            newInfo.install32Bit.signature = Signature.NeverExpires(publisherX509);
+            // Fall back to known old signature data.
+            newInfo.install32Bit.signature = new Signature(publisherX509, certificateExpiration);
             newInfo.install64Bit.signature = newInfo.install32Bit.signature;
             return newInfo;
         }
