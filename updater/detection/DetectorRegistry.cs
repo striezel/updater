@@ -80,14 +80,14 @@ namespace updater.detection
                 return null;
             }
 
-            List<data.DetectedSoftware> entries = new List<data.DetectedSoftware>();
+            var entries = new List<data.DetectedSoftware>();
             var subKeys = rKey.GetSubKeyNames();
             foreach (var subName in subKeys)
             {
                 RegistryKey subKey = rKey.OpenSubKey(subName);
                 if (null != subKey)
                 {
-                    data.DetectedSoftware e = new data.DetectedSoftware();
+                    var e = new data.DetectedSoftware();
                     object dnObj = subKey.GetValue("DisplayName");
                     if (null != dnObj)
                         e.displayName = dnObj.ToString().Trim();
