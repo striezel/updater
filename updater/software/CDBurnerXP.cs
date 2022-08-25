@@ -18,7 +18,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Net.Http;
 using System.Text.RegularExpressions;
 using updater.data;
 
@@ -110,20 +109,17 @@ namespace updater.software
         {
             logger.Info("Searching for newer version of CDBurnerXP...");
             string htmlCode = null;
-            using (var client = new HttpClient())
+            var client = HttpClientProvider.Provide();
+            try
             {
-                try
-                {
-                    var task = client.GetStringAsync("https://cdburnerxp.se/download");
-                    task.Wait();
-                    htmlCode = task.Result;
-                }
-                catch (Exception ex)
-                {
-                    logger.Warn("Exception occurred while checking for newer version of CDBurnerXP: " + ex.Message);
-                    return null;
-                }
-                client.Dispose();
+                var task = client.GetStringAsync("https://cdburnerxp.se/download");
+                task.Wait();
+                htmlCode = task.Result;
+            }
+            catch (Exception ex)
+            {
+                logger.Warn("Exception occurred while checking for newer version of CDBurnerXP: " + ex.Message);
+                return null;
             }
 
             var reMsi = new Regex("cdbxp_setup_[1-9]\\.[0-9]\\.[0-9]\\.[0-9]{4}\\.msi");
@@ -131,7 +127,7 @@ namespace updater.software
             if (!matchMsi.Success)
                 return null;
             string newVersion = matchMsi.Value.Replace("cdbxp_setup_", "").Replace(".msi", "");
-            
+
             // construct new version information
             var newInfo = knownInfo();
             // ... but use known information, if versions match. That way we

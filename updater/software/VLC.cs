@@ -19,7 +19,6 @@
 using updater.data;
 using System;
 using System.Net;
-using System.Net.Http;
 using System.Text.RegularExpressions;
 using System.Collections.Generic;
 using updater.versions;
@@ -121,21 +120,18 @@ namespace updater.software
         private static string getLastVersion()
         {
             string htmlCode = null;
-            using (var client = new HttpClient())
+            var client = HttpClientProvider.Provide();
+            try
             {
-                try
-                {
-                    var task = client.GetStringAsync("https://get.videolan.org/vlc/last/");
-                    task.Wait();
-                    htmlCode = task.Result;
-                }
-                catch (Exception ex)
-                {
-                    logger.Warn("Exception occurred while checking for latest version of VLC: " + ex.Message);
-                    return null;
-                }
-                client.Dispose();
-            } // using
+                var task = client.GetStringAsync("https://get.videolan.org/vlc/last/");
+                task.Wait();
+                htmlCode = task.Result;
+            }
+            catch (Exception ex)
+            {
+                logger.Warn("Exception occurred while checking for latest version of VLC: " + ex.Message);
+                return null;
+            }
 
             var reTarXz = new Regex("vlc\\-[0-9]+\\.[0-9]+\\.[0-9]+(\\.[0-9]+)?\\.tar\\.xz");
             Match matchTarXz = reTarXz.Match(htmlCode);
@@ -156,21 +152,18 @@ namespace updater.software
         {
             // See https://get.videolan.org/vlc/ for available versions.
             string htmlCode = null;
-            using (var client = new HttpClient())
+            var client = HttpClientProvider.Provide();
+            try
             {
-                try
-                {
-                    var task = client.GetStringAsync("https://get.videolan.org/vlc/");
-                    task.Wait();
-                    htmlCode = task.Result;
-                }
-                catch (Exception ex)
-                {
-                    logger.Warn("Exception occurred while checking for available versions of VLC: " + ex.Message);
-                    return null;
-                }
-                client.Dispose();
-            } // using
+                var task = client.GetStringAsync("https://get.videolan.org/vlc/");
+                task.Wait();
+                htmlCode = task.Result;
+            }
+            catch (Exception ex)
+            {
+                logger.Warn("Exception occurred while checking for available versions of VLC: " + ex.Message);
+                return null;
+            }
 
             var reVersion = new Regex("\"[0-9]+\\.[0-9]+\\.[0-9]+(\\.[0-9]+)?/\"");
             var matches = reVersion.Matches(htmlCode);

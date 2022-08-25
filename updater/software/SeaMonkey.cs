@@ -20,7 +20,6 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Net.Http;
 using System.Text.RegularExpressions;
 using updater.data;
 using updater.versions;
@@ -211,22 +210,19 @@ namespace updater.software
         {
             string url = "https://archive.mozilla.org/pub/seamonkey/releases/";
             string htmlCode = null;
-            using (var client = new HttpClient())
+            var client = HttpClientProvider.Provide();
+            try
             {
-                try
-                {
-                    var task = client.GetStringAsync(url);
-                    task.Wait();
-                    htmlCode = task.Result;
-                }
-                catch (Exception ex)
-                {
-                    logger.Warn("Exception occurred while checking for newer version of SeaMonkey: " + ex.Message);
-                    return null;
-                }
-                client.Dispose();
-            } // using
-            
+                var task = client.GetStringAsync(url);
+                task.Wait();
+                htmlCode = task.Result;
+            }
+            catch (Exception ex)
+            {
+                logger.Warn("Exception occurred while checking for newer version of SeaMonkey: " + ex.Message);
+                return null;
+            }
+
             var reVersion = new Regex("/[0-9]+\\.[0-9]+(\\.[0-9]+(\\.[0-9]+)?)?/");
             MatchCollection matches = reVersion.Matches(htmlCode);
             if (matches.Count <= 0)
@@ -274,20 +270,17 @@ namespace updater.software
 
             string url = "https://archive.mozilla.org/pub/seamonkey/releases/" + newerVersion + "/SHA1SUMS.txt";
             string sha1SumsContent = null;
-            using (var client = new HttpClient())
+            var client = HttpClientProvider.Provide();
+            try
             {
-                try
-                {
-                    var task = client.GetStringAsync(url);
-                    task.Wait();
-                    sha1SumsContent = task.Result;
-                }
-                catch (Exception ex)
-                {
-                    logger.Warn("Exception occurred while checking for newer version of SeaMonkey: " + ex.Message);
-                    return null;
-                }
-                client.Dispose();
+                var task = client.GetStringAsync(url);
+                task.Wait();
+                sha1SumsContent = task.Result;
+            }
+            catch (Exception ex)
+            {
+                logger.Warn("Exception occurred while checking for newer version of SeaMonkey: " + ex.Message);
+                return null;
             }
 
             // look for line with the correct language code and version

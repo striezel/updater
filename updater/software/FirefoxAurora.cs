@@ -19,7 +19,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.Http;
 using System.Text.RegularExpressions;
 using updater.data;
 using updater.versions;
@@ -363,21 +362,18 @@ namespace updater.software
             string url = "https://ftp.mozilla.org/pub/devedition/releases/";
 
             string htmlContent = null;
-            using (var client = new HttpClient())
+            var client = HttpClientProvider.Provide();
+            try
             {
-                try
-                {
-                    var task = client.GetStringAsync(url);
-                    task.Wait();
-                    htmlContent = task.Result;
-                }
-                catch (Exception ex)
-                {
-                    logger.Warn("Error while looking for newer Firefox Developer Edition version: " + ex.Message);
-                    return null;
-                }
-                client.Dispose();
-            } // using
+                var task = client.GetStringAsync(url);
+                task.Wait();
+                htmlContent = task.Result;
+            }
+            catch (Exception ex)
+            {
+                logger.Warn("Error while looking for newer Firefox Developer Edition version: " + ex.Message);
+                return null;
+            }
 
             // HTML source contains something like "<a href="/pub/devedition/releases/54.0b11/">54.0b11/</a>"
             // for every version. We just collect them all and look for the newest version.
@@ -427,26 +423,23 @@ namespace updater.software
             {
                 // Get file content from Mozilla server.
                 string url = "https://ftp.mozilla.org/pub/devedition/releases/" + newerVersion + "/SHA512SUMS";
-                using (var client = new HttpClient())
+                var client = HttpClientProvider.Provide();
+                try
                 {
-                    try
+                    var task = client.GetStringAsync(url);
+                    task.Wait();
+                    sha512SumsContent = task.Result;
+                    if (newerVersion == currentVersion)
                     {
-                        var task = client.GetStringAsync(url);
-                        task.Wait();
-                        sha512SumsContent = task.Result;
-                        if (newerVersion == currentVersion)
-                        {
-                            checksumsText = sha512SumsContent;
-                        }
+                        checksumsText = sha512SumsContent;
                     }
-                    catch (Exception ex)
-                    {
-                        logger.Warn("Exception occurred while checking for newer"
-                            + " version of Firefox Developer Edition (" + languageCode + "): " + ex.Message);
-                        return null;
-                    }
-                    client.Dispose();
-                } // using
+                }
+                catch (Exception ex)
+                {
+                    logger.Warn("Exception occurred while checking for newer"
+                        + " version of Firefox Developer Edition (" + languageCode + "): " + ex.Message);
+                    return null;
+                }
             } // else
             if (newerVersion == currentVersion)
             {

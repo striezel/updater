@@ -113,21 +113,18 @@ namespace updater.software
         {
             logger.Info("Searching for newer version of Pidgin...");
             string htmlCode = null;
-            using (var client = new HttpClient())
+            var client = HttpClientProvider.Provide();
+            try
             {
-                try
-                {
-                    var task = client.GetStringAsync("https://pidgin.im/install/");
-                    task.Wait();
-                    htmlCode = task.Result;
-                }
-                catch (Exception ex)
-                {
-                    logger.Error("Exception occurred while checking for newer version of Pidgin: " + ex.Message);
-                    return null;
-                }
-                client.Dispose();
-            } // using
+                var task = client.GetStringAsync("https://pidgin.im/install/");
+                task.Wait();
+                htmlCode = task.Result;
+            }
+            catch (Exception ex)
+            {
+                logger.Error("Exception occurred while checking for newer version of Pidgin: " + ex.Message);
+                return null;
+            }
 
             var reVersion = new Regex("href=\"https://sourceforge\\.net/projects/pidgin/files/Pidgin/([0-9]+\\.[0-9]+\\.[0-9]+)/pidgin\\-([0-9]+\\.[0-9]+\\.[0-9]+)\\.exe\"");
             Match matchVersion = reVersion.Match(htmlCode);
@@ -152,17 +149,17 @@ namespace updater.software
             newInfo.newestVersion = version;
             // Try to get checksum.
             htmlCode = null;
-            using (var client = new TimelyWebClient())
+            using (var t_client = new TimelyWebClient())
             {
                 try
                 {
-                    htmlCode = client.DownloadString("https://netcologne.dl.sourceforge.net/project/pidgin/Pidgin/" + version + "/pidgin-" + version + "-offline.exe.sha256sum");
+                    htmlCode = t_client.DownloadString("https://netcologne.dl.sourceforge.net/project/pidgin/Pidgin/" + version + "/pidgin-" + version + "-offline.exe.sha256sum");
                 }
                 catch (Exception ex)
                 {
                     logger.Warn("Exception occurred while retrieving checksum for newer version of Pidgin: " + ex.Message);
                 }
-                client.Dispose();
+                t_client.Dispose();
             } // using
             string checksum32 = null;
             if (htmlCode != null)

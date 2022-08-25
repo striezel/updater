@@ -18,7 +18,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Net.Http;
 using System.Text.RegularExpressions;
 using updater.data;
 using updater.utility;
@@ -175,21 +174,18 @@ namespace updater.software
                 return latestSupported32BitVersion();
             }
             string htmlCode = null;
-            using (var client = new HttpClient())
+            var client = HttpClientProvider.Provide();
+            try
             {
-                try
-                {
-                    var task = client.GetStringAsync("https://calibre-ebook.com/download_windows64");
-                    task.Wait();
-                    htmlCode = task.Result;
-                }
-                catch (Exception ex)
-                {
-                    logger.Warn("Exception occurred while checking for newer version of Calibre: " + ex.Message);
-                    return null;
-                }
-                client.Dispose();
-            } // using
+                var task = client.GetStringAsync("https://calibre-ebook.com/download_windows64");
+                task.Wait();
+                htmlCode = task.Result;
+            }
+            catch (Exception ex)
+            {
+                logger.Warn("Exception occurred while checking for newer version of Calibre: " + ex.Message);
+                return null;
+            }
 
             // get new version from alternative MSI path on GitHub
             var reMsi = new Regex("https://github.com/kovidgoyal/calibre/releases/download/v[0-9]+\\.[0-9]+\\.[0-9]+/calibre\\-64bit\\-[0-9]+\\.[0-9]+\\.[0-9]+\\.msi");
@@ -204,21 +200,17 @@ namespace updater.software
 
             // get SHA-256 sums from FossHub (official site provides no hashes)
             htmlCode = null;
-            using (var client = new HttpClient())
+            try
             {
-                try
-                {
-                    var task = client.GetStringAsync("https://www.fosshub.com/Calibre.html");
-                    task.Wait();
-                    htmlCode = task.Result;
-                }
-                catch (Exception ex)
-                {
-                    logger.Warn("Exception occurred while checking for newer version of Calibre: " + ex.Message);
-                    return null;
-                }
-                client.Dispose();
-            } // using
+                var task = client.GetStringAsync("https://www.fosshub.com/Calibre.html");
+                task.Wait();
+                htmlCode = task.Result;
+            }
+            catch (Exception ex)
+            {
+                logger.Warn("Exception occurred while checking for newer version of Calibre: " + ex.Message);
+                return null;
+            }
 
             // checksum for Windows 64bit installer
             idx = htmlCode.IndexOf("\"n\":\"calibre-64bit-" + newVersion + ".msi\"");

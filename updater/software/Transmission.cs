@@ -18,7 +18,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Net.Http;
 using System.Text.RegularExpressions;
 using updater.data;
 
@@ -116,19 +115,17 @@ namespace updater.software
         {
             logger.Info("Searching for newer version of Transmission...");
             string html;
-            using (var client = new HttpClient())
+            var client = HttpClientProvider.Provide();
+            try
             {
-                try
-                {
-                    var task = client.GetStringAsync("https://transmissionbt.com/includes/js/constants.js");
-                    task.Wait();
-                    html = task.Result;
-                }
-                catch (Exception ex)
-                {
-                    logger.Warn("Exception occurred while checking for newer version of Transmission: " + ex.Message);
-                    return null;
-                }
+                var task = client.GetStringAsync("https://transmissionbt.com/includes/js/constants.js");
+                task.Wait();
+                html = task.Result;
+            }
+            catch (Exception ex)
+            {
+                logger.Warn("Exception occurred while checking for newer version of Transmission: " + ex.Message);
+                return null;
             }
 
             var reVersion = new Regex("current_version_msi: \"([0-9]+\\.[0-9]+)\"");

@@ -18,7 +18,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Net.Http;
 using System.Text.RegularExpressions;
 using updater.data;
 using updater.versions;
@@ -119,19 +118,17 @@ namespace updater.software
             logger.Info("Searching for newer version of CMake...");
             // Just getting the latest release does not work here, because that may also be a release candidate, and we do not want that.
             string html;
-            using (var client = new HttpClient())
+            var client = HttpClientProvider.Provide();
+            try
             {
-                try
-                {
-                    var task = client.GetStringAsync("https://github.com/Kitware/CMake/releases");
-                    task.Wait();
-                    html = task.Result;
-                }
-                catch (Exception ex)
-                {
-                    logger.Warn("Exception occurred while checking for newer version of CMake: " + ex.Message);
-                    return null;
-                }
+                var task = client.GetStringAsync("https://github.com/Kitware/CMake/releases");
+                task.Wait();
+                html = task.Result;
+            }
+            catch (Exception ex)
+            {
+                logger.Warn("Exception occurred while checking for newer version of CMake: " + ex.Message);
+                return null;
             }
 
             // HTML text will contain links to releases like "https://github.com/Kitware/CMake/releases/tag/v3.19.4".
@@ -145,25 +142,21 @@ namespace updater.software
                 versions.Add(new Triple(item.Groups[1].Value));
             }
             versions.Sort();
-            string currentVersion = versions[versions.Count-1].full();
+            string currentVersion = versions[versions.Count - 1].full();
 
             // download checksum file, e.g. "https://github.com/Kitware/CMake/releases/download/v3.19.4/cmake-3.19.4-SHA-256.txt"
             string htmlCode = null;
-            using (var client = new HttpClient())
+            try
             {
-                try
-                {
-                    var task = client.GetStringAsync("https://github.com/Kitware/CMake/releases/download/v" + currentVersion + "/cmake-" + currentVersion + "-SHA-256.txt");
-                    task.Wait();
-                    htmlCode = task.Result;
-                }
-                catch (Exception ex)
-                {
-                    logger.Warn("Exception occurred while checking for newer version of CMake: " + ex.Message);
-                    return null;
-                }
-                client.Dispose();
-            } // using
+                var task = client.GetStringAsync("https://github.com/Kitware/CMake/releases/download/v" + currentVersion + "/cmake-" + currentVersion + "-SHA-256.txt");
+                task.Wait();
+                htmlCode = task.Result;
+            }
+            catch (Exception ex)
+            {
+                logger.Warn("Exception occurred while checking for newer version of CMake: " + ex.Message);
+                return null;
+            }
 
             // find SHA256 hash for 32 bit installer
             var reHash = new Regex("[a-f0-9]{64}  cmake.+windows\\-i386\\.msi");

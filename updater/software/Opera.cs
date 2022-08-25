@@ -18,7 +18,6 @@
 
 using System;
 using updater.data;
-using System.Net.Http;
 using System.Text.RegularExpressions;
 using System.Collections.Generic;
 
@@ -117,21 +116,18 @@ namespace updater.software
         {
             logger.Info("Searching for newer version of Opera...");
             string htmlCode = null;
-            using (var client = new HttpClient())
+            var client = HttpClientProvider.Provide();
+            try
             {
-                try
-                {
-                    var task = client.GetStringAsync("https://get.geo.opera.com/pub/opera/desktop/");
-                    task.Wait();
-                    htmlCode = task.Result;
-                }
-                catch (Exception ex)
-                {
-                    logger.Warn("Exception occurred while checking for newer version of Opera: " + ex.Message);
-                    return null;
-                }
-                client.Dispose();
-            } // using
+                var task = client.GetStringAsync("https://get.geo.opera.com/pub/opera/desktop/");
+                task.Wait();
+                htmlCode = task.Result;
+            }
+            catch (Exception ex)
+            {
+                logger.Warn("Exception occurred while checking for newer version of Opera: " + ex.Message);
+                return null;
+            }
 
             // Search for all known versions.
             var reVersion = new Regex("\"[0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+/\"");
@@ -155,22 +151,18 @@ namespace updater.software
             for (int i = versions.Count - 1; i >= 0; i--)
             {
                 bool exists = false;
-                using (var client = new HttpClient())
+                try
                 {
-                    try
-                    {
-                        var task = client.GetStringAsync("https://get.geo.opera.com/ftp/pub/opera/desktop/" + versions[i].full() + "/win/");
-                        task.Wait();
-                        htmlCode = task.Result;
-                        exists = true;
-                    }
-                    catch (Exception)
-                    {
-                        // Not found.
-                        exists = false;
-                    }
-                    client.Dispose();
-                } // using
+                    var task = client.GetStringAsync("https://get.geo.opera.com/ftp/pub/opera/desktop/" + versions[i].full() + "/win/");
+                    task.Wait();
+                    htmlCode = task.Result;
+                    exists = true;
+                }
+                catch (Exception)
+                {
+                    // Not found.
+                    exists = false;
+                }
                 if (exists)
                 {
                     newVersion = versions[i].full();
@@ -188,21 +180,17 @@ namespace updater.software
             // Look into "https://get.geo.opera.com/ftp/pub/opera/desktop/<version>/win/Opera_<version>_Setup_x64.exe.sha256sum"
             // to get the checksum for 64 bit installer.
             htmlCode = null;
-            using (var client = new HttpClient())
+            try
             {
-                try
-                {
-                    var task = client.GetStringAsync("https://get.geo.opera.com/ftp/pub/opera/desktop/" + newVersion + "/win/Opera_" + newVersion + "_Setup_x64.exe.sha256sum");
-                    task.Wait();
-                    htmlCode = task.Result;
-                }
-                catch (Exception ex)
-                {
-                    logger.Warn("Exception occurred while finding checksums for newer version of Opera: " + ex.Message);
-                    return null;
-                }
-                client.Dispose();
-            } // using
+                var task = client.GetStringAsync("https://get.geo.opera.com/ftp/pub/opera/desktop/" + newVersion + "/win/Opera_" + newVersion + "_Setup_x64.exe.sha256sum");
+                task.Wait();
+                htmlCode = task.Result;
+            }
+            catch (Exception ex)
+            {
+                logger.Warn("Exception occurred while finding checksums for newer version of Opera: " + ex.Message);
+                return null;
+            }
 
             // checksum for 64 bit installer
             var reg = new Regex("[0-9a-f]{64}");
@@ -214,21 +202,17 @@ namespace updater.software
             // Look into "https://get.geo.opera.com/ftp/pub/opera/desktop/<version>/win/Opera_<version>_Setup.exe.sha256sum"
             // to get the checksum for 32 bit installer.
             htmlCode = null;
-            using (var client = new HttpClient())
+            try
             {
-                try
-                {
-                    var task = client.GetStringAsync("https://get.geo.opera.com/ftp/pub/opera/desktop/" + newVersion + "/win/Opera_" + newVersion + "_Setup.exe.sha256sum");
-                    task.Wait();
-                    htmlCode = task.Result;
-                }
-                catch (Exception ex)
-                {
-                    logger.Warn("Exception occurred while finding checksums for newer version of Opera: " + ex.Message);
-                    return null;
-                }
-                client.Dispose();
-            } // using
+                var task = client.GetStringAsync("https://get.geo.opera.com/ftp/pub/opera/desktop/" + newVersion + "/win/Opera_" + newVersion + "_Setup.exe.sha256sum");
+                task.Wait();
+                htmlCode = task.Result;
+            }
+            catch (Exception ex)
+            {
+                logger.Warn("Exception occurred while finding checksums for newer version of Opera: " + ex.Message);
+                return null;
+            }
 
             // checksum for 32 bit installer
             m = reg.Match(htmlCode);

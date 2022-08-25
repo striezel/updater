@@ -18,7 +18,6 @@
 
 using updater.data;
 using System;
-using System.Net.Http;
 using System.Text.RegularExpressions;
 using System.Collections.Generic;
 
@@ -107,20 +106,17 @@ namespace updater.software
         {
             logger.Info("Searching for newer version of WinSCP...");
             string htmlCode = null;
-            using (var client = new HttpClient())
+            var client = HttpClientProvider.Provide();
+            try
             {
-                try
-                {
-                    var task = client.GetStringAsync("https://winscp.net/eng/download.php");
-                    task.Wait();
-                    htmlCode = task.Result;
-                }
-                catch (Exception ex)
-                {
-                    logger.Warn("Exception occurred while checking for newer version of WinSCP: " + ex.Message);
-                    return null;
-                }
-                client.Dispose();
+                var task = client.GetStringAsync("https://winscp.net/eng/download.php");
+                task.Wait();
+                htmlCode = task.Result;
+            }
+            catch (Exception ex)
+            {
+                logger.Warn("Exception occurred while checking for newer version of WinSCP: " + ex.Message);
+                return null;
             }
 
             var reExe = new Regex("WinSCP\\-[1-9]+\\.[0-9]+(\\.[0-9]+)?\\-Setup\\.exe");
@@ -140,21 +136,17 @@ namespace updater.software
 
             // Readme (e.g. https://winscp.net/download/WinSCP-5.9.5-ReadMe.txt) contains hash.
             htmlCode = null;
-            using (var client = new HttpClient())
+            try
             {
-                try
-                {
-                    var task = client.GetStringAsync("https://winscp.net/download/WinSCP-" + newVersion + "-ReadMe.txt");
-                    task.Wait();
-                    htmlCode = task.Result;
-                }
-                catch (Exception ex)
-                {
-                    logger.Warn("Exception occurred while checking for newer version of WinSCP: " + ex.Message);
-                    return null;
-                }
-                client.Dispose();
-            } // using
+                var task = client.GetStringAsync("https://winscp.net/download/WinSCP-" + newVersion + "-ReadMe.txt");
+                task.Wait();
+                htmlCode = task.Result;
+            }
+            catch (Exception ex)
+            {
+                logger.Warn("Exception occurred while checking for newer version of WinSCP: " + ex.Message);
+                return null;
+            }
             // extract hash - .exe occurs first, so first hash is the one we want
             var hash = new Regex("SHA\\-256\\: [0-9a-f]{64}");
             Match matchHash = hash.Match(htmlCode);
@@ -167,21 +159,17 @@ namespace updater.software
             // file after a few seconds, so we have to parse the direct link of
             // the download and use that.
             htmlCode = null;
-            using (var client = new HttpClient())
+            try
             {
-                try
-                {
-                    var task = client.GetStringAsync("https://winscp.net/download/WinSCP-" + newVersion + "-Setup.exe");
-                    task.Wait();
-                    htmlCode = task.Result;
-                }
-                catch (Exception ex)
-                {
-                    logger.Warn("Exception occurred while checking for newer version of WinSCP: " + ex.Message);
-                    return null;
-                }
-                client.Dispose();
-            } // using
+                var task = client.GetStringAsync("https://winscp.net/download/WinSCP-" + newVersion + "-Setup.exe");
+                task.Wait();
+                htmlCode = task.Result;
+            }
+            catch (Exception ex)
+            {
+                logger.Warn("Exception occurred while checking for newer version of WinSCP: " + ex.Message);
+                return null;
+            }
 
             // URL for direct download is something like
             // https://winscp.net/download/files/201704212143f42467fc64e4c84259bce4a07a98edbd/WinSCP-5.9.5-Setup.exe,

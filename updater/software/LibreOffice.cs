@@ -18,7 +18,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Net.Http;
 using System.Text.RegularExpressions;
 using updater.data;
 
@@ -116,21 +115,18 @@ namespace updater.software
         {
             logger.Info("Searching for newer version of LibreOffice...");
             string htmlCode = null;
-            using (var client = new HttpClient())
+            var client = HttpClientProvider.Provide();
+            try
             {
-                try
-                {
-                    var task = client.GetStringAsync("https://download.documentfoundation.org/libreoffice/stable/?C=N;O=D");
-                    task.Wait();
-                    htmlCode = task.Result;
-                }
-                catch (Exception ex)
-                {
-                    logger.Warn("Exception occurred while checking for newer version of LibreOffice: " + ex.Message);
-                    return null;
-                }
-                client.Dispose();
-            } // using
+                var task = client.GetStringAsync("https://download.documentfoundation.org/libreoffice/stable/?C=N;O=D");
+                task.Wait();
+                htmlCode = task.Result;
+            }
+            catch (Exception ex)
+            {
+                logger.Warn("Exception occurred while checking for newer version of LibreOffice: " + ex.Message);
+                return null;
+            }
             // Link is something like <a href="5.3.0/">5.3.0/</a>, no fourth digit.
             var reVersion = new Regex("<a href=\"[0-9]\\.[0-9]\\.[0-9]/\">[0-9]\\.[0-9]\\.[0-9]/</a>");
             Match matchVersion = reVersion.Match(htmlCode);
@@ -146,23 +142,18 @@ namespace updater.software
             // https://download.documentfoundation.org/libreoffice/stable/5.3.0/win/x86/LibreOffice_5.3.0_Win_x86.msi.sha256
             // https://download.documentfoundation.org/libreoffice/stable/5.3.0/win/x86_64/LibreOffice_5.3.0_Win_x64.msi.sha256
             htmlCode = null;
-            using (var client = new HttpClient())
+            try
             {
-                try
-                {
-                    var task = client.GetStringAsync("https://download.documentfoundation.org/libreoffice/stable/"
-                        + newVersion + "/win/x86/LibreOffice_" + newVersion + "_Win_x86.msi.sha256");
-                    task.Wait();
-                    htmlCode = task.Result;
-                }
-                catch (Exception ex)
-                {
-                    logger.Warn("Exception occurred while checking for newer version of LibreOffice: " + ex.Message);
-                    return null;
-                }
-                client.Dispose();
-            } //using
-
+                var task = client.GetStringAsync("https://download.documentfoundation.org/libreoffice/stable/"
+                    + newVersion + "/win/x86/LibreOffice_" + newVersion + "_Win_x86.msi.sha256");
+                task.Wait();
+                htmlCode = task.Result;
+            }
+            catch (Exception ex)
+            {
+                logger.Warn("Exception occurred while checking for newer version of LibreOffice: " + ex.Message);
+                return null;
+            }
             var reHash32 = new Regex("[0-9a-f]{64}  LibreOffice_" + Regex.Escape(newVersion) + "_Win_x86\\.msi");
             Match matchHash32 = reHash32.Match(htmlCode);
             if (!matchHash32.Success)
@@ -170,23 +161,18 @@ namespace updater.software
             string hash32 = matchHash32.Value.Substring(0, 64);
 
             htmlCode = null;
-            using (var client = new HttpClient())
+            try
             {
-                try
-                {
-                    var task = client.GetStringAsync("https://download.documentfoundation.org/libreoffice/stable/"
-                        + newVersion + "/win/x86_64/LibreOffice_" + newVersion + "_Win_x64.msi.sha256");
-                    task.Wait();
-                    htmlCode = task.Result;
-                }
-                catch (Exception ex)
-                {
-                    logger.Warn("Exception occurred while checking for newer version of LibreOffice: " + ex.Message);
-                    return null;
-                }
-                client.Dispose();
-            } // using
-
+                var task = client.GetStringAsync("https://download.documentfoundation.org/libreoffice/stable/"
+                    + newVersion + "/win/x86_64/LibreOffice_" + newVersion + "_Win_x64.msi.sha256");
+                task.Wait();
+                htmlCode = task.Result;
+            }
+            catch (Exception ex)
+            {
+                logger.Warn("Exception occurred while checking for newer version of LibreOffice: " + ex.Message);
+                return null;
+            }
             var reHash64 = new Regex("[0-9a-f]{64}  LibreOffice_" + Regex.Escape(newVersion) + "_Win_x64\\.msi");
             Match matchHash64 = reHash64.Match(htmlCode);
             if (!matchHash64.Success)

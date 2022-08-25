@@ -18,7 +18,6 @@
 
 using updater.data;
 using System;
-using System.Net.Http;
 using System.Text.RegularExpressions;
 using System.Collections.Generic;
 
@@ -111,21 +110,18 @@ namespace updater.software
         {
             logger.Info("Searching for newer version of KeePass...");
             string htmlCode = null;
-            using (var client = new HttpClient())
+            var client = HttpClientProvider.Provide();
+            try
             {
-                try
-                {
-                    var task = client.GetStringAsync("https://keepass.info/integrity.html");
-                    task.Wait();
-                    htmlCode = task.Result;
-                }
-                catch (Exception ex)
-                {
-                    logger.Warn("Exception occurred while checking for newer version of KeePass: " + ex.Message);
-                    return null;
-                }
-                client.Dispose();
-            } // using
+                var task = client.GetStringAsync("https://keepass.info/integrity.html");
+                task.Wait();
+                htmlCode = task.Result;
+            }
+            catch (Exception ex)
+            {
+                logger.Warn("Exception occurred while checking for newer version of KeePass: " + ex.Message);
+                return null;
+            }
 
             var reExe = new Regex(">KeePass\\-[2-9]\\.[0-9]{2}(\\.[0-9]+)?\\-Setup\\.exe<");
             Match matchExe = reExe.Match(htmlCode);

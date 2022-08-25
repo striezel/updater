@@ -18,7 +18,6 @@
 
 using System;
 using System.IO;
-using System.Net.Http;
 using System.Text.RegularExpressions;
 using System.Diagnostics;
 using updater.data;
@@ -105,20 +104,17 @@ namespace updater.software
         {
             logger.Info("Searching for newer version of Inkscape...");
             string htmlCode = null;
-            using (var client = new HttpClient())
+            var client = HttpClientProvider.Provide();
+            try
             {
-                try
-                {
-                    var task = client.GetStringAsync("https://inkscape.org/release/");
-                    task.Wait();
-                    htmlCode = task.Result;
-                }
-                catch (Exception ex)
-                {
-                    logger.Warn("Exception occurred while checking for newer version of Inkscape: " + ex.Message);
-                    return null;
-                }
-                client.Dispose();
+                var task = client.GetStringAsync("https://inkscape.org/release/");
+                task.Wait();
+                htmlCode = task.Result;
+            }
+            catch (Exception ex)
+            {
+                logger.Warn("Exception occurred while checking for newer version of Inkscape: " + ex.Message);
+                return null;
             }
 
             // Search for URL part like "/release/0.92.4/windows/".
@@ -127,7 +123,7 @@ namespace updater.software
             if (!matchVersion.Success)
                 return null;
             string newVersion = matchVersion.Value.Replace("/release/", "").Replace("/windows/", "").Trim();
-            
+
             // construct new version information based on old information
             var newInfo = knownInfo();
             if (newVersion == newInfo.newestVersion)
@@ -146,20 +142,16 @@ namespace updater.software
                 // 64 bit version is at an URL like
                 // https://inkscape.org/release/inkscape-0.92.4/windows/64-bit/msi/dl/
                 htmlCode = null;
-                using (var client = new HttpClient())
+                try
                 {
-                    try
-                    {
-                        var task = client.GetStringAsync("https://inkscape.org/release/inkscape-" + newVersion + "/windows/" + bits + "-bit/msi/dl/");
-                        task.Wait();
-                        htmlCode = task.Result;
-                    }
-                    catch (Exception ex)
-                    {
-                        logger.Warn("Exception occurred while checking for newer version of Inkscape: " + ex.Message);
-                        return null;
-                    }
-                    client.Dispose();
+                    var task = client.GetStringAsync("https://inkscape.org/release/inkscape-" + newVersion + "/windows/" + bits + "-bit/msi/dl/");
+                    task.Wait();
+                    htmlCode = task.Result;
+                }
+                catch (Exception ex)
+                {
+                    logger.Warn("Exception occurred while checking for newer version of Inkscape: " + ex.Message);
+                    return null;
                 }
 
                 // Search for URL part like '<a href="/gallery/item/33460/inkscape-1.2_2022-05-15_dc2aedaf03-x86_4JZVqba.msi">'.
@@ -194,20 +186,16 @@ namespace updater.software
                         + newVersion + dateAndHash + "-" + arch + ".msi" + bogus + ".sha256";
 
                     htmlCode = null;
-                    using (var client = new HttpClient())
+                    try
                     {
-                        try
-                        {
-                            var task = client.GetStringAsync(signatureUrl);
-                            task.Wait();
-                            htmlCode = task.Result;
-                        }
-                        catch (Exception ex)
-                        {
-                            logger.Warn("Exception occurred while checking for newer version of Inkscape: " + ex.Message);
-                            return null;
-                        }
-                        client.Dispose();
+                        var task = client.GetStringAsync(signatureUrl);
+                        task.Wait();
+                        htmlCode = task.Result;
+                    }
+                    catch (Exception ex)
+                    {
+                        logger.Warn("Exception occurred while checking for newer version of Inkscape: " + ex.Message);
+                        return null;
                     }
                 }
 

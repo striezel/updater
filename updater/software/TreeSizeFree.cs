@@ -19,7 +19,6 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Net.Http;
 using System.Text.RegularExpressions;
 using updater.data;
 
@@ -113,19 +112,17 @@ namespace updater.software
             logger.Info("Searching for newer version of TreeSize Free...");
             // Just getting the latest release does not work here, because that may also be a release candidate, and we do not want that.
             string html;
-            using (var client = new HttpClient())
+            var client = HttpClientProvider.Provide();
+            try
             {
-                try
-                {
-                    var task = client.GetStringAsync("https://customers.jam-software.de/downloadTrial.php?language=DE&article_no=80");
-                    task.Wait();
-                    html = task.Result;
-                }
-                catch (Exception ex)
-                {
-                    logger.Warn("Exception occurred while checking for newer version of TreeSize Free: " + ex.Message);
-                    return null;
-                }
+                var task = client.GetStringAsync("https://customers.jam-software.de/downloadTrial.php?language=DE&article_no=80");
+                task.Wait();
+                html = task.Result;
+            }
+            catch (Exception ex)
+            {
+                logger.Warn("Exception occurred while checking for newer version of TreeSize Free: " + ex.Message);
+                return null;
             }
 
             // HTML text will contain something like "<b>TreeSize Free V4.42</b>".

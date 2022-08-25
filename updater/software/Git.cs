@@ -18,7 +18,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Net.Http;
 using System.Text.RegularExpressions;
 using updater.data;
 
@@ -117,19 +116,17 @@ namespace updater.software
             logger.Info("Searching for newer version of Git for Windows...");
             // Just getting the latest release does not work here, because that may also be a release candidate, and we do not want that.
             string html;
-            using (var client = new HttpClient())
+            var client = HttpClientProvider.Provide();
+            try
             {
-                try
-                {
-                    var task = client.GetStringAsync("https://github.com/git-for-windows/git/releases");
-                    task.Wait();
-                    html = task.Result;
-                }
-                catch (Exception ex)
-                {
-                    logger.Warn("Exception occurred while checking for newer version of Git for Windows: " + ex.Message);
-                    return null;
-                }
+                var task = client.GetStringAsync("https://github.com/git-for-windows/git/releases");
+                task.Wait();
+                html = task.Result;
+            }
+            catch (Exception ex)
+            {
+                logger.Warn("Exception occurred while checking for newer version of Git for Windows: " + ex.Message);
+                return null;
             }
 
             // HTML text will contain links to releases like "https://github.com/git-for-windows/git/releases/tag/v2.30.1.windows.1".
@@ -143,21 +140,17 @@ namespace updater.software
 
             // Get checksum from release page, e.g. "https://github.com/git-for-windows/git/releases/tag/v2.30.1.windows.1"
             string htmlCode = null;
-            using (var client = new HttpClient())
+            try
             {
-                try
-                {
-                    var task = client.GetStringAsync("https://github.com/git-for-windows/git/releases/tag/" + tag);
-                    task.Wait();
-                    htmlCode = task.Result;
-                }
-                catch (Exception ex)
-                {
-                    logger.Warn("Exception occurred while checking for newer version of Git for Windows: " + ex.Message);
-                    return null;
-                }
-                client.Dispose();
-            } // using
+                var task = client.GetStringAsync("https://github.com/git-for-windows/git/releases/tag/" + tag);
+                task.Wait();
+                htmlCode = task.Result;
+            }
+            catch (Exception ex)
+            {
+                logger.Warn("Exception occurred while checking for newer version of Git for Windows: " + ex.Message);
+                return null;
+            }
 
             // find SHA256 hash for 32 bit installer
             /* Hash is part of a HTML table, e. g. in

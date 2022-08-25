@@ -19,7 +19,6 @@
 using System;
 using System.Collections.Generic;
 using System.Net;
-using System.Net.Http;
 using System.Text.RegularExpressions;
 using updater.data;
 
@@ -113,8 +112,7 @@ namespace updater.software
         {
             logger.Info("Searching for newer version of GIMP...");
             string htmlCode = null;
-            using (var client = new HttpClient())
-            {
+            var client = HttpClientProvider.Provide();
                 try
                 {
                     var task = client.GetStringAsync("https://www.gimp.org/downloads/");
@@ -126,8 +124,6 @@ namespace updater.software
                     logger.Error("Exception occurred while checking for newer version of GIMP: " + ex.Message);
                     return null;
                 }
-                client.Dispose();
-            } // using
 
             const string stableRelease = "The current stable release of GIMP is";
             int idx = htmlCode.IndexOf(stableRelease);
@@ -145,12 +141,12 @@ namespace updater.software
             // https://download.gimp.org/pub/gimp/v2.8/windows/gimp-2.8.20-setup.exe.sha256
             string shortVersion = string.Join(".", version.Split(new char[] { '.' }), 0, 2);
             htmlCode = null;
-            using (var client = new WebClient())
+            using (var w_client = new WebClient())
             {
                 try
                 {
                     string sha256Url = "https://download.gimp.org/pub/gimp/v" + shortVersion + "/windows/gimp-" + version + "-setup.exe.sha256";
-                    htmlCode = client.DownloadString(sha256Url);
+                    htmlCode = w_client.DownloadString(sha256Url);
                 }
                 catch (WebException webEx)
                 {
@@ -161,7 +157,7 @@ namespace updater.software
                         try
                         {
                             string sha256Url = "https://download.gimp.org/pub/gimp/v" + shortVersion + "/windows/SHA256SUMS";
-                            htmlCode = client.DownloadString(sha256Url);
+                            htmlCode = w_client.DownloadString(sha256Url);
                         }
                         catch (Exception ex)
                         {
@@ -182,7 +178,7 @@ namespace updater.software
                     logger.Warn("Exception occurred while checking for newer version of GIMP: " + ex.Message);
                     return null;
                 }
-                client.Dispose();
+                w_client.Dispose();
             } // using
 
             var reChecksum = new Regex("[0-9a-f]{64}  gimp\\-" + Regex.Escape(version) + "\\-setup\\.exe");

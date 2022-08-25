@@ -18,7 +18,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Net.Http;
 using System.Text.RegularExpressions;
 using updater.data;
 
@@ -103,21 +102,18 @@ namespace updater.software
         {
             logger.Info("Searching for newer version of 7-Zip...");
             string htmlCode = null;
-            using (var client = new HttpClient())
+            var client = HttpClientProvider.Provide();
+            try
             {
-                try
-                {
-                    var task = client.GetStringAsync("https://www.7-zip.org/");
-                    task.Wait();
-                    htmlCode = task.Result;
-                }
-                catch (Exception ex)
-                {
-                    logger.Warn("Exception occurred while checking for newer version of 7-Zip: " + ex.Message);
-                    return null;
-                }
-                client.Dispose();
-            } // using
+                var task = client.GetStringAsync("https://www.7-zip.org/");
+                task.Wait();
+                htmlCode = task.Result;
+            }
+            catch (Exception ex)
+            {
+                logger.Warn("Exception occurred while checking for newer version of 7-Zip: " + ex.Message);
+                return null;
+            }
 
             var reVersion = new Regex("<A href=\"a/7z[0-9]{4}.exe\">Download</A>", RegexOptions.IgnoreCase);
             Match matchVersion = reVersion.Match(htmlCode);

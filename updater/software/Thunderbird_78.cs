@@ -21,7 +21,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Net;
-using System.Net.Http;
 using System.Text.RegularExpressions;
 using updater.data;
 
@@ -219,21 +218,18 @@ namespace updater.software
 
             string url = "https://ftp.mozilla.org/pub/thunderbird/releases/" + newerVersion + "/SHA512SUMS";
             string sha512SumsContent = null;
-            using (var client = new HttpClient())
+            var client = HttpClientProvider.Provide();
+            try
             {
-                try
-                {
-                    var task = client.GetStringAsync(url);
-                    task.Wait();
-                    sha512SumsContent = task.Result;
-                }
-                catch (Exception ex)
-                {
-                    logger.Warn("Exception occurred while checking for newer version of Thunderbird: " + ex.Message);
-                    return null;
-                }
-                client.Dispose();
-            } // using
+                var task = client.GetStringAsync(url);
+                task.Wait();
+                sha512SumsContent = task.Result;
+            }
+            catch (Exception ex)
+            {
+                logger.Warn("Exception occurred while checking for newer version of Thunderbird: " + ex.Message);
+                return null;
+            }
             // look for line with the correct language code and version
             var reChecksum32Bit = new Regex("[0-9a-f]{128}  win32/" + languageCode.Replace("-", "\\-")
                 + "/Thunderbird Setup " + Regex.Escape(newerVersion) + "\\.exe");
