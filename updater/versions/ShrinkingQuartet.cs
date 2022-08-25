@@ -106,8 +106,6 @@ namespace updater.versions
 
         public int CompareTo(ShrinkingQuartet other)
         {
-            if (ReferenceEquals(this, other))
-                return 0;
             int c = major.CompareTo(other.major);
             if (c != 0)
                 return c;

@@ -126,8 +126,8 @@ namespace updater.versions
 
         public bool Equals(QuartetAurora other)
         {
-            return ((major == other.major) && (minor == other.minor)
-                && (patch == other.patch) && (build == other.build));
+            return (major == other.major) && (minor == other.minor)
+                && (patch == other.patch) && (build == other.build);
         }
 
 

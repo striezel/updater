@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017  Dirk Stolle
+    Copyright (C) 2017, 2022  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -80,8 +80,6 @@ namespace updater.versions
 
         public int CompareTo(Triple other)
         {
-            if (ReferenceEquals(this, other))
-                return 0;
             int c = major.CompareTo(other.major);
             if (c != 0)
                 return c;

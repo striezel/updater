@@ -1,6 +1,6 @@
 ﻿/*
     updater, command line interface
-    Copyright (C) 2016  Dirk Stolle
+    Copyright (C) 2016, 2022  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -56,8 +56,6 @@ namespace updater.data
         /// Returns a value greater than zero, if this comes after other.</returns>
         public int CompareTo(DetectedSoftware other)
         {
-            if (ReferenceEquals(this, other))
-                return 0;
             // First compare by display name.
             if (null == displayName)
             {
