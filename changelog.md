@@ -18,6 +18,10 @@ got introduced in newer versions of Audacity. For the (rather long) discussion
 about Audacity's telemetry stuff see
 <https://github.com/audacity/audacity/pull/835>.
 
+__[new features]__
+
+Update support for HeidiSQL is added.
+
 __[changes]__
 
 Downloads for 7-Zip will now use HTTPS (instead of HTTP) consistently.
