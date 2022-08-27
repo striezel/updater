@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017  Dirk Stolle
+    Copyright (C) 2017, 2022  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -75,7 +75,7 @@ namespace updater_test.software
             var info = fx.info();
 
             // versions with three numbers
-            Regex re = new Regex(info.match64Bit);
+            var re = new Regex(info.match64Bit);
             Assert.IsTrue(re.IsMatch("Mozilla Firefox 51.0.1 (x64 de)"));
             re = new Regex(info.match32Bit);
             Assert.IsTrue(re.IsMatch("Mozilla Firefox 51.0.1 (x86 de)"));
@@ -84,6 +84,11 @@ namespace updater_test.software
             Assert.IsTrue(re.IsMatch("Mozilla Firefox 50.0 (x64 de)"));
             re = new Regex(info.match32Bit);
             Assert.IsTrue(re.IsMatch("Mozilla Firefox 50.0 (x86 de)"));
+            // versions without numbers
+            re = new Regex(info.match64Bit);
+            Assert.IsTrue(re.IsMatch("Mozilla Firefox (x64 de)"));
+            re = new Regex(info.match32Bit);
+            Assert.IsTrue(re.IsMatch("Mozilla Firefox (x86 de)"));
         }
 
 
