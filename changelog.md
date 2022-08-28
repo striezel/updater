@@ -4,6 +4,13 @@ _(Note: This changelog focuses on the major changes between the different
 versions. Therefore, it may not contain all changes. Especially smaller fixes or
 improvements may be omitted.)_
 
+## Version NEXT
+
+__[maintenance]__
+
+Fix problem with installer not containing all required files for a proper
+installation of the software.
+
 ## Version 2022.08.28.0
 
 __[breaking change]__
