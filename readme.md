@@ -17,6 +17,12 @@ currently be updated with this application is available
 * GitLab CI:
 [![GitLab pipeline status](https://gitlab.com/striezel/updater/badges/master/pipeline.svg)](https://gitlab.com/striezel/updater/)
 
+## Prerequisites
+
+To run the `updater` program you need the .NET 6 runtime.
+The current .NET 6 runtime can be downloaded from
+<https://dotnet.microsoft.com/en-us/download/dotnet/6.0/runtime>.
+
 ## Usage
 
 The updater is a command-line program, there is no graphical user interface yet
