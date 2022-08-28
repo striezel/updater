@@ -9,6 +9,8 @@ improvements may be omitted.)_
 __[breaking change]__
 
 The required version of the .NET is bumped from .NET Framework 4.7.2 to .NET 6.
+If your system does not have .NET 6 yet, then you can download the .NET 6
+runtime at <https://dotnet.microsoft.com/en-us/download/dotnet/6.0/runtime>.
 
 __[breaking change]__
 
