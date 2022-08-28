@@ -8,8 +8,11 @@ improvements may be omitted.)_
 
 __[maintenance]__
 
-Fix problem with installer not containing all required files for a proper
-installation of the software.
+* Fix problem with installer not containing all required files for a proper
+  installation of the software.
+* The installer will now offer few more languages during installation.
+  (Those are only used by the installer. The program itself still only uses
+   English as language.)
 
 ## Version 2022.08.28.0
 
