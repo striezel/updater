@@ -54,19 +54,19 @@ namespace updater.software
         public override AvailableSoftware knownInfo()
         {
             return new AvailableSoftware("Inkscape",
-                "1.2",
+                "1.2.1",
                 "^Inkscape( [0-9]\\.[0-9]+(\\.[0-9]+)?)?$",
                 "^Inkscape( [0-9]\\.[0-9]+(\\.[0-9]+)?)?$",
                 new InstallInfoMsi(
-                    "https://media.inkscape.org/dl/resources/file/inkscape-1.2_2022-05-15_dc2aedaf03-x86_4JZVqba.msi",
+                    "https://media.inkscape.org/dl/resources/file/inkscape-1.2.1_2022-07-14_9c6d41e410-x86_6CQ8iKc.msi",
                     HashAlgorithm.SHA256,
-                    "f9a220c9d3d84e4dd1358062fe6c2e82324dd4a66540a3735e628f2f5c829454",
+                    "20a931475ab6876da21af0a332729441d5c8478f09313250b4a790c03547efa6",
                     Signature.None,
                     "/qn /norestart"),
                 new InstallInfoMsi(
-                    "https://media.inkscape.org/dl/resources/file/inkscape-1.2_2022-05-15_dc2aedaf03-x64_5iRsplS.msi",
+                    "https://media.inkscape.org/dl/resources/file/inkscape-1.2.1_2022-07-14_9c6d41e410-x64_qPmYh2W.msi",
                     HashAlgorithm.SHA256,
-                    "74904664d2b9bcacbe562c12367d1abfb38d2f710788b48422f4a73659b5816d",
+                    "f72b8be847d78876a5fcaa0c0475732c00f0f88f5fbb18b7b459ee22a6a1e6e7",
                     Signature.None,
                     "/qn /norestart")
                     );
@@ -303,6 +303,8 @@ namespace updater.software
                     "{C58DF5E8-47B7-4EC4-9045-19F23D540E4C}", // 1.1.2 MSI (x64)
                     "{95BBB0BB-700E-45FB-8BB9-B24CE6A89E81}", // 1.2 MSI (x86)
                     "{8D6DECA5-17F9-42AF-A62B-8D7C5C11069B}", // 1.2 MSI (x64)
+                    "{00847B46-2888-4E6E-B50B-ED50A4C21190}", // 1.2.1 MSI (x86)
+                    "{DF2665EE-1E5E-43DD-98B5-407BC0976D87}", // 1.2.1 MSI (x64)
                 };
                 foreach (var id in guids)
                 {
@@ -333,7 +335,7 @@ namespace updater.software
 
 
         /// <summary>
-        /// whether the detected software is older than the newest known software
+        /// Checks whether the detected software is older than the newest known software.
         /// </summary>
         /// <param name="detected">the corresponding detected software</param>
         /// <returns>Returns true, if the detected software version is older
