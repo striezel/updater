@@ -65,19 +65,19 @@ namespace updater.software
         {
             var signature = new Signature(publisherX509, certificateExpiration);
             return new AvailableSoftware("Git",
-                "2.37.2.2",
+                "2.37.3",
                 "^(Git|Git version [0-9]+\\.[0-9]+\\.[0-9]+(\\.[0-9]+)?)$",
                 "^(Git|Git version [0-9]+\\.[0-9]+\\.[0-9]+(\\.[0-9]+)?)$",
                 new InstallInfoExe(
-                    "https://github.com/git-for-windows/git/releases/download/v2.37.2.windows.2/Git-2.37.2.2-32-bit.exe",
+                    "https://github.com/git-for-windows/git/releases/download/v2.37.3.windows.1/Git-2.37.3-32-bit.exe",
                     HashAlgorithm.SHA256,
-                    "672569b7041024b1fdb5c29cc9a775658be78f7d3afea025973e07954f5070fa",
+                    "5cc8e503989f0a3b3a5529c19074b07d83d7a6bc163532efa577bddbddfe3da3",
                     signature,
                     "/VERYSILENT /NORESTART"),
                 new InstallInfoExe(
-                    "https://github.com/git-for-windows/git/releases/download/v2.37.2.windows.2/Git-2.37.2.2-64-bit.exe",
+                    "https://github.com/git-for-windows/git/releases/download/v2.37.3.windows.1/Git-2.37.3-64-bit.exe",
                     HashAlgorithm.SHA256,
-                    "6f91f1bb28b222f30c13f905a5e9b0ad491e67c28a37a238000def19f86e0a2f",
+                    "b0442f1b8ea40b6f94ef9a611121d2c204f6aa7f29c54315d2ce59876c3d134e",
                     signature,
                     "/VERYSILENT /NORESTART")
                     );
@@ -139,7 +139,7 @@ namespace updater.software
             string tag = matchVersion.Value.Remove(0, "git/releases/tag/".Length).Replace("\"", "");
 
             // Get checksum from release page, e.g. "https://github.com/git-for-windows/git/releases/tag/v2.30.1.windows.1"
-            string htmlCode = null;
+            string htmlCode;
             try
             {
                 var task = client.GetStringAsync("https://github.com/git-for-windows/git/releases/tag/" + tag);
