@@ -76,11 +76,11 @@ namespace updater.software
             }
             
             var signature = new Signature(publisherX509, certificateExpiration);
-            const string knownVersion = "6.3.0";
+            const string knownVersion = "6.4.0";
             InstallInfo info64 = new InstallInfoMsi(
                 "https://download.calibre-ebook.com/" + knownVersion + "/calibre-64bit-" + knownVersion + ".msi",
                 HashAlgorithm.SHA256,
-                "5bef08b765c0d4f370f6677d80c2e9f06c2e4b43270eafcb9d77cace0edcecf2",
+                "6346d712c7dbd9fde7cafc86421705fdbcc34c212f903605435da01126b014a4",
                 signature,
                 "/qn /norestart"
                 );
@@ -173,7 +173,7 @@ namespace updater.software
                 logger.Warn("Please consider upgrading to Windows 10 or better to get newer Calibre updates.");
                 return latestSupported32BitVersion();
             }
-            string htmlCode = null;
+            string htmlCode;
             var client = HttpClientProvider.Provide();
             try
             {
@@ -199,7 +199,6 @@ namespace updater.software
             newVersion = newVersion.Remove(idx);
 
             // get SHA-256 sums from FossHub (official site provides no hashes)
-            htmlCode = null;
             try
             {
                 var task = client.GetStringAsync("https://www.fosshub.com/Calibre.html");
