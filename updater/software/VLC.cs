@@ -119,7 +119,7 @@ namespace updater.software
         /// Returns null, if an error occurred.</returns>
         private static string getLastVersion()
         {
-            string htmlCode = null;
+            string htmlCode;
             var client = HttpClientProvider.Provide();
             try
             {
@@ -151,7 +151,7 @@ namespace updater.software
         private static string getLatestAvailableVersion()
         {
             // See https://get.videolan.org/vlc/ for available versions.
-            string htmlCode = null;
+            string htmlCode;
             var client = HttpClientProvider.Provide();
             try
             {

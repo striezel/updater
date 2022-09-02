@@ -109,7 +109,7 @@ namespace moz_checksum_generator
              */
 
             string url = "https://ftp.mozilla.org/pub/firefox/releases/" + version + "/SHA512SUMS";
-            string sha512SumsContent = null;
+            string sha512SumsContent;
             using (var client = new HttpClient())
             {
                 try
@@ -173,7 +173,7 @@ namespace moz_checksum_generator
              */
 
             string url = "https://ftp.mozilla.org/pub/devedition/releases/" + version + "/SHA512SUMS";
-            string sha512SumsContent = null;
+            string sha512SumsContent;
             using (var client = new HttpClient())
             {
                 try
@@ -237,7 +237,7 @@ namespace moz_checksum_generator
              */
 
             string url = "https://ftp.mozilla.org/pub/firefox/releases/" + version + "esr/SHA512SUMS";
-            string sha512SumsContent = null;
+            string sha512SumsContent;
             using (var client = new HttpClient())
             {
                 try
@@ -304,7 +304,7 @@ namespace moz_checksum_generator
              */
 
             string url = "https://archive.mozilla.org/pub/seamonkey/releases/" + version + "/SHA1SUMS.txt";
-            string sha1SumsContent = null;
+            string sha1SumsContent;
             using (var client = new HttpClient())
             {
                 try
@@ -370,7 +370,7 @@ namespace moz_checksum_generator
              */
 
             string url = "https://ftp.mozilla.org/pub/thunderbird/releases/" + version + "/SHA512SUMS";
-            string sha512SumsContent = null;
+            string sha512SumsContent;
             using (var client = new HttpClient())
             {
                 try

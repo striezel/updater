@@ -180,8 +180,8 @@ namespace updater.software
         {
             // Simple version string comparison may not be enough, so use the
             // parsed version numbers instead.
-            Quartet verDetected = new Quartet(detected.displayVersion);
-            Quartet verNewest = new Quartet(info().newestVersion);
+            var verDetected = new Quartet(detected.displayVersion);
+            var verNewest = new Quartet(info().newestVersion);
             return verDetected < verNewest;
         }
 
@@ -197,7 +197,7 @@ namespace updater.software
             var known = knownInfo();
             if (Environment.Is64BitOperatingSystem && !string.IsNullOrWhiteSpace(known.match64Bit))
             {
-                Regex regularExp = new Regex(known.match64Bit, RegexOptions.IgnoreCase);
+                var regularExp = new Regex(known.match64Bit, RegexOptions.IgnoreCase);
                 int idx = detected.FindIndex(x => regularExp.IsMatch(x.displayName) && !string.IsNullOrWhiteSpace(x.displayVersion));
                 if ((idx >= 0) && (detected[idx].appType == ApplicationType.Bit64))
                 {
@@ -209,7 +209,7 @@ namespace updater.software
             } // if 64 bit expression does exist and we are on a 64 bit system
             if (!string.IsNullOrWhiteSpace(known.match32Bit))
             {
-                Regex regularExp = new Regex(known.match32Bit, RegexOptions.IgnoreCase);
+                var regularExp = new Regex(known.match32Bit, RegexOptions.IgnoreCase);
                 int idx = detected.FindIndex(x => regularExp.IsMatch(x.displayName) && !string.IsNullOrWhiteSpace(x.displayVersion));
                 if ((idx >= 0) && (detected[idx].appType == ApplicationType.Bit32))
                 {

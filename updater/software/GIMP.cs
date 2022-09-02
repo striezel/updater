@@ -111,19 +111,19 @@ namespace updater.software
         public override AvailableSoftware searchForNewer()
         {
             logger.Info("Searching for newer version of GIMP...");
-            string htmlCode = null;
+            string htmlCode;
             var client = HttpClientProvider.Provide();
-                try
-                {
-                    var task = client.GetStringAsync("https://www.gimp.org/downloads/");
-                    task.Wait();
-                    htmlCode = task.Result;
-                }
-                catch (Exception ex)
-                {
-                    logger.Error("Exception occurred while checking for newer version of GIMP: " + ex.Message);
-                    return null;
-                }
+            try
+            {
+                var task = client.GetStringAsync("https://www.gimp.org/downloads/");
+                task.Wait();
+                htmlCode = task.Result;
+            }
+            catch (Exception ex)
+            {
+                logger.Error("Exception occurred while checking for newer version of GIMP: " + ex.Message);
+                return null;
+            }
 
             const string stableRelease = "The current stable release of GIMP is";
             int idx = htmlCode.IndexOf(stableRelease);
