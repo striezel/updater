@@ -4,6 +4,13 @@ _(Note: This changelog focuses on the major changes between the different
 versions. Therefore, it may not contain all changes. Especially smaller fixes or
 improvements may be omitted.)_
 
+## Version NEXT
+
+__[changes]__
+
+Adjust search for newer version of Transmission (BitTorrent client) for the
+newer, updated website of the Transmission project.
+
 ## Version 2022.08.29.1
 
 __[maintenance]__
