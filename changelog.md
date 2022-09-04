@@ -11,6 +11,10 @@ __[changes]__
 Adjust search for newer version of Transmission (BitTorrent client) for the
 newer, updated website of the Transmission project.
 
+__[maintenance]__
+
+* NLog library is updated from 5.0.2 to 5.0.4.
+
 ## Version 2022.08.29.1
 
 __[maintenance]__
