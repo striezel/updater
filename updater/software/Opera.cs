@@ -66,19 +66,19 @@ namespace updater.software
             const string silentOptions = "/silent /norestart /launchopera 0 /setdefaultbrowser 0 /enable-stats 0 /enable-installer-stats 0 /pintotaskbar 0 /pin-additional-shortcuts 0 /allusers";
             var signature = new Signature(publisherX509, certificateExpiration);
             return new AvailableSoftware("Opera",
-                "90.0.4480.54",
+                "90.0.4480.80",
                 "^Opera Stable [0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+$",
                 "^Opera Stable [0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+$",
                 new InstallInfoExe(
-                    "https://get.geo.opera.com/pub/opera/desktop/90.0.4480.54/win/Opera_90.0.4480.54_Setup.exe",
+                    "https://get.geo.opera.com/pub/opera/desktop/90.0.4480.80/win/Opera_90.0.4480.80_Setup.exe",
                     HashAlgorithm.SHA256,
-                    "73e941126b95c5e9d4195a25d984030201dafe5fc3403420f0f1ae96a06b3fec",
+                    "0c861dfa8725d833f3c93ff726d498593d0fa361bcfe7beb197206a345639853",
                     signature,
                     silentOptions),
                 new InstallInfoExe(
-                    "https://get.geo.opera.com/pub/opera/desktop/90.0.4480.54/win/Opera_90.0.4480.54_Setup_x64.exe",
+                    "https://get.geo.opera.com/pub/opera/desktop/90.0.4480.80/win/Opera_90.0.4480.80_Setup_x64.exe",
                     HashAlgorithm.SHA256,
-                    "c1958ed651dd1d6e575cdfa7940dc50c33e136e385dce071b9efb033e32dc381",
+                    "37abd4d4e1e18d9c5306377c12999b812cb549cd583164e478672ee0117f0d0c",
                     signature,
                     silentOptions)
                     );
@@ -115,7 +115,7 @@ namespace updater.software
         public override AvailableSoftware searchForNewer()
         {
             logger.Info("Searching for newer version of Opera...");
-            string htmlCode = null;
+            string htmlCode;
             var client = HttpClientProvider.Provide();
             try
             {
@@ -179,7 +179,6 @@ namespace updater.software
 
             // Look into "https://get.geo.opera.com/ftp/pub/opera/desktop/<version>/win/Opera_<version>_Setup_x64.exe.sha256sum"
             // to get the checksum for 64 bit installer.
-            htmlCode = null;
             try
             {
                 var task = client.GetStringAsync("https://get.geo.opera.com/ftp/pub/opera/desktop/" + newVersion + "/win/Opera_" + newVersion + "_Setup_x64.exe.sha256sum");
@@ -201,7 +200,6 @@ namespace updater.software
 
             // Look into "https://get.geo.opera.com/ftp/pub/opera/desktop/<version>/win/Opera_<version>_Setup.exe.sha256sum"
             // to get the checksum for 32 bit installer.
-            htmlCode = null;
             try
             {
                 var task = client.GetStringAsync("https://get.geo.opera.com/ftp/pub/opera/desktop/" + newVersion + "/win/Opera_" + newVersion + "_Setup.exe.sha256sum");
