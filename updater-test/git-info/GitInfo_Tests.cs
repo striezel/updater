@@ -50,7 +50,7 @@ namespace updater_test.git_info
         {
             string hash = updater.GitInfo.getCommit();
             // Commit hash is a SHA-1 hash, i.e. 40 hex digits.
-            Regex forty = new Regex("^[0-9a-f]{40}$");
+            var forty = new Regex("^[0-9a-f]{40}$");
             Assert.IsTrue(forty.IsMatch(hash));
         }
 
@@ -62,7 +62,7 @@ namespace updater_test.git_info
         public void Test_getCommitDate()
         {
             string date = updater.GitInfo.getCommitDate();
-            Regex expr = new Regex("^[0-9]{4}\\-[0-9]{2}\\-[0-9]{2} [012][0-9]:[0-9]{2}:[0-9]{2} [\\+\\-][0-9]{4}$");
+            var expr = new Regex("^[0-9]{4}\\-[0-9]{2}\\-[0-9]{2} [012][0-9]:[0-9]{2}:[0-9]{2} [\\+\\-][0-9]{4}$");
             Assert.IsTrue(expr.IsMatch(date));
         }
 
@@ -75,9 +75,9 @@ namespace updater_test.git_info
         public void Test_getDescription()
         {
             string desc = updater.GitInfo.getDescription();
-            Regex seven = new Regex("^[0-9a-f]{7}$");
-            Regex versionTag = new Regex("^v[0-9]{4}\\.[0-9]{2}\\.[0-9]{2}(\\.[0-9]+)?$");
-            Regex versionTagAndCommit = new Regex("^v[0-9]{4}\\.[0-9]{2}\\.[0-9]{2}(\\.[0-9]+)?\\-[0-9]+\\-g[0-9a-f]{7}$");
+            var seven = new Regex("^[0-9a-f]{7}$");
+            var versionTag = new Regex("^v[0-9]{4}\\.[0-9]{2}\\.[0-9]{2}(\\.[0-9]+)?$");
+            var versionTagAndCommit = new Regex("^v[0-9]{4}\\.[0-9]{2}\\.[0-9]{2}(\\.[0-9]+)?\\-[0-9]+\\-g[0-9a-f]{7}$");
             Assert.IsTrue(seven.IsMatch(desc) || versionTag.IsMatch(desc)
                 || versionTagAndCommit.IsMatch(desc), "Description is \""
                 + desc + "\" and does not match any of the regular expressions!");
@@ -92,7 +92,7 @@ namespace updater_test.git_info
         {
             string shorty = updater.GitInfo.getShortHash();
             // Start of commit hash, i.e. seven hex digits.
-            Regex seven = new Regex("^[0-9a-f]{7}$");
+            var seven = new Regex("^[0-9a-f]{7}$");
             Assert.IsTrue(seven.IsMatch(shorty));
         }
     } // class
