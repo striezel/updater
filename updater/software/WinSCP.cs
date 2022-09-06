@@ -62,12 +62,12 @@ namespace updater.software
         public override AvailableSoftware knownInfo()
         {
             return new AvailableSoftware("WinSCP",
-                "5.21.2",
+                "5.21.3",
                 "^WinSCP [1-9]+\\.[0-9]+(\\.[0-9]+)?$", null,
                 new InstallInfoExe(
-                    "https://netcologne.dl.sourceforge.net/project/winscp/WinSCP/5.21.2/WinSCP-5.21.2-Setup.exe",
+                    "https://netcologne.dl.sourceforge.net/project/winscp/WinSCP/5.21.3/WinSCP-5.21.3-Setup.exe",
                     HashAlgorithm.SHA256,
-                    "0e06b3649c3e7f26b415c4b6f5b1ae8f8f754d361204f81e0f2654fd8abd5516",
+                    "6bae480b8853de60b88e51ccc6b8b6fc2eca80cc26d40019e99ebdbd70a8785a",
                     new Signature(publisherX509, certificateExpiration),
                     "/VERYSILENT /NORESTART"),
                 // There is no 64 bit installer yet.
@@ -105,7 +105,7 @@ namespace updater.software
         public override AvailableSoftware searchForNewer()
         {
             logger.Info("Searching for newer version of WinSCP...");
-            string htmlCode = null;
+            string htmlCode;
             var client = HttpClientProvider.Provide();
             try
             {
@@ -135,7 +135,6 @@ namespace updater.software
                 return null;
 
             // Readme (e.g. https://winscp.net/download/WinSCP-5.9.5-ReadMe.txt) contains hash.
-            htmlCode = null;
             try
             {
                 var task = client.GetStringAsync("https://winscp.net/download/WinSCP-" + newVersion + "-ReadMe.txt");
@@ -158,7 +157,6 @@ namespace updater.software
             // similar is just a HTML page that starts the download of the real
             // file after a few seconds, so we have to parse the direct link of
             // the download and use that.
-            htmlCode = null;
             try
             {
                 var task = client.GetStringAsync("https://winscp.net/download/WinSCP-" + newVersion + "-Setup.exe");
