@@ -39,8 +39,8 @@ namespace updater.software
         /// <summary>
         /// Default constructor.
         /// </summary>
-        /// <param name="autoGetNewer">whether to automatically get
-        /// newer information about the software when calling the info() method</param>
+        /// <param name="autoGetNewer">whether to automatically get newer
+        /// information about the software when calling the info() method</param>
         public NotepadPlusPlus(bool autoGetNewer)
             : base(autoGetNewer)
         { }
@@ -67,8 +67,8 @@ namespace updater.software
         {
             var signature = new Signature(publisherX509, certificateExpiration);
             // Both version and tag are usually the same, except for major releases like 8.0.
-            const string version = "8.4.4";
-            const string tag = "8.4.4";
+            const string version = "8.4.5";
+            const string tag = "8.4.5";
             return new AvailableSoftware("Notepad++",
                 version,
                 "^Notepad\\+\\+ \\(32\\-bit x86\\)$|^Notepad\\+\\+$",
@@ -76,13 +76,13 @@ namespace updater.software
                 new InstallInfoExe(
                     "https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v" + tag + "/npp." + version + ".Installer.exe",
                     HashAlgorithm.SHA256,
-                    "8c550af844da90d05ac6be12f424ac61c6eb074238985e48201f3aa5db37b78b",
+                    "71c8beb31074c53a59927f1874f0cce19bed8fd3be9edd93164511eb717c581c",
                     signature,
                     "/S"),
                 new InstallInfoExe(
                     "https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v" + tag + "/npp." + version + ".Installer.x64.exe",
                     HashAlgorithm.SHA256,
-                    "638bd860149703820bf605e1098d9fa158982281cc7cfda788416c1fd3093931",
+                    "69c679d75bd877e0a66697d6d04f24a7e9f136a117b7b5022be8536a2734924d",
                     signature,
                     "/S")
                 );
@@ -133,7 +133,7 @@ namespace updater.software
                 request = null;
                 response = null;
                 // Location header will point to something like "https://github.com/notepad-plus-plus/notepad-plus-plus/releases/tag/v7.9.1".
-                Regex reVersion = new Regex("v[0-9]+(\\.[0-9]+(\\.[0-9]+(\\.[0-9]+)?)?)?$");
+                var reVersion = new Regex("v[0-9]+(\\.[0-9]+(\\.[0-9]+(\\.[0-9]+)?)?)?$");
                 Match matchVersion = reVersion.Match(newLocation);
                 if (!matchVersion.Success)
                     return null;
@@ -145,7 +145,7 @@ namespace updater.software
                 return null;
             }
 
-            string versionNumber = currentVersion.Contains(".") ? currentVersion : currentVersion + ".0";
+            string versionNumber = currentVersion.Contains('.') ? currentVersion : currentVersion + ".0";
 
             // download checksum file, e.g. "http://download.notepad-plus-plus.org/repository/7.x/7.7/npp.7.7.checksums.sha256"
             //                           or for GitHub releases: "https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v7.9.1/npp.7.9.1.checksums.sha256"
@@ -170,7 +170,7 @@ namespace updater.software
             } // using
 
             // find SHA256 hash for 32 bit installer
-            Regex reHash = new Regex("[a-f0-9]{64}  npp.+Installer\\.exe");
+            var reHash = new Regex("[a-f0-9]{64}  npp.+Installer\\.exe");
             Match matchHash = reHash.Match(htmlCode);
             if (!matchHash.Success)
                 return null;
