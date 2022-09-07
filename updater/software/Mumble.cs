@@ -20,6 +20,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Net;
+using System.Net.Http;
 using System.Text.RegularExpressions;
 using updater.data;
 
@@ -117,16 +118,21 @@ namespace updater.software
         public override AvailableSoftware searchForNewer()
         {
             logger.Info("Searching for newer version of Mumble...");
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://github.com/mumble-voip/mumble/releases/latest");
-            request.Method = WebRequestMethods.Http.Head;
-            request.AllowAutoRedirect = false;
+            var request = new HttpRequestMessage(HttpMethod.Head, "https://github.com/mumble-voip/mumble/releases/latest");
+            var nonRedirectingHandler = new HttpClientHandler
+            {
+                AllowAutoRedirect = false
+            };
+            var client = new HttpClient(nonRedirectingHandler);
             string currentVersion;
             try
             {
-                HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+                var response = client.Send(request);
                 if (response.StatusCode != HttpStatusCode.Found)
                     return null;
-                string newLocation = response.Headers[HttpResponseHeader.Location];
+                string newLocation = response.Headers.Location.ToString();
+                client.Dispose();
+                client = null;
                 request = null;
                 response = null;
                 var reVersion = new Regex("tag/v[0-9]+\\.[0-9]+\\.[0-9]+$");
