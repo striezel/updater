@@ -65,13 +65,13 @@ namespace updater.software
         {
             var signature = new Signature(publisherX509, certificateExpiration);
             return new AvailableSoftware("KeePass",
-                "2.51.1",
+                "2.52",
                 "^KeePass Password Safe [2-9]\\.[0-9]{2}(\\.[0-9]+)?$",
                 null,
                 new InstallInfoExe(
-                    "https://netcologne.dl.sourceforge.net/project/keepass/KeePass%202.x/2.51.1/KeePass-2.51.1-Setup.exe",
+                    "https://netcologne.dl.sourceforge.net/project/keepass/KeePass%202.x/2.52/KeePass-2.52-Setup.exe",
                     HashAlgorithm.SHA256,
-                    "6FB6A206 C2C68514 DAD5048E 82B28105 FC7FA5A9 67033C6D 402AEACF E09A974A",
+                    "DA403BC2 E91132D1 C1E0C49F 585441E4 CD430C81 95CA8AF3 8ADC2EA3 00DE52CB",
                     signature,
                     "/VERYSILENT"),
                 // There is no 64 bit installer yet.
@@ -109,7 +109,7 @@ namespace updater.software
         public override AvailableSoftware searchForNewer()
         {
             logger.Info("Searching for newer version of KeePass...");
-            string htmlCode = null;
+            string htmlCode;
             var client = HttpClientProvider.Provide();
             try
             {

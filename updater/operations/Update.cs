@@ -402,7 +402,7 @@ namespace updater.operations
                 }
             }
             string localFile = Path.Combine(cacheDirectory, basename);
-            using (WebClient wc = new WebClient())
+            using (var wc = new WebClient())
             {
                 var lowerCaseUrl = url.ToLowerInvariant();
                 if (lowerCaseUrl.Contains("filezilla") || lowerCaseUrl.Contains("mariadb"))
