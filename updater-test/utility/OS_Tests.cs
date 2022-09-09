@@ -28,42 +28,42 @@ namespace updater_test.utility
     [TestClass]
     public class OS_Tests
     {
-        private static OperatingSystem win2000()
+        private static OperatingSystem Win2000()
         {
             return new OperatingSystem(PlatformID.Win32NT, new Version(5, 0));
         }
 
-        private static OperatingSystem winXP()
+        private static OperatingSystem WinXP()
         {
             return new OperatingSystem(PlatformID.Win32NT, new Version(5, 1));
         }
 
-        private static OperatingSystem winXP64()
+        private static OperatingSystem WinXP64()
         {
             return new OperatingSystem(PlatformID.Win32NT, new Version(5, 2));
         }
 
-        private static OperatingSystem winVista()
+        private static OperatingSystem WinVista()
         {
             return new OperatingSystem(PlatformID.Win32NT, new Version(6, 0));
         }
 
-        private static OperatingSystem win7()
+        private static OperatingSystem Win7()
         {
             return new OperatingSystem(PlatformID.Win32NT, new Version(6, 1));
         }
 
-        private static OperatingSystem win8()
+        private static OperatingSystem Win8()
         {
             return new OperatingSystem(PlatformID.Win32NT, new Version(6, 2));
         }
 
-        private static OperatingSystem win8_1()
+        private static OperatingSystem Win8_1()
         {
             return new OperatingSystem(PlatformID.Win32NT, new Version(6, 3));
         }
 
-        private static OperatingSystem win10()
+        private static OperatingSystem Win10()
         {
             return new OperatingSystem(PlatformID.Win32NT, new Version(10, 0));
         }
@@ -75,14 +75,14 @@ namespace updater_test.utility
         [TestMethod]
         public void Test_isWinXPOrNewer()
         {
-            Assert.IsFalse(OS.isWinXPOrNewer(win2000()));
-            Assert.IsTrue(OS.isWinXPOrNewer(winXP()));
-            Assert.IsTrue(OS.isWinXPOrNewer(winXP64()));
-            Assert.IsTrue(OS.isWinXPOrNewer(winVista()));
-            Assert.IsTrue(OS.isWinXPOrNewer(win7()));
-            Assert.IsTrue(OS.isWinXPOrNewer(win8()));
-            Assert.IsTrue(OS.isWinXPOrNewer(win8_1()));
-            Assert.IsTrue(OS.isWinXPOrNewer(win10()));
+            Assert.IsFalse(OS.isWinXPOrNewer(Win2000()));
+            Assert.IsTrue(OS.isWinXPOrNewer(WinXP()));
+            Assert.IsTrue(OS.isWinXPOrNewer(WinXP64()));
+            Assert.IsTrue(OS.isWinXPOrNewer(WinVista()));
+            Assert.IsTrue(OS.isWinXPOrNewer(Win7()));
+            Assert.IsTrue(OS.isWinXPOrNewer(Win8()));
+            Assert.IsTrue(OS.isWinXPOrNewer(Win8_1()));
+            Assert.IsTrue(OS.isWinXPOrNewer(Win10()));
         }
 
 
@@ -92,14 +92,14 @@ namespace updater_test.utility
         [TestMethod]
         public void Test_isWinVistaOrNewer()
         {
-            Assert.IsFalse(OS.isWinVistaOrNewer(win2000()));
-            Assert.IsFalse(OS.isWinVistaOrNewer(winXP()));
-            Assert.IsFalse(OS.isWinVistaOrNewer(winXP64()));
-            Assert.IsTrue(OS.isWinVistaOrNewer(winVista()));
-            Assert.IsTrue(OS.isWinVistaOrNewer(win7()));
-            Assert.IsTrue(OS.isWinVistaOrNewer(win8()));
-            Assert.IsTrue(OS.isWinVistaOrNewer(win8_1()));
-            Assert.IsTrue(OS.isWinVistaOrNewer(win10()));
+            Assert.IsFalse(OS.isWinVistaOrNewer(Win2000()));
+            Assert.IsFalse(OS.isWinVistaOrNewer(WinXP()));
+            Assert.IsFalse(OS.isWinVistaOrNewer(WinXP64()));
+            Assert.IsTrue(OS.isWinVistaOrNewer(WinVista()));
+            Assert.IsTrue(OS.isWinVistaOrNewer(Win7()));
+            Assert.IsTrue(OS.isWinVistaOrNewer(Win8()));
+            Assert.IsTrue(OS.isWinVistaOrNewer(Win8_1()));
+            Assert.IsTrue(OS.isWinVistaOrNewer(Win10()));
         }
 
 
@@ -109,14 +109,14 @@ namespace updater_test.utility
         [TestMethod]
         public void Test_isWin7OrNewer()
         {
-            Assert.IsFalse(OS.isWin7OrNewer(win2000()));
-            Assert.IsFalse(OS.isWin7OrNewer(winXP()));
-            Assert.IsFalse(OS.isWin7OrNewer(winXP64()));
-            Assert.IsFalse(OS.isWin7OrNewer(winVista()));
-            Assert.IsTrue(OS.isWin7OrNewer(win7()));
-            Assert.IsTrue(OS.isWin7OrNewer(win8()));
-            Assert.IsTrue(OS.isWin7OrNewer(win8_1()));
-            Assert.IsTrue(OS.isWin7OrNewer(win10()));
+            Assert.IsFalse(OS.isWin7OrNewer(Win2000()));
+            Assert.IsFalse(OS.isWin7OrNewer(WinXP()));
+            Assert.IsFalse(OS.isWin7OrNewer(WinXP64()));
+            Assert.IsFalse(OS.isWin7OrNewer(WinVista()));
+            Assert.IsTrue(OS.isWin7OrNewer(Win7()));
+            Assert.IsTrue(OS.isWin7OrNewer(Win8()));
+            Assert.IsTrue(OS.isWin7OrNewer(Win8_1()));
+            Assert.IsTrue(OS.isWin7OrNewer(Win10()));
         }
 
 
@@ -126,14 +126,14 @@ namespace updater_test.utility
         [TestMethod]
         public void Test_isWin10OrNewer()
         {
-            Assert.IsFalse(OS.isWin10OrNewer(win2000()));
-            Assert.IsFalse(OS.isWin10OrNewer(winXP()));
-            Assert.IsFalse(OS.isWin10OrNewer(winXP64()));
-            Assert.IsFalse(OS.isWin10OrNewer(winVista()));
-            Assert.IsFalse(OS.isWin10OrNewer(win7()));
-            Assert.IsFalse(OS.isWin10OrNewer(win8()));
-            Assert.IsFalse(OS.isWin10OrNewer(win8_1()));
-            Assert.IsTrue(OS.isWin10OrNewer(win10()));
+            Assert.IsFalse(OS.isWin10OrNewer(Win2000()));
+            Assert.IsFalse(OS.isWin10OrNewer(WinXP()));
+            Assert.IsFalse(OS.isWin10OrNewer(WinXP64()));
+            Assert.IsFalse(OS.isWin10OrNewer(WinVista()));
+            Assert.IsFalse(OS.isWin10OrNewer(Win7()));
+            Assert.IsFalse(OS.isWin10OrNewer(Win8()));
+            Assert.IsFalse(OS.isWin10OrNewer(Win8_1()));
+            Assert.IsTrue(OS.isWin10OrNewer(Win10()));
         }
     } // class
 } // namespace

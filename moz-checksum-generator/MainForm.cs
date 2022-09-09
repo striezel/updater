@@ -73,7 +73,7 @@ namespace moz_checksum_generator
         /// </summary>
         /// <param name="data">dictionary with data: key = language code, value = checksum</param>
         /// <returns>string containing the C# code</returns>
-        string getChecksumCode(SortedDictionary<string, string> data)
+        static string getChecksumCode(SortedDictionary<string, string> data)
         {
             string result = "return new Dictionary<string, string>(" + data.Count.ToString() + ")"
                 + Environment.NewLine + "            {";
