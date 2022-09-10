@@ -66,19 +66,19 @@ namespace updater.software
             const string silentOptions = "/silent /norestart /launchopera 0 /setdefaultbrowser 0 /enable-stats 0 /enable-installer-stats 0 /pintotaskbar 0 /pin-additional-shortcuts 0 /allusers";
             var signature = new Signature(publisherX509, certificateExpiration);
             return new AvailableSoftware("Opera",
-                "90.0.4480.80",
+                "90.0.4480.84",
                 "^Opera Stable [0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+$",
                 "^Opera Stable [0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+$",
                 new InstallInfoExe(
-                    "https://get.geo.opera.com/pub/opera/desktop/90.0.4480.80/win/Opera_90.0.4480.80_Setup.exe",
+                    "https://get.geo.opera.com/pub/opera/desktop/90.0.4480.84/win/Opera_90.0.4480.84_Setup.exe",
                     HashAlgorithm.SHA256,
-                    "0c861dfa8725d833f3c93ff726d498593d0fa361bcfe7beb197206a345639853",
+                    "28fc01a31a56481654101fa7a63ce8d978613f5f1ba3d2b5cdd72b91a3ef97eb",
                     signature,
                     silentOptions),
                 new InstallInfoExe(
-                    "https://get.geo.opera.com/pub/opera/desktop/90.0.4480.80/win/Opera_90.0.4480.80_Setup_x64.exe",
+                    "https://get.geo.opera.com/pub/opera/desktop/90.0.4480.84/win/Opera_90.0.4480.84_Setup_x64.exe",
                     HashAlgorithm.SHA256,
-                    "37abd4d4e1e18d9c5306377c12999b812cb549cd583164e478672ee0117f0d0c",
+                    "450dfaf4b6ac267d973fb66884ae84f5c0df4f43653313758a53702b2cf378fa",
                     signature,
                     silentOptions)
                     );
@@ -150,7 +150,7 @@ namespace updater.software
             string newVersion = null;
             for (int i = versions.Count - 1; i >= 0; i--)
             {
-                bool exists = false;
+                bool exists;
                 try
                 {
                     var task = client.GetStringAsync("https://get.geo.opera.com/ftp/pub/opera/desktop/" + versions[i].full() + "/win/");
