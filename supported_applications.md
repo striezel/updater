@@ -21,6 +21,7 @@ updater application.
 * Git for Windows
 * HeidiSQL
 * Inkscape
+* IrfanView
 * KeePass 2
 * LibreOffice
 * MariaDB 10.5
@@ -48,4 +49,3 @@ updater application.
 
 * Adobe Acrobat Reader
 * Google Chrome
-* IrfanView

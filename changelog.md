@@ -4,6 +4,12 @@ _(Note: This changelog focuses on the major changes between the different
 versions. Therefore, it may not contain all changes. Especially smaller fixes or
 improvements may be omitted.)_
 
+## Version NEXT
+
+__[new features]__
+
+Update support for IrfanView is added.
+
 ## Version 2022.09.04.0
 
 __[changes]__
