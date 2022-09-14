@@ -65,7 +65,7 @@ namespace updater.software
         public override AvailableSoftware knownInfo()
         {
             var signature = new Signature(publisherX509, certificateExpiration);
-            const string version = "3.24.1";
+            const string version = "3.24.2";
             return new AvailableSoftware("CMake",
                 version,
                 "^CMake$",
@@ -73,13 +73,13 @@ namespace updater.software
                 new InstallInfoMsi(
                     "https://github.com/Kitware/CMake/releases/download/v"+ version + "/cmake-" + version + "-windows-i386.msi",
                     HashAlgorithm.SHA256,
-                    "96862eaf218d9da4ce1fe15d2594d1163cb5f87212862a9afc9526ce9224d53d",
+                    "4a2916149b678cfe41f3e16e03ba12960f8a4be0b1bc702b20ddc5fdbdef46ee",
                     signature,
                     "/qn /norestart"),
                 new InstallInfoMsi(
                     "https://github.com/Kitware/CMake/releases/download/v" + version + "/cmake-" + version + "-windows-x86_64.msi",
                     HashAlgorithm.SHA256,
-                    "04f1d47172b69d39cf178d0e7d9100b536c2b4b5f3c7302c7140800d9c2fa220",
+                    "a589a1adcc631343521fef65515e2e03ba64770c82c099ab7651c5e107bd9238",
                     signature,
                     "/qn /norestart")
                     );
@@ -145,7 +145,7 @@ namespace updater.software
             string currentVersion = versions[versions.Count - 1].full();
 
             // download checksum file, e.g. "https://github.com/Kitware/CMake/releases/download/v3.19.4/cmake-3.19.4-SHA-256.txt"
-            string htmlCode = null;
+            string htmlCode;
             try
             {
                 var task = client.GetStringAsync("https://github.com/Kitware/CMake/releases/download/v" + currentVersion + "/cmake-" + currentVersion + "-SHA-256.txt");
