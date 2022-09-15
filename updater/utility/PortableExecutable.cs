@@ -80,16 +80,16 @@ namespace updater.utility
                 // Offset to PE header is located at 0x3C.
                 // The PE header starts with "PE\0\0" =  0x50 0x45 0x00 0x00,
                 // followed by a 2-byte machine type field.
-                FileStream fs = new FileStream(fileName, FileMode.Open, FileAccess.Read);
+                var fs = new FileStream(fileName, FileMode.Open, FileAccess.Read);
                 try
                 {
-                    BinaryReader br = new BinaryReader(fs);
+                    var br = new BinaryReader(fs);
                     try
                     {
                         fs.Seek(0x3c, SeekOrigin.Begin);
-                        Int32 peOffset = br.ReadInt32();
+                        int peOffset = br.ReadInt32();
                         fs.Seek(peOffset, SeekOrigin.Begin);
-                        UInt32 peHead = br.ReadUInt32();
+                        uint peHead = br.ReadUInt32();
 
                         if (peHead != 0x00004550) // "PE\0\0", little-endian
                             return PEFormat.NotPE;

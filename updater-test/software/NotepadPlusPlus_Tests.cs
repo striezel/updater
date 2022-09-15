@@ -77,7 +77,7 @@ namespace updater_test.software
         public void Test_match32Bit()
         {
             var npp = new NotepadPlusPlus(false);
-            Regex regex = new Regex(npp.knownInfo().match32Bit);
+            var regex = new Regex(npp.knownInfo().match32Bit);
             // new variant (after introduction of 64 bit variant)
             Assert.IsTrue(regex.IsMatch("Notepad++ (32-bit x86)"));
             // old variant (before introduction of 64 bit variant)

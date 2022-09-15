@@ -76,7 +76,7 @@ namespace updater_test.software
         public void Test_match()
         {
             var info = new Git(false).info();
-            Regex re = new Regex(info.match64Bit);
+            var re = new Regex(info.match64Bit);
             // match old style, including version number
             Assert.IsTrue(re.IsMatch("Git version 2.32.0"));
             Assert.IsTrue(re.IsMatch("Git version 2.32.0.2"));

@@ -79,7 +79,7 @@ namespace updater_test.software
             var info = new Mumble(false).knownInfo();
             Assert.IsNotNull(info, "knownInfo() returned null!");
 
-            Regex re64 = new Regex(info.match64Bit, RegexOptions.IgnoreCase);
+            var re64 = new Regex(info.match64Bit, RegexOptions.IgnoreCase);
             // Match old pre-1.4.0 product names.
             Assert.IsTrue(re64.IsMatch("Mumble 1.3.4"));
             Assert.IsTrue(re64.IsMatch("Mumble 1.3.3"));
@@ -89,7 +89,7 @@ namespace updater_test.software
             // Match new post-1.4.0 name.
             Assert.IsTrue(re64.IsMatch("Mumble (client)"));
 
-            Regex re32 = new Regex(info.match32Bit, RegexOptions.IgnoreCase);
+            var re32 = new Regex(info.match32Bit, RegexOptions.IgnoreCase);
             // Match old pre-1.4.0 product names.
             Assert.IsTrue(re32.IsMatch("Mumble 1.3.4"));
             Assert.IsTrue(re32.IsMatch("Mumble 1.3.3"));

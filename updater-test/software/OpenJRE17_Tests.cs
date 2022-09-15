@@ -78,12 +78,12 @@ namespace updater_test.software
         {
             var info = new OpenJRE17(false).knownInfo();
             Assert.IsNotNull(info, "knownInfo() returned null!");
-            Regex re64 = new Regex(info.match64Bit, RegexOptions.IgnoreCase);
+            var re64 = new Regex(info.match64Bit, RegexOptions.IgnoreCase);
             Assert.IsTrue(re64.IsMatch("Eclipse Temurin JRE with Hotspot 17.0.2+8 (x64)"), "English product name (64 bit) does not match!");
             Assert.IsTrue(re64.IsMatch("Eclipse Temurin JRE avec Hotspot 17.0.2+8 (x64)"), "French product name (64 bit) does not match!");
             Assert.IsTrue(re64.IsMatch("Eclipse Temurin JRE mit Hotspot 17.0.2+8 (x64)"), "German product name (64 bit) does not match!");
             Assert.IsTrue(re64.IsMatch("Eclipse Temurin JRE con Hotspot 17.0.2+8 (x64)"), "Spanish product name (64 bit) does not match!");
-            Regex re32 = new Regex(info.match32Bit, RegexOptions.IgnoreCase);
+            var re32 = new Regex(info.match32Bit, RegexOptions.IgnoreCase);
             Assert.IsTrue(re32.IsMatch("Eclipse Temurin JRE with Hotspot 17.0.2+8 (x86)"), "English product name (32 bit) does not match!");
             Assert.IsTrue(re32.IsMatch("Eclipse Temurin JRE avec Hotspot 17.0.2+8 (x86)"), "French product name (32 bit) does not match!");
             Assert.IsTrue(re32.IsMatch("Eclipse Temurin JRE mit Hotspot 17.0.2+8 (x86)"), "German product name (32 bit) does not match!");

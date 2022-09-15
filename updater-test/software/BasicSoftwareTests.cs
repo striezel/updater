@@ -27,7 +27,7 @@ namespace updater_test.software
     /// </summary>
     public class BasicSoftwareTests
     {
-        protected void _info(ISoftware sw)
+        protected static void _info(ISoftware sw)
         {
             Assert.IsNotNull(sw);
             var info = sw.info();
@@ -60,7 +60,7 @@ namespace updater_test.software
         }
 
 
-        protected void _searchForNewer(ISoftware sw)
+        protected static void _searchForNewer(ISoftware sw)
         {
             Assert.IsNotNull(sw);
             if (!sw.implementsSearchForNewer())
@@ -71,7 +71,7 @@ namespace updater_test.software
         }
 
 
-        public void _upToDate_info(ISoftware sw)
+        public static void _upToDate_info(ISoftware sw)
         {
             Assert.IsNotNull(sw);
             if (!sw.implementsSearchForNewer())

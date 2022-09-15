@@ -361,7 +361,7 @@ namespace updater.software
         {
             string url = "https://ftp.mozilla.org/pub/devedition/releases/";
 
-            string htmlContent = null;
+            string htmlContent;
             var client = HttpClientProvider.Provide();
             try
             {

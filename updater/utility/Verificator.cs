@@ -56,11 +56,11 @@ namespace updater.utility
         /// Returns false otherwise.</returns>
         public static bool verifiyPublisher(string fileName, string publisher)
         {
-            string sub = null;
+            string sub;
             try
             {
-                X509Certificate2 cert = new X509Certificate2(fileName);
-                X509Chain certChain = new X509Chain();
+                var cert = new X509Certificate2(fileName);
+                var certChain = new X509Chain();
                 bool chainValid = certChain.Build(cert);
                 if (!chainValid)
                 {

@@ -62,7 +62,7 @@ namespace updater.software
             if (!d.ContainsKey(languageCode))
             {
                 logger.Error("The string '" + langCode + "' does not represent a valid language code!");
-                throw new ArgumentOutOfRangeException("langCode", "The string '" + langCode + "' does not represent a valid language code!");
+                throw new ArgumentOutOfRangeException(nameof(langCode), "The string '" + langCode + "' does not represent a valid language code!");
             }
             checksum = d[languageCode];
         }
@@ -261,8 +261,8 @@ namespace updater.software
         /// Returns false, if no update is necessary.</returns>
         public override bool needsUpdate(DetectedSoftware detected)
         {
-            Triple verDetected = new Triple(detected.displayVersion);
-            Triple verNewest = new Triple(info().newestVersion);
+            var verDetected = new Triple(detected.displayVersion);
+            var verNewest = new Triple(info().newestVersion);
             return verDetected < verNewest;
         }
 

@@ -105,7 +105,7 @@ namespace updater.software
         /// </summary>
         /// <returns>Returns an AvailableSoftware instance with the known
         /// details about the software.</returns>
-        public AvailableSoftware latestSupported32BitVersion()
+        public static AvailableSoftware latestSupported32BitVersion()
         {
             var signature = new Signature(
                 "CN=Kovid Goyal, O=Kovid Goyal, L=Mumbai, S=Maharashtra, C=IN",

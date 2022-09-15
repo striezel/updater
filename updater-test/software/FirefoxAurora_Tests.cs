@@ -78,7 +78,7 @@ namespace updater_test.software
             var fx = new FirefoxAurora("de", false);
             var info = fx.info();
 
-            Regex re = new Regex(info.match64Bit);
+            var re = new Regex(info.match64Bit);
             // older naming convention
             Assert.IsTrue(re.IsMatch("Firefox Developer Edition 53.0a2 (x64 de)"));
             // newer naming convention

@@ -114,7 +114,7 @@ namespace updater.software
         public override AvailableSoftware searchForNewer()
         {
             logger.Info("Searching for newer version of LibreOffice Help Pack (German)...");
-            string htmlCode = null;
+            string htmlCode;
             var client = HttpClientProvider.Provide();
             try
             {
@@ -142,7 +142,6 @@ namespace updater.software
             // Hash info is in files like
             // https://download.documentfoundation.org/libreoffice/stable/5.3.0/win/x86/LibreOffice_5.3.0_Win_x86_helppack_de.msi.sha256
             // https://download.documentfoundation.org/libreoffice/stable/5.3.0/win/x86_64/LibreOffice_5.3.0_Win_x64_helppack_de.msi.sha256
-            htmlCode = null;
 
             try
             {
@@ -163,7 +162,6 @@ namespace updater.software
                 return null;
             string hash32 = matchHash32.Value.Substring(0, 64);
 
-            htmlCode = null;
             try
             {
                 var task = client.GetStringAsync("https://download.documentfoundation.org/libreoffice/stable/"

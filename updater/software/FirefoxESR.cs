@@ -399,7 +399,7 @@ namespace updater.software
              */
 
             string url = "https://ftp.mozilla.org/pub/firefox/releases/" + newerVersion + "esr/SHA512SUMS";
-            string sha512SumsContent = null;
+            string sha512SumsContent;
             var client = HttpClientProvider.Provide();
             try
             {

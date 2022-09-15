@@ -209,7 +209,7 @@ namespace updater.software
         public string determineNewestVersion()
         {
             string url = "https://archive.mozilla.org/pub/seamonkey/releases/";
-            string htmlCode = null;
+            string htmlCode;
             var client = HttpClientProvider.Provide();
             try
             {
@@ -269,7 +269,7 @@ namespace updater.software
              */
 
             string url = "https://archive.mozilla.org/pub/seamonkey/releases/" + newerVersion + "/SHA1SUMS.txt";
-            string sha1SumsContent = null;
+            string sha1SumsContent;
             var client = HttpClientProvider.Provide();
             try
             {

@@ -79,7 +79,7 @@ namespace updater_test.software
             var info = new OpenJDK8(false).knownInfo();
             Assert.IsNotNull(info, "knownInfo() returned null!");
 
-            Regex re64 = new Regex(info.match64Bit, RegexOptions.IgnoreCase);
+            var re64 = new Regex(info.match64Bit, RegexOptions.IgnoreCase);
             // Match old AdoptOpenJDK product names.
             Assert.IsTrue(re64.IsMatch("AdoptOpenJDK JDK with Hotspot 8u282-b08 (x64)"), "English product name (64 bit) does not match!");
             Assert.IsTrue(re64.IsMatch("AdoptOpenJDK JDK avec Hotspot 8u282-b08 (x64)"), "French product name (64 bit) does not match!");
@@ -91,7 +91,7 @@ namespace updater_test.software
             Assert.IsTrue(re64.IsMatch("Eclipse Temurin JDK mit Hotspot 8u302-b08 (x64)"), "German product name (64 bit) does not match!");
             Assert.IsTrue(re64.IsMatch("Eclipse Temurin JDK con Hotspot 8u302-b08 (x64)"), "Spanish product name (64 bit) does not match!");
 
-            Regex re32 = new Regex(info.match32Bit, RegexOptions.IgnoreCase);
+            var re32 = new Regex(info.match32Bit, RegexOptions.IgnoreCase);
             // Match old AdoptOpenJDK product names.
             Assert.IsTrue(re32.IsMatch("AdoptOpenJDK JDK with Hotspot 8u292-b10 (x86)"), "English product name (32 bit) does not match!");
             Assert.IsTrue(re32.IsMatch("AdoptOpenJDK JDK avec Hotspot 8u292-b10 (x86)"), "French product name (32 bit) does not match!");

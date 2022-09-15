@@ -112,7 +112,7 @@ namespace updater.software
         public override AvailableSoftware searchForNewer()
         {
             logger.Info("Searching for newer version of Pidgin...");
-            string htmlCode = null;
+            string htmlCode;
             var client = HttpClientProvider.Provide();
             try
             {
