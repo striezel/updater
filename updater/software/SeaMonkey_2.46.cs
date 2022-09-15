@@ -136,23 +136,6 @@ namespace updater.software
 
 
         /// <summary>
-        /// Tries to find the newest version number of SeaMonkey.
-        /// </summary>
-        /// <returns>Returns a string containing the newest version number on success.
-        /// Returns null, if an error occurred.</returns>
-        public string determineNewestVersion()
-        {
-            var langs = SeaMonkey.validLanguageCodes();
-            var enumerator = langs.GetEnumerator();
-            if (!enumerator.MoveNext())
-                return null;
-            string languageCode = enumerator.Current;
-            SeaMonkey sm = new SeaMonkey(languageCode, false);
-            return sm.determineNewestVersion();
-        }
-
-
-        /// <summary>
         /// Determines whether or not the method searchForNewer() is implemented.
         /// </summary>
         /// <returns>Returns true, if searchForNewer() is implemented for that
