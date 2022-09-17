@@ -24,6 +24,7 @@ updater application.
 * IrfanView
 * KeePass 2
 * LibreOffice
+* MariaDB 10.4
 * MariaDB 10.5
 * MariaDB 10.6
 * Mozilla Firefox

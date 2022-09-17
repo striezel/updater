@@ -8,7 +8,10 @@ improvements may be omitted.)_
 
 __[new features]__
 
-Update support for IrfanView is added.
+Update support for the following applications is added.
+
+* IrfanView
+* MariaDB 10.4
 
 ## Version 2022.09.04.0
 

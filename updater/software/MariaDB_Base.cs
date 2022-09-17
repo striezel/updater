@@ -99,7 +99,7 @@ namespace updater.software
         public override AvailableSoftware searchForNewer()
         {
             logger.Info("Searching for newer version of MariaDB Server " + branch + "...");
-            checkForEndOfLife();
+            CheckForEndOfLife();
             string json = null;
             var client = HttpClientProvider.Provide();
             try
@@ -218,7 +218,7 @@ namespace updater.software
         /// <remarks>For EOL dates of various MariaDB release branches see
         /// https://mariadb.org/about/#maintenance-policy.
         /// </remarks>
-        private void checkForEndOfLife()
+        private void CheckForEndOfLife()
         {
             if (DateTime.UtcNow > EndOfLife())
             {
