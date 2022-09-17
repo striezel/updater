@@ -85,6 +85,7 @@ namespace updater.software
             result.Add(new KeePass(autoGetNewer));
             result.Add(new LibreOffice(autoGetNewer));
             result.Add(new LibreOfficeHelpPackGerman(autoGetNewer));
+            result.Add(new MariaDB_10_3(autoGetNewer));
             result.Add(new MariaDB_10_4(autoGetNewer));
             result.Add(new MariaDB_10_5(autoGetNewer));
             result.Add(new MariaDB_10_6(autoGetNewer));
