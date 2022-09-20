@@ -68,11 +68,11 @@ namespace updater.software
             var info = new InstallInfoExe(
                 "https://downloads.jam-software.de/treesize_free/TreeSizeFreeSetup.exe",
                 HashAlgorithm.SHA256,
-                "df63e1f730978d1cd70d93eae16d96ff705418a998e9e2c38899f6f8df5fb436",
+                "73a68e649bc5215bda16b3b58a970352572a826674318039da1404ec1262b851",
                 signature,
                 "/VERYSILENT /NORESTART");
             return new AvailableSoftware("TreeSize Free",
-                "4.6.0",
+                "4.6.1",
                 "^TreeSize Free V[0-9]+\\.[0-9]+(\\.[0-9]+)?$",
                 "^TreeSize Free V[0-9]+\\.[0-9]+(\\.[0-9]+)?( \\(64 bit\\)( \\(64 Bit\\))?)?$",
                 info,
