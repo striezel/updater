@@ -71,30 +71,30 @@ namespace updater.software
             {
                 var signature = new Signature(publisherX509, certificateExpiration);
                 return new AvailableSoftware("FileZilla FTP Client",
-                    "3.60.2",
+                    "3.61.0",
                     "^FileZilla (Client )?[0-9]+\\.[0-9]+(\\.[0-9]+(\\.[0-9]+)?)?$",
                     "^FileZilla (Client )?[0-9]+\\.[0-9]+(\\.[0-9]+(\\.[0-9]+)?)?$",
                     new InstallInfoExe(
-                        "https://download.filezilla-project.org/client/FileZilla_3.60.2_win32-setup.exe",
+                        "https://download.filezilla-project.org/client/FileZilla_3.61.0_win32-setup.exe",
                         HashAlgorithm.SHA512,
-                        "577eed8771a95479429521fb883c4c84a036d3171c0d73495a71fe0059ad63093fc49166db9159af5dd929009a6dd5b0f328e8db96d59479d31ddf0b5f08d07f",
+                        "6b0d36cb329210ab57f614ac4fe9638c4b26c605ef1ddb43091359934d3b617176a38cc9a7019c3a0be207f238e02f566aa1a5c91bdaf2becf51a99d9c240684",
                         signature,
                         "/S"),
                     new InstallInfoExe(
-                        "https://download.filezilla-project.org/client/FileZilla_3.60.2_win64-setup.exe",
+                        "https://download.filezilla-project.org/client/FileZilla_3.61.0_win64-setup.exe",
                         HashAlgorithm.SHA512,
-                        "b532c9e82016dedbc04714ed659f459d1e87db926f4eed6eef5ff7daba450f91ea1558e247c87a7727c9cf8ec96d7cee3a6cd5159e7dc0ccd28ceb87f05e722a",
+                        "aab872624bc9b874c79f24f43d47e57d7cf3054ece15022be6bfbbfc725aa242e64d344aa6ff80aa1e240de483594274cc2f75ea3a7f757eebc1135020e6ea79",
                         signature,
                         "/S")
                     );
             }
             // Windows Vista
             if (utility.OS.isWinVistaOrNewer())
-                return latestSupportedVersionWinVista();
+                return LatestSupportedVersionWinVista();
             // WinXP or older, but we do not care about older stuff. If you are
             // still using Windows 2000 or Windows 98 as productive system, you
             // have screwed up somewhere along the way.
-            return latestSupportedVersionWinXP();
+            return LatestSupportedVersionWinXP();
         }
 
 
@@ -103,7 +103,7 @@ namespace updater.software
         /// </summary>
         /// <returns>Returns an AvailableSoftware instance with the known
         /// details about the software.</returns>
-        private AvailableSoftware latestSupportedVersionWinVista()
+        private static AvailableSoftware LatestSupportedVersionWinVista()
         {
             // The last version for Windows Vista is 3.25.1.
             // Additionally, Windows Vista is not officially supported by Microsoft anymore.
@@ -133,7 +133,7 @@ namespace updater.software
         /// </summary>
         /// <returns>Returns an AvailableSoftware instance with the known
         /// details about the software.</returns>
-        private AvailableSoftware latestSupportedVersionWinXP()
+        private static AvailableSoftware LatestSupportedVersionWinXP()
         {
             // The last version that still supports Windows XP is 3.8.0.
             // Additionally, WinXP is not officially supported by Microsoft anymore.
@@ -275,10 +275,10 @@ namespace updater.software
             // Windows Vista
             if (utility.OS.isWinVistaOrNewer())
             {
-                return latestSupportedVersionWinVista();
+                return LatestSupportedVersionWinVista();
             }
             // WinXP or older - you should really get an OS update.
-            return latestSupportedVersionWinXP();
+            return LatestSupportedVersionWinXP();
         }
 
 
