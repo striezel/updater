@@ -66,13 +66,13 @@ namespace updater.software
         {
             var signature = new Signature(publisherX509, certificateExpiration);
             var installer = new InstallInfoExe(
-                "https://download.ccleaner.com/ccsetup603.exe",
+                "https://download.ccleaner.com/ccsetup604.exe",
                 HashAlgorithm.SHA256,
-                "850ed8b970d09b227e2103e010f160d387e8ff1276aaec90ef9fd12228a6d7dc",
+                "7164c5cd414850299fd5b6e400683b9055badd2e6ae6113db40f579079794791",
                 signature,
                 "/S");
             return new AvailableSoftware("CCleaner",
-                "6.03",
+                "6.04",
                 "^CCleaner+$",
                 "^CCleaner+$",
                 // CCleaner uses the same installer for 32 and 64 bit.
