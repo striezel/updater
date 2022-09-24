@@ -51,13 +51,19 @@ namespace updater.software
 
 
         /// <summary>
+        /// expiration date of certificate
+        /// </summary>
+        private static readonly DateTime certificateExpiration = new DateTime(2021, 10, 30, 23, 59, 59, DateTimeKind.Utc);
+
+
+        /// <summary>
         /// Gets the currently known information about the software.
         /// </summary>
         /// <returns>Returns an AvailableSoftware instance with the known
         /// details about the software.</returns>
         public override AvailableSoftware knownInfo()
         {
-            var signature = Signature.NeverExpires(publisherX509);
+            var signature = new Signature(publisherX509, certificateExpiration);
             return new AvailableSoftware("CDBurnerXP",
                 "4.5.8.7128",
                 "^CDBurnerXP$",
@@ -112,7 +118,7 @@ namespace updater.software
             var client = HttpClientProvider.Provide();
             try
             {
-                var task = client.GetStringAsync("https://cdburnerxp.se/download");
+                var task = client.GetStringAsync("https://cdburnerxp.se/");
                 task.Wait();
                 htmlCode = task.Result;
             }
@@ -122,11 +128,11 @@ namespace updater.software
                 return null;
             }
 
-            var reMsi = new Regex("cdbxp_setup_[1-9]\\.[0-9]\\.[0-9]\\.[0-9]{4}\\.msi");
-            Match matchMsi = reMsi.Match(htmlCode);
-            if (!matchMsi.Success)
+            var reVersion = new Regex("Version [1-9]\\.[0-9]\\.[0-9]\\.[0-9]{4}");
+            Match match = reVersion.Match(htmlCode);
+            if (!match.Success)
                 return null;
-            string newVersion = matchMsi.Value.Replace("cdbxp_setup_", "").Replace(".msi", "");
+            string newVersion = match.Value.Replace("Version ", "");
 
             // construct new version information
             var newInfo = knownInfo();
@@ -141,10 +147,12 @@ namespace updater.software
             // no checksums are provided on the official site, but binaries are signed
             newInfo.install32Bit.checksum = null;
             newInfo.install32Bit.algorithm = HashAlgorithm.Unknown;
+            newInfo.install32Bit.signature = new Signature(publisherX509, certificateExpiration);
             newInfo.install64Bit.downloadUrl = newInfo.install64Bit.downloadUrl.Replace(oldVersion, newVersion);
             // no checksums are provided on the official site, but binaries are signed
             newInfo.install64Bit.checksum = null;
             newInfo.install64Bit.algorithm = HashAlgorithm.Unknown;
+            newInfo.install64Bit.signature = new Signature(publisherX509, certificateExpiration);
             return newInfo;
         }
 

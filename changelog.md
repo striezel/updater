@@ -4,6 +4,14 @@ _(Note: This changelog focuses on the major changes between the different
 versions. Therefore, it may not contain all changes. Especially smaller fixes or
 improvements may be omitted.)_
 
+## Version NEXT
+
+__[changed]__
+
+Search for newer versions of CDBurnerXP has been adjusted for the partially
+defect website. The newest available version can now be found despite the fact
+that the download page shows an error.
+
 ## Version 2022.09.20.0
 
 __[new features]__
