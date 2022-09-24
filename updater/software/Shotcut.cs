@@ -79,13 +79,13 @@ namespace updater.software
 
             var signature = new Signature(publisherX509, certificateExpiration);
             var info = new InstallInfoExe(
-                "https://github.com/mltframework/shotcut/releases/download/v22.06.23/shotcut-win64-220623.exe",
+                "https://github.com/mltframework/shotcut/releases/download/v22.09.23/shotcut-win64-220923.exe",
                 HashAlgorithm.SHA256,
-                "edb03b299571d91836588fb07d60b481eb45ba631c29fcd66921796f09e0d04b",
+                "cc895e073f16fc880604af0a5fbd3c88c3ec2351d56f38c801e657bff30a18d0",
                 signature,
                 "/S");
             return new AvailableSoftware("Shotcut",
-                "22.06.23",
+                "22.09.23",
                 "^Shotcut$",
                 "^Shotcut$",
                 info,
@@ -173,14 +173,13 @@ namespace updater.software
                 Match matchVersion = reVersion.Match(newLocation);
                 if (!matchVersion.Success)
                     return null;
-                currentVersion = matchVersion.Value.Substring(5);
+                currentVersion = matchVersion.Value[5..];
             }
             catch (Exception ex)
             {
                 logger.Warn("Error while looking for newer Shotcut version: " + ex.Message);
                 return null;
             }
-            request = null;
 
             // Get checksum from release page, e.g. "https://github.com/mltframework/shotcut/releases/download/v21.05.18/sha256sums.txt"
             string htmlCode = null;
@@ -203,7 +202,7 @@ namespace updater.software
             Match matchHash = reHash.Match(htmlCode);
             if (!matchHash.Success)
                 return null;
-            string newHash64Bit = matchHash.Value.Substring(0, 64);
+            string newHash64Bit = matchHash.Value[..64];
             // construct new information
             var newInfo = knownInfo();
             newInfo.newestVersion = currentVersion;
