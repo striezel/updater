@@ -124,7 +124,7 @@ Bash) and change to the directory after the repository is completely cloned:
 That's it, you should now have the current source code of updater on your
 machine.
 
-After that, open Visual Studio (2015 Community Edition or later recommended)
+After that, open Visual Studio (2019 Community Edition or later recommended)
 and just build the solution **updater/updater.sln** from the checked out
 sources.
 
