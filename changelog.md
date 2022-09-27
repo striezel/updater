@@ -12,6 +12,10 @@ Search for newer versions of CDBurnerXP has been adjusted for the partially
 defect website. The newest available version can now be found despite the fact
 that the download page shows an error.
 
+__[new features]__
+
+Support to update Adobe Acrobat Reader 2017 to Acrobat Reader 2020 is added.
+
 ## Version 2022.09.20.0
 
 __[new features]__

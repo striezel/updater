@@ -43,6 +43,7 @@ namespace updater.software
             bool autoGetNewer = opts.autoGetNewer;
             var result = new List<ISoftware>()
             {
+                new AcrobatReader2017To2020(),
                 new Calibre(autoGetNewer),
                 new CCleaner(autoGetNewer),
                 new CDBurnerXP(autoGetNewer),
