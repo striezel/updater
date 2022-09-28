@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "updater": {
+      "commandName": "Project",
+      "commandLineArgs": "-nn check"
+    }
+  }
+}
