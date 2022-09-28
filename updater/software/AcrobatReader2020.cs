@@ -18,7 +18,8 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
+using System.Net;
+using System.Text.RegularExpressions;
 using updater.data;
 
 namespace updater.software
@@ -29,22 +30,30 @@ namespace updater.software
     public class AcrobatReader2020: NoPreUpdateProcessSoftware
     {
         /// <summary>
+        /// NLog.Logger for AcrobatReader2020 class
+        /// </summary>
+        private static readonly NLog.Logger logger = NLog.LogManager.GetLogger(typeof(AcrobatReader2020).FullName);
+
+
+        /// <summary>
         /// publisher name for signed executables of Reader 2020
         /// </summary>
-        private const string publisherX509 = "OU=Acrobat DC, O=Adobe Inc., L=San Jose, S=ca, C=US, SERIALNUMBER=2748129, OID.2.5.4.15=Private Organization, OID.1.3.6.1.4.1.311.60.2.1.2 = Delaware, OID.1.3.6.1.4.1.311.60.2.1.3=US";
+        private const string publisherX509 = "CN=Adobe Inc., OU=Acrobat DC, O=Adobe Inc., L=San Jose, S=ca, C=US, SERIALNUMBER=2748129, OID.2.5.4.15=Private Organization, OID.1.3.6.1.4.1.311.60.2.1.2=Delaware, OID.1.3.6.1.4.1.311.60.2.1.3=US";
 
 
         /// <summary>
         /// expiration date for the publisher certificate
         /// </summary>
-        private static readonly DateTime certificateExpiration = new(2021, 2, 3, 12, 0, 0, DateTimeKind.Utc);
+        private static readonly DateTime certificateExpiration = new(2022, 12, 21, 23, 59, 59, DateTimeKind.Utc);
 
 
         /// <summary>
         /// Default constructor.
         /// </summary>
-        public AcrobatReader2020()
-            : base(false)
+        /// <param name="autoGetNewer">whether to automatically get
+        /// newer information about the software when calling the info() method</param>
+        public AcrobatReader2020(bool autoGetNewer)
+            : base(autoGetNewer)
         { }
 
 
@@ -55,11 +64,11 @@ namespace updater.software
         /// details about the software.</returns>
         public override AvailableSoftware knownInfo()
         {
-            const string version = "20.001.30010";
+            const string version = "20.005.30381";
             var installer = new InstallInfoMsiPatch(
-                "ftp://ftp.adobe.com/pub/adobe/reader/win/Acrobat2020/2000130010/AcroRdr2020Upd2000130010_MUI.msp",
+                "https://ardownload2.adobe.com/pub/adobe/reader/win/Acrobat2020/2000530381/AcroRdr2020Upd2000530381_MUI.msp",
                 HashAlgorithm.SHA256,
-                "0ec1a792ccb902f8c50d456db807cb9512e07e90c1fda9060da2e6ce92982cd5",
+                "d829c5dcfeed888b60487dab82631c460f80efbf8ac45073caa861d1b09bf1aa",
                 new Signature(publisherX509, certificateExpiration),
                 "/qn /norestart"
                 );
@@ -90,7 +99,7 @@ namespace updater.software
         /// exception in the later case.</returns>
         public override bool implementsSearchForNewer()
         {
-            return false;
+            return true;
         }
 
 
@@ -101,7 +110,66 @@ namespace updater.software
         /// that was retrieved from the net.</returns>
         public override AvailableSoftware searchForNewer()
         {
-            throw new NotImplementedException("Search for new releases of Acrobat Reader 2020 is not implemented.");
+            logger.Info("Searching for newer version of Acrobat Reader 2020...");
+            string html;
+            try
+            {
+                var client = HttpClientProvider.Provide();
+                var task = client.GetStringAsync("https://helpx.adobe.com/acrobat/release-note/release-notes-acrobat-reader.html");
+                task.Wait();
+                html = task.Result;
+            }
+            catch (Exception ex)
+            {
+                logger.Warn("Exception occurred while checking for newer version of Acrobat Reader 2020: " + ex.Message);
+                return null;
+            }
+
+            // HTML text will contain links to both continuous track and classic
+            // track, but we only want the classic stuff. Links will look like
+            // '<a disablelinktracking="false" href="https://www.adobe.com/devnet-docs/acrobatetk/tools/ReleaseNotesDC/classic/dcclassic20.005aug2022.html#dc20-005augtwentytwentytwo">20.005.30381</a>'
+            var reVersion = new Regex("href=\"(https://www\\.adobe\\.com/devnet\\-docs/acrobatetk/tools/ReleaseNotesDC/classic/dcclassic20\\.[0-9]{3}[a-z]{3}[0-9]{4}.html)#dc20\\-[0-9]+[a-z]+\">(20\\.[0-9]+\\.[0-9]+)</a>");
+            var match = reVersion.Match(html);
+            if (!match.Success)
+                return null;
+            var latestVersion = match.Groups[2].Value;
+            string notesLink = match.Groups[1].Value;
+
+            using (var client = new WebClient())
+            {
+                // The requests hangs and times out without an User-Agent header,
+                // so let's provide a simple curl User-Agent here.s
+                client.Headers.Add("User-Agent", "curl/7.85.0");
+                try
+                {
+                    html = client.DownloadString(notesLink);
+                }
+                catch (Exception ex)
+                {
+                    logger.Warn("Exception occurred while checking for the latest release of Acrobat Reader 2020: " + ex.Message);
+                    return null;
+                }
+                client.Dispose();
+            }
+
+            // Link to the *.msp file will look like this:
+            // <a class="reference external" href="https://ardownload2.adobe.com/pub/adobe/reader/win/Acrobat2020/2000530381/AcroRdr2020Upd2000530381_MUI.msp">AcroRdr2020Upd2000530381_MUI.msp</a>
+            var reLink = new Regex("https://ardownload2\\.adobe\\.com/pub/adobe/reader/win/Acrobat2020/[0-9]+/AcroRdr2020Upd[0-9]+_MUI.msp");
+            match = reLink.Match(html);
+            if (!match.Success)
+                return null;
+
+            var latestInfo = knownInfo();
+            latestInfo.newestVersion = latestVersion;
+            // Release notes do not provide any checksum.
+            latestInfo.install32Bit.algorithm = HashAlgorithm.Unknown;
+            latestInfo.install32Bit.checksum = null;
+            latestInfo.install64Bit.algorithm = HashAlgorithm.Unknown;
+            latestInfo.install64Bit.checksum = null;
+            // Set new download URL.
+            latestInfo.install32Bit.downloadUrl = match.Value;
+            latestInfo.install64Bit.downloadUrl = match.Value;
+            return latestInfo;
         }
 
 

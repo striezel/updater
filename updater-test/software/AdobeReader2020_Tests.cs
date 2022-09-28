@@ -33,17 +33,16 @@ namespace updater_test.software
         [TestMethod]
         public void Test_info()
         {
-            _info(new AcrobatReader2020());
+            _info(new AcrobatReader2020(false));
         }
 
-        /*
         /// <summary>
         /// Checks whether the class implements the searchForNewer() method.
         /// </summary>
         [TestMethod]
         public void Test_implementsSearchForNewer()
         {
-            var reader = new AcrobatReader2020();
+            var reader = new AcrobatReader2020(false);
             Assert.IsTrue(reader.implementsSearchForNewer());
         }
 
@@ -54,7 +53,7 @@ namespace updater_test.software
         [TestMethod]
         public void Test_searchForNewer()
         {
-            _searchForNewer(new AcrobatReader2020());
+            _searchForNewer(new AcrobatReader2020(false));
         }
 
 
@@ -64,8 +63,7 @@ namespace updater_test.software
         [TestMethod]
         public void Test_upToDate_info()
         {
-            _upToDate_info(new AcrobatReader2020());
+            _upToDate_info(new AcrobatReader2020(false));
         }
-        */
     } // class
 } // namespace
