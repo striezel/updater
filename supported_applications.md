@@ -48,7 +48,3 @@ updater application.
 * TreeSize Free
 * VLC media player
 * WinSCP
-
-## Planned
-
-* Google Chrome
