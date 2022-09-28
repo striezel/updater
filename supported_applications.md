@@ -7,6 +7,7 @@ updater application.
 
 * 7-Zip
 * Adobe Acrobat Reader 2017 (update to Reader 2020 only)
+* Adobe Acrobat Reader 2020
 * Calibre
 * CCleaner
 * CDBurnerXP
@@ -50,5 +51,4 @@ updater application.
 
 ## Planned
 
-* Adobe Acrobat Reader 2020
 * Google Chrome

@@ -14,7 +14,8 @@ that the download page shows an error.
 
 __[new features]__
 
-Support to update Adobe Acrobat Reader 2017 to Acrobat Reader 2020 is added.
+* Support to update Adobe Acrobat Reader 2017 to Acrobat Reader 2020 is added.
+* Update support for Adobe Acrobat Reader 2022 is added.
 
 ## Version 2022.09.20.0
 

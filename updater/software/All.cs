@@ -44,6 +44,7 @@ namespace updater.software
             var result = new List<ISoftware>()
             {
                 new AcrobatReader2017To2020(),
+                new AcrobatReader2020(),
                 new Calibre(autoGetNewer),
                 new CCleaner(autoGetNewer),
                 new CDBurnerXP(autoGetNewer),
