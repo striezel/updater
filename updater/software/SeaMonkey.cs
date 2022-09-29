@@ -45,7 +45,7 @@ namespace updater.software
         /// <summary>
         /// expiration date for the publisher certificate
         /// </summary>
-        private static readonly DateTime certificateExpiration = new DateTime(2022, 12, 13, 23, 59, 59, DateTimeKind.Utc);
+        private static readonly DateTime certificateExpiration = new(2022, 12, 13, 23, 59, 59, DateTimeKind.Utc);
 
 
         /// <summary>
@@ -83,32 +83,32 @@ namespace updater.software
         private static Dictionary<string, string> knownChecksums32Bit()
         {
             // These are the checksums for Windows 32 bit installers from
-            // https://archive.mozilla.org/pub/seamonkey/releases/2.53.13/SHA1SUMS.txt
+            // https://archive.mozilla.org/pub/seamonkey/releases/2.53.14/SHA1SUMS.txt
             return new Dictionary<string, string>(23)
             {
-                { "cs", "fa1508e4a94ede917cb70c7b14a3c164480b4b17" },
-                { "de", "7d577e8d56e47edbb00228f3159aa38220b6686f" },
-                { "el", "3c220cbbf4a0af4c059f2716d51bf151aa87a9fe" },
-                { "en-GB", "039613357187275eed24c232fbbba5abde930945" },
-                { "en-US", "52e82c228b5553c13d8be9f2a63ec1b049724cd2" },
-                { "es-AR", "6089a5ba15e6a9d40bfb81bd3e656428bac0db1f" },
-                { "es-ES", "3277489b1f7c877cd6ca9c8d130c5d1c60f0edb5" },
-                { "fi", "59e20a6ec7212d34dce9c316baef7a1a68b958e7" },
-                { "fr", "9094634883d1fc8ff2efe1bd7d7363931ea31dcf" },
-                { "hu", "b1b1e61e84ba47acfc6515e715ad8d6283b13920" },
-                { "it", "b0623b2052b2446be62a03704d66a3c3e602d8f5" },
-                { "ja", "739f4c09c4a3ae829ecb404884de43be860f740b" },
-                { "ka", "c24f960497440673268f9f4557e61e00d75f6a90" },
-                { "nb-NO", "2e751912477f725d2997ddca466b289332bff9d2" },
-                { "nl", "314917b653b72bab6ac018279e4e029fa0e057cf" },
-                { "pl", "ca340c506786fcd41de4293344d31b0790754b5f" },
-                { "pt-BR", "c0e75da987feb1f7e510ef718c719686540b70a2" },
-                { "pt-PT", "23a3a882cd1ce9bc6b7bfbb947bab88c6d41aed7" },
-                { "ru", "2d060ddfe889d4fe1e4981425f2612b7cc6e06b3" },
-                { "sk", "753ad951cfcd89ef475ffdb932710e10719a5be9" },
-                { "sv-SE", "20872b98c81d9710dc40110faa5f65d11dce46d0" },
-                { "zh-CN", "049e6ee94f2de00967043ca5a23daf3ec4cf7c49" },
-                { "zh-TW", "86252e08522a064a8aface7246f513ac21bc8175" }
+                { "cs", "86c17b1531ae5355d0318821b238f53ef7b36d44" },
+                { "de", "f9d8564fc7741c1021091ccba95e62a7d1b83484" },
+                { "el", "426bafb7920ee5f8868365b83597ae4d4c2e82dd" },
+                { "en-GB", "9b391ba384c84a6a87f06391619595c1f2e254e8" },
+                { "en-US", "ea078a3baac1bf907d232889c438746034156f8f" },
+                { "es-AR", "1242245c202b4f59e4d7b94b06c70d71db031b62" },
+                { "es-ES", "c9b47081e982b157b3441724ecde3784c1a4c530" },
+                { "fi", "82d44013de07ddaf06a6f95364821fbc6645daf7" },
+                { "fr", "ca506a64f95c668d9986fec231d2c07043f4f1e4" },
+                { "hu", "0f57881fe533687ff1e89a6a00f2693204559c34" },
+                { "it", "f89fef0200e02b5bab11e6f388986b9867197156" },
+                { "ja", "d1537f66451321601a3e4966f99c2be20ee74556" },
+                { "ka", "f5a5eb8103994ec3f6076dc4502fac9ae882060a" },
+                { "nb-NO", "293c12bf64bc964ab5955d373c5d695399a83e85" },
+                { "nl", "da5b55dbcf2f7a0e5db38f53cc26d5271b63bd4c" },
+                { "pl", "6a86d344504d06f34998323544a04185195de495" },
+                { "pt-BR", "7f1c4f1c498fb701dd90221dd6f4815ed297b465" },
+                { "pt-PT", "f0f98b2b1fcb7a7e097c3658a754475bb9dff771" },
+                { "ru", "70ccd31ddb8f78a84d6677e16540d1d31b5b64ea" },
+                { "sk", "debd8a44063246a99065bd917ee23fdafc7704e0" },
+                { "sv-SE", "53caeb308e2f2d0faa98234143cef06d46f6d181" },
+                { "zh-CN", "c19dbaa152cc18530f1bab73829baae3629864d9" },
+                { "zh-TW", "f9b9dd2e46a4694d5d6b8e7763b776a7c4135d17" }
             };
         }
 
@@ -120,32 +120,32 @@ namespace updater.software
         private static Dictionary<string, string> knownChecksums64Bit()
         {
             // These are the checksums for Windows 64 bit installers from
-            // https://archive.mozilla.org/pub/seamonkey/releases/2.53.13/SHA1SUMS.txt
+            // https://archive.mozilla.org/pub/seamonkey/releases/2.53.14/SHA1SUMS.txt
             return new Dictionary<string, string>(23)
             {
-                { "cs", "bd3107e6250381c6c112e7392bba3230ff0e3792" },
-                { "de", "438b00012224304bb679fcaa73c8439c6b4a9081" },
-                { "el", "5647a44dafb964aaa46734cff62ce8c92b8f9c2a" },
-                { "en-GB", "f27cb472b8dc6699991c3bf3cc92d1013035edd4" },
-                { "en-US", "fa0250eac71c1b485dbf2ee3beff2a636b8a8461" },
-                { "es-AR", "a2ca395fd197312864e9d52c28f11c9ecc82cc85" },
-                { "es-ES", "7b9cc76520b50372379f82609c43abf3f7a8c491" },
-                { "fi", "7e52670ba9584fce577efab498fed8a711e10164" },
-                { "fr", "f3194783a81088e13b1e27981185057f10ce58f0" },
-                { "hu", "dc09750d26570768592752e9438041d4954f3c8d" },
-                { "it", "3234655eaf26c6c452b89772ad394cc148ebba80" },
-                { "ja", "6f447a43b5cbbcc6d8942456f6fbd575e308cb69" },
-                { "ka", "960a6df35d5c6fe934f5dd7a80b94d7fc8ab30b7" },
-                { "nb-NO", "3a439ee31ab0fdc3713f8c2ed0267bd0644c3b2e" },
-                { "nl", "2875042b15524ee8b3d00c64c2080ef5a9724fdd" },
-                { "pl", "eaf9e2ad0455f1d0bbae931d786921546b6bdbc8" },
-                { "pt-BR", "603f923cb08757d9f6b1211692ed9aa58be78517" },
-                { "pt-PT", "42ed8d23da8e0767b19abf42ff3b003eed1fb3db" },
-                { "ru", "0ba50eef9514066aeb66d7dd2084698a9d8dafa0" },
-                { "sk", "ff31eada4c7585fd4b3085b41e0c415be7f1c57f" },
-                { "sv-SE", "dbf0ae7dff57c1d862ccd7ff84c5d32ab98b1a96" },
-                { "zh-CN", "f02e08e9a0ecffe9f86c484fde2cce39d0391f3d" },
-                { "zh-TW", "80cf934e0378f6f8b0024b6a4ebc483e7df0b4ad" }
+                { "cs", "e767fbb112adb6f32535465a72b7d34c6f9af5c5" },
+                { "de", "91e481535d56eff79f6aa0dcee203129c17d2078" },
+                { "el", "0280023aa02ca65a7b212f72278768b38f069977" },
+                { "en-GB", "2fe68833fd1b11c3108f2e774f86b873be7a0c09" },
+                { "en-US", "d83f01de0c4696fb69c6c7b752f29cd2f4e5697d" },
+                { "es-AR", "1dc613674f88475a673911ace682c63b5ea032d1" },
+                { "es-ES", "ad2d424825c610e51f841988486631d7d45affe9" },
+                { "fi", "7ec05fde7f55ec195681597a07f83b13b09be67b" },
+                { "fr", "192e69b667d29a72e548a731e9ed0a60e3f57e7f" },
+                { "hu", "ff7f964b55a088cce9e3dce59580aa6188d1a21a" },
+                { "it", "1b410f845ef19c3bea41d54738540b0c70002703" },
+                { "ja", "2060326071c2f727c054a3e905f679ee5874271c" },
+                { "ka", "f16611a86bc8b192f5addd86f822b1521a65db03" },
+                { "nb-NO", "e7002eef8059716ff1c4805fd27c23abadf9ba34" },
+                { "nl", "a0bb5ade27ebf80fd250521dc7bfc4ac909bdb61" },
+                { "pl", "aa07a70e1ba7dc84eceb00223595f65b08b96693" },
+                { "pt-BR", "8efbe7e4f3c43deec3c59749f00a80e1471782ff" },
+                { "pt-PT", "39e3108976a5e77df2f44cafdcefd0c2fa378b6c" },
+                { "ru", "16963c493b6028445b6550c9f3d09e26a34ae4b8" },
+                { "sk", "185cb35614dc53b47cf6e1880240d9dba494f5f4" },
+                { "sv-SE", "be88cce39297e98211178c9e774f07a4702ab28a" },
+                { "zh-CN", "5a25e163c4f1a7764a11af566cbf966d7a6b2071" },
+                { "zh-TW", "fdb021480d5e284517c83d9831a45559edc58b8c" }
             };
         }
 
@@ -170,7 +170,7 @@ namespace updater.software
         /// details about the software.</returns>
         public override AvailableSoftware knownInfo()
         {
-            const string knownVersion = "2.53.13";
+            const string knownVersion = "2.53.14";
             var signature = new Signature(publisherX509, certificateExpiration);
             return new AvailableSoftware("SeaMonkey (" + languageCode + ")",
                 knownVersion,
