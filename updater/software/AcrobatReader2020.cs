@@ -137,7 +137,7 @@ namespace updater.software
 
             using (var client = new WebClient())
             {
-                // The requests hangs and times out without an User-Agent header,
+                // The request hangs and times out without an User-Agent header,
                 // so let's provide a simple curl User-Agent here.s
                 client.Headers.Add("User-Agent", "curl/7.85.0");
                 try
