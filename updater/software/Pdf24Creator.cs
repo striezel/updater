@@ -41,7 +41,7 @@ namespace updater.software
         /// <summary>
         /// certificate expiration date
         /// </summary>
-        private static readonly DateTime certificateExpiration = new DateTime(2023, 9, 23, 23, 59, 59, DateTimeKind.Utc);
+        private static readonly DateTime certificateExpiration = new(2023, 9, 23, 23, 59, 59, DateTimeKind.Utc);
 
 
         /// <summary>
@@ -93,14 +93,14 @@ namespace updater.software
         public override AvailableSoftware knownInfo()
         {
             var pdf24 = new InstallInfoMsi(
-                "https://en.pdf24.org/products/pdf-creator/download/pdf24-creator-11.4.0.msi",
+                "https://en.pdf24.org/products/pdf-creator/download/pdf24-creator-11.5.0.msi",
                 HashAlgorithm.SHA512,
-                "b7888bd34a7c4b2a6362986ebb1dccd8e7793bdf8b69dee523ac1f3c29e67a1c5673c606e06306ff736d08e024120228dd60fc3765855ea78decca534d71fdc8",
+                "11b4b2afc0abd085020d1c6efcfc427259b8e0ee401a1a108370d0c25b845ab20d631c616a39a2e3f0da2a096d01aac32c8f60ce6bceb0d3dd12bfc0ad2796f5",
                 new Signature(publisherX509, certificateExpiration),
                 getOptions() + " /qn /norestart");
 
             return new AvailableSoftware("PDF24 Creator",
-                "11.4.0",
+                "11.5.0",
                 "^PDF24 Creator$",
                 "^PDF24 Creator$", // 64 bit version uses same pattern as 32 bit.
                 pdf24,
