@@ -43,7 +43,7 @@ namespace updater.software
         /// <summary>
         /// expiration date for the publisher certificate
         /// </summary>
-        private readonly DateTime certificateExpiration = new DateTime(2023, 5, 13, 18, 16, 53, DateTimeKind.Utc);
+        private readonly DateTime certificateExpiration = new(2023, 5, 13, 18, 16, 53, DateTimeKind.Utc);
 
 
         /// <summary>

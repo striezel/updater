@@ -41,7 +41,7 @@ namespace updater.software
         /// <summary>
         /// expiration date of certificate in signature of binary installer
         /// </summary>
-        private static readonly DateTime certificateExpiration = new DateTime(2023, 2, 17, 12, 0, 0, DateTimeKind.Utc);
+        private static readonly DateTime certificateExpiration = new(2023, 2, 17, 12, 0, 0, DateTimeKind.Utc);
 
 
         /// <summary>

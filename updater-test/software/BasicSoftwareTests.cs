@@ -49,11 +49,11 @@ namespace updater_test.software
                 Assert.IsTrue(info.install64Bit.hasChecksum() || info.install64Bit.hasVerifiableSignature());
             // check whether signature data has expired
             // Expiration is not an error though, because some people publish signed binaries that expire the day after the release.
-            if (null != info.install32Bit && info.install32Bit.signature.containsData() && info.install32Bit.signature.hasExpired())
+            if (null != info.install32Bit && info.install32Bit.signature.ContainsData() && info.install32Bit.signature.HasExpired())
             {
                 Assert.Inconclusive("Signature data of 32 bit installer is past its expiration date!");
             }
-            if (null != info.install64Bit && info.install64Bit.signature.containsData() && info.install64Bit.signature.hasExpired())
+            if (null != info.install64Bit && info.install64Bit.signature.ContainsData() && info.install64Bit.signature.HasExpired())
             {
                 Assert.Inconclusive("Signature data of 64 bit installer is past its expiration date!");
             }

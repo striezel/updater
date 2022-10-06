@@ -76,7 +76,7 @@ namespace updater.data
         /// Returns false otherwise.</returns>
         public bool hasVerifiableSignature()
         {
-            return signature.containsData() && !signature.hasExpired();
+            return signature.ContainsData() && !signature.HasExpired();
         }
 
 

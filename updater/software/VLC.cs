@@ -55,7 +55,7 @@ namespace updater.software
         /// <summary>
         /// certificate expiration date
         /// </summary>
-        private static readonly DateTime certificateExpiration = new DateTime(2023, 12, 18, 23, 59, 59, DateTimeKind.Utc);
+        private static readonly DateTime certificateExpiration = new(2023, 12, 18, 23, 59, 59, DateTimeKind.Utc);
 
 
         /// <summary>

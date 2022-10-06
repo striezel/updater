@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2021  Dirk Stolle
+    Copyright (C) 2021, 2022  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -28,7 +28,7 @@ namespace updater.data
         /// <summary>
         /// An instance that contains no signature information.
         /// </summary>
-        public static readonly Signature None = new Signature(null, DateTime.MinValue);
+        public static readonly Signature None = new(null, DateTime.MinValue);
 
 
         /// <summary>
@@ -58,7 +58,7 @@ namespace updater.data
         /// Checks whether the structure contains data that can be used for verification.
         /// </summary>
         /// <returns>Returns true, if the structure contains usable data.</returns>
-        public bool containsData()
+        public bool ContainsData()
         {
             return !string.IsNullOrWhiteSpace(publisher) && expiresAt > DateTime.MinValue;
         }
@@ -69,7 +69,7 @@ namespace updater.data
         /// </summary>
         /// <returns>Returns true, if the signature has expired.
         /// Returns false otherwise.</returns>
-        public bool hasExpired()
+        public bool HasExpired()
         {
             return expiresAt.ToUniversalTime() < DateTime.UtcNow;
         }
