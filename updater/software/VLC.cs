@@ -229,7 +229,8 @@ namespace updater.software
                 {
                     try
                     {
-                        htmlCode = client.DownloadString("https://get.videolan.org/vlc/" + newVersion.full() + "/win" + bits + "/vlc-" + newVersion.full() + "-win" + bits + ".exe.sha256");
+                        string full_version = newVersion.full();
+                        htmlCode = client.DownloadString("https://get.videolan.org/vlc/" + full_version + "/win" + bits + "/vlc-" + full_version + "-win" + bits + ".exe.sha256");
                     }
                     catch (WebException webEx)
                     {
@@ -247,7 +248,8 @@ namespace updater.software
                             try
                             {
                                 logger.Info("Trying another VLC mirror instead...");
-                                htmlCode = mirrorClient.DownloadString("https://ftp.halifax.rwth-aachen.de/videolan/vlc/" + newVersion.full() + "/win" + bits + "/vlc-" + newVersion.full() + "-win" + bits + ".exe.sha256");
+                                string full_version = newVersion.full();
+                                htmlCode = mirrorClient.DownloadString("https://ftp.halifax.rwth-aachen.de/videolan/vlc/" + full_version + "/win" + bits + "/vlc-" + full_version + "-win" + bits + ".exe.sha256");
                             }
                             catch (Exception ex)
                             {
