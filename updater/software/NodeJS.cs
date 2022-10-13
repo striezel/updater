@@ -63,7 +63,7 @@ namespace updater.software
         /// details about the software.</returns>
         public override AvailableSoftware knownInfo()
         {
-            const string version = "16.17.1";
+            const string version = "16.18.0";
             var signature = new Signature(publisherX509, certificateExpiration);
             return new AvailableSoftware(
                 "Node.js",
@@ -73,13 +73,13 @@ namespace updater.software
                 new InstallInfoMsi(
                     "https://nodejs.org/download/release/v" + version + "/node-v" + version + "-x86.msi",
                     HashAlgorithm.SHA256,
-                    "b737eb23a2c67c253b9364b5284123faf5220d567615bebd4ec4b81070e4d177",
+                    "d80be5bb62d00fb68b7158da44fb1e4af829223ed526c8f33db3f29d5e47db2d",
                     signature,
                     "/qn /norestart"),
                 new InstallInfoMsi(
                     "https://nodejs.org/download/release/v" + version + "/node-v" + version + "-x64.msi",
                     HashAlgorithm.SHA256,
-                    "1bdff65fb7642425c0d6826084d63c4be43520316f0ea0b46e6a51999a0ed7fc",
+                    "c9d61a2e78bd836b02cba87adebcb043aa27d1a8e4b2fda0ba604ad180eb50bf",
                     signature,
                     "/qn /norestart")
                     );
@@ -176,9 +176,9 @@ namespace updater.software
             string oldVersion = newInfo.newestVersion;
             newInfo.newestVersion = newVersion;
             newInfo.install32Bit.downloadUrl = newInfo.install32Bit.downloadUrl.Replace(oldVersion, newVersion);
-            newInfo.install32Bit.checksum = match32.Value.Substring(0, 64);
+            newInfo.install32Bit.checksum = match32.Value[..64];
             newInfo.install64Bit.downloadUrl = newInfo.install64Bit.downloadUrl.Replace(oldVersion, newVersion);
-            newInfo.install64Bit.checksum = match64.Value.Substring(0, 64);
+            newInfo.install64Bit.checksum = match64.Value[..64];
             return newInfo;
         }
 
