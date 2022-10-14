@@ -4,6 +4,12 @@ _(Note: This changelog focuses on the major changes between the different
 versions. Therefore, it may not contain all changes. Especially smaller fixes or
 improvements may be omitted.)_
 
+## Version NEXT
+
+__[maintenance]__
+
+* Update certificate information for LibreOffice installers.
+
 ## Version 2022.10.06.0
 
 __[changed]__
