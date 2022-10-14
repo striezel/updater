@@ -37,13 +37,13 @@ namespace updater.software
         /// <summary>
         /// publisher name for signed executables of LibreOffice
         /// </summary>
-        private const string publisherX509 = "E=info@documentfoundation.org, CN=The Document Foundation, O=The Document Foundation, OU=LibreOffice Build Team, L=Berlin, S=Berlin, C=DE";
+        private const string publisherX509 = "E=info@documentfoundation.org, CN=The Document Foundation, O=The Document Foundation, OU=LibreOffice Build Team, S=Berlin, C=DE";
 
 
         /// <summary>
         /// expiration date of the certificate
         /// </summary>
-        private static readonly DateTime certificateExpiration = new(2023, 9, 8, 13, 45, 08, DateTimeKind.Utc);
+        private static readonly DateTime certificateExpiration = new(2023, 5, 30, 6, 22, 29, DateTimeKind.Utc);
 
 
         /// <summary>
@@ -65,19 +65,19 @@ namespace updater.software
         {
             var signature = new Signature(publisherX509, certificateExpiration);
             return new AvailableSoftware("LibreOffice Help Pack German",
-                "7.4.1.2",
+                "7.4.2.3",
                 "^LibreOffice [0-9]+\\.[0-9] Help Pack \\(German\\)$",
                 "^LibreOffice [0-9]+\\.[0-9] Help Pack \\(German\\)$",
                 new InstallInfoLibO(
-                    "https://download.documentfoundation.org/libreoffice/stable/7.4.1/win/x86/LibreOffice_7.4.1_Win_x86_helppack_de.msi",
+                    "https://download.documentfoundation.org/libreoffice/stable/7.4.2/win/x86/LibreOffice_7.4.2_Win_x86_helppack_de.msi",
                     HashAlgorithm.SHA256,
-                    "ed438a1dc0282127284aec5faac228e0f52b12c305dd002e66b94ac6c46fcc30",
+                    "600998d70028a214d20c32ad6c578adf1ead6da39e2a9feb7d261318d05b2541",
                     signature,
                     "/qn /norestart"),
                 new InstallInfoLibO(
-                    "https://download.documentfoundation.org/libreoffice/stable/7.4.1/win/x86_64/LibreOffice_7.4.1_Win_x64_helppack_de.msi",
+                    "https://download.documentfoundation.org/libreoffice/stable/7.4.2/win/x86_64/LibreOffice_7.4.2_Win_x64_helppack_de.msi",
                     HashAlgorithm.SHA256,
-                    "bab5d169cd15ff1014e2e0de93b17a55609529cecb268a37b90ac868151a223c",
+                    "52f3e4b288718bdb51363286decc5d6943ccd5c1fe6ac2fd41e732f03d840c8e",
                     signature,
                     "/qn /norestart")
                     );
@@ -137,7 +137,7 @@ namespace updater.software
             int idx = newVersion.IndexOf('/');
             if (idx < 0)
                 return null;
-            newVersion = newVersion.Substring(0, idx);
+            newVersion = newVersion[..idx];
 
             // Hash info is in files like
             // https://download.documentfoundation.org/libreoffice/stable/5.3.0/win/x86/LibreOffice_5.3.0_Win_x86_helppack_de.msi.sha256
@@ -160,7 +160,7 @@ namespace updater.software
             Match matchHash32 = reHash32.Match(htmlCode);
             if (!matchHash32.Success)
                 return null;
-            string hash32 = matchHash32.Value.Substring(0, 64);
+            string hash32 = matchHash32.Value[..64];
 
             try
             {
@@ -179,7 +179,7 @@ namespace updater.software
             Match matchHash64 = reHash64.Match(htmlCode);
             if (!matchHash64.Success)
                 return null;
-            string hash64 = matchHash64.Value.Substring(0, 64);
+            string hash64 = matchHash64.Value[..64];
 
             // construct new version information
             var newInfo = knownInfo();
