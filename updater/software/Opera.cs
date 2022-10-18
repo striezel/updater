@@ -70,13 +70,13 @@ namespace updater.software
                 "^Opera Stable [0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+$",
                 "^Opera Stable [0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+$",
                 new InstallInfoExe(
-                    "https://get.geo.opera.com/ftp/pub/opera/desktop/91.0.4516.77/win/Opera_91.0.4516.77_Setup.exe",
+                    "https://get.geo.opera.com/pub/opera/desktop/91.0.4516.77/win/Opera_91.0.4516.77_Setup.exe",
                     HashAlgorithm.SHA256,
                     "4b6e0852173f09d8f6c06b35f48efa14f5f31b5178082b4e4e0be391e2914bd9",
                     signature,
                     silentOptions),
                 new InstallInfoExe(
-                    "https://get.geo.opera.com/ftp/pub/opera/desktop/91.0.4516.77/win/Opera_91.0.4516.77_Setup_x64.exe",
+                    "https://get.geo.opera.com/pub/opera/desktop/91.0.4516.77/win/Opera_91.0.4516.77_Setup_x64.exe",
                     HashAlgorithm.SHA256,
                     "65b5091aa7e96626a40797474d4359ed28f066fc3e502bb70677f787a1d413b8",
                     signature,
