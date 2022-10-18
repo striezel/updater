@@ -168,7 +168,7 @@ namespace updater.software
                 var match = hashRegEx.Match(htmlCode);
                 if (match.Success)
                 {
-                    checksum32 = match.Value.Substring(0, 64);
+                    checksum32 = match.Value[..64];
                 }
             }
             // 32 bit

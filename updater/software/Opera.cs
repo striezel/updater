@@ -140,7 +140,7 @@ namespace updater.software
             {
                 if (!match.Success)
                     return null;
-                string version = match.Value.Substring(1).Replace("/\"", "");
+                string version = match.Value[1..].Replace("/\"", "");
                 versions.Add(new versions.Quartet(version));
             }
             // ... and sort them from earliest to latest.

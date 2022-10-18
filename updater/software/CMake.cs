@@ -163,13 +163,13 @@ namespace updater.software
             Match matchHash = reHash.Match(htmlCode);
             if (!matchHash.Success)
                 return null;
-            string newHash32Bit = matchHash.Value.Substring(0, 64);
+            string newHash32Bit = matchHash.Value[..64];
             // find SHA256 hash for 64 bit installer
             reHash = new Regex("[a-f0-9]{64}  cmake.+windows\\-x86_64\\.msi");
             matchHash = reHash.Match(htmlCode);
             if (!matchHash.Success)
                 return null;
-            string newHash64Bit = matchHash.Value.Substring(0, 64);
+            string newHash64Bit = matchHash.Value[..64];
             // construct new information
             var newInfo = knownInfo();
             newInfo.newestVersion = currentVersion;

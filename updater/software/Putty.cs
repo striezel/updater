@@ -165,13 +165,13 @@ namespace updater.software
             Match matchHash32 = reHash32.Match(sha512sums);
             if (!matchHash32.Success)
                 return null;
-            string hash32 = matchHash32.Value.Substring(0, 128);
+            string hash32 = matchHash32.Value[..128];
 
             var reHash64 = new Regex("[0-9a-f]{128}  w64/putty\\-64bit\\-" + Regex.Escape(newVersion) + "\\-installer\\.msi");
             Match matchHash64 = reHash64.Match(sha512sums);
             if (!matchHash64.Success)
                 return null;
-            string hash64 = matchHash64.Value.Substring(0, 128);
+            string hash64 = matchHash64.Value[..128];
 
             // construct new version information
             var newInfo = knownInfo();

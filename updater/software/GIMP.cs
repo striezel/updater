@@ -185,7 +185,7 @@ namespace updater.software
             Match m = reChecksum.Match(htmlCode);
             if (!m.Success)
                 return null;
-            string checksum = m.Value.Substring(0, 64);
+            string checksum = m.Value[..64];
 
             // construct new information
             var newInfo = knownInfo();

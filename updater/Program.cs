@@ -32,7 +32,7 @@ namespace updater
         {
             utility.Logging.initialize();
 
-            cli.Options options = new cli.Options();
+            var options = new cli.Options();
             int rc = cli.ArgumentParser.parse(args, ref options);
             if (rc != 0)
                 return rc;

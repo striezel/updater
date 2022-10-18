@@ -272,7 +272,7 @@ namespace updater.software
                 Match matchHash = reHash.Match(htmlCode);
                 if (!matchHash.Success)
                     return null;
-                string newHash = matchHash.Value.Substring(0, 64).Trim();
+                string newHash = matchHash.Value[..64].Trim();
                 newHashes.Add(newHash);
             } // foreach
 

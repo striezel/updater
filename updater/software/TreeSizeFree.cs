@@ -136,10 +136,10 @@ namespace updater.software
             int dotIndex = currentVersion.IndexOf('.');
             if (dotIndex >= 0)
             {
-                string partTwo = currentVersion.Substring(dotIndex + 1);
+                string partTwo = currentVersion[(dotIndex + 1)..];
                 if (partTwo.Length == 2)
                 {
-                    currentVersion = currentVersion.Substring(0, dotIndex) + '.' + partTwo[0] + '.' + partTwo[1];
+                    currentVersion = currentVersion[..dotIndex] + '.' + partTwo[0] + '.' + partTwo[1];
                 }
             }
 

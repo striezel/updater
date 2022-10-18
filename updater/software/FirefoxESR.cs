@@ -425,7 +425,7 @@ namespace updater.software
             if (!matchChecksum64Bit.Success)
                 return null;
             // Checksum is the first 128 characters of the match.
-            return new string[] { matchChecksum32Bit.Value.Substring(0, 128), matchChecksum64Bit.Value.Substring(0, 128) };
+            return new string[] { matchChecksum32Bit.Value[..128], matchChecksum64Bit.Value[..128] };
         }
 
 

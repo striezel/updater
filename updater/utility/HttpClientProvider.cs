@@ -25,7 +25,7 @@ namespace updater
     /// </summary>
     internal static class HttpClientProvider
     {
-        private static readonly HttpClient client = new HttpClient();
+        private static readonly HttpClient client = new();
 
         /// <summary>
         /// Gets the HttpClient instance.

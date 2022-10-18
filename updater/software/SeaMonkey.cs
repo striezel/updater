@@ -298,8 +298,8 @@ namespace updater.software
                 return null;
             // Checksum is in the first 40 characters of each match.
             return new string[] {
-                matchChecksum32Bit.Value.Substring(0, 40),
-                matchChecksum64Bit.Value.Substring(0, 40)
+                matchChecksum32Bit.Value[..40],
+                matchChecksum64Bit.Value[..40]
             };
         }
 

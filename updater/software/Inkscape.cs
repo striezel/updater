@@ -203,7 +203,7 @@ namespace updater.software
                 Match matchHash = reHash.Match(htmlCode);
                 if (!matchHash.Success)
                     return null;
-                string newHash = matchHash.Value.Substring(0, 64); // SHA256 is 64 characters in hex.
+                string newHash = matchHash.Value[..64]; // SHA256 is 64 characters in hex.
                 if (bits == "32")
                 {
                     newInfo.install32Bit.checksum = newHash;

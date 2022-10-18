@@ -49,7 +49,7 @@ namespace updater.versions
         /// <summary>
         /// regular expression for splitting the second part of the version number
         /// </summary>
-        private static readonly Regex reg = new Regex("^([0-9]+)([a-z])([0-9]+)$");
+        private static readonly Regex reg = new("^([0-9]+)([a-z])([0-9]+)$");
 
 
         /// <summary>

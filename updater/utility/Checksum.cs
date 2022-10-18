@@ -61,7 +61,7 @@ namespace updater.utility
 
 
             byte[] hash = null;
-            using (FileStream fs = new FileStream(fileName, FileMode.Open))
+            using (var fs = new FileStream(fileName, FileMode.Open))
             {
                 fs.Position = 0;
                 hash = hasher.ComputeHash(fs);

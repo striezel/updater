@@ -121,7 +121,7 @@ namespace updater_test.software
         public void Test_needsUpdate()
         {
             var fz = new FileZilla(false);
-            DetectedSoftware det = new DetectedSoftware()
+            var det = new DetectedSoftware()
             {
                 displayVersion = fz.knownInfo().newestVersion
             };

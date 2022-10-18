@@ -484,8 +484,8 @@ namespace updater.software
                     MatchCollection matches = reChecksum32Bit.Matches(checksumsText);
                     for (int i = 0; i < matches.Count; i++)
                     {
-                        string language = matches[i].Value.Substring(136).Replace("/Firefox Setup " + currentVersion + ".exe", "");
-                        cs32.Add(language, matches[i].Value.Substring(0, 128));
+                        string language = matches[i].Value[136..].Replace("/Firefox Setup " + currentVersion + ".exe", "");
+                        cs32.Add(language, matches[i].Value[..128]);
                     }
                 }
 
@@ -497,8 +497,8 @@ namespace updater.software
                     MatchCollection matches = reChecksum64Bit.Matches(checksumsText);
                     for (int i = 0; i < matches.Count; i++)
                     {
-                        string language = matches[i].Value.Substring(136).Replace("/Firefox Setup " + currentVersion + ".exe", "");
-                        cs64.Add(language, matches[i].Value.Substring(0, 128));
+                        string language = matches[i].Value[136..].Replace("/Firefox Setup " + currentVersion + ".exe", "");
+                        cs64.Add(language, matches[i].Value[..128]);
                     }
                 }
             }

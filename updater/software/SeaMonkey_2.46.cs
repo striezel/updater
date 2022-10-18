@@ -55,7 +55,7 @@ namespace updater.software
             if (string.IsNullOrWhiteSpace(langCode))
             {
                 logger.Error("The language code must not be null, empty or whitespace!");
-                throw new ArgumentNullException("langCode", "The language code must not be null, empty or whitespace!");
+                throw new ArgumentNullException(nameof(langCode), "The language code must not be null, empty or whitespace!");
             }
             languageCode = langCode.Trim();
             var d = knownChecksums();

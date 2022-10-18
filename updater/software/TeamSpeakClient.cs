@@ -157,11 +157,11 @@ namespace updater.software
             }
 
             var reHash = new Regex("SHA256\\: ([0-9a-f]{64})");
-            match = reHash.Match(htmlCode.Substring(idx32));
+            match = reHash.Match(htmlCode[idx32..]);
             if (!match.Success)
                 return null;
             info.install32Bit.checksum = match.Groups[1].Value;
-            match = reHash.Match(htmlCode.Substring(idx64));
+            match = reHash.Match(htmlCode[idx64..]);
             if (!match.Success)
                 return null;
             info.install64Bit.checksum = match.Groups[1].Value;

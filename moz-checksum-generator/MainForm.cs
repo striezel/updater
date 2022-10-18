@@ -133,8 +133,8 @@ namespace moz_checksum_generator
             MatchCollection matches = reChecksum32Bit.Matches(sha512SumsContent);
             for (int i = 0; i < matches.Count; i++)
             {
-                string language = matches[i].Value.Substring(136).Replace("/Firefox Setup " + version + ".exe", "");
-                data.Add(language, matches[i].Value.Substring(0, 128));
+                string language = matches[i].Value[136..].Replace("/Firefox Setup " + version + ".exe", "");
+                data.Add(language, matches[i].Value[..128]);
             }
             rtbBit32.Text = getChecksumCode(data);
 
@@ -144,8 +144,8 @@ namespace moz_checksum_generator
             matches = reChecksum64Bit.Matches(sha512SumsContent);
             for (int i = 0; i < matches.Count; i++)
             {
-                string language = matches[i].Value.Substring(136).Replace("/Firefox Setup " + version + ".exe", "");
-                data.Add(language, matches[i].Value.Substring(0, 128));
+                string language = matches[i].Value[136..].Replace("/Firefox Setup " + version + ".exe", "");
+                data.Add(language, matches[i].Value[..128]);
             } //for
             rtbBit64.Text = getChecksumCode(data);
         }
@@ -197,8 +197,8 @@ namespace moz_checksum_generator
             MatchCollection matches = reChecksum32Bit.Matches(sha512SumsContent);
             for (int i = 0; i < matches.Count; i++)
             {
-                string language = matches[i].Value.Substring(136).Replace("/Firefox Setup " + version + ".exe", "");
-                data.Add(language, matches[i].Value.Substring(0, 128));
+                string language = matches[i].Value[136..].Replace("/Firefox Setup " + version + ".exe", "");
+                data.Add(language, matches[i].Value[..128]);
             }
             rtbBit32.Text = getChecksumCode(data);
 
@@ -208,8 +208,8 @@ namespace moz_checksum_generator
             matches = reChecksum64Bit.Matches(sha512SumsContent);
             for (int i = 0; i < matches.Count; i++)
             {
-                string language = matches[i].Value.Substring(136).Replace("/Firefox Setup " + version + ".exe", "");
-                data.Add(language, matches[i].Value.Substring(0, 128));
+                string language = matches[i].Value[136..].Replace("/Firefox Setup " + version + ".exe", "");
+                data.Add(language, matches[i].Value[..128]);
             }
             rtbBit64.Text = getChecksumCode(data);
         }
@@ -261,8 +261,8 @@ namespace moz_checksum_generator
             MatchCollection matches = reChecksum32Bit.Matches(sha512SumsContent);
             for (int i = 0; i < matches.Count; i++)
             {
-                string language = matches[i].Value.Substring(136).Replace("/Firefox Setup " + version + "esr.exe", "");
-                data.Add(language, matches[i].Value.Substring(0, 128));
+                string language = matches[i].Value[136..].Replace("/Firefox Setup " + version + "esr.exe", "");
+                data.Add(language, matches[i].Value[..128]);
             }
             rtbBit32.Text = getChecksumCode(data);
 
@@ -272,8 +272,8 @@ namespace moz_checksum_generator
             matches = reChecksum64Bit.Matches(sha512SumsContent);
             for (int i = 0; i < matches.Count; i++)
             {
-                string language = matches[i].Value.Substring(136).Replace("/Firefox Setup " + version + "esr.exe", "");
-                data.Add(language, matches[i].Value.Substring(0, 128));
+                string language = matches[i].Value[136..].Replace("/Firefox Setup " + version + "esr.exe", "");
+                data.Add(language, matches[i].Value[..128]);
             }
             rtbBit64.Text = getChecksumCode(data);
         }
@@ -330,7 +330,7 @@ namespace moz_checksum_generator
             {
                 string[] parts = matches[i].Value.Split(new char[] { '.' });
                 string language = parts[parts.Length - 4];
-                data.Add(language, matches[i].Value.Substring(0, 40));
+                data.Add(language, matches[i].Value[..40]);
             }
             rtbBit32.Text = getChecksumCode(data);
 
@@ -342,7 +342,7 @@ namespace moz_checksum_generator
             {
                 string[] parts = matches[i].Value.Split(new char[] { '.' });
                 string language = parts[parts.Length - 4];
-                data.Add(language, matches[i].Value.Substring(0, 40));
+                data.Add(language, matches[i].Value[..40]);
             }
             rtbBit64.Text = getChecksumCode(data);
         }
@@ -394,8 +394,8 @@ namespace moz_checksum_generator
             MatchCollection matches = reChecksum.Matches(sha512SumsContent);
             for (int i = 0; i < matches.Count; i++)
             {
-                string language = matches[i].Value.Substring(136).Replace("/Thunderbird Setup " + version + ".exe", "");
-                data.Add(language, matches[i].Value.Substring(0, 128));
+                string language = matches[i].Value[136..].Replace("/Thunderbird Setup " + version + ".exe", "");
+                data.Add(language, matches[i].Value[..128]);
             }
             rtbBit32.Text = getChecksumCode(data);
 
@@ -405,8 +405,8 @@ namespace moz_checksum_generator
             matches = reChecksum64Bit.Matches(sha512SumsContent);
             for (int i = 0; i < matches.Count; i++)
             {
-                string language = matches[i].Value.Substring(136).Replace("/Thunderbird Setup " + version + ".exe", "");
-                data.Add(language, matches[i].Value.Substring(0, 128));
+                string language = matches[i].Value[136..].Replace("/Thunderbird Setup " + version + ".exe", "");
+                data.Add(language, matches[i].Value[..128]);
             } //for
             rtbBit64.Text = getChecksumCode(data);
         }
