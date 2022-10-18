@@ -10,9 +10,13 @@ __[maintenance]__
 
 * Update certificate information for LibreOffice installers.
 
+__[changes]__
+
+* Add workaround for Opera 91.0.4516.80.
+
 ## Version 2022.10.06.0
 
-__[changed]__
+__[changes]__
 
 Search for newer versions of CDBurnerXP has been adjusted for the partially
 defect website. The newest available version can now be found despite the fact
