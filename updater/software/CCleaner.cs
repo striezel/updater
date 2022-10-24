@@ -48,13 +48,13 @@ namespace updater.software
         /// <summary>
         /// publisher name for signed executables
         /// </summary>
-        private const string publisherX509 = "CN=Piriform Software Ltd, OU=RE 901, O=Piriform Software Ltd, L=London, C=GB";
+        private const string publisherX509 = "CN=PIRIFORM SOFTWARE LIMITED, O=PIRIFORM SOFTWARE LIMITED, L=London, C=GB";
 
 
         /// <summary>
         /// expiration date of certificate
         /// </summary>
-        private static readonly DateTime certificateExpiration = new(2022, 10, 18, 12, 0, 0, DateTimeKind.Utc);
+        private static readonly DateTime certificateExpiration = new(2025, 9, 17, 23, 59, 59, DateTimeKind.Utc);
 
 
         /// <summary>
@@ -66,13 +66,13 @@ namespace updater.software
         {
             var signature = new Signature(publisherX509, certificateExpiration);
             var installer = new InstallInfoExe(
-                "https://download.ccleaner.com/ccsetup604.exe",
+                "https://download.ccleaner.com/ccsetup605.exe",
                 HashAlgorithm.SHA256,
-                "7164c5cd414850299fd5b6e400683b9055badd2e6ae6113db40f579079794791",
+                "08031cae113cf7aba12dcfafcf482604015c67d2050233064e1c7827f8014ba2",
                 signature,
                 "/S");
             return new AvailableSoftware("CCleaner",
-                "6.04",
+                "6.05",
                 "^CCleaner+$",
                 "^CCleaner+$",
                 // CCleaner uses the same installer for 32 and 64 bit.
@@ -145,7 +145,7 @@ namespace updater.software
             // new version should be at least three digits long
             if (newVersion.Length < 3)
                 return null;
-            newVersion = newVersion.Substring(0, newVersion.Length - 2) + "." + newVersion.Substring(newVersion.Length - 2);
+            newVersion = string.Concat(newVersion.AsSpan(0, newVersion.Length - 2), ".", newVersion.AsSpan(newVersion.Length - 2));
             if (newVersion == knownInfo().newestVersion)
                 return knownInfo();
             string newUrl = "https://download.ccleaner.com/ccsetup" + matchVersion.Groups[1].Value + ".exe";

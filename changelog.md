@@ -10,6 +10,10 @@ __[maintenance]__
 
 * Update certificate information for LibreOffice installers.
 
+__[maintenance]__
+
+* Update certificate information for CCleaner installers.
+
 __[changes]__
 
 * Add workaround for Opera 91.0.4516.80.
