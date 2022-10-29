@@ -21,6 +21,9 @@ __[maintenance]__
 __[changes]__
 
 * Add workaround for Opera 91.0.4516.80.
+* Updates of PuTTY will now uninstall the old version first, even if the old
+  version is an MSI package (i. e. PuTTY 0.68 or later) to avoid potential
+  conflicts with the new version.
 
 ## Version 2022.10.06.0
 

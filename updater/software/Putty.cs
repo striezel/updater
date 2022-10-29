@@ -194,7 +194,10 @@ namespace updater.software
         /// <returns>Returns a list of process names that block the upgrade.</returns>
         public override List<string> blockerProcesses(DetectedSoftware detected)
         {
-            return new List<string>();
+            return new List<string>(1)
+            {
+                "putty"
+            };
         }
 
 
@@ -208,10 +211,7 @@ namespace updater.software
         /// exception in the later case.</returns>
         public override bool needsPreUpdateProcess(DetectedSoftware detected)
         {
-            if (string.IsNullOrWhiteSpace(detected.displayVersion))
-                return false;
-
-            return string.Compare(detected.displayVersion, "0.68") < 0;
+            return !string.IsNullOrWhiteSpace(detected.displayVersion);
         }
 
 
@@ -224,28 +224,54 @@ namespace updater.software
         /// returned false.</returns>
         public override List<Process> preUpdateProcess(DetectedSoftware detected)
         {
-            // We do not need a pre-update process, if the version is 0.68 or
-            // newer, because that one uses MSI.
-            // We also cannot create a process, if the install directory is
-            // unknown.
-            if (string.IsNullOrWhiteSpace(detected.displayVersion)
-                || string.IsNullOrWhiteSpace(detected.installPath)
-                || (string.Compare(detected.displayVersion, "0.68") >= 0))
+            // We also cannot create a process, if the version is unknown.
+            if (string.IsNullOrWhiteSpace(detected.displayVersion))
+                return null;
+
+            // If the version is older than 0.68, that uses an *.exe installer.
+            // Versions from 0.68 onwards use MSI installers.
+            bool oldExeInstaller = string.Compare(detected.displayVersion, "0.68") < 0;
+            // Install path is required when uninstalling old *.exe installed
+            // versions of PuTTY.
+            if (oldExeInstaller && string.IsNullOrWhiteSpace(detected.installPath))
+                return null;
+            // Uninstall string containing GUID is required when uninstalling
+            // MSI installers.
+            if (!oldExeInstaller && string.IsNullOrWhiteSpace(detected.uninstallString))
                 return null;
 
             var processes = new List<Process>();
-            // First process:
-            // Delete putty.exe to disable prompt that deletes settings (we want to keep them).
-            var proc = new Process();
+            // Uninstallation process for versions before 0.68 (*.exe installers):
+            if (oldExeInstaller)
+            {
+                // First process:
+                // Delete putty.exe to disable prompt that deletes settings (we want to keep them).
+                var proc = new Process();
                 proc.StartInfo.FileName = "cmd.exe";
-            proc.StartInfo.Arguments = "/C del \""
-                + System.IO.Path.Combine(detected.installPath, "putty.exe") + "\"";
-            processes.Add(proc);
-            // second process: uninstall old PuTTY
-            proc = new Process();
-            proc.StartInfo.FileName = System.IO.Path.Combine(detected.installPath, "unins000.exe");
-            proc.StartInfo.Arguments = "/VERYSILENT /SUPPRESSMSGBOXES /NORESTART";
-            processes.Add(proc);
+                proc.StartInfo.Arguments = "/C del \""
+                    + System.IO.Path.Combine(detected.installPath, "putty.exe") + "\"";
+                processes.Add(proc);
+                // second process: uninstall old PuTTY
+                proc = new Process();
+                proc.StartInfo.FileName = System.IO.Path.Combine(detected.installPath, "unins000.exe");
+                proc.StartInfo.Arguments = "/VERYSILENT /SUPPRESSMSGBOXES /NORESTART";
+                processes.Add(proc);
+            }
+            // Uninstallation process for MSI packages (0.68 and later):
+            else
+            {
+                var re = new Regex("\\{[0-9A-F]{8}\\-[0-9A-F]{4}\\-[0-9A-F]{4}\\-[0-9A-F]{4}\\-[0-9A-F]{12}\\}", RegexOptions.IgnoreCase);
+                Match m = re.Match(detected.uninstallString);
+                if (!m.Success)
+                {
+                    logger.Error("Could not extract GUID of old PuTTY version for pre-update process.");
+                    return null;
+                }
+                var proc = new Process();
+                proc.StartInfo.FileName = "msiexec.exe";
+                proc.StartInfo.Arguments = "/X" + m.Value + " /qn /norestart";
+                processes.Add(proc);
+            }
             return processes;
         }
 
