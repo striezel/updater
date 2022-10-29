@@ -28,11 +28,14 @@ namespace updater.data
         /// <summary>
         /// default constructor
         /// </summary>
-        public DetectedSoftware(string dispName = null, string dispVersion = null, string instPath = null, ApplicationType _appType = ApplicationType.Unknown)
+        public DetectedSoftware(string dispName = null, string dispVersion = null,
+            string instPath = null, string uninstString = null,
+            ApplicationType _appType = ApplicationType.Unknown)
         {
             displayName = dispName;
             displayVersion = dispVersion;
             installPath = instPath;
+            uninstallString = uninstString;
             appType = _appType;
         }
 
@@ -121,6 +124,12 @@ namespace updater.data
         /// path where the software is installed
         /// </summary>
         public string installPath;
+
+
+        /// <summary>
+        /// uninstall command listed in the registry
+        /// </summary>
+        public string uninstallString;
 
 
         /// <summary>

@@ -97,6 +97,9 @@ namespace updater.detection
                     object ilObj = subKey.GetValue("InstallLocation");
                     if (null != ilObj)
                         e.installPath = ilObj.ToString().Trim();
+                    object us = subKey.GetValue("UninstallString");
+                    if (us != null)
+                        e.uninstallString = us.ToString().Trim();
                     subKey.Close();
                     subKey = null;
                     switch (view)
