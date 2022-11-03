@@ -146,15 +146,6 @@ namespace updater.software
             // ... and sort them from earliest to latest.
             versions.Sort();
 
-            // Workaround:
-            // Opera 91.0.4516.80 currently only provides incremental updates,
-            // and we cannot use those here. So remove the version from the list.
-            {
-                int idx = versions.FindIndex(q => q.full() == "91.0.4516.80");
-                if (idx != -1)
-                    versions.RemoveAt(idx);
-            }
-
             // Now find the latest version that already has a win/ directory.
             string newVersion = null;
             for (int i = versions.Count - 1; i >= 0; i--)
