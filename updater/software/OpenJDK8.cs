@@ -66,21 +66,21 @@ namespace updater.software
         public override AvailableSoftware knownInfo()
         {
             var signature = new Signature(publisherX509, certificateExpiration);
-            const string version = "8.0.345.1";
+            const string version = "8.0.352.8";
             return new AvailableSoftware("Eclipse Temurin JDK 8 with Hotspot",
                 version,
                 "^(Eclipse Temurin JDK [a-z]+ Hotspot 8u[0-9]+\\-b[0-9]+ \\(x86\\)|AdoptOpenJDK JDK [a-z]+ Hotspot 8u[0-9]+\\-b[0-9]+ \\(x86\\))$",
                 "^(Eclipse Temurin JDK [a-z]+ Hotspot 8u[0-9]+\\-b[0-9]+ \\(x64\\)|AdoptOpenJDK JDK [a-z]+ Hotspot 8u[0-9]+\\-b[0-9]+ \\(x64\\))$",
                 new InstallInfoMsiNoLocation(
-                    "https://github.com/adoptium/temurin8-binaries/releases/download/jdk8u345-b01/OpenJDK8U-jdk_x86-32_windows_hotspot_8u345b01.msi",
+                    "https://github.com/adoptium/temurin8-binaries/releases/download/jdk8u352-b08/OpenJDK8U-jdk_x86-32_windows_hotspot_8u352b08.msi",
                     HashAlgorithm.SHA256,
-                    "a260d36fbb0d891448899d74297786a2d682137f97be93239e6b001a951d5196",
+                    "c4e7e38444bbf57572b15c7ff16ecf58ae4939e804d9a1902974ede615227b06",
                     signature,
                     "INSTALLLEVEL=3 /qn /norestart"),
                 new InstallInfoMsiNoLocation(
-                    "https://github.com/adoptium/temurin8-binaries/releases/download/jdk8u345-b01/OpenJDK8U-jdk_x64_windows_hotspot_8u345b01.msi",
+                    "https://github.com/adoptium/temurin8-binaries/releases/download/jdk8u352-b08/OpenJDK8U-jdk_x64_windows_hotspot_8u352b08.msi",
                     HashAlgorithm.SHA256,
-                    "a19b85fedcc830aa81c6aeb07449905032b7b391c033a1647639486b25f2e1f3",
+                    "c3f2ee62970bae81aa163e155faab8498638962a0a480aa01620d3122ad902ee",
                     signature,
                     "INSTALLLEVEL=3 /qn /norestart")
                 );
