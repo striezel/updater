@@ -35,15 +35,65 @@ Operations or commands define the main action of the program. Only one of
 these may be specified. Valid operations are:
 
 * **check** - displays which installed software can be updated, but does not
-              actually perform the updates.
+  actually perform the updates. This will display something like
+
+  ```
+  +-------------------------------------+--------+--------------+--------------+---------+
+  | Software                            | type   | current      | newest       | can be  |
+  |                                     |        | version      | version      | updated |
+  +-------------------------------------+--------+--------------+--------------+---------+
+  | Acrobat Reader 2020                 | 32 bit | 20.005.30407 | 20.005.30407 | no      |
+  | CMake                               | 64 bit | 3.24.3       | 3.24.3       | no      |
+  | Eclipse Temurin JDK 17 with Hotspot | 64 bit | 17.0.5.8     | 17.0.5.8     | no      |
+  | Mozilla Firefox ESR (de)            | 64 bit | 102.4.0      | 102.4.0      | no      |
+  | FileZilla FTP Client                | 64 bit | 3.62.0       | 3.62.0       | no      |
+  | Git                                 | 64 bit | 2.38.1       | 2.38.1       | no      |
+  | HeidiSQL                            | 64 bit | 12.1         | 12.1.0.6537  | no      |
+  | KeePass                             | 32 bit | 2.52         | 2.52         | no      |
+  | LibreOffice                         | 64 bit | 7.4.2.3      | 7.4.2.3      | no      |
+  | MariaDB Server 10.5                 | 64 bit | 10.5.17.0    | 10.5.18      | yes     |
+  | Node.js                             | 64 bit | 18.12.1      | 18.12.1      | no      |
+  | Notepad++                           | 32 bit | 8.4.6        | 8.4.7        | yes     |
+  | Pidgin                              | 32 bit | 2.14.10      | 2.14.10      | no      |
+  | PuTTY                               | 64 bit | 0.78.0.0     | 0.78         | no      |
+  | 7-Zip                               | 64 bit | 22.01        | 22.01        | no      |
+  | TeamSpeak Client                    | 64 bit | 3.5.6        | 3.5.6        | no      |
+  | TeamViewer                          | 64 bit | 15.35.7      | 15.35.7      | no      |
+  | Mozilla Thunderbird (de)            | 64 bit | 102.4.2      | 102.4.2      | no      |
+  | VLC media player                    | 64 bit | 3.0.17.4     | 3.0.17.4     | no      |
+  | WinSCP                              | 32 bit | 5.21.5       | 5.21.5       | no      |
+  +-------------------------------------+--------+--------------+--------------+---------+
+  ```
+
 * **update** - updates every software that can be updated, i.e. downloads and
-               installs new versions / updates.
+               installs new versions / updates. Possible output could be:
+
+  ```
+  2022-11-08 19:12:44 - Downloading https://downloads.mariadb.org/rest-api/mariadb/10.5.18/mariadb-10.5.18-winx64.msi...
+  2022-11-08 19:13:10 - Calculating checksum of C:\Users\admin\AppData\Roaming\.updaterCache\mariadb-10.5.18-winx64.msi ...
+  2022-11-08 19:13:11 - Info: Checksum of C:\Users\admin\AppData\Roaming\.updaterCache\mariadb-10.5.18-winx64.msi is correct.
+  2022-11-08 19:13:11 - Verifying signature of C:\Users\admin\AppData\Roaming\.updaterCache\mariadb-10.5.18-winx64.msi ...
+  2022-11-08 19:13:11 - Info: Signature and publisher of C:\Users\admin\AppData\Roaming\.updaterCache\mariadb-10.5.18-winx64.msi are correct.
+  2022-11-08 19:13:11 - Info: Starting update of MariaDB Server 10.5...
+  2022-11-08 19:13:28 - Info: Update process exited after 17 second(s) with code 0.
+  2022-11-08 19:13:28 - Info: Update of MariaDB Server 10.5 was successful.
+  2022-11-08 19:13:28 - Downloading https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v8.4.7/npp.8.4.7.Installer.exe...
+  2022-11-08 19:13:30 - Calculating checksum of C:\Users\admin\AppData\Roaming\.updaterCache\npp.8.4.7.Installer.exe ...
+  2022-11-08 19:13:30 - Info: Checksum of C:\Users\admin\AppData\Roaming\.updaterCache\npp.8.4.7.Installer.exe is correct.
+  2022-11-08 19:13:30 - Verifying signature of C:\Users\admin\AppData\Roaming\.updaterCache\npp.8.4.7.Installer.exe ...
+  2022-11-08 19:13:31 - Info: Signature and publisher of C:\Users\admin\AppData\Roaming\.updaterCache\npp.8.4.7.Installer.exe are correct.
+  2022-11-08 19:13:31 - Info: Starting update of Notepad++...
+  2022-11-08 19:13:34 - Info: Update process exited after 3 second(s) with code 0.
+  2022-11-08 19:13:34 - Info: Update of Notepad++ was successful.
+  2022-11-08 19:13:34 - 2 applications were updated.
+  ```
+
 * **help** - shows a help message.
 * **version** - shows version of the program.
 * **license** - shows license information for the program.
 * **list-id** - prints a list of software IDs to the standard output. These IDs
                 can be used to exculde certain software from updates. See the
-                option --exclude below for more information.
+                option `--exclude` below for more information.
 
 ### Options
 Options can change behaviour of the update process. Available options are:
