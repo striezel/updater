@@ -146,14 +146,16 @@ namespace updater.software
             // ... and sort them from earliest to latest.
             versions.Sort();
 
-            // Now find the latest version that already has a win/ directory.
+            // Now find the latest version that already has a win/ directory
+            // containing a checksum file for the 64 bit build.
             string newVersion = null;
             for (int i = versions.Count - 1; i >= 0; i--)
             {
                 bool exists;
                 try
                 {
-                    var task = client.GetStringAsync("https://get.geo.opera.com/ftp/pub/opera/desktop/" + versions[i].full() + "/win/");
+                    var fullVersion = versions[i].full();
+                    var task = client.GetStringAsync("https://get.geo.opera.com/ftp/pub/opera/desktop/" + fullVersion + "/win/Opera_" + fullVersion + "_Setup_x64.exe.sha256sum");
                     task.Wait();
                     htmlCode = task.Result;
                     exists = true;

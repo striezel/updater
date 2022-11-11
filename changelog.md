@@ -4,6 +4,14 @@ _(Note: This changelog focuses on the major changes between the different
 versions. Therefore, it may not contain all changes. Especially smaller fixes or
 improvements may be omitted.)_
 
+## Version NEXT
+
+__[changes]__
+
+* The search for new Opera versions is adjusted to only include versions that
+  provide a full installer and skip those versions that only provide the
+  "autoupdate" binaries.
+
 ## Version 2022.11.03.0
 
 __[maintenance]__
