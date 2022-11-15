@@ -10,4 +10,4 @@ build:
   project: updater/updater.sln
   verbosity: normal
 test_script:
-  - dotnet test updater-test\updater-test.csproj --configuration Debug --no-build /property:Platform=AnyCPU --test-adapter-path:. --logger:Appveyor
+  - dotnet test updater-test\updater-test.csproj --configuration Debug --test-adapter-path:. --logger:Appveyor
