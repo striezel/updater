@@ -11,6 +11,8 @@ __[changes]__
 * The search for new Opera versions is adjusted to only include versions that
   provide a full installer and skip those versions that only provide the
   "autoupdate" binaries.
+* Search for newer versions of Git has been adjusted to skip the releases that
+  only contain MinGit binaries (e. g. MinGit v2.35.5.windows.1).
 
 __[maintenance]__
 
