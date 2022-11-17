@@ -12,6 +12,10 @@ __[changes]__
   provide a full installer and skip those versions that only provide the
   "autoupdate" binaries.
 
+__[maintenance]__
+
+* Update certificate information for CCleaner installers.
+
 ## Version 2022.11.03.0
 
 __[maintenance]__

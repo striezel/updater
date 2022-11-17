@@ -48,13 +48,13 @@ namespace updater.software
         /// <summary>
         /// publisher name for signed executables
         /// </summary>
-        private const string publisherX509 = "CN=PIRIFORM SOFTWARE LIMITED, O=PIRIFORM SOFTWARE LIMITED, L=London, C=GB";
+        private const string publisherX509 = "CN=Piriform Software Ltd, O=Piriform Software Ltd, L=London, C=GB, SERIALNUMBER=08235567, OID.1.3.6.1.4.1.311.60.2.1.3=GB, OID.2.5.4.15=Private Organization";
 
 
         /// <summary>
         /// expiration date of certificate
         /// </summary>
-        private static readonly DateTime certificateExpiration = new(2025, 9, 17, 23, 59, 59, DateTimeKind.Utc);
+        private static readonly DateTime certificateExpiration = new(2024, 12, 4, 23, 59, 59, DateTimeKind.Utc);
 
 
         /// <summary>
@@ -66,13 +66,13 @@ namespace updater.software
         {
             var signature = new Signature(publisherX509, certificateExpiration);
             var installer = new InstallInfoExe(
-                "https://download.ccleaner.com/ccsetup605.exe",
+                "https://download.ccleaner.com/ccsetup606.exe",
                 HashAlgorithm.SHA256,
-                "08031cae113cf7aba12dcfafcf482604015c67d2050233064e1c7827f8014ba2",
+                "f7aa15255b2e6ce57e682f82fe70732a45e6cf204cfc7b04eb6f2d2245363522",
                 signature,
                 "/S");
             return new AvailableSoftware("CCleaner",
-                "6.05",
+                "6.06",
                 "^CCleaner+$",
                 "^CCleaner+$",
                 // CCleaner uses the same installer for 32 and 64 bit.
