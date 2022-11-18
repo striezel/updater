@@ -44,7 +44,7 @@ namespace updater.software
         /// <summary>
         /// expiration date for the publisher certificate
         /// </summary>
-        private static readonly DateTime certificateExpiration = new(2022, 12, 21, 23, 59, 59, DateTimeKind.Utc);
+        private static readonly DateTime certificateExpiration = new(2024, 5, 1, 23, 59, 59, DateTimeKind.Utc);
 
 
         /// <summary>
@@ -64,11 +64,11 @@ namespace updater.software
         /// details about the software.</returns>
         public override AvailableSoftware knownInfo()
         {
-            const string version = "20.005.30407";
+            const string version = "20.005.30418";
             var installer = new InstallInfoMsiPatch(
-                "https://ardownload2.adobe.com/pub/adobe/reader/win/Acrobat2020/2000530407/AcroRdr2020Upd2000530407_MUI.msp",
+                "https://ardownload2.adobe.com/pub/adobe/reader/win/Acrobat2020/2000530418/AcroRdr2020Upd2000530418_MUI.msp",
                 HashAlgorithm.SHA256,
-                "5db911481b59ab368a1b541e52bd4d3814362a0e19ff3bddb911ae43c1b19322",
+                "853276ed31ec8a58050847272de479e219a757ce0f1926e5863f9050dd98fad7",
                 new Signature(publisherX509, certificateExpiration),
                 "/qn /norestart"
                 );
@@ -138,8 +138,8 @@ namespace updater.software
             using (var client = new WebClient())
             {
                 // The request hangs and times out without an User-Agent header,
-                // so let's provide a simple curl User-Agent here.s
-                client.Headers.Add("User-Agent", "curl/7.85.0");
+                // so let's provide a simple curl User-Agent here.
+                client.Headers.Add("User-Agent", "curl/7.86.0");
                 try
                 {
                     html = client.DownloadString(notesLink);
