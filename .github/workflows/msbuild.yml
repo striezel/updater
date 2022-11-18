@@ -59,3 +59,20 @@ jobs:
       with:
         name: installer-${{ matrix.os }}
         path: output\*.exe
+
+    - name: Create ZIP file
+      working-directory: ${{env.GITHUB_WORKSPACE}}
+      shell: cmd
+      run: |
+        md updater-zipped
+        copy updater\bin\Release\net6.0-windows\updater.exe updater-zipped
+        copy updater\bin\Release\net6.0-windows\updater.dll updater-zipped
+        copy updater\bin\Release\net6.0-windows\updater.runtimeconfig.json updater-zipped
+        copy "%USERPROFILE%\.nuget\packages\nlog\5.0.5\lib\netstandard2.0\NLog.dll" updater-zipped
+        copy "%USERPROFILE%\.nuget\packages\newtonsoft.json\13.0.1\lib\netstandard2.0\Newtonsoft.Json.dll" updater-zipped
+
+    - name: Upload zipped updater
+      uses: actions/upload-artifact@v3
+      with:
+        name: updater-zipped
+        path: updater-zipped\*
