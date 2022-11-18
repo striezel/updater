@@ -71,19 +71,19 @@ namespace updater.software
             {
                 var signature = new Signature(publisherX509, certificateExpiration);
                 return new AvailableSoftware("FileZilla FTP Client",
-                    "3.62.0",
+                    "3.62.1",
                     "^FileZilla (Client )?[0-9]+\\.[0-9]+(\\.[0-9]+(\\.[0-9]+)?)?$",
                     "^FileZilla (Client )?[0-9]+\\.[0-9]+(\\.[0-9]+(\\.[0-9]+)?)?$",
                     new InstallInfoExe(
-                        "https://download.filezilla-project.org/client/FileZilla_3.62.0_win32-setup.exe",
+                        "https://download.filezilla-project.org/client/FileZilla_3.62.1_win32-setup.exe",
                         HashAlgorithm.SHA512,
-                        "a80498b6acc30c42bc497b412b20ea08b7d036bbfaa30b0b509741feb0f01edb8afe6d55d85bf3e651362c29e6ea023b0da5159eaba74012ad35d0b4ececfe91",
+                        "9d27322fe18624e559dbeb122a706def624205ce7ec20a9f2dca546c6a85dfca767e8cf9fff4ce551e2b4c9238fcf2c5a14560fdc2c72d8e4220143750b14433",
                         signature,
                         "/S"),
                     new InstallInfoExe(
-                        "https://download.filezilla-project.org/client/FileZilla_3.62.0_win64-setup.exe",
+                        "https://download.filezilla-project.org/client/FileZilla_3.62.1_win64-setup.exe",
                         HashAlgorithm.SHA512,
-                        "ad6662d507930888ab8cb4395657b46973d8b93d780b7d56ec505af77e519b4d8e67ea14ff16acc851b0e0e12a341f7b04fd8ec9ab7497401f469f6822f80efc",
+                        "4540af17b9cc5b24570a623dc3522e0812bbeaeff7bd2ba62b1acf66d25c229e34971fe92063e6201e294147f2f1f71f1aabd75698935da2765321006a797a1a",
                         signature,
                         "/S")
                     );
@@ -191,7 +191,7 @@ namespace updater.software
                 {
                     // Looks like we have to add a user agent to get a valid response.
                     // Without user agent the server returns "403 Forbidden".
-                    client.Headers.Add("User-Agent", "curl/7.73.0");
+                    client.Headers.Add("User-Agent", "curl/7.86.0");
                     try
                     {
                         htmlCode = client.DownloadString("https://filezilla-project.org/download.php?show_all=1");
