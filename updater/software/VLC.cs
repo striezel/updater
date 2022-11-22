@@ -66,7 +66,7 @@ namespace updater.software
         public override AvailableSoftware knownInfo()
         {
             var signature = new Signature(publisherX509, certificateExpiration);
-            const string version = "3.0.17.4";
+            const string version = "3.0.18";
             return new AvailableSoftware("VLC media player",
                 version,
                 "^VLC media player$",
@@ -75,14 +75,14 @@ namespace updater.software
                 new InstallInfoExe(
                     "https://get.videolan.org/vlc/" + version + "/win32/vlc-" + version + "-win32.exe",
                     HashAlgorithm.SHA256,
-                    "514b0bf5ac82e7132ecac31da64c38fc85cd0ff76e2dcbcf904b6e2028c6749f",
+                    "f4baaa8135e0f9a993f0258a4d095db475096896bd3adb48369f1f70c1f0d9d4",
                     signature,
                     "/S"),
                 // 64 bit installer
                 new InstallInfoExe(
                     "https://get.videolan.org/vlc/" + version + "/win64/vlc-" + version + "-win64.exe",
                     HashAlgorithm.SHA256,
-                    "fda8cbf2ee876be4eb14d7affca3a0746ef4ae78341dbb589cbdddcf912db85c",
+                    "ba575f153d357eaf3fdbf446b9b93a12ced87c35887cdd83ad4281733eb86602",
                     signature,
                     "/S")
                 );
