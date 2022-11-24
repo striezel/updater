@@ -18,6 +18,10 @@ __[maintenance]__
 
 * Update certificate information for CCleaner installers.
 
+__[maintenance]__
+
+* Newtonsoft.Json library is updated from 13.0.2 to 13.0.2.
+
 ## Version 2022.11.03.0
 
 __[maintenance]__
