@@ -38,7 +38,7 @@ namespace updater_test.utility
         /// <summary>
         /// subject in signature for LibreOffice Help Pack installer
         /// </summary>
-        private const string libreOfficePublisherX509 = "E=info@documentfoundation.org, CN=The Document Foundation, O=The Document Foundation, OU=LibreOffice Build Team, S=Berlin, C=DE";
+        private const string libreOfficePublisherX509 = "E=info@documentfoundation.org, CN=The Document Foundation, O=The Document Foundation, OU=LibreOffice Build Team, L=Berlin, S=Berlin, C=DE";
 
 
         /// <summary>
@@ -75,7 +75,7 @@ namespace updater_test.utility
         [ClassInitialize()]
         public static void DownloadExampleFile(TestContext testContext)
         {
-            downloadFileLocation = download("https://download.documentfoundation.org/libreoffice/stable/7.4.2/win/x86_64/LibreOffice_7.4.2_Win_x64_helppack_de.msi");
+            downloadFileLocation = download("https://download.documentfoundation.org/libreoffice/stable/7.4.3/win/x86_64/LibreOffice_7.4.3_Win_x64_helppack_de.msi");
         }
 
 

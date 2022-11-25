@@ -37,13 +37,13 @@ namespace updater.software
         /// <summary>
         /// publisher name for signed executables of LibreOffice
         /// </summary>
-        private const string publisherX509 = "E=info@documentfoundation.org, CN=The Document Foundation, O=The Document Foundation, OU=LibreOffice Build Team, S=Berlin, C=DE";
+        private const string publisherX509 = "E=info@documentfoundation.org, CN=The Document Foundation, O=The Document Foundation, OU=LibreOffice Build Team, L=Berlin, S=Berlin, C=DE";
 
 
         /// <summary>
         /// expiration date of the certificate
         /// </summary>
-        private static readonly DateTime certificateExpiration = new(2023, 5, 30, 6, 22, 29, DateTimeKind.Utc);
+        private static readonly DateTime certificateExpiration = new(2023, 9, 8, 13, 45, 8, DateTimeKind.Utc);
 
 
         /// <summary>
@@ -65,19 +65,19 @@ namespace updater.software
         {
             var signature = new Signature(publisherX509, certificateExpiration);
             return new AvailableSoftware("LibreOffice",
-                "7.4.2.3",
+                "7.4.3.2",
                 "^LibreOffice [0-9]+\\.[0-9]\\.[0-9]\\.[0-9]$",
                 "^LibreOffice [0-9]+\\.[0-9]\\.[0-9]\\.[0-9]$",
                 new InstallInfoLibO(
-                    "https://download.documentfoundation.org/libreoffice/stable/7.4.2/win/x86/LibreOffice_7.4.2_Win_x86.msi",
+                    "https://download.documentfoundation.org/libreoffice/stable/7.4.3/win/x86/LibreOffice_7.4.3_Win_x86.msi",
                     HashAlgorithm.SHA256,
-                    "64732d57588cd08ecefe3bcffdfc0e0f3db2059260b4ba0491b60a1f9aadfcc2",
+                    "07415d8740079623f5d21eddcdf10212935ddd43d52e0f54b06d52cc43c44bcd",
                     signature,
                     "/qn /norestart"),
                 new InstallInfoLibO(
-                    "https://download.documentfoundation.org/libreoffice/stable/7.4.2/win/x86_64/LibreOffice_7.4.2_Win_x64.msi",
+                    "https://download.documentfoundation.org/libreoffice/stable/7.4.3/win/x86_64/LibreOffice_7.4.3_Win_x64.msi",
                     HashAlgorithm.SHA256,
-                    "4590009b0800ff372de74e6e81f95b783c998570e46079de38aae26c9c33f61e",
+                    "f4cf0fe2ff0b9716d3622202c4dcbd7aedabce03e135a159d747f9bbeb92da01",
                     signature,
                     "/qn /norestart")
                     );
