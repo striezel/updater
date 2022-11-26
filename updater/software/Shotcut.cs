@@ -22,6 +22,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Net;
+using System.Net.Http;
 using System.Text.RegularExpressions;
 using updater.data;
 using updater.utility;
@@ -140,6 +141,48 @@ namespace updater.software
 
 
         /// <summary>
+        /// Determines the latest available version of Shotcut on GitHub.
+        /// </summary>
+        /// <returns>Returns the latest version in case of success.
+        /// Return null, if an error occurred.</returns>
+        private static string GetLatestVersion()
+        {
+            var handler = new HttpClientHandler()
+            {
+                AllowAutoRedirect = false
+            };
+            var client = new HttpClient(handler)
+            {
+                Timeout = TimeSpan.FromSeconds(30)
+            };
+            string latestVersion;
+            try
+            {
+                var task = client.SendAsync(new HttpRequestMessage(HttpMethod.Head, "https://github.com/mltframework/shotcut/releases/latest"));
+                task.Wait();
+                var response = task.Result;
+                if (response.StatusCode != HttpStatusCode.Found)
+                    return null;
+                string newLocation = response.Headers.Location?.ToString();
+                response = null;
+                task = null;
+                var reVersion = new Regex("tag/v[0-9]+\\.[0-9]+\\.[0-9]+$");
+                Match matchVersion = reVersion.Match(newLocation);
+                if (!matchVersion.Success)
+                    return null;
+                latestVersion = matchVersion.Value[5..];
+            }
+            catch (Exception ex)
+            {
+                logger.Warn("Error while looking for newer Shotcut version: " + ex.Message);
+                return null;
+            }
+            client.Dispose();
+            return latestVersion;
+        }
+
+
+        /// <summary>
         /// Looks for newer versions of the software than the currently known version.
         /// </summary>
         /// <returns>Returns an AvailableSoftware instance with the information
@@ -156,30 +199,9 @@ namespace updater.software
             }
 
             // Get newest information (64 bit builds only).
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://github.com/mltframework/shotcut/releases/latest");
-            request.Method = WebRequestMethods.Http.Head;
-            request.AllowAutoRedirect = false;
-            request.Timeout = 30000; // 30_000 ms / 30 seconds
-            string currentVersion;
-            try
-            {
-                HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-                if (response.StatusCode != HttpStatusCode.Found)
-                    return null;
-                string newLocation = response.Headers[HttpResponseHeader.Location];
-                request = null;
-                response = null;
-                var reVersion = new Regex("tag/v[0-9]+\\.[0-9]+\\.[0-9]+$");
-                Match matchVersion = reVersion.Match(newLocation);
-                if (!matchVersion.Success)
-                    return null;
-                currentVersion = matchVersion.Value[5..];
-            }
-            catch (Exception ex)
-            {
-                logger.Warn("Error while looking for newer Shotcut version: " + ex.Message);
+            string currentVersion = GetLatestVersion();
+            if (string.IsNullOrWhiteSpace(currentVersion))
                 return null;
-            }
 
             // Get checksum from release page, e.g. "https://github.com/mltframework/shotcut/releases/download/v21.05.18/sha256sums.txt"
             string htmlCode = null;

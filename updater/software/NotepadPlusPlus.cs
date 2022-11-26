@@ -22,6 +22,7 @@ using System.Net;
 using System.Text.RegularExpressions;
 using System.Collections.Generic;
 using updater.utility;
+using System.Net.Http;
 
 namespace updater.software
 {
@@ -119,19 +120,25 @@ namespace updater.software
         public override AvailableSoftware searchForNewer()
         {
             logger.Info("Searching for newer version of Notepad++...");
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://github.com/notepad-plus-plus/notepad-plus-plus/releases/latest");
-            request.Method = WebRequestMethods.Http.Head;
-            request.AllowAutoRedirect = false;
-            request.Timeout = 30000; // 30_000 ms / 30 seconds
+            var handler = new HttpClientHandler()
+            {
+                AllowAutoRedirect = false
+            };
+            var httpClient = new HttpClient(handler)
+            {
+                Timeout = TimeSpan.FromSeconds(30)
+            };
             string currentVersion;
             try
             {
-                HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+                var task = httpClient.SendAsync(new HttpRequestMessage(HttpMethod.Head, "https://github.com/notepad-plus-plus/notepad-plus-plus/releases/latest"));
+                task.Wait();
+                var response = task.Result;
                 if (response.StatusCode != HttpStatusCode.Found)
                     return null;
-                string newLocation = response.Headers[HttpResponseHeader.Location];
-                request = null;
+                string newLocation = response.Headers.Location?.ToString();
                 response = null;
+                task = null;
                 // Location header will point to something like "https://github.com/notepad-plus-plus/notepad-plus-plus/releases/tag/v7.9.1".
                 var reVersion = new Regex("v[0-9]+(\\.[0-9]+(\\.[0-9]+(\\.[0-9]+)?)?)?$");
                 Match matchVersion = reVersion.Match(newLocation);

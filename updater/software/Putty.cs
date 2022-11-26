@@ -20,6 +20,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Net;
+using System.Net.Http;
 using System.Text.RegularExpressions;
 using updater.data;
 using updater.utility;
@@ -119,19 +120,25 @@ namespace updater.software
         public override AvailableSoftware searchForNewer()
         {
             logger.Info("Searching for newer version of PuTTY...");
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://the.earth.li/~sgtatham/putty/latest/");
-            request.Method = WebRequestMethods.Http.Head;
-            request.AllowAutoRedirect = false;
-            request.Timeout = 30000; // 30_000 ms / 30 seconds
+            var handler = new HttpClientHandler()
+            {
+                AllowAutoRedirect = false
+            };
+            var httpClient = new HttpClient(handler)
+            {
+                Timeout = TimeSpan.FromSeconds(30)
+            };
             string newLocation;
             try
             {
-                HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+                var task = httpClient.SendAsync(new HttpRequestMessage(HttpMethod.Head, "https://the.earth.li/~sgtatham/putty/latest/"));
+                task.Wait();
+                var response = task.Result;
                 if (response.StatusCode != HttpStatusCode.Found)
                     return null;
-                newLocation = response.Headers[HttpResponseHeader.Location];
-                request = null;
+                newLocation = response.Headers.Location?.ToString();
                 response = null;
+                task = null;
             }
             catch (Exception ex)
             {

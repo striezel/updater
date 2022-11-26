@@ -19,6 +19,7 @@
 using System;
 using System.Collections.Generic;
 using System.Net;
+using System.Net.Http;
 using System.Text.RegularExpressions;
 using updater.data;
 
@@ -362,18 +363,24 @@ namespace updater.software
         public string determineNewestVersion()
         {
             string url = "https://download.mozilla.org/?product=firefox-latest&os=win&lang=" + languageCode;
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
-            request.Method = WebRequestMethods.Http.Head;
-            request.AllowAutoRedirect = false;
-            request.Timeout = 30000; // 30 seconds
+            var handler = new HttpClientHandler()
+            {
+                AllowAutoRedirect = false
+            };
+            var client = new HttpClient(handler)
+            {
+                Timeout = TimeSpan.FromSeconds(30)
+            };
             try
             {
-                HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+                var task = client.SendAsync(new HttpRequestMessage(HttpMethod.Head, url));
+                task.Wait();
+                var response = task.Result;
                 if (response.StatusCode != HttpStatusCode.Found)
                     return null;
-                string newLocation = response.Headers[HttpResponseHeader.Location];
-                request = null;
+                string newLocation = response.Headers.Location?.ToString();
                 response = null;
+                client = null;
                 var reVersion = new Regex("[0-9]{2,3}\\.[0-9](\\.[0-9])?");
                 Match matchVersion = reVersion.Match(newLocation);
                 if (!matchVersion.Success)
