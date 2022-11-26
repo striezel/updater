@@ -58,6 +58,11 @@ Source: "{#GetEnv('USERPROFILE')}\.nuget\packages\newtonsoft.json\13.0.2\lib\net
 Source: "{#GetEnv('USERPROFILE')}\.nuget\packages\nlog\5.0.5\lib\netstandard2.0\NLog.dll"; DestDir: "{app}"; Flags: ignoreversion
 ; GPL 3 license text
 Source: "..\LICENSE"; DestDir: "{app}"; Flags: ignoreversion
+; documentation files
+Source: "..\readme.md"; DestDir: "{app}\documentation"; Flags: ignoreversion
+Source: "..\changelog.md"; DestDir: "{app}\documentation"; Flags: ignoreversion
+Source: "..\faq.md"; DestDir: "{app}\documentation"; Flags: ignoreversion
+Source: "..\supported_applications.md"; DestDir: "{app}\documentation"; Flags: ignoreversion
 
 [Icons]
 ; Start Menu entry for updater: check for new updates
