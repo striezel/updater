@@ -23,6 +23,8 @@ jobs:
     steps:
     - name: Code checkout
       uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
 
     - name: Install .NET Core
       uses: actions/setup-dotnet@v3
@@ -64,15 +66,25 @@ jobs:
       working-directory: ${{env.GITHUB_WORKSPACE}}
       shell: cmd
       run: |
-        md updater-zipped
-        copy updater\bin\Release\net6.0-windows\updater.exe updater-zipped
-        copy updater\bin\Release\net6.0-windows\updater.dll updater-zipped
-        copy updater\bin\Release\net6.0-windows\updater.runtimeconfig.json updater-zipped
-        copy "%USERPROFILE%\.nuget\packages\nlog\5.0.5\lib\netstandard2.0\NLog.dll" updater-zipped
-        copy "%USERPROFILE%\.nuget\packages\newtonsoft.json\13.0.2\lib\netstandard2.0\Newtonsoft.Json.dll" updater-zipped
+        for /f %%i IN ('git describe --always') do set "VERSION=%%i"
+        echo Version is %VERSION%.
+        md updater-%VERSION%
+        copy updater\bin\Release\net6.0-windows\updater.exe updater-%VERSION%
+        copy updater\bin\Release\net6.0-windows\updater.dll updater-%VERSION%
+        copy updater\bin\Release\net6.0-windows\updater.runtimeconfig.json updater-%VERSION%
+        copy "%USERPROFILE%\.nuget\packages\nlog\5.0.5\lib\netstandard2.0\NLog.dll" updater-%VERSION%
+        copy "%USERPROFILE%\.nuget\packages\newtonsoft.json\13.0.1\lib\netstandard2.0\Newtonsoft.Json.dll" updater-%VERSION%
+        copy LICENSE updater-%VERSION%
+        md updater-%VERSION%\documentation
+        copy readme.md updater-%VERSION%\documentation
+        copy changelog.md updater-%VERSION%\documentation
+        copy faq.md updater-%VERSION%\documentation
+        copy supported_applications.md updater-%VERSION%\documentation
+        "C:\Program Files\7-Zip\7z.exe" a -r updater.zip updater-%VERSION%
 
     - name: Upload zipped updater
       uses: actions/upload-artifact@v3
       with:
         name: updater-zipped
-        path: updater-zipped\*
+        if-no-files-found: error
+        path: updater.zip
