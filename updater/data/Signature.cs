@@ -23,7 +23,7 @@ namespace updater.data
     /// <summary>
     /// Holds information about a signed binary file.
     /// </summary>
-    public struct Signature
+    public readonly struct Signature
     {
         /// <summary>
         /// An instance that contains no signature information.

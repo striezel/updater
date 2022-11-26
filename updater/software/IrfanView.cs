@@ -134,7 +134,7 @@ namespace updater.software
             if (!versionMatch.Success)
                 return null;
             string version_digits = versionMatch.Groups[1].Value;
-            string version = version_digits.Substring(0, version_digits.Length - 2) + "." +  version_digits.Substring(version_digits.Length - 2);
+            string version = string.Concat(version_digits.AsSpan(0, version_digits.Length - 2), ".", version_digits.AsSpan(version_digits.Length - 2));
 
             // Get 64 bit checksum.
             var checksumRegEx = new Regex("[0-9a-f]{64}");
