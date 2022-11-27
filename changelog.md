@@ -4,6 +4,12 @@ _(Note: This changelog focuses on the major changes between the different
 versions. Therefore, it may not contain all changes. Especially smaller fixes or
 improvements may be omitted.)_
 
+## Version NEXT
+
+__[maintenance]__
+
+* NLog library is updated from 5.0.5 to 5.1.0.
+
 ## Version 2022.11.26.0
 
 __[changes]__
