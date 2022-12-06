@@ -53,13 +53,13 @@ namespace updater.software
         public override AvailableSoftware knownInfo()
         {
             var installer = new InstallInfoExe(
-                    "https://www.heidisql.com/installers/HeidiSQL_12.2.0.6576_Setup.exe",
+                    "https://www.heidisql.com/installers/HeidiSQL_12.3.0.6589_Setup.exe",
                     HashAlgorithm.SHA1,
-                    "268c2c3115faf782ebd3f35acb49365c76ea6e42",
+                    "63e74cac70dbc9293711bf14053bfa20bd51cb36",
                     Signature.None,
                     "/VERYSILENT /NORESTART");
             return new AvailableSoftware("HeidiSQL",
-                "12.2.0.6576",
+                "12.3.0.6589",
                 "^HeidiSQL [0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+$",
                 "^HeidiSQL [0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+$",
                 // 32 bit installer
