@@ -412,6 +412,11 @@ namespace updater.operations
                     // Let's pretend we are Firefox ESR downloading the file.
                     wc.Headers.Add(HttpRequestHeader.UserAgent, "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101 Firefox/91.0");
                 }
+                if (lowerCaseUrl.Contains("irfanview"))
+                {
+                    // IrfanView downloads require that a referer is set.
+                    wc.Headers.Add(HttpRequestHeader.Referer, url);
+                }
                 try
                 {
                     wc.DownloadFile(url, localFile);
