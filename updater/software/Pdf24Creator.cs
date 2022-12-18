@@ -165,6 +165,7 @@ namespace updater.software
             if (!match2.Success || match2.Value != versionMatch.Value)
                 return null;
             string newVersion = versionMatch.Value;
+            string checksum = GetSha256Checksum(newVersion);
 
             // construct new version information
             var newInfo = knownInfo();
@@ -172,10 +173,54 @@ namespace updater.software
             string oldVersion = newInfo.newestVersion;
             newInfo.newestVersion = newVersion;
             newInfo.install32Bit.downloadUrl = newInfo.install32Bit.downloadUrl.Replace(oldVersion, newVersion);
-            // no checksums are provided on the official site, but binaries are signed
-            newInfo.install32Bit.checksum = null;
-            newInfo.install32Bit.algorithm = HashAlgorithm.Unknown;
+            if (string.IsNullOrWhiteSpace(checksum))
+            {
+                // No checksum was found on the official site, but binaries are
+                // still signed.
+                newInfo.install32Bit.checksum = null;
+                newInfo.install32Bit.algorithm = HashAlgorithm.Unknown;
+            }
+            else
+            {
+                newInfo.install32Bit.checksum = checksum;
+                newInfo.install32Bit.algorithm = HashAlgorithm.SHA256;
+            }
             return newInfo;
+        }
+
+
+        /// <summary>
+        /// Tries to get the checksum for the MSI file of the given version.
+        /// </summary>
+        /// <param name="newVersion">version of the installer, e. g. "11.9.0"</param>
+        /// <returns>Returns a string containing the SHA-256 checksum of the
+        /// installer in case of success. Returns null otherwise.</returns>
+        private static string GetSha256Checksum(string newVersion)
+        {
+            // https://creator.pdf24.org/listVersions.php lists versions with SHA256 checksum.
+            string htmlCode;
+            var client = HttpClientProvider.Provide();
+            try
+            {
+                var task = client.GetStringAsync("https://creator.pdf24.org/listVersions.php");
+                task.Wait();
+                htmlCode = task.Result;
+            }
+            catch (Exception ex)
+            {
+                logger.Warn("Exception occurred while retrieving checksum for newer version of PDF24 Creator: " + ex.Message);
+                return null;
+            }
+            if (!htmlCode.Contains("SHA256", StringComparison.InvariantCultureIgnoreCase))
+                return null;
+            int idx = htmlCode.IndexOf("pdf24-creator-" + newVersion + ".msi");
+            if (idx < 0)
+                return null;
+            var regExHash = new Regex("[A-Z0-9]{64}", RegexOptions.IgnoreCase);
+            var match = regExHash.Match(htmlCode, idx);
+            if (!match.Success)
+                return null;
+            return match.Value;
         }
 
 

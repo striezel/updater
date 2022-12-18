@@ -6,6 +6,11 @@ improvements may be omitted.)_
 
 ## Version NEXT
 
+__[changes]__
+
+* The search for new PDF24 Creator versions can now also find the appropriate
+  SHA-256 checksum for the MSI installer package.
+
 __[maintenance]__
 
 * NLog library is updated from 5.0.5 to 5.1.0.
