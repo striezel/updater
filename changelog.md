@@ -10,6 +10,8 @@ __[changes]__
 
 * The search for new PDF24 Creator versions can now also find the appropriate
   SHA-256 checksum for the MSI installer package.
+* The search for newer versions of Inkscape has been improved to handle small
+  changes in the URLs of MSI installer packages.
 
 __[maintenance]__
 
