@@ -128,6 +128,26 @@ namespace updater_test.versions
 
 
         [TestMethod]
+        public void Test_GetHashCode()
+        {
+            var quart = new QuartetAurora();
+            int code = quart.GetHashCode();
+            // 98 is the ASCII code for 'b'.
+            Assert.AreEqual(code, 98);
+
+            quart = new QuartetAurora()
+            {
+                major = uint.MaxValue,
+                minor = 0,
+                patch = 'b',
+                build = 0
+            };
+            // 98 is the ASCII code for 'b'.
+            Assert.AreEqual(quart.GetHashCode(), int.MaxValue - 98);
+        }
+
+
+        [TestMethod]
         public void Test_CompareTo_Equal()
         {
             var quadOne = new QuartetAurora("12.3b4");

@@ -97,6 +97,18 @@ namespace updater.versions
         }
 
 
+        public override bool Equals(object obj)
+        {
+            return (obj is Triple t) && Equals(t);
+        }
+
+
+        public override int GetHashCode()
+        {
+            return Convert.ToInt32((major ^ minor ^ patch) & 0x7FFFFFFFu);
+        }
+
+
         public static bool operator <(Triple a, Triple b)
         {
             return a.CompareTo(b) < 0;

@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2018  Dirk Stolle
+    Copyright (C) 2018, 2022  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -128,6 +128,18 @@ namespace updater.versions
         {
             return (major == other.major) && (minor == other.minor)
                 && (patch == other.patch) && (build == other.build);
+        }
+
+
+        public override bool Equals(object obj)
+        {
+            return (obj is QuartetAurora qa) && Equals(qa);
+        }
+
+
+        public override int GetHashCode()
+        {
+            return Convert.ToInt32((major ^ minor ^ patch ^ build) & 0x7FFFFFFFu);
         }
 
 

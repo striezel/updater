@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017  Dirk Stolle
+    Copyright (C) 2017, 2022  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -109,6 +109,28 @@ namespace updater_test.versions
             tripTwo = new Triple("1.2.6");
             Assert.IsFalse(tripOne.Equals(tripTwo));
             Assert.IsFalse(tripTwo.Equals(tripOne));
+        }
+
+
+        [TestMethod]
+        public void Test_GetHashCode()
+        {
+            var trip = new Triple()
+            {
+                major = uint.MaxValue,
+                minor = 0,
+                patch = 0
+            };
+            int code = trip.GetHashCode();
+            Assert.AreEqual(code, int.MaxValue);
+
+            trip = new Triple()
+            {
+                major = 1,
+                minor = 2,
+                patch = 4
+            };
+            Assert.AreEqual(7, trip.GetHashCode());
         }
 
 

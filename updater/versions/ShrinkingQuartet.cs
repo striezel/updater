@@ -104,6 +104,21 @@ namespace updater.versions
         }
 
 
+        public override bool Equals(object obj)
+        {
+            // There are two possible compatible types: ShrinkingQuartet and plain Quartet.
+            if (obj is ShrinkingQuartet sq)
+                return Equals(sq);
+            return (obj is Quartet q) && Equals(q);
+        }
+
+
+        public override int GetHashCode()
+        {
+            return Convert.ToInt32((major ^ minor ^ patch ^ build) & 0x7FFFFFFFu);
+        }
+
+
         public int CompareTo(ShrinkingQuartet other)
         {
             int c = major.CompareTo(other.major);

@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017  Dirk Stolle
+    Copyright (C) 2017, 2022  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -119,6 +119,30 @@ namespace updater_test.versions
             quadTwo = new Quartet("1.2.3.6");
             Assert.IsFalse(quadOne.Equals(quadTwo));
             Assert.IsFalse(quadTwo.Equals(quadOne));
+        }
+
+
+        [TestMethod]
+        public void Test_GetHashCode()
+        {
+            var quad = new Quartet()
+            {
+                major = uint.MaxValue,
+                minor = 0,
+                patch = 0,
+                build = 0
+            };
+            int code = quad.GetHashCode();
+            Assert.AreEqual(code, int.MaxValue);
+
+            quad = new Quartet()
+            {
+                major = 1,
+                minor = 2,
+                patch = 4,
+                build = 8
+            };
+            Assert.AreEqual(15, quad.GetHashCode());
         }
 
 

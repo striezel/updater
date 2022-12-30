@@ -93,6 +93,27 @@ namespace updater.versions
         }
 
 
+        public bool Equals(ShrinkingQuartet other)
+        {
+            return (major == other.major) && (minor == other.minor)
+                && (patch == other.patch) && (build == other.build);
+        }
+
+
+        public override bool Equals(object obj)
+        {
+            if (obj is Quartet q)
+                return Equals(q);
+            return (obj is ShrinkingQuartet sq) && Equals(sq);
+        }
+
+
+        public override int GetHashCode()
+        {
+            return Convert.ToInt32((major ^ minor ^ patch ^ build) & 0x7FFFFFFFu);
+        }
+
+
         public int CompareTo(Quartet other)
         {
             int c = major.CompareTo(other.major);

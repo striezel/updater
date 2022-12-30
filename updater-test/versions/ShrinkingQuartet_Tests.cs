@@ -95,6 +95,27 @@ namespace updater_test.versions
             Assert.IsTrue(quadTwo.Equals(quadTwo));
         }
 
+        [TestMethod]
+        public void Test_Equals_object()
+        {
+            var quadOne = new ShrinkingQuartet("12.3.4.56");
+            object obj = new ShrinkingQuartet("12.3.4.56");
+            // two instances should be equal
+            Assert.IsTrue(quadOne.Equals(obj));
+            Assert.IsTrue(obj.Equals(quadOne));
+        }
+
+
+        [TestMethod]
+        public void Test_Equals_Quartet()
+        {
+            var quadOne = new ShrinkingQuartet("12.3.4.56");
+            var quadTwo = new Quartet("12.3.4.56");
+            // two instances should be equal
+            Assert.IsTrue(quadOne.Equals(quadTwo));
+            Assert.IsTrue(quadTwo.Equals(quadOne));
+        }
+
 
         [TestMethod]
         public void Test_Equals_negative()
@@ -119,6 +140,61 @@ namespace updater_test.versions
             quadTwo = new ShrinkingQuartet("1.2.3.6");
             Assert.IsFalse(quadOne.Equals(quadTwo));
             Assert.IsFalse(quadTwo.Equals(quadOne));
+        }
+
+
+        [TestMethod]
+        public void Test_Equals_negative_object()
+        {
+            // two different numbers should not be equal
+            var quadOne = new ShrinkingQuartet("12.3.4.5");
+            object quadTwo = new ShrinkingQuartet("12.1.2.7");
+            Assert.IsFalse(quadOne.Equals(quadTwo));
+            Assert.IsFalse(quadTwo.Equals(quadOne));
+
+            object pseudo_quad = new string("12.3.4.5");
+            Assert.IsFalse(quadOne.Equals(pseudo_quad));
+            Assert.IsFalse(pseudo_quad.Equals(quadOne));
+        }
+
+
+        [TestMethod]
+        public void Test_Equals_negative_Quartet()
+        {
+            // two different numbers should not be equal
+            var quadOne = new ShrinkingQuartet("12.3.4.5");
+            var quadTwo = new Quartet("12.1.2.7");
+            Assert.IsFalse(quadOne.Equals(quadTwo));
+            Assert.IsFalse(quadTwo.Equals(quadOne));
+
+            quadOne = new ShrinkingQuartet("1.2.3.4");
+            quadTwo = new Quartet("2.4.6.8");
+            Assert.IsFalse(quadOne.Equals(quadTwo));
+            Assert.IsFalse(quadTwo.Equals(quadOne));
+        }
+
+
+        [TestMethod]
+        public void Test_GetHashCode()
+        {
+            var quad = new ShrinkingQuartet()
+            {
+                major = uint.MaxValue,
+                minor = 0,
+                patch = 0,
+                build = 0
+            };
+            int code = quad.GetHashCode();
+            Assert.AreEqual(code, int.MaxValue);
+
+            quad = new ShrinkingQuartet()
+            {
+                major = 1,
+                minor = 2,
+                patch = 4,
+                build = 8
+            };
+            Assert.AreEqual(15, quad.GetHashCode());
         }
 
 
