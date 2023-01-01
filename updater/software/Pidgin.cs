@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017, 2018, 2019, 2020, 2021, 2022  Dirk Stolle
+    Copyright (C) 2017, 2018, 2019, 2020, 2021, 2022, 2023  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -65,7 +65,7 @@ namespace updater.software
         /// details about the software.</returns>
         public override AvailableSoftware knownInfo()
         {
-            const string version = "2.14.10";
+            const string version = "2.14.12";
             return new AvailableSoftware("Pidgin",
                 version,
                 "^Pidgin$",
@@ -74,7 +74,7 @@ namespace updater.software
                 new InstallInfoPidgin(
                     "https://netcologne.dl.sourceforge.net/project/pidgin/Pidgin/" + version + "/pidgin-" + version + "-offline.exe",
                     HashAlgorithm.SHA256,
-                    "3bb3186222a491aae4da1c87544da30dab405b0f7f974bba6fd60963ec6c73c6",
+                    "36803ca9ff708df4c07d3de7bc8a8ec6f510e37d350082840302aa7938a7ed9b",
                     new Signature(publisherX509, certificateExpiration),
                     "/DS=1 /SMS=1 /S"),
                 null
