@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017, 2018, 2020, 2021, 2022  Dirk Stolle
+    Copyright (C) 2017, 2018, 2020, 2021, 2022, 2023  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -93,14 +93,14 @@ namespace updater.software
         public override AvailableSoftware knownInfo()
         {
             var pdf24 = new InstallInfoMsi(
-                "https://en.pdf24.org/products/pdf-creator/download/pdf24-creator-11.9.0.msi",
+                "https://en.pdf24.org/products/pdf-creator/download/pdf24-creator-11.9.1.msi",
                 HashAlgorithm.SHA512,
-                "9ecdb7a8be5e349b74268271c370cfef7686de458d6f39556d0994b6845948288a27d2bc1d12b81371baafd482dc0b46e98cbb34c2436466791cb0288063ecdf",
+                "f6c56bed9bf6b063e7e9da3535f5004c4cc75cfdf587e752b6b1eb324448a61da5b55f535827ba666bf383834eb6db06e5b2f9093c6216ba75d0a2bac29956c3",
                 new Signature(publisherX509, certificateExpiration),
                 getOptions() + " /qn /norestart");
 
             return new AvailableSoftware("PDF24 Creator",
-                "11.9.0",
+                "11.9.1",
                 "^PDF24 Creator$",
                 "^PDF24 Creator$", // 64 bit version uses same pattern as 32 bit.
                 pdf24,
