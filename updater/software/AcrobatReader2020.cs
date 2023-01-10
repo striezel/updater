@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2022  Dirk Stolle
+    Copyright (C) 2022, 2023  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -64,11 +64,11 @@ namespace updater.software
         /// details about the software.</returns>
         public override AvailableSoftware knownInfo()
         {
-            const string version = "20.005.30418";
+            const string version = "20.005.30436";
             var installer = new InstallInfoMsiPatch(
-                "https://ardownload2.adobe.com/pub/adobe/reader/win/Acrobat2020/2000530418/AcroRdr2020Upd2000530418_MUI.msp",
+                "https://ardownload2.adobe.com/pub/adobe/reader/win/Acrobat2020/2000530436/AcroRdr2020Upd2000530436_MUI.msp",
                 HashAlgorithm.SHA256,
-                "853276ed31ec8a58050847272de479e219a757ce0f1926e5863f9050dd98fad7",
+                "37bdc5672ee5075b0785645e3fe0c6ec87d49756b637c798c2427ea0f330c896",
                 new Signature(publisherX509, certificateExpiration),
                 "/qn /norestart"
                 );
