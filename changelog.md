@@ -8,6 +8,10 @@ improvements may be omitted.)_
 
 __[maintenance]__
 
+* Update certificate information for LibreOffice installers.
+
+__[maintenance]__
+
 * NLog library is updated from 5.1.0 to 5.1.1.
 
 ## Version 2022.12.20.0

@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017, 2018, 2019, 2020, 2021, 2022  Dirk Stolle
+    Copyright (C) 2017, 2018, 2019, 2020, 2021, 2022, 2023  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -37,13 +37,13 @@ namespace updater.software
         /// <summary>
         /// publisher name for signed executables of LibreOffice
         /// </summary>
-        private const string publisherX509 = "E=info@documentfoundation.org, CN=The Document Foundation, O=The Document Foundation, OU=LibreOffice Build Team, L=Berlin, S=Berlin, C=DE";
+        private const string publisherX509 = "E=info@documentfoundation.org, CN=The Document Foundation, O=The Document Foundation, OU=LibreOffice Build Team, S=Berlin, C=DE";
 
 
         /// <summary>
         /// expiration date of the certificate
         /// </summary>
-        private static readonly DateTime certificateExpiration = new(2023, 9, 8, 13, 45, 8, DateTimeKind.Utc);
+        private static readonly DateTime certificateExpiration = new(2023, 5, 30, 5, 22, 29, DateTimeKind.Utc);
 
 
         /// <summary>
@@ -65,19 +65,19 @@ namespace updater.software
         {
             var signature = new Signature(publisherX509, certificateExpiration);
             return new AvailableSoftware("LibreOffice Help Pack German",
-                "7.4.3.2",
+                "7.4.4.2",
                 "^LibreOffice [0-9]+\\.[0-9] Help Pack \\(German\\)$",
                 "^LibreOffice [0-9]+\\.[0-9] Help Pack \\(German\\)$",
                 new InstallInfoLibO(
-                    "https://download.documentfoundation.org/libreoffice/stable/7.4.3/win/x86/LibreOffice_7.4.3_Win_x86_helppack_de.msi",
+                    "https://download.documentfoundation.org/libreoffice/stable/7.4.4/win/x86/LibreOffice_7.4.4_Win_x86_helppack_de.msi",
                     HashAlgorithm.SHA256,
-                    "e06d29b26439f3f917527449c0546b57b4660d0118fe681751cafdcaa9677a8c",
+                    "5e52cd36c1414d1451a57d6d7d43ee7fa687d990e810fb71876974d92188a863",
                     signature,
                     "/qn /norestart"),
                 new InstallInfoLibO(
-                    "https://download.documentfoundation.org/libreoffice/stable/7.4.3/win/x86_64/LibreOffice_7.4.3_Win_x64_helppack_de.msi",
+                    "https://download.documentfoundation.org/libreoffice/stable/7.4.4/win/x86_64/LibreOffice_7.4.4_Win_x64_helppack_de.msi",
                     HashAlgorithm.SHA256,
-                    "0246c4c1fa5d4a563a7b7f238e18b8ba7531d4626e087c15d737602f66dfd22d",
+                    "d3f555cb7e2ecf3572beb173ab8b43d4bcda622caf311c250eebaddf9852d6ee",
                     signature,
                     "/qn /norestart")
                     );
