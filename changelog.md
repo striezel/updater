@@ -8,6 +8,10 @@ improvements may be omitted.)_
 
 __[maintenance]__
 
+* Update certificate information for SeaMonkey installers.
+
+__[maintenance]__
+
 * Update certificate information for LibreOffice installers.
 
 __[maintenance]__
