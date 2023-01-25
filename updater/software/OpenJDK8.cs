@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2021, 2022  Dirk Stolle
+    Copyright (C) 2021, 2022, 2023  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -66,21 +66,21 @@ namespace updater.software
         public override AvailableSoftware knownInfo()
         {
             var signature = new Signature(publisherX509, certificateExpiration);
-            const string version = "8.0.352.8";
+            const string version = "8.0.362.9";
             return new AvailableSoftware("Eclipse Temurin JDK 8 with Hotspot",
                 version,
                 "^(Eclipse Temurin JDK [a-z]+ Hotspot 8u[0-9]+\\-b[0-9]+ \\(x86\\)|AdoptOpenJDK JDK [a-z]+ Hotspot 8u[0-9]+\\-b[0-9]+ \\(x86\\))$",
                 "^(Eclipse Temurin JDK [a-z]+ Hotspot 8u[0-9]+\\-b[0-9]+ \\(x64\\)|AdoptOpenJDK JDK [a-z]+ Hotspot 8u[0-9]+\\-b[0-9]+ \\(x64\\))$",
                 new InstallInfoMsiNoLocation(
-                    "https://github.com/adoptium/temurin8-binaries/releases/download/jdk8u352-b08/OpenJDK8U-jdk_x86-32_windows_hotspot_8u352b08.msi",
+                    "https://github.com/adoptium/temurin8-binaries/releases/download/jdk8u362-b09/OpenJDK8U-jdk_x86-32_windows_hotspot_8u362b09.msi",
                     HashAlgorithm.SHA256,
-                    "c4e7e38444bbf57572b15c7ff16ecf58ae4939e804d9a1902974ede615227b06",
+                    "f6868e2763b9199a4921ccd9d318c40bcb6bdf01d568fb8db7e0833db192c127",
                     signature,
                     "INSTALLLEVEL=3 /qn /norestart"),
                 new InstallInfoMsiNoLocation(
-                    "https://github.com/adoptium/temurin8-binaries/releases/download/jdk8u352-b08/OpenJDK8U-jdk_x64_windows_hotspot_8u352b08.msi",
+                    "https://github.com/adoptium/temurin8-binaries/releases/download/jdk8u362-b09/OpenJDK8U-jdk_x64_windows_hotspot_8u362b09.msi",
                     HashAlgorithm.SHA256,
-                    "c3f2ee62970bae81aa163e155faab8498638962a0a480aa01620d3122ad902ee",
+                    "07d6ff7bb5400a618e7e8c6e6104c04c1df6141fa85026526676aa8af011e44c",
                     signature,
                     "INSTALLLEVEL=3 /qn /norestart")
                 );
