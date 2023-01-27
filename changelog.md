@@ -47,7 +47,7 @@ __[maintenance]__
 
 __[maintenance]__
 
-* Newtonsoft.Json library is updated from 13.0.2 to 13.0.2.
+* Newtonsoft.Json library is updated from 13.0.1 to 13.0.2.
 
 __[maintenance]__
 
