@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017, 2018, 2019, 2020, 2021, 2022  Dirk Stolle
+    Copyright (C) 2017, 2018, 2019, 2020, 2021, 2022, 2023  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -68,8 +68,8 @@ namespace updater.software
         {
             var signature = new Signature(publisherX509, certificateExpiration);
             // Both version and tag are usually the same, except for major releases like 8.0.
-            const string version = "8.4.8";
-            const string tag = "8.4.8";
+            const string version = "8.4.9";
+            const string tag = "8.4.9";
             return new AvailableSoftware("Notepad++",
                 version,
                 "^Notepad\\+\\+ \\(32\\-bit x86\\)$|^Notepad\\+\\+$",
@@ -77,13 +77,13 @@ namespace updater.software
                 new InstallInfoExe(
                     "https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v" + tag + "/npp." + version + ".Installer.exe",
                     HashAlgorithm.SHA256,
-                    "ace3e87ddabae2a214dc652969f060d778e43645f305da6714f4449e9deccf2f",
+                    "ecb7f0fba2b6f362d2001822e4d23a7e734980e7089f7c139fdd6f5d08f8ef4b",
                     signature,
                     "/S"),
                 new InstallInfoExe(
                     "https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v" + tag + "/npp." + version + ".Installer.x64.exe",
                     HashAlgorithm.SHA256,
-                    "d21718a11bc71b3f0a65d148488ddf8130c2ec80d80fb9af1cb002aefde9648e",
+                    "6b170127061feb082ffd1b14309ef6d4a783df3c0fd51999e1786067731a49f3",
                     signature,
                     "/S")
                 );
