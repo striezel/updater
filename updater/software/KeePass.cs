@@ -53,7 +53,7 @@ namespace updater.software
         /// <summary>
         /// expiration date of certificate
         /// </summary>
-        private static readonly DateTime certificateExpiration = new(2023, 2, 6, 8, 8, 19, DateTimeKind.Utc);
+        private static readonly DateTime certificateExpiration = new(2024, 2, 6, 8, 28, 53, DateTimeKind.Utc);
 
 
         /// <summary>
@@ -65,13 +65,13 @@ namespace updater.software
         {
             var signature = new Signature(publisherX509, certificateExpiration);
             return new AvailableSoftware("KeePass",
-                "2.53",
+                "2.53.1",
                 "^KeePass Password Safe [2-9]\\.[0-9]{2}(\\.[0-9]+)?$",
                 null,
                 new InstallInfoExe(
-                    "https://netcologne.dl.sourceforge.net/project/keepass/KeePass%202.x/2.53/KeePass-2.53-Setup.exe",
+                    "https://netcologne.dl.sourceforge.net/project/keepass/KeePass%202.x/2.53.1/KeePass-2.53.1-Setup.exe",
                     HashAlgorithm.SHA256,
-                    "BBE39EB5 5F720A05 49B4457B 73991F3C 42F6610D DE86A00D 94F5CFB8 7472DF07",
+                    "067727CA A782F53F 6232F8F5 9BC94538 4FCE9881 7B014300 039B2848 7C06A5CD",
                     signature,
                     "/VERYSILENT"),
                 // There is no 64 bit installer yet.
