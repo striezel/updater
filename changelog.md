@@ -15,6 +15,10 @@ __[maintenance]__
 
 * Update certificate information for KeePass installers.
 
+__[maintenance]__
+
+* Update certificate information for LibreOffice installers.
+
 ## Version 2023.01.28.0
 
 __[maintenance]__
