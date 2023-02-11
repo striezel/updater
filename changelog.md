@@ -6,6 +6,11 @@ improvements may be omitted.)_
 
 ## Version NEXT
 
+__[changes]__
+
+Adjust search for newer version of LibreOffice for the new URL pattern of the
+LibreOffice 64 bit installers.
+
 __[maintenance]__
 
 * Update certificate information for KeePass installers.

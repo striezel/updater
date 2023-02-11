@@ -140,8 +140,8 @@ namespace updater.software
             newVersion = newVersion[..idx];
 
             // Hash info is in files like
-            // https://download.documentfoundation.org/libreoffice/stable/5.3.0/win/x86/LibreOffice_5.3.0_Win_x86_helppack_de.msi.sha256
-            // https://download.documentfoundation.org/libreoffice/stable/5.3.0/win/x86_64/LibreOffice_5.3.0_Win_x64_helppack_de.msi.sha256
+            // https://download.documentfoundation.org/libreoffice/stable/7.5.0/win/x86/LibreOffice_7.5.0_Win_x86_helppack_de.msi.sha256
+            // https://download.documentfoundation.org/libreoffice/stable/7.5.0/win/x86_64/LibreOffice_7.5.0_Win_x86-64_helppack_de.msi.sha256
 
             try
             {
@@ -165,7 +165,7 @@ namespace updater.software
             try
             {
                 var task = client.GetStringAsync("https://download.documentfoundation.org/libreoffice/stable/"
-                    + newVersion + "/win/x86_64/LibreOffice_" + newVersion + "_Win_x64_helppack_de.msi.sha256");
+                    + newVersion + "/win/x86_64/LibreOffice_" + newVersion + "_Win_x86-64_helppack_de.msi.sha256");
                 task.Wait();
                 htmlCode = task.Result;
             }
@@ -175,7 +175,7 @@ namespace updater.software
                 return null;
             }
 
-            var reHash64 = new Regex("[0-9a-f]{64}  LibreOffice_" + Regex.Escape(newVersion) + "_Win_x64_helppack_de\\.msi");
+            var reHash64 = new Regex("[0-9a-f]{64}  LibreOffice_" + Regex.Escape(newVersion) + "_Win_x86\\-64_helppack_de\\.msi");
             Match matchHash64 = reHash64.Match(htmlCode);
             if (!matchHash64.Success)
                 return null;
@@ -185,11 +185,11 @@ namespace updater.software
             var newInfo = knownInfo();
             // replace version number - both as newest version and in URL for download
             newInfo.newestVersion = newVersion;
-            newInfo.install32Bit.downloadUrl = "http://download.documentfoundation.org/libreoffice/stable/"
+            newInfo.install32Bit.downloadUrl = "https://download.documentfoundation.org/libreoffice/stable/"
                 + newVersion + "/win/x86/LibreOffice_" + newVersion + "_Win_x86_helppack_de.msi";
             newInfo.install32Bit.checksum = hash32;
-            newInfo.install64Bit.downloadUrl = "http://download.documentfoundation.org/libreoffice/stable/"
-                + newVersion + "/win/x86_64/LibreOffice_" + newVersion + "_Win_x64_helppack_de.msi";
+            newInfo.install64Bit.downloadUrl = "https://download.documentfoundation.org/libreoffice/stable/"
+                + newVersion + "/win/x86_64/LibreOffice_" + newVersion + "_Win_x86-64_helppack_de.msi";
             newInfo.install64Bit.checksum = hash64;
             return newInfo;
         }
