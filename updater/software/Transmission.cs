@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2021  Dirk Stolle
+    Copyright (C) 2021, 2023  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -130,7 +130,7 @@ namespace updater.software
 
             // Download page should contain embedded JSON with version, something
             // like '"softwareVersion": ["3.00"]' or similar.
-            var reVersion = new Regex("\"softwareVersion\":\\s*\\[\"([0-9]+\\.[0-9]+)\"\\]");
+            var reVersion = new Regex("\"softwareVersion\":\\s*\\[\"([0-9]+\\.[0-9]+\\.[0-9]+)\"\\]");
             var matchVersion = reVersion.Match(html);
             if (!matchVersion.Success)
                 return null;
@@ -140,7 +140,7 @@ namespace updater.software
             // Hash is something like 
             // 'Transmission-3.00-x86.msi: <a href="https://www.virustotal.com/en/file/eeab85327fa8a1299bb133d5f60f6674ca9e76522297202bbe39aae92dad4f32/analysis">eeab85327fa8a1299bb133d5f60f6674ca9e76522297202bbe39aae92dad4f32</a>'
             string escapedVersion = Regex.Escape(currentVersion);
-            var reHash = new Regex("[Tt]ransmission\\-"+escapedVersion+ "\\-x86\\.msi:\\s+<a\\s+href=\"https://www\\.virustotal\\.com/en/file/([a-f0-9]{64})/analysis\">");
+            var reHash = new Regex("[Tt]ransmission\\-" + escapedVersion + "\\-x86\\.msi</th>\\s+<td class=\"card\\-text font\\-monospace\">\\s?<a\\s+href=\"https://www\\.virustotal\\.com/en/file/([a-f0-9]{64})/analysis\">");
             Match matchHash = reHash.Match(html);
             if (!matchHash.Success)
                 return null;
@@ -148,7 +148,7 @@ namespace updater.software
             // find SHA256 hash for 64 bit installer
             // Hash is something like 
             // 'Transmission-3.00-x64.msi: <a href="https://www.virustotal.com/en/file/c34828a6d2c50c7c590d05ca50249b511d46e9a2a7223323fb3d1421e3f6b9d1/analysis">c34828a6d2c50c7c590d05ca50249b511d46e9a2a7223323fb3d1421e3f6b9d1</a>'
-            reHash = new Regex("[Tt]ransmission\\-" + escapedVersion + "\\-x64\\.msi:\\s+<a\\s+href=\"https://www\\.virustotal\\.com/en/file/([a-f0-9]{64})/analysis\">");
+            reHash = new Regex("[Tt]ransmission\\-" + escapedVersion + "\\-x64\\.msi</th>\\s+<td class=\"card\\-text font\\-monospace\">\\s?<a\\s+href=\"https://www\\.virustotal\\.com/en/file/([a-f0-9]{64})/analysis\">");
             matchHash = reHash.Match(html);
             if (!matchHash.Success)
                 return null;

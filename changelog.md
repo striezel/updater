@@ -8,8 +8,10 @@ improvements may be omitted.)_
 
 __[changes]__
 
-Adjust search for newer version of LibreOffice for the new URL pattern of the
-LibreOffice 64 bit installers.
+* Adjust search for newer version of LibreOffice for the new URL pattern of the
+  LibreOffice 64 bit installers.
+* Adjust search for newer version of Transmission (BitTorrent client) for the
+  newer, updated website of the Transmission project.
 
 __[maintenance]__
 
