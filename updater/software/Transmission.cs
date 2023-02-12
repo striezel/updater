@@ -65,19 +65,19 @@ namespace updater.software
         {
             var signature = new Signature(publisherX509, certificateExpiration);
             return new AvailableSoftware("Transmission",
-                "3.00",
-                "^Transmission [0-9]+\\.[0-9]+ \\([0-9a-f]+\\) \\(x86\\)$",
-                "^Transmission [0-9]+\\.[0-9]+ \\([0-9a-f]+\\) \\(x64\\)$",
+                "4.0.0",
+                "^Transmission [0-9]+\\.[0-9]+(\\.[0-9]+)? \\([0-9a-f]+\\)$",
+                "^Transmission [0-9]+\\.[0-9]+(\\.[0-9]+)? \\([0-9a-f]+\\) \\(x64\\)$",
                 new InstallInfoMsi(
-                    "https://github.com/transmission/transmission/releases/download/3.00/transmission-3.00-x86.msi",
+                    "https://github.com/transmission/transmission/releases/download/4.0.0/transmission-4.0.0-x86.msi",
                     HashAlgorithm.SHA256,
-                    "eeab85327fa8a1299bb133d5f60f6674ca9e76522297202bbe39aae92dad4f32",
+                    "1262efa209554c0ff8ef55b1626b89791c8b63dfbdaa88339c48b9797689f4bc",
                     signature,
                     "/qn /norestart"),
                 new InstallInfoMsi(
-                    "https://github.com/transmission/transmission/releases/download/3.00/transmission-3.00-x64.msi",
+                    "https://github.com/transmission/transmission/releases/download/4.0.0/transmission-4.0.0-x64.msi",
                     HashAlgorithm.SHA256,
-                    "c34828a6d2c50c7c590d05ca50249b511d46e9a2a7223323fb3d1421e3f6b9d1",
+                    "465bb5591d76057ad781651dcfa77cb07d3c884ebe2127723c5af8e26a964a3c",
                     signature,
                     "/qn /norestart")
                     );
