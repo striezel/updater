@@ -137,18 +137,18 @@ namespace updater.software
             string currentVersion = matchVersion.Groups[1].Value;
 
             // find SHA256 hash for 32 bit installer
-            // Hash is something like 
-            // 'Transmission-3.00-x86.msi: <a href="https://www.virustotal.com/en/file/eeab85327fa8a1299bb133d5f60f6674ca9e76522297202bbe39aae92dad4f32/analysis">eeab85327fa8a1299bb133d5f60f6674ca9e76522297202bbe39aae92dad4f32</a>'
+            // Hash is something like
+            // '<a href="https://www.virustotal.com/en/file/1262efa209554c0ff8ef55b1626b89791c8b63dfbdaa88339c48b9797689f4bc/analysis">1262efa209554c0ff8ef55b1626b89791c8b63dfbdaa88339c48b9797689f4bc</a>  transmission-4.0.0-x86.msi'
             string escapedVersion = Regex.Escape(currentVersion);
-            var reHash = new Regex("[Tt]ransmission\\-" + escapedVersion + "\\-x86\\.msi</th>\\s+<td class=\"card\\-text font\\-monospace\">\\s?<a\\s+href=\"https://www\\.virustotal\\.com/en/file/([a-f0-9]{64})/analysis\">");
+            var reHash = new Regex("<a\\s+href=\"https://www\\.virustotal\\.com/en/file/([a-f0-9]{64})/analysis\">[a-f0-9]{64}</a>\\s+[Tt]ransmission\\-" + escapedVersion + "\\-x86\\.msi");
             Match matchHash = reHash.Match(html);
             if (!matchHash.Success)
                 return null;
             string newHash32Bit = matchHash.Groups[1].Value;
             // find SHA256 hash for 64 bit installer
-            // Hash is something like 
-            // 'Transmission-3.00-x64.msi: <a href="https://www.virustotal.com/en/file/c34828a6d2c50c7c590d05ca50249b511d46e9a2a7223323fb3d1421e3f6b9d1/analysis">c34828a6d2c50c7c590d05ca50249b511d46e9a2a7223323fb3d1421e3f6b9d1</a>'
-            reHash = new Regex("[Tt]ransmission\\-" + escapedVersion + "\\-x64\\.msi</th>\\s+<td class=\"card\\-text font\\-monospace\">\\s?<a\\s+href=\"https://www\\.virustotal\\.com/en/file/([a-f0-9]{64})/analysis\">");
+            // Hash is something like
+            // '<a href="https://www.virustotal.com/en/file/465bb5591d76057ad781651dcfa77cb07d3c884ebe2127723c5af8e26a964a3c/analysis">465bb5591d76057ad781651dcfa77cb07d3c884ebe2127723c5af8e26a964a3c</a>  transmission-4.0.0-x64.msi'
+            reHash = new Regex("<a\\s+href=\"https://www\\.virustotal\\.com/en/file/([a-f0-9]{64})/analysis\">[a-f0-9]{64}</a>\\s+[Tt]ransmission\\-" + escapedVersion + "\\-x64\\.msi");
             matchHash = reHash.Match(html);
             if (!matchHash.Success)
                 return null;
