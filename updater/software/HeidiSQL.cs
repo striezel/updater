@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2022  Dirk Stolle
+    Copyright (C) 2022, 2023  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -36,6 +36,18 @@ namespace updater.software
 
 
         /// <summary>
+        /// publisher name for signed executables of LibreOffice
+        /// </summary>
+        private const string publisherX509 = "CN=Ansgar Becker, O=Ansgar Becker, S=Nordrhein-Westfalen, C=DE";
+
+
+        /// <summary>
+        /// expiration date of the certificate
+        /// </summary>
+        private static readonly DateTime certificateExpiration = new(2025, 4, 9, 23, 59, 59, DateTimeKind.Utc);
+
+
+        /// <summary>
         /// Constructor.
         /// </summary>
         /// <param name="autoGetNewer">whether to automatically get newer
@@ -53,13 +65,13 @@ namespace updater.software
         public override AvailableSoftware knownInfo()
         {
             var installer = new InstallInfoExe(
-                    "https://www.heidisql.com/installers/HeidiSQL_12.3.0.6589_Setup.exe",
+                    "https://www.heidisql.com/installers/HeidiSQL_12.4.0.6659_Setup.exe",
                     HashAlgorithm.SHA1,
-                    "63e74cac70dbc9293711bf14053bfa20bd51cb36",
-                    Signature.None,
+                    "40cebf3e01dff591e4fdc425d0453488d92e5b49",
+                    new Signature(publisherX509, certificateExpiration),
                     "/VERYSILENT /NORESTART");
             return new AvailableSoftware("HeidiSQL",
-                "12.3.0.6589",
+                "12.4.0.6659",
                 "^HeidiSQL [0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+$",
                 "^HeidiSQL [0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+$",
                 // 32 bit installer
