@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017, 2018, 2020, 2021, 2022  Dirk Stolle
+    Copyright (C) 2017, 2018, 2020, 2021, 2022, 2023  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -66,19 +66,19 @@ namespace updater.software
             const string silentOptions = "/silent /norestart /launchopera 0 /setdefaultbrowser 0 /enable-stats 0 /enable-installer-stats 0 /pintotaskbar 0 /pin-additional-shortcuts 0 /allusers";
             var signature = new Signature(publisherX509, certificateExpiration);
             return new AvailableSoftware("Opera",
-                "94.0.4606.38",
+                "96.0.4693.20",
                 "^Opera Stable [0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+$",
                 "^Opera Stable [0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+$",
                 new InstallInfoExe(
-                    "https://get.geo.opera.com/pub/opera/desktop/94.0.4606.38/win/Opera_94.0.4606.38_Setup.exe",
+                    "https://get.geo.opera.com/pub/opera/desktop/96.0.4693.20/win/Opera_96.0.4693.20_Setup.exe",
                     HashAlgorithm.SHA256,
-                    "1a9447e40eef154a9b19edcefed2f3ad4e997be814feaad13de0b0179cb1e9de",
+                    "f802c0938ad733fdb86a05b5be57bb0c4ca75286af06d9c47b22fe9e17d3e56a",
                     signature,
                     silentOptions),
                 new InstallInfoExe(
-                    "https://get.geo.opera.com/pub/opera/desktop/94.0.4606.38/win/Opera_94.0.4606.38_Setup_x64.exe",
+                    "https://get.geo.opera.com/pub/opera/desktop/96.0.4693.20/win/Opera_96.0.4693.20_Setup_x64.exe",
                     HashAlgorithm.SHA256,
-                    "8e9efb57e19a5ffd9090edde3cf1db67198b8f7f9227e0459eb3b502024c46df",
+                    "d532a9d9fbb295ddaf369eb5122f7dd22512c2b8dc8921f7eeff08f981e0b5ed",
                     signature,
                     silentOptions)
                     );
