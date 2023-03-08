@@ -4,6 +4,12 @@ _(Note: This changelog focuses on the major changes between the different
 versions. Therefore, it may not contain all changes. Especially smaller fixes or
 improvements may be omitted.)_
 
+## Version NEXT
+
+__[maintenance]__
+
+* Newtonsoft.Json library is updated from 13.0.2 to 13.0.3.
+
 ## Version 2023.03.07.0
 
 __[changes]__
