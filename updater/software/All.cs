@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017, 2018, 2019, 2021, 2022  Dirk Stolle
+    Copyright (C) 2017, 2018, 2019, 2021, 2022, 2023  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -91,6 +91,7 @@ namespace updater.software
             result.Add(new MariaDB_10_4(autoGetNewer));
             result.Add(new MariaDB_10_5(autoGetNewer));
             result.Add(new MariaDB_10_6(autoGetNewer));
+            result.Add(new MariaDB_10_11(autoGetNewer));
             result.Add(new Mumble(autoGetNewer));
             result.Add(new NodeJS(autoGetNewer));
             result.Add(new NotepadPlusPlus(autoGetNewer));

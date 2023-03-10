@@ -6,6 +6,10 @@ improvements may be omitted.)_
 
 ## Version NEXT
 
+__[new features]__
+
+* Update support for MariaDB 10.11 is added.
+
 __[maintenance]__
 
 * Newtonsoft.Json library is updated from 13.0.2 to 13.0.3.

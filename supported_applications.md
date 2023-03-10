@@ -30,6 +30,7 @@ updater application.
 * MariaDB 10.4
 * MariaDB 10.5
 * MariaDB 10.6
+* MariaDB 10.11
 * Mozilla Firefox
 * Mozilla Firefox ESR
 * Mozilla Thunderbird
