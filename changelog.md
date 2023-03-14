@@ -12,6 +12,10 @@ __[new features]__
 
 __[maintenance]__
 
+* Update certificate information for CMake installers.
+
+__[maintenance]__
+
 * Newtonsoft.Json library is updated from 13.0.2 to 13.0.3.
 
 ## Version 2023.03.07.0

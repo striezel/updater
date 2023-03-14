@@ -38,13 +38,13 @@ namespace updater.software
         /// <summary>
         /// publisher name for signed executables of CMake
         /// </summary>
-        private const string publisherX509 = "CN=KITWARE INC, OU=Kitware Inc, O=KITWARE INC, OID.2.5.4.15=Private Organization, OID.1.3.6.1.4.1.311.60.2.1.2=New York, OID.1.3.6.1.4.1.311.60.2.1.3=US, SERIALNUMBER=2235734, L=Clifton Park, S=New York, C=US";
+        private const string publisherX509 = "CN=\"Kitware, Inc.\", O=\"Kitware, Inc.\", L=Clifton Park, S=New York, C=US, SERIALNUMBER=2235734, OID.2.5.4.15=Private Organization, OID.1.3.6.1.4.1.311.60.2.1.2=New York, OID.1.3.6.1.4.1.311.60.2.1.3=US";
 
 
         /// <summary>
         /// expiration date for the publisher certificate
         /// </summary>
-        private static readonly DateTime certificateExpiration = new(2023, 3, 22, 16, 8, 51, DateTimeKind.Utc);
+        private static readonly DateTime certificateExpiration = new(2026, 3, 10, 23, 59, 59, DateTimeKind.Utc);
 
 
         /// <summary>
@@ -65,7 +65,7 @@ namespace updater.software
         public override AvailableSoftware knownInfo()
         {
             var signature = new Signature(publisherX509, certificateExpiration);
-            const string version = "3.25.3";
+            const string version = "3.26.0";
             return new AvailableSoftware("CMake",
                 version,
                 "^CMake$",
@@ -73,13 +73,13 @@ namespace updater.software
                 new InstallInfoMsi(
                     "https://github.com/Kitware/CMake/releases/download/v"+ version + "/cmake-" + version + "-windows-i386.msi",
                     HashAlgorithm.SHA256,
-                    "6d4261e4ddee3aa8d9785b2e9ff11f97ae46f3972fd70f19b4b59548001e2695",
+                    "2108f8bda1f57662b3e5cc98b0db7310b5742f62b76680abd7d8494fd2afe356",
                     signature,
                     "/qn /norestart"),
                 new InstallInfoMsi(
                     "https://github.com/Kitware/CMake/releases/download/v" + version + "/cmake-" + version + "-windows-x86_64.msi",
                     HashAlgorithm.SHA256,
-                    "ee09742b0a682f33c0b2e49681dd2d8bc851bd4a8f404f2fc075cbd73b494ff2",
+                    "56464b2e56ac92d3fc68bef1e69a447e9139640269a81c5c2ee6a6f287bbac6b",
                     signature,
                     "/qn /norestart")
                     );
