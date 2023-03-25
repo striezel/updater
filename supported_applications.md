@@ -38,6 +38,7 @@ updater application.
 * Node.js LTS
 * Notepad++
 * Opera
+* Opera GX
 * PDF24 Creator
 * Pidgin
 * PuTTY

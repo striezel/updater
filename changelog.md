@@ -9,6 +9,7 @@ improvements may be omitted.)_
 __[new features]__
 
 * Update support for MariaDB 10.11 is added.
+* Update support for Opera GX is added.
 
 __[maintenance]__
 

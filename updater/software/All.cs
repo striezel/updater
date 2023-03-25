@@ -96,6 +96,7 @@ namespace updater.software
             result.Add(new NodeJS(autoGetNewer));
             result.Add(new NotepadPlusPlus(autoGetNewer));
             result.Add(new Opera(autoGetNewer));
+            result.Add(new OperaGX(autoGetNewer));
             result.Add(new Pdf24Creator(autoGetNewer, opts.pdf24autoUpdate, opts.pdf24desktopIcons, opts.pdf24faxPrinter));
             result.Add(new Pidgin(autoGetNewer));
             result.Add(new Putty(autoGetNewer));
