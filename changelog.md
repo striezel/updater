@@ -18,6 +18,7 @@ __[maintenance]__
 __[maintenance]__
 
 * Newtonsoft.Json library is updated from 13.0.2 to 13.0.3.
+* NLog library is updated from 5.1.2 to 5.1.3.
 
 ## Version 2023.03.07.0
 
