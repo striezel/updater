@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2021, 2022  Dirk Stolle
+    Copyright (C) 2021, 2022, 2023  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -125,8 +125,9 @@ namespace updater.software
                 return null;
             }
 
-            // HTML text will contain something like "<b>TreeSize Free V4.42</b>".
-            var reVersion = new Regex("<b>TreeSize Free V([0-9]+\\.[0-9]+)</b>");
+            // HTML text will contain something like "<b>TreeSize Free V4.42</b>"
+            // or "<b>TreeSize Free v4.63</b>".
+            var reVersion = new Regex("<b>TreeSize Free [Vv]([0-9]+\\.[0-9]+)</b>");
             var matchVersion = reVersion.Match(html);
             if (!matchVersion.Success)
                 return null;

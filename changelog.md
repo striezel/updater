@@ -11,6 +11,11 @@ __[new features]__
 * Update support for MariaDB 10.11 is added.
 * Update support for Opera GX is added.
 
+__[changes]__
+
+* The search for newer versions of TreeSize Free has been improved to handle a
+  small change in the version number on the TreeSize website.
+
 __[maintenance]__
 
 * Update certificate information for CMake installers.
