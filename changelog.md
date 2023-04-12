@@ -4,6 +4,12 @@ _(Note: This changelog focuses on the major changes between the different
 versions. Therefore, it may not contain all changes. Especially smaller fixes or
 improvements may be omitted.)_
 
+## Version NEXT
+
+__[maintenance]__
+
+* Update certificate information for WinSCP installers.
+
 ## Version 2023.04.07.0
 
 __[new features]__

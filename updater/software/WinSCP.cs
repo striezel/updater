@@ -41,7 +41,7 @@ namespace updater.software
         /// <summary>
         /// expiration date of certificate in signature of binary installer
         /// </summary>
-        private static readonly DateTime certificateExpiration = new(2023, 2, 17, 12, 0, 0, DateTimeKind.Utc);
+        private static readonly DateTime certificateExpiration = new(2026, 2, 17, 23, 59, 59, DateTimeKind.Utc);
 
 
         /// <summary>
@@ -62,12 +62,12 @@ namespace updater.software
         public override AvailableSoftware knownInfo()
         {
             return new AvailableSoftware("WinSCP",
-                "5.21.7",
+                "5.21.8",
                 "^WinSCP [1-9]+\\.[0-9]+(\\.[0-9]+)?$", null,
                 new InstallInfoExe(
-                    "https://netcologne.dl.sourceforge.net/project/winscp/WinSCP/5.21.7/WinSCP-5.21.7-Setup.exe",
+                    "https://netcologne.dl.sourceforge.net/project/winscp/WinSCP/5.21.8/WinSCP-5.21.8-Setup.exe",
                     HashAlgorithm.SHA256,
-                    "6f8ba50c67083504a4dbc064f0d7e172ee9205db65557a12fd3193749fb8651b",
+                    "abf0bb2c73dea0b66de3f2fa34c03987980c3db4406f07c5f3b8c25dc6f5511f",
                     new Signature(publisherX509, certificateExpiration),
                     "/VERYSILENT /NORESTART"),
                 // There is no 64 bit installer yet.
