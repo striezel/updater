@@ -92,19 +92,22 @@ namespace updater.software
         /// details about the software.</returns>
         public override AvailableSoftware knownInfo()
         {
-            var pdf24 = new InstallInfoMsi(
-                "https://en.pdf24.org/products/pdf-creator/download/pdf24-creator-11.11.1.msi",
-                HashAlgorithm.SHA256,
-                "832cbdf6678d89bc151676417e318f1bd5852563fb9cff995881c92785ae9ca8",
-                new Signature(publisherX509, certificateExpiration),
-                getOptions() + " /qn /norestart");
+            var signature = new Signature(publisherX509, certificateExpiration);
 
             return new AvailableSoftware("PDF24 Creator",
                 "11.11.1",
                 "^PDF24 Creator$",
                 "^PDF24 Creator$", // 64 bit version uses same pattern as 32 bit.
-                pdf24,
-                pdf24 // Newer MSI (>=10.x.x) is 64 bit only, but who does not have a 64 bit Windows these days?
+                new InstallInfoMsi(
+                "https://download.pdf24.org/pdf24-creator-11.11.1-x86.msi",
+                HashAlgorithm.SHA256,
+                "7867502a6b49c5ef8232d41d9eb262b886251b76b77cb54d2bd6a1a1eb2b083b",
+                signature, getOptions() + " /qn /norestart"),
+                new InstallInfoMsi(
+                "https://download.pdf24.org/pdf24-creator-11.11.1-x64.msi",
+                HashAlgorithm.SHA256,
+                "832cbdf6678d89bc151676417e318f1bd5852563fb9cff995881c92785ae9ca8",
+                signature, getOptions() + " /qn /norestart")
                 );
         }
 
@@ -143,7 +146,7 @@ namespace updater.software
             var client = HttpClientProvider.Provide();
             try
             {
-                var task = client.GetStringAsync("https://en.pdf24.org/pdf-creator-download.html");
+                var task = client.GetStringAsync("https://creator.pdf24.org/listVersions.php");
                 task.Wait();
                 htmlCode = task.Result;
             }
@@ -153,74 +156,39 @@ namespace updater.software
                 return null;
             }
 
-            // version number occurs three times on the site (private exe, business exe, msi)
-            var reVersion = new Regex("[0-9]+\\.[0-9]+\\.[0-9]+");
+            // version number occurs several times on the site (exe, msi, and for 64 and 32 bit)
+            var reVersion = new Regex("pdf24\\-creator\\-([0-9]+\\.[0-9]+\\.[0-9]+)\\-x64.msi");
             Match versionMatch = reVersion.Match(htmlCode);
             if (!versionMatch.Success)
                 return null;
-            Match match2 = reVersion.Match(htmlCode, versionMatch.Index + 4);
-            if (!match2.Success || match2.Value != versionMatch.Value)
+            string newVersion = versionMatch.Groups[1].Value;
+            var regExHash = new Regex("[A-Z0-9]{64}", RegexOptions.IgnoreCase);
+            var match = regExHash.Match(htmlCode, versionMatch.Index + versionMatch.Length);
+            if (!match.Success)
                 return null;
-            match2 = reVersion.Match(htmlCode, match2.Index + 4);
-            if (!match2.Success || match2.Value != versionMatch.Value)
-                return null;
-            string newVersion = versionMatch.Value;
-            string checksum = GetSha256Checksum(newVersion);
+            string checksum = match.Value;
 
             // construct new version information
             var newInfo = knownInfo();
             // replace version number - both as newest version and in URL for download
             string oldVersion = newInfo.newestVersion;
             newInfo.newestVersion = newVersion;
-            newInfo.install32Bit.downloadUrl = newInfo.install32Bit.downloadUrl.Replace(oldVersion, newVersion);
-            if (string.IsNullOrWhiteSpace(checksum))
-            {
-                // No checksum was found on the official site, but binaries are
-                // still signed.
-                newInfo.install32Bit.checksum = null;
-                newInfo.install32Bit.algorithm = HashAlgorithm.Unknown;
-            }
-            else
-            {
-                newInfo.install32Bit.checksum = checksum;
-                newInfo.install32Bit.algorithm = HashAlgorithm.SHA256;
-            }
-            return newInfo;
-        }
+            newInfo.install64Bit.downloadUrl = newInfo.install64Bit.downloadUrl.Replace(oldVersion, newVersion);
+            newInfo.install64Bit.checksum = checksum;
+            newInfo.install64Bit.algorithm = HashAlgorithm.SHA256;
 
-
-        /// <summary>
-        /// Tries to get the checksum for the MSI file of the given version.
-        /// </summary>
-        /// <param name="newVersion">version of the installer, e. g. "11.9.0"</param>
-        /// <returns>Returns a string containing the SHA-256 checksum of the
-        /// installer in case of success. Returns null otherwise.</returns>
-        private static string GetSha256Checksum(string newVersion)
-        {
-            // https://creator.pdf24.org/listVersions.php lists versions with SHA256 checksum.
-            string htmlCode;
-            var client = HttpClientProvider.Provide();
-            try
-            {
-                var task = client.GetStringAsync("https://creator.pdf24.org/listVersions.php");
-                task.Wait();
-                htmlCode = task.Result;
-            }
-            catch (Exception ex)
-            {
-                logger.Warn("Exception occurred while retrieving checksum for newer version of PDF24 Creator: " + ex.Message);
+            int idx = htmlCode.IndexOf("pdf24-creator-" + newVersion + "-x86.msi");
+            if (idx == -1)
                 return null;
-            }
-            if (!htmlCode.Contains("SHA256", StringComparison.InvariantCultureIgnoreCase))
-                return null;
-            int idx = htmlCode.IndexOf("pdf24-creator-" + newVersion + ".msi");
-            if (idx < 0)
-                return null;
-            var regExHash = new Regex("[A-Z0-9]{64}", RegexOptions.IgnoreCase);
-            var match = regExHash.Match(htmlCode, idx);
+            match = regExHash.Match(htmlCode, idx);
             if (!match.Success)
                 return null;
-            return match.Value;
+
+            newInfo.install32Bit.downloadUrl = newInfo.install32Bit.downloadUrl.Replace(oldVersion, newVersion);
+            newInfo.install32Bit.checksum = match.Value;
+            newInfo.install32Bit.algorithm = HashAlgorithm.SHA256;
+
+            return newInfo;
         }
 
 

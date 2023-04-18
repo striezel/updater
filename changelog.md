@@ -9,6 +9,7 @@ improvements may be omitted.)_
 __[maintenance]__
 
 * Update certificate information for WinSCP installers.
+* Update search for newer versions of PDF24 Creator.
 
 ## Version 2023.04.07.0
 
