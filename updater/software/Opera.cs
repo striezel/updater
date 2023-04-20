@@ -66,19 +66,19 @@ namespace updater.software
             const string silentOptions = "/silent /norestart /launchopera 0 /setdefaultbrowser 0 /enable-stats 0 /enable-installer-stats 0 /pintotaskbar 0 /pin-additional-shortcuts 0 /allusers";
             var signature = new Signature(publisherX509, certificateExpiration);
             return new AvailableSoftware("Opera",
-                "97.0.4719.83",
+                "98.0.4759.6",
                 "^Opera Stable [0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+$",
                 "^Opera Stable [0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+$",
                 new InstallInfoExe(
-                    "https://get.geo.opera.com/pub/opera/desktop/97.0.4719.83/win/Opera_97.0.4719.83_Setup.exe",
+                    "https://get.geo.opera.com/pub/opera/desktop/98.0.4759.6/win/Opera_98.0.4759.6_Setup.exe",
                     HashAlgorithm.SHA256,
-                    "b4ce25541abc6e1452e1d72f1d6521986433fbb4044570e3eb42a294b5ae5de4",
+                    "a20182014248e2998c1d1c664ff9156df7ed812bf1061ba6fb1e005fa2207b28",
                     signature,
                     silentOptions),
                 new InstallInfoExe(
-                    "https://get.geo.opera.com/pub/opera/desktop/97.0.4719.83/win/Opera_97.0.4719.83_Setup_x64.exe",
+                    "https://get.geo.opera.com/pub/opera/desktop/98.0.4759.6/win/Opera_98.0.4759.6_Setup_x64.exe",
                     HashAlgorithm.SHA256,
-                    "db5dcf717307445702e11192b6acf540382aa46bf8fc18095e2739415b851df1",
+                    "93ddf3ae08b009aa2f47cdcd62ab17ae95e217e7c01a85e360a8700eac063d0f",
                     signature,
                     silentOptions)
                     );
@@ -155,7 +155,7 @@ namespace updater.software
                 try
                 {
                     var fullVersion = versions[i].full();
-                    var task = client.GetStringAsync("https://get.geo.opera.com/ftp/pub/opera/desktop/" + fullVersion + "/win/Opera_" + fullVersion + "_Setup_x64.exe.sha256sum");
+                    var task = client.GetStringAsync("https://get.geo.opera.com/pub/opera/desktop/" + fullVersion + "/win/Opera_" + fullVersion + "_Setup_x64.exe.sha256sum");
                     task.Wait();
                     htmlCode = task.Result;
                     exists = true;
@@ -179,11 +179,11 @@ namespace updater.software
             if (newVersion == newInfo.newestVersion)
                 return newInfo;
 
-            // Look into "https://get.geo.opera.com/ftp/pub/opera/desktop/<version>/win/Opera_<version>_Setup_x64.exe.sha256sum"
+            // Look into "https://get.geo.opera.com/pub/opera/desktop/<version>/win/Opera_<version>_Setup_x64.exe.sha256sum"
             // to get the checksum for 64 bit installer.
             try
             {
-                var task = client.GetStringAsync("https://get.geo.opera.com/ftp/pub/opera/desktop/" + newVersion + "/win/Opera_" + newVersion + "_Setup_x64.exe.sha256sum");
+                var task = client.GetStringAsync("https://get.geo.opera.com/pub/opera/desktop/" + newVersion + "/win/Opera_" + newVersion + "_Setup_x64.exe.sha256sum");
                 task.Wait();
                 htmlCode = task.Result;
             }
@@ -200,11 +200,11 @@ namespace updater.software
                 return null;
             string checksum64 = m.Value;
 
-            // Look into "https://get.geo.opera.com/ftp/pub/opera/desktop/<version>/win/Opera_<version>_Setup.exe.sha256sum"
+            // Look into "https://get.geo.opera.com/pub/opera/desktop/<version>/win/Opera_<version>_Setup.exe.sha256sum"
             // to get the checksum for 32 bit installer.
             try
             {
-                var task = client.GetStringAsync("https://get.geo.opera.com/ftp/pub/opera/desktop/" + newVersion + "/win/Opera_" + newVersion + "_Setup.exe.sha256sum");
+                var task = client.GetStringAsync("https://get.geo.opera.com/pub/opera/desktop/" + newVersion + "/win/Opera_" + newVersion + "_Setup.exe.sha256sum");
                 task.Wait();
                 htmlCode = task.Result;
             }
