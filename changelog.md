@@ -41,13 +41,7 @@ __[changes]__
 __[maintenance]__
 
 * Update certificate information for KeePass installers.
-
-__[maintenance]__
-
 * Update certificate information for LibreOffice installers.
-
-__[maintenance]__
-
 * NLog library is updated from 5.1.1 to 5.1.2.
 
 ## Version 2023.01.28.0
@@ -55,13 +49,7 @@ __[maintenance]__
 __[maintenance]__
 
 * Update certificate information for SeaMonkey installers.
-
-__[maintenance]__
-
 * Update certificate information for LibreOffice installers.
-
-__[maintenance]__
-
 * NLog library is updated from 5.1.0 to 5.1.1.
 
 ## Version 2022.12.20.0
@@ -90,13 +78,7 @@ __[changes]__
 __[maintenance]__
 
 * Update certificate information for CCleaner installers.
-
-__[maintenance]__
-
 * Newtonsoft.Json library is updated from 13.0.1 to 13.0.2.
-
-__[maintenance]__
-
 * Update certificate information for LibreOffice installers.
 
 ## Version 2022.11.03.0
@@ -104,13 +86,7 @@ __[maintenance]__
 __[maintenance]__
 
 * Update certificate information for LibreOffice installers.
-
-__[maintenance]__
-
 * Update certificate information for CCleaner installers.
-
-__[maintenance]__
-
 * NLog library is updated from 5.0.4 to 5.0.5.
 
 __[changes]__
