@@ -10,6 +10,7 @@ __[maintenance]__
 
 * Update certificate information for WinSCP installers.
 * Update search for newer versions of PDF24 Creator.
+* NLog library is updated from 5.1.3 to 5.1.4.
 
 ## Version 2023.04.07.0
 
