@@ -43,13 +43,13 @@ namespace updater.software
         /// <summary>
         /// publisher of signed binaries
         /// </summary>
-        private const string publisherX509 = "CN=\"Meltytech, LLC\", O=\"Meltytech, LLC\", L=Castro Valley, S=California, C=US";
+        private const string publisherX509 = "CN=\"Meltytech, LLC\", O=\"Meltytech, LLC\", L=Oceanside, S=California, C=US";
 
 
         /// <summary>
         /// expiration date of certificate
         /// </summary>
-        private static readonly DateTime certificateExpiration = new(2023, 5, 5, 12, 0, 0, DateTimeKind.Utc);
+        private static readonly DateTime certificateExpiration = new(2026, 5, 6, 23, 59, 59, DateTimeKind.Utc);
 
 
         /// <summary>
@@ -80,13 +80,13 @@ namespace updater.software
 
             var signature = new Signature(publisherX509, certificateExpiration);
             var info = new InstallInfoExe(
-                "https://github.com/mltframework/shotcut/releases/download/v22.12.21/shotcut-win64-221221.exe",
+                "https://github.com/mltframework/shotcut/releases/download/v23.05.07/shotcut-win64-230507.exe",
                 HashAlgorithm.SHA256,
-                "fa0628bb4722ed6b0eeb9a834ba96eb639a6fad744b184c413a01b5ebffc316a",
+                "0a6064507f67a7499309956dbf1e800cb3e3d285b8bf81bba363ac7a7afca8ac",
                 signature,
                 "/S");
             return new AvailableSoftware("Shotcut",
-                "22.12.21",
+                "23.05.07",
                 "^Shotcut$",
                 "^Shotcut$",
                 info,
