@@ -43,7 +43,7 @@ namespace updater.software
         /// details about the software.</returns>
         public override AvailableSoftware knownInfo()
         {
-            const string version = "10.11.2";
+            const string version = "10.11.3";
             var signature = new Signature(publisherX509, certificateExpiration);
             return new AvailableSoftware("MariaDB Server 10.11",
                 version,
@@ -53,7 +53,7 @@ namespace updater.software
                 new InstallInfoMsi(
                     "https://downloads.mariadb.org/rest-api/mariadb/" + version + "/mariadb-" + version + "-winx64.msi",
                     HashAlgorithm.SHA256,
-                    "29fda55d7f335331e09843693850b14d7e00c292b59871def4efc3b4bed1b540",
+                    "4b281da0b8209e577734422856cfecea39038536b26cb9a440a147ad6ac7e876",
                     signature,
                     "/qn /norestart")
                 );
