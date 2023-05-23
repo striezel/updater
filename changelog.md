@@ -10,6 +10,10 @@ __[maintenance]__
 
 * Update certificate information for Shotcut installer.
 
+__[changes]__
+
+* Adjust search for newer version of TeamViewer for the newer, updated website.
+
 ## Version 2023.05.04.0
 
 __[maintenance]__

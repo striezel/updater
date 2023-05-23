@@ -66,7 +66,7 @@ namespace updater.software
         {
             var signature = new Signature(publisherX509, certificateExpiration);
             return new AvailableSoftware("TeamViewer",
-                "15.41.9",
+                "15.42.5",
                 "^TeamViewer$",
                 "^TeamViewer$",
                 new InstallInfoExe(
@@ -129,8 +129,8 @@ namespace updater.software
                 }
             }
 
-            // HTML text will contain version in a paragraph like "<p>Current version: 15.18.5</p>".
-            var reVersion = new Regex("<p>Current version: ([0-9]+\\.[0-9]+\\.[0-9])</p>");
+            // HTML text will contain version in a paragraph like "<span>Current version: 15.18.5</span>".
+            var reVersion = new Regex("<span>Current version: ([0-9]+\\.[0-9]+\\.[0-9])</span>");
             var matchVersion = reVersion.Match(html);
             if (!matchVersion.Success)
                 return null;
