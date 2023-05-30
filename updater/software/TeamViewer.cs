@@ -129,8 +129,8 @@ namespace updater.software
                 }
             }
 
-            // HTML text will contain version in a paragraph like "<span>Current version: 15.18.5</span>".
-            var reVersion = new Regex("<span>Current version: ([0-9]+\\.[0-9]+\\.[0-9])</span>");
+            // HTML text will contain version in a paragraph like "Current version: <span data-dl-version-label>15.42.6</span>".
+            var reVersion = new Regex("Current version: <span data\\-dl\\-version\\-label>([0-9]+\\.[0-9]+\\.[0-9])</span>");
             var matchVersion = reVersion.Match(html);
             if (!matchVersion.Success)
                 return null;
