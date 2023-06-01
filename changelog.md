@@ -8,6 +8,7 @@ improvements may be omitted.)_
 
 __[maintenance]__
 
+* Update certificate information for Git installer.
 * Update certificate information for Shotcut installer.
 * NLog library is updated from 5.1.4 to 5.2.0.
 
