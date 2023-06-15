@@ -64,7 +64,7 @@ namespace updater.software
         /// details about the software.</returns>
         public override AvailableSoftware knownInfo()
         {
-            const string version = "3.5.6";
+            const string version = "3.6.0";
             var signature = new Signature(publisherX509, certificateExpiration);
             return new AvailableSoftware(
                 "TeamSpeak Client",
@@ -74,13 +74,13 @@ namespace updater.software
                 new InstallInfoExe(
                     "https://files.teamspeak-services.com/releases/client/" + version + "/TeamSpeak3-Client-win32-" + version + ".exe",
                     HashAlgorithm.SHA256,
-                    "c1387e7dd8be6ddeb23d235fad04f207b5c81b0a71e9e5acba1c6ce856414142",
+                    "1fe9d240f94893f63fd61e3270c5ac23dcbcedb2a6eb840211e4aee7135a8ab0",
                     signature,
                     "/S"),
                 new InstallInfoExe(
                     "https://files.teamspeak-services.com/releases/client/" + version + "/TeamSpeak3-Client-win64-" + version + ".exe",
                     HashAlgorithm.SHA256,
-                    "86381879a3e7dc7a2e90e4da1cccfbd2e5359b7ce6dd8bc11196d18dfc9e2abc",
+                    "2752de74add856b8c8e0db9fedd2c2e12fa5c47226feca4e37135c4680f62ac3",
                     signature,
                     "/S")
                 );
@@ -122,7 +122,7 @@ namespace updater.software
             {
                 // Looks like we have to add a user agent to get a valid response.
                 // Without user agent the server returns "403 Forbidden".
-                client.Headers.Add("User-Agent", "curl/7.77.0");
+                client.Headers.Add("User-Agent", "curl/8.1.2");
                 try
                 {
                     htmlCode = client.DownloadString("https://teamspeak.com/en/downloads/");
