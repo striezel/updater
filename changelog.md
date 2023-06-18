@@ -4,6 +4,12 @@ _(Note: This changelog focuses on the major changes between the different
 versions. Therefore, it may not contain all changes. Especially smaller fixes or
 improvements may be omitted.)_
 
+## Next Version
+
+__[changes]__
+
+* Adjust search for newer version of Node.js for the newer, updated website.
+
 ## Version 2023.06.10.0
 
 __[maintenance]__

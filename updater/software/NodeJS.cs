@@ -120,7 +120,8 @@ namespace updater.software
             var client = HttpClientProvider.Provide();
             try
             {
-                var task = client.GetStringAsync("https://nodejs.org/en/download/");
+                // Note: Changes this URL as soon as the next version enters LTS state.
+                var task = client.GetStringAsync("https://nodejs.org/dist/latest-v18.x/");
                 task.Wait();
                 htmlCode = task.Result;
             }
@@ -130,15 +131,10 @@ namespace updater.software
                 return null;
             }
 
-            var reMsi = new Regex("https://nodejs\\.org/dist/v([0-9]+\\.[0-9]+\\.[0-9]+)/node\\-v([0-9]+\\.[0-9]+\\.[0-9]+)\\-x64\\.msi");
+            var reMsi = new Regex("node\\-v([0-9]+\\.[0-9]+\\.[0-9]+)\\-x64\\.msi");
             Match matchMsi = reMsi.Match(htmlCode);
             if (!matchMsi.Success)
                 return null;
-            if (matchMsi.Groups[1].Value != matchMsi.Groups[2].Value)
-            {
-                logger.Error("Detected Node.js versions do not match: " + matchMsi.Groups[1].Value + " != " + matchMsi.Groups[2].Value + "!");
-                return null;
-            }
             string newVersion = matchMsi.Groups[1].Value;
 
             // Now get SHA-256 checksum file from server.
