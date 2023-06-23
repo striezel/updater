@@ -32,6 +32,7 @@ updater application.
 * MariaDB 10.6
 * MariaDB 10.11
 * Mozilla Firefox
+* Mozilla Firefox Developer Edition
 * Mozilla Firefox ESR
 * Mozilla Thunderbird
 * Mumble (client only)
