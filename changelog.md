@@ -9,6 +9,9 @@ improvements may be omitted.)_
 __[changes]__
 
 * Adjust search for newer version of Node.js for the newer, updated website.
+* Adjust search for newer version of TeamSpeak Client for the modified website.
+* When the updater detects an old 32 bit version of TeamSpeak on a 64 bit OS,
+  it will now migrate it to the 64 bit version of the TeamSpeak Client.
 
 __[maintenance]__
 
