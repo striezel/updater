@@ -10,6 +10,10 @@ __[changes]__
 
 * Adjust search for newer version of Node.js for the newer, updated website.
 
+__[maintenance]__
+
+* NLog library is updated from 5.2.0 to 5.2.1.
+
 ## Version 2023.06.10.0
 
 __[maintenance]__
