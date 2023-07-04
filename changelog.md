@@ -15,7 +15,7 @@ __[changes]__
 
 __[maintenance]__
 
-* NLog library is updated from 5.2.0 to 5.2.1.
+* NLog library is updated from 5.2.0 to 5.2.2.
 
 ## Version 2023.06.10.0
 
