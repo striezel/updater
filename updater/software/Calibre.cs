@@ -77,11 +77,11 @@ namespace updater.software
             }
             
             var signature = new Signature(publisherX509, certificateExpiration);
-            const string knownVersion = "6.22.0";
+            const string knownVersion = "6.23.0";
             InstallInfo info64 = new InstallInfoMsi(
                 "https://download.calibre-ebook.com/" + knownVersion + "/calibre-64bit-" + knownVersion + ".msi",
                 HashAlgorithm.SHA256,
-                "8175aa15a46b03dc3cc4c0874fe2c534301239fff9393f3b734cbc8673b208f2",
+                "aa63ca81765254d2d1de31e5251fd8cc47f74990f625e606ab3a0af7c723f75d",
                 signature,
                 "/qn /norestart"
                 );
