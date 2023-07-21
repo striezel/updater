@@ -75,7 +75,7 @@ namespace updater_test.utility
         [ClassInitialize()]
         public static void DownloadExampleFile(TestContext testContext)
         {
-            downloadFileLocation = download("https://download.documentfoundation.org/libreoffice/stable/7.5.4/win/x86_64/LibreOffice_7.5.4_Win_x86-64_helppack_de.msi");
+            downloadFileLocation = download("https://download.documentfoundation.org/libreoffice/stable/7.5.5/win/x86_64/LibreOffice_7.5.5_Win_x86-64_helppack_de.msi");
         }
 
 
