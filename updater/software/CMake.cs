@@ -65,7 +65,7 @@ namespace updater.software
         public override AvailableSoftware knownInfo()
         {
             var signature = new Signature(publisherX509, certificateExpiration);
-            const string version = "3.27.0";
+            const string version = "3.27.1";
             return new AvailableSoftware("CMake",
                 version,
                 "^CMake$",
@@ -73,13 +73,13 @@ namespace updater.software
                 new InstallInfoMsi(
                     "https://github.com/Kitware/CMake/releases/download/v"+ version + "/cmake-" + version + "-windows-i386.msi",
                     HashAlgorithm.SHA256,
-                    "2047479f87ba74891dfe4fd3addd3126754ceb9003ae27f26264f14fc60d66f8",
+                    "e681b3501e09b1f727ca65b4a62bc70e3ca2519ae1f94a5cc25a6fb0620278b0",
                     signature,
                     "/qn /norestart"),
                 new InstallInfoMsi(
                     "https://github.com/Kitware/CMake/releases/download/v" + version + "/cmake-" + version + "-windows-x86_64.msi",
                     HashAlgorithm.SHA256,
-                    "5b18d0056a5e83de19e0793f6ad9934aa691630e02ddd16f71d2f11e3f3827bf",
+                    "f63bef95f8d4b69b777a94a8d32bc9b2bc5d0f1de763c322ca5edd0945df6fd8",
                     signature,
                     "/qn /norestart")
                     );
