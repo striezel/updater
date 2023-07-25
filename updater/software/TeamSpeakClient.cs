@@ -73,12 +73,12 @@ namespace updater.software
                 return latestSupported32BitVersion();
             }
 
-            const string version = "3.6.0";
+            const string version = "3.6.1";
             var signature = new Signature(publisherX509, certificateExpiration);
             var installer_64_bits = new InstallInfoExe(
                     "https://files.teamspeak-services.com/releases/client/" + version + "/TeamSpeak3-Client-win64-" + version + ".exe",
                     HashAlgorithm.SHA256,
-                    "2752de74add856b8c8e0db9fedd2c2e12fa5c47226feca4e37135c4680f62ac3",
+                    "3b6cf0a99f1686a53c3afc15e502593f50e3822a86dde400fee9ba38242c9532",
                     signature,
                     "/S");
             return new AvailableSoftware(
