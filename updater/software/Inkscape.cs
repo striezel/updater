@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017, 2018, 2020, 2021, 2022  Dirk Stolle
+    Copyright (C) 2017, 2018, 2020, 2021, 2022, 2023  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -354,14 +354,14 @@ namespace updater.software
             if (m.Success)
             {
                 // Use version number from name, because it is more accurate.
-                return (string.Compare(m.Value, info().newestVersion, true) < 0);
+                return string.Compare(m.Value, info().newestVersion, true) < 0;
             }
             else
             {
                 // Fall back to displayed version. However, this is inaccurate,
                 // because versions like 0.92.1 will only show up as 0.92, thus
                 // always triggering an update.
-                return (string.Compare(detected.displayVersion, info().newestVersion, true) < 0);
+                return string.Compare(detected.displayVersion, info().newestVersion, true) < 0;
             }
         }
 
