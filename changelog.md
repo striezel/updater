@@ -4,6 +4,11 @@ _(Note: This changelog focuses on the major changes between the different
 versions. Therefore, it may not contain all changes. Especially smaller fixes or
 improvements may be omitted.)_
 
+## Next Version
+
+* Integrity checks for downloads of SeaMonkey will now use SHA-512 instead of
+  SHA-1 checksums.
+
 ## Version 2023.07.13.0
 
 __[changes]__

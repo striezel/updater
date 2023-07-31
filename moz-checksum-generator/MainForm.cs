@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017, 2018, 2020, 2021, 2022  Dirk Stolle
+    Copyright (C) 2017, 2018, 2020, 2021, 2022, 2023  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -295,23 +295,23 @@ namespace moz_checksum_generator
             lblVersion.Text = "Version " + version;
 
             /* Checksums are found in a file like
-             * https://archive.mozilla.org/pub/seamonkey/releases/2.53.6/SHA1SUMS.txt
+             * https://archive.mozilla.org/pub/seamonkey/releases/2.53.17/SHA512SUMS.txt
              * Common lines look like
-             * 7ccee70c54580c0c0949a9bc86737fbcb35c46ed sha1 38851663 win32/en-GB/seamonkey-2.53.6.en-GB.win32.installer.exe
+             * 16695546e9a77cfebdb6e1dafe64f40a5f775116209f3c85e380439c32d3c320dd77129706def5c9592a2684009f1c060e370cac7098103c999b0969bc350748 sha512 40218176 win32/en-GB/seamonkey-2.53.17.en-GB.win32.installer.exe
              * for the 32 bit installer, or like
-             * c6a9d874dcaa0dabdd01f242b610cb47565e91fc sha1 41802858 win64/en-GB/seamonkey-2.53.6.en-GB.win64.installer.exe
+             * 6bcf4bf0c5ddef06e8345c012707eff1ebf81798c47dd737332bdedc2d5e69a39dd200ddfa63149d5e540de06eb3accf6f65063a57110dc6da9a731443f0108a sha512 43261904 win64/en-GB/seamonkey-2.53.17.en-GB.win64.installer.exe
              * for the 64 bit installer.
              */
 
-            string url = "https://archive.mozilla.org/pub/seamonkey/releases/" + version + "/SHA1SUMS.txt";
-            string sha1SumsContent;
+            string url = "https://archive.mozilla.org/pub/seamonkey/releases/" + version + "/SHA512SUMS.txt";
+            string sha512SumsContent;
             using (var client = new HttpClient())
             {
                 try
                 {
                     var task = client.GetStringAsync(url);
                     task.Wait();
-                    sha1SumsContent = task.Result;
+                    sha512SumsContent = task.Result;
                 }
                 catch (Exception ex)
                 {
@@ -323,26 +323,26 @@ namespace moz_checksum_generator
             }
 
             // look for line with language code and version for 32 bit
-            var reChecksum = new Regex("[0-9a-f]{40} sha1 [0-9]+ .*seamonkey\\-" + Regex.Escape(version) + "\\.[a-z]{2,3}(\\-[A-Z]+)?\\.win32\\.installer\\.exe");
+            var reChecksum = new Regex("[0-9a-f]{128} sha512 [0-9]+ .*seamonkey\\-" + Regex.Escape(version) + "\\.[a-z]{2,3}(\\-[A-Z]+)?\\.win32\\.installer\\.exe");
             var data = new SortedDictionary<string, string>();
-            MatchCollection matches = reChecksum.Matches(sha1SumsContent);
+            MatchCollection matches = reChecksum.Matches(sha512SumsContent);
             for (int i = 0; i < matches.Count; i++)
             {
                 string[] parts = matches[i].Value.Split(new char[] { '.' });
                 string language = parts[parts.Length - 4];
-                data.Add(language, matches[i].Value[..40]);
+                data.Add(language, matches[i].Value[..128]);
             }
             rtbBit32.Text = getChecksumCode(data);
 
             // look for line with the correct language code and version for 64 bit
-            var reChecksum64Bit = new Regex("[0-9a-f]{40} sha1 [0-9]+ .*seamonkey\\-" + Regex.Escape(version) + "\\.[a-z]{2,3}(\\-[A-Z]+)?\\.win64\\.installer\\.exe");
+            var reChecksum64Bit = new Regex("[0-9a-f]{128} sha512 [0-9]+ .*seamonkey\\-" + Regex.Escape(version) + "\\.[a-z]{2,3}(\\-[A-Z]+)?\\.win64\\.installer\\.exe");
             data.Clear();
-            matches = reChecksum64Bit.Matches(sha1SumsContent);
+            matches = reChecksum64Bit.Matches(sha512SumsContent);
             for (int i = 0; i < matches.Count; i++)
             {
                 string[] parts = matches[i].Value.Split(new char[] { '.' });
                 string language = parts[parts.Length - 4];
-                data.Add(language, matches[i].Value[..40]);
+                data.Add(language, matches[i].Value[..128]);
             }
             rtbBit64.Text = getChecksumCode(data);
         }
