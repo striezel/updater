@@ -6,8 +6,14 @@ improvements may be omitted.)_
 
 ## Next Version
 
+__[changes]__
+
 * Integrity checks for downloads of SeaMonkey will now use SHA-512 instead of
   SHA-1 checksums.
+
+__[maintenance]__
+
+* NLog library is updated from 5.2.2 to 5.2.3.
 
 ## Version 2023.07.13.0
 
