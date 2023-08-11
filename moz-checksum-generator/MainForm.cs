@@ -156,8 +156,7 @@ namespace moz_checksum_generator
         /// </summary>
         void getFxAuroraChecksums()
         {
-            var fx = new updater.software.FirefoxAurora("de", false);
-            string version = fx.determineNewestVersion();
+            string version = updater.software.FirefoxAurora.determineNewestVersion();
             if (string.IsNullOrWhiteSpace(version))
             {
                 MessageBox.Show("Could not determine current version of Firefox Developer Edition!",

@@ -363,7 +363,7 @@ namespace updater.software
         /// </summary>
         /// <returns>Returns a string containing the newest version number on success.
         /// Returns null, if an error occurred.</returns>
-        public string determineNewestVersion()
+        public static string determineNewestVersion()
         {
             string url = "https://ftp.mozilla.org/pub/devedition/releases/";
 
