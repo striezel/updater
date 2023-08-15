@@ -44,7 +44,7 @@ namespace updater.software
         /// <summary>
         /// expiration date of certificate
         /// </summary>
-        private static readonly DateTime certificateExpiration = new(2025, 2, 28, 16, 49, 49, DateTimeKind.Utc);
+        private static readonly DateTime certificateExpiration = new(2026, 7, 31, 14, 42, 20, DateTimeKind.Utc);
 
 
         /// <summary>
@@ -68,11 +68,11 @@ namespace updater.software
             var info = new InstallInfoExe(
                 "https://downloads.jam-software.de/treesize_free/TreeSizeFreeSetup.exe",
                 HashAlgorithm.SHA256,
-                "8fb501d3bc7371a1795793c77a0a55cfa83ba63f0815f1faeadaeccb0314f131",
+                "f975c3087f778fd847baad9d482d7f78df410f3ec29a729e6af4cb15528d448c",
                 signature,
                 "/VERYSILENT /NORESTART");
             return new AvailableSoftware("TreeSize Free",
-                "4.6.3",
+                "4.7",
                 "^TreeSize Free V[0-9]+\\.[0-9]+(\\.[0-9]+)?$",
                 "^TreeSize Free V[0-9]+\\.[0-9]+(\\.[0-9]+)?( \\(64 bit\\)( \\(64 Bit\\))?)?$",
                 info,

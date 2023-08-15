@@ -14,6 +14,7 @@ __[changes]__
 __[maintenance]__
 
 * NLog library is updated from 5.2.2 to 5.2.3.
+* Update certificate information for TreeSize Free installer.
 
 ## Version 2023.07.13.0
 
