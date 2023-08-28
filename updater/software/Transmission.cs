@@ -37,13 +37,13 @@ namespace updater.software
         /// <summary>
         /// publisher name for signed installers
         /// </summary>
-        private const string publisherX509 = "CN=SignPath Foundation, OU=sig.fo/Transmission, O=SignPath Foundation, L=Lewes, S=Delaware, C=US";
+        private const string publisherX509 = "CN=SignPath Foundation, O=SignPath Foundation, L=Lewes, S=Delaware, C=US";
 
 
         /// <summary>
         /// expiration date for the publisher certificate
         /// </summary>
-        private readonly DateTime certificateExpiration = new(2023, 5, 13, 18, 16, 53, DateTimeKind.Utc);
+        private readonly DateTime certificateExpiration = new(2026, 5, 7, 12, 21, 25, DateTimeKind.Utc);
 
 
         /// <summary>
@@ -65,19 +65,19 @@ namespace updater.software
         {
             var signature = new Signature(publisherX509, certificateExpiration);
             return new AvailableSoftware("Transmission",
-                "4.0.3",
+                "4.0.4",
                 "^Transmission [0-9]+\\.[0-9]+(\\.[0-9]+)? \\([0-9a-f]+\\)$",
                 "^Transmission [0-9]+\\.[0-9]+(\\.[0-9]+)? \\([0-9a-f]+\\) \\(x64\\)$",
                 new InstallInfoMsi(
-                    "https://github.com/transmission/transmission/releases/download/4.0.3/transmission-4.0.3-x86.msi",
+                    "https://github.com/transmission/transmission/releases/download/4.0.4/transmission-4.0.4-x86.msi",
                     HashAlgorithm.SHA256,
-                    "a131f8f1654c5a787d8c67a0667a34852952cdfaaf97dd1e93864200196ce098",
+                    "2e993f0ddd890e3e67670ff75da15e0c9c03a0ec4a24cee28d97d1eb0ee65fc5",
                     signature,
                     "/qn /norestart"),
                 new InstallInfoMsi(
-                    "https://github.com/transmission/transmission/releases/download/4.0.3/transmission-4.0.3-x64.msi",
+                    "https://github.com/transmission/transmission/releases/download/4.0.4/transmission-4.0.4-x64.msi",
                     HashAlgorithm.SHA256,
-                    "1ef1294f0cd1f352db7367be04a8bdc77083ee82926d76769f20937b90fa1202",
+                    "9120ab6e93b946841a7249e763ad54a851103e8bcc5121dac49c0b3676493ba5",
                     signature,
                     "/qn /norestart")
                     );
