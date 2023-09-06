@@ -8,6 +8,7 @@ improvements may be omitted.)_
 
 __[maintenance]__
 
+* NLog library is updated from 5.2.3 to 5.2.4.
 * Update certificate information for Transmission installer.
 
 ## Version 2023.08.20.0
