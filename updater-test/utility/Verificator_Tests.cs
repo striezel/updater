@@ -36,9 +36,9 @@ namespace updater_test.utility
 
 
         /// <summary>
-        /// subject in signature for LibreOffice Help Pack installer
+        /// subject in signature for PuTTY installer
         /// </summary>
-        private const string libreOfficePublisherX509 = "E=info@documentfoundation.org, CN=The Document Foundation, O=The Document Foundation, OU=LibreOffice Build Team, L=Berlin, S=Berlin, C=DE";
+        private const string libreOfficePublisherX509 = "CN=Simon Tatham, O=Simon Tatham, S=Cambridgeshire, C=GB";
 
 
         /// <summary>
@@ -75,7 +75,7 @@ namespace updater_test.utility
         [ClassInitialize()]
         public static void DownloadExampleFile(TestContext testContext)
         {
-            downloadFileLocation = download("https://download.documentfoundation.org/libreoffice/stable/7.6.0/win/x86_64/LibreOffice_7.6.0_Win_x86-64_helppack_de.msi");
+            downloadFileLocation = download("https://the.earth.li/~sgtatham/putty/0.79/w32/putty-0.79-installer.msi");
         }
 
 
