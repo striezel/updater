@@ -10,6 +10,7 @@ __[maintenance]__
 
 * NLog library is updated from 5.2.3 to 5.2.4.
 * Update certificate information for Transmission installer.
+* Fix certificate expiration date for TeamSpeak Client installer.
 
 ## Version 2023.08.20.0
 
