@@ -9,6 +9,8 @@ improvements may be omitted.)_
 __[maintenance]__
 
 * Update certificate information for LibreOffice installers.
+* Update silent install parameters for Shotcut due to installer change from NSIS
+  to Inno Setup.
 
 ## Version 2023.09.14.0
 
