@@ -36,12 +36,12 @@ namespace updater.software
         /// <summary>
         /// publisher of signed binaries
         /// </summary>
-        private const string publisherX509 = "CN=geek software GmbH, O=geek software GmbH, STREET=Friedrichstr. 171, L=Berlin, PostalCode=10117, C=DE";
+        private const string publisherX509 = "CN=Geek Software GmbH, O=Geek Software GmbH, S=Berlin, C=DE, OID.2.5.4.15=Private Organization, OID.1.3.6.1.4.1.311.60.2.1.3=DE, SERIALNUMBER=HRB 100865";
 
         /// <summary>
         /// certificate expiration date
         /// </summary>
-        private static readonly DateTime certificateExpiration = new(2023, 9, 23, 23, 59, 59, DateTimeKind.Utc);
+        private static readonly DateTime certificateExpiration = new(2026, 9, 24, 23, 59, 59, DateTimeKind.Utc);
 
 
         /// <summary>
@@ -95,18 +95,18 @@ namespace updater.software
             var signature = new Signature(publisherX509, certificateExpiration);
 
             return new AvailableSoftware("PDF24 Creator",
-                "11.13.2",
+                "11.14.0",
                 "^PDF24 Creator$",
                 "^PDF24 Creator$", // 64 bit version uses same pattern as 32 bit.
                 new InstallInfoMsi(
-                "https://download.pdf24.org/pdf24-creator-11.13.2-x86.msi",
+                "https://download.pdf24.org/pdf24-creator-11.14.0-x86.msi",
                 HashAlgorithm.SHA256,
-                "70D1DD785A6F2FBD5CB6F74A8EC1347F9C80530F6146C7E46D24D4672B386956",
+                "D5E4EB14A60F81C5F32810AD52DCABFC7198F096BD381F10C83D253DA660EECE",
                 signature, getOptions() + " /qn /norestart"),
                 new InstallInfoMsi(
-                "https://download.pdf24.org/pdf24-creator-11.13.2-x64.msi",
+                "https://download.pdf24.org/pdf24-creator-11.14.0-x64.msi",
                 HashAlgorithm.SHA256,
-                "8B78240A9E3EB9C6E692807F6694474C6FFDC938E2FBED70A51D15E2E6FB61B3",
+                "2F795A89069EE7AF70021A0AA164ADB32EB34C86C1EB03973646A641FCE461DD",
                 signature, getOptions() + " /qn /norestart")
                 );
         }
