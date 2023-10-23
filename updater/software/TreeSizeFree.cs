@@ -127,7 +127,7 @@ namespace updater.software
 
             // HTML text will contain something like "<b>TreeSize Free V4.42</b>"
             // or "<b>TreeSize Free v4.63</b>".
-            var reVersion = new Regex("<b>TreeSize Free [Vv]([0-9]+\\.[0-9]+)</b>");
+            var reVersion = new Regex("TreeSize Free [Vv]ersion ([0-9]+\\.[0-9]+)</span>");
             var matchVersion = reVersion.Match(html);
             if (!matchVersion.Success)
                 return null;

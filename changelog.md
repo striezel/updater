@@ -6,6 +6,10 @@ improvements may be omitted.)_
 
 ## Next Version
 
+__[changes]__
+
+* Adjust search for newer version of TreeSize Free for the modified website.
+
 __[maintenance]__
 
 * NLog library is updated from 5.2.4 to 5.2.5.
