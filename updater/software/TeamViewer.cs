@@ -66,7 +66,7 @@ namespace updater.software
         {
             var signature = new Signature(publisherX509, certificateExpiration);
             return new AvailableSoftware("TeamViewer",
-                "15.46.8",
+                "15.47.3",
                 "^TeamViewer$",
                 "^TeamViewer$",
                 new InstallInfoExe(
