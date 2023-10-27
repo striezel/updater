@@ -67,19 +67,19 @@ namespace updater.software
         {
             var signature = new Signature(publisherX509, certificateExpiration);
             return new AvailableSoftware("Eclipse Temurin JDK 11 with Hotspot",
-                "11.0.20.8",
+                "11.0.21.9",
                 "^(Eclipse Temurin JDK [a-z]+ Hotspot 11\\.[0-9]+\\.[0-9]+\\+[0-9]+(\\.[0-9]+)? \\(x86\\)|AdoptOpenJDK JDK [a-z]+ Hotspot 11\\.[0-9]+\\.[0-9]+\\+[0-9]+(\\.[0-9]+)? \\(x86\\))$",
                 "^(Eclipse Temurin JDK [a-z]+ Hotspot 11\\.[0-9]+\\.[0-9]+\\+[0-9]+(\\.[0-9]+)? \\(x64\\)|AdoptOpenJDK JDK [a-z]+ Hotspot 11\\.[0-9]+\\.[0-9]+\\+[0-9]+(\\.[0-9]+)? \\(x64\\))$",
                 new InstallInfoMsiNoLocation(
-                    "https://github.com/adoptium/temurin11-binaries/releases/download/jdk-11.0.20%2B8/OpenJDK11U-jdk_x86-32_windows_hotspot_11.0.20_8.msi",
+                    "https://github.com/adoptium/temurin11-binaries/releases/download/jdk-11.0.21%2B9/OpenJDK11U-jdk_x86-32_windows_hotspot_11.0.21_9.msi",
                     HashAlgorithm.SHA256,
-                    "0268d3ea0d935006665cbabf7b87e1b9d3b7f93981090ed23b89cdc53ef27099",
+                    "57111df6bfb24d0f9977a3940aae41940cc42c6a6f43aa98d03c73f568bed30a",
                     signature,
                     "INSTALLLEVEL=3 /qn /norestart"),
                 new InstallInfoMsiNoLocation(
-                    "https://github.com/adoptium/temurin11-binaries/releases/download/jdk-11.0.20%2B8/OpenJDK11U-jdk_x64_windows_hotspot_11.0.20_8.msi",
+                    "https://github.com/adoptium/temurin11-binaries/releases/download/jdk-11.0.21%2B9/OpenJDK11U-jdk_x64_windows_hotspot_11.0.21_9.msi",
                     HashAlgorithm.SHA256,
-                    "ff55a265c41cc2525f87dd3790f469a074a5e196c2354c28a9f553420bdc4468",
+                    "ccaa09811f488cf95340e2702e8d9176058a52e89808ae6e1a1d20de39e5ce34",
                     signature,
                     "INSTALLLEVEL=3 /qn /norestart")
                     );
