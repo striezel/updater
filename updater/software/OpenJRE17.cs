@@ -66,21 +66,21 @@ namespace updater.software
         public override AvailableSoftware knownInfo()
         {
             var signature = new Signature(publisherX509, certificateExpiration);
-            const string version = "17.0.8.7";
+            const string version = "17.0.9.9";
             return new AvailableSoftware("Eclipse Temurin JRE 17 with Hotspot",
                 version,
                 "^Eclipse Temurin JRE [a-z]+ Hotspot 17\\.[0-9]+\\.[0-9]+(\\.[0-9]+)?\\+[0-9]+(\\.[0-9]+)? \\(x86\\)$",
                 "^Eclipse Temurin JRE [a-z]+ Hotspot 17\\.[0-9]+\\.[0-9]+(\\.[0-9]+)?\\+[0-9]+(\\.[0-9]+)? \\(x64\\)$",
                 new InstallInfoMsiNoLocation(
-                    "https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.8%2B7/OpenJDK17U-jre_x86-32_windows_hotspot_17.0.8_7.msi",
+                    "https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.9%2B9.1/OpenJDK17U-jre_x86-32_windows_hotspot_17.0.9_9.msi",
                     HashAlgorithm.SHA256,
-                    "89fb5c01ba8890d18757f45860784d008977c2832f50c1b09969b10d5e4a631c",
+                    "69e0edcff69d3629083b54054f93a3c36422fda695e6843a9a9b69cc94ffbb04",
                     signature,
                     "INSTALLLEVEL=3 /qn /norestart"),
                 new InstallInfoMsiNoLocation(
-                    "https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.8%2B7/OpenJDK17U-jre_x64_windows_hotspot_17.0.8_7.msi",
+                    "https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.9%2B9.1/OpenJDK17U-jre_x64_windows_hotspot_17.0.9_9.msi",
                     HashAlgorithm.SHA256,
-                    "57d6d2fd057eb9e293e110c4442bdf6725ea0490be718381b5b24b11d562a537",
+                    "06a11211b09054b3a57c51c1d90fc0a183db32ee03ea0002740a0ef89d1b3cd4",
                     signature,
                     "INSTALLLEVEL=3 /qn /norestart")
                     );
