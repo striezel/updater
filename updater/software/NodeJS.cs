@@ -63,7 +63,7 @@ namespace updater.software
         /// details about the software.</returns>
         public override AvailableSoftware knownInfo()
         {
-            const string version = "18.18.2";
+            const string version = "20.9.0";
             var signature = new Signature(publisherX509, certificateExpiration);
             return new AvailableSoftware(
                 "Node.js",
@@ -73,13 +73,13 @@ namespace updater.software
                 new InstallInfoMsi(
                     "https://nodejs.org/download/release/v" + version + "/node-v" + version + "-x86.msi",
                     HashAlgorithm.SHA256,
-                    "77684d746d977404ee1832505ae64fb4cb8355eb12e4bf37c3036f7cf3b84e5b",
+                    "808d504dfd367b72260b378a5a5ee1812751a43512ab48d70d9d945f22c71af8",
                     signature,
                     "/qn /norestart"),
                 new InstallInfoMsi(
                     "https://nodejs.org/download/release/v" + version + "/node-v" + version + "-x64.msi",
                     HashAlgorithm.SHA256,
-                    "221f2a904f13105122a108fb735a8f89615864c7bcba3842fa1ef684f136abe3",
+                    "b2decdfc3dd4bb43965be46302e1198b1a3a95da0be5c7dc7eb221c185a3c5fd",
                     signature,
                     "/qn /norestart")
                     );
@@ -121,7 +121,7 @@ namespace updater.software
             try
             {
                 // Note: Changes this URL as soon as the next version enters LTS state.
-                var task = client.GetStringAsync("https://nodejs.org/dist/latest-v18.x/");
+                var task = client.GetStringAsync("https://nodejs.org/dist/latest-v20.x/");
                 task.Wait();
                 htmlCode = task.Result;
             }
