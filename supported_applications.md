@@ -19,6 +19,7 @@ updater application.
 * Eclipse Temurin JRE 8 LTS (formerly AdoptOpenJDK JRE 8)
 * Eclipse Temurin JRE 11 LTS (formerly AdoptOpenJDK JRE 11)
 * Eclipse Temurin JRE 17 LTS
+* Eclipse Temurin JRE 21 LTS
 * FileZilla FTP Client
 * GIMP
 * Git for Windows

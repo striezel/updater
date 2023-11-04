@@ -11,6 +11,7 @@ __[new features]__
 Update support for the following applications is added:
 
 * Eclipse Temurin JDK 21 LTS
+* Eclipse Temurin JRE 21 LTS
 
 __[changes]__
 
