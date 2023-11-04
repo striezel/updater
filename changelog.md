@@ -6,6 +6,12 @@ improvements may be omitted.)_
 
 ## Next Version
 
+__[new features]__
+
+Update support for the following applications is added:
+
+* Eclipse Temurin JDK 21 LTS
+
 __[changes]__
 
 * Adjust search for newer version of TreeSize Free for the modified website.
