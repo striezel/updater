@@ -28,6 +28,7 @@ updater application.
 * IrfanView
 * KeePass 2
 * LibreOffice
+* LibreWolf
 * MariaDB 10.3
 * MariaDB 10.4
 * MariaDB 10.5

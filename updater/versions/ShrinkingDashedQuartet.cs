@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017, 2022  Dirk Stolle
+    Copyright (C) 2023  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -21,27 +21,28 @@ using System;
 namespace updater.versions
 {
     /// <summary>
-    /// Utility class to represent a four-part version, e.g. "11.23.4.5".
+    /// Utility class to represent a four-part version with dash, e.g. "11.23.4-5",
+    /// that shrinks to a triple when the patch version is zero.
     /// </summary>
-    public struct Quartet : IComparable<Quartet>, IEquatable<Quartet>
+    public struct ShrinkingDashedQuartet : IComparable<ShrinkingDashedQuartet>, IEquatable<ShrinkingDashedQuartet>
     {
         /// <summary>
-        /// major version number, e. g. the 11 in 11.23.4.5
+        /// major version number, e. g. the 11 in 11.23.4-5
         /// </summary>
         public uint major;
 
         /// <summary>
-        /// minor version number, e. g. the 23 in 11.23.4.5
+        /// minor version number, e. g. the 23 in 11.23.4-5
         /// </summary>
         public uint minor;
 
         /// <summary>
-        /// patch level, e. g. the 4 in 11.23.4.5
+        /// patch level, e. g. the 4 in 11.23.4-5
         /// </summary>
         public uint patch;
 
         /// <summary>
-        /// build number, e. g. the 5 in 11.23.4.5
+        /// build number, e. g. the 5 in 11.23.4-5
         /// </summary>
         public uint build;
 
@@ -49,23 +50,24 @@ namespace updater.versions
         /// <summary>
         /// construct quartet from string value
         /// </summary>
-        /// <param name="value">string value containing a dot-separated version, e.g. "11.2.7.23"</param>
-        public Quartet(string value)
+        /// <param name="value">string value containing a dot-separated version, e.g. "11.2.7-23"</param>
+        public ShrinkingDashedQuartet(string value)
         {
             major = 0;
             minor = 0;
             patch = 0;
             build = 0;
-            string[] parts = value.Split(new char[] { '.' });
-            // If there are less than four parts, we just assume zero.
+            string[] dashed_parts = value.Split(new char[] { '-' });
+            string[] parts = dashed_parts[0].Split(new char[] { '.' });
+
+            // If there are less than three parts, we just assume zero.
             uint.TryParse(parts[0], out major);
             if (parts.Length >= 2)
                 uint.TryParse(parts[1], out minor);
             if (parts.Length >= 3)
                 uint.TryParse(parts[2], out patch);
-            if (parts.Length >= 4)
-                uint.TryParse(parts[3], out build);
-            return;
+            if (dashed_parts.Length >= 2)
+                uint.TryParse(dashed_parts[1], out build);
         }
 
 
@@ -75,8 +77,12 @@ namespace updater.versions
         /// <returns>Returns a string containing the full version number.</returns>
         public string full()
         {
-            return major.ToString() + "." + minor.ToString() + "." +
-                patch.ToString() + "." + build.ToString();
+            if (patch == 0)
+                return major.ToString() + "." + minor.ToString() + "-"
+                    + build.ToString();
+            else
+                return major.ToString() + "." + minor.ToString() + "."
+                    + patch.ToString() + "-" + build.ToString();
         }
 
 
@@ -87,13 +93,6 @@ namespace updater.versions
 
 
         public bool Equals(Quartet other)
-        {
-            return (major == other.major) && (minor == other.minor)
-                && (patch == other.patch) && (build == other.build);
-        }
-
-
-        public bool Equals(ShrinkingQuartet other)
         {
             return (major == other.major) && (minor == other.minor)
                 && (patch == other.patch) && (build == other.build);
@@ -111,7 +110,7 @@ namespace updater.versions
         {
             if (obj is Quartet q)
                 return Equals(q);
-            return (obj is ShrinkingQuartet sq) && Equals(sq);
+            return (obj is ShrinkingDashedQuartet sdq) && Equals(sdq);
         }
 
 
@@ -121,7 +120,7 @@ namespace updater.versions
         }
 
 
-        public int CompareTo(Quartet other)
+        public int CompareTo(ShrinkingDashedQuartet other)
         {
             int c = major.CompareTo(other.major);
             if (c != 0)
@@ -136,13 +135,13 @@ namespace updater.versions
         }
 
 
-        public static bool operator <(Quartet a, Quartet b)
+        public static bool operator <(ShrinkingDashedQuartet a, ShrinkingDashedQuartet b)
         {
             return a.CompareTo(b) < 0;
         }
 
 
-        public static bool operator >(Quartet a, Quartet b)
+        public static bool operator >(ShrinkingDashedQuartet a, ShrinkingDashedQuartet b)
         {
             return a.CompareTo(b) > 0;
         }

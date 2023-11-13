@@ -12,6 +12,7 @@ Update support for the following applications is added:
 
 * Eclipse Temurin JDK 21 LTS
 * Eclipse Temurin JRE 21 LTS
+* LibreWolf
 
 __[changes]__
 
