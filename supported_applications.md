@@ -29,7 +29,7 @@ updater application.
 * KeePass 2
 * LibreOffice
 * LibreWolf
-* MariaDB 10.3
+* MariaDB 10.3 _(reached end of support on 25th May 2023)_
 * MariaDB 10.4
 * MariaDB 10.5
 * MariaDB 10.6
