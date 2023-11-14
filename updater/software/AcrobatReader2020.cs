@@ -64,11 +64,11 @@ namespace updater.software
         /// details about the software.</returns>
         public override AvailableSoftware knownInfo()
         {
-            const string version = "20.005.30524";
+            const string version = "20.005.30539";
             var installer = new InstallInfoMsiPatch(
-                "https://ardownload2.adobe.com/pub/adobe/reader/win/Acrobat2020/2000530524/AcroRdr2020Upd2000530524_MUI.msp",
+                "https://ardownload2.adobe.com/pub/adobe/reader/win/Acrobat2020/2000530539/AcroRdr2020Upd2000530539_MUI.msp",
                 HashAlgorithm.SHA256,
-                "2a24a6a349693d0c72749f70a569037c2ebce46dbb1abf82c5da4a861d10250c",
+                "26d681ae6a171082712a79785116062d0bd284fe8034c4c8ae3d0a484efae246",
                 new Signature(publisherX509, certificateExpiration),
                 "/qn /norestart"
                 );
@@ -139,7 +139,7 @@ namespace updater.software
             {
                 // The request hangs and times out without an User-Agent header,
                 // so let's provide a simple curl User-Agent here.
-                client.Headers.Add("User-Agent", "curl/8.2.1");
+                client.Headers.Add("User-Agent", "curl/8.4.0");
                 try
                 {
                     html = client.DownloadString(notesLink);
