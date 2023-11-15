@@ -11,10 +11,8 @@ currently be updated with this application is available
 
 ## Build status
 
-* GitHub Actions:
 [![GitHub CI](https://github.com/striezel/updater/workflows/.NET%20on%20Ubuntu/badge.svg)](https://github.com/striezel/updater/actions)
 [![GitHub CI](https://github.com/striezel/updater/workflows/MSBuild%20on%20Windows/badge.svg)](https://github.com/striezel/updater/actions)
-* GitLab CI:
 [![GitLab pipeline status](https://gitlab.com/striezel/updater/badges/master/pipeline.svg)](https://gitlab.com/striezel/updater/)
 
 ## Prerequisites
