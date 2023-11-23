@@ -6,6 +6,10 @@ improvements may be omitted.)_
 
 ## Next Version
 
+__[new features]__
+
+* Update support for HexChat is added.
+
 __[maintenance]__
 
 * NLog library is updated from 5.2.5 to 5.2.6.

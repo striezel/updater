@@ -24,6 +24,7 @@ updater application.
 * GIMP
 * Git for Windows
 * HeidiSQL
+* HexChat
 * Inkscape
 * IrfanView
 * KeePass 2
