@@ -23,38 +23,51 @@ using System;
 namespace updater_test.data
 {
     /// <summary>
-    /// Contains tests for the InstallInfoExe class.
+    /// Contains tests for the InstallInfoMsi class.
     /// </summary>
     [TestClass]
-    public class InstallInfoExe_Tests
+    public class InstallInfoMsi_Tests
     {
         [TestMethod]
         public void createInstallProcess()
         {
             var sig = new Signature("CN=foo, OU=bar", DateTime.Now.AddDays(3.0));
-            var ii = new InstallInfoExe("https://example.org/foo/bar.exe", HashAlgorithm.Unknown, null, sig, "/S /FOO");
-            const string file_name = "C:\\foo\\bar.exe";
-            var proc = ii.createInstallProccess(file_name, new DetectedSoftware());
+            var info = new InstallInfoMsi("https://example.org/foo/bar.msi", HashAlgorithm.Unknown, null, sig, "/qn /norestart");
+            const string file_name = "C:\\foo\\bar.msi";
+            var proc = info.createInstallProccess(file_name, new DetectedSoftware());
 
             Assert.IsNotNull(proc);
-            Assert.AreEqual(file_name, proc.StartInfo.FileName);
-            Assert.AreEqual("/S /FOO", proc.StartInfo.Arguments);
+            Assert.AreEqual("msiexec.exe", proc.StartInfo.FileName);
+            Assert.AreEqual("/i \"" + file_name + "\" /qn /norestart", proc.StartInfo.Arguments);
         }
 
+        [TestMethod]
+        public void createInstallProcess_with_installation_directory()
+        {
+            var sig = new Signature("CN=foo, OU=bar", DateTime.Now.AddDays(3.0));
+            var info = new InstallInfoMsi("https://example.org/foo/bar.msi", HashAlgorithm.Unknown, null, sig, "/qn /norestart");
+            const string file_name = "C:\\foo\\bar.msi";
+            var detected = new DetectedSoftware("Foo", "1.0.0", "C:\\Program Files\\foo\\");
+            var proc = info.createInstallProccess(file_name, detected);
+
+            Assert.IsNotNull(proc);
+            Assert.AreEqual("msiexec.exe", proc.StartInfo.FileName);
+            Assert.AreEqual("/i \"" + file_name + "\" INSTALLDIR=\"C:\\Program Files\\foo\" /qn /norestart", proc.StartInfo.Arguments);
+        }
 
         [TestMethod]
         public void createInstallProcess_null()
         {
             var sig = new Signature("CN=foo, OU=bar", DateTime.Now.AddDays(3.0));
-            var info = new InstallInfoExe("https://example.org/foo/bar.exe", HashAlgorithm.Unknown, null, sig, "/S /FOO");
-
+            var info = new InstallInfoMsi("https://example.org/foo/bar.msi", HashAlgorithm.Unknown, null, sig, "/qn /norestart");
+            
             var proc = info.createInstallProccess(null, new DetectedSoftware());
             Assert.IsNull(proc);
 
             proc = info.createInstallProccess("", new DetectedSoftware());
             Assert.IsNull(proc);
 
-            proc = info.createInstallProccess("     ", new DetectedSoftware());
+            proc = info.createInstallProccess("       ", new DetectedSoftware());
             Assert.IsNull(proc);
         }
     } // class
