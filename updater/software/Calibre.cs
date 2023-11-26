@@ -199,29 +199,8 @@ namespace updater.software
                 return null;
             newVersion = newVersion.Remove(idx);
 
-            // get SHA-256 sums from FossHub (official site provides no hashes)
-            try
-            {
-                var task = client.GetStringAsync("https://www.fosshub.com/Calibre.html");
-                task.Wait();
-                htmlCode = task.Result;
-            }
-            catch (Exception ex)
-            {
-                logger.Warn("Exception occurred while checking for newer version of Calibre: " + ex.Message);
-                return null;
-            }
-
-            // checksum for Windows 64bit installer
-            idx = htmlCode.IndexOf("\"n\":\"calibre-64bit-" + newVersion + ".msi\"");
-            if (idx < 0)
-                return null;
-            // "sha256":"82e0a37fbb556792ce091e63177260d47662a757b21c768e0fe9f7dd4c1b1c06"
-            var exprSha256 = new Regex("\"sha256\":\"[0-9a-f]{64}\"");
-            Match match = exprSha256.Match(htmlCode, idx);
-            if (!match.Success)
-                return null;
-            string checksum64 = match.Value.Substring(match.Value.Length - 65, 64);
+            // FossHub does not seem to be updated anymore, so we cannot get a
+            // SHA-256 hash for the installer file.
 
             // construct new version information
             var newInfo = knownInfo();
@@ -229,8 +208,8 @@ namespace updater.software
             string oldVersion = newInfo.newestVersion;
             newInfo.newestVersion = newVersion;
             newInfo.install64Bit.downloadUrl = newInfo.install64Bit.downloadUrl.Replace(oldVersion, newVersion);
-            newInfo.install64Bit.checksum = checksum64;
-            newInfo.install64Bit.algorithm = HashAlgorithm.SHA256;
+            newInfo.install64Bit.checksum = null;
+            newInfo.install64Bit.algorithm = HashAlgorithm.Unknown;
             // Use same info for "32 bit" build, forcing switch to 64 bit build on 64 bit OS.
             newInfo.install32Bit = newInfo.install64Bit;
             return newInfo;

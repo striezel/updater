@@ -10,6 +10,10 @@ __[new features]__
 
 * Update support for HexChat is added.
 
+__[changes]__
+
+* Adjust search for newer version of Calibre.
+
 __[maintenance]__
 
 * NLog library is updated from 5.2.5 to 5.2.6.
