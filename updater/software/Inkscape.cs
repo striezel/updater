@@ -54,19 +54,19 @@ namespace updater.software
         public override AvailableSoftware knownInfo()
         {
             return new AvailableSoftware("Inkscape",
-                "1.3",
+                "1.3.1",
                 "^Inkscape( [0-9]\\.[0-9]+(\\.[0-9]+)?)?$",
                 "^Inkscape( [0-9]\\.[0-9]+(\\.[0-9]+)?)?$",
                 new InstallInfoMsi(
-                    "https://media.inkscape.org/dl/resources/file/inkscape-1.3_2023-07-21_0e150ed6c4-x86_K2QrAzI.msi",
+                    "https://media.inkscape.org/dl/resources/file/inkscape-1.3.1_2023-11-16_91b66b0783-x86_ulhsqfz.msi",
                     HashAlgorithm.SHA256,
-                    "89567dd3c370da7a8e89405c80f6454e0541875fd21cce7e99f8c36fdf5a7de8",
+                    "e49d533d0d741509a7b982541c9014f4ef7c20ff9063d602e211de09717d523e",
                     Signature.None,
                     "/qn /norestart"),
                 new InstallInfoMsi(
-                    "https://media.inkscape.org/dl/resources/file/inkscape-1.3_2023-07-21_0e150ed6c4-x64_31XBEKV.msi",
+                    "https://media.inkscape.org/dl/resources/file/inkscape-1.3.1_2023-11-16_91b66b0783-x64_yOr62Fw.msi",
                     HashAlgorithm.SHA256,
-                    "ff67fdf7f8f9154950552b66b7c9045a1173fae247d52f42944527c7a7fbea58",
+                    "90f8f632c57fe6ab5b050ba1ed8dc08ae79d88bb9c48ee6de3e8d17db5673f58",
                     Signature.None,
                     "/qn /norestart")
                     );
@@ -313,6 +313,8 @@ namespace updater.software
                     "{B57F4693-8866-4053-B706-901E03F3301B}", // 1.2.2 MSI (x64)
                     "{A607C1E9-1D13-41BB-B1C7-17B709684F6A}", // 1.3 MSI (x86)
                     "{2C69A8D5-2E44-4F99-BD5E-08536B52F1DA}", // 1.3 MSI (x64)
+                    "{CA37822D-C39B-45F0-A03A-8ADF25D2E679}", // 1.3.1 MSI (x86)
+                    "{454A87BE-0589-4AD2-8FA3-E6D1825D97DE}", // 1.3.1 MSI (x64)
                 };
                 foreach (var id in guids)
                 {
