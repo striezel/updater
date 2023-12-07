@@ -43,7 +43,7 @@ namespace updater.software
         /// <summary>
         /// expiration date of the certificate
         /// </summary>
-        private static readonly DateTime certificateExpiration = new(2026, 9, 13, 12, 18, 28, DateTimeKind.Utc);
+        private static readonly DateTime certificateExpiration = new(2025, 6, 1, 5, 39, 27, DateTimeKind.Utc);
 
 
         /// <summary>
@@ -65,19 +65,19 @@ namespace updater.software
         {
             var signature = new Signature(publisherX509, certificateExpiration);
             return new AvailableSoftware("LibreOffice Help Pack German",
-                "7.6.3.2",
+                "7.6.4.1",
                 "^LibreOffice [0-9]+\\.[0-9] Help Pack \\(German\\)$",
                 "^LibreOffice [0-9]+\\.[0-9] Help Pack \\(German\\)$",
                 new InstallInfoLibO(
-                    "https://download.documentfoundation.org/libreoffice/stable/7.6.3/win/x86/LibreOffice_7.6.3_Win_x86_helppack_de.msi",
+                    "https://download.documentfoundation.org/libreoffice/stable/7.6.4/win/x86/LibreOffice_7.6.4_Win_x86_helppack_de.msi",
                     HashAlgorithm.SHA256,
-                    "821b8539972762ab937c04c47b66a5ddec384967cafbf95cceb64cd805f6961f",
+                    "55901e4b53e1b213b2eed03d6e9586b81159699d49b5b39334d3d1b23db4de39",
                     signature,
                     "/qn /norestart"),
                 new InstallInfoLibO(
-                    "https://download.documentfoundation.org/libreoffice/stable/7.6.3/win/x86_64/LibreOffice_7.6.3_Win_x86-64_helppack_de.msi",
+                    "https://download.documentfoundation.org/libreoffice/stable/7.6.4/win/x86_64/LibreOffice_7.6.4_Win_x86-64_helppack_de.msi",
                     HashAlgorithm.SHA256,
-                    "cfd69788cafe02f2a7ef19c536fe91749461398408ef7723acbf3716170ed1e7",
+                    "cfde6d5847a24f48d397387f6ab8e4aebb3a5104977ab344e5ed2510f8210c70",
                     signature,
                     "/qn /norestart")
                     );

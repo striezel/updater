@@ -43,7 +43,7 @@ namespace updater.software
         /// <summary>
         /// expiration date of the certificate
         /// </summary>
-        private static readonly DateTime certificateExpiration = new(2026, 9, 13, 12, 18, 28, DateTimeKind.Utc);
+        private static readonly DateTime certificateExpiration = new(2025, 6, 1, 5, 39, 27, DateTimeKind.Utc);
 
 
         /// <summary>
@@ -65,19 +65,19 @@ namespace updater.software
         {
             var signature = new Signature(publisherX509, certificateExpiration);
             return new AvailableSoftware("LibreOffice",
-                "7.6.3.2",
+                "7.6.4.1",
                 "^LibreOffice [0-9]+\\.[0-9]\\.[0-9]\\.[0-9]$",
                 "^LibreOffice [0-9]+\\.[0-9]\\.[0-9]\\.[0-9]$",
                 new InstallInfoLibO(
-                    "https://download.documentfoundation.org/libreoffice/stable/7.6.3/win/x86/LibreOffice_7.6.3_Win_x86.msi",
+                    "https://download.documentfoundation.org/libreoffice/stable/7.6.4/win/x86/LibreOffice_7.6.4_Win_x86.msi",
                     HashAlgorithm.SHA256,
-                    "cd948c1f2f75c44395de6065f489f7ab0e580c702120c9360de5dce0f06164c4",
+                    "8dd1302de5414e9196a0ef847b5b552417b6832bcc8e5394b2bebd2966c094fc",
                     signature,
                     "/qn /norestart"),
                 new InstallInfoLibO(
-                    "https://download.documentfoundation.org/libreoffice/stable/7.6.3/win/x86_64/LibreOffice_7.6.3_Win_x86-64.msi",
+                    "https://download.documentfoundation.org/libreoffice/stable/7.6.4/win/x86_64/LibreOffice_7.6.4_Win_x86-64.msi",
                     HashAlgorithm.SHA256,
-                    "65a1330abaddf31e4dd8cb9c1110f422a3edc828b8d5680bcd3ea8efa508ef3c",
+                    "65678ac729cd0b545d14703879b601872d285c2934ae8d76452f7c2fb2c62d15",
                     signature,
                     "/qn /norestart")
                     );
