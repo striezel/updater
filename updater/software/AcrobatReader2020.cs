@@ -139,7 +139,7 @@ namespace updater.software
             {
                 // The request hangs and times out without an User-Agent header,
                 // so let's provide a simple curl User-Agent here.
-                client.Headers.Add("User-Agent", "curl/8.4.0");
+                client.Headers.Add("User-Agent", "curl/8.5.0");
                 try
                 {
                     html = client.DownloadString(notesLink);

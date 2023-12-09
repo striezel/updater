@@ -191,7 +191,7 @@ namespace updater.software
                 {
                     // Looks like we have to add a user agent to get a valid response.
                     // Without user agent the server returns "403 Forbidden".
-                    client.Headers.Add("User-Agent", "curl/7.86.0");
+                    client.Headers.Add("User-Agent", "curl/8.5.0");
                     try
                     {
                         htmlCode = client.DownloadString("https://filezilla-project.org/download.php?show_all=1");
