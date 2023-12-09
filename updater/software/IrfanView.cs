@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2022  Dirk Stolle
+    Copyright (C) 2022, 2023  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -37,13 +37,13 @@ namespace updater.software
         /// <summary>
         /// publisher name for signed executables of IrfanView
         /// </summary>
-        private const string publisherX509 = "CN=Irfan Skiljan, O=Irfan Skiljan, L=Winzendorf-Muthmannsdorf, PostalCode=2723, C=AT";
+        private const string publisherX509 = "CN=Irfan Skiljan, O=Irfan Skiljan, S=Lower Austria, C=AT";
 
 
         /// <summary>
         /// expiration date of certificate
         /// </summary>
-        private static readonly DateTime certificateExpiration = new(2023, 4, 27, 23, 59, 59, DateTimeKind.Utc);
+        private static readonly DateTime certificateExpiration = new(2026, 8, 1, 9, 46, 7, DateTimeKind.Utc);
 
 
         /// <summary>
@@ -64,19 +64,19 @@ namespace updater.software
         {
             var signature = new Signature(publisherX509, certificateExpiration);
             return new AvailableSoftware("IrfanView",
-                "4.62",
+                "4.65",
                 "^(IrfanView [0-9]+\\.[0-9]+ \\(32\\-bit\\)|IrfanView \\(remove only\\))$",
                 "^(IrfanView [0-9]+\\.[0-9]+ \\(64\\-bit\\)|IrfanView 64 \\(remove only\\))$",
                 new InstallInfoExe(
-                    "https://www.irfanview.info/files/iview462_setup.exe",
+                    "https://www.irfanview.info/files/iview465_setup.exe",
                     HashAlgorithm.SHA256,
-                    "37cdb372c4b6053356eca2c40aa44f4fb8cd30681c28cda54e80601d6c7b565a ",
+                    "7a080996e3f793712f4f8dd9b4ce1d815050cce6060e989661eb325a8316a4c7  ",
                     signature,
                     "/silent /desktop=1 /group=1 /allusers=1 /assoc=1"),
                 new InstallInfoExe(
-                    "https://www.irfanview.info/files/iview462_x64_setup.exe",
+                    "https://www.irfanview.info/files/iview465_x64_setup.exe",
                     HashAlgorithm.SHA256,
-                    "d9d4c5f3120a9420e2dbaf0ee8931556e161787fbc4297d5fb4e4c7616fdd668",
+                    "77d812bbfb937ca8449a0a0946589002d012fb4c4d6008f0a809286398250a4c",
                     signature,
                     "/silent /desktop=1 /group=1 /allusers=1 /assoc=1")
                     );
