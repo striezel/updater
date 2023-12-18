@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017, 2018, 2019, 2020, 2021, 2022  Dirk Stolle
+    Copyright (C) 2017, 2018, 2019, 2020, 2021, 2022, 2023  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -69,21 +69,21 @@ namespace updater.software
         {
             var signature = new Signature(publisherX509, certificateExpiration);
             return new AvailableSoftware("PuTTY",
-                "0.79",
+                "0.80",
                 "^PuTTY release [0-9]\\.[0-9]+$",
                 "^PuTTY release [0-9]\\.[0-9]+ \\(64\\-bit\\)$",
                 // 32 bit installer
                 new InstallInfoMsi(
-                    "https://the.earth.li/~sgtatham/putty/0.79/w32/putty-0.79-installer.msi",
+                    "https://the.earth.li/~sgtatham/putty/0.80/w32/putty-0.80-installer.msi",
                     HashAlgorithm.SHA512,
-                    "3fa0ff37bbff33a3520a1ca8e0e0fd54e7265981eadcc920f6aa6611d5c9aa899ce4e0734a9a050a2c5c967b93927039481b234326eaf223a2a2a75f9f143daa",
+                    "043c0757d8c30c09e0f7a2f52fea92e071b101faf465fe0219fdd107911901f2a007824c1d1ae4cb533a08ff51b4e5b43dfd3357e6c145c50b0dab5ed4c935a7",
                     signature,
                     "/qn /norestart"),
                 // 64 bit installer
                 new InstallInfoMsi(
-                    "https://the.earth.li/~sgtatham/putty/0.79/w64/putty-64bit-0.79-installer.msi",
+                    "https://the.earth.li/~sgtatham/putty/0.80/w64/putty-64bit-0.80-installer.msi",
                     HashAlgorithm.SHA512,
-                    "6db13a338ad1c109dc6daa93713a37682a58841fca0ce7a1f03c73c65f10d579e4dff49f8176d50d4512d102d0ded5bbadb7c93cc64a5cc2cb8016be35f2be03",
+                    "599b031199b9629549ac0d172726056b6fcd8248e7ef24e36c18e06f23038ed726b354398b73cd3fb5d8a7ce4872b3fa9fc0fa191efcd5f35a2f3d02db222313",
                     signature,
                     "/qn /norestart")
                 );
@@ -293,7 +293,7 @@ namespace updater.software
         public override bool needsUpdate(DetectedSoftware detected)
         {
             // Simple version string comparison.
-            return (string.Compare(detected.displayVersion, info().newestVersion, true) < 0);
+            return string.Compare(detected.displayVersion, info().newestVersion, true) < 0;
         }
     } // class
 } // namespace
