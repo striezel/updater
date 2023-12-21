@@ -64,19 +64,19 @@ namespace updater.software
         {
             var signature = new Signature(publisherX509, certificateExpiration);
             return new AvailableSoftware("IrfanView",
-                "4.65",
+                "4.66",
                 "^(IrfanView [0-9]+\\.[0-9]+ \\(32\\-bit\\)|IrfanView \\(remove only\\))$",
                 "^(IrfanView [0-9]+\\.[0-9]+ \\(64\\-bit\\)|IrfanView 64 \\(remove only\\))$",
                 new InstallInfoExe(
-                    "https://www.irfanview.info/files/iview465_setup.exe",
+                    "https://www.irfanview.info/files/iview466_setup.exe",
                     HashAlgorithm.SHA256,
-                    "7a080996e3f793712f4f8dd9b4ce1d815050cce6060e989661eb325a8316a4c7  ",
+                    "681577dffd38c937173882954e2503b21f5d263b771f1f93d0f9e782655eedc6",
                     signature,
                     "/silent /desktop=1 /group=1 /allusers=1 /assoc=1"),
                 new InstallInfoExe(
-                    "https://www.irfanview.info/files/iview465_x64_setup.exe",
+                    "https://www.irfanview.info/files/iview466_x64_setup.exe",
                     HashAlgorithm.SHA256,
-                    "77d812bbfb937ca8449a0a0946589002d012fb4c4d6008f0a809286398250a4c",
+                    "4335d6dc500456a3c4554e04143b332885b5939321f4aab5bed5e6b70c746f16",
                     signature,
                     "/silent /desktop=1 /group=1 /allusers=1 /assoc=1")
                     );
