@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2023  Dirk Stolle
+    Copyright (C) 2023, 2024  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -66,19 +66,19 @@ namespace updater.software
             const string silentOptions = "/silent /norestart /launchopera 0 /setdefaultbrowser 0 /enable-stats 0 /enable-installer-stats 0 /pintotaskbar 0 /pin-additional-shortcuts 0 /allusers";
             var signature = new Signature(publisherX509, certificateExpiration);
             return new AvailableSoftware("Opera GX",
-                "105.0.4970.63",
+                "105.0.4970.74",
                 "^Opera GX Stable [0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+$",
                 "^Opera GX Stable [0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+$",
                 new InstallInfoExe(
-                    "https://get.geo.opera.com/pub/opera_gx/105.0.4970.63/win/Opera_GX_105.0.4970.63_Setup.exe",
+                    "https://get.geo.opera.com/pub/opera_gx/105.0.4970.74/win/Opera_GX_105.0.4970.74_Setup.exe",
                     HashAlgorithm.SHA256,
-                    "2c1be37955ac87d53040d316df473ed99e41231632db2569bfa24febca70de12",
+                    "ecd142df150380ae20526f1bf74ac290b0461a9658369edf810a6152caa5c5a9",
                     signature,
                     silentOptions),
                 new InstallInfoExe(
-                    "https://get.geo.opera.com/pub/opera_gx/105.0.4970.63/win/Opera_GX_105.0.4970.63_Setup_x64.exe",
+                    "https://get.geo.opera.com/pub/opera_gx/105.0.4970.74/win/Opera_GX_105.0.4970.74_Setup_x64.exe",
                     HashAlgorithm.SHA256,
-                    "a06776d61774ee3ae7a825b6d42a3a5e79c5fc69af67c41568728f96ddbc0e17",
+                    "a387685e570b3bb4bb13d885d487a84b0860d45daac1775e34038cc3b6d17263",
                     signature,
                     silentOptions)
                     );
