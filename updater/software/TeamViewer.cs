@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2021, 2022, 2023  Dirk Stolle
+    Copyright (C) 2021, 2022, 2023, 2024  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -66,7 +66,7 @@ namespace updater.software
         {
             var signature = new Signature(publisherX509, certificateExpiration);
             return new AvailableSoftware("TeamViewer",
-                "15.49.2",
+                "15.49.3",
                 "^TeamViewer$",
                 "^TeamViewer$",
                 new InstallInfoExe(
