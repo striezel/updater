@@ -9,6 +9,7 @@ improvements may be omitted.)_
 __[maintenance]__
 
 * NLog library is updated from 5.2.7 to 5.2.8.
+* Update certificate information for Node.js installer.
 
 ## Version 2023.12.11.0
 

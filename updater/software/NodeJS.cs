@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2021, 2022, 2023  Dirk Stolle
+    Copyright (C) 2021, 2022, 2023, 2024  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -47,13 +47,13 @@ namespace updater.software
         /// <summary>
         /// publisher of signed binaries
         /// </summary>
-        private const string publisherX509 = "CN=OpenJS Foundation, O=OpenJS Foundation, L=San Francisco, S=California, C=US";
+        private const string publisherX509 = "CN=OpenJS Foundation, OU=Nodejs, O=OpenJS Foundation, L=San Francisco, S=California, C=US, SERIALNUMBER=5579593, OID.2.5.4.15=Private Organization, OID.1.3.6.1.4.1.311.60.2.1.2=Delaware, OID.1.3.6.1.4.1.311.60.2.1.3=US";
 
 
         /// <summary>
         /// expiration date of certificate
         /// </summary>
-        private static readonly DateTime certificateExpiration = new(2023, 12, 18, 12, 0, 0, DateTimeKind.Utc);
+        private static readonly DateTime certificateExpiration = new(2026, 11, 15, 23, 59, 59, DateTimeKind.Utc);
 
 
         /// <summary>
@@ -63,7 +63,7 @@ namespace updater.software
         /// details about the software.</returns>
         public override AvailableSoftware knownInfo()
         {
-            const string version = "20.10.0";
+            const string version = "20.11.0";
             var signature = new Signature(publisherX509, certificateExpiration);
             return new AvailableSoftware(
                 "Node.js",
@@ -73,13 +73,13 @@ namespace updater.software
                 new InstallInfoMsi(
                     "https://nodejs.org/download/release/v" + version + "/node-v" + version + "-x86.msi",
                     HashAlgorithm.SHA256,
-                    "39c3f584ebca40f61fb610739722b7ec163e214f7f9d3e73bd980ce658cffa56",
+                    "01484d759ca9aa758ca1e1ddf080c00ef850b2aa98645dafe4557a46e9fa0e7d",
                     signature,
                     "/qn /norestart"),
                 new InstallInfoMsi(
                     "https://nodejs.org/download/release/v" + version + "/node-v" + version + "-x64.msi",
                     HashAlgorithm.SHA256,
-                    "90ae1666c56988a6cc38424e8b9bffd05defe0e892a46aa606b94f7552cfb581",
+                    "9a8c2e99b1fca559e1a1a393d6be4a23781b0c66883a9d6e5584272d9bf49dc2",
                     signature,
                     "/qn /norestart")
                     );
