@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017, 2018  Dirk Stolle
+    Copyright (C) 2017, 2018, 2024  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -35,6 +35,7 @@ namespace updater.cli
             autoGetNewer = true;
             timeout = Update.defaultTimeout;
             excluded = new List<string>();
+            showDownloadProgress = false;
             pdf24autoUpdate = true;
             pdf24desktopIcons = true;
             pdf24faxPrinter = true;
@@ -60,6 +61,12 @@ namespace updater.cli
         /// list of software IDs that shall be excluded from the operation
         /// </summary>
         public List<string> excluded;
+
+
+        /// <summary>
+        /// whether to show the download progress when downloading updates
+        /// </summary>
+        public bool showDownloadProgress;
 
         /// <summary>
         /// whether PDF24 Creator shall enable automatic updates

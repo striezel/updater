@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017, 2021  Dirk Stolle
+    Copyright (C) 2017, 2021, 2024  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -22,6 +22,7 @@ using System.IO;
 using System.Net;
 using updater.cli;
 using updater.data;
+using updater.utility;
 
 namespace updater.operations
 {
@@ -66,9 +67,10 @@ namespace updater.operations
         /// </summary>
         /// <param name="status">software status, as retrieved via SoftwareStatus.query()</param>
         /// <param name="timeoutPerUpdate">maximum time in seconds to wait per update</param>
+        /// <param name="showProgress">whether to show download progress</param>
         /// <returns>Returns the number of updated application in case of success.
         /// Returns a negative value equal to -1 - number of updated applications, if an error occurred.</returns>
-        public static int update(List<QueryEntry> status, uint timeoutPerUpdate = defaultTimeout)
+        public static int update(List<QueryEntry> status, uint timeoutPerUpdate = defaultTimeout, bool showProgress = false)
         {
             if (null == status)
                 return -1;
@@ -134,7 +136,7 @@ namespace updater.operations
                     return -1 - updatedApplications;
                 }
                 logger.Info("Downloading " + instInfo.downloadUrl + "...");
-                string downloadedFile = download(instInfo.downloadUrl);
+                string downloadedFile = download(instInfo.downloadUrl, showProgress);
                 if (string.IsNullOrWhiteSpace(downloadedFile))
                 {
                     logger.Error("Error: Could not download installer from " + instInfo.downloadUrl + "!");
@@ -365,9 +367,10 @@ namespace updater.operations
         /// Downloads a given file to the local cache directory.
         /// </summary>
         /// <param name="url">URL of the file</param>
+        /// <param name="showProgress">whether to show download progress</param>
         /// <returns>Returns path of the local file, if successful.
         /// Returns null, if an error occurred.</returns>
-        private static string download(string url)
+        private static string download(string url, bool showProgress)
         {
             if (string.IsNullOrWhiteSpace(url))
                 return null;
@@ -402,7 +405,7 @@ namespace updater.operations
                 }
             }
             string localFile = Path.Combine(cacheDirectory, basename);
-            using (var wc = new WebClient())
+            using (WebClient wc = showProgress ? new ProgressReportingWebClient() : new WebClient())
             {
                 var lowerCaseUrl = url.ToLowerInvariant();
                 if (lowerCaseUrl.Contains("filezilla") || lowerCaseUrl.Contains("mariadb"))
@@ -419,7 +422,16 @@ namespace updater.operations
                 }
                 try
                 {
-                    wc.DownloadFile(url, localFile);
+                    if (showProgress)
+                    {
+                        (wc as ProgressReportingWebClient).Start = DateTime.UtcNow;
+                        var task = wc.DownloadFileTaskAsync(url, localFile);
+                        task.Wait();
+                    }
+                    else
+                    {
+                        wc.DownloadFile(url, localFile);
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -468,7 +480,7 @@ namespace updater.operations
         public int perform()
         {
             var query = SoftwareStatus.query(opts);
-            int result = update(query, opts.timeout);
+            int result = update(query, opts.timeout, opts.showDownloadProgress);
             if (result < 0)
             {
                 logger.Error("At least one error occurred during the update.");

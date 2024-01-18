@@ -6,6 +6,11 @@ improvements may be omitted.)_
 
 ## Next Version
 
+__[new features]__
+
+* A new command-line parameter, `--progress`, is added to show the download
+  progress while downloading updates.
+
 __[maintenance]__
 
 * NLog library is updated from 5.2.7 to 5.2.8.

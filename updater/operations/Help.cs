@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017, 2018  Dirk Stolle
+    Copyright (C) 2017, 2018, 2024  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -44,7 +44,7 @@ namespace updater.operations
                 + "            option --exclude below for more information.\r\n"
                 + Environment.NewLine
                 + "Options:" + Environment.NewLine
-                + "  Options can change bhaviour of the update process. Available options are:\r\n"
+                + "  Options can change behaviour of the update process. Available options are:\r\n"
                 + Environment.NewLine
                 + "  --auto-get-newer | --newer | -n" + Environment.NewLine
                 + "      automatically tries to get information about newer versions of the soft-\r\n"
@@ -65,6 +65,11 @@ namespace updater.operations
                 + "      the ID for a specific software, run the program with the --list-id\r\n"
                 + "      option which lists all software IDs. You can use this option several\r\n"
                 + "      times to exclude more than one software from the update process.\r\n"
+                + "  --show-progress | --progress | -p" + Environment.NewLine
+                + "      Shows the download progress while downloading the updates. This is only\r\n"
+                + "      relevant when the update operation was specified, it has no effect on\r\n"
+                + "      other operations. Note that this can cause a very noisy output during\r\n"
+                + "      downloads, because the progress may be updated several times per second.\r\n"
                 + "  --pdf24-autoupdate" + Environment.NewLine
                 + "      Enable automatic updates for PDF24 Creator after update. This option is\r\n"
                 + "      enabled by default.\r\n"

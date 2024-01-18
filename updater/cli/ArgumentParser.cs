@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017, 2018, 2020  Dirk Stolle
+    Copyright (C) 2017, 2018, 2020, 2024  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -149,6 +149,11 @@ namespace updater.cli
                         }
                         opts.excluded.Add(id);
                         ++i; // skip next argument, because that is the ID
+                        break;
+                    case "--show-progress":
+                    case "--progress":
+                    case "-p":
+                        opts.showDownloadProgress = true;
                         break;
                     // options for PDF24 Creator
                     case "--pdf24-creator-autoupdate":
