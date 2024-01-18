@@ -121,7 +121,7 @@ namespace updater.operations
                 }
 
                 // check for blocking processes
-                if (utility.Processes.processesExist(entry.software.blockerProcesses(entry.detected)))
+                if (Processes.processesExist(entry.software.blockerProcesses(entry.detected)))
                 {
                     logger.Warn("Warning: At least one process was found that "
                         + "blocks the update of " + entry.software.info().Name
@@ -151,14 +151,14 @@ namespace updater.operations
                 {
                     // calculate checksum
                     logger.Info("Calculating checksum of " + downloadedFile + " ...");
-                    string hash = utility.Checksum.calculate(downloadedFile, instInfo.algorithm);
+                    string hash = Checksum.calculate(downloadedFile, instInfo.algorithm);
                     if (string.IsNullOrWhiteSpace(hash))
                     {
                         logger.Error("Error: Could not calculate checksum of file " + downloadedFile + "!");
                         File.Delete(downloadedFile);
                         return -1 - updatedApplications;
                     }
-                    if (!utility.Checksum.areEqual(hash, instInfo.checksum))
+                    if (!Checksum.areEqual(hash, instInfo.checksum))
                     {
                         logger.Error("Error: Checksum of file " + downloadedFile
                             + " is " + hash + ", but expected checksum is " + instInfo.checksum + "!");
@@ -173,7 +173,7 @@ namespace updater.operations
                 if (instInfo.hasVerifiableSignature())
                 {
                     logger.Info("Verifying signature of " + downloadedFile + " ...");
-                    if (!utility.Verificator.verifySignature(downloadedFile, instInfo.signature.publisher))
+                    if (!Verificator.verifySignature(downloadedFile, instInfo.signature.publisher))
                     {
                         logger.Error("Error: Signature of file " + downloadedFile
                             + " is invalid or missing! The file may also have the wrong publisher.");
@@ -195,7 +195,7 @@ namespace updater.operations
 
                 // Check for blocking processes - again, because download can take
                 // enough time to start some new processes.
-                if (utility.Processes.processesExist(entry.software.blockerProcesses(entry.detected)))
+                if (Processes.processesExist(entry.software.blockerProcesses(entry.detected)))
                 {
                     logger.Warn("Warning: At least one process was found that "
                         + "blocks the update of " + entry.software.info().Name
