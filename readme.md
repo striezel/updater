@@ -97,42 +97,47 @@ these may be specified. Valid operations are:
 Options can change behaviour of the update process. Available options are:
 
     --auto-get-newer | --newer | -n
-      automatically tries to get information about newer versions of the soft-
-      ware from the internet. The updater has a list of known newest software
-      versions, but that information can get outdated quickly. That is why
-      this option exists - it helps to get the latest software version.
-      The option is enabled by default.
+        automatically tries to get information about newer versions of the soft-
+        ware from the internet. The updater has a list of known newest software
+        versions, but that information can get outdated quickly. That is why
+        this option exists - it helps to get the latest software version.
+        The option is enabled by default.
     --no-auto-get-newer | --no-newer | -nn
-      Do not try to get information about newer software versions. It is not
-      recommended to use this option, because it might mean that you get some
-      slightly outdated updates.
+        Do not try to get information about newer software versions. It is not
+        recommended to use this option, because it might mean that you get some
+        slightly outdated updates.
     --timeout SECONDS | -t SECONDS
-      Sets the timeout in seconds for a single update process. If an update
-      runs longer than the specified amount of seconds, it gets cancelled. The
-      default timeout is 1800 seconds (30 minutes).
+        Sets the timeout in seconds for a single update process. If an update
+        runs longer than the specified amount of seconds, it gets cancelled. The
+        default timeout is 1800 seconds.
     --exclude ID | --except ID | -e ID
-      Excludes the software with the given ID from the update process. To get
-      the ID for a specific software, run the program with the --list-id
-      option which lists all software IDs. You can use this option several
-      times to exclude more than one software from the update process.
+        Excludes the software with the given ID from the update process. To get
+        the ID for a specific software, run the program with the --list-id
+        option which lists all software IDs. You can use this option several
+        times to exclude more than one software from the update process.
+    --show-progress | --progress | -p
+        Shows the download progress while downloading the updates. This is only
+        relevant when the update operation was specified, it has no effect on
+        other operations. Note that this can cause a very noisy output during
+        downloads, because the progress may be updated several times per second.
     --pdf24-autoupdate
-      Enable automatic updates for PDF24 Creator after update. This option is
-      enabled by default.
+        Enable automatic updates for PDF24 Creator after update. This option is
+        enabled by default.
     --no-pdf24-autoupdate
-      Disable automatic updates for PDF24 Creator after update. This option is
-      disabled by default.
+        Disable automatic updates for PDF24 Creator after update. This option is
+        disabled by default.
     --pdf24-icons
-      Enable desktop icons for PDF24 Creator during update. This option is
-      enabled by default.
+        Enable desktop icons for PDF24 Creator during update. This option is
+        enabled by default.
     --no-pdf24-icons
-      Disable desktop icons for PDF24 Creator during update. This option is
-      disabled by default.
+        Disable desktop icons for PDF24 Creator during update. This option is
+        disabled by default.
     --pdf24-fax-printer
-      Installs the fax printer for PDF24 Creator during update. This option is
-      enabled by default.
+        Installs the fax printer for PDF24 Creator during update. This option is
+        enabled by default.
     --no-pdf24-fax-printer
-      Does not install the fax printer for PDF24 Creator during update. This
-      option is disabled by default.
+        Does not install the fax printer for PDF24 Creator during update. This
+        option is disabled by default.
 
 ### Examples
 
