@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017, 2020, 2021  Dirk Stolle
+    Copyright (C) 2017, 2020, 2021, 2024  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -23,7 +23,7 @@ using updater.data;
 namespace updater.software
 {
     /// <summary>
-    /// interface to provide information for various softwares
+    /// interface to provide information for various software
     /// </summary>
     public interface ISoftware
     {

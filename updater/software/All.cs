@@ -37,7 +37,7 @@ namespace updater.software
         /// the ISoftware interface.
         /// </summary>
         /// <param name="opts">parsed command line options</param>
-        /// <returns>Returns a list of all supported softwares.</returns>
+        /// <returns>Returns a list of all supported software.</returns>
         private static List<ISoftware> getUnfiltered(Options opts)
         {
             bool autoGetNewer = opts.autoGetNewer;
@@ -153,7 +153,7 @@ namespace updater.software
         /// the ISoftware interface, but without the ones in the exclusion list.
         /// </summary>
         /// <param name="opts">parsed command line options</param>
-        /// <returns>Returns a list of all supported softwares, minus the ones in the exclusion list.</returns>
+        /// <returns>Returns a list of all supported software, minus the ones in the exclusion list.</returns>
         public static List<ISoftware> get(Options opts)
         {
             var result = getUnfiltered(opts);

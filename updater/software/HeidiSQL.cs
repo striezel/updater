@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2022, 2023  Dirk Stolle
+    Copyright (C) 2022, 2023, 2024  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -190,7 +190,7 @@ namespace updater.software
         {
             // HeidiSQL version information from registry only contains the
             // major and minor version number, e. g. 12.1 instead of the full
-            // version number 12.1.0.6537. Therefore, comparision should only
+            // version number 12.1.0.6537. Therefore, comparison should only
             // consider the first two numbers for updates.
             var verDetected = new Quartet(detected.displayVersion)
             {

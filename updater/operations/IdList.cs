@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017, 2020  Dirk Stolle
+    Copyright (C) 2017, 2020, 2024  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -22,7 +22,7 @@ using updater.cli;
 namespace updater.operations
 {
     /// <summary>
-    /// Lists the IDs of softwares.
+    /// Lists the IDs of software.
     /// </summary>
     public class IdList : IOperation
     {
