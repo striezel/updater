@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017, 2018, 2019, 2021, 2022, 2023  Dirk Stolle
+    Copyright (C) 2017, 2018, 2019, 2021, 2022, 2023, 2024  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -45,6 +45,7 @@ namespace updater.software
             {
                 new AcrobatReader2017To2020(),
                 new AcrobatReader2020(autoGetNewer),
+                new BlenderLTS(autoGetNewer),
                 new Calibre(autoGetNewer),
                 new CCleaner(autoGetNewer),
                 new CDBurnerXP(autoGetNewer),

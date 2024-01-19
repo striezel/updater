@@ -8,6 +8,8 @@ improvements may be omitted.)_
 
 __[new features]__
 
+* Update support for Blender 3.6 LTS is added.
+  (This may change to newer LTS versions of Blender in the future.)
 * A new command-line parameter, `--progress`, is added to show the download
   progress while downloading updates.
 
