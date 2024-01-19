@@ -221,7 +221,9 @@ namespace updater.operations
                         foreach (System.Diagnostics.Process preProc in preProcs)
                         {
                             logger.Info("Info: Starting pre-update task for "
-                                + entry.software.info().Name + "...");
+                                + entry.software.info().Name + ": "
+                                + preProc.StartInfo.FileName + " "
+                                + preProc.StartInfo.Arguments);
                             try
                             {
                                 preProc.Start();
