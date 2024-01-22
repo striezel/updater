@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2022, 2023  Dirk Stolle
+    Copyright (C) 2022, 2023, 2024  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -66,21 +66,21 @@ namespace updater.software
         public override AvailableSoftware knownInfo()
         {
             var signature = new Signature(publisherX509, certificateExpiration);
-            const string version = "17.0.9.9";
+            const string version = "17.0.10.7";
             return new AvailableSoftware("Eclipse Temurin JRE 17 with Hotspot",
                 version,
                 "^Eclipse Temurin JRE [a-z]+ Hotspot 17\\.[0-9]+\\.[0-9]+(\\.[0-9]+)?\\+[0-9]+(\\.[0-9]+)? \\(x86\\)$",
                 "^Eclipse Temurin JRE [a-z]+ Hotspot 17\\.[0-9]+\\.[0-9]+(\\.[0-9]+)?\\+[0-9]+(\\.[0-9]+)? \\(x64\\)$",
                 new InstallInfoMsiNoLocation(
-                    "https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.9%2B9.1/OpenJDK17U-jre_x86-32_windows_hotspot_17.0.9_9.msi",
+                    "https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.10%2B7/OpenJDK17U-jre_x86-32_windows_hotspot_17.0.10_7.msi",
                     HashAlgorithm.SHA256,
-                    "69e0edcff69d3629083b54054f93a3c36422fda695e6843a9a9b69cc94ffbb04",
+                    "5f31f5a208e0a426ea92764f458081defd03c4bb17b0a811f0e74efb08fcb636",
                     signature,
                     "INSTALLLEVEL=3 /qn /norestart"),
                 new InstallInfoMsiNoLocation(
-                    "https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.9%2B9.1/OpenJDK17U-jre_x64_windows_hotspot_17.0.9_9.msi",
+                    "https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.10%2B7/OpenJDK17U-jre_x64_windows_hotspot_17.0.10_7.msi",
                     HashAlgorithm.SHA256,
-                    "06a11211b09054b3a57c51c1d90fc0a183db32ee03ea0002740a0ef89d1b3cd4",
+                    "c22a2f34d291e19c6f6120c8f15dac5a34659a37991299b6d15ed6009322e6f2",
                     signature,
                     "INSTALLLEVEL=3 /qn /norestart")
                     );
