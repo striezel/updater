@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2023  Dirk Stolle
+    Copyright (C) 2023, 2024  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -56,19 +56,19 @@ namespace updater.software
         public override AvailableSoftware knownInfo()
         {
             return new AvailableSoftware("LibreWolf",
-                "121.0-1",
+                "122.0-1",
                 "^LibreWolf$",
                 "^LibreWolf$",
                 new InstallInfoExe(
-                "https://gitlab.com/api/v4/projects/44042130/packages/generic/librewolf/121.0-1/librewolf-121.0-1-windows-i686-setup.exe",
+                "https://gitlab.com/api/v4/projects/44042130/packages/generic/librewolf/122.0-1/librewolf-122.0-1-windows-i686-setup.exe",
                 HashAlgorithm.SHA256,
-                "2708bb80dfdf4223341bd542dcbdcc453e3309d0fdeddb664515dea5ee995922",
+                "74cb220a1a609e3614a8bfed0d64b22f30774f69c5ca4bdbd3b61946938b05f2",
                 Signature.None,
                 "/S"),
                 new InstallInfoExe(
-                "https://gitlab.com/api/v4/projects/44042130/packages/generic/librewolf/121.0-1/librewolf-121.0-1-windows-x86_64-setup.exe",
+                "https://gitlab.com/api/v4/projects/44042130/packages/generic/librewolf/122.0-1/librewolf-122.0-1-windows-x86_64-setup.exe",
                 HashAlgorithm.SHA256,
-                "c50ecc9cd5abca1db6f08c2a378e916efb12cb2f38fedf712966aadc1ab91c74",
+                "bcd6a75001b0cd4c62989dcd947eb9a73fc42ff89a8d22784c405993b635d168",
                 Signature.None,
                 "/S"));
         }
