@@ -50,11 +50,12 @@ jobs:
 
     - name: Create installer
       working-directory: ${{env.GITHUB_WORKSPACE}}
-      # Running custom commands / executables is unnecessarily complicated in
-      # PowerShell, so I guess we have to do it that way.
+      shell: cmd
       run: |
-        $command = '"C:\Program Files (x86)\Inno Setup 6\iscc.exe" "setup\setup.iss"'
-        Invoke-Expression "& $command"
+        "C:\Program Files (x86)\Inno Setup 6\iscc.exe" "setup\setup.iss"
+        for /f %%i IN ('git describe --always') do set "VERSION=%%i"
+        echo Version is %VERSION%.
+        move output\updater_setup.exe output\updater_setup_%VERSION%.exe
 
     - name: Upload artifact
       uses: actions/upload-artifact@v4
@@ -80,11 +81,11 @@ jobs:
         copy changelog.md updater-%VERSION%\documentation
         copy faq.md updater-%VERSION%\documentation
         copy supported_applications.md updater-%VERSION%\documentation
-        "C:\Program Files\7-Zip\7z.exe" a -r updater.zip updater-%VERSION%
+        "C:\Program Files\7-Zip\7z.exe" a -r updater_%VERSION%.zip updater-%VERSION%
 
     - name: Upload zipped updater
       uses: actions/upload-artifact@v4
       with:
         name: updater-zipped
         if-no-files-found: error
-        path: updater.zip
+        path: updater*.zip
