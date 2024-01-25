@@ -53,9 +53,14 @@ No, not necessarily.
 
 updater.exe has a builtin mechanism that can find the latest software versions
 by checking the servers of the software creators / developers. This means that
-the updater.exe can for example find updates for Firefox 59 even if this
-version was not released when the updater.exe was created.
+the updater.exe can for example find updates for Firefox 123 when they are
+available even if this version was not released when the updater.exe was
+created.
 
 However, when new applications are added to the updater.exe and you want to
 use the updater to update that new application, you have to get the newer
 version of updater.exe.
+
+Nevertheless you should still strive to use the newest available version of
+updater in order to get fixes and improvements and get the best update
+experience that the updater can provide.
