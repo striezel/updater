@@ -84,7 +84,7 @@ namespace updater.software
                 HashAlgorithm.SHA256,
                 "599bdd616f406394f56f6f5607d0ef392edf807290d1deef3b07c8195aea1e27",
                 signature,
-                "/VERYSILENT /ALLUSERS");
+                "/VERYSILENT /ALLUSERS /NORESTART");
             return new AvailableSoftware("Shotcut",
                 "24.01.28",
                 "^Shotcut$",
@@ -280,8 +280,19 @@ namespace updater.software
             {
                 // Uninstall previous version to avoid having two Shotcut entries in control panel.
                 var proc = new Process();
-                proc.StartInfo.FileName = Path.Combine(detected.installPath, "uninstall.exe");
-                proc.StartInfo.Arguments = "/S";
+                var path = Path.Combine(detected.installPath, "unins000.exe");
+                if (File.Exists(path))
+                {
+                    // Inno Setup uninstaller
+                    proc.StartInfo.FileName = path;
+                    proc.StartInfo.Arguments = "/VERYSILENT /NORESTART";
+                }
+                else
+                {
+                    // older uninstaller
+                    proc.StartInfo.FileName = Path.Combine(detected.installPath, "uninstall.exe");
+                    proc.StartInfo.Arguments = "/S";
+                }
                 processes.Add(proc);
                 return processes;
             }
