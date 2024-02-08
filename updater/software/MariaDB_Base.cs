@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2022  Dirk Stolle
+    Copyright (C) 2022, 2024  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -158,7 +158,7 @@ namespace updater.software
             int idx = release.files.FindIndex(x => x.os == "Windows" && x.package_type == "MSI Package" && x.cpu == "x86_64");
             if (idx == -1)
             {
-                logger.Error("Error: There seems to be no matching installer for MariaDB on Windows!");
+                logger.Error("Error: There seems to be no matching installer for MariaDB " + maxVersion.full() + " on Windows!");
                 return null;
             }
             if (string.IsNullOrEmpty(release.release_id)
