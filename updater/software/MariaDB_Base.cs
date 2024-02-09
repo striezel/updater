@@ -136,36 +136,47 @@ namespace updater.software
                 return null;
             }
 
-            // First entry in release list always seems to be the most recent one.
-            var maxVersion = new Triple("0.0.0");
-            foreach (var item in wrapper.releases.Keys)
+            Release release = null;
+            int idx = -1;
+            do
             {
-                var version = new Triple(item);
-                if (version > maxVersion)
+                var maxVersion = new Triple("0.0.0");
+                foreach (var item in wrapper.releases.Keys)
                 {
-                    maxVersion = version;
+                    var version = new Triple(item);
+                    if (version > maxVersion)
+                    {
+                        maxVersion = version;
+                    }
                 }
-            }
 
-            var release = wrapper.releases[maxVersion.full()];
-            // There should be several files for download.
-            if ((release.files == null) || (release.files.Count == 0))
+                release = wrapper.releases[maxVersion.full()];
+                // There should be several files for download.
+                if ((release.files == null) || (release.files.Count == 0))
+                {
+                    logger.Error("Error: MariaDB API returned empty file list for release " + release.release_name + "!");
+                    return null;
+                }
+                // Find the appropriate download for 64-bit Windows.
+                idx = release.files.FindIndex(x => x.os == "Windows" && x.package_type == "MSI Package" && x.cpu == "x86_64");
+                if (idx == -1)
+                {
+                    logger.Warn("Info: There seems to be no matching installer for MariaDB "
+                        + maxVersion.full() + " on Windows. Trying next newest version instead.");
+                    wrapper.releases.Remove(maxVersion.full());
+                    continue;
+                }
+                if (string.IsNullOrEmpty(release.release_id)
+                    || string.IsNullOrEmpty(release.files[idx].file_download_url)
+                    || string.IsNullOrEmpty(release.files[idx].checksum.sha256sum))
+                {
+                    logger.Error("Error: MariaDB API response does not contain enough information for installer download!");
+                    return null;
+                }
+            } while (wrapper.releases.Count > 0 && idx == -1);
+            if ((idx == -1) || (release == null))
             {
-                logger.Error("Error: MariaDB API returned empty file list for release " + release.release_name + "!");
-                return null;
-            }
-            // Find the appropriate download for 64-bit Windows.
-            int idx = release.files.FindIndex(x => x.os == "Windows" && x.package_type == "MSI Package" && x.cpu == "x86_64");
-            if (idx == -1)
-            {
-                logger.Error("Error: There seems to be no matching installer for MariaDB " + maxVersion.full() + " on Windows!");
-                return null;
-            }
-            if (string.IsNullOrEmpty(release.release_id)
-                || string.IsNullOrEmpty(release.files[idx].file_download_url)
-                || string.IsNullOrEmpty(release.files[idx].checksum.sha256sum))
-            {
-                logger.Error("Error: MariaDB API response does not contain enough information for installer download!");
+                logger.Error("Error: There is no matching installer for MariaDB " + branch + " on Windows!");
                 return null;
             }
 
