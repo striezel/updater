@@ -16,9 +16,7 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-using System;
 using System.Collections.Generic;
-using System.Text.RegularExpressions;
 using updater.data;
 
 namespace updater.software
@@ -28,12 +26,6 @@ namespace updater.software
     /// </summary>
     public class HexChat : NoPreUpdateProcessSoftware
     {
-        /// <summary>
-        /// NLog.Logger for HexChat class
-        /// </summary>
-        private static readonly NLog.Logger logger = NLog.LogManager.GetLogger(typeof(HexChat).FullName);
-
-
         /// <summary>
         /// Default constructor.
         /// </summary>
@@ -89,7 +81,7 @@ namespace updater.software
         /// exception in the later case.</returns>
         public override bool implementsSearchForNewer()
         {
-            return true;
+            return false;
         }
 
 
@@ -100,46 +92,9 @@ namespace updater.software
         /// that was retrieved from the net.</returns>
         public override AvailableSoftware searchForNewer()
         {
-            logger.Info("Searching for newer version of HexChat...");
-            // Just getting the latest release does not work here, because that may also be a release candidate, and we do not want that.
-            string html;
-            var client = HttpClientProvider.Provide();
-            try
-            {
-                var task = client.GetStringAsync("https://hexchat.github.io/downloads.html");
-                task.Wait();
-                html = task.Result;
-            }
-            catch (Exception ex)
-            {
-                logger.Warn("Exception occurred while checking for newer version of HexChat: " + ex.Message);
-                return null;
-            }
-
-            // HTML text will contain hashes like "4b47930951ebc46e9cb8e8201856b8bddcd7499f5510fe1059f67d65cc80bf07  HexChat 2.16.1 x64.exe".
-            var reVersion = new Regex("([0-9a-f]{64})  HexChat ([0-9]+\\.[0-9]+\\.[0-9]+) x64\\.exe");
-            var matchVersion = reVersion.Match(html);
-            if (!matchVersion.Success)
-                return null;
-            string hash_64_bit = matchVersion.Groups[1].Value;
-            string current_version = matchVersion.Groups[2].Value;
-
-            reVersion = new Regex("([0-9a-f]{64})  HexChat ([0-9]+\\.[0-9]+\\.[0-9]+) x86\\.exe");
-            matchVersion = reVersion.Match(html);
-            if (!matchVersion.Success)
-                return null;
-            string hash_32_bit = matchVersion.Groups[1].Value;
-
-            var new_info = knownInfo();
-            string old_version = new_info.newestVersion;
-
-            new_info.newestVersion = current_version;
-            new_info.install32Bit.checksum = hash_32_bit;
-            new_info.install32Bit.downloadUrl = new_info.install32Bit.downloadUrl.Replace(old_version, current_version);
-            new_info.install64Bit.checksum = hash_64_bit;
-            new_info.install64Bit.downloadUrl = new_info.install64Bit.downloadUrl.Replace(old_version, current_version);
-
-            return new_info;
+            // HexChat 2.16.2 is the final release, there will be no newer versions.
+            // See <https://hexchat.github.io/news/2.16.2.html> for more information.
+            return null;
         }
 
 

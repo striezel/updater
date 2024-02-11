@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2023  Dirk Stolle
+    Copyright (C) 2023, 2024  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -34,37 +34,6 @@ namespace updater_test.software
         public void Test_info()
         {
             _info(new HexChat(false));
-        }
-
-
-        /// <summary>
-        /// Checks whether the class implements the searchForNewer() method.
-        /// </summary>
-        [TestMethod]
-        public void Test_implementsSearchForNewer()
-        {
-            var hc = new HexChat(false);
-            Assert.IsTrue(hc.implementsSearchForNewer());
-        }
-
-
-        /// <summary>
-        /// Checks whether searchForNewer() returns something.
-        /// </summary>
-        [TestMethod]
-        public void Test_searchForNewer()
-        {
-            _searchForNewer(new HexChat(false));
-        }
-
-
-        /// <summary>
-        /// Checks whether the class info is up to date.
-        /// </summary>
-        [TestMethod]
-        public void Test_upToDate_info()
-        {
-            _upToDate_info(new HexChat(false));
         }
     }
 }
