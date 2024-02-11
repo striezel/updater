@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2023  Dirk Stolle
+    Copyright (C) 2023, 2024  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -52,19 +52,19 @@ namespace updater.software
         public override AvailableSoftware knownInfo()
         {
             return new AvailableSoftware("HexChat",
-                "2.16.1",
+                "2.16.2",
                 "^HexChat$",
                 "^HexChat$",
                 new InstallInfoExe(
-                    "https://dl.hexchat.net/hexchat/HexChat%202.16.1%20x86.exe",
+                    "https://github.com/hexchat/hexchat/releases/download/v2.16.2/HexChat.2.16.2.x86.exe",
                     HashAlgorithm.SHA256,
-                    "ab6db5c0cdd0a1ddd80dd7124430a6b56d75905859e4bab68c973837171c6161",
+                    "830f32073130faaeaba22b7e4f7f8b21ecd476a1236fabb675b7de5a8bf8c026",
                     Signature.None,
                     "/VERYSILENT /NORESTART"),
                 new InstallInfoExe(
-                    "https://dl.hexchat.net/hexchat/HexChat%202.16.1%20x64.exe",
+                    "https://github.com/hexchat/hexchat/releases/download/v2.16.2/HexChat.2.16.2.x64.exe",
                     HashAlgorithm.SHA256,
-                    "4b47930951ebc46e9cb8e8201856b8bddcd7499f5510fe1059f67d65cc80bf07",
+                    "39da96a323ba98583e716a7ee5af1a02a34935dbe3b0865b54c65ce7784e0828",
                     Signature.None,
                     "/VERYSILENT /NORESTART")
                     );
