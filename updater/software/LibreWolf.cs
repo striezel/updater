@@ -139,7 +139,7 @@ namespace updater.software
         /// that was retrieved from the net.</returns>
         public override AvailableSoftware searchForNewer()
         {
-            logger.Info("Searcing for newer version of Firefox...");
+            logger.Info("Searcing for newer version of LibreWolf...");
             var newerVersion = determineNewestRelease();
             var known = knownInfo();
             var knownVersion = new ShrinkingDashedQuartet(known.newestVersion);
