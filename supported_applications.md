@@ -55,4 +55,5 @@ updater application.
 * Transmission (BitTorrent client)
 * TreeSize Free
 * VLC media player
+* WinMerge
 * WinSCP

@@ -6,6 +6,10 @@ improvements may be omitted.)_
 
 ## Next Version
 
+__[new features]__
+
+* Update support for WinMerge is added.
+
 __[changes]__
 
 * Adjust uninstallation routine for Shotcut to detect the proper uninstall
