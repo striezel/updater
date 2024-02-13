@@ -15,6 +15,10 @@ __[changes]__
 * Adjust uninstallation routine for Shotcut to detect the proper uninstall
   binary.
 
+__[maintenance]__
+
+* Update certificate information for Acrobat Reader 2020 patches.
+
 ## Version 2024.01.25.0
 
 __[new features]__
