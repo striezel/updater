@@ -37,7 +37,7 @@ namespace updater.software
 
 
         /// <summary>
-        /// publisher name for signed executables of Firefox ESR
+        /// publisher name for signed executables of Firefox Aurora
         /// </summary>
         private const string publisherX509 = "CN=Mozilla Corporation, OU=Firefox Engineering Operations, O=Mozilla Corporation, L=Mountain View, S=California, C=US";
 
