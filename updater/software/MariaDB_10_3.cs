@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2022, 2023  Dirk Stolle
+    Copyright (C) 2022, 2023, 2024  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -26,6 +26,18 @@ namespace updater.software
     /// </summary>
     public sealed class MariaDB_10_3: MariaDB_Base
     {
+        /// <summary>
+        /// publisher of signed binaries for MariaDB 10.3
+        /// </summary>
+        private new const string publisherX509 = "CN=MariaDB Corporation Ab, OU=Connectors, O=MariaDB Corporation Ab, L=Espoo, C=FI";
+
+
+        /// <summary>
+        /// expiration date of the certificate for MariaDB 10.3
+        /// </summary>
+        private static new readonly DateTime certificateExpiration = new(2024, 1, 4, 23, 59, 59, DateTimeKind.Utc);
+
+
         /// <summary>
         /// Default constructor.
         /// </summary>

@@ -27,18 +27,6 @@ namespace updater.software
     public sealed class MariaDB_10_11: MariaDB_Base
     {
         /// <summary>
-        /// publisher of signed binaries for MariaDB 10.11
-        /// </summary>
-        private new const string publisherX509 = "CN=\"MariaDB USA, Inc.\", O=\"MariaDB USA, Inc.\", L=Redwood City, S=California, C=US";
-
-
-        /// <summary>
-        /// expiration date of the certificate
-        /// </summary>
-        private static new readonly DateTime certificateExpiration = new(2026, 3, 21, 23, 59, 59, DateTimeKind.Utc);
-
-
-        /// <summary>
         /// Default constructor.
         /// </summary>
         /// <param name="autoGetNewer">whether to automatically get newer
