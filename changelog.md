@@ -21,6 +21,7 @@ __[maintenance]__
 * Update certificate information for MariaDB 10.4 installer.
 * Update certificate information for MariaDB 10.5 installer.
 * Update certificate information for MariaDB 10.6 installer.
+* Update certificate information for MariaDB 10.11 installer.
 
 ## Version 2024.01.25.0
 

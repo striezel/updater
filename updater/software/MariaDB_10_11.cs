@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2023  Dirk Stolle
+    Copyright (C) 2023, 2024  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -27,6 +27,18 @@ namespace updater.software
     public sealed class MariaDB_10_11: MariaDB_Base
     {
         /// <summary>
+        /// publisher of signed binaries for MariaDB 10.11
+        /// </summary>
+        private new const string publisherX509 = "CN=\"MariaDB USA, Inc.\", O=\"MariaDB USA, Inc.\", L=Redwood City, S=California, C=US";
+
+
+        /// <summary>
+        /// expiration date of the certificate
+        /// </summary>
+        private static new readonly DateTime certificateExpiration = new(2026, 3, 21, 23, 59, 59, DateTimeKind.Utc);
+
+
+        /// <summary>
         /// Default constructor.
         /// </summary>
         /// <param name="autoGetNewer">whether to automatically get newer
@@ -43,7 +55,7 @@ namespace updater.software
         /// details about the software.</returns>
         public override AvailableSoftware knownInfo()
         {
-            const string version = "10.11.6";
+            const string version = "10.11.7";
             var signature = new Signature(publisherX509, certificateExpiration);
             return new AvailableSoftware("MariaDB Server 10.11",
                 version,
@@ -53,7 +65,7 @@ namespace updater.software
                 new InstallInfoMsi(
                     "https://downloads.mariadb.org/rest-api/mariadb/" + version + "/mariadb-" + version + "-winx64.msi",
                     HashAlgorithm.SHA256,
-                    "9389419b275a1a6b1afd24bd12dc0144715d6a472707447de0159ba6ec6d139b",
+                    "2b0fc795146b431224ab7f21cd69cef723edb285acf2d5ac668d54eb7dca48da",
                     signature,
                     "/qn /norestart")
                 );
