@@ -20,6 +20,7 @@ __[maintenance]__
 * Update certificate information for Acrobat Reader 2020 patches.
 * Update certificate information for MariaDB 10.4 installer.
 * Update certificate information for MariaDB 10.5 installer.
+* Update certificate information for MariaDB 10.6 installer.
 
 ## Version 2024.01.25.0
 
