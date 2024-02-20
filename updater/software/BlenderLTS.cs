@@ -119,7 +119,7 @@ namespace updater.software
                 task.Wait();
                 var html = task.Result;
                 // Installer will be something like "https://www.blender.org/download/release/Blender3.6/blender-3.6.8-windows-x64.msi".
-                var reVersion = new Regex("blender\\-([0-9]+\\.[0-9]+\\.[0-9])+\\-windows\\-x64\\.msi");
+                var reVersion = new Regex("blender\\-([0-9]+\\.[0-9]+\\.[0-9]+)\\-windows\\-x64\\.msi");
                 Match matchVersion = reVersion.Match(html);
                 if (!matchVersion.Success)
                     return null;
