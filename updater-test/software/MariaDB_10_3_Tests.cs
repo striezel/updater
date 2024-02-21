@@ -33,7 +33,20 @@ namespace updater_test.software
         [TestMethod]
         public void Test_info()
         {
-            _info(new MariaDB_10_3(false));
+            var sw = new MariaDB_10_3(false);
+            Assert.IsNotNull(sw);
+            var info = sw.info();
+            Assert.IsNotNull(info);
+            // name must be set
+            Assert.IsFalse(string.IsNullOrWhiteSpace(info.Name));
+            // 64 bit installation information instance should be present
+            Assert.IsTrue(info.install64Bit != null);
+            // regex should be present
+            Assert.IsTrue(!string.IsNullOrWhiteSpace(info.match64Bit));
+            // 64 bit information should match
+            Assert.AreEqual<bool>(info.install64Bit != null, !string.IsNullOrWhiteSpace(info.match64Bit));
+            // checksums should always be present, or at least a signature for verification
+            Assert.IsTrue(info.install64Bit.hasChecksum() || info.install64Bit.hasVerifiableSignature());
         }
 
 
