@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017, 2018, 2019, 2020, 2021, 2022, 2023  Dirk Stolle
+    Copyright (C) 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -43,7 +43,7 @@ namespace updater.software
         /// <summary>
         /// expiration date of the certificate
         /// </summary>
-        private static readonly DateTime certificateExpiration = new(2025, 6, 1, 5, 39, 27, DateTimeKind.Utc);
+        private static readonly DateTime certificateExpiration = new(2026, 9, 13, 12, 18, 28, DateTimeKind.Utc);
 
 
         /// <summary>
@@ -65,19 +65,19 @@ namespace updater.software
         {
             var signature = new Signature(publisherX509, certificateExpiration);
             return new AvailableSoftware("LibreOffice",
-                "7.6.4.1",
+                "7.6.5.2",
                 "^LibreOffice [0-9]+\\.[0-9]\\.[0-9]\\.[0-9]$",
                 "^LibreOffice [0-9]+\\.[0-9]\\.[0-9]\\.[0-9]$",
                 new InstallInfoLibO(
-                    "https://download.documentfoundation.org/libreoffice/stable/7.6.4/win/x86/LibreOffice_7.6.4_Win_x86.msi",
+                    "https://download.documentfoundation.org/libreoffice/stable/7.6.5/win/x86/LibreOffice_7.6.5_Win_x86.msi",
                     HashAlgorithm.SHA256,
-                    "8dd1302de5414e9196a0ef847b5b552417b6832bcc8e5394b2bebd2966c094fc",
+                    "0d151754abb89e8adbfa645eac57237ce45e1ae6a996bcbcbb61b602f19667e2",
                     signature,
                     "/qn /norestart"),
                 new InstallInfoLibO(
-                    "https://download.documentfoundation.org/libreoffice/stable/7.6.4/win/x86_64/LibreOffice_7.6.4_Win_x86-64.msi",
+                    "https://download.documentfoundation.org/libreoffice/stable/7.6.5/win/x86_64/LibreOffice_7.6.5_Win_x86-64.msi",
                     HashAlgorithm.SHA256,
-                    "65678ac729cd0b545d14703879b601872d285c2934ae8d76452f7c2fb2c62d15",
+                    "505ca8ca48b816b5210b47b3a0f235cd9d9b58e3fbe4f181afb9ca45f3d7fdfa",
                     signature,
                     "/qn /norestart")
                     );
