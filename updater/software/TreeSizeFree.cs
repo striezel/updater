@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2021, 2022, 2023  Dirk Stolle
+    Copyright (C) 2021, 2022, 2023, 2024  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -68,11 +68,11 @@ namespace updater.software
             var info = new InstallInfoExe(
                 "https://downloads.jam-software.de/treesize_free/TreeSizeFreeSetup.exe",
                 HashAlgorithm.SHA256,
-                "a73362664fbd8b5907b35bf37f16535e3b6e343ceb6672e82859655ffaaecd05",
+                "a1f1c58fd0798de51f3a5624530a6833bc91e85d0637bb870835ab3897e6b264",
                 signature,
                 "/VERYSILENT /NORESTART");
             return new AvailableSoftware("TreeSize Free",
-                "4.7.1",
+                "4.7.2",
                 "^TreeSize Free V[0-9]+\\.[0-9]+(\\.[0-9]+)?$",
                 "^TreeSize Free V[0-9]+\\.[0-9]+(\\.[0-9]+)?( \\(64 bit\\)( \\(64 Bit\\))?)?$",
                 info,
