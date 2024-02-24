@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2021, 2022, 2023  Dirk Stolle
+    Copyright (C) 2021, 2022, 2023, 2024  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -65,19 +65,19 @@ namespace updater.software
         {
             var signature = new Signature(publisherX509, certificateExpiration);
             return new AvailableSoftware("Git",
-                "2.43.0",
+                "2.44.0",
                 "^(Git|Git version [0-9]+\\.[0-9]+\\.[0-9]+(\\.[0-9]+)?)$",
                 "^(Git|Git version [0-9]+\\.[0-9]+\\.[0-9]+(\\.[0-9]+)?)$",
                 new InstallInfoExe(
-                    "https://github.com/git-for-windows/git/releases/download/v2.43.0.windows.1/Git-2.43.0-32-bit.exe",
+                    "https://github.com/git-for-windows/git/releases/download/v2.44.0.windows.1/Git-2.44.0-32-bit.exe",
                     HashAlgorithm.SHA256,
-                    "aee1587a4004c6a57b614c81fdc2ae1fa33de0daaf6b650cf6467e4253e024a9",
+                    "5ba23d73e861d872416175ac6a05304875d6ec420c08d0217329580ca1ea0fff",
                     signature,
                     "/VERYSILENT /NORESTART"),
                 new InstallInfoExe(
-                    "https://github.com/git-for-windows/git/releases/download/v2.43.0.windows.1/Git-2.43.0-64-bit.exe",
+                    "https://github.com/git-for-windows/git/releases/download/v2.44.0.windows.1/Git-2.44.0-64-bit.exe",
                     HashAlgorithm.SHA256,
-                    "a6058d7c4c16bfa5bcd6fde051a92de8c68535fd7ebade55fc0ab1c41be3c8d5",
+                    "914ffc96cee0631d09049b9d87d4cd8ac9c98ead9a9f9a094d3341348324a9ec",
                     signature,
                     "/VERYSILENT /NORESTART")
                     );
