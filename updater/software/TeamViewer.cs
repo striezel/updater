@@ -44,7 +44,7 @@ namespace updater.software
         /// <summary>
         /// expiration date for the publisher certificate
         /// </summary>
-        private static readonly DateTime certificateExpiration = new(2024, 1, 31, 23, 59, 59, DateTimeKind.Utc);
+        private static readonly DateTime certificateExpiration = new(2026, 5, 6, 23, 59, 59, DateTimeKind.Utc);
 
 
         /// <summary>
@@ -66,7 +66,7 @@ namespace updater.software
         {
             var signature = new Signature(publisherX509, certificateExpiration);
             return new AvailableSoftware("TeamViewer",
-                "15.50.5",
+                "15.51.5",
                 "^TeamViewer$",
                 "^TeamViewer$",
                 new InstallInfoExe(
