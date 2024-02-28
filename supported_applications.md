@@ -1,9 +1,7 @@
 # Applications
 
-The following list shows applications that are or will be recognized by the
-updater application.
-
-## Implemented
+The following list shows applications that are recognized by the updater
+application.
 
 * 7-Zip
 * Adobe Acrobat Reader 2017 (update to Reader 2020 only)
