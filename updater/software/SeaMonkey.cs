@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017, 2018, 2020, 2021, 2022, 2023  Dirk Stolle
+    Copyright (C) 2017, 2018, 2020, 2021, 2022, 2023, 2024  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -83,7 +83,7 @@ namespace updater.software
         private static Dictionary<string, string> knownChecksums32Bit()
         {
             // These are the checksums for Windows 32 bit installers from
-            // https://archive.mozilla.org/pub/seamonkey/releases/2.53.18/SHA512SUMS.txt
+            // https://archive.seamonkey-project.org/releases/2.53.18/SHA512SUMS.txt
             return new Dictionary<string, string>(23)
             {
                 { "cs", "dd2bd35bae1c4e6fcf1c6ebbfbf8765520ffde0870f3b09c4966eff55d1ef438c84a16fc2b36c225102111077a741619124a4c825a7c087cacd2f5f880d29008" },
@@ -120,7 +120,7 @@ namespace updater.software
         private static Dictionary<string, string> knownChecksums64Bit()
         {
             // These are the checksums for Windows 64 bit installers from
-            // https://archive.mozilla.org/pub/seamonkey/releases/2.53.18/SHA512SUMS.txt
+            // https://archive.seamonkey-project.org/releases/2.53.18/SHA512SUMS.txt
             return new Dictionary<string, string>(23)
             {
                 { "cs", "56a0e187b8e6f82849e46e06d8c8290c0d4b1930507b1389589d813147b8d8c27a330874ab394ecbf7d45d104c7fc61e2b0845a0f2d9b26df72d38b9a9a04c76" },
@@ -177,13 +177,13 @@ namespace updater.software
                 "^SeaMonkey [0-9]+\\.[0-9]+(\\.[0-9]+(\\.[0-9]+)?)? \\(x86 " + Regex.Escape(languageCode) + "\\)$",
                 "^SeaMonkey [0-9]+\\.[0-9]+(\\.[0-9]+(\\.[0-9]+)?)? \\(x64 " + Regex.Escape(languageCode) + "\\)$",
                 new InstallInfoExe(
-                    "https://archive.mozilla.org/pub/seamonkey/releases/" + knownVersion + "/win32/" + languageCode + "/seamonkey-" + knownVersion + "." + languageCode + ".win32.installer.exe",
+                    "https://archive.seamonkey-project.org/releases/" + knownVersion + "/win32/" + languageCode + "/seamonkey-" + knownVersion + "." + languageCode + ".win32.installer.exe",
                     HashAlgorithm.SHA512,
                     checksum32Bit,
                     signature,
                     "-ms -ma"),
                 new InstallInfoExe(
-                    "https://archive.mozilla.org/pub/seamonkey/releases/" + knownVersion + "/win64/" + languageCode + "/seamonkey-" + knownVersion + "." + languageCode + ".win64.installer.exe",
+                    "https://archive.seamonkey-project.org/releases/" + knownVersion + "/win64/" + languageCode + "/seamonkey-" + knownVersion + "." + languageCode + ".win64.installer.exe",
                     HashAlgorithm.SHA512,
                     checksum64Bit,
                     signature,
@@ -208,7 +208,7 @@ namespace updater.software
         /// Returns null, if an error occurred.</returns>
         public string determineNewestVersion()
         {
-            string url = "https://archive.mozilla.org/pub/seamonkey/releases/";
+            string url = "https://archive.seamonkey-project.org/releases/";
             string htmlCode;
             var client = HttpClientProvider.Provide();
             try
@@ -223,7 +223,7 @@ namespace updater.software
                 return null;
             }
 
-            var reVersion = new Regex("/[0-9]+\\.[0-9]+(\\.[0-9]+(\\.[0-9]+)?)?/");
+            var reVersion = new Regex(">[0-9]+\\.[0-9]+(\\.[0-9]+(\\.[0-9]+)?)?<");
             MatchCollection matches = reVersion.Matches(htmlCode);
             if (matches.Count <= 0)
                 return null;
@@ -231,16 +231,16 @@ namespace updater.software
             var releaseList = new List<Quartet>();
             foreach (Match item in matches)
             {
-                var quart = new Quartet(item.Value.Replace("/", ""));
+                var quart = new Quartet(item.Value[1..^1]);
                 releaseList.Add(quart);
             }
             releaseList.Sort();
             var newest = releaseList[releaseList.Count - 1];
 
-            if (htmlCode.Contains("/" + newest.full() + "/"))
+            if (htmlCode.Contains(">" + newest.full() + "<"))
                 return newest.full();
             var trip = new Triple(newest.full());
-            if (htmlCode.Contains("/" + trip.full() + "/"))
+            if (htmlCode.Contains(">" + trip.full() + "<"))
                 return trip.full();
             else
                 return newest.major.ToString() + "." + newest.minor.ToString();
@@ -257,9 +257,9 @@ namespace updater.software
             if (string.IsNullOrWhiteSpace(newerVersion))
                 return null;
             /* Checksums are found in a file like
-             * https://archive.mozilla.org/pub/seamonkey/releases/2.53.6/SHA1SUMS.txt
+             * https://archive.seamonkey-project.org/releases/2.53.18.1/SHA512SUMS.txt
              * Common lines look like
-             * "7219....f4b4d  win32/en-GB/SeaMonkey Setup 2.46.exe"
+             * "be06...690f0 sha512 40284320 win32/en-GB/seamonkey-2.53.18.1.en-GB.win32.installer.exe"
              * 
              * Version 2.53.1 uses a new format. Common lines look like
              * 7ccee70c54580c0c0949a9bc86737fbcb35c46ed sha1 38851663 win32/en-GB/seamonkey-2.53.6.en-GB.win32.installer.exe
@@ -268,7 +268,7 @@ namespace updater.software
              * for the 64 bit installer.
              */
 
-            string url = "https://archive.mozilla.org/pub/seamonkey/releases/" + newerVersion + "/SHA512SUMS.txt";
+            string url = "https://archive.seamonkey-project.org/releases/" + newerVersion + "/SHA512SUMS.txt";
             string sha1SumsContent;
             var client = HttpClientProvider.Provide();
             try
