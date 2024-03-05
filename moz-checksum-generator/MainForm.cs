@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017, 2018, 2020, 2021, 2022, 2023  Dirk Stolle
+    Copyright (C) 2017, 2018, 2020, 2021, 2022, 2023, 2024  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -294,7 +294,7 @@ namespace moz_checksum_generator
             lblVersion.Text = "Version " + version;
 
             /* Checksums are found in a file like
-             * https://archive.mozilla.org/pub/seamonkey/releases/2.53.17/SHA512SUMS.txt
+             * https://archive.seamonkey-project.org/releases/2.53.17/SHA512SUMS.txt
              * Common lines look like
              * 16695546e9a77cfebdb6e1dafe64f40a5f775116209f3c85e380439c32d3c320dd77129706def5c9592a2684009f1c060e370cac7098103c999b0969bc350748 sha512 40218176 win32/en-GB/seamonkey-2.53.17.en-GB.win32.installer.exe
              * for the 32 bit installer, or like
@@ -302,7 +302,7 @@ namespace moz_checksum_generator
              * for the 64 bit installer.
              */
 
-            string url = "https://archive.mozilla.org/pub/seamonkey/releases/" + version + "/SHA512SUMS.txt";
+            string url = "https://archive.seamonkey-project.org/releases/" + version + "/SHA512SUMS.txt";
             string sha512SumsContent;
             using (var client = new HttpClient())
             {

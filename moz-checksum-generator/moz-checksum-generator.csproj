@@ -8,9 +8,9 @@
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>disable</ImplicitUsings>
     <Description>Utility to generates checksums for Mozilla Firefox / SeaMonkey / Thunderbird setups.</Description>
-    <Copyright>Copyright ©  2017-2023 Dirk Stolle</Copyright>
-    <FileVersion>1.2.0.0</FileVersion>
-    <AssemblyVersion>1.2.0.0</AssemblyVersion>
+    <Copyright>Copyright ©  2017-2024 Dirk Stolle</Copyright>
+    <FileVersion>1.2.1.0</FileVersion>
+    <AssemblyVersion>1.2.1.0</AssemblyVersion>
     <PackageLicenseExpression>GPL-3.0-or-later</PackageLicenseExpression>
   </PropertyGroup>
 
