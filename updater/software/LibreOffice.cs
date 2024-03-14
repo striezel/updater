@@ -65,19 +65,19 @@ namespace updater.software
         {
             var signature = new Signature(publisherX509, certificateExpiration);
             return new AvailableSoftware("LibreOffice",
-                "7.6.5.2",
-                "^LibreOffice [0-9]+\\.[0-9]\\.[0-9]\\.[0-9]$",
-                "^LibreOffice [0-9]+\\.[0-9]\\.[0-9]\\.[0-9]$",
+                "24.2.1.2",
+                "^LibreOffice [0-9]+\\.[0-9]+\\.[0-9]\\.[0-9]$",
+                "^LibreOffice [0-9]+\\.[0-9]+\\.[0-9]\\.[0-9]$",
                 new InstallInfoLibO(
-                    "https://download.documentfoundation.org/libreoffice/stable/7.6.5/win/x86/LibreOffice_7.6.5_Win_x86.msi",
+                    "https://download.documentfoundation.org/libreoffice/stable/24.2.1/win/x86/LibreOffice_24.2.1_Win_x86.msi",
                     HashAlgorithm.SHA256,
-                    "0d151754abb89e8adbfa645eac57237ce45e1ae6a996bcbcbb61b602f19667e2",
+                    "fbf6f7b49da37794cf34cdb816d7b7c9644b3b74383bdbcafc264f6782132a8a",
                     signature,
                     "/qn /norestart"),
                 new InstallInfoLibO(
-                    "https://download.documentfoundation.org/libreoffice/stable/7.6.5/win/x86_64/LibreOffice_7.6.5_Win_x86-64.msi",
+                    "https://download.documentfoundation.org/libreoffice/stable/24.2.1/win/x86_64/LibreOffice_24.2.1_Win_x86-64.msi",
                     HashAlgorithm.SHA256,
-                    "505ca8ca48b816b5210b47b3a0f235cd9d9b58e3fbe4f181afb9ca45f3d7fdfa",
+                    "0a860244ca570695e4846a51b1f7de0dd46b21f8c58577d52932a91c6aa48948",
                     signature,
                     "/qn /norestart")
                     );
@@ -128,7 +128,7 @@ namespace updater.software
                 return null;
             }
             // Link is something like <a href="5.3.0/">5.3.0/</a>, no fourth digit.
-            var reVersion = new Regex("<a href=\"[0-9]\\.[0-9]\\.[0-9]/\">[0-9]\\.[0-9]\\.[0-9]/</a>");
+            var reVersion = new Regex("<a href=\"[0-9]+\\.[0-9]+\\.[0-9]+/\">[0-9]+\\.[0-9]+\\.[0-9]+/</a>");
             Match matchVersion = reVersion.Match(htmlCode);
             if (!matchVersion.Success)
                 return null;

@@ -8,6 +8,7 @@ improvements may be omitted.)_
 
 __[changes]__
 
+* Adjust search for newer version of LibreOffice for the new version scheme.
 * Adjust search for newer version of SeaMonkey for the new / modified website.
 
 ## Version 2024.02.29.0
