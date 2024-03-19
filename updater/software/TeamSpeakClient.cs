@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2021, 2023  Dirk Stolle
+    Copyright (C) 2021, 2023, 2024  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -73,12 +73,12 @@ namespace updater.software
                 return latestSupported32BitVersion();
             }
 
-            const string version = "3.6.1";
+            const string version = "3.6.2";
             var signature = new Signature(publisherX509, certificateExpiration);
             var installer_64_bits = new InstallInfoExe(
                     "https://files.teamspeak-services.com/releases/client/" + version + "/TeamSpeak3-Client-win64-" + version + ".exe",
                     HashAlgorithm.SHA256,
-                    "3b6cf0a99f1686a53c3afc15e502593f50e3822a86dde400fee9ba38242c9532",
+                    "eab9e0c1a7134643e5f7116b7e0e58faffb20d6db528f8b333d2c2b5d1ab68ae",
                     signature,
                     "/S");
             return new AvailableSoftware(
