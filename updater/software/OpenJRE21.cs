@@ -117,7 +117,7 @@ namespace updater.software
             {
                 try
                 {
-                    json = client.DownloadString("https://api.adoptopenjdk.net/v3/assets/feature_releases/21/ga?heap_size=normal&image_type=jre&jvm_impl=hotspot&os=windows&page=0&page_size=1&project=jdk&sort_method=DEFAULT&sort_order=DESC&vendor=adoptopenjdk");
+                    json = client.DownloadString("https://api.adoptium.net/v3/assets/feature_releases/21/ga?heap_size=normal&image_type=jre&jvm_impl=hotspot&os=windows&page=0&page_size=1&project=jdk&sort_method=DEFAULT&sort_order=DESC&vendor=eclipse");
                 }
                 catch (Exception ex)
                 {

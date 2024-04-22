@@ -4,6 +4,13 @@ _(Note: This changelog focuses on the major changes between the different
 versions. Therefore, it may not contain all changes. Especially smaller fixes or
 improvements may be omitted.)_
 
+## Next Version
+
+__[changes]__
+
+* Adjust search for newer version of Eclipse Temurin JDK 21 LTS and Eclipse
+  Temurin JRE 21 LTS.
+
 ## Version 2024.03.27.0
 
 __[changes]__
