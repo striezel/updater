@@ -67,14 +67,14 @@ namespace updater.software
         {
             var signature = new Signature(publisherX509, certificateExpiration);
             return new AvailableSoftware("Eclipse Temurin JDK 21 with Hotspot",
-                "21.0.2.13",
+                "21.0.3.9",
                 null, // no 32 bit installer
                 "^Eclipse Temurin JDK [a-z]+ Hotspot 21\\.[0-9]+\\.[0-9]+\\+[0-9]+(\\.[0-9]+)? \\(x64\\)$",
                 null, // no 32 bit installer
                 new InstallInfoMsiNoLocation(
-                    "https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.2%2B13/OpenJDK21U-jdk_x64_windows_hotspot_21.0.2_13.msi",
+                    "https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.3%2B9/OpenJDK21U-jdk_x64_windows_hotspot_21.0.3_9.msi",
                     HashAlgorithm.SHA256,
-                    "d0c53b1bfa741b7f6484200faf8452e5a779357c2a29aa6b0dfdedf7173e903f",
+                    "264db89e74213f3ea2d7b7379d1c2ac346797d03b4d88cbf4ce72c3ff96477a1",
                     signature,
                     "INSTALLLEVEL=3 /qn /norestart")
                     );
