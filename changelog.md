@@ -11,6 +11,10 @@ __[changes]__
 * Adjust search for newer version of Eclipse Temurin JDK 21 LTS and Eclipse
   Temurin JRE 21 LTS.
 
+__[maintenance]__
+
+* Update certificate information for Opera GX installers.
+
 ## Version 2024.03.27.0
 
 __[changes]__
