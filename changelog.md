@@ -14,7 +14,7 @@ __[changes]__
 __[maintenance]__
 
 * Update certificate information for Opera GX installers.
-* NLog library is updated from 5.2.8 to 5.3.1.
+* NLog library is updated from 5.2.8 to 5.3.2.
 
 ## Version 2024.03.27.0
 

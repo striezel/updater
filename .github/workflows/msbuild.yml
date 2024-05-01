@@ -73,7 +73,7 @@ jobs:
         copy updater\bin\Release\net6.0-windows\updater.exe updater-%VERSION%
         copy updater\bin\Release\net6.0-windows\updater.dll updater-%VERSION%
         copy updater\bin\Release\net6.0-windows\updater.runtimeconfig.json updater-%VERSION%
-        copy "%USERPROFILE%\.nuget\packages\nlog\5.3.1\lib\netstandard2.0\NLog.dll" updater-%VERSION%
+        copy "%USERPROFILE%\.nuget\packages\nlog\5.3.2\lib\netstandard2.0\NLog.dll" updater-%VERSION%
         copy "%USERPROFILE%\.nuget\packages\newtonsoft.json\13.0.3\lib\netstandard2.0\Newtonsoft.Json.dll" updater-%VERSION%
         copy LICENSE updater-%VERSION%
         md updater-%VERSION%\documentation
