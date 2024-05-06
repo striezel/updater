@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017, 2018, 2020, 2021, 2022, 2023  Dirk Stolle
+    Copyright (C) 2017, 2018, 2020, 2021, 2022, 2023, 2024  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -38,13 +38,13 @@ namespace updater.software
         /// <summary>
         /// publisher of signed binaries
         /// </summary>
-        private const string publisherX509 = "CN=Jernej Simončič, O=Jernej Simončič, STREET=Herbersteinova 29, L=Ljubljana, C=SI";
+        private const string publisherX509 = "CN=Jernej Simončič, O=Jernej Simončič, L=Ljubljana, C=SI";
 
 
         /// <summary>
         /// expiration date of the certificate
         /// </summary>
-        private static readonly DateTime certificateExpiration = new(2024, 2, 24, 23, 59, 59, DateTimeKind.Utc);
+        private static readonly DateTime certificateExpiration = new(2027, 2, 28, 6, 22, 14, DateTimeKind.Utc);
 
 
         /// <summary>
@@ -65,14 +65,14 @@ namespace updater.software
         public override AvailableSoftware knownInfo()
         {
             var installer = new InstallInfoExe(
-                "https://download.gimp.org/pub/gimp/v2.10/windows/gimp-2.10.36-setup.exe",
+                "https://download.gimp.org/pub/gimp/v2.10/windows/gimp-2.10.38-setup.exe",
                 HashAlgorithm.SHA256,
-                "947efa2397f7a17b8e4f4c9689e4ab67f00ca220ac1aa0ae0c1e179ccfc4fc10",
+                "e3515980c9012eed67cf78f1151d216725529e95676c16f5ff7478d46230ddab",
                 new Signature(publisherX509, certificateExpiration),
                 "/VERYSILENT /NORESTART");
 
             return new AvailableSoftware("The GIMP",
-                "2.10.36",
+                "2.10.38",
                 "^GIMP [0-9]+\\.[0-9]+\\.[0-9]+$",
                 "^GIMP [0-9]+\\.[0-9]+\\.[0-9]+$",
                 // The GIMP uses the same installer for 32 and 64 bit.
