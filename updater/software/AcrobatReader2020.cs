@@ -128,11 +128,11 @@ namespace updater.software
             // HTML text will contain links to both continuous track and classic
             // track, but we only want the classic stuff. Links will look like
             // '<a disablelinktracking="false" href="https://www.adobe.com/devnet-docs/acrobatetk/tools/ReleaseNotesDC/classic/dcclassic20.005aug2022.html#dc20-005augtwentytwentytwo">20.005.30381</a>'
-            var reVersion = new Regex("href=\"(https://www\\.adobe\\.com/devnet\\-docs/acrobatetk/tools/ReleaseNotesDC/classic/dcclassic20\\.[0-9]{3}[a-z]{3}[0-9]{4}.html)#dc20\\-[0-9]+[a-z]+\">(20\\.[0-9]+\\.[0-9]+)</a>");
+            var reVersion = new Regex("href=\"(https://www\\.adobe\\.com/devnet\\-docs/acrobatetk/tools/ReleaseNotesDC/classic/dcclassic20\\.[0-9]{3}[a-z]{3}[0-9]{4}.html)#dc20\\-[0-9]+[a-z]+\">(20\\.[0-9]+\\.[0-9x]+)</a>");
             var match = reVersion.Match(html);
             if (!match.Success)
                 return null;
-            var latestVersion = match.Groups[2].Value;
+            var latestVersion = match.Groups[2].Value.Replace('x', '0');
             string notesLink = match.Groups[1].Value;
 
             using (var client = new WebClient())
