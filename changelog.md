@@ -13,6 +13,7 @@ __[changes]__
 __[maintenance]__
 
 * Update certificate information for GIMP installer.
+* Update certificate information for Opera installers.
 
 ## Version 2024.05.03.0
 

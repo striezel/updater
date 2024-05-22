@@ -53,7 +53,7 @@ namespace updater.software
         /// <summary>
         /// expiration date of certificate
         /// </summary>
-        private static readonly DateTime certificateExpiration = new(2024, 5, 23, 23, 59, 59, DateTimeKind.Utc);
+        private static readonly DateTime certificateExpiration = new(2026, 5, 29, 23, 59, 59, DateTimeKind.Utc);
 
 
         /// <summary>
@@ -66,19 +66,19 @@ namespace updater.software
             const string silentOptions = "/silent /norestart /launchopera 0 /setdefaultbrowser 0 /enable-stats 0 /enable-installer-stats 0 /pintotaskbar 0 /pin-additional-shortcuts 0 /allusers";
             var signature = new Signature(publisherX509, certificateExpiration);
             return new AvailableSoftware("Opera",
-                "110.0.5130.23",
+                "110.0.5130.35",
                 "^Opera Stable [0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+$",
                 "^Opera Stable [0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+$",
                 new InstallInfoExe(
-                    "https://get.geo.opera.com/pub/opera/desktop/110.0.5130.23/win/Opera_110.0.5130.23_Setup.exe",
+                    "https://get.geo.opera.com/pub/opera/desktop/110.0.5130.35/win/Opera_110.0.5130.35_Setup.exe",
                     HashAlgorithm.SHA256,
-                    "bcaf6694998aa6681c931e8ac478744d26eebac9fba45ef1c5a656076be22a8d",
+                    "7322f1f4615a30ec3e8ef8fd89cd086836983238cf8191d6b7c1aed838c668d9",
                     signature,
                     silentOptions),
                 new InstallInfoExe(
-                    "https://get.geo.opera.com/pub/opera/desktop/110.0.5130.23/win/Opera_110.0.5130.23_Setup_x64.exe",
+                    "https://get.geo.opera.com/pub/opera/desktop/110.0.5130.35/win/Opera_110.0.5130.35_Setup_x64.exe",
                     HashAlgorithm.SHA256,
-                    "3bb0ccbb26cd0e8a5f30041587837cdb57f41a6bd4dd141b66c91bde9029acf4",
+                    "fc5c5821fa9104a90c1bcfca0031fb2050de12d3ddea701d0780992159f6d449",
                     signature,
                     silentOptions)
                     );
