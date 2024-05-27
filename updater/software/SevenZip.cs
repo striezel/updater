@@ -52,19 +52,19 @@ namespace updater.software
         public override AvailableSoftware knownInfo()
         {
             return new AvailableSoftware("7-Zip",
-                "24.05",
+                "24.06",
                 "^7\\-Zip [0-9]+\\.[0-9]{2}$",
                 "^7\\-Zip [0-9]+\\.[0-9]{2} \\(x64\\)$",
                 new InstallInfoExe(
-                    "https://www.7-zip.org/a/7z2405.exe",
+                    "https://www.7-zip.org/a/7z2406.exe",
                     HashAlgorithm.SHA256,
-                    "3194526f123508f9fa56c66e767738e2648fd491c44531af28323a126a679c5d",
+                    "1ea62e6b152e4b7dbadf45289e04bf4ea7431c7928a9b3c6ba5e4c06fe368085",
                     Signature.None,
                     "/S"),
                 new InstallInfoExe(
-                    "https://www.7-zip.org/a/7z2405-x64.exe",
+                    "https://www.7-zip.org/a/7z2406-x64.exe",
                     HashAlgorithm.SHA256,
-                    "12ef1c8127ec3465520e4cfd23605b708d81a5a2cf37ba124f018e5c094de0d9",
+                    "6220bbe6c26d87fc343e0ffa4e20ccfafeca7dab2742e41963c40b56fb884807",
                     Signature.None,
                     "/S")
                 );
