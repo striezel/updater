@@ -136,7 +136,7 @@ namespace updater.software
                 return null;
             }
 
-            var reVersion = new Regex("attachment; filename=\"ccsetup([0-9]+)\\.exe\"");
+            var reVersion = new Regex("attachment; filename=\".*ccsetup([0-9]+)\\.exe.*\"");
             Match matchVersion = reVersion.Match(contentDisposition);
             if (!matchVersion.Success)
                 return null;
