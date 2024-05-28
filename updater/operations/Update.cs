@@ -136,7 +136,7 @@ namespace updater.operations
                     return -1 - updatedApplications;
                 }
                 logger.Info("Downloading " + instInfo.downloadUrl + "...");
-                string downloadedFile = download(instInfo.downloadUrl, showProgress);
+                string downloadedFile = Download(instInfo.downloadUrl, showProgress);
                 if (string.IsNullOrWhiteSpace(downloadedFile))
                 {
                     logger.Error("Error: Could not download installer from " + instInfo.downloadUrl + "!");
@@ -372,7 +372,7 @@ namespace updater.operations
         /// <param name="showProgress">whether to show download progress</param>
         /// <returns>Returns path of the local file, if successful.
         /// Returns null, if an error occurred.</returns>
-        private static string download(string url, bool showProgress)
+        private static string Download(string url, bool showProgress)
         {
             if (string.IsNullOrWhiteSpace(url))
                 return null;
@@ -391,7 +391,7 @@ namespace updater.operations
             }
             if (string.IsNullOrWhiteSpace(basename))
                 basename = Path.GetRandomFileName() + ".exe";
-            string cacheDirectory = downloadCacheDirectory();
+            string cacheDirectory = DownloadCacheDirectory();
             if (null == cacheDirectory)
                 return null;
             if (!Directory.Exists(cacheDirectory))
@@ -452,7 +452,7 @@ namespace updater.operations
         /// </summary>
         /// <returns>Returns path of the download cache directory on success.
         /// Returns null, if an error occurred.</returns>
-        private static string downloadCacheDirectory()
+        private static string DownloadCacheDirectory()
         {
             string path = null;
             try
