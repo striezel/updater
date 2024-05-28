@@ -12,6 +12,7 @@ __[changes]__
 * Fix problem where search for newer version of Acrobat Reader 2020 might hang
   and time out.
 * Adjust search for newer version of CCleaner.
+* Fix failing search for newer versions of FileZilla Client.
 
 __[maintenance]__
 

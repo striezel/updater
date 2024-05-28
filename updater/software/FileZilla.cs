@@ -18,6 +18,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Net;
 using System.Net.Http;
 using System.Text.RegularExpressions;
 using updater.data;
@@ -187,11 +188,25 @@ namespace updater.software
             if (utility.OS.isWin7OrNewer())
             {
                 string htmlCode = null;
-                using (var client = new HttpClient())
+                var handler = new HttpClientHandler
+                {
+                    AllowAutoRedirect = true,
+                    MaxAutomaticRedirections = 3,
+                    // Compression methos must be set, resulting in the
+                    // corresponding Accept-Encoding header being set.
+                    // Otherwise the HTML code is different and does not contain
+                    // the available versions of the FileZilla client.
+                    AutomaticDecompression = DecompressionMethods.All
+                };
+                using (var client = new HttpClient(handler))
                 {
                     // Looks like we have to add a user agent to get a valid response.
                     // Without user agent the server returns "403 Forbidden".
-                    client.DefaultRequestHeaders.Add("User-Agent", "curl/8.8.0");
+                    // So let's pretend we are Firefox 115 ESR.
+                    client.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0");
+                    // Without an Accept header the returned HTML code is
+                    // different and does not contain the available versions.
+                    client.DefaultRequestHeaders.Add("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8");
                     try
                     {
                         var task = client.GetStringAsync("https://filezilla-project.org/download.php?show_all=1");
