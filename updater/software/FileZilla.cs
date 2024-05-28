@@ -18,7 +18,7 @@
 
 using System;
 using System.Collections.Generic;
-using System.Net;
+using System.Net.Http;
 using System.Text.RegularExpressions;
 using updater.data;
 
@@ -187,14 +187,16 @@ namespace updater.software
             if (utility.OS.isWin7OrNewer())
             {
                 string htmlCode = null;
-                using (var client = new WebClient())
+                using (var client = new HttpClient())
                 {
                     // Looks like we have to add a user agent to get a valid response.
                     // Without user agent the server returns "403 Forbidden".
-                    client.Headers.Add("User-Agent", "curl/8.5.0");
+                    client.DefaultRequestHeaders.Add("User-Agent", "curl/8.8.0");
                     try
                     {
-                        htmlCode = client.DownloadString("https://filezilla-project.org/download.php?show_all=1");
+                        var task = client.GetStringAsync("https://filezilla-project.org/download.php?show_all=1");
+                        task.Wait();
+                        htmlCode = task.Result;
                     }
                     catch (Exception ex)
                     {
