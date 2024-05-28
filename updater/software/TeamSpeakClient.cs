@@ -20,7 +20,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Net;
+using System.Net.Http;
 using System.Text.RegularExpressions;
 using updater.data;
 
@@ -166,14 +166,16 @@ namespace updater.software
                 return latestSupported32BitVersion();
             }
             string htmlCode = null;
-            using (var client = new WebClient())
+            using (var client = new HttpClient())
             {
                 // Looks like we have to add a user agent to get a valid response.
                 // Without user agent the server returns "403 Forbidden".
-                client.Headers.Add("User-Agent", "curl/8.5.0");
+                client.DefaultRequestHeaders.Add("User-Agent", "curl/8.8.0");
                 try
                 {
-                    htmlCode = client.DownloadString("https://teamspeak.com/en/downloads/");
+                    var task = client.GetStringAsync("https://teamspeak.com/en/downloads/");
+                    task.Wait();
+                    htmlCode = task.Result;
                 }
                 catch (Exception ex)
                 {
