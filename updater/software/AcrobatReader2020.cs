@@ -18,7 +18,7 @@
 
 using System;
 using System.Collections.Generic;
-using System.Net;
+using System.Net.Http;
 using System.Text.RegularExpressions;
 using updater.data;
 
@@ -112,9 +112,12 @@ namespace updater.software
         {
             logger.Info("Searching for newer version of Acrobat Reader 2020...");
             string html;
+            // The request hangs and times out without an User-Agent header,
+            // so let's provide a simple curl User-Agent here.
+            var client = new HttpClient();
+            client.DefaultRequestHeaders.Add("User-Agent", "curl/8.8.0");
             try
             {
-                var client = HttpClientProvider.Provide();
                 var task = client.GetStringAsync("https://helpx.adobe.com/acrobat/release-note/release-notes-acrobat-reader.html");
                 task.Wait();
                 html = task.Result;
@@ -135,21 +138,16 @@ namespace updater.software
             var latestVersion = match.Groups[2].Value.Replace('x', '0');
             string notesLink = match.Groups[1].Value;
 
-            using (var client = new WebClient())
+            try
             {
-                // The request hangs and times out without an User-Agent header,
-                // so let's provide a simple curl User-Agent here.
-                client.Headers.Add("User-Agent", "curl/8.5.0");
-                try
-                {
-                    html = client.DownloadString(notesLink);
-                }
-                catch (Exception ex)
-                {
-                    logger.Warn("Exception occurred while checking for the latest release of Acrobat Reader 2020: " + ex.Message);
-                    return null;
-                }
-                client.Dispose();
+                var task = client.GetStringAsync(notesLink);
+                task.Wait();
+                html = task.Result;
+            }
+            catch (Exception ex)
+            {
+                logger.Warn("Exception occurred while checking for the latest release of Acrobat Reader 2020: " + ex.Message);
+                return null;
             }
 
             // Link to the *.msp file will look like this:

@@ -9,6 +9,8 @@ improvements may be omitted.)_
 __[changes]__
 
 * Adjust search for newer version of Acrobat Reader 2020.
+* Fix problem where search for newer version of Acrobat Reader 2020 might hang
+  and time out.
 * Adjust search for newer version of CCleaner.
 
 __[maintenance]__
