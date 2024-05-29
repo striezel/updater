@@ -73,24 +73,21 @@ namespace updater.software
                 return LastSupported32BitVersion();
             }
             var signature = new Signature(publisherX509, certificateExpiration);
+            var installer = new InstallInfoMsi(
+                "https://github.com/mumble-voip/mumble/releases/download/v1.5.634/mumble_client-1.5.634.x64.msi",
+                HashAlgorithm.SHA256,
+                "ad4a49d9ac08c0f281bb90f34742bc60887d969f91420cdcfab1f88c7d25ab3e",
+                signature,
+                "/qn /norestart");
             return new AvailableSoftware("Mumble Client",
-                "1.4.287",
+                "1.5.634",
                 "^(Mumble [0-9]\\.[0-9]+\\.[0-9]+|Mumble \\(client\\))$",
                 "^(Mumble [0-9]\\.[0-9]+\\.[0-9]+|Mumble \\(client\\))$",
-                new InstallInfoMsi(
-                    "https://github.com/mumble-voip/mumble/releases/download/v1.4.287/mumble_client-1.4.287.x86.msi",
-                    HashAlgorithm.SHA256,
-                    "e1e020e12bb8cc55176b0cbeed6d7abfbe8a138eb69418360ac159a3b46c0262",
-                    signature,
-                    "/qn /norestart"),
+                // 32 bit installations will be uninstalled and switched to the
+                // 64 bit version of the client, if they are on a 64 bit OS.
+                installer,
                 // 64 bit MSI installer started with 1.3.0.
-                new InstallInfoMsi(
-                    "https://github.com/mumble-voip/mumble/releases/download/v1.4.287/mumble_client-1.4.287.x64.msi",
-                    HashAlgorithm.SHA256,
-                    "bbd8d57fd450c98e08553518c523a07ddadf3cff503f70db561f4b53fdb1c292",
-                    signature,
-                    "/qn /norestart")
-                );
+                installer);
         }
 
 
