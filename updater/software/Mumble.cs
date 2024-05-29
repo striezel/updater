@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017, 2018, 2020, 2021, 2022  Dirk Stolle
+    Copyright (C) 2017, 2018, 2020, 2021, 2022, 2024  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -66,6 +66,12 @@ namespace updater.software
         /// details about the software.</returns>
         public override AvailableSoftware knownInfo()
         {
+            if (!Environment.Is64BitOperatingSystem)
+            {
+                logger.Warn("Mumble does not provide 32 bit binaries from version 1.5.634 onwards.");
+                logger.Warn("Please consider switching to an 64 bit operating system to get newer Mumble updates.");
+                return LastSupported32BitVersion();
+            }
             var signature = new Signature(publisherX509, certificateExpiration);
             return new AvailableSoftware("Mumble Client",
                 "1.4.287",
@@ -78,6 +84,37 @@ namespace updater.software
                     signature,
                     "/qn /norestart"),
                 // 64 bit MSI installer started with 1.3.0.
+                new InstallInfoMsi(
+                    "https://github.com/mumble-voip/mumble/releases/download/v1.4.287/mumble_client-1.4.287.x64.msi",
+                    HashAlgorithm.SHA256,
+                    "bbd8d57fd450c98e08553518c523a07ddadf3cff503f70db561f4b53fdb1c292",
+                    signature,
+                    "/qn /norestart")
+                );
+        }
+
+
+        /// <summary>
+        /// Gets information about the latest version of Mumble that still has
+        /// 32-bit builds.
+        /// </summary>
+        /// <returns>Returns an AvailableSoftware instance with the known
+        /// details about the software.</returns>
+        private static AvailableSoftware LastSupported32BitVersion()
+        {
+            const string publisherX509 = "CN=SignPath Foundation, O=SignPath Foundation, L=Lewes, S=Delaware, C=US";
+            DateTime certificateExpiration = new(2024, 7, 12, 13, 14, 18, DateTimeKind.Utc);
+            var signature = new Signature(publisherX509, certificateExpiration);
+            return new AvailableSoftware("Mumble Client",
+                "1.4.287",
+                "^(Mumble [0-9]\\.[0-9]+\\.[0-9]+|Mumble \\(client\\))$",
+                "^(Mumble [0-9]\\.[0-9]+\\.[0-9]+|Mumble \\(client\\))$",
+                new InstallInfoMsi(
+                    "https://github.com/mumble-voip/mumble/releases/download/v1.4.287/mumble_client-1.4.287.x86.msi",
+                    HashAlgorithm.SHA256,
+                    "e1e020e12bb8cc55176b0cbeed6d7abfbe8a138eb69418360ac159a3b46c0262",
+                    signature,
+                    "/qn /norestart"),
                 new InstallInfoMsi(
                     "https://github.com/mumble-voip/mumble/releases/download/v1.4.287/mumble_client-1.4.287.x64.msi",
                     HashAlgorithm.SHA256,
@@ -118,6 +155,12 @@ namespace updater.software
         public override AvailableSoftware searchForNewer()
         {
             logger.Info("Searching for newer version of Mumble...");
+            if (!Environment.Is64BitOperatingSystem)
+            {
+                logger.Warn("Mumble does not provide 32 bit binaries from version 1.5.634 onwards.");
+                logger.Warn("Please consider switching to an 64 bit operating system to get newer Mumble updates.");
+                return LastSupported32BitVersion();
+            }
             var request = new HttpRequestMessage(HttpMethod.Head, "https://github.com/mumble-voip/mumble/releases/latest");
             var nonRedirectingHandler = new HttpClientHandler
             {
@@ -203,7 +246,16 @@ namespace updater.software
             // background information on that.
             var detectedVersion = new versions.Triple(detected.displayVersion);
             var v1_4_0 = new versions.Triple("1.4.0");
-            return detectedVersion < v1_4_0;
+            if (detectedVersion < v1_4_0)
+            {
+                return true;
+            }
+            // Versions from 1.5.634 onwards only offer 64 bit builds. To allow
+            // an update to newer versions, the switch from 32 bit to 64 bit
+            // application has to happen on those machines that have a 64 bit
+            // operating system. This means uninstalling the 32 bit app first.
+            return detected.appType == ApplicationType.Bit32
+                && Environment.Is64BitOperatingSystem;
         }
 
         /// <summary>
@@ -260,8 +312,29 @@ namespace updater.software
         /// Returns null otherwise.</returns>
         private static string GetGuid(DetectedSoftware detected)
         {
-            var guids = new Dictionary<string, Dictionary<ApplicationType, string>>(22)
+            var guids = new Dictionary<string, Dictionary<ApplicationType, string>>(25)
             {
+                { "1.4.287",
+                    new Dictionary<ApplicationType, string>(2)
+                    {
+                        { ApplicationType.Bit32, "{1D23FEC2-9F85-4449-9541-4E5D23E2D491}" },
+                        { ApplicationType.Bit64, "{7668CA93-7D82-43E5-AA6D-BCA352951877}" },
+                    }
+                },
+                { "1.4.274",
+                    new Dictionary<ApplicationType, string>(2)
+                    {
+                        { ApplicationType.Bit32, "{8D5A8490-8A2E-482A-9CEA-6529EC54891A}" },
+                        { ApplicationType.Bit64, "{ABA089C5-3F2A-454E-A11A-D4F5FD365770}" },
+                    }
+                },
+                { "1.4.230",
+                    new Dictionary<ApplicationType, string>(2)
+                    {
+                        { ApplicationType.Bit32, "{59063133-248A-4A51-830A-08F60CB7921B}" },
+                        { ApplicationType.Bit64, "{8DA03EEA-8A36-4C17-A54F-4330781D461B}" },
+                    }
+                },
                 { "1.3.4",
                     new Dictionary<ApplicationType, string>(2)
                     {
