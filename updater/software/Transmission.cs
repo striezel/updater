@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2021, 2023  Dirk Stolle
+    Copyright (C) 2021, 2023, 2024  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -65,19 +65,19 @@ namespace updater.software
         {
             var signature = new Signature(publisherX509, certificateExpiration);
             return new AvailableSoftware("Transmission",
-                "4.0.5",
+                "4.0.6",
                 "^Transmission [0-9]+\\.[0-9]+(\\.[0-9]+)? \\([0-9a-f]+\\)$",
                 "^Transmission [0-9]+\\.[0-9]+(\\.[0-9]+)? \\([0-9a-f]+\\) \\(x64\\)$",
                 new InstallInfoMsi(
-                    "https://github.com/transmission/transmission/releases/download/4.0.5/transmission-4.0.5-x86.msi",
+                    "https://github.com/transmission/transmission/releases/download/4.0.6/transmission-4.0.6-x86.msi",
                     HashAlgorithm.SHA256,
-                    "416f6d6fd96b7481c9cf75a89ba66d61a0d9c1237703bad799e5574404cf6b14",
+                    "b7bdac970c686cfcdc249dc96fabb83fe85057e7d53f4c9aa55dc71891ba8c26",
                     signature,
                     "/qn /norestart"),
                 new InstallInfoMsi(
-                    "https://github.com/transmission/transmission/releases/download/4.0.5/transmission-4.0.5-x64.msi",
+                    "https://github.com/transmission/transmission/releases/download/4.0.6/transmission-4.0.6-x64.msi",
                     HashAlgorithm.SHA256,
-                    "a698a6b39abf307c72f3a9152f320e290dc967927821161521f1460db74d7654",
+                    "29417282f2a5405018a211aa94e60d324657cf347e7a496ca7a51798ede0f6c1",
                     signature,
                     "/qn /norestart")
                     );
