@@ -47,13 +47,13 @@ namespace updater.software
         /// <summary>
         /// publisher of signed binaries
         /// </summary>
-        private const string publisherX509 = "E=cert@dominik-reichl.de, CN=\"Open Source Developer, Dominik Reichl\", O=Open Source Developer, L=Metzingen, C=DE";
+        private const string publisherX509 = "CN=\"Open Source Developer, Dominik Reichl\", O=Open Source Developer, L=Metzingen, S=Baden-Württemberg, C=DE";
 
 
         /// <summary>
         /// expiration date of certificate
         /// </summary>
-        private static readonly DateTime certificateExpiration = new(2024, 2, 6, 8, 28, 53, DateTimeKind.Utc);
+        private static readonly DateTime certificateExpiration = new(2025, 2, 6, 15, 2, 0, DateTimeKind.Utc);
 
 
         /// <summary>
@@ -65,13 +65,13 @@ namespace updater.software
         {
             var signature = new Signature(publisherX509, certificateExpiration);
             return new AvailableSoftware("KeePass",
-                "2.56",
+                "2.57",
                 "^KeePass Password Safe [2-9]\\.[0-9]{2}(\\.[0-9]+)?$",
                 null,
                 new InstallInfoExe(
-                    "https://netcologne.dl.sourceforge.net/project/keepass/KeePass%202.x/2.56/KeePass-2.56-Setup.exe",
+                    "https://netcologne.dl.sourceforge.net/project/keepass/KeePass%202.x/2.57/KeePass-2.57-Setup.exe",
                     HashAlgorithm.SHA256,
-                    "92529DC0 E6449ECA 21688601 02045550 54628192 17B8E8D5 1F6E7B1D D05A69EF",
+                    "EA53F7F9 44FADA95 0CD7BB15 4DEB0781 23A357B7 BC5E2484 851762B3 552EB48B",
                     signature,
                     "/VERYSILENT"),
                 // There is no 64 bit installer yet.
