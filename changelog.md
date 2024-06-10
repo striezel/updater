@@ -9,6 +9,7 @@ improvements may be omitted.)_
 __[maintenance]__
 
 * Update certificate information for KeePass installers.
+* Update certificate information for VLC media player installers.
 
 ## Version 2024.05.30.0
 
