@@ -8,6 +8,7 @@ improvements may be omitted.)_
 
 __[maintenance]__
 
+* Update certificate information for Firefox Developer Edition installers.
 * Update certificate information for KeePass installers.
 * Update certificate information for VLC media player installers.
 
