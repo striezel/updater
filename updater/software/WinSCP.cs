@@ -62,12 +62,12 @@ namespace updater.software
         public override AvailableSoftware knownInfo()
         {
             return new AvailableSoftware("WinSCP",
-                "6.3.3",
+                "6.3.4",
                 "^WinSCP [1-9]+\\.[0-9]+(\\.[0-9]+)?$", null,
                 new InstallInfoExe(
-                    "https://netcologne.dl.sourceforge.net/project/winscp/WinSCP/6.3.3/WinSCP-6.3.3-Setup.exe",
+                    "https://netcologne.dl.sourceforge.net/project/winscp/WinSCP/6.3.4/WinSCP-6.3.4-Setup.exe",
                     HashAlgorithm.SHA256,
-                    "928dd0b8818b49106c344c937aad68d7893def75a5bf65d79aeb2cd566f239f7",
+                    "d83e32f949f717e51e1a88a33f8ea23cbc0a4320bff51f53e0859bcca628ccf0",
                     new Signature(publisherX509, certificateExpiration),
                     "/VERYSILENT /NORESTART"),
                 // There is no 64 bit installer yet.
