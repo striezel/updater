@@ -6,6 +6,17 @@ improvements may be omitted.)_
 
 ## Next Version
 
+__[announcement]__
+
+* Microsoft's support for .NET 6 will end in November 2024. While this is still
+  a few months in the future this also means that the updater will switch from
+  .NET 6 to .NET 8, a newer Long Term Support release of .NET, in the coming
+  months. Most likely this will not happen in the next one or two releases of
+  the updater. However, you can expect the updater to require .NET 8 instead of
+  the currently required .NET 6 by the end of the year. This notice is here to
+  make sure users are aware of that upcoming change and have time to prepare
+  accordingly.
+
 __[maintenance]__
 
 * Update certificate information for Firefox Developer Edition installers.
