@@ -19,7 +19,7 @@
 namespace updater.data
 {
     /// <summary>
-    /// enumeration to indicate whether 32 bit or 64 bit application was detected
+    /// enumeration to indicate whether 32-bit or 64-bit application was detected
     /// </summary>
     public enum ApplicationType
     {
@@ -29,13 +29,13 @@ namespace updater.data
         Unknown,
 
         /// <summary>
-        /// 32 bit application
+        /// 32-bit application
         /// </summary>
         Bit32,
 
         /// <summary>
-        /// 64 bit application
+        /// 64-bit application
         /// </summary>
         Bit64
-    } //enum
-} //namespace
+    }
+}

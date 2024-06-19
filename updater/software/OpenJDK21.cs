@@ -68,9 +68,9 @@ namespace updater.software
             var signature = new Signature(publisherX509, certificateExpiration);
             return new AvailableSoftware("Eclipse Temurin JDK 21 with Hotspot",
                 "21.0.3.9",
-                null, // no 32 bit installer
+                null, // no 32-bit installer
                 "^Eclipse Temurin JDK [a-z]+ Hotspot 21\\.[0-9]+\\.[0-9]+\\+[0-9]+(\\.[0-9]+)? \\(x64\\)$",
-                null, // no 32 bit installer
+                null, // no 32-bit installer
                 new InstallInfoMsiNoLocation(
                     "https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.3%2B9/OpenJDK21U-jdk_x64_windows_hotspot_21.0.3_9.msi",
                     HashAlgorithm.SHA256,
@@ -182,7 +182,7 @@ namespace updater.software
             // Do we have all the data we need?
             if (!hasBuild64)
             {
-                logger.Error("The 64 bit build information of Eclipse Temurin JDK was not found!");
+                logger.Error("The 64-bit build information of Eclipse Temurin JDK was not found!");
                 return null;
             }
             return newInfo;

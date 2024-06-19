@@ -39,11 +39,11 @@ namespace updater_test.software
             Assert.IsNotNull(info);
             // name must be set
             Assert.IsFalse(string.IsNullOrWhiteSpace(info.Name));
-            // 64 bit installation information instance should be present
+            // 64-bit installation information instance should be present
             Assert.IsTrue(info.install64Bit != null);
             // regex should be present
             Assert.IsTrue(!string.IsNullOrWhiteSpace(info.match64Bit));
-            // 64 bit information should match
+            // 64-bit information should match
             Assert.AreEqual<bool>(info.install64Bit != null, !string.IsNullOrWhiteSpace(info.match64Bit));
             // checksums should always be present, or at least a signature for verification
             Assert.IsTrue(info.install64Bit.hasChecksum() || info.install64Bit.hasVerifiableSignature());

@@ -133,7 +133,7 @@ namespace updater.data
 
 
         /// <summary>
-        /// whether this is a 32 bit or 64 bit app
+        /// whether this is a 32-bit or 64-bit app
         /// </summary>
         public ApplicationType appType;
     } // struct

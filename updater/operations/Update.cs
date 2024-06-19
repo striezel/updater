@@ -314,7 +314,7 @@ namespace updater.operations
                         // i.e. there was no timeout.
                         // Additionally, the exit code must be zero.
                         // However, for MSI processes the exit code 3010 means
-                        // the the update succeeded, but a reboot is required.
+                        // the update succeeded, but a reboot is required.
                         bool success = proc.HasExited
                             && ((proc.ExitCode == 0)
                             || ((proc.ExitCode == InstallInfoMsi.successRebootRequired) && (instInfo is InstallInfoMsi)));

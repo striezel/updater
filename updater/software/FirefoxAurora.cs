@@ -85,7 +85,7 @@ namespace updater.software
         /// <returns>Returns a dictionary where keys are the language codes and values are the associated checksums.</returns>
         private static Dictionary<string, string> knownChecksums32Bit()
         {
-            // These are the checksums for Windows 32 bit installers from
+            // These are the checksums for Windows 32-bit installers from
             // https://ftp.mozilla.org/pub/devedition/releases/128.0b4/SHA512SUMS
             return new Dictionary<string, string>(102)
             {
@@ -200,7 +200,7 @@ namespace updater.software
         /// <returns>Returns a dictionary where keys are the language codes and values are the associated checksums.</returns>
         private static Dictionary<string, string> knownChecksums64Bit()
         {
-            // These are the checksums for Windows 64 bit installers from
+            // These are the checksums for Windows 64-bit installers from
             // https://ftp.mozilla.org/pub/devedition/releases/128.0b4/SHA512SUMS
             return new Dictionary<string, string>(102)
             {
@@ -332,7 +332,7 @@ namespace updater.software
                 currentVersion,
                 "^Firefox Developer Edition( [0-9]{2}\\.[0-9]([a-z][0-9])?)? \\(x86 " + Regex.Escape(languageCode) + "\\)$",
                 "^Firefox Developer Edition( [0-9]{2}\\.[0-9]([a-z][0-9])?)? \\(x64 " + Regex.Escape(languageCode) + "\\)$",
-                // 32 bit installer
+                // 32-bit installer
                 new InstallInfoExe(
                     // URL is formed like "https://ftp.mozilla.org/pub/devedition/releases/60.0b9/win32/en-GB/Firefox%20Setup%2060.0b9.exe".
                     "https://ftp.mozilla.org/pub/devedition/releases/" + currentVersion + "/win32/" + languageCode + "/Firefox%20Setup%20" + currentVersion + ".exe",
@@ -340,7 +340,7 @@ namespace updater.software
                     checksum32Bit,
                     signature,
                     "-ms -ma"),
-                // 64 bit installer
+                // 64-bit installer
                 new InstallInfoExe(
                     // URL is formed like "https://ftp.mozilla.org/pub/devedition/releases/60.0b9/win64/en-GB/Firefox%20Setup%2060.0b9.exe".
                     "https://ftp.mozilla.org/pub/devedition/releases/" + currentVersion + "/win64/" + languageCode + "/Firefox%20Setup%20" + currentVersion + ".exe",
@@ -410,7 +410,7 @@ namespace updater.software
         /// <summary>
         /// Tries to get the checksums of the newer version.
         /// </summary>
-        /// <returns>Returns a string array containing the checksums for 32 bit and 64 bit (in that order), if successful.
+        /// <returns>Returns a string array containing the checksums for 32-bit and 64-bit (in that order), if successful.
         /// Returns null, if an error occurred.</returns>
         private string[] determineNewestChecksums(string newerVersion)
         {
@@ -488,7 +488,7 @@ namespace updater.software
             {
                 if ((null == cs32) || (cs32.Count == 0))
                 {
-                    // look for lines with language code and version for 32 bit
+                    // look for lines with language code and version for 32-bit
                     var reChecksum32Bit = new Regex("[0-9a-f]{128}  win32/[a-z]{2,3}(\\-[A-Z]+)?/Firefox Setup " + Regex.Escape(currentVersion) + "\\.exe");
                     cs32 = new SortedDictionary<string, string>();
                     MatchCollection matches = reChecksum32Bit.Matches(checksumsText);
@@ -501,7 +501,7 @@ namespace updater.software
 
                 if ((null == cs64) || (cs64.Count == 0))
                 {
-                    // look for line with the correct language code and version for 64 bit
+                    // look for line with the correct language code and version for 64-bit
                     var reChecksum64Bit = new Regex("[0-9a-f]{128}  win64/[a-z]{2,3}(\\-[A-Z]+)?/Firefox Setup " + Regex.Escape(currentVersion) + "\\.exe");
                     cs64 = new SortedDictionary<string, string>();
                     MatchCollection matches = reChecksum64Bit.Matches(checksumsText);
@@ -578,13 +578,13 @@ namespace updater.software
 
 
         /// <summary>
-        /// checksum for the 32 bit installer
+        /// checksum for the 32-bit installer
         /// </summary>
         private readonly string checksum32Bit;
 
 
         /// <summary>
-        /// checksum for the 64 bit installer
+        /// checksum for the 64-bit installer
         /// </summary>
         private readonly string checksum64Bit;
 
@@ -595,12 +595,12 @@ namespace updater.software
         private static string checksumsText = null;
 
         /// <summary>
-        /// dictionary of known checksums for 32 bit versions (key: language code; value: checksum)
+        /// dictionary of known checksums for 32-bit versions (key: language code; value: checksum)
         /// </summary>
         private static SortedDictionary<string, string> cs32 = null;
 
         /// <summary>
-        /// dictionary of known checksums for 64 bit version (key: language code; value: checksum)
+        /// dictionary of known checksums for 64-bit version (key: language code; value: checksum)
         /// </summary>
         private static SortedDictionary<string, string> cs64 = null;
     } // class

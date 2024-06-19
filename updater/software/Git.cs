@@ -155,7 +155,7 @@ namespace updater.software
                     return null;
                 }
 
-                // find SHA256 hash for 32 bit installer
+                // find SHA256 hash for 32-bit installer
                 /* Hash is part of a HTML table, e.g. in
                  * <td>Git-2.30.0-32-bit.exe</td>
                  * <td>e41b7d0e1c88a023ecd42a1e7339c39a8e906cd51ea9ae9aefdb42c513103f57</td>
@@ -172,7 +172,7 @@ namespace updater.software
                     continue;
                 }
                 string newHash32Bit = matchHash.Groups[1].Value;
-                // find SHA256 hash for 64 bit installer
+                // find SHA256 hash for 64-bit installer
                 reHash = needsFourthDigit ?
                     new Regex("<td>Git\\-" + escapedVersion + "\\." + fourthDigit + "\\-64\\-bit\\.exe</td>\r?\n<td>([a-f0-9]{64})</td>")
                     : new Regex("<td>Git\\-" + escapedVersion + "\\-64\\-bit\\.exe</td>\r?\n<td>([a-f0-9]{64})</td>");

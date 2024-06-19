@@ -136,7 +136,7 @@ namespace updater.software
             string version_digits = versionMatch.Groups[1].Value;
             string version = string.Concat(version_digits.AsSpan(0, version_digits.Length - 2), ".", version_digits.AsSpan(version_digits.Length - 2));
 
-            // Get 64 bit checksum.
+            // Get 64-bit installer's checksum.
             var checksumRegEx = new Regex("[0-9a-f]{64}");
             var checksumMatch = checksumRegEx.Match(htmlCode, versionMatch.Index + 1);
             if (!checksumMatch.Success)
@@ -148,7 +148,7 @@ namespace updater.software
             info.newestVersion = version;
             info.install64Bit.downloadUrl = info.install64Bit.downloadUrl.Replace(oldVersionWithoutDot, version_digits);
 
-            // Get 32 bit checksum.
+            // Get 32-bit installer's checksum.
             try
             {
                 var task = client.GetStringAsync("https://www.irfanview.com/main_download_engl.htm");
@@ -166,10 +166,10 @@ namespace updater.software
             versionMatch = versionRegEx.Match(htmlCode);
             if (!versionMatch.Success)
                 return null;
-            // Should be the same version as the 64 bit version.
+            // Should be the same version as the 64-bit version.
             if (versionMatch.Groups[1].Value != version_digits)
             {
-                logger.Warn("Different versions for 32 bit and 64 bit variant of IrfanView were detected."
+                logger.Warn("Different versions for 32-bit and 64-bit variant of IrfanView were detected."
                     + " Something is wrong here.");
                 return null;
             }

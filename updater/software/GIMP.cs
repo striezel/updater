@@ -75,7 +75,7 @@ namespace updater.software
                 "2.10.38",
                 "^GIMP [0-9]+\\.[0-9]+\\.[0-9]+$",
                 "^GIMP [0-9]+\\.[0-9]+\\.[0-9]+$",
-                // The GIMP uses the same installer for 32 and 64 bit.
+                // The GIMP uses the same installer for 32 and 64-bit.
                 installer,
                 installer);
         }
@@ -192,10 +192,10 @@ namespace updater.software
             string oldVersion = newInfo.newestVersion;
             string oldShortVersion = string.Join(".", oldVersion.Split(new char[] { '.' }), 0, 2);
             newInfo.newestVersion = version;
-            // 32 bit
+            // 32-bit
             newInfo.install32Bit.downloadUrl = newInfo.install32Bit.downloadUrl.Replace(oldVersion, version).Replace(oldShortVersion, shortVersion);
             newInfo.install32Bit.checksum = checksum;
-            // 64 bit - same installer, same checksum
+            // 64-bit - same installer, same checksum
             newInfo.install64Bit.downloadUrl = newInfo.install32Bit.downloadUrl;
             newInfo.install64Bit.checksum = checksum;
             return newInfo;

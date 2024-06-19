@@ -38,9 +38,9 @@ namespace updater_test.software
             Assert.IsTrue((info.install32Bit != null) || (info.install64Bit != null));
             // at least one regex should be present
             Assert.IsTrue(!string.IsNullOrWhiteSpace(info.match32Bit) || !string.IsNullOrWhiteSpace(info.match64Bit));
-            // 32 bit information should match
+            // 32-bit information should match
             Assert.AreEqual<bool>(info.install32Bit != null, !string.IsNullOrWhiteSpace(info.match32Bit));
-            // 64 bit information should match
+            // 64-bit information should match
             Assert.AreEqual<bool>(info.install64Bit != null, !string.IsNullOrWhiteSpace(info.match64Bit));
             // checksums should always be present, or at least a signature for verification
             if (null != info.install32Bit)
@@ -51,11 +51,11 @@ namespace updater_test.software
             // Expiration is not an error though, because some people publish signed binaries that expire the day after the release.
             if (null != info.install32Bit && info.install32Bit.signature.ContainsData() && info.install32Bit.signature.HasExpired())
             {
-                Assert.Inconclusive("Signature data of 32 bit installer is past its expiration date!");
+                Assert.Inconclusive("Signature data of 32-bit installer is past its expiration date!");
             }
             if (null != info.install64Bit && info.install64Bit.signature.ContainsData() && info.install64Bit.signature.HasExpired())
             {
-                Assert.Inconclusive("Signature data of 64 bit installer is past its expiration date!");
+                Assert.Inconclusive("Signature data of 64-bit installer is past its expiration date!");
             }
         }
 

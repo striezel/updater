@@ -72,14 +72,14 @@ namespace updater.software
                 "0.81",
                 "^PuTTY release [0-9]\\.[0-9]+$",
                 "^PuTTY release [0-9]\\.[0-9]+ \\(64\\-bit\\)$",
-                // 32 bit installer
+                // 32-bit installer
                 new InstallInfoMsi(
                     "https://the.earth.li/~sgtatham/putty/0.81/w32/putty-0.81-installer.msi",
                     HashAlgorithm.SHA512,
                     "30c0a65917548724fcc6138a8c0fa926cd1af629e9dafa04c96ae6c65c0fccababa81605a39a826686887e7392f37c6f2f349f2f59ca9d7a03a0968cdf1ac854",
                     signature,
                     "/qn /norestart"),
-                // 64 bit installer
+                // 64-bit installer
                 new InstallInfoMsi(
                     "https://the.earth.li/~sgtatham/putty/0.81/w64/putty-64bit-0.81-installer.msi",
                     HashAlgorithm.SHA512,

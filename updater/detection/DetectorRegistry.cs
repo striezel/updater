@@ -50,7 +50,7 @@ namespace updater.detection
                         return null;
                     data64.AddRange(data32);
                     return data64;
-                } // if 64 bit OS
+                } // if 64-bit OS
                 else
                 {
                     return detectSingleView(RegistryView.Registry32);
@@ -67,7 +67,7 @@ namespace updater.detection
         /// <summary>
         /// Gets a list of installed software from the registry, using a specified registry view.
         /// </summary>
-        /// <param name="view">the registry view (64 bit or 32 bit)</param>
+        /// <param name="view">the registry view (64-bit or 32-bit)</param>
         /// <returns>Returns a list of installed software.</returns>
         private static List<data.DetectedSoftware> detectSingleView(RegistryView view)
         {

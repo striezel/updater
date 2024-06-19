@@ -147,7 +147,7 @@ namespace updater.software
             versions.Sort();
 
             // Now find the latest version that already has a win/ directory
-            // containing a checksum file for the 64 bit build.
+            // containing a checksum file for the 64-bit build.
             string newVersion = null;
             for (int i = versions.Count - 1; i >= 0; i--)
             {
@@ -180,7 +180,7 @@ namespace updater.software
                 return newInfo;
 
             // Look into "https://get.geo.opera.com/ftp/pub/opera_gx/<version>/win/Opera_GX_<version>_Setup_x64.exe.sha256sum"
-            // to get the checksum for 64 bit installer.
+            // to get the checksum for 64-bit installer.
             try
             {
                 var task = client.GetStringAsync("https://get.geo.opera.com/ftp/pub/opera_gx/" + newVersion + "/win/Opera_GX_" + newVersion + "_Setup_x64.exe.sha256sum");
@@ -193,7 +193,7 @@ namespace updater.software
                 return null;
             }
 
-            // checksum for 64 bit installer
+            // checksum for 64-bit installer
             var reg = new Regex("[0-9a-f]{64}");
             Match m = reg.Match(htmlCode);
             if (!m.Success)
@@ -201,7 +201,7 @@ namespace updater.software
             string checksum64 = m.Value;
 
             // Look into "https://get.geo.opera.com/ftp/pub/opera_gx/<version>/win/Opera_GX_<version>_Setup.exe.sha256sum"
-            // to get the checksum for 32 bit installer.
+            // to get the checksum for 32-bit installer.
             try
             {
                 var task = client.GetStringAsync("https://get.geo.opera.com/ftp/pub/opera_gx/" + newVersion + "/win/Opera_GX_" + newVersion + "_Setup.exe.sha256sum");
@@ -214,7 +214,7 @@ namespace updater.software
                 return null;
             }
 
-            // checksum for 32 bit installer
+            // checksum for 32-bit installer
             m = reg.Match(htmlCode);
             if (!m.Success)
                 return null;

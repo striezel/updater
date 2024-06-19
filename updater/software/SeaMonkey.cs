@@ -77,12 +77,12 @@ namespace updater.software
 
 
         /// <summary>
-        /// Gets a dictionary with the known checksums for the 32 bit installers (key: language, value: checksum).
+        /// Gets a dictionary with the known checksums for the 32-bit installers (key: language, value: checksum).
         /// </summary>
         /// <returns>Returns a dictionary where keys are the language codes and values are the associated checksums.</returns>
         private static Dictionary<string, string> knownChecksums32Bit()
         {
-            // These are the checksums for Windows 32 bit installers from
+            // These are the checksums for Windows 32-bit installers from
             // https://archive.seamonkey-project.org/releases/2.53.18.2/SHA512SUMS.txt
             return new Dictionary<string, string>(23)
             {
@@ -114,12 +114,12 @@ namespace updater.software
 
 
         /// <summary>
-        /// Gets a dictionary with the known checksums for the 64 bit installers (key: language, value: checksum).
+        /// Gets a dictionary with the known checksums for the 64-bit installers (key: language, value: checksum).
         /// </summary>
         /// <returns>Returns a dictionary where keys are the language codes and values are the associated checksums.</returns>
         private static Dictionary<string, string> knownChecksums64Bit()
         {
-            // These are the checksums for Windows 64 bit installers from
+            // These are the checksums for Windows 64-bit installers from
             // https://archive.seamonkey-project.org/releases/2.53.18.2/SHA512SUMS.txt
             return new Dictionary<string, string>(23)
             {
@@ -156,8 +156,8 @@ namespace updater.software
         /// <returns>Returns an enumerable collection of valid language codes.</returns>
         public static IEnumerable<string> validLanguageCodes()
         {
-            // Just go for the 32 bit installers here. We could also use the
-            // 64 bit installers, but they have the same languages anyway.
+            // Just go for the 32-bit installers here. We could also use the
+            // 64-bit installers, but they have the same languages anyway.
             var d = knownChecksums32Bit();
             return d.Keys;
         }
@@ -250,7 +250,7 @@ namespace updater.software
         /// <summary>
         /// Tries to get the checksums of the newer version.
         /// </summary>
-        /// <returns>Returns a string array containing the checksums for 32 bit and 64 bit (in that order), if successful.
+        /// <returns>Returns a string array containing the checksums for 32-bit and 64-bit (in that order), if successful.
         /// Returns null, if an error occurred.</returns>
         private string[] determineNewestChecksums(string newerVersion)
         {
@@ -263,9 +263,9 @@ namespace updater.software
              * 
              * Version 2.53.1 uses a new format. Common lines look like
              * 7ccee70c54580c0c0949a9bc86737fbcb35c46ed sha1 38851663 win32/en-GB/seamonkey-2.53.6.en-GB.win32.installer.exe
-             * for the 32 bit installer, or like
+             * for the 32-bit installer, or like
              * c6a9d874dcaa0dabdd01f242b610cb47565e91fc sha1 41802858 win64/en-GB/seamonkey-2.53.6.en-GB.win64.installer.exe
-             * for the 64 bit installer.
+             * for the 64-bit installer.
              */
 
             string url = "https://archive.seamonkey-project.org/releases/" + newerVersion + "/SHA512SUMS.txt";
@@ -290,7 +290,7 @@ namespace updater.software
             Match matchChecksum32Bit = reChecksum32Bit.Match(sha1SumsContent);
             if (!matchChecksum32Bit.Success)
                 return null;
-            // look for line with the correct language code and version for 64 bit
+            // look for line with the correct language code and version for 64-bit
             var reChecksum64Bit = new Regex("[0-9a-f]{128} sha512 [0-9]+ .*seamonkey\\-" + Regex.Escape(newerVersion)
                 + "\\." + languageCode.Replace("-", "\\-") + "\\.win64\\.installer\\.exe");
             Match matchChecksum64Bit = reChecksum64Bit.Match(sha1SumsContent);
@@ -401,13 +401,13 @@ namespace updater.software
 
 
         /// <summary>
-        /// checksum for the 32 bit installer
+        /// checksum for the 32-bit installer
         /// </summary>
         private readonly string checksum32Bit;
 
 
         /// <summary>
-        /// checksum for the 64 bit installer
+        /// checksum for the 64-bit installer
         /// </summary>
         private readonly string checksum64Bit;
 

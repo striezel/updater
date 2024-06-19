@@ -149,7 +149,7 @@ namespace updater.software
                     "48089aad2da20b49b2d6ad1baf450a14cd20ed2b65b681c469b2b9c943f20970d48cf73008e4ff427ed9743af0c257cfca1b6bdeecdd2153b6531c1449ab8353",
                     Signature.None,
                     "/S"),
-                // There was no 64 bit version as of version 3.8.0.
+                // There was no 64-bit version as of version 3.8.0.
                 null
                 );
         }
@@ -192,7 +192,7 @@ namespace updater.software
                 {
                     AllowAutoRedirect = true,
                     MaxAutomaticRedirections = 3,
-                    // Compression methos must be set, resulting in the
+                    // Compression methods must be set, resulting in the
                     // corresponding Accept-Encoding header being set.
                     // Otherwise the HTML code is different and does not contain
                     // the available versions of the FileZilla client.
@@ -243,34 +243,34 @@ namespace updater.software
                 var reSha512 = new Regex("[0-9a-f]{128}");
                 if (idx64 < idx32)
                 {
-                    // 64 bit first
+                    // 64-bit first
                     Match sha512 = reSha512.Match(htmlCode, idx64 + 1, idx32 - idx64);
                     if (!sha512.Success)
                         return null;
                     checksum64 = sha512.Value;
-                    // 32 bit next
+                    // 32-bit next
                     sha512 = reSha512.Match(htmlCode, idx32);
                     if (!sha512.Success)
                         return null;
                     checksum32 = sha512.Value;
-                } // if 64 bit build is before 32 bit build
+                } // if 64-bit build is before 32-bit build
                 else
                 {
-                    // 32 bit build before 64 bit build
+                    // 32-bit build before 64-bit build
                     Match sha512 = reSha512.Match(htmlCode, idx32 + 1, idx64 - idx32);
                     if (!sha512.Success)
                         return null;
                     checksum32 = sha512.Value;
-                    // 64 bit next
+                    // 64-bit next
                     sha512 = reSha512.Match(htmlCode, idx64);
                     if (!sha512.Success)
                         return null;
                     checksum64 = sha512.Value;
                 } // else
 
-                // find download URL
+                // Find the download URL.
                 // URL is something like "https://dl4.cdn.filezilla-project.org/client/FileZilla_3.50.0_win64-setup.exe?h=wJDamKbB9lkk6abFtg1Lig&x=1600204244"
-                // for the 64 bit binary. Similar pattern is applied for 32 bit binary.
+                // for the 64-bit binary. Similar pattern is applied for 32-bit binary.
                 var reDownload64 = new Regex("href=\"(https://dl[0-9]+\\.cdn\\.filezilla\\-project\\.org/client/FileZilla_[0-9]+\\.[0-9]+(\\.[0-9]+(\\.[0-9]+)?)?_win64\\-setup\\.exe\\?h=[A-Za-z0-9_\\-]+&x=[0-9]+)\"");
                 Match dl64 = reDownload64.Match(htmlCode);
                 if (!dl64.Success)
@@ -334,20 +334,20 @@ namespace updater.software
         /// <param name="result">query result where software will be added, if it is in the detection list</param>
         public override void detectionQuery(List<DetectedSoftware> detected, bool autoGetNew, List<QueryEntry> result)
         {
-            // 32 bit systems use normal detection.
+            // 32-bit systems use normal detection.
             if (!Environment.Is64BitOperatingSystem)
             {
                 base.detectionQuery(detected, autoGetNew, result);
                 return;
             }
-            // 64 bit systems might need adjustments.
+            // 64-bit systems might need adjustments.
             var resBase = new List<QueryEntry>();
             base.detectionQuery(detected, autoGetNew, resBase);
             foreach (var item in resBase)
             {
                 if (string.IsNullOrWhiteSpace(item.detected.installPath))
                     continue;
-                // See if we need to adjust the type for the 64 bit variant.
+                // See if we need to adjust the type for the 64-bit variant.
                 string exePath = System.IO.Path.Combine(item.detected.installPath, "filezilla.exe");
                 utility.PEFormat format = utility.PortableExecutable.determineFormat(exePath);
                 if ((format == utility.PEFormat.PE64) && (item.type != ApplicationType.Bit64))

@@ -176,13 +176,13 @@ namespace updater.software
                 client.Dispose();
             } // using
 
-            // find SHA256 hash for 32 bit installer
+            // find SHA256 hash for 32-bit installer
             var reHash = new Regex("[a-f0-9]{64}  npp.+Installer\\.exe");
             Match matchHash = reHash.Match(htmlCode);
             if (!matchHash.Success)
                 return null;
             string newHash32Bit = matchHash.Value[..64];
-            // find SHA256 hash for 64 bit installer
+            // find SHA256 hash for 64-bit installer
             reHash = new Regex("[a-f0-9]{64}  npp.+Installer\\.x64\\.exe");
             matchHash = reHash.Match(htmlCode);
             if (!matchHash.Success)

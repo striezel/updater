@@ -70,7 +70,7 @@ namespace updater_test.software
 
 
         /// <summary>
-        /// Checks whether the regular expression for 32 bit variant detects old
+        /// Checks whether the regular expression for 32-bit variant detects old
         /// and new variants.
         /// </summary>
         [TestMethod]
@@ -78,9 +78,9 @@ namespace updater_test.software
         {
             var npp = new NotepadPlusPlus(false);
             var regex = new Regex(npp.knownInfo().match32Bit);
-            // new variant (after introduction of 64 bit variant)
+            // new variant (after introduction of 64-bit variant)
             Assert.IsTrue(regex.IsMatch("Notepad++ (32-bit x86)"));
-            // old variant (before introduction of 64 bit variant)
+            // old variant (before introduction of 64-bit variant)
             Assert.IsTrue(regex.IsMatch("Notepad++"), "The regular expression does not detect the old variant of 32-bit Notepad++.");
         }
     } // class

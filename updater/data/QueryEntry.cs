@@ -56,7 +56,7 @@ namespace updater.data
 
 
         /// <summary>
-        /// application type (32 or 64 bit)
+        /// application type (32 or 64-bit)
         /// </summary>
         public ApplicationType type;
     } // class

@@ -49,9 +49,9 @@ namespace updater.utility
             {
                 
                 case data.ApplicationType.Bit32:
-                    return "32 bit";
+                    return "32-bit";
                 case data.ApplicationType.Bit64:
-                    return "64 bit";
+                    return "64-bit";
                 case data.ApplicationType.Unknown:
                 default:
                     return "unknown";

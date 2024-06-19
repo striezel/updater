@@ -74,7 +74,7 @@ namespace updater.software
         /// <returns>Returns a dictionary where keys are the language codes and values are the associated checksums.</returns>
         private static Dictionary<string, string> knownChecksums()
         {
-            // These are the checksums for Windows 32 bit installers from
+            // These are the checksums for Windows 32-bit installers from
             // https://archive.mozilla.org/pub/seamonkey/releases/2.46/SHA1SUMS
             var result = new Dictionary<string, string>(6)
             {
@@ -120,7 +120,7 @@ namespace updater.software
                     checksum,
                     Signature.None,
                     "-ms -ma"),
-                //There is no 64 bit installer yet.
+                //There is no 64-bit installer yet.
                 null);
         }
 

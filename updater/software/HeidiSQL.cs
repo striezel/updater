@@ -74,9 +74,9 @@ namespace updater.software
                 "12.7.0.6850",
                 "^HeidiSQL [0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+$",
                 "^HeidiSQL [0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+$",
-                // 32 bit installer
+                // 32-bit installer
                 installer,
-                // 64 bit installer
+                // 64-bit installer
                 installer
                 );
         }

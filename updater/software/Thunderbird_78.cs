@@ -81,12 +81,12 @@ namespace updater.software
 
 
         /// <summary>
-        /// Gets a dictionary with the known checksums for the 32 bit installers (key: language, value: checksum).
+        /// Gets a dictionary with the known checksums for the 32-bit installers (key: language, value: checksum).
         /// </summary>
         /// <returns>Returns a dictionary where keys are the language codes and values are the associated checksums.</returns>
         private static Dictionary<string, string> knownChecksums32Bit()
         {
-            // These are the checksums for Windows 32 bit installers from
+            // These are the checksums for Windows 32-bit installers from
             // https://ftp.mozilla.org/pub/thunderbird/releases/78.14.0/SHA512SUMS
             return new Dictionary<string, string>(2)
             {
@@ -97,12 +97,12 @@ namespace updater.software
 
 
         /// <summary>
-        /// Gets a dictionary with the known checksums for the 64 bit installers (key: language, value: checksum).
+        /// Gets a dictionary with the known checksums for the 64-bit installers (key: language, value: checksum).
         /// </summary>
         /// <returns>Returns a dictionary where keys are the language codes and values are the associated checksums.</returns>
         private static Dictionary<string, string> knownChecksums64Bit()
         {
-            // These are the checksums for Windows 64 bit installers from
+            // These are the checksums for Windows 64-bit installers from
             // https://ftp.mozilla.org/pub/thunderbird/releases/78.14.0/SHA512SUMS
             return new Dictionary<string, string>(2)
             {
@@ -136,14 +136,14 @@ namespace updater.software
                 version,
                 "^Mozilla Thunderbird [0-9]+\\.[0-9]+(\\.[0-9]+)? \\(x86 " + Regex.Escape(languageCode) + "\\)$",
                 "^Mozilla Thunderbird [0-9]+\\.[0-9]+(\\.[0-9]+)? \\(x64 " + Regex.Escape(languageCode) + "\\)$",
-                // 32 bit installer
+                // 32-bit installer
                 new InstallInfoExe(
                     "https://ftp.mozilla.org/pub/thunderbird/releases/" + version + "/win32/" + languageCode + "/Thunderbird%20Setup%20" + version + ".exe",
                     HashAlgorithm.SHA512,
                     checksum32Bit,
                     signature,
                     "-ms -ma"),
-                // 64 bit installer
+                // 64-bit installer
                 new InstallInfoExe(
                     "https://ftp.mozilla.org/pub/thunderbird/releases/" + version + "/win64/" + languageCode + "/Thunderbird%20Setup%20" + version + ".exe",
                     HashAlgorithm.SHA512,
@@ -218,9 +218,9 @@ namespace updater.software
              * https://ftp.mozilla.org/pub/thunderbird/releases/78.7.1/SHA512SUMS
              * Common lines look like
              * "69d11924...7eff  win32/en-GB/Thunderbird Setup 45.7.1.exe"
-             * for the 32 bit installer, and like
+             * for the 32-bit installer, and like
              * "1428e70c...fb3c  win64/en-GB/Thunderbird Setup 78.7.1.exe"
-             * for the 64 bit installer.
+             * for the 64-bit installer.
              */
 
             string url = "https://ftp.mozilla.org/pub/thunderbird/releases/" + newerVersion + "/SHA512SUMS";
@@ -243,7 +243,7 @@ namespace updater.software
             Match matchChecksum32Bit = reChecksum32Bit.Match(sha512SumsContent);
             if (!matchChecksum32Bit.Success)
                 return null;
-            // look for line with the correct language code and version for 64 bit
+            // look for line with the correct language code and version for 64-bit
             var reChecksum64Bit = new Regex("[0-9a-f]{128}  win64/" + languageCode.Replace("-", "\\-")
                 + "/Thunderbird Setup " + Regex.Escape(newerVersion) + "\\.exe");
             Match matchChecksum64Bit = reChecksum64Bit.Match(sha512SumsContent);
@@ -359,13 +359,13 @@ namespace updater.software
 
 
         /// <summary>
-        /// checksum for the 32 bit installer
+        /// checksum for the 32-bit installer
         /// </summary>
         private readonly string checksum32Bit;
 
 
         /// <summary>
-        /// checksum for the 64 bit installer
+        /// checksum for the 64-bit installer
         /// </summary>
         private readonly string checksum64Bit;
 

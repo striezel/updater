@@ -32,7 +32,7 @@ namespace updater.software
     public class TeamSpeakClient : AbstractSoftware
     {
         /// <summary>
-        /// NLog.Logger for NodeJS class
+        /// NLog.Logger for TeamSpeakClient class
         /// </summary>
         private static readonly NLog.Logger logger = NLog.LogManager.GetLogger(typeof(TeamSpeakClient).FullName);
 
@@ -68,8 +68,8 @@ namespace updater.software
         {
             if (!Environment.Is64BitOperatingSystem)
             {
-                logger.Warn("TeamSpeak does not provide 32 bit binaries from version 3.6.0 onwards.");
-                logger.Warn("Please consider switching to an 64 bit operating system to get newer TeamSpeak updates.");
+                logger.Warn("TeamSpeak does not provide 32-bit binaries from version 3.6.0 onwards.");
+                logger.Warn("Please consider switching to an 64-bit operating system to get newer TeamSpeak updates.");
                 return latestSupported32BitVersion();
             }
 
@@ -86,11 +86,11 @@ namespace updater.software
                 version,
                 "^TeamSpeak 3 Client$",
                 "^TeamSpeak 3 Client$",
-                // Official site provides no 32 bit download directly anymore,
-                // so we use the 64 bit version here to perform a migration to
-                // the 64 bit version of the TeamSpeak client.
+                // Official site provides no 32-bit download directly anymore,
+                // so we use the 64-bit version here to perform a migration to
+                // the 64-bit version of the TeamSpeak client.
                 installer_64_bits,
-                // usual 64 bit installer
+                // usual 64-bit installer
                 installer_64_bits
                 );
         }
@@ -98,7 +98,7 @@ namespace updater.software
 
         /// <summary>
         /// Gets the information about the latest TeamSpeak version that still
-        /// has officially supported 32 bit builds.
+        /// has officially supported 32-bit builds.
         /// </summary>
         /// <returns>Returns an AvailableSoftware instance with the known
         /// details about the software.</returns>
@@ -161,8 +161,8 @@ namespace updater.software
             logger.Info("Searching for newer version of TeamSpeak Client...");
             if (!Environment.Is64BitOperatingSystem)
             {
-                logger.Warn("TeamSpeak does not provide 32 bit binaries from version 3.6.0 onwards.");
-                logger.Warn("Please consider switching to an 64 bit operating system to get newer TeamSpeak updates.");
+                logger.Warn("TeamSpeak does not provide 32-bit binaries from version 3.6.0 onwards.");
+                logger.Warn("Please consider switching to an 64-bit operating system to get newer TeamSpeak updates.");
                 return latestSupported32BitVersion();
             }
             string htmlCode = null;
@@ -231,12 +231,12 @@ namespace updater.software
 
 
         /// <summary>
-        /// Checks whether an update is a migration to 64 bit version of the
+        /// Checks whether an update is a migration to 64-bit version of the
         /// TeamSpeak client.
         /// </summary>
         /// <param name="detected">currently installed / detected software version</param>
         /// <returns>Returns true, if an update would involve a migration to
-        /// the 64 bit version of the application.
+        /// the 64-bit version of the application.
         /// Returns false otherwise.</returns>
         private static bool IsMigrationTo64Bit(DetectedSoftware detected)
         {
@@ -257,7 +257,7 @@ namespace updater.software
         public override bool needsPreUpdateProcess(DetectedSoftware detected)
         {
             // Pre-update process is required to perform the migration from 32
-            // to 64 bit application.
+            // to 64-bit application.
             return IsMigrationTo64Bit(detected);
         }
 
@@ -276,7 +276,7 @@ namespace updater.software
             if (string.IsNullOrWhiteSpace(detected.installPath))
                 return null;
             var processes = new List<Process>();
-            // Uninstall previous 32 bit version to avoid having two TeamSpeak
+            // Uninstall previous 32-bit version to avoid having two TeamSpeak
             // client entries in control panel.
             var proc = new Process();
             proc.StartInfo.FileName = Path.Combine(detected.installPath, "Uninstall.exe");

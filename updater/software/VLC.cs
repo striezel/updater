@@ -71,14 +71,14 @@ namespace updater.software
                 version,
                 "^VLC media player$",
                 "^VLC media player$",
-                // 32 bit installer
+                // 32-bit installer
                 new InstallInfoExe(
                     "https://get.videolan.org/vlc/" + version + "/win32/vlc-" + version + "-win32.exe",
                     HashAlgorithm.SHA256,
                     "4bd03202b6633f9611b3fc8757880a9b2b38c7c0c40ed6bcbefec71c0099d493",
                     signature,
                     "/S"),
-                // 64 bit installer
+                // 64-bit installer
                 new InstallInfoExe(
                     "https://get.videolan.org/vlc/" + version + "/win64/vlc-" + version + "-win64.exe",
                     HashAlgorithm.SHA256,
@@ -219,8 +219,8 @@ namespace updater.software
                 return null;
 
             // There are extra files for hashes:
-            // https://get.videolan.org/vlc/last/win32/vlc-2.2.4-win32.exe.sha256 for 32 bit
-            // and https://get.videolan.org/vlc/last/win64/vlc-2.2.4-win64.exe.sha256 for 64 bit.
+            // https://get.videolan.org/vlc/last/win32/vlc-2.2.4-win32.exe.sha256 for 32-bit
+            // and https://get.videolan.org/vlc/last/win64/vlc-2.2.4-win64.exe.sha256 for 64-bit.
             var newHashes = new List<string>();
             foreach (var bits in new string[] { "32", "64" })
             {

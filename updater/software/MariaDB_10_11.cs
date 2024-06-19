@@ -47,9 +47,9 @@ namespace updater.software
             var signature = new Signature(publisherX509, certificateExpiration);
             return new AvailableSoftware("MariaDB Server 10.11",
                 version,
-                null, // no 32 bit installer
+                null, // no 32-bit installer
                 "^MariaDB 10\\.11 \\(x64\\)$",
-                null, // no 32 bit installer
+                null, // no 32-bit installer
                 new InstallInfoMsi(
                     "https://downloads.mariadb.org/rest-api/mariadb/" + version + "/mariadb-" + version + "-winx64.msi",
                     HashAlgorithm.SHA256,

@@ -75,7 +75,7 @@ namespace updater.software
                 "6.24",
                 "^CCleaner+$",
                 "^CCleaner+$",
-                // CCleaner uses the same installer for 32 and 64 bit.
+                // CCleaner uses the same installer for 32 and 64-bit.
                 installer,
                 installer
                 );
@@ -155,11 +155,11 @@ namespace updater.software
             // construct new information
             var newInfo = knownInfo();
             newInfo.newestVersion = newVersion;
-            // 32 bit
+            // 32-bit
             newInfo.install32Bit.downloadUrl = newUrl;
             newInfo.install32Bit.checksum = null;
             newInfo.install32Bit.algorithm = HashAlgorithm.Unknown;
-            // 64 bit - same installer
+            // 64-bit - same installer
             newInfo.install64Bit.downloadUrl = newUrl;
             newInfo.install64Bit.checksum = null;
             newInfo.install64Bit.algorithm = HashAlgorithm.Unknown;

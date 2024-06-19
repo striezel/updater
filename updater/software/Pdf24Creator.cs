@@ -97,7 +97,7 @@ namespace updater.software
             return new AvailableSoftware("PDF24 Creator",
                 "11.18.0",
                 "^PDF24 Creator$",
-                "^PDF24 Creator$", // 64 bit version uses same pattern as 32 bit.
+                "^PDF24 Creator$", // 64-bit version uses same pattern as 32-bit.
                 new InstallInfoMsi(
                     "https://download.pdf24.org/pdf24-creator-11.18.0-x86.msi",
                     HashAlgorithm.SHA256,

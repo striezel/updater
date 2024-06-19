@@ -137,9 +137,9 @@ namespace updater.software
 
             foreach (string bits in new string[] { "32", "64" })
             {
-                // Find download URL for 32 bit version.
+                // Find download URL for 32-bit version.
                 // https://inkscape.org/release/inkscape-0.92.4/windows/32-bit/msi/dl/
-                // 64 bit version is at an URL like
+                // 64-bit version is at a URL like
                 // https://inkscape.org/release/inkscape-0.92.4/windows/64-bit/msi/dl/
                 htmlCode = null;
                 try

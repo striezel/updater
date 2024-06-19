@@ -70,7 +70,7 @@ namespace updater.software
                     "d83e32f949f717e51e1a88a33f8ea23cbc0a4320bff51f53e0859bcca628ccf0",
                     new Signature(publisherX509, certificateExpiration),
                     "/VERYSILENT /NORESTART"),
-                // There is no 64 bit installer yet.
+                // There is no 64-bit installer yet.
                 null);
         }
 

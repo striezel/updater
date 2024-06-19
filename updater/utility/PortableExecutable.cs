@@ -22,7 +22,7 @@ using System.IO;
 namespace updater.utility
 {
     /// <summary>
-    /// eumeration type for Portable Executable formats (32 / 64 bit)
+    /// eumeration type for Portable Executable formats (32 / 64-bit)
     /// </summary>
     public enum PEFormat
     {
@@ -37,12 +37,12 @@ namespace updater.utility
         NotPE,
 
         /// <summary>
-        /// 32 bit executable
+        /// 32-bit executable
         /// </summary>
         PE32,
 
         /// <summary>
-        /// 64 bit executable
+        /// 64-bit executable
         /// </summary>
         PE64
     }

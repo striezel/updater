@@ -206,7 +206,7 @@ namespace updater.software
                     bool updatable = needsUpdate(detected[idx]);
                     result.Add(new QueryEntry(this, detected[idx], updatable, ApplicationType.Bit64));
                 } // if match was found
-            } // if 64 bit expression does exist and we are on a 64 bit system
+            } // if 64-bit expression does exist and we are on a 64-bit system
             if (!string.IsNullOrWhiteSpace(known.match32Bit))
             {
                 var regularExp = new Regex(known.match32Bit, RegexOptions.IgnoreCase);
@@ -218,7 +218,7 @@ namespace updater.software
                     bool updatable = needsUpdate(detected[idx]);
                     result.Add(new QueryEntry(this, detected[idx], updatable, ApplicationType.Bit32));
                 } // if match was found
-            } // if 32 bit expression does exist
+            } // if 32-bit expression does exist
         }
 
 

@@ -69,7 +69,7 @@ namespace updater.software
                 version,
                 "^Pidgin$",
                 null,
-                // Pidgin only has an installer for 32 bit.
+                // Pidgin only has an installer for 32-bit.
                 new InstallInfoPidgin(
                     "https://netcologne.dl.sourceforge.net/project/pidgin/Pidgin/" + version + "/pidgin-" + version + "-offline.exe",
                     HashAlgorithm.SHA256,
@@ -170,7 +170,7 @@ namespace updater.software
                     checksum32 = match.Value[..64];
                 }
             }
-            // 32 bit
+            // 32-bit
             newInfo.install32Bit.downloadUrl = newInfo.install32Bit.downloadUrl.Replace(oldVersion, version);
             if (checksum32 != null)
             {

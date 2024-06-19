@@ -74,7 +74,7 @@ namespace updater.software
                     "EA53F7F9 44FADA95 0CD7BB15 4DEB0781 23A357B7 BC5E2484 851762B3 552EB48B",
                     signature,
                     "/VERYSILENT"),
-                // There is no 64 bit installer yet.
+                // There is no 64-bit installer yet.
                 null);
         }
 

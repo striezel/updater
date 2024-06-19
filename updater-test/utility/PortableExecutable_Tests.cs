@@ -32,12 +32,12 @@ namespace updater_test.utility
     {
         /// <summary>
         /// Checks whether PortableExecutable.determineFormat() can properly detect
-        /// the format of a 32 bit portable executable.
+        /// the format of a 32-bit portable executable.
         /// </summary>
         [TestMethod]
         public void Test_determineFormat_executable32()
         {
-            // Download https://the.earth.li/~sgtatham/putty/0.77/w32/putty.exe, that is a known 32 bit file.
+            // Download https://the.earth.li/~sgtatham/putty/0.77/w32/putty.exe, that is a known 32-bit file.
             string local_path = Path.Combine(Path.GetTempPath(), "known-32bit-exe.bak");
             using (var client = new HttpClient())
             {
@@ -50,7 +50,7 @@ namespace updater_test.utility
                 }
             }
 
-            // Downloaded .exe should always be 32 bit.
+            // Downloaded .exe should always be 32-bit.
             var format = PortableExecutable.determineFormat(local_path);
             File.Delete(local_path);
             Assert.AreEqual(PEFormat.PE32, format);
@@ -59,19 +59,19 @@ namespace updater_test.utility
 
         /// <summary>
         /// Checks whether PortableExecutable.determineFormat() can properly detect
-        /// the format of a 64 bit portable executable.
+        /// the format of a 64-bit portable executable.
         /// </summary>
         [TestMethod]
         public void Test_determineFormat_executable64()
         {
             if (!Environment.Is64BitOperatingSystem)
             {
-                Assert.Inconclusive("Probably there will not be an 64 bit executables on a 32 bit operating system,"
-                    + " so we cannot test a 64 bit executable.");
+                Assert.Inconclusive("Probably there will not be an 64-bit executables on a 32-bit operating system,"
+                    + " so we cannot test a 64-bit executable.");
                 return;
             }
 
-            // explorer.exe should be 64 bit on a 64 bit OS.
+            // explorer.exe should be 64-bit on a 64-bit OS.
             var format = PortableExecutable.determineFormat("C:\\Windows\\explorer.exe");
             Assert.AreEqual(PEFormat.PE64, format);
         }

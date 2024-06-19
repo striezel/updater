@@ -163,7 +163,7 @@ namespace updater.software
             }
 
             // Find checksums.
-            // The 32 bit installer checksum is listed in a line like
+            // The 32-bit installer checksum is listed in a line like
             // "068650cc45da848ac31500e0525063de00068f5a09bebc59d1f36d34e5a8851a  librewolf-119.0-6-windows-i686-setup.exe".
             var regEx = new Regex("[0-9a-f]{64}  librewolf\\-" + Regex.Escape(full_version) + "\\-windows\\-i686\\-setup.exe");
             Match match = regEx.Match(response);
@@ -172,7 +172,7 @@ namespace updater.software
             known.install32Bit.checksum = match.Value[..64];
             known.install32Bit.downloadUrl = known.install32Bit.downloadUrl.Replace(known.newestVersion, full_version);
 
-            // The 64 bit installer checksum is listed in a line like
+            // The 64-bit installer checksum is listed in a line like
             // "b9a241ead1c8ce53785087081a2b2b69af0222515cb99fb3a38b6cefd9fff812  librewolf-119.0-6-windows-x86_64-setup.exe"
             regEx = new Regex("[0-9a-f]{64}  librewolf\\-" + Regex.Escape(full_version) + "\\-windows\\-x86_64\\-setup.exe");
             match = regEx.Match(response);

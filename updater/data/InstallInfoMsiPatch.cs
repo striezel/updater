@@ -21,7 +21,7 @@ using System.Diagnostics;
 namespace updater.data
 {
     /// <summary>
-    /// Like InstallInfoMsi, but it install patches (*.msp) instead of full packages (*.msi).
+    /// Like InstallInfoMsi, but it installs patches (*.msp) instead of full packages (*.msi).
     /// </summary>
     public class InstallInfoMsiPatch : InstallInfoMsi
     {

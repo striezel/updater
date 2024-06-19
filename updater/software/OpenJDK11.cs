@@ -194,7 +194,7 @@ namespace updater.software
             // Do we have all the data we need?
             if (!hasBuild32 || !hasBuild64)
             {
-                logger.Error("Either 32 bit build or 64 bit build information of Eclipse Temurin JDK was not found!");
+                logger.Error("Either 32-bit build or 64-bit build information of Eclipse Temurin JDK was not found!");
                 return null;
             }
             return newInfo;

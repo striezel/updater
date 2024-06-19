@@ -69,7 +69,7 @@ namespace updater.software
                 new InstallInfoMsi(
                     // Use mirror URL, because the "original" URL of the Blender
                     // website will redirect to a mirror site, and this redirect
-                    // is not machine-friendly, i. e. uses JavaScript etc., so a
+                    // is not machine-friendly, i.e. uses JavaScript etc., so a
                     // mirror is the safe choice here.
                     // "https://ftp.nluug.nl/pub/graphics/blender/release/Blender3.6/blender-3.6.10-windows-x64.msi",
                     "https://ftp.halifax.rwth-aachen.de/blender/release/Blender3.6/blender-3.6.12-windows-x64.msi",

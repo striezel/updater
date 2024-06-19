@@ -68,8 +68,8 @@ namespace updater.software
         {
             if (!Environment.Is64BitOperatingSystem)
             {
-                logger.Warn("Mumble does not provide 32 bit binaries from version 1.5.634 onwards.");
-                logger.Warn("Please consider switching to an 64 bit operating system to get newer Mumble updates.");
+                logger.Warn("Mumble does not provide 32-bit binaries from version 1.5.634 onwards.");
+                logger.Warn("Please consider switching to an 64-bit operating system to get newer Mumble updates.");
                 return LastSupported32BitVersion();
             }
             var signature = new Signature(publisherX509, certificateExpiration);
@@ -83,10 +83,10 @@ namespace updater.software
                 "1.5.634",
                 "^(Mumble [0-9]\\.[0-9]+\\.[0-9]+|Mumble \\(client\\))$",
                 "^(Mumble [0-9]\\.[0-9]+\\.[0-9]+|Mumble \\(client\\))$",
-                // 32 bit installations will be uninstalled and switched to the
-                // 64 bit version of the client, if they are on a 64 bit OS.
+                // 32-bit installations will be uninstalled and switched to the
+                // 64-bit version of the client, if they are on a 64-bit OS.
                 installer,
-                // 64 bit MSI installer started with 1.3.0.
+                // 64-bit MSI installer started with 1.3.0.
                 installer);
         }
 
@@ -154,8 +154,8 @@ namespace updater.software
             logger.Info("Searching for newer version of Mumble...");
             if (!Environment.Is64BitOperatingSystem)
             {
-                logger.Warn("Mumble does not provide 32 bit binaries from version 1.5.634 onwards.");
-                logger.Warn("Please consider switching to an 64 bit operating system to get newer Mumble updates.");
+                logger.Warn("Mumble does not provide 32-bit binaries from version 1.5.634 onwards.");
+                logger.Warn("Please consider switching to an 64-bit operating system to get newer Mumble updates.");
                 return LastSupported32BitVersion();
             }
             var request = new HttpRequestMessage(HttpMethod.Head, "https://github.com/mumble-voip/mumble/releases/latest");
@@ -231,14 +231,14 @@ namespace updater.software
         }
 
         /// <summary>
-        /// Checks whether the update needs to unistall the old installed version first.
+        /// Checks whether the update needs to uninstall the old installed version first.
         /// </summary>
         /// <param name="detected">currently installed / detected software version</param>
         /// <returns>Returns true, if the software needs an uninstall before the upgrade.</returns>
         private bool needsFreshInstallation(DetectedSoftware detected)
         {
             // Update path from 1.3.x to 1.4.x is broken, so anything before 1.4.0 needs
-            // a clean installation, i. e. uninstallation before installation of a new
+            // a clean installation, i.e. uninstallation before installation of a new
             // version. See <https://github.com/mumble-voip/mumble/issues/5076> for more
             // background information on that.
             var detectedVersion = new versions.Triple(detected.displayVersion);
@@ -247,10 +247,10 @@ namespace updater.software
             {
                 return true;
             }
-            // Versions from 1.5.634 onwards only offer 64 bit builds. To allow
-            // an update to newer versions, the switch from 32 bit to 64 bit
-            // application has to happen on those machines that have a 64 bit
-            // operating system. This means uninstalling the 32 bit app first.
+            // Versions from 1.5.634 onwards only offer 64-bit builds. To allow
+            // an update to newer versions, the switch from 32-bit to 64-bit
+            // application has to happen on those machines that have a 64-bit
+            // operating system. This means uninstalling the 32-bit app first.
             return detected.appType == ApplicationType.Bit32
                 && Environment.Is64BitOperatingSystem;
         }
@@ -367,7 +367,7 @@ namespace updater.software
                         { ApplicationType.Bit64, "{6011D53E-52D0-49DC-B40F-1C9579523D29}" }
                     }
                 },
-                // Versions before 1.3.0 were only available as 32 bit builds.
+                // Versions before 1.3.0 were only available as 32-bit builds.
                 { "1.2.19",
                     new Dictionary<ApplicationType, string>(1)
                     {

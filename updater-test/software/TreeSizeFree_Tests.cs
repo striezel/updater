@@ -70,7 +70,7 @@ namespace updater_test.software
 
         /// <summary>
         /// Checks whether the regular expression for TreeSize Free matches a
-        /// typical 64 bit version of it.
+        /// typical 64-bit version of it.
         /// </summary>
         [TestMethod]
         public void Test_matchTest_64bit()
@@ -92,7 +92,7 @@ namespace updater_test.software
 
         /// <summary>
         /// Checks whether the regular expression for TreeSize Free matches a
-        /// typical 32 bit version of it.
+        /// typical 32-bit version of it.
         /// </summary>
         [TestMethod]
         public void Test_matchTest_32bit()

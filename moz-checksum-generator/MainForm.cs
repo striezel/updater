@@ -127,7 +127,7 @@ namespace moz_checksum_generator
                 client.Dispose();
             } //using
 
-            // look for line with language code and version for 32 bit
+            // look for line with language code and version for 32-bit
             var reChecksum32Bit = new Regex("[0-9a-f]{128}  win32/[a-z]{2,3}(\\-[A-Z]+)?/Firefox Setup " + Regex.Escape(version) + "\\.exe");
             var data = new SortedDictionary<string, string>();
             MatchCollection matches = reChecksum32Bit.Matches(sha512SumsContent);
@@ -138,7 +138,7 @@ namespace moz_checksum_generator
             }
             rtbBit32.Text = getChecksumCode(data);
 
-            // look for line with the correct language code and version for 64 bit
+            // look for line with the correct language code and version for 64-bit
             var reChecksum64Bit = new Regex("[0-9a-f]{128}  win64/[a-z]{2,3}(\\-[A-Z]+)?/Firefox Setup " + Regex.Escape(version) + "\\.exe");
             data.Clear();
             matches = reChecksum64Bit.Matches(sha512SumsContent);
@@ -190,7 +190,7 @@ namespace moz_checksum_generator
                 client.Dispose();
             } //using
 
-            // look for line with language code and version for 32 bit
+            // look for line with language code and version for 32-bit
             var reChecksum32Bit = new Regex("[0-9a-f]{128}  win32/[a-z]{2,3}(\\-[A-Z]+)?/Firefox Setup " + Regex.Escape(version) + "\\.exe");
             var data = new SortedDictionary<string, string>();
             MatchCollection matches = reChecksum32Bit.Matches(sha512SumsContent);
@@ -201,7 +201,7 @@ namespace moz_checksum_generator
             }
             rtbBit32.Text = getChecksumCode(data);
 
-            // look for line with the correct language code and version for 64 bit
+            // look for line with the correct language code and version for 64-bit
             var reChecksum64Bit = new Regex("[0-9a-f]{128}  win64/[a-z]{2,3}(\\-[A-Z]+)?/Firefox Setup " + Regex.Escape(version) + "\\.exe");
             data.Clear();
             matches = reChecksum64Bit.Matches(sha512SumsContent);
@@ -254,7 +254,7 @@ namespace moz_checksum_generator
                 client.Dispose();
             } //using
 
-            // look for line with language code and version for 32 bit
+            // look for line with language code and version for 32-bit
             var reChecksum32Bit = new Regex("[0-9a-f]{128}  win32/[a-z]{2,3}(\\-[A-Z]+)?/Firefox Setup " + Regex.Escape(version) + "esr\\.exe");
             var data = new SortedDictionary<string, string>();
             MatchCollection matches = reChecksum32Bit.Matches(sha512SumsContent);
@@ -265,7 +265,7 @@ namespace moz_checksum_generator
             }
             rtbBit32.Text = getChecksumCode(data);
 
-            // look for line with the correct language code and version for 64 bit
+            // look for line with the correct language code and version for 64-bit
             var reChecksum64Bit = new Regex("[0-9a-f]{128}  win64/[a-z]{2,3}(\\-[A-Z]+)?/Firefox Setup " + Regex.Escape(version) + "esr\\.exe");
             data.Clear();
             matches = reChecksum64Bit.Matches(sha512SumsContent);
@@ -297,9 +297,9 @@ namespace moz_checksum_generator
              * https://archive.seamonkey-project.org/releases/2.53.17/SHA512SUMS.txt
              * Common lines look like
              * 16695546e9a77cfebdb6e1dafe64f40a5f775116209f3c85e380439c32d3c320dd77129706def5c9592a2684009f1c060e370cac7098103c999b0969bc350748 sha512 40218176 win32/en-GB/seamonkey-2.53.17.en-GB.win32.installer.exe
-             * for the 32 bit installer, or like
+             * for the 32-bit installer, or like
              * 6bcf4bf0c5ddef06e8345c012707eff1ebf81798c47dd737332bdedc2d5e69a39dd200ddfa63149d5e540de06eb3accf6f65063a57110dc6da9a731443f0108a sha512 43261904 win64/en-GB/seamonkey-2.53.17.en-GB.win64.installer.exe
-             * for the 64 bit installer.
+             * for the 64-bit installer.
              */
 
             string url = "https://archive.seamonkey-project.org/releases/" + version + "/SHA512SUMS.txt";
@@ -321,7 +321,7 @@ namespace moz_checksum_generator
                 client.Dispose();
             }
 
-            // look for line with language code and version for 32 bit
+            // look for line with language code and version for 32-bit
             var reChecksum = new Regex("[0-9a-f]{128} sha512 [0-9]+ .*seamonkey\\-" + Regex.Escape(version) + "\\.[a-z]{2,3}(\\-[A-Z]+)?\\.win32\\.installer\\.exe");
             var data = new SortedDictionary<string, string>();
             MatchCollection matches = reChecksum.Matches(sha512SumsContent);
@@ -333,7 +333,7 @@ namespace moz_checksum_generator
             }
             rtbBit32.Text = getChecksumCode(data);
 
-            // look for line with the correct language code and version for 64 bit
+            // look for line with the correct language code and version for 64-bit
             var reChecksum64Bit = new Regex("[0-9a-f]{128} sha512 [0-9]+ .*seamonkey\\-" + Regex.Escape(version) + "\\.[a-z]{2,3}(\\-[A-Z]+)?\\.win64\\.installer\\.exe");
             data.Clear();
             matches = reChecksum64Bit.Matches(sha512SumsContent);
@@ -387,7 +387,7 @@ namespace moz_checksum_generator
                 client.Dispose();
             } //using
 
-            // look for line with language code and version for 32 bit
+            // look for line with language code and version for 32-bit
             var reChecksum = new Regex("[0-9a-f]{128}  win32/[a-z]{2,3}(\\-[A-Z]+)?/Thunderbird Setup " + Regex.Escape(version) + "\\.exe");
             var data = new SortedDictionary<string, string>();
             MatchCollection matches = reChecksum.Matches(sha512SumsContent);
@@ -398,7 +398,7 @@ namespace moz_checksum_generator
             }
             rtbBit32.Text = getChecksumCode(data);
 
-            // look for line with the correct language code and version for 64 bit
+            // look for line with the correct language code and version for 64-bit
             var reChecksum64Bit = new Regex("[0-9a-f]{128}  win64/[a-z]{2,3}(\\-[A-Z]+)?/Thunderbird Setup " + Regex.Escape(version) + "\\.exe");
             data.Clear();
             matches = reChecksum64Bit.Matches(sha512SumsContent);

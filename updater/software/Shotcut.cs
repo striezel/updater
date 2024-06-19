@@ -69,12 +69,12 @@ namespace updater.software
         /// details about the software.</returns>
         public override AvailableSoftware knownInfo()
         {
-            // Since v20.10.31, shotcut only provides 64 bit builds on Windows.
-            // Older 32 bit builds may still be installed, so we use the 64 bit build for
-            // both 32 bit and 64 bit installations, effectively crossgrading 32 bit to
-            // 64 bit installations.
-            // To avoid any conflicts on older 32 bit OSes, the known info for the last
-            // 32 bit build is returned in those cases.
+            // Since v20.10.31, shotcut only provides 64-bit builds on Windows.
+            // Older 32-bit builds may still be installed, so we use the 64-bit build for
+            // both 32-bit and 64-bit installations, effectively crossgrading 32-bit to
+            // 64-bit installations.
+            // To avoid any conflicts on older 32-bit OSes, the known info for the last
+            // 32-bit build is returned in those cases.
             if (!Environment.Is64BitOperatingSystem)
                 return last32BitBuildInformation();
 
@@ -95,9 +95,9 @@ namespace updater.software
 
 
         /// <summary>
-        /// Provides information for the last Shotcut version that still provided a 32 bit build.
+        /// Provides information for the last Shotcut version that still provided a 32-bit build.
         /// </summary>
-        /// <returns>Returns information about the last available 32 bit build version.</returns>
+        /// <returns>Returns information about the last available 32-bit build version.</returns>
         private static AvailableSoftware last32BitBuildInformation()
         {
             return new AvailableSoftware("Shotcut",
@@ -190,15 +190,15 @@ namespace updater.software
         public override AvailableSoftware searchForNewer()
         {
             logger.Info("Searching for newer version of Shotcut...");
-            // Handle 32 bit OSes.
+            // Handle 32-bit OSes.
             if (!Environment.Is64BitOperatingSystem)
             {
-                logger.Warn("Warning: Shotcut developers discontinued the 32 bit builds after version v20.09.27. "
-                    + "If you want a more recent version of Shotcut, switch to a 64 bit operating system.");
+                logger.Warn("Warning: Shotcut developers discontinued the 32-bit builds after version v20.09.27. "
+                    + "If you want a more recent version of Shotcut, switch to a 64-bit operating system.");
                 return last32BitBuildInformation();
             }
 
-            // Get newest information (64 bit builds only).
+            // Get newest information (64-bit builds only).
             string currentVersion = GetLatestVersion();
             if (string.IsNullOrWhiteSpace(currentVersion))
                 return null;
@@ -219,7 +219,7 @@ namespace updater.software
                 client.Dispose();
             } // using
 
-            // find SHA256 hash for 64 bit installer
+            // find SHA256 hash for 64-bit installer
             var reHash = new Regex("[a-f0-9]{64}  shotcut\\-win64\\-[0-9]{6}.exe");
             Match matchHash = reHash.Match(htmlCode);
             if (!matchHash.Success)
@@ -231,7 +231,7 @@ namespace updater.software
             // e.g. https://github.com/mltframework/shotcut/releases/download/v21.05.18/shotcut-win64-210518.exe
             newInfo.install64Bit.downloadUrl = "https://github.com/mltframework/shotcut/releases/download/v" + currentVersion + "/shotcut-win64-" + currentVersion.Replace(".", "") + ".exe";
             newInfo.install64Bit.checksum = newHash64Bit;
-            // Use same information for 32 bit build.
+            // Use same information for 32-bit build.
             newInfo.install32Bit = newInfo.install64Bit;
             return newInfo;
         }

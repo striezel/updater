@@ -65,8 +65,8 @@ namespace updater.software
         {
             if (!Environment.Is64BitOperatingSystem)
             {
-                logger.Warn("Calibre does not provide 32 bit binaries from version 6.0.0 onwards.");
-                logger.Warn("Please consider switching to an 64 bit operating system to get newer Calibre updates.");
+                logger.Warn("Calibre does not provide 32-bit binaries from version 6.0.0 onwards.");
+                logger.Warn("Please consider switching to an 64-bit operating system to get newer Calibre updates.");
                 return latestSupported32BitVersion();
             }
             if (!OS.isWin10OrNewer())
@@ -90,18 +90,18 @@ namespace updater.software
                 knownVersion,
                 "^calibre$",
                 "^(calibre 64 bit)|(calibre 64bit)$",
-                // There are no 32 bit builds from version 6.0.0 onwards,
-                // but the 64 bit installer will detect and remove 32 bit
+                // There are no 32-bit builds from version 6.0.0 onwards,
+                // but the 64-bit installer will detect and remove 32-bit
                 // versions of Calibre as part of its installation. So we
-                // force the switch from 32 bit to the 64 bit version here.
+                // force the switch from 32-bit to the 64-bit version here.
                 info64,
-                // 64 bit installer
+                // 64-bit installer
                 info64);
         }
 
 
         /// <summary>
-        /// Gets the information about the latest Calibre version that still has 32 bit builds.
+        /// Gets the information about the latest Calibre version that still has 32-bit builds.
         /// By coincidence, that is also the last version that still supports Windows 8.
         /// </summary>
         /// <returns>Returns an AvailableSoftware instance with the known
@@ -164,8 +164,8 @@ namespace updater.software
             logger.Info("Searching for newer version of Calibre...");
             if (!Environment.Is64BitOperatingSystem)
             {
-                logger.Warn("Calibre does not provide 32 bit binaries from version 6.0.0 onwards.");
-                logger.Warn("Please consider switching to an 64 bit operating system to get newer Calibre updates.");
+                logger.Warn("Calibre does not provide 32-bit binaries from version 6.0.0 onwards.");
+                logger.Warn("Please consider switching to an 64-bit operating system to get newer Calibre updates.");
                 return latestSupported32BitVersion();
             }
             if (!OS.isWin10OrNewer())
@@ -210,7 +210,7 @@ namespace updater.software
             newInfo.install64Bit.downloadUrl = newInfo.install64Bit.downloadUrl.Replace(oldVersion, newVersion);
             newInfo.install64Bit.checksum = null;
             newInfo.install64Bit.algorithm = HashAlgorithm.Unknown;
-            // Use same info for "32 bit" build, forcing switch to 64 bit build on 64 bit OS.
+            // Use same info for "32-bit" build, forcing switch to 64-bit build on 64-bit OS.
             newInfo.install32Bit = newInfo.install64Bit;
             return newInfo;
         }

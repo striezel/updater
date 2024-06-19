@@ -82,7 +82,7 @@ namespace updater.software
         /// <returns>Returns a dictionary where keys are the language codes and values are the associated checksums.</returns>
         private static Dictionary<string, string> knownChecksums32Bit()
         {
-            // These are the checksums for Windows 32 bit installers from
+            // These are the checksums for Windows 32-bit installers from
             // https://ftp.mozilla.org/pub/firefox/releases/115.12.0esr/SHA512SUMS
             return new Dictionary<string, string>(100)
             {
@@ -196,7 +196,7 @@ namespace updater.software
         /// <returns>Returns a dictionary where keys are the language codes and values are the associated checksums.</returns>
         private static Dictionary<string, string> knownChecksums64Bit()
         {
-            // These are the checksums for Windows 64 bit installers from
+            // These are the checksums for Windows 64-bit installers from
             // https://ftp.mozilla.org/pub/firefox/releases/115.12.0esr/SHA512SUMS
             return new Dictionary<string, string>(100)
             {
@@ -328,14 +328,14 @@ namespace updater.software
                 knownVersion,
                 "^Mozilla Firefox( [0-9]+\\.[0-9]+(\\.[0-9]+)?)? ESR \\(x86 " + Regex.Escape(languageCode) + "\\)$",
                 "^Mozilla Firefox( [0-9]+\\.[0-9]+(\\.[0-9]+)?)? ESR \\(x64 " + Regex.Escape(languageCode) + "\\)$",
-                // 32 bit installer
+                // 32-bit installer
                 new InstallInfoExe(
                     "https://ftp.mozilla.org/pub/firefox/releases/" + knownVersion + "esr/win32/" + languageCode + "/Firefox%20Setup%20" + knownVersion + "esr.exe",
                     HashAlgorithm.SHA512,
                     checksum32Bit,
                     signature,
                     "-ms -ma"),
-                // 64 bit installer
+                // 64-bit installer
                 new InstallInfoExe(
                     "https://ftp.mozilla.org/pub/firefox/releases/" + knownVersion + "esr/win64/" + languageCode + "/Firefox%20Setup%20" + knownVersion + "esr.exe",
                     HashAlgorithm.SHA512,
@@ -399,7 +399,7 @@ namespace updater.software
         /// <summary>
         /// Tries to get the checksums of the newer version.
         /// </summary>
-        /// <returns>Returns a string array containing the checksums for 32 bit and 64 bit (in that order), if successful.
+        /// <returns>Returns a string array containing the checksums for 32-bit and 64-bit (in that order), if successful.
         /// Returns null, if an error occurred.</returns>
         private string[] determineNewestChecksums(string newerVersion)
         {
@@ -425,13 +425,13 @@ namespace updater.software
                 logger.Warn("Exception occurred while checking for newer version of Firefox ESR: " + ex.Message);
                 return null;
             }
-            // look for line with the correct language code and version for 32 bit
+            // look for line with the correct language code and version for 32-bit
             var reChecksum32Bit = new Regex("[0-9a-f]{128}  win32/" + languageCode.Replace("-", "\\-")
                 + "/Firefox Setup " + Regex.Escape(newerVersion) + "esr\\.exe");
             Match matchChecksum32Bit = reChecksum32Bit.Match(sha512SumsContent);
             if (!matchChecksum32Bit.Success)
                 return null;
-            // look for line with the correct language code and version for 64 bit
+            // look for line with the correct language code and version for 64-bit
             var reChecksum64Bit = new Regex("[0-9a-f]{128}  win64/" + languageCode.Replace("-", "\\-")
                 + "/Firefox Setup " + Regex.Escape(newerVersion) + "esr\\.exe");
             Match matchChecksum64Bit = reChecksum64Bit.Match(sha512SumsContent);
@@ -510,13 +510,13 @@ namespace updater.software
 
 
         /// <summary>
-        /// checksum for the 32 bit installer
+        /// checksum for the 32-bit installer
         /// </summary>
         private readonly string checksum32Bit;
 
 
         /// <summary>
-        /// checksum for the 64 bit installer
+        /// checksum for the 64-bit installer
         /// </summary>
         private readonly string checksum64Bit;
     } // class

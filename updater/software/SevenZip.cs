@@ -133,13 +133,13 @@ namespace updater.software
             }
             newInfo.newestVersion = version;
             string newVersionWithoutDot = version.Replace(".", "");
-            // 32 bit
+            // 32-bit
             newInfo.install32Bit.downloadUrl = "https://www.7-zip.org/a/7z" + newVersionWithoutDot + ".exe";
             // The official 7-zip.org site does not provide any checksums,
             // so we have to do without.
             newInfo.install32Bit.algorithm = HashAlgorithm.Unknown;
             newInfo.install32Bit.checksum = null;
-            // 64 bit
+            // 64-bit
             newInfo.install64Bit.downloadUrl = "https://www.7-zip.org/a/7z" + newVersionWithoutDot + "-x64.exe";
             // The official 7-zip.org site does not provide any checksums,
             // so we have to do without.

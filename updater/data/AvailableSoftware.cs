@@ -44,10 +44,10 @@ namespace updater.data
         /// </summary>
         /// <param name="_name">name of the software</param>
         /// <param name="_newestVersion">newest version</param>
-        /// <param name="_regex32">regular expression to match for the 32 bit version</param>
-        /// <param name="_regex64">regular expression to match for the 64 bit version</param>
-        /// <param name="_install32">installer information for the 32 bit variant of the software</param>
-        /// <param name="_install64">installer information for the 64 bit variant of the software</param>
+        /// <param name="_regex32">regular expression to match for the 32-bit version</param>
+        /// <param name="_regex64">regular expression to match for the 64-bit version</param>
+        /// <param name="_install32">installer information for the 32-bit variant of the software</param>
+        /// <param name="_install64">installer information for the 64-bit variant of the software</param>
         public AvailableSoftware(string _name, string _newestVersion,
             string _regex32 = null, string _regex64 = null,
             InstallInfo _install32 = null, InstallInfo _install64 = null)
@@ -74,27 +74,27 @@ namespace updater.data
 
 
         /// <summary>
-        /// regular expression to match for the 32 bit version
+        /// regular expression to match for the 32-bit version
         /// </summary>
         public string match32Bit;
 
 
         /// <summary>
-        /// regular expression to match for the 64 bit version
+        /// regular expression to match for the 64-bit version
         /// </summary>
         public string match64Bit;
 
 
         /// <summary>
-        /// installer information for the 32 bit variant of the software
-        /// (Might be null, if there is no 32 bit variant.)
+        /// installer information for the 32-bit variant of the software
+        /// (Might be null, if there is no 32-bit variant.)
         /// </summary>
         public InstallInfo install32Bit;
 
 
         /// <summary>
-        /// installer information for the 64 bit variant of the software
-        /// (Might be null, if there is no 64 bit variant.)
+        /// installer information for the 64-bit variant of the software
+        /// (Might be null, if there is no 64-bit variant.)
         /// </summary>
         public InstallInfo install64Bit;
 
