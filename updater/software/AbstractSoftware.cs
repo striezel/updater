@@ -28,7 +28,7 @@ namespace updater.software
     /// <summary>
     /// Abstract base class for software update classes.
     /// </summary>
-    abstract public class AbstractSoftware : ISoftware
+    public abstract class AbstractSoftware : ISoftware
     {
         /// <summary>
         /// NLog.Logger for AbstractSoftware class
@@ -41,7 +41,7 @@ namespace updater.software
         /// </summary>
         /// <param name="automaticallyGetNewer">whether to automatically get
         /// newer information about the software when calling the info() method</param>
-        public AbstractSoftware(bool automaticallyGetNewer)
+        protected AbstractSoftware(bool automaticallyGetNewer)
         {
             m_newerInfo = null;
             m_automaticallyGetNewer = automaticallyGetNewer;
@@ -53,7 +53,7 @@ namespace updater.software
         /// Gets a list of IDs to identify the software.
         /// </summary>
         /// <returns>Returns a non-empty array of IDs, where at least one entry is unique to the software.</returns>
-        abstract public string[] id();
+        public abstract string[] id();
 
 
         /// <summary>
@@ -61,7 +61,7 @@ namespace updater.software
         /// </summary>
         /// <returns>Returns an AvailableSoftware instance with the known
         /// details about the software.</returns>
-        abstract public AvailableSoftware knownInfo();
+        public abstract AvailableSoftware knownInfo();
 
 
         /// <summary>
@@ -113,7 +113,7 @@ namespace updater.software
         /// <returns>Returns true, if searchForNewer() is implemented for that
         /// class. Returns false, if not. Calling searchForNewer() may throw an
         /// exception in the later case.</returns>
-        abstract public bool implementsSearchForNewer();
+        public abstract bool implementsSearchForNewer();
 
 
         /// <summary>
@@ -121,7 +121,7 @@ namespace updater.software
         /// </summary>
         /// <returns>Returns an AvailableSoftware instance with the information
         /// that was retrieved from the net.</returns>
-        abstract public AvailableSoftware searchForNewer();
+        public abstract AvailableSoftware searchForNewer();
 
 
         /// <summary>
@@ -130,7 +130,7 @@ namespace updater.software
         /// </summary>
         /// <param name="detected">currently installed / detected software version</param>
         /// <returns>Returns a list of process names that block the upgrade.</returns>
-        abstract public List<string> blockerProcesses(DetectedSoftware detected);
+        public abstract List<string> blockerProcesses(DetectedSoftware detected);
 
 
         /// <summary>
@@ -141,7 +141,7 @@ namespace updater.software
         /// preUpdateProcess() needs to run in preparation of the update.
         /// Returns false, if not. Calling preUpdateProcess() may throw an
         /// exception in the later case.</returns>
-        abstract public bool needsPreUpdateProcess(DetectedSoftware detected);
+        public abstract bool needsPreUpdateProcess(DetectedSoftware detected);
 
 
         /// <summary>
@@ -152,7 +152,7 @@ namespace updater.software
         /// <returns>Returns a Process ready to start that should be run before
         /// the update. May return null or may throw, if needsPreUpdateProcess()
         /// returned false.</returns>
-        abstract public List<Process> preUpdateProcess(DetectedSoftware detected);
+        public abstract List<Process> preUpdateProcess(DetectedSoftware detected);
 
 
         /// <summary>

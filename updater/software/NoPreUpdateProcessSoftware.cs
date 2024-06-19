@@ -33,7 +33,7 @@ namespace updater.software
         /// </summary>
         /// <param name="autoGetNewer">whether to automatically get
         /// newer information about the software when calling the info() method</param>
-        public NoPreUpdateProcessSoftware(bool autoGetNewer)
+        protected NoPreUpdateProcessSoftware(bool autoGetNewer)
             : base(autoGetNewer)
         { }
 

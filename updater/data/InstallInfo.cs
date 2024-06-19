@@ -28,7 +28,7 @@ namespace updater.data
         /// <summary>
         /// Default constructor.
         /// </summary>
-        public InstallInfo()
+        protected InstallInfo()
         {
             downloadUrl = null;
             algorithm = HashAlgorithm.Unknown;
@@ -46,7 +46,7 @@ namespace updater.data
         /// <param name="_check">checksum for the installer - hexadecimal representation</param>
         /// <param name="_signature">common name of publisher and expiration date, if file is signed</param>
         /// <param name="_silent">switches for silent installation</param>
-        public InstallInfo(string _downloadUrl, HashAlgorithm _algo, string _check, Signature _signature, string _silent)
+        protected InstallInfo(string _downloadUrl, HashAlgorithm _algo, string _check, Signature _signature, string _silent)
         {
             downloadUrl = _downloadUrl;
             algorithm = _algo;

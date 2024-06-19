@@ -54,7 +54,7 @@ namespace updater.software
         /// <param name="autoGetNewer">whether to automatically get newer
         /// information about the software when calling the info() method</param>
         /// <param name="_branch">the MariaDB branch to handle, e.g. "10.5"</param>
-        public MariaDB_Base(bool autoGetNewer, string _branch)
+        protected MariaDB_Base(bool autoGetNewer, string _branch)
             : base(autoGetNewer)
         {
             branch = _branch;
@@ -66,7 +66,7 @@ namespace updater.software
         /// </summary>
         /// <returns>Returns an AvailableSoftware instance with the known
         /// details about the software.</returns>
-        abstract public override AvailableSoftware knownInfo();
+        public abstract override AvailableSoftware knownInfo();
 
 
         /// <summary>

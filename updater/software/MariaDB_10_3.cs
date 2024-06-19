@@ -35,7 +35,7 @@ namespace updater.software
         /// <summary>
         /// expiration date of the certificate for MariaDB 10.3
         /// </summary>
-        private static new readonly DateTime certificateExpiration = new(2024, 1, 4, 23, 59, 59, DateTimeKind.Utc);
+        private new static readonly DateTime certificateExpiration = new(2024, 1, 4, 23, 59, 59, DateTimeKind.Utc);
 
 
         /// <summary>

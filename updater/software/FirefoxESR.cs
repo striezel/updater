@@ -52,7 +52,7 @@ namespace updater.software
         /// constructor with language code
         /// </summary>
         /// <param name="langCode">the language code for the Firefox ESR software,
-        /// e.g. "de" for German, "en-GB" for British English, "fr" for French, etc.</param
+        /// e.g. "de" for German, "en-GB" for British English, "fr" for French, etc.</param>
         /// <param name="autoGetNewer">whether to automatically get
         /// newer information about the software when calling the info() method</param>
         public FirefoxESR(string langCode, bool autoGetNewer)
