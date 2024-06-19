@@ -33,7 +33,7 @@ namespace updater.operations
         /// <summary>
         /// Constructor.
         /// </summary>
-        /// <param name="options">program options from the command line</param>
+        /// <param name="_options">program options from the command line</param>
         public SoftwareStatus(Options _options)
         {
             opts = _options;
@@ -136,7 +136,7 @@ namespace updater.operations
                 output += utility.Strings.appTypeToString(item.type).PadRight(maxAppTypeLength) + " | ";
                 // currently installed version
                 if (!string.IsNullOrWhiteSpace(item.detected.displayVersion))
-                output += item.detected.displayVersion.PadRight(maxCurrentVersionLength);
+                    output += item.detected.displayVersion.PadRight(maxCurrentVersionLength);
                 else
                     output += "???".PadRight(maxCurrentVersionLength);
                 // newest version

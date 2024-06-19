@@ -93,7 +93,7 @@ namespace updater.software
 
 
         /// <summary>
-        /// Determines whether or not the method searchForNewer() is implemented.
+        /// Determines whether the method searchForNewer() is implemented.
         /// </summary>
         /// <returns>Returns true, if searchForNewer() is implemented for that
         /// class. Returns false, if not. Calling searchForNewer() may throw an
@@ -189,7 +189,7 @@ namespace updater.software
         public override bool needsUpdate(DetectedSoftware detected)
         {
             // HeidiSQL version information from registry only contains the
-            // major and minor version number, e. g. 12.1 instead of the full
+            // major and minor version number, e.g. 12.1 instead of the full
             // version number 12.1.0.6537. Therefore, comparison should only
             // consider the first two numbers for updates.
             var verDetected = new Quartet(detected.displayVersion)

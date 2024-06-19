@@ -97,7 +97,7 @@ namespace updater.software
 
 
         /// <summary>
-        /// Determines whether or not the method searchForNewer() is implemented.
+        /// Determines whether the method searchForNewer() is implemented.
         /// </summary>
         /// <returns>Returns true, if searchForNewer() is implemented for that
         /// class. Returns false, if not. Calling searchForNewer() may throw an
@@ -173,12 +173,12 @@ namespace updater.software
             // construct new information
             var newInfo = knownInfo();
             newInfo.newestVersion = currentVersion;
-            // e. g. https://github.com/Kitware/CMake/releases/download/v3.19.4/cmake-3.19.4-win32-x86.msi (until 3.19.8)
-            //    or https://github.com/Kitware/CMake/releases/download/v3.20.2/cmake-3.20.2-windows-i386.msi (since 3.20.0)
+            // e.g. https://github.com/Kitware/CMake/releases/download/v3.19.4/cmake-3.19.4-win32-x86.msi (until 3.19.8)
+            //   or https://github.com/Kitware/CMake/releases/download/v3.20.2/cmake-3.20.2-windows-i386.msi (since 3.20.0)
             newInfo.install32Bit.downloadUrl = "https://github.com/Kitware/CMake/releases/download/v" + currentVersion + "/cmake-" + currentVersion + "-windows-i386.msi";
             newInfo.install32Bit.checksum = newHash32Bit;
-            // e. g. https://github.com/Kitware/CMake/releases/download/v3.19.4/cmake-3.19.4-win64-x64.msi (until 3.19.8)
-            //    or https://github.com/Kitware/CMake/releases/download/v3.20.1/cmake-3.20.1-windows-x86_64.msi (since 3.20.0)
+            // e.g. https://github.com/Kitware/CMake/releases/download/v3.19.4/cmake-3.19.4-win64-x64.msi (until 3.19.8)
+            //   or https://github.com/Kitware/CMake/releases/download/v3.20.1/cmake-3.20.1-windows-x86_64.msi (since 3.20.0)
             newInfo.install64Bit.downloadUrl = "https://github.com/Kitware/CMake/releases/download/v" + currentVersion + "/cmake-" + currentVersion + "-windows-x86_64.msi";
             newInfo.install64Bit.checksum = newHash64Bit;
             return newInfo;

@@ -94,7 +94,7 @@ namespace updater.software
 
 
         /// <summary>
-        /// Determines whether or not the method searchForNewer() is implemented.
+        /// Determines whether the method searchForNewer() is implemented.
         /// </summary>
         /// <returns>Returns true, if searchForNewer() is implemented for that
         /// class. Returns false, if not. Calling searchForNewer() may throw an
@@ -161,7 +161,7 @@ namespace updater.software
                 return null;
             }
 
-            // There's the executable name (e. g. iview460_setup.exe) followed by the checksum.
+            // There's the executable name (e.g. iview460_setup.exe) followed by the checksum.
             versionRegEx = new Regex("iview([0-9]+)_setup.exe");
             versionMatch = versionRegEx.Match(htmlCode);
             if (!versionMatch.Success)

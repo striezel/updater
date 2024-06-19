@@ -92,7 +92,7 @@ namespace updater.software
 
 
         /// <summary>
-        /// Determines whether or not the method searchForNewer() is implemented.
+        /// Determines whether the method searchForNewer() is implemented.
         /// </summary>
         /// <returns>Returns true, if searchForNewer() is implemented for that
         /// class. Returns false, if not. Calling searchForNewer() may throw an

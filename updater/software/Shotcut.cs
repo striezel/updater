@@ -129,7 +129,7 @@ namespace updater.software
 
 
         /// <summary>
-        /// Determines whether or not the method searchForNewer() is implemented.
+        /// Determines whether the method searchForNewer() is implemented.
         /// </summary>
         /// <returns>Returns true, if searchForNewer() is implemented for that
         /// class. Returns false, if not. Calling searchForNewer() may throw an
@@ -228,7 +228,7 @@ namespace updater.software
             // construct new information
             var newInfo = knownInfo();
             newInfo.newestVersion = currentVersion;
-            // e. g. https://github.com/mltframework/shotcut/releases/download/v21.05.18/shotcut-win64-210518.exe
+            // e.g. https://github.com/mltframework/shotcut/releases/download/v21.05.18/shotcut-win64-210518.exe
             newInfo.install64Bit.downloadUrl = "https://github.com/mltframework/shotcut/releases/download/v" + currentVersion + "/shotcut-win64-" + currentVersion.Replace(".", "") + ".exe";
             newInfo.install64Bit.checksum = newHash64Bit;
             // Use same information for 32 bit build.
@@ -253,7 +253,7 @@ namespace updater.software
 
 
         /// <summary>
-        /// Determines whether or not a separate process must be run before the update.
+        /// Determines whether a separate process must be run before the update.
         /// </summary>
         /// <param name="detected">currently installed / detected software version</param>
         /// <returns>Returns true, if a separate process returned by
@@ -358,7 +358,7 @@ namespace updater.software
 
 
         /// <summary>
-        /// Determines whether or not the pre-update processes are allowed to fail.
+        /// Determines whether the pre-update processes are allowed to fail.
         /// </summary>
         /// <param name="detected">currently installed / detected software version</param>
         /// <param name="preProc">the current pre-update process</param>

@@ -95,7 +95,7 @@ namespace updater.software
 
 
         /// <summary>
-        /// Determines whether or not the method searchForNewer() is implemented.
+        /// Determines whether the method searchForNewer() is implemented.
         /// </summary>
         /// <returns>Returns true, if searchForNewer() is implemented for that
         /// class. Returns false, if not. Calling searchForNewer() may throw an
@@ -156,7 +156,7 @@ namespace updater.software
                 }
 
                 // find SHA256 hash for 32 bit installer
-                /* Hash is part of a HTML table, e. g. in
+                /* Hash is part of a HTML table, e.g. in
                  * <td>Git-2.30.0-32-bit.exe</td>
                  * <td>e41b7d0e1c88a023ecd42a1e7339c39a8e906cd51ea9ae9aefdb42c513103f57</td>
                  */
@@ -185,17 +185,17 @@ namespace updater.software
                 if (needsFourthDigit)
                 {
                     newInfo.newestVersion = currentVersion + "." + fourthDigit;
-                    // e. g. https://github.com/git-for-windows/git/releases/download/v2.32.0.windows.2/Git-2.32.0.2-32-bit.exe
+                    // e.g. https://github.com/git-for-windows/git/releases/download/v2.32.0.windows.2/Git-2.32.0.2-32-bit.exe
                     newInfo.install32Bit.downloadUrl = "https://github.com/git-for-windows/git/releases/download/" + tag + "/Git-" + currentVersion + "." + fourthDigit + "-32-bit.exe";
-                    // e. g. https://github.com/git-for-windows/git/releases/download/v2.32.0.windows.2/Git-2.32.0.2-64-bit.exe
+                    // e.g. https://github.com/git-for-windows/git/releases/download/v2.32.0.windows.2/Git-2.32.0.2-64-bit.exe
                     newInfo.install64Bit.downloadUrl = "https://github.com/git-for-windows/git/releases/download/" + tag + "/Git-" + currentVersion + "." + fourthDigit + "-64-bit.exe";
                 }
                 else
                 {
                     newInfo.newestVersion = currentVersion;
-                    // e. g. https://github.com/git-for-windows/git/releases/download/v2.30.0.windows.1/Git-2.30.0-32-bit.exe
+                    // e.g. https://github.com/git-for-windows/git/releases/download/v2.30.0.windows.1/Git-2.30.0-32-bit.exe
                     newInfo.install32Bit.downloadUrl = "https://github.com/git-for-windows/git/releases/download/" + tag + "/Git-" + currentVersion + "-32-bit.exe";
-                    // e. g. https://github.com/git-for-windows/git/releases/download/v2.30.0.windows.1/Git-2.30.0-64-bit.exe
+                    // e.g. https://github.com/git-for-windows/git/releases/download/v2.30.0.windows.1/Git-2.30.0-64-bit.exe
                     newInfo.install64Bit.downloadUrl = "https://github.com/git-for-windows/git/releases/download/" + tag + "/Git-" + currentVersion + "-64-bit.exe";
                 }
                 newInfo.install32Bit.checksum = newHash32Bit;

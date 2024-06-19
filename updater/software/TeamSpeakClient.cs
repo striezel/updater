@@ -140,7 +140,7 @@ namespace updater.software
 
 
         /// <summary>
-        /// Determines whether or not the method searchForNewer() is implemented.
+        /// Determines whether the method searchForNewer() is implemented.
         /// </summary>
         /// <returns>Returns true, if searchForNewer() is implemented for that
         /// class. Returns false, if not. Calling searchForNewer() may throw an
@@ -247,7 +247,7 @@ namespace updater.software
 
 
         /// <summary>
-        /// Determines whether or not a separate process must be run before the update.
+        /// Determines whether a separate process must be run before the update.
         /// </summary>
         /// <param name="detected">currently installed / detected software version</param>
         /// <returns>Returns true, if a separate process returned by

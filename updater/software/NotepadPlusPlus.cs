@@ -101,7 +101,7 @@ namespace updater.software
 
 
         /// <summary>
-        /// Determines whether or not the method searchForNewer() is implemented.
+        /// Determines whether the method searchForNewer() is implemented.
         /// </summary>
         /// <returns>Returns true, if searchForNewer() is implemented for that
         /// class. Returns false, if not. Calling searchForNewer() may throw an
@@ -191,10 +191,10 @@ namespace updater.software
             // construct new information
             var newInfo = knownInfo();
             newInfo.newestVersion = versionNumber;
-            // e. g. https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v7.9.1/npp.7.9.1.Installer.exe
+            // e.g. https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v7.9.1/npp.7.9.1.Installer.exe
             newInfo.install32Bit.downloadUrl = "https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v" + currentVersion + "/npp." + versionNumber + ".Installer.exe";
             newInfo.install32Bit.checksum = newHash32Bit;
-            // e. g. https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v7.9.1/npp.7.9.1.Installer.x64.exe
+            // e.g. https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v7.9.1/npp.7.9.1.Installer.x64.exe
             newInfo.install64Bit.downloadUrl = "https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v" + versionNumber + "/npp." + versionNumber + ".Installer.x64.exe";
             newInfo.install64Bit.checksum = newHash64Bit;
             return newInfo;

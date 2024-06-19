@@ -29,22 +29,22 @@ namespace updater.versions
         IComparable<Quartet>, IEquatable<Quartet>
     {
         /// <summary>
-        /// major version number, e. g. the 11 in 11.23.4.5
+        /// major version number, e.g. the 11 in 11.23.4.5
         /// </summary>
         public uint major;
 
         /// <summary>
-        /// minor version number, e. g. the 23 in 11.23.4.5
+        /// minor version number, e.g. the 23 in 11.23.4.5
         /// </summary>
         public uint minor;
 
         /// <summary>
-        /// patch level, e. g. the 4 in 11.23.4.5
+        /// patch level, e.g. the 4 in 11.23.4.5
         /// </summary>
         public uint patch;
 
         /// <summary>
-        /// build number, e. g. the 5 in 11.23.4.5
+        /// build number, e.g. the 5 in 11.23.4.5
         /// </summary>
         public uint build;
 

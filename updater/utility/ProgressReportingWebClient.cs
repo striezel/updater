@@ -78,7 +78,7 @@ namespace updater.utility
         /// Formats a given number of seconds as a human-friendly string.
         /// </summary>
         /// <param name="seconds">time span in seconds</param>
-        /// <returns>Returns the time span as human-friendly string, e. g.
+        /// <returns>Returns the time span as human-friendly string, e.g.
         /// "2min 17s" for 137 seconds.</returns>
         public static string FormatSeconds(long seconds)
         {
@@ -102,7 +102,7 @@ namespace updater.utility
         /// Formats a number of bytes as a human-friendly string.
         /// </summary>
         /// <param name="bytes">the number of bytes</param>
-        /// <returns>Returns a human-friendly string, e. g. "1.5 KB" for 1536 bytes.</returns>
+        /// <returns>Returns a human-friendly string, e.g. "1.5 KB" for 1536 bytes.</returns>
         public static string FormatBytes(long bytes)
         {
             var invariant = System.Globalization.CultureInfo.InvariantCulture;

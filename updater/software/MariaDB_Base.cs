@@ -53,7 +53,7 @@ namespace updater.software
         /// </summary>
         /// <param name="autoGetNewer">whether to automatically get newer
         /// information about the software when calling the info() method</param>
-        /// /// <param name="_branch">the MariaDB branch to handle, e. g. "10.5"</param>
+        /// <param name="_branch">the MariaDB branch to handle, e.g. "10.5"</param>
         public MariaDB_Base(bool autoGetNewer, string _branch)
             : base(autoGetNewer)
         {
@@ -80,7 +80,7 @@ namespace updater.software
 
 
         /// <summary>
-        /// Determines whether or not the method searchForNewer() is implemented.
+        /// Determines whether the method searchForNewer() is implemented.
         /// </summary>
         /// <returns>Returns true, if searchForNewer() is implemented for that
         /// class. Returns false, if not. Calling searchForNewer() may throw an
@@ -248,7 +248,7 @@ namespace updater.software
 
 
         /// <summary>
-        /// the MariaDB server branch to use, e. g. "10.5" or "10.6"
+        /// the MariaDB server branch to use, e.g. "10.5" or "10.6"
         /// </summary>
         private readonly string branch;
     }

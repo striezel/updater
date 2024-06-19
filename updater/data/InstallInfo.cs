@@ -57,7 +57,7 @@ namespace updater.data
 
 
         /// <summary>
-        /// Determines whether or not this instance has checksum information.
+        /// Determines whether this instance has checksum information.
         /// </summary>
         /// <returns>Returns true, if there is a checksum.
         /// Returns false, if there is no checksum.</returns>
@@ -69,8 +69,8 @@ namespace updater.data
 
 
         /// <summary>
-        /// Determines whether or not this instance has signature information
-        /// that can be used for verification.
+        /// Determines whether this instance has signature information that can
+        /// be used for verification.
         /// </summary>
         /// <returns>Returns true, if there is usable information.
         /// Returns false otherwise.</returns>

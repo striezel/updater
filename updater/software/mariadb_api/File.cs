@@ -30,17 +30,17 @@ namespace updater.software.mariadb_api
         public string file_name { get; set; }
 
         /// <summary>
-        /// type of package, e. g. "ZIP file", "gzipped tar file" or "MSI Package"
+        /// type of package, e.g. "ZIP file", "gzipped tar file" or "MSI Package"
         /// </summary>
         public string package_type { get; set; }
         
         /// <summary>
-        /// Generic name of the operating system, e. g. "Linux", "Windows", "Source"
+        /// Generic name of the operating system, e.g. "Linux", "Windows", "Source"
         /// </summary>
         public string os { get; set; }
         
         /// <summary>
-        /// CPU type for the download, e. g. "x86" or "x86_64"
+        /// CPU type for the download, e.g. "x86" or "x86_64"
         /// </summary>
         public string cpu { get; set; }
 

@@ -32,13 +32,13 @@ namespace updater.software.openjdk_api
 
 
         /// <summary>
-        /// name of the release, e. g. "jdk8u292-b10"
+        /// name of the release, e.g. "jdk8u292-b10"
         /// </summary>
         public string release_name { get; set; }
 
 
         /// <summary>
-        /// type of the release, e. g. "ga" for General Availability release
+        /// type of the release, e.g. "ga" for General Availability release
         /// </summary>
         public string release_type { get; set; }
 

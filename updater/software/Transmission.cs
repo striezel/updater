@@ -95,7 +95,7 @@ namespace updater.software
 
 
         /// <summary>
-        /// Determines whether or not the method searchForNewer() is implemented.
+        /// Determines whether the method searchForNewer() is implemented.
         /// </summary>
         /// <returns>Returns true, if searchForNewer() is implemented for that
         /// class. Returns false, if not. Calling searchForNewer() may throw an
@@ -156,10 +156,10 @@ namespace updater.software
             // construct new information
             var newInfo = knownInfo();
             newInfo.newestVersion = currentVersion;
-            // e. g. https://github.com/transmission/transmission/releases/download/3.00/transmission-3.00-x86.msi
+            // e.g. https://github.com/transmission/transmission/releases/download/3.00/transmission-3.00-x86.msi
             newInfo.install32Bit.downloadUrl = "https://github.com/transmission/transmission/releases/download/" + currentVersion + "/transmission-" + currentVersion + "-x86.msi";
             newInfo.install32Bit.checksum = newHash32Bit;
-            // e. g. https://github.com/transmission/transmission/releases/download/3.00/transmission-3.00-x64.msi
+            // e.g. https://github.com/transmission/transmission/releases/download/3.00/transmission-3.00-x64.msi
             newInfo.install64Bit.downloadUrl = "https://github.com/transmission/transmission/releases/download/" + currentVersion + "/transmission-" + currentVersion + "-x64.msi";
             newInfo.install64Bit.checksum = newHash64Bit;
             return newInfo;

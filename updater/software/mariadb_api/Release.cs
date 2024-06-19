@@ -26,17 +26,17 @@ namespace updater.software.mariadb_api
     internal class Release
     {
         /// <summary>
-        /// ID of the release, usually the version nummber, e. g. "10.5.16"
+        /// ID of the release, usually the version number, e.g. "10.5.16"
         /// </summary>
         public string release_id { get; set; }
         
         /// <summary>
-        /// Name of the release, e. g. "MariaDB Server 10.5.16"
+        /// Name of the release, e.g. "MariaDB Server 10.5.16"
         /// </summary>
         public string release_name { get; set; }
 
         /// <summary>
-        /// Release data as string, e. g. "2022-05-21"
+        /// Release data as string, e.g. "2022-05-21"
         /// </summary>
         public string data_of_release { get; set; }
 

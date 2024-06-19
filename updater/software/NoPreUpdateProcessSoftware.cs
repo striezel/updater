@@ -39,7 +39,7 @@ namespace updater.software
 
 
         /// <summary>
-        /// Determines whether or not a separate process must be run before the update.
+        /// Determines whether a separate process must be run before the update.
         /// </summary>
         /// <param name="detected">currently installed / detected software version</param>
         /// <returns>Returns true, if a separate process returned by

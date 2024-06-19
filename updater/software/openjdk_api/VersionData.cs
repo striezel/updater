@@ -24,28 +24,28 @@ namespace updater.software.openjdk_api
     internal class VersionData
     {
         /// <summary>
-        /// major version number, e. g. the 8 in 8.0.292+10 or 8u292-b10
+        /// major version number, e.g. the 8 in 8.0.292+10 or 8u292-b10
         /// </summary>
         public int major { get; set; }
 
         /// <summary>
-        /// minor version number, e. g. the 0 (zero) in 8.0.292+10
+        /// minor version number, e.g. the 0 (zero) in 8.0.292+10
         /// </summary>
         public int minor { get; set; }
 
         /// <summary>
-        /// security patch level, e. g. the 292 in 8.0.292+10 or 8u292-b10
+        /// security patch level, e.g. the 292 in 8.0.292+10 or 8u292-b10
         /// </summary>
         public int security { get; set; }
 
         /// <summary>
-        /// build number, e. g. the 10 in 8.0.292+10 or 8u292-b10
+        /// build number, e.g. the 10 in 8.0.292+10 or 8u292-b10
         /// </summary>
         public int build { get; set; }
 
 
         /// <summary>
-        /// Semantic Versioning string, e. g. "8.0.292+10"
+        /// Semantic Versioning string, e.g. "8.0.292+10"
         /// </summary>
         public string semver { get; set; }
 

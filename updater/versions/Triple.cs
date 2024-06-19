@@ -26,17 +26,17 @@ namespace updater.versions
     public struct Triple : IComparable<Triple>, IEquatable<Triple>
     {
         /// <summary>
-        /// major version number, e. g. the 11 in 11.2.3
+        /// major version number, e.g. the 11 in 11.2.3
         /// </summary>
         public uint major;
 
         /// <summary>
-        /// minor version number, e. g. the 2 in 11.2.3
+        /// minor version number, e.g. the 2 in 11.2.3
         /// </summary>
         public uint minor;
 
         /// <summary>
-        /// patch level, e. g. the 3 in 11.2.3
+        /// patch level, e.g. the 3 in 11.2.3
         /// </summary>
         public uint patch;
 

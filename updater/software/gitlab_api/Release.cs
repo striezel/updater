@@ -26,7 +26,7 @@ namespace updater.software.gitlab_api
     internal class Release
     {
         /// <summary>
-        /// name of the release, e. g. "118.0-1"
+        /// name of the release, e.g. "118.0-1"
         /// </summary>
         public string name { get; set; }
 
