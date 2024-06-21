@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017, 2021, 2022  Dirk Stolle
+    Copyright (C) 2017, 2021, 2022, 2024  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -56,7 +56,25 @@ namespace updater_test.software
             var languages = Thunderbird78.validLanguageCodes();
             foreach (var languageCode in languages)
             {
-                _info(new Thunderbird78(languageCode, false));
+                var sw = new Thunderbird78(languageCode, false);
+                Assert.IsNotNull(sw);
+                var info = sw.info();
+                Assert.IsNotNull(info);
+                // name must be set
+                Assert.IsFalse(string.IsNullOrWhiteSpace(info.Name));
+                // at least one installation information instance should be present
+                Assert.IsTrue((info.install32Bit != null) || (info.install64Bit != null));
+                // at least one regex should be present
+                Assert.IsTrue(!string.IsNullOrWhiteSpace(info.match32Bit) || !string.IsNullOrWhiteSpace(info.match64Bit));
+                // 32-bit information should match
+                Assert.AreEqual<bool>(info.install32Bit != null, !string.IsNullOrWhiteSpace(info.match32Bit));
+                // 64-bit information should match
+                Assert.AreEqual<bool>(info.install64Bit != null, !string.IsNullOrWhiteSpace(info.match64Bit));
+                // checksums should always be present, or at least a signature for verification
+                if (null != info.install32Bit)
+                    Assert.IsTrue(info.install32Bit.hasChecksum() || info.install32Bit.hasVerifiableSignature());
+                if (null != info.install64Bit)
+                    Assert.IsTrue(info.install64Bit.hasChecksum() || info.install64Bit.hasVerifiableSignature());
             }
         }
 
