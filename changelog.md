@@ -20,6 +20,7 @@ __[announcement]__
 __[maintenance]__
 
 * Update certificate information for Firefox Developer Edition installers.
+* Update certificate information for Firefox (release channel) installers.
 * Update certificate information for KeePass installers.
 * Update certificate information for VLC media player installers.
 
