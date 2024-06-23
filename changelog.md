@@ -22,6 +22,7 @@ __[maintenance]__
 * Update certificate information for Firefox Developer Edition installers.
 * Update certificate information for Firefox (release channel) installers.
 * Update certificate information for KeePass installers.
+* Update certificate information for Thunderbird installers.
 * Update certificate information for VLC media player installers.
 
 ## Version 2024.05.30.0
