@@ -46,6 +46,7 @@ application.
 * PDF24 Creator
 * Pidgin
 * PuTTY
+* Scribus
 * SeaMonkey
 * Shotcut
 * TeamSpeak Client

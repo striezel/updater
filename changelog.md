@@ -17,6 +17,10 @@ __[announcement]__
   make sure users are aware of that upcoming change and have time to prepare
   accordingly.
 
+__[new features]__
+
+* Update support for Scribus is added.
+
 __[maintenance]__
 
 * Update certificate information for Firefox Developer Edition installers.

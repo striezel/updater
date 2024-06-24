@@ -105,6 +105,7 @@ namespace updater.software
             result.Add(new Pdf24Creator(autoGetNewer, opts.pdf24autoUpdate, opts.pdf24desktopIcons, opts.pdf24faxPrinter));
             result.Add(new Pidgin(autoGetNewer));
             result.Add(new Putty(autoGetNewer));
+            result.Add(new Scribus(autoGetNewer));
 
             // SeaMonkey
             languages = SeaMonkey.validLanguageCodes();
