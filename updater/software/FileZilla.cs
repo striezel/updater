@@ -28,7 +28,7 @@ namespace updater.software
     /// <summary>
     /// FileZilla FTP Client
     /// </summary>
-    public class FileZilla : NoPreUpdateProcessSoftware
+    public class FileZilla : Improved64BitDetectionSoftware
     {
         /// <summary>
         /// NLog.Logger for FileZilla class
@@ -42,7 +42,7 @@ namespace updater.software
         /// <param name="autoGetNewer">whether to automatically get
         /// newer information about the software when calling the info() method</param>
         public FileZilla(bool autoGetNewer)
-            : base(autoGetNewer)
+            : base(autoGetNewer, "filezilla.exe")
         { }
 
 
@@ -324,40 +324,5 @@ namespace updater.software
             var verNewest = new versions.Quartet(info().newestVersion);
             return verNewest.CompareTo(verDetected) > 0;
         }
-
-
-        /// <summary>
-        /// Checks whether the software is in the list of detected software.
-        /// </summary>
-        /// <param name="detected">list of detected software on the system</param>
-        /// <param name="autoGetNew">whether to automatically get new software information</param>
-        /// <param name="result">query result where software will be added, if it is in the detection list</param>
-        public override void detectionQuery(List<DetectedSoftware> detected, bool autoGetNew, List<QueryEntry> result)
-        {
-            // 32-bit systems use normal detection.
-            if (!Environment.Is64BitOperatingSystem)
-            {
-                base.detectionQuery(detected, autoGetNew, result);
-                return;
-            }
-            // 64-bit systems might need adjustments.
-            var resBase = new List<QueryEntry>();
-            base.detectionQuery(detected, autoGetNew, resBase);
-            foreach (var item in resBase)
-            {
-                if (string.IsNullOrWhiteSpace(item.detected.installPath))
-                    continue;
-                // See if we need to adjust the type for the 64-bit variant.
-                string exePath = System.IO.Path.Combine(item.detected.installPath, "filezilla.exe");
-                utility.PEFormat format = utility.PortableExecutable.determineFormat(exePath);
-                if ((format == utility.PEFormat.PE64) && (item.type != ApplicationType.Bit64))
-                {
-                    item.type = ApplicationType.Bit64;
-                    item.detected.appType = ApplicationType.Bit64;
-                }
-            } // foreach
-            result.AddRange(resBase);
-        }
-
     } // class
 } // namespace
