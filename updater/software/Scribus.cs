@@ -102,7 +102,7 @@ namespace updater.software
         /// that was retrieved from the net.</returns>
         public override AvailableSoftware searchForNewer()
         {
-            logger.Info("Searching for newer version of Scribus...");
+            logger.Info("Searching for newer version of Scribus. This may take a while, because the Scribus website can be slow to respond...");
             string htmlCode;
             var client = HttpClientProvider.Provide();
             try
@@ -121,10 +121,16 @@ namespace updater.software
             var reVersion = new Regex("The current stable version of Scribus is ([0-9]+\\.[0-9]+\\.[0-9]+)\\.");
             Match matchVersion = reVersion.Match(htmlCode);
             if (!matchVersion.Success)
+            {
                 return null;
+            }
             var version = matchVersion.Groups[1].ValueSpan;
+            // Cut things short, if the newest version is the known version.
+            // That way we can avoid another slow HTTP(S) request.
             if (version == knownInfo().newestVersion)
+            {
                 return knownInfo();
+            }
 
             // Find hashes: Those are available on the wiki on https://wiki.scribus.net/canvas/X.Y.Z_Release.
             try
