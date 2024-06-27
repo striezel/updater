@@ -21,6 +21,10 @@ __[new features]__
 
 * Update support for Scribus is added.
 
+__[changes]__
+
+* The detection of installed 64-bit versions of LibreWolf is improved.
+
 __[maintenance]__
 
 * Update certificate information for Firefox Developer Edition installers.

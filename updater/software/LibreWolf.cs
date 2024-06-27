@@ -213,5 +213,44 @@ namespace updater.software
             var verNewest = new ShrinkingDashedQuartet(info().newestVersion);
             return verDetected < verNewest;
         }
+
+
+        /// <summary>
+        /// Checks whether the software is in the list of detected software.
+        /// </summary>
+        /// <param name="detected">list of detected software on the system</param>
+        /// <param name="autoGetNew">whether to automatically get new software information</param>
+        /// <param name="result">query result where software will be added, if it is in the detection list</param>
+        public override void detectionQuery(List<DetectedSoftware> detected, bool autoGetNew, List<QueryEntry> result)
+        {
+            // 32-bit systems use normal detection.
+            if (!Environment.Is64BitOperatingSystem)
+            {
+                base.detectionQuery(detected, autoGetNew, result);
+                return;
+            }
+            // 64-bit systems might need adjustments.
+            var resultBase = new List<QueryEntry>();
+            base.detectionQuery(detected, autoGetNew, resultBase);
+            foreach (var item in resultBase)
+            {
+                if (string.IsNullOrWhiteSpace(item.detected.installPath))
+                    continue;
+                // Remove enclosing quotes.
+                if (item.detected.installPath.StartsWith("\"") && item.detected.installPath.EndsWith("\""))
+                {
+                    item.detected.installPath = item.detected.installPath[1..^1];
+                }
+                // See if we need to adjust the type for the 64-bit variant.
+                string exePath = System.IO.Path.Combine(item.detected.installPath, "librewolf.exe");
+                utility.PEFormat format = utility.PortableExecutable.determineFormat(exePath);
+                if ((format == utility.PEFormat.PE64) && (item.type != ApplicationType.Bit64))
+                {
+                    item.type = ApplicationType.Bit64;
+                    item.detected.appType = ApplicationType.Bit64;
+                }
+            } // foreach
+            result.AddRange(resultBase);
+        }
     }
 }
