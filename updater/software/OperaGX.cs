@@ -26,7 +26,7 @@ namespace updater.software
     /// <summary>
     /// Manages updates for Opera GX browser.
     /// </summary>
-    public class OperaGX : NoPreUpdateProcessSoftware
+    public class OperaGX : Improved64BitDetectionSoftware
     {
         /// <summary>
         /// NLog.Logger for OperaGX class
@@ -40,7 +40,7 @@ namespace updater.software
         /// <param name="autoGetNewer">whether to automatically get
         /// newer information about the software when calling the info() method</param>
         public OperaGX(bool autoGetNewer)
-            : base(autoGetNewer)
+            : base(autoGetNewer, "opera.exe")
         { }
 
 

@@ -26,7 +26,7 @@ namespace updater.software
     /// <summary>
     /// Manages updates for Opera browser.
     /// </summary>
-    public class Opera : NoPreUpdateProcessSoftware
+    public class Opera : Improved64BitDetectionSoftware
     {
         /// <summary>
         /// NLog.Logger for Opera class
@@ -40,7 +40,7 @@ namespace updater.software
         /// <param name="autoGetNewer">whether to automatically get
         /// newer information about the software when calling the info() method</param>
         public Opera(bool autoGetNewer)
-            : base(autoGetNewer)
+            : base(autoGetNewer, "opera.exe")
         { }
 
 

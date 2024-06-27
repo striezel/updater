@@ -23,7 +23,8 @@ __[new features]__
 
 __[changes]__
 
-* The detection of installed 64-bit versions of LibreWolf is improved.
+* The detection of installed 64-bit versions of LibreWolf, Opera and Opera GX is
+  improved.
 
 __[maintenance]__
 
