@@ -4,6 +4,12 @@ _(Note: This changelog focuses on the major changes between the different
 versions. Therefore, it may not contain all changes. Especially smaller fixes or
 improvements may be omitted.)_
 
+## Next Version
+
+__[new features]__
+
+* Update support for MariaDB 11.4 is added.
+
 ## Version 2024.06.28.0
 
 __[announcement]__

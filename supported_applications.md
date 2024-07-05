@@ -34,6 +34,7 @@ application.
 * MariaDB 10.5
 * MariaDB 10.6
 * MariaDB 10.11
+* MariaDB 11.4
 * Mozilla Firefox
 * Mozilla Firefox Developer Edition
 * Mozilla Firefox ESR
