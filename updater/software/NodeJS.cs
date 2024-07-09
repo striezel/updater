@@ -63,7 +63,7 @@ namespace updater.software
         /// details about the software.</returns>
         public override AvailableSoftware knownInfo()
         {
-            const string version = "20.15.0";
+            const string version = "20.15.1";
             var signature = new Signature(publisherX509, certificateExpiration);
             return new AvailableSoftware(
                 "Node.js",
@@ -73,13 +73,13 @@ namespace updater.software
                 new InstallInfoMsi(
                     "https://nodejs.org/download/release/v" + version + "/node-v" + version + "-x86.msi",
                     HashAlgorithm.SHA256,
-                    "13961959ef59ba6312f17539702aef174f643344e7a058cff076ed543e661c62",
+                    "6079df4ab0d457180b4b730fab76d0b60b14342d797cc10a4f2d7c8b61fba584",
                     signature,
                     "/qn /norestart"),
                 new InstallInfoMsi(
                     "https://nodejs.org/download/release/v" + version + "/node-v" + version + "-x64.msi",
                     HashAlgorithm.SHA256,
-                    "0945b75af2eb884790064d90dc2e05cb3443c196c2ff546d7354b81a0721f882",
+                    "b139ba1b82807918af40fbed49a5b529f67ba198e87bcabdac907b734ff83ab5",
                     signature,
                     "/qn /norestart")
                     );
