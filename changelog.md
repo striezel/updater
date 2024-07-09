@@ -10,6 +10,10 @@ __[new features]__
 
 * Update support for MariaDB 11.4 is added.
 
+__[maintenance]__
+
+* Update certificate information for Firefox ESR installers.
+
 ## Version 2024.06.28.0
 
 __[announcement]__
