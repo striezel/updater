@@ -10,6 +10,10 @@ __[new features]__
 
 * Update support for MariaDB 11.4 is added.
 
+__[changes]__
+
+* Add workaround for failing downloads of FileZilla Client.
+
 __[maintenance]__
 
 * Update certificate information for Firefox ESR installers.

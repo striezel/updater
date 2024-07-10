@@ -42,6 +42,14 @@ namespace updater.utility
         }
 
 
+        protected override WebRequest GetWebRequest(Uri address)
+        {
+            var req = base.GetWebRequest(address) as HttpWebRequest;
+            req.AutomaticDecompression = DecompressionMethods.All;
+            return req;
+        }
+
+
         /// <summary>
         /// Time when the current request started.
         /// Should be set manually before the start of each request / download,

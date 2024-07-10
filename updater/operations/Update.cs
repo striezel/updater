@@ -407,7 +407,7 @@ namespace updater.operations
                 }
             }
             string localFile = Path.Combine(cacheDirectory, basename);
-            using (WebClient wc = showProgress ? new ProgressReportingWebClient() : new WebClient())
+            using (WebClient wc = showProgress ? new ProgressReportingWebClient() : new AutoDecompressWebClient())
             {
                 var lowerCaseUrl = url.ToLowerInvariant();
                 if (lowerCaseUrl.Contains("filezilla") || lowerCaseUrl.Contains("mariadb"))
@@ -416,6 +416,10 @@ namespace updater.operations
                     // (Yes, I am pointing at you, FileZilla download server!)
                     // Let's pretend we are Firefox ESR downloading the file.
                     wc.Headers.Add(HttpRequestHeader.UserAgent, "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0");
+                    if (lowerCaseUrl.Contains("filezilla"))
+                    {
+                        wc.Headers.Add(HttpRequestHeader.Accept, "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8");
+                    }
                 }
                 if (lowerCaseUrl.Contains("irfanview"))
                 {
