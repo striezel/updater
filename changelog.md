@@ -8,6 +8,7 @@ improvements may be omitted.)_
 
 __[new features]__
 
+* Update support for Doxygen is added.
 * Update support for MariaDB 11.4 is added.
 
 __[changes]__

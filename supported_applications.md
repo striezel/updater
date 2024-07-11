@@ -11,6 +11,7 @@ application.
 * CCleaner
 * CDBurnerXP
 * CMake
+* Doxygen
 * Eclipse Temurin JDK 8 LTS (formerly AdoptOpenJDK JDK 8)
 * Eclipse Temurin JDK 11 LTS (formerly AdoptOpenJDK JDK 11)
 * Eclipse Temurin JDK 17 LTS

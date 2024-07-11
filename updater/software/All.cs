@@ -50,6 +50,7 @@ namespace updater.software
                 new CCleaner(autoGetNewer),
                 new CDBurnerXP(autoGetNewer),
                 new CMake(autoGetNewer),
+                new Doxygen(autoGetNewer),
                 new OpenJDK8(autoGetNewer),
                 new OpenJDK11(autoGetNewer),
                 new OpenJDK17(autoGetNewer),
