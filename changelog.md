@@ -17,6 +17,7 @@ __[changes]__
 
 __[maintenance]__
 
+* Update certificate information for CCleaner installers.
 * Update certificate information for Firefox ESR installers.
 
 ## Version 2024.06.28.0
