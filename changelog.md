@@ -19,6 +19,7 @@ __[maintenance]__
 
 * Update certificate information for CCleaner installers.
 * Update certificate information for Eclipse Temurin JDK 17 LTS installers.
+* Update certificate information for Eclipse Temurin JRE 17 LTS installers.
 * Update certificate information for Eclipse Temurin JDK 21 LTS installers.
 * Update certificate information for Eclipse Temurin JRE 21 LTS installers.
 * Update certificate information for Firefox ESR installers.
