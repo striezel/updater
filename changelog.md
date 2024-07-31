@@ -14,6 +14,7 @@ __[new features]__
 __[changes]__
 
 * Add workaround for failing downloads of FileZilla Client.
+* Adjust version detection for WinMerge.
 
 __[maintenance]__
 

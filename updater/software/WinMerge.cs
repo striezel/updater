@@ -130,7 +130,7 @@ namespace updater.software
 
             // Find version. There is a link to the download on sf.net, usually something like
             // "<a href="https://downloads.sourceforge.net/winmerge/WinMerge-2.16.38-x64-Setup.exe" ...>"
-            var regEx = new Regex("href=\"https://downloads\\.sourceforge\\.net/winmerge/WinMerge\\-([0-9]+\\.[0-9]+\\.[0-9]+)\\-x64\\-Setup\\.exe");
+            var regEx = new Regex("href=\"https://downloads\\.sourceforge\\.net/winmerge/WinMerge\\-([0-9]+\\.[0-9]+\\.[0-9]+(\\.[0-9]+)?)\\-x64\\-Setup\\.exe");
             Match match = regEx.Match(response);
             if (!match.Success)
                 return null;
