@@ -64,11 +64,11 @@ namespace updater.software
         /// details about the software.</returns>
         public override AvailableSoftware knownInfo()
         {
-            const string version = "20.005.30636";
+            const string version = "20.005.30655";
             var installer = new InstallInfoMsiPatch(
-                "https://ardownload2.adobe.com/pub/adobe/reader/win/Acrobat2020/2000530636/AcroRdr2020Upd2000530636_MUI.msp",
+                "https://ardownload2.adobe.com/pub/adobe/reader/win/Acrobat2020/2000530655/AcroRdr2020Upd2000530655_MUI.msp",
                 HashAlgorithm.SHA256,
-                "465ad017e3107aa053781af457ece56ad4b7a35b3ce7d219753ce51e4a4f8981",
+                "fdef88a0c169e0dbdb12d136c0b9ce10d35e4953b3cb8b7dd42336f2f612f2eb",
                 new Signature(publisherX509, certificateExpiration),
                 "/qn /norestart"
                 );
