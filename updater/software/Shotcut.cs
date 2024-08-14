@@ -25,7 +25,6 @@ using System.Net;
 using System.Net.Http;
 using System.Text.RegularExpressions;
 using updater.data;
-using updater.utility;
 
 namespace updater.software
 {
@@ -205,11 +204,13 @@ namespace updater.software
 
             // Get checksum from release page, e.g. "https://github.com/mltframework/shotcut/releases/download/v21.05.18/sha256sums.txt"
             string htmlCode = null;
-            using (var client = new TimelyWebClient())
+            using (var client = new HttpClient() { Timeout = TimeSpan.FromSeconds(25) })
             {
                 try
                 {
-                    htmlCode = client.DownloadString("https://github.com/mltframework/shotcut/releases/download/v" + currentVersion + "/sha256sums.txt");
+                    var task = client.GetStringAsync("https://github.com/mltframework/shotcut/releases/download/v" + currentVersion + "/sha256sums.txt");
+                    task.Wait();
+                    htmlCode = task.Result;
                 }
                 catch (Exception ex)
                 {

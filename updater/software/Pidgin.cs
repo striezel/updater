@@ -18,9 +18,9 @@
 
 using System;
 using System.Collections.Generic;
+using System.Net.Http;
 using System.Text.RegularExpressions;
 using updater.data;
-using updater.utility;
 
 namespace updater.software
 {
@@ -148,11 +148,13 @@ namespace updater.software
             newInfo.newestVersion = version;
             // Try to get checksum.
             htmlCode = null;
-            using (var t_client = new TimelyWebClient())
+            using (var t_client = new HttpClient() { Timeout = TimeSpan.FromSeconds(25) })
             {
                 try
                 {
-                    htmlCode = t_client.DownloadString("https://netcologne.dl.sourceforge.net/project/pidgin/Pidgin/" + version + "/pidgin-" + version + "-offline.exe.sha256sum");
+                    var task = t_client.GetStringAsync("https://netcologne.dl.sourceforge.net/project/pidgin/Pidgin/" + version + "/pidgin-" + version + "-offline.exe.sha256sum");
+                    task.Wait();
+                    htmlCode = task.Result;
                 }
                 catch (Exception ex)
                 {

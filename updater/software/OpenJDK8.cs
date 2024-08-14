@@ -19,9 +19,9 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Net.Http;
 using updater.data;
 using updater.software.openjdk_api;
-using updater.utility;
 
 namespace updater.software
 {
@@ -119,11 +119,13 @@ namespace updater.software
             logger.Info("Searching for newer version of Eclipse Temurin 8 JDK...");
             // Just getting the latest release does not work here, because that may also be a release candidate, and we do not want that.
             string json;
-            using (var client = new TimelyWebClient())
+            using (var client = new HttpClient() { Timeout = TimeSpan.FromSeconds(25) })
             {
                 try
                 {
-                    json = client.DownloadString("https://api.adoptopenjdk.net/v3/assets/feature_releases/8/ga?heap_size=normal&image_type=jdk&jvm_impl=hotspot&os=windows&page=0&page_size=5&project=jdk&sort_method=DEFAULT&sort_order=DESC&vendor=adoptopenjdk");
+                    var task = client.GetStringAsync("https://api.adoptopenjdk.net/v3/assets/feature_releases/8/ga?heap_size=normal&image_type=jdk&jvm_impl=hotspot&os=windows&page=0&page_size=5&project=jdk&sort_method=DEFAULT&sort_order=DESC&vendor=adoptopenjdk");
+                    task.Wait();
+                    json = task.Result;
                 }
                 catch (Exception ex)
                 {

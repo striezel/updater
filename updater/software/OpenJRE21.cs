@@ -19,9 +19,9 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Net.Http;
 using updater.data;
 using updater.software.openjdk_api;
-using updater.utility;
 
 namespace updater.software
 {
@@ -113,11 +113,13 @@ namespace updater.software
         {
             logger.Info("Searching for newer version of Eclipse Temurin 21 JRE...");
             string json;
-            using (var client = new TimelyWebClient())
+            using (var client = new HttpClient() { Timeout = TimeSpan.FromSeconds(25) })
             {
                 try
                 {
-                    json = client.DownloadString("https://api.adoptium.net/v3/assets/feature_releases/21/ga?heap_size=normal&image_type=jre&jvm_impl=hotspot&os=windows&page=0&page_size=1&project=jdk&sort_method=DEFAULT&sort_order=DESC&vendor=eclipse");
+                    var task = client.GetStringAsync("https://api.adoptium.net/v3/assets/feature_releases/21/ga?heap_size=normal&image_type=jre&jvm_impl=hotspot&os=windows&page=0&page_size=1&project=jdk&sort_method=DEFAULT&sort_order=DESC&vendor=eclipse");
+                    task.Wait();
+                    json = task.Result;
                 }
                 catch (Exception ex)
                 {

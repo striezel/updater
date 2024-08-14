@@ -154,11 +154,13 @@ namespace updater.software
 
             // Checksums are in a file like https://the.earth.li/~sgtatham/putty/0.68/sha512sums
             string sha512sums = null;
-            using (var client = new TimelyWebClient())
+            using (var client = new HttpClient() { Timeout = TimeSpan.FromSeconds(25) })
             {
                 try
                 {
-                    sha512sums = client.DownloadString("https://the.earth.li/~sgtatham/putty/" + newVersion + "/sha512sums");
+                    var task = client.GetStringAsync("https://the.earth.li/~sgtatham/putty/" + newVersion + "/sha512sums");
+                    task.Wait();
+                    sha512sums = task.Result;
                 }
                 catch (Exception ex)
                 {

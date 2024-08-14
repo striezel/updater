@@ -18,9 +18,9 @@
 
 using System;
 using System.Collections.Generic;
+using System.Net.Http;
 using System.Text.RegularExpressions;
 using updater.data;
-using updater.utility;
 
 namespace updater.software
 {
@@ -116,11 +116,16 @@ namespace updater.software
         {
             logger.Info("Searching for newer version of TeamViewer...");
             string html;
-            using (var client = new TimelyWebClient())
+            using (var client = new HttpClient()
+            {
+                Timeout = TimeSpan.FromSeconds(25)
+            })
             {
                 try
                 {
-                    html = client.DownloadString("https://www.teamviewer.com/en/download/windows/");
+                    var task = client.GetStringAsync("https://www.teamviewer.com/en/download/windows/");
+                    task.Wait();
+                    html = task.Result;
                 }
                 catch (Exception ex)
                 {

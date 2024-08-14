@@ -21,7 +21,6 @@ using System;
 using System.Net;
 using System.Text.RegularExpressions;
 using System.Collections.Generic;
-using updater.utility;
 using System.Net.Http;
 
 namespace updater.software
@@ -157,7 +156,7 @@ namespace updater.software
             // download checksum file, e.g. "http://download.notepad-plus-plus.org/repository/7.x/7.7/npp.7.7.checksums.sha256"
             //                           or for GitHub releases: "https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v7.9.1/npp.7.9.1.checksums.sha256"
             string htmlCode = null;
-            using (var client = new TimelyWebClient())
+            using (var client = new HttpClient() { Timeout = TimeSpan.FromSeconds(25) })
             {
                 try
                 {
@@ -166,7 +165,9 @@ namespace updater.software
                     // while the domain download.notepad-plus-plus.org does
                     // not and can only be accessed via HTTP.
                     // But we want HTTPS / TLS for the checksum download.
-                    htmlCode = client.DownloadString("https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v" + currentVersion + "/npp." + versionNumber + ".checksums.sha256");
+                    var task = client.GetStringAsync("https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v" + currentVersion + "/npp." + versionNumber + ".checksums.sha256");
+                    task.Wait();
+                    htmlCode = task.Result;
                 }
                 catch (Exception ex)
                 {
