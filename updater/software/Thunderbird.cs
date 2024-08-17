@@ -24,6 +24,7 @@ using System.Net;
 using System.Net.Http;
 using System.Text.RegularExpressions;
 using updater.data;
+using updater.versions;
 
 namespace updater.software
 {
@@ -48,6 +49,12 @@ namespace updater.software
         /// certificate expiration date
         /// </summary>
         private static readonly DateTime certificateExpiration = new(2027, 6, 18, 23, 59, 59, DateTimeKind.Utc);
+
+
+        /// <summary>
+        /// currently known newest version
+        /// </summary>
+        private const string knownVersion = "115.14.0";
 
 
         /// <summary>
@@ -257,21 +264,20 @@ namespace updater.software
         public override AvailableSoftware knownInfo()
         {
             var signature = new Signature(publisherX509, certificateExpiration);
-            const string version = "115.14.0";
             return new AvailableSoftware("Mozilla Thunderbird (" + languageCode + ")",
-                version,
+                knownVersion,
                 "^Mozilla Thunderbird ([0-9]+\\.[0-9]+(\\.[0-9]+)? )?\\(x86 " + Regex.Escape(languageCode) + "\\)$",
                 "^Mozilla Thunderbird ([0-9]+\\.[0-9]+(\\.[0-9]+)? )?\\(x64 " + Regex.Escape(languageCode) + "\\)$",
                 // 32-bit installer
                 new InstallInfoExe(
-                    "https://ftp.mozilla.org/pub/thunderbird/releases/" + version + "/win32/" + languageCode + "/Thunderbird%20Setup%20" + version + ".exe",
+                    "https://ftp.mozilla.org/pub/thunderbird/releases/" + knownVersion + "/win32/" + languageCode + "/Thunderbird%20Setup%20" + knownVersion + ".exe",
                     HashAlgorithm.SHA512,
                     checksum32Bit,
                     signature,
                     "-ms -ma"),
                 // 64-bit installer
                 new InstallInfoExe(
-                    "https://ftp.mozilla.org/pub/thunderbird/releases/" + version + "/win64/" + languageCode + "/Thunderbird%20Setup%20" + version + ".exe",
+                    "https://ftp.mozilla.org/pub/thunderbird/releases/" + knownVersion + "/win64/" + languageCode + "/Thunderbird%20Setup%20" + knownVersion + ".exe",
                     HashAlgorithm.SHA512,
                     checksum64Bit,
                     signature,
@@ -320,6 +326,12 @@ namespace updater.software
                 if (!matchVersion.Success)
                     return null;
                 string currentVersion = matchVersion.Value;
+                Triple current = new(currentVersion);
+                Triple known = new(knownVersion);
+                if (known > current)
+                {
+                    return knownVersion;
+                }
                 
                 return currentVersion;
             }
