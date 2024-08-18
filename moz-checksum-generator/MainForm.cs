@@ -363,12 +363,12 @@ namespace moz_checksum_generator
             lblVersion.Text = "Version " + version;
 
             /* Checksums are found in a file like
-             * https://ftp.mozilla.org/pub/thunderbird/releases/45.7.1/SHA512SUMS
+             * https://ftp.mozilla.org/pub/thunderbird/releases/128.1.0esr/SHA512SUMS
              * Common lines look like
-             * "69d11924...7eff  win32/en-GB/Thunderbird Setup 45.7.1.exe"
+             * "3881bf28...e2ab  win32/en-GB/Thunderbird Setup 128.1.0esr.exe"
              */
 
-            string url = "https://ftp.mozilla.org/pub/thunderbird/releases/" + version + "/SHA512SUMS";
+            string url = "https://ftp.mozilla.org/pub/thunderbird/releases/" + version + "esr/SHA512SUMS";
             string sha512SumsContent;
             using (var client = new HttpClient())
             {
@@ -388,23 +388,23 @@ namespace moz_checksum_generator
             } //using
 
             // look for line with language code and version for 32-bit
-            var reChecksum = new Regex("[0-9a-f]{128}  win32/[a-z]{2,3}(\\-[A-Z]+)?/Thunderbird Setup " + Regex.Escape(version) + "\\.exe");
+            var reChecksum = new Regex("[0-9a-f]{128}  win32/[a-z]{2,3}(\\-[A-Z]+)?/Thunderbird Setup " + Regex.Escape(version) + "esr\\.exe");
             var data = new SortedDictionary<string, string>();
             MatchCollection matches = reChecksum.Matches(sha512SumsContent);
             for (int i = 0; i < matches.Count; i++)
             {
-                string language = matches[i].Value[136..].Replace("/Thunderbird Setup " + version + ".exe", "");
+                string language = matches[i].Value[136..].Replace("/Thunderbird Setup " + version + "esr.exe", "");
                 data.Add(language, matches[i].Value[..128]);
             }
             rtbBit32.Text = getChecksumCode(data);
 
             // look for line with the correct language code and version for 64-bit
-            var reChecksum64Bit = new Regex("[0-9a-f]{128}  win64/[a-z]{2,3}(\\-[A-Z]+)?/Thunderbird Setup " + Regex.Escape(version) + "\\.exe");
+            var reChecksum64Bit = new Regex("[0-9a-f]{128}  win64/[a-z]{2,3}(\\-[A-Z]+)?/Thunderbird Setup " + Regex.Escape(version) + "esr\\.exe");
             data.Clear();
             matches = reChecksum64Bit.Matches(sha512SumsContent);
             for (int i = 0; i < matches.Count; i++)
             {
-                string language = matches[i].Value[136..].Replace("/Thunderbird Setup " + version + ".exe", "");
+                string language = matches[i].Value[136..].Replace("/Thunderbird Setup " + version + "esr.exe", "");
                 data.Add(language, matches[i].Value[..128]);
             } //for
             rtbBit64.Text = getChecksumCode(data);

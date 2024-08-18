@@ -6,6 +6,17 @@ improvements may be omitted.)_
 
 ## Next Version
 
+__[changes]__
+
+* Thunderbird updates are now using the ESR channel. This changes is needed to
+  adapt to the new release model used by Thunderbird. To get more information
+  about that, see <https://support.mozilla.org/en-US/kb/thunderbird-128-nebula-faq#w_why-is-thunderbird-128-labeled-as-128-0esr-when-previous-versions-were-not-called-esr>.
+  Of all the new release channels, the ESR channel of Thunderbird uses a release
+  model that is the closest to the release model in earlier versions
+  (i. e. 115.x) and thus is closest to what users of the updater would expect.
+  **Thunderbird 128 also dropped support for Windows 7 and Windows 8.1, so at
+  least Windows 10 is required to use the new version of Thunderbird.**
+
 __[maintenance]__
 
 * NLog library is updated from 5.3.2 to 5.3.3.
