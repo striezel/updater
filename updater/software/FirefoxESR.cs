@@ -22,6 +22,7 @@ using System.Net;
 using System.Net.Http;
 using System.Text.RegularExpressions;
 using updater.data;
+using updater.versions;
 
 namespace updater.software
 {
@@ -46,6 +47,12 @@ namespace updater.software
         /// expiration date of certificate
         /// </summary>
         private static readonly DateTime certificateExpiration = new(2027, 6, 18, 23, 59, 59, DateTimeKind.Utc);
+
+
+        /// <summary>
+        /// currently known newest version
+        /// </summary>
+        private const string knownVersion = "115.14.0";
 
 
         /// <summary>
@@ -323,7 +330,6 @@ namespace updater.software
         public override AvailableSoftware knownInfo()
         {
             var signature = new Signature(publisherX509, certificateExpiration);
-            const string knownVersion = "115.14.0";
             return new AvailableSoftware("Mozilla Firefox ESR (" + languageCode + ")",
                 knownVersion,
                 "^Mozilla Firefox( [0-9]+\\.[0-9]+(\\.[0-9]+)?)? ESR \\(x86 " + Regex.Escape(languageCode) + "\\)$",
@@ -386,6 +392,12 @@ namespace updater.software
                 Match matchVersion = reVersion.Match(newLocation);
                 if (!matchVersion.Success)
                     return null;
+                Triple current = new(matchVersion.Value);
+                Triple known = new(knownVersion);
+                if (known > current)
+                {
+                    return knownVersion;
+                }
                 return matchVersion.Value;
             }
             catch (Exception ex)
