@@ -42,6 +42,8 @@
             lblBit32 = new System.Windows.Forms.Label();
             rtbBit64 = new System.Windows.Forms.RichTextBox();
             lblBit64 = new System.Windows.Forms.Label();
+            lblNewLangs = new System.Windows.Forms.Label();
+            lblNewLangCodes = new System.Windows.Forms.Label();
             gbProduct.SuspendLayout();
             gbChecksums.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
@@ -53,6 +55,8 @@
             // gbProduct
             // 
             gbProduct.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            gbProduct.Controls.Add(lblNewLangCodes);
+            gbProduct.Controls.Add(lblNewLangs);
             gbProduct.Controls.Add(rbFirefoxAurora);
             gbProduct.Controls.Add(rbSeaMonkey);
             gbProduct.Controls.Add(lblVersion);
@@ -230,6 +234,24 @@
             lblBit64.TabIndex = 0;
             lblBit64.Text = "64 bit:";
             // 
+            // lblNewLangs
+            // 
+            lblNewLangs.AutoSize = true;
+            lblNewLangs.Location = new System.Drawing.Point(143, 73);
+            lblNewLangs.Name = "lblNewLangs";
+            lblNewLangs.Size = new System.Drawing.Size(91, 15);
+            lblNewLangs.TabIndex = 7;
+            lblNewLangs.Text = "New languages:";
+            // 
+            // lblNewLangCodes
+            // 
+            lblNewLangCodes.AutoSize = true;
+            lblNewLangCodes.Location = new System.Drawing.Point(273, 73);
+            lblNewLangCodes.Name = "lblNewLangCodes";
+            lblNewLangCodes.Size = new System.Drawing.Size(57, 15);
+            lblNewLangCodes.TabIndex = 8;
+            lblNewLangCodes.Text = "unknown";
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -269,6 +291,8 @@
         private System.Windows.Forms.Label lblVersion;
         private System.Windows.Forms.RadioButton rbSeaMonkey;
         private System.Windows.Forms.RadioButton rbFirefoxAurora;
+        private System.Windows.Forms.Label lblNewLangs;
+        private System.Windows.Forms.Label lblNewLangCodes;
     }
 }
 

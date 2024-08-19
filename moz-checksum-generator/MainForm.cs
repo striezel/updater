@@ -18,6 +18,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
@@ -41,6 +42,7 @@ namespace moz_checksum_generator
             rtbBit32.Clear();
             rtbBit64.Clear();
             lblVersion.Text = "";
+            lblNewLangCodes.Text = "unknown";
         }
 
         private void btnChecksums_Click(object sender, EventArgs e)
@@ -138,6 +140,9 @@ namespace moz_checksum_generator
             }
             rtbBit32.Text = getChecksumCode(data);
 
+            string new_langs = getNewLangCodes(updater.software.Firefox.validLanguageCodes(), data.Keys);
+            lblNewLangCodes.Text = new_langs;
+
             // look for line with the correct language code and version for 64-bit
             var reChecksum64Bit = new Regex("[0-9a-f]{128}  win64/[a-z]{2,3}(\\-[A-Z]+)?/Firefox Setup " + Regex.Escape(version) + "\\.exe");
             data.Clear();
@@ -200,6 +205,9 @@ namespace moz_checksum_generator
                 data.Add(language, matches[i].Value[..128]);
             }
             rtbBit32.Text = getChecksumCode(data);
+
+            string new_langs = getNewLangCodes(updater.software.FirefoxAurora.validLanguageCodes(), data.Keys);
+            lblNewLangCodes.Text = new_langs;
 
             // look for line with the correct language code and version for 64-bit
             var reChecksum64Bit = new Regex("[0-9a-f]{128}  win64/[a-z]{2,3}(\\-[A-Z]+)?/Firefox Setup " + Regex.Escape(version) + "\\.exe");
@@ -264,6 +272,9 @@ namespace moz_checksum_generator
                 data.Add(language, matches[i].Value[..128]);
             }
             rtbBit32.Text = getChecksumCode(data);
+
+            string new_langs = getNewLangCodes(updater.software.FirefoxESR.validLanguageCodes(), data.Keys);
+            lblNewLangCodes.Text = new_langs;
 
             // look for line with the correct language code and version for 64-bit
             var reChecksum64Bit = new Regex("[0-9a-f]{128}  win64/[a-z]{2,3}(\\-[A-Z]+)?/Firefox Setup " + Regex.Escape(version) + "esr\\.exe");
@@ -333,6 +344,9 @@ namespace moz_checksum_generator
             }
             rtbBit32.Text = getChecksumCode(data);
 
+            string new_langs = getNewLangCodes(updater.software.SeaMonkey.validLanguageCodes(), data.Keys);
+            lblNewLangCodes.Text = new_langs;
+
             // look for line with the correct language code and version for 64-bit
             var reChecksum64Bit = new Regex("[0-9a-f]{128} sha512 [0-9]+ .*seamonkey\\-" + Regex.Escape(version) + "\\.[a-z]{2,3}(\\-[A-Z]+)?\\.win64\\.installer\\.exe");
             data.Clear();
@@ -398,6 +412,9 @@ namespace moz_checksum_generator
             }
             rtbBit32.Text = getChecksumCode(data);
 
+            string new_langs = getNewLangCodes(updater.software.Thunderbird.validLanguageCodes(), data.Keys);
+            lblNewLangCodes.Text = new_langs;
+
             // look for line with the correct language code and version for 64-bit
             var reChecksum64Bit = new Regex("[0-9a-f]{128}  win64/[a-z]{2,3}(\\-[A-Z]+)?/Thunderbird Setup " + Regex.Escape(version) + "esr\\.exe");
             data.Clear();
@@ -408,6 +425,28 @@ namespace moz_checksum_generator
                 data.Add(language, matches[i].Value[..128]);
             } //for
             rtbBit64.Text = getChecksumCode(data);
+        }
+
+        private static string getNewLangCodes(IEnumerable<string> oldLangCodes, IEnumerable<string> newLangCodes)
+        {
+            if (oldLangCodes == null || newLangCodes == null)
+            {
+                return "unknown";
+            }
+
+            string newCodes = "";
+            foreach (string langCode in newLangCodes)
+            {
+                if (!oldLangCodes.Contains(langCode))
+                {
+                    newCodes += ", " + langCode;
+                }
+            }
+            if (newCodes.Length == 0)
+            {
+                return "none";
+            }
+            return newCodes.Remove(0, 2);
         }
     } // class
 } // namespace
