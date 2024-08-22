@@ -47,7 +47,7 @@ namespace updater_test.versions
 
         [TestMethod]
         public void Test_constructor_nonNumeric()
-        { 
+        {
             // constructor with parameter should set only numeric parts
             var three = new Triple("12.3b.foo7");
             Assert.AreEqual<uint>(12, three.major);

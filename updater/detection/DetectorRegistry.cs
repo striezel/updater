@@ -16,9 +16,9 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
-using Microsoft.Win32;
 
 namespace updater.detection
 {

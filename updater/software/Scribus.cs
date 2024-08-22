@@ -159,7 +159,7 @@ namespace updater.software
                <td>5c63c59f3c0b333fa1bcfd636a644c5a51701289
                </td></tr>
             */
-            var reHash = new Regex("<td>scribus\\-" + Regex.Escape(version.ToString()) +"\\-windows.exe</td>\r?\n<td>([0-9a-f]{64})</td>");
+            var reHash = new Regex("<td>scribus\\-" + Regex.Escape(version.ToString()) + "\\-windows.exe</td>\r?\n<td>([0-9a-f]{64})</td>");
             var matchHash = reHash.Match(htmlCode);
             if (!matchHash.Success)
             {

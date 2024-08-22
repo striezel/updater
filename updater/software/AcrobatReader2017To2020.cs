@@ -26,7 +26,7 @@ namespace updater.software
     /// <summary>
     /// Handles updates of Adobe Acrobat Reader 2017 to Adobe Acrobat Reader 2020.
     /// </summary>
-    public class AcrobatReader2017To2020: AbstractSoftware
+    public class AcrobatReader2017To2020 : AbstractSoftware
     {
         /// <summary>
         /// publisher name for signed executables of Reader 2020

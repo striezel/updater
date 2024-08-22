@@ -62,8 +62,8 @@ namespace updater_test.software
             {
                 Assert.IsTrue(signature.ContainsData());
                 Assert.IsTrue(signature.publisher.Contains("MariaDB USA, Inc."));
-                Assert.IsTrue(signature.expiresAt > new System.DateTime (2024, 2, 1, 0, 0, 0, System.DateTimeKind.Utc));
-            }           
+                Assert.IsTrue(signature.expiresAt > new System.DateTime(2024, 2, 1, 0, 0, 0, System.DateTimeKind.Utc));
+            }
         }
 
 

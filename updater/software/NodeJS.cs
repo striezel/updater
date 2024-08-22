@@ -26,7 +26,7 @@ namespace updater.software
     /// <summary>
     /// Handles updates of Node.js.
     /// </summary>
-    public class NodeJS: NoPreUpdateProcessSoftware
+    public class NodeJS : NoPreUpdateProcessSoftware
     {
         /// <summary>
         /// NLog.Logger for NodeJS class

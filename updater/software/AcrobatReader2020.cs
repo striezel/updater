@@ -27,7 +27,7 @@ namespace updater.software
     /// <summary>
     /// Handles updates of Adobe Acrobat Reader 2020.
     /// </summary>
-    public class AcrobatReader2020: NoPreUpdateProcessSoftware
+    public class AcrobatReader2020 : NoPreUpdateProcessSoftware
     {
         /// <summary>
         /// NLog.Logger for AcrobatReader2020 class

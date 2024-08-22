@@ -147,7 +147,7 @@ namespace updater.utility.trust
         [DllImport("wintrust.dll", ExactSpelling = true, SetLastError = false, CharSet = CharSet.Unicode)]
         static extern WinVerifyTrustResult WinVerifyTrust(
             [In] IntPtr hwnd,
-            [In] [MarshalAs(UnmanagedType.LPStruct)] Guid pgActionID,
+            [In][MarshalAs(UnmanagedType.LPStruct)] Guid pgActionID,
             [In] WinTrustData pWVTData
         );
 

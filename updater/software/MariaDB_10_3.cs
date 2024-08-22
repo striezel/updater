@@ -24,7 +24,7 @@ namespace updater.software
     /// <summary>
     /// Handles updates of MariaDB 10.3.
     /// </summary>
-    public sealed class MariaDB_10_3: MariaDB_Base
+    public sealed class MariaDB_10_3 : MariaDB_Base
     {
         /// <summary>
         /// publisher of signed binaries for MariaDB 10.3

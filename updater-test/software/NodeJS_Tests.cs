@@ -25,7 +25,7 @@ namespace updater_test.software
     /// Test cases for the NodeJS class.
     /// </summary>
     [TestClass]
-    public class NodeJS_Tests: BasicSoftwareTests
+    public class NodeJS_Tests : BasicSoftwareTests
     {
         /// <summary>
         /// Checks whether info() returns some meaningful data.

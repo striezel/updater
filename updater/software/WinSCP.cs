@@ -16,10 +16,10 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-using updater.data;
 using System;
-using System.Text.RegularExpressions;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
+using updater.data;
 
 namespace updater.software
 {
@@ -37,7 +37,7 @@ namespace updater.software
         /// publisher of signed binaries
         /// </summary>
         private const string publisherX509 = "CN=Martin Prikryl, O=Martin Prikryl, L=Prague, C=CZ, SERIALNUMBER=87331519, OID.2.5.4.15=Private Organization, OID.1.3.6.1.4.1.311.60.2.1.3=CZ";
-        
+
         /// <summary>
         /// expiration date of certificate in signature of binary installer
         /// </summary>

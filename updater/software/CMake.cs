@@ -27,7 +27,7 @@ namespace updater.software
     /// <summary>
     /// Handles updates of CMake.
     /// </summary>
-    public class CMake: NoPreUpdateProcessSoftware
+    public class CMake : NoPreUpdateProcessSoftware
     {
         /// <summary>
         /// NLog.Logger for CMake class
@@ -71,7 +71,7 @@ namespace updater.software
                 "^CMake$",
                 "^CMake$",
                 new InstallInfoMsi(
-                    "https://github.com/Kitware/CMake/releases/download/v"+ version + "/cmake-" + version + "-windows-i386.msi",
+                    "https://github.com/Kitware/CMake/releases/download/v" + version + "/cmake-" + version + "-windows-i386.msi",
                     HashAlgorithm.SHA256,
                     "cba44353b434b5d07b2788a742a1054b2da6262a2a4b649cece0bc98139e7ebb",
                     signature,

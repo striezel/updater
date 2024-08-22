@@ -24,7 +24,7 @@ using updater.data;
 
 namespace updater.software
 {
-    public class BlenderLTS: AbstractSoftware
+    public class BlenderLTS : AbstractSoftware
     {
         /// <summary>
         /// NLog.Logger for BlenderLTS class
@@ -150,7 +150,7 @@ namespace updater.software
                 logger.Warn("Exception occurred while checking for newer version of Blender: " + ex.Message);
                 return null;
             }
-            
+
             // construct new information
             var newInfo = knownInfo();
             string oldVersion = newInfo.newestVersion;

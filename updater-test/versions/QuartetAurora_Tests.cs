@@ -48,7 +48,7 @@ namespace updater_test.versions
 
         [TestMethod]
         public void Test_constructor_malformedString()
-        { 
+        {
             // constructor with parameter should set only numeric parts
             var four = new QuartetAurora("12.3foo7");
             Assert.AreEqual<uint>(12, four.major);

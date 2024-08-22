@@ -48,8 +48,8 @@ namespace updater.utility
             // No matching processes have been found.
             return false;
         }
-        
-        
+
+
         /// <summary>
         /// Counts the number of processes with the given name.
         /// </summary>

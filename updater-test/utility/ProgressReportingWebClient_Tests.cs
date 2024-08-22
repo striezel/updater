@@ -16,10 +16,10 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using updater.utility;
 using System;
+using System.Collections.Generic;
+using updater.utility;
 
 namespace updater_test.utility
 {
@@ -41,7 +41,7 @@ namespace updater_test.utility
         [TestMethod]
         public void Test_BytesPerSecond()
         {
-            
+
             var client = new ProgressReportingWebClient();
 
             // Since the BytesPerSecond() method uses the current time for its

@@ -228,7 +228,7 @@ namespace updater.software
             var processes = new List<Process>();
             // uninstall previous version to avoid having two SeaMonkey entries in control panel
             var proc = new Process();
-            proc.StartInfo.FileName = Path.Combine(detected.installPath , "uninstall", "helper.exe");
+            proc.StartInfo.FileName = Path.Combine(detected.installPath, "uninstall", "helper.exe");
             proc.StartInfo.Arguments = "/SILENT";
             processes.Add(proc);
             return processes;

@@ -47,7 +47,6 @@ namespace updater.utility
         {
             switch (appT)
             {
-                
                 case data.ApplicationType.Bit32:
                     return "32-bit";
                 case data.ApplicationType.Bit64:

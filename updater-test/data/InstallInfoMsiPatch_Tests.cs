@@ -17,8 +17,8 @@
 */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using updater.data;
 using System;
+using updater.data;
 
 namespace updater_test.data
 {
@@ -46,7 +46,7 @@ namespace updater_test.data
         {
             var sig = new Signature("CN=foo, OU=bar", DateTime.Now.AddDays(3.0));
             var info = new InstallInfoMsiPatch("https://example.org/foo/bar.msp", HashAlgorithm.Unknown, null, sig, "/qn /norestart");
-            
+
             var proc = info.createInstallProccess(null, new DetectedSoftware());
             Assert.IsNull(proc);
 

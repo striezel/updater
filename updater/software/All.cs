@@ -115,7 +115,7 @@ namespace updater.software
             {
                 result.Add(new SeaMonkey(lang, autoGetNewer));
             }
-            
+
             // old SeaMonkey languages (available until SeaMonkey 2.46 and
             // dropped in SeaMonkey 2.48)
             languages = SeaMonkey246.validLanguageCodes();
@@ -164,7 +164,7 @@ namespace updater.software
             if ((null == opts.excluded) || (opts.excluded.Count == 0))
                 return result;
 
-            for (int i = 0; i < result.Count; )
+            for (int i = 0; i < result.Count;)
             {
                 bool removed = false;
                 foreach (string id in result[i].id())

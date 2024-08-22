@@ -75,7 +75,7 @@ namespace updater.software
                 logger.Warn("Please consider upgrading to Windows 10 or better to get newer Calibre updates.");
                 return latestSupported32BitVersion();
             }
-            
+
             var signature = new Signature(publisherX509, certificateExpiration);
             const string knownVersion = "7.16.0";
             InstallInfo info64 = new InstallInfoMsi(
@@ -85,7 +85,7 @@ namespace updater.software
                 signature,
                 "/qn /norestart"
                 );
-            
+
             return new AvailableSoftware("Calibre",
                 knownVersion,
                 "^calibre$",

@@ -16,9 +16,9 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-using System.IO;
-using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Collections.Generic;
+using System.IO;
 using updater.data;
 using updater.utility;
 
@@ -66,7 +66,7 @@ namespace updater_test.utility
             Assert.IsFalse(Checksum.areEqual(null, "a61f9380255bb154f001cc15f27374ea30de1013"));
             Assert.IsFalse(Checksum.areEqual("a61f9380255bb154f001cc15f27374ea30de1013", null));
 
-            Assert.IsFalse(Checksum.areEqual("a61f9380255bb154f001cc15f27374ea30de1013", 
+            Assert.IsFalse(Checksum.areEqual("a61f9380255bb154f001cc15f27374ea30de1013",
                 "6274e8cb0358ef3e3906a91036bc84138a8fde606a6e926b9a580c79f9cfc489"));
         }
 

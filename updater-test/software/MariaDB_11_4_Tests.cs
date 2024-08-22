@@ -25,7 +25,7 @@ namespace updater_test.software
     /// Contains tests for MariaDB_11_4.
     /// </summary>
     [TestClass]
-    public class MariaDB_11_4_Tests: BasicSoftwareTests
+    public class MariaDB_11_4_Tests : BasicSoftwareTests
     {
         /// <summary>
         /// Checks whether info() returns some meaningful data.

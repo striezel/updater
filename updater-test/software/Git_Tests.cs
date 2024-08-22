@@ -26,7 +26,7 @@ namespace updater_test.software
     /// Contains tests for the Git class.
     /// </summary>
     [TestClass]
-    public class Git_Tests: BasicSoftwareTests
+    public class Git_Tests : BasicSoftwareTests
     {
         /// <summary>
         /// Checks whether info() returns some meaningful data.

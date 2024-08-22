@@ -24,7 +24,7 @@ namespace updater.software
     /// <summary>
     /// Handles updates of MariaDB 11.4.
     /// </summary>
-    public sealed class MariaDB_11_4: MariaDB_Base
+    public sealed class MariaDB_11_4 : MariaDB_Base
     {
         /// <summary>
         /// Default constructor.

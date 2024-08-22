@@ -197,7 +197,7 @@ namespace updater.software
                https://github.com/mumble-voip/mumble/releases/download/1.2.19/mumble-1.2.19.msi.sig
                However, the updater cannot check signatures yet.
             */
-            
+
             // construct new version information
             var newInfo = known;
             // replace version number - both as newest version and in URL for download

@@ -60,7 +60,7 @@ namespace updater.data
             install64Bit = _install64;
         }
 
-        
+
         /// <summary>
         /// generic name of the software
         /// </summary>

@@ -29,7 +29,7 @@ namespace updater_test.software
     class FzTest : FileZilla
     {
         public FzTest(bool autoNewer, string version)
-            :base(autoNewer)
+            : base(autoNewer)
         {
             mVersion = version;
         }

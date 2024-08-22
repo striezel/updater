@@ -118,7 +118,7 @@ namespace updater.utility
             {
                 return bytes.ToString(invariant) + " bytes";
             }
-            if (bytes < 1024*1024)
+            if (bytes < 1024 * 1024)
             {
                 return Math.Round(bytes / 1024.0, 2).ToString(invariant) + " KB";
             }

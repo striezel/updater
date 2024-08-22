@@ -27,7 +27,7 @@ namespace updater.data
         /// unknown or no hash algorithm
         /// </summary>
         Unknown,
-        
+
         /// <summary>
         /// secure hash algorithm 1, 160 bits
         /// </summary>

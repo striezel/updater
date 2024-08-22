@@ -48,7 +48,7 @@ namespace updater_test.versions
 
         [TestMethod]
         public void Test_constructor_nonNumeric()
-        { 
+        {
             // constructor with parameter should set only numeric parts
             var four = new Quartet("12.3b.foo7.8c");
             Assert.AreEqual<uint>(12, four.major);

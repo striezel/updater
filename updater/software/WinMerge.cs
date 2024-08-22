@@ -26,7 +26,7 @@ namespace updater.software
     /// <summary>
     /// Handles updates of WinMerge.
     /// </summary>
-    public class WinMerge: NoPreUpdateProcessSoftware
+    public class WinMerge : NoPreUpdateProcessSoftware
     {
         /// <summary>
         /// NLog.Logger for WinMerge class

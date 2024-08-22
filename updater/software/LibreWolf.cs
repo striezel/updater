@@ -30,7 +30,7 @@ namespace updater.software
     /// <summary>
     /// Handles updates of LibreWolf, a Firefox fork.
     /// </summary>
-    public class LibreWolf: Improved64BitDetectionSoftware
+    public class LibreWolf : Improved64BitDetectionSoftware
     {
         /// <summary>
         /// NLog.Logger for LibreWolf class

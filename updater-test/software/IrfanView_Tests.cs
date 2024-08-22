@@ -34,7 +34,7 @@ namespace updater_test.software
         [TestMethod]
         public void Test_info()
         {
-           _info(new IrfanView(false));
+            _info(new IrfanView(false));
         }
 
 

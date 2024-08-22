@@ -17,11 +17,11 @@
 */
 
 using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Text.RegularExpressions;
-using System.Diagnostics;
 using updater.data;
-using System.Collections.Generic;
 
 namespace updater.software
 {

@@ -110,7 +110,7 @@ namespace updater.utility
             } // try-catch
             catch (Exception ex)
             {
-                logger.Error("Error ("+ ex.GetType().Name + ") while determining executable type of \""
+                logger.Error("Error (" + ex.GetType().Name + ") while determining executable type of \""
                     + fileName + "\": " + ex.Message);
                 return PEFormat.NotPE;
             }

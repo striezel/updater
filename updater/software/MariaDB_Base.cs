@@ -28,7 +28,7 @@ namespace updater.software
     /// <summary>
     /// Handles updates of MariaDB server.
     /// </summary>
-    public abstract class MariaDB_Base: NoPreUpdateProcessSoftware
+    public abstract class MariaDB_Base : NoPreUpdateProcessSoftware
     {
         /// <summary>
         /// NLog.Logger for MariaDB class

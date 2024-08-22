@@ -16,12 +16,12 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-using updater.data;
 using System;
-using System.Net;
-using System.Text.RegularExpressions;
 using System.Collections.Generic;
+using System.Net;
 using System.Net.Http;
+using System.Text.RegularExpressions;
+using updater.data;
 
 namespace updater.software
 {

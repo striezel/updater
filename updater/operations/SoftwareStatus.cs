@@ -39,7 +39,7 @@ namespace updater.operations
             opts = _options;
         }
 
-        
+
         /// <summary>
         /// Queries the software status.
         /// </summary>

@@ -25,7 +25,7 @@ namespace updater_test.software
     /// Test cases for the Doxygen class.
     /// </summary>
     [TestClass]
-    public class Doxygen_Tests: BasicSoftwareTests
+    public class Doxygen_Tests : BasicSoftwareTests
     {
         /// <summary>
         /// Checks whether info() returns some meaningful data.

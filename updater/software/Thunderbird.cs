@@ -38,7 +38,7 @@ namespace updater.software
         /// </summary>
         private static readonly NLog.Logger logger = NLog.LogManager.GetLogger(typeof(Thunderbird).FullName);
 
-        
+
         /// <summary>
         /// publisher of the signed binaries
         /// </summary>
@@ -332,7 +332,7 @@ namespace updater.software
                 {
                     return knownVersion;
                 }
-                
+
                 return currentVersion;
             }
             catch (Exception ex)

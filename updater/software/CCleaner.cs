@@ -149,7 +149,7 @@ namespace updater.software
             if (newVersion == knownInfo().newestVersion)
                 return knownInfo();
             string newUrl = "https://download.ccleaner.com/ccsetup" + matchVersion.Groups[1].Value + ".exe";
-            
+
             // No checksums are provided, but binary is signed.
 
             // construct new information

@@ -29,7 +29,7 @@ namespace updater.software.mariadb_api
         /// ID of the release, usually the version number, e.g. "10.5.16"
         /// </summary>
         public string release_id { get; set; }
-        
+
         /// <summary>
         /// Name of the release, e.g. "MariaDB Server 10.5.16"
         /// </summary>

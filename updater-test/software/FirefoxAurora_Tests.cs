@@ -113,6 +113,5 @@ namespace updater_test.software
         {
             _upToDate_info(new FirefoxAurora("de", false));
         }
-        
     } // class
 } // namespace

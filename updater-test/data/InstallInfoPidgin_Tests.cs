@@ -17,8 +17,8 @@
 */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using updater.data;
 using System;
+using updater.data;
 
 namespace updater_test.data
 {
@@ -60,7 +60,7 @@ namespace updater_test.data
         {
             var sig = new Signature("CN=foo, OU=bar", DateTime.Now.AddDays(3.0));
             var info = new InstallInfoPidgin("https://example.org/foo/bar.exe", HashAlgorithm.Unknown, null, sig, "/S");
-            
+
             var proc = info.createInstallProccess(null, new DetectedSoftware());
             Assert.IsNull(proc);
 

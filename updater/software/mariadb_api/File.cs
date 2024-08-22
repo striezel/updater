@@ -33,12 +33,12 @@ namespace updater.software.mariadb_api
         /// type of package, e.g. "ZIP file", "gzipped tar file" or "MSI Package"
         /// </summary>
         public string package_type { get; set; }
-        
+
         /// <summary>
         /// Generic name of the operating system, e.g. "Linux", "Windows", "Source"
         /// </summary>
         public string os { get; set; }
-        
+
         /// <summary>
         /// CPU type for the download, e.g. "x86" or "x86_64"
         /// </summary>

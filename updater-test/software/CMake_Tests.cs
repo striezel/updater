@@ -108,7 +108,7 @@ namespace updater_test.software
                 {
                     dect.displayVersion = versions[i];
                     var cm = new CmTest(false, versions[j]);
-   
+
                     Assert.AreEqual<bool>(i < j, cm.needsUpdate(dect));
                 }
             }
