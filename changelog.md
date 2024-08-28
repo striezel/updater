@@ -16,6 +16,7 @@ __[changes]__
   (i. e. 115.x) and thus is closest to what users of the updater would expect.
   **Thunderbird 128 also dropped support for Windows 7 and Windows 8.1, so at
   least Windows 10 is required to use the new version of Thunderbird.**
+* Fix failing search for newer versions of WinMerge.
 
 __[maintenance]__
 

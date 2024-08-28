@@ -18,6 +18,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Net.Http;
 using System.Text.RegularExpressions;
 using updater.data;
 
@@ -114,7 +115,10 @@ namespace updater.software
         public override AvailableSoftware searchForNewer()
         {
             logger.Info("Searching for newer version of WinMerge...");
-            var client = HttpClientProvider.Provide();
+            var client = new HttpClient();
+            // Server returns "503 Service Unavailable" when no user agent is
+            // set, so we pretend to be curl.
+            client.DefaultRequestHeaders.Add("User-Agent", "curl/8.8.0");
             string response;
             try
             {
