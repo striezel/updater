@@ -95,18 +95,18 @@ namespace updater.software
             var signature = new Signature(publisherX509, certificateExpiration);
 
             return new AvailableSoftware("PDF24 Creator",
-                "11.18.0",
+                "11.19.0",
                 "^PDF24 Creator$",
                 "^PDF24 Creator$", // 64-bit version uses same pattern as 32-bit.
                 new InstallInfoMsi(
-                    "https://download.pdf24.org/pdf24-creator-11.18.0-x86.msi",
+                    "https://download.pdf24.org/pdf24-creator-11.19.0-x86.msi",
                     HashAlgorithm.SHA256,
-                    "A8E996B7813A12FA5B00E6A0424B7AB006A763153D3B91F9C39F27E5ADB62B69",
+                    "578F347F2B339F66DFDFE759A9FC5E933B4CBB5E84F6621F7C0DEFD7B7B9E693",
                     signature, getOptions() + " /qn /norestart"),
                 new InstallInfoMsi(
-                    "https://download.pdf24.org/pdf24-creator-11.18.0-x64.msi",
+                    "https://download.pdf24.org/pdf24-creator-11.19.0-x64.msi",
                     HashAlgorithm.SHA256,
-                    "080D31F8F30021643A1D8EF57F8D7169763363B472CE5A95FADA3A5D1039055F",
+                    "C6E12D671C477537A31E8F7D0B908CC456068E4FE35738DEA7643A9E4FEC6E9A",
                     signature, getOptions() + " /qn /norestart")
                 );
         }
