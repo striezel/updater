@@ -62,7 +62,7 @@ namespace updater.software
         public override AvailableSoftware knownInfo()
         {
             return new AvailableSoftware("Blender LTS",
-                "3.6.15",
+                "4.2.1",
                 null,
                 "^blender$",
                 null,
@@ -72,9 +72,9 @@ namespace updater.software
                     // is not machine-friendly, i.e. uses JavaScript etc., so a
                     // mirror is the safe choice here.
                     // "https://ftp.nluug.nl/pub/graphics/blender/release/Blender3.6/blender-3.6.10-windows-x64.msi",
-                    "https://ftp.halifax.rwth-aachen.de/blender/release/Blender3.6/blender-3.6.15-windows-x64.msi",
+                    "https://ftp.halifax.rwth-aachen.de/blender/release/Blender4.2/blender-4.2.1-windows-x64.msi",
                     HashAlgorithm.SHA256,
-                    "b44b8262ec99d7c30050fa091dde486df9c2288ffc6549c8aa5788a3b379da04",
+                    "e3309fbc01eaa4a6d270767a5847f192fa074499b6dddbf2b0362973ad15acb4",
                     new Signature(publisherX509, certificateExpiration),
                     "/qn /norestart ALLUSERS=1")
                 );
@@ -115,7 +115,7 @@ namespace updater.software
             string currentVersion;
             try
             {
-                var task = client.GetStringAsync("https://www.blender.org/download/lts/3-6/");
+                var task = client.GetStringAsync("https://www.blender.org/download/lts/4-2/");
                 task.Wait();
                 var html = task.Result;
                 // Installer will be something like "https://www.blender.org/download/release/Blender3.6/blender-3.6.8-windows-x64.msi".
@@ -135,7 +135,7 @@ namespace updater.software
             string checksum;
             try
             {
-                var task = client.GetStringAsync("https://download.blender.org/release/Blender3.6/blender-" + currentVersion + ".sha256");
+                var task = client.GetStringAsync("https://download.blender.org/release/Blender4.2/blender-" + currentVersion + ".sha256");
                 task.Wait();
                 var html = task.Result;
 

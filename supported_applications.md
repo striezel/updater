@@ -6,7 +6,7 @@ application.
 * 7-Zip
 * Adobe Acrobat Reader 2017 (update to Reader 2020 only)
 * Adobe Acrobat Reader 2020
-* Blender 3.6 LTS
+* Blender 4.2 LTS
 * Calibre
 * CCleaner
 * CDBurnerXP
