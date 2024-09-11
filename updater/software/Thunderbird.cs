@@ -302,7 +302,7 @@ namespace updater.software
         /// Returns null, if an error occurred.</returns>
         public string determineNewestVersion()
         {
-            string url = "https://download.mozilla.org/?product=thunderbird-latest&os=win&lang=" + languageCode;
+            string url = "https://download.mozilla.org/?product=thunderbird-esr-latest&os=win&lang=" + languageCode;
             var handler = new HttpClientHandler()
             {
                 AllowAutoRedirect = false
