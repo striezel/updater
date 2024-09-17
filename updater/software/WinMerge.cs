@@ -118,7 +118,7 @@ namespace updater.software
             var client = new HttpClient();
             // Server returns "503 Service Unavailable" when no user agent is
             // set, so we pretend to be curl.
-            client.DefaultRequestHeaders.Add("User-Agent", "curl/8.9.1");
+            client.DefaultRequestHeaders.Add("User-Agent", "curl/8.10.0");
             string response;
             try
             {
