@@ -62,7 +62,7 @@ namespace updater.software
         public override AvailableSoftware knownInfo()
         {
             return new AvailableSoftware("Blender LTS",
-                "4.2.1",
+                "4.2.2",
                 null,
                 "^blender$",
                 null,
@@ -72,9 +72,9 @@ namespace updater.software
                     // is not machine-friendly, i.e. uses JavaScript etc., so a
                     // mirror is the safe choice here.
                     // "https://ftp.nluug.nl/pub/graphics/blender/release/Blender3.6/blender-3.6.10-windows-x64.msi",
-                    "https://ftp.halifax.rwth-aachen.de/blender/release/Blender4.2/blender-4.2.1-windows-x64.msi",
+                    "https://ftp.halifax.rwth-aachen.de/blender/release/Blender4.2/blender-4.2.2-windows-x64.msi",
                     HashAlgorithm.SHA256,
-                    "e3309fbc01eaa4a6d270767a5847f192fa074499b6dddbf2b0362973ad15acb4",
+                    "6940114f5a7d032144e362a6b06d71b0d8850b703fa134eadf7a620f06eb06ac",
                     new Signature(publisherX509, certificateExpiration),
                     "/qn /norestart ALLUSERS=1")
                 );
