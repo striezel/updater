@@ -23,6 +23,7 @@ application.
 * FileZilla FTP Client
 * GIMP
 * Git for Windows
+* Graphviz
 * HeidiSQL
 * HexChat
 * Inkscape

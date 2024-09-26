@@ -85,6 +85,7 @@ namespace updater.software
             result.Add(new FileZilla(autoGetNewer));
             result.Add(new GIMP(autoGetNewer));
             result.Add(new Git(autoGetNewer));
+            result.Add(new Graphviz(autoGetNewer));
             result.Add(new HexChat(autoGetNewer));
             result.Add(new HeidiSQL(autoGetNewer));
             result.Add(new Inkscape(autoGetNewer));

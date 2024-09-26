@@ -6,6 +6,10 @@ improvements may be omitted.)_
 
 ## Next Version
 
+__[new features]__
+
+* Update support for Graphviz is added.
+
 __[changes]__
 
 * Blender updates will now use the newer 4.2 LTS release series, switching away
