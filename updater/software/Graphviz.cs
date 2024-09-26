@@ -237,6 +237,15 @@ namespace updater.software
         /// <param name="result">query result where software will be added, if it is in the detection list</param>
         public override void detectionQuery(List<DetectedSoftware> detected, bool autoGetNew, List<QueryEntry> result)
         {
+            // Note: This is basically the same functionality as in the class
+            // Improved64BitDetectionSoftware, but adjusted for Graphviz which
+            // does not provide an installation directory via registry, so the
+            // uninstall string (path to Uninstall.exe of Graphviz) is used
+            // instead.
+            // Furthermore, the executable to check is not directly beneath the
+            // installation directory both one level further down inside the
+            // "bin" directory.
+
             // 32-bit systems use normal detection.
             if (!Environment.Is64BitOperatingSystem)
             {
