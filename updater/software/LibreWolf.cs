@@ -100,8 +100,8 @@ namespace updater.software
         /// <summary>
         /// Tries to find the newest version number of LibreWolf.
         /// </summary>
-        /// <returns>Returns a string containing the newest version number on success.
-        /// Returns null, if an error occurred.</returns>
+        /// <returns>Returns a struct containing the newest version number on success.
+        /// Returns 0.0.0-0, if an error occurred.</returns>
         private static ShrinkingDashedQuartet determineNewestRelease()
         {
             string url = "https://gitlab.com/api/v4/projects/44042130/releases/";
@@ -140,7 +140,7 @@ namespace updater.software
         /// that was retrieved from the net.</returns>
         public override AvailableSoftware searchForNewer()
         {
-            logger.Info("Searcing for newer version of LibreWolf...");
+            logger.Info("Searching for newer version of LibreWolf...");
             var newerVersion = determineNewestRelease();
             var known = knownInfo();
             var knownVersion = new ShrinkingDashedQuartet(known.newestVersion);
