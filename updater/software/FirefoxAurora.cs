@@ -400,7 +400,7 @@ namespace updater.software
             versions.Sort();
             if (versions.Count > 0)
             {
-                return versions[versions.Count - 1].full();
+                return versions[^1].full();
             }
             else
                 return null;

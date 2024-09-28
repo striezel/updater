@@ -235,7 +235,7 @@ namespace updater.software
         /// </summary>
         /// <param name="detected">currently installed / detected software version</param>
         /// <returns>Returns true, if the software needs an uninstall before the upgrade.</returns>
-        private bool needsFreshInstallation(DetectedSoftware detected)
+        private static bool needsFreshInstallation(DetectedSoftware detected)
         {
             // Update path from 1.3.x to 1.4.x is broken, so anything before 1.4.0 needs
             // a clean installation, i.e. uninstallation before installation of a new

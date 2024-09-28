@@ -45,16 +45,12 @@ namespace updater.utility
         /// <returns>Returns a string indicating the appliation type.</returns>
         public static string appTypeToString(data.ApplicationType appT)
         {
-            switch (appT)
+            return appT switch
             {
-                case data.ApplicationType.Bit32:
-                    return "32-bit";
-                case data.ApplicationType.Bit64:
-                    return "64-bit";
-                case data.ApplicationType.Unknown:
-                default:
-                    return "unknown";
-            }
+                data.ApplicationType.Bit32 => "32-bit",
+                data.ApplicationType.Bit64 => "64-bit",
+                _ => "unknown",
+            };
         }
 
 

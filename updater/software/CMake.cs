@@ -142,7 +142,7 @@ namespace updater.software
                 versions.Add(new Triple(item.Groups[1].Value));
             }
             versions.Sort();
-            string currentVersion = versions[versions.Count - 1].full();
+            string currentVersion = versions[^1].full();
 
             // download checksum file, e.g. "https://github.com/Kitware/CMake/releases/download/v3.19.4/cmake-3.19.4-SHA-256.txt"
             string htmlCode;

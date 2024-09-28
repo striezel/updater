@@ -294,8 +294,7 @@ namespace moz_checksum_generator
         /// </summary>
         void getSmChecksums()
         {
-            var sm = new updater.software.SeaMonkey("de", false);
-            string version = sm.determineNewestVersion();
+            string version = updater.software.SeaMonkey.determineNewestVersion();
             if (string.IsNullOrWhiteSpace(version))
             {
                 MessageBox.Show("Could not determine current version of SeaMonkey!",

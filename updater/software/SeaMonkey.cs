@@ -206,7 +206,7 @@ namespace updater.software
         /// </summary>
         /// <returns>Returns a string containing the newest version number on success.
         /// Returns null, if an error occurred.</returns>
-        public string determineNewestVersion()
+        public static string determineNewestVersion()
         {
             string url = "https://archive.seamonkey-project.org/releases/";
             string htmlCode;
@@ -235,7 +235,7 @@ namespace updater.software
                 releaseList.Add(quart);
             }
             releaseList.Sort();
-            var newest = releaseList[releaseList.Count - 1];
+            var newest = releaseList[^1];
 
             if (htmlCode.Contains(">" + newest.full() + "<"))
                 return newest.full();

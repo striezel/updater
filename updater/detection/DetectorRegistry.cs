@@ -102,18 +102,12 @@ namespace updater.detection
                         e.uninstallString = us.ToString().Trim();
                     subKey.Close();
                     subKey = null;
-                    switch (view)
+                    e.appType = view switch
                     {
-                        case RegistryView.Registry64:
-                            e.appType = data.ApplicationType.Bit64;
-                            break;
-                        case RegistryView.Registry32:
-                            e.appType = data.ApplicationType.Bit32;
-                            break;
-                        case RegistryView.Default:
-                        default:
-                            throw new ArgumentOutOfRangeException(nameof(view), "Unknown registry view type!");
-                    }
+                        RegistryView.Registry64 => data.ApplicationType.Bit64,
+                        RegistryView.Registry32 => data.ApplicationType.Bit32,
+                        _ => throw new ArgumentOutOfRangeException(nameof(view), "Unknown registry view type!"),
+                    };
                     if (e.containsInformation())
                         entries.Add(e);
                 } // if subKey was opened
