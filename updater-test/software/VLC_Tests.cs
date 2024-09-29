@@ -43,8 +43,8 @@ namespace updater_test.software
         [TestMethod]
         public void Test_implementsSearchForNewer()
         {
-            var w = new VLC(false);
-            Assert.IsTrue(w.implementsSearchForNewer());
+            var vlc = new VLC(false);
+            Assert.IsTrue(vlc.implementsSearchForNewer());
         }
 
 
