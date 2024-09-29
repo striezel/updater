@@ -55,7 +55,8 @@ namespace updater_test.software
                 new MariaDB_10_4(false).knownInfo().install64Bit.signature,
                 new MariaDB_10_5(false).knownInfo().install64Bit.signature,
                 new MariaDB_10_6(false).knownInfo().install64Bit.signature,
-                new MariaDB_10_11(false).knownInfo().install64Bit.signature
+                new MariaDB_10_11(false).knownInfo().install64Bit.signature,
+                new MariaDB_11_4(false).knownInfo().install64Bit.signature
             };
 
             foreach (var signature in signatures)
@@ -78,11 +79,13 @@ namespace updater_test.software
             var mdb_10_5 = new MariaDB_10_5(false);
             var mdb_10_6 = new MariaDB_10_6(false);
             var mdb_10_11 = new MariaDB_10_11(false);
+            var mdb_11_4 = new MariaDB_11_4(false);
 
             Assert.IsTrue(mdb_10_3.EndOfLife() < mdb_10_4.EndOfLife());
             Assert.IsTrue(mdb_10_4.EndOfLife() < mdb_10_5.EndOfLife());
             Assert.IsTrue(mdb_10_5.EndOfLife() < mdb_10_6.EndOfLife());
             Assert.IsTrue(mdb_10_6.EndOfLife() < mdb_10_11.EndOfLife());
+            Assert.IsTrue(mdb_10_11.EndOfLife() < mdb_11_4.EndOfLife());
         }
     }
 }
