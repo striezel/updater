@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017, 2018  Dirk Stolle
+    Copyright (C) 2017, 2018, 2024  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -38,7 +38,7 @@ namespace updater_test.software
             var opts = new Options
             {
                 autoGetNewer = false,
-                excluded = null
+                excluded = new List<string>(0) { }
             };
             var result = All.get(opts);
             Assert.IsNotNull(result);
@@ -46,7 +46,7 @@ namespace updater_test.software
             for (int i = 0; i < result.Count; i++)
             {
                 Assert.IsNotNull(result[i]);
-            } //for
+            }
         }
 
 
@@ -110,5 +110,35 @@ namespace updater_test.software
             Assert.AreEqual<int>(result.Count - excluded.Count, result2.Count);
         }
 
+
+        /// <summary>
+        /// Checks that each software has at least one unique id.
+        /// </summary>
+        [TestMethod]
+        public void Test_get_UniqueIds()
+        {
+            var opts = new Options
+            {
+                autoGetNewer = false,
+                excluded = null
+            };
+            var result = All.get(opts);
+            Assert.IsNotNull(result);
+            Assert.IsTrue(result.Count > 0);
+
+            HashSet<string> uniqueIds = new(result.Count);
+            foreach (var software in result)
+            {
+                var ids = software.id();
+                Assert.IsNotNull(ids);
+                Assert.AreNotEqual(0, ids.Length);
+                bool added = false;
+                foreach (var id in ids)
+                {
+                    added |= uniqueIds.Add(id);
+                }
+                Assert.IsTrue(added, "The software " + software.info().Name + " has no unique id.");
+            }
+        }
     } // class
 } // namespace
