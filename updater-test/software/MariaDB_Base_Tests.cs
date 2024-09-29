@@ -45,14 +45,28 @@ namespace updater_test.software
 
 
         /// <summary>
-        /// Checks whether MariaDB 10.4 and newer releases use the current certificate data.
+        /// Checks whether MariaDB 10.4 release still uses the old certificate data.
+        /// </summary>
+        [TestMethod]
+        public void Test_certificate_10_4()
+        {
+            var mdb_10_4 = new MariaDB_10_4(false);
+            var signature = mdb_10_4.knownInfo().install64Bit.signature;
+            Assert.IsTrue(signature.ContainsData());
+            Assert.IsTrue(signature.publisher.Contains("MariaDB USA, Inc."));
+            Assert.IsTrue(signature.publisher.Contains("Redwood City"));
+            Assert.IsFalse(signature.HasExpired()); // Note: Change to IsTrue() after 2026-03-21.
+        }
+
+
+        /// <summary>
+        /// Checks whether MariaDB 10.5 and newer releases use the current certificate data.
         /// </summary>
         [TestMethod]
         public void Test_certificates_newer()
         {
             var signatures = new List<Signature>
             {
-                new MariaDB_10_4(false).knownInfo().install64Bit.signature,
                 new MariaDB_10_5(false).knownInfo().install64Bit.signature,
                 new MariaDB_10_6(false).knownInfo().install64Bit.signature,
                 new MariaDB_10_11(false).knownInfo().install64Bit.signature,
@@ -63,6 +77,7 @@ namespace updater_test.software
             {
                 Assert.IsTrue(signature.ContainsData());
                 Assert.IsTrue(signature.publisher.Contains("MariaDB USA, Inc."));
+                Assert.IsTrue(signature.publisher.Contains("Redwood City"));
                 Assert.IsTrue(signature.expiresAt > new System.DateTime(2024, 2, 1, 0, 0, 0, System.DateTimeKind.Utc));
             }
         }
