@@ -18,7 +18,7 @@
 
 using System;
 using System.Collections.Generic;
-using System.Net;
+using System.Net.Http;
 using System.Text.RegularExpressions;
 using updater.data;
 using updater.versions;
@@ -225,31 +225,33 @@ namespace updater.software
             foreach (var bits in new string[] { "32", "64" })
             {
                 string htmlCode = null;
-                using (var client = new WebClient())
+                using (var client = new HttpClient())
                 {
                     try
                     {
                         string full_version = newVersion.full();
-                        htmlCode = client.DownloadString("https://get.videolan.org/vlc/" + full_version + "/win" + bits + "/vlc-" + full_version + "-win" + bits + ".exe.sha256");
+                        var task = client.GetStringAsync("https://get.videolan.org/vlc/" + full_version + "/win" + bits + "/vlc-" + full_version + "-win" + bits + ".exe.sha256");
+                        task.Wait();
+                        htmlCode = task.Result;
                     }
-                    catch (WebException webEx)
+                    catch (Exception firstEx)
                     {
-                        logger.Warn("Exception occurred while checking for newer version of VLC: " + webEx.Message);
-                        // If it is not a SChannel failure (usually indicates invalid certificate),
-                        // then exit right here.
-                        if (webEx.Status != WebExceptionStatus.SecureChannelFailure)
-                            return null;
+                        logger.Warn("Exception occurred while checking for newer version of VLC: " + firstEx.Message);
+                        // Some mirrors have invalid certificates or no certificate, and that will
+                        // cause the request to fail.
                         // Try again with another mirror that hopefully has a valid TLS certificate.
                         // The get.videolan.org/vlc/... URL redirects randomly to a VLC mirror server.
                         // Some of those servers might not have a valid TLS certificate, so we try
                         // some other mirror.
-                        using (var mirrorClient = new WebClient())
+                        using (var mirrorClient = new HttpClient())
                         {
                             try
                             {
                                 logger.Info("Trying another VLC mirror instead...");
                                 string full_version = newVersion.full();
-                                htmlCode = mirrorClient.DownloadString("https://ftp.halifax.rwth-aachen.de/videolan/vlc/" + full_version + "/win" + bits + "/vlc-" + full_version + "-win" + bits + ".exe.sha256");
+                                var task = mirrorClient.GetStringAsync("https://ftp.halifax.rwth-aachen.de/videolan/vlc/" + full_version + "/win" + bits + "/vlc-" + full_version + "-win" + bits + ".exe.sha256");
+                                task.Wait();
+                                htmlCode = task.Result;
                             }
                             catch (Exception ex)
                             {
@@ -258,11 +260,6 @@ namespace updater.software
                             }
                             mirrorClient.Dispose();
                         }
-                    }
-                    catch (Exception ex)
-                    {
-                        logger.Warn("Exception occurred while checking for newer version of VLC: " + ex.Message);
-                        return null;
                     }
                     client.Dispose();
                 } // using
