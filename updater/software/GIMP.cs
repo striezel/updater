@@ -19,6 +19,7 @@
 using System;
 using System.Collections.Generic;
 using System.Net;
+using System.Net.Http;
 using System.Text.RegularExpressions;
 using updater.data;
 
@@ -141,44 +142,43 @@ namespace updater.software
             // https://download.gimp.org/pub/gimp/v2.8/windows/gimp-2.8.20-setup.exe.sha256
             string shortVersion = string.Join(".", version.Split(new char[] { '.' }), 0, 2);
             htmlCode = null;
-            using (var w_client = new WebClient())
+            using (var h_client = new HttpClient())
             {
                 try
                 {
                     string sha256Url = "https://download.gimp.org/pub/gimp/v" + shortVersion + "/windows/gimp-" + version + "-setup.exe.sha256";
-                    htmlCode = w_client.DownloadString(sha256Url);
+                    var task = h_client.GetStringAsync(sha256Url);
+                    task.Wait();
+                    htmlCode = task.Result;
                 }
-                catch (WebException webEx)
+                catch (Exception ex)
                 {
-                    if ((webEx.Response is HttpWebResponse)
-                        && ((webEx.Response as HttpWebResponse).StatusCode == HttpStatusCode.NotFound))
+                    if ((ex.InnerException is HttpRequestException)
+                        && ((ex.InnerException as HttpRequestException).StatusCode == HttpStatusCode.NotFound))
                     {
                         // try SHA256 file for whole directory instead
                         try
                         {
                             string sha256Url = "https://download.gimp.org/pub/gimp/v" + shortVersion + "/windows/SHA256SUMS";
-                            htmlCode = w_client.DownloadString(sha256Url);
+                            var task = h_client.GetStringAsync(sha256Url);
+                            task.Wait();
+                            htmlCode = task.Result;
                         }
-                        catch (Exception ex)
+                        catch (Exception ex2)
                         {
-                            logger.Warn("Exception occurred while checking for newer version of GIMP: " + ex.Message);
+                            logger.Warn("Exception occurred while checking for newer version of GIMP: " + ex2.Message);
                             return null;
                         } // try-catch (inner)
                     } // if 404 Not Found
 
-                    // Other web exceptions are still errors.
+                    // Other exceptions are still errors.
                     else
                     {
-                        logger.Warn("Exception occurred while checking for newer version of GIMP: " + webEx.Message);
+                        logger.Warn("Exception occurred while checking for newer version of GIMP: " + ex.Message);
                         return null;
                     }
-                } // catch WebException
-                catch (Exception ex)
-                {
-                    logger.Warn("Exception occurred while checking for newer version of GIMP: " + ex.Message);
-                    return null;
                 }
-                w_client.Dispose();
+                h_client.Dispose();
             } // using
 
             var reChecksum = new Regex("[0-9a-f]{64}  gimp\\-" + Regex.Escape(version) + "\\-setup\\.exe");
