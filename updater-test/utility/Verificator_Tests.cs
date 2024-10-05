@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017, 2019, 2022, 2023  Dirk Stolle
+    Copyright (C) 2017, 2019, 2022, 2023, 2024  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -38,7 +38,7 @@ namespace updater_test.utility
         /// <summary>
         /// subject in signature for PuTTY installer
         /// </summary>
-        private const string libreOfficePublisherX509 = "CN=Simon Tatham, O=Simon Tatham, S=Cambridgeshire, C=GB";
+        private const string puttyPublisherX509 = "CN=Simon Tatham, O=Simon Tatham, S=Cambridgeshire, C=GB";
 
 
         /// <summary>
@@ -47,7 +47,7 @@ namespace updater_test.utility
         /// <param name="url">URL of the file</param>
         /// <returns>Returns the local path of the downloaded file, if successful.
         /// Returns null, if an error occurred.</returns>
-        private static string download(string url)
+        private static string Download(string url)
         {
             string localFile = Path.Combine(Path.GetTempPath(), "test_original.msi");
             using (var wc = new WebClient())
@@ -75,7 +75,7 @@ namespace updater_test.utility
         [ClassInitialize()]
         public static void DownloadExampleFile(TestContext testContext)
         {
-            downloadFileLocation = download("https://the.earth.li/~sgtatham/putty/0.79/w32/putty-0.79-installer.msi");
+            downloadFileLocation = Download("https://the.earth.li/~sgtatham/putty/0.81/w32/putty-0.81-installer.msi");
         }
 
 
@@ -122,7 +122,7 @@ namespace updater_test.utility
                     stream.Close();
                 }
                 // check signature
-                verified = updater.utility.Verificator.verifySignature(copyLocation, libreOfficePublisherX509);
+                verified = updater.utility.Verificator.verifySignature(copyLocation, puttyPublisherX509);
             }
             finally
             {
@@ -142,7 +142,7 @@ namespace updater_test.utility
         {
             Assert.IsNotNull(downloadFileLocation, "The test file was not downloaded!");
 
-            bool s = updater.utility.Verificator.verifySignature(downloadFileLocation, libreOfficePublisherX509);
+            bool s = updater.utility.Verificator.verifySignature(downloadFileLocation, puttyPublisherX509);
             // If this assertion fails and it is the 8th September 2023 or later,
             // then this is because the certificate has expired.
             Assert.IsTrue(s);
