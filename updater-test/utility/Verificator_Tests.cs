@@ -19,7 +19,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.IO;
-using System.Net;
+using System.Net.Http;
 
 namespace updater_test.utility
 {
@@ -50,17 +50,21 @@ namespace updater_test.utility
         private static string Download(string url)
         {
             string localFile = Path.Combine(Path.GetTempPath(), "test_original.msi");
-            using (var wc = new WebClient())
+            using (var client = new HttpClient())
             {
                 try
                 {
-                    wc.DownloadFile(url, localFile);
+                    var stream_task = client.GetStreamAsync(url);
+                    stream_task.Wait();
+                    using var stream = stream_task.Result;
+                    using var file = new FileStream(localFile, FileMode.CreateNew);
+                    stream.CopyTo(file);
                 }
                 catch (Exception ex)
                 {
                     Console.WriteLine("An error occurred while downloading the file "
                         + url + ": " + ex.Message);
-                    wc.Dispose();
+                    client.Dispose();
                     return null;
                 }
             } // using
