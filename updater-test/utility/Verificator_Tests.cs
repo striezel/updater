@@ -147,7 +147,7 @@ namespace updater_test.utility
             Assert.IsNotNull(downloadFileLocation, "The test file was not downloaded!");
 
             bool s = updater.utility.Verificator.verifySignature(downloadFileLocation, puttyPublisherX509);
-            // If this assertion fails and it is the 8th September 2023 or later,
+            // If this assertion fails and it is the 6th November 2024 or later,
             // then this is because the certificate has expired.
             Assert.IsTrue(s);
         }
