@@ -243,22 +243,18 @@ namespace updater.software
                         // The get.videolan.org/vlc/... URL redirects randomly to a VLC mirror server.
                         // Some of those servers might not have a valid TLS certificate, so we try
                         // some other mirror.
-                        using (var mirrorClient = new HttpClient())
+                        try
                         {
-                            try
-                            {
-                                logger.Info("Trying another VLC mirror instead...");
-                                string full_version = newVersion.full();
-                                var task = mirrorClient.GetStringAsync("https://ftp.halifax.rwth-aachen.de/videolan/vlc/" + full_version + "/win" + bits + "/vlc-" + full_version + "-win" + bits + ".exe.sha256");
-                                task.Wait();
-                                htmlCode = task.Result;
-                            }
-                            catch (Exception ex)
-                            {
-                                logger.Warn("Exception occurred while checking for newer version of VLC on a mirror: " + ex.Message);
-                                return null;
-                            }
-                            mirrorClient.Dispose();
+                            logger.Info("Trying another VLC mirror instead...");
+                            string full_version = newVersion.full();
+                            var task = client.GetStringAsync("https://ftp.halifax.rwth-aachen.de/videolan/vlc/" + full_version + "/win" + bits + "/vlc-" + full_version + "-win" + bits + ".exe.sha256");
+                            task.Wait();
+                            htmlCode = task.Result;
+                        }
+                        catch (Exception ex)
+                        {
+                            logger.Warn("Exception occurred while checking for newer version of VLC on a mirror: " + ex.Message);
+                            return null;
                         }
                     }
                     client.Dispose();
