@@ -52,6 +52,7 @@ application.
 * Scribus
 * SeaMonkey
 * Shotcut
+* Stellarium
 * TeamSpeak Client
 * TeamViewer
 * Transmission (BitTorrent client)
