@@ -87,6 +87,5 @@ namespace updater.utility
             }
             return sub == publisher;
         }
-
     }
 } // namespace

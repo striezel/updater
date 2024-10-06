@@ -70,34 +70,5 @@ namespace updater.utility
                 return -1;
             }
         }
-
-
-        /*
-        /// <summary>
-        /// Kills all processes with the given name.
-        /// </summary>
-        /// <param name="name">name of the process(es)</param>
-        /// <returns>Returns the number of killed processes in case of success.
-        /// Returns -1 in case of failure.</returns>
-        public static int killAllByName(string name)
-        {
-            int result = 0;
-            try
-            {
-                Process[] pProcess = Process.GetProcessesByName(name);
-                foreach (Process p in pProcess)
-                {
-                    p.Kill();
-                    p.WaitForExit();
-                    result++;
-                } //foreach
-            } //try-c
-            catch
-            {
-                result = -1;
-            }
-            return result;
-        }
-        */
     } // class
 } // namespace

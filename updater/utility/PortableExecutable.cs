@@ -128,6 +128,5 @@ namespace updater.utility
                     return PEFormat.Unknown;
             }
         }
-
     } // class
 } // namespace

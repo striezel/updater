@@ -18,7 +18,7 @@
 
 namespace updater
 {
-    public class ReturnCodes
+    public static class ReturnCodes
     {
         /// <summary>
         /// return code that indicates successful program execution
@@ -32,7 +32,7 @@ namespace updater
 
 
         /// <summary>
-        /// return code that identified unknown operation
+        /// return code that identifies unknown operation
         /// </summary>
         public const int rcUnknownOperation = 2;
     } // class

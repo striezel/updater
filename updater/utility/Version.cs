@@ -35,6 +35,5 @@ namespace updater.utility
                 ver.Minor.ToString().PadLeft(2, '0'),
                 ver.Build.ToString().PadLeft(2, '0')});
         }
-
     } // class
 } // namespace

@@ -74,7 +74,7 @@ namespace updater.versions
         /// Gets the full version.
         /// </summary>
         /// <returns>Returns a string containing the full version number.</returns>
-        public string full()
+        public readonly string full()
         {
             if (build != 0)
                 return major.ToString() + "." + minor.ToString() + "."

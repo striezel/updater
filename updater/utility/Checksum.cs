@@ -155,6 +155,5 @@ namespace updater.utility
             // Simple equality checks will do after normalisation.
             return checksum1 == checksum2;
         }
-
     } // class
 } // namespace

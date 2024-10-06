@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017, 2022  Dirk Stolle
+    Copyright (C) 2017, 2022, 2024  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -73,41 +73,41 @@ namespace updater.versions
         /// Gets the full version.
         /// </summary>
         /// <returns>Returns a string containing the full version number.</returns>
-        public string full()
+        public readonly string full()
         {
             return major.ToString() + "." + minor.ToString() + "." +
                 patch.ToString() + "." + build.ToString();
         }
 
 
-        public override string ToString()
+        public override readonly string ToString()
         {
             return full();
         }
 
 
-        public bool Equals(Quartet other)
+        public readonly bool Equals(Quartet other)
         {
             return (major == other.major) && (minor == other.minor)
                 && (patch == other.patch) && (build == other.build);
         }
 
 
-        public bool Equals(ShrinkingQuartet other)
+        public readonly bool Equals(ShrinkingQuartet other)
         {
             return (major == other.major) && (minor == other.minor)
                 && (patch == other.patch) && (build == other.build);
         }
 
 
-        public bool Equals(ShrinkingDashedQuartet other)
+        public readonly bool Equals(ShrinkingDashedQuartet other)
         {
             return (major == other.major) && (minor == other.minor)
                 && (patch == other.patch) && (build == other.build);
         }
 
 
-        public override bool Equals(object obj)
+        public override readonly bool Equals(object obj)
         {
             if (obj is Quartet q)
                 return Equals(q);
@@ -115,13 +115,13 @@ namespace updater.versions
         }
 
 
-        public override int GetHashCode()
+        public override readonly int GetHashCode()
         {
             return Convert.ToInt32((major ^ minor ^ patch ^ build) & 0x7FFFFFFFu);
         }
 
 
-        public int CompareTo(Quartet other)
+        public readonly int CompareTo(Quartet other)
         {
             int c = major.CompareTo(other.major);
             if (c != 0)
