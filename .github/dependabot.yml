@@ -6,7 +6,8 @@ updates:
   - package-ecosystem: "nuget"
     directory: "/updater"
     schedule:
-      interval: "daily"
+      interval: "weekly"
+      day: "wednesday"
     open-pull-requests-limit: 5
     reviewers:
       - "striezel"
