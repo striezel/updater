@@ -44,7 +44,7 @@ jobs:
       # See https://docs.microsoft.com/visualstudio/msbuild/msbuild-command-line-reference
       run: msbuild /m /p:Configuration=${{env.BUILD_CONFIGURATION}} ${{env.SOLUTION_FILE_PATH}}
 
-    # InnoSetup 6.2.2 is already installed on the Windows 2022 image. See
+    # InnoSetup 6.3.3 is already installed on the Windows 2022 image. See
     # <https://github.com/actions/runner-images/blob/main/images/windows/Windows2022-Readme.md>
     # for pre-installed software.
 
