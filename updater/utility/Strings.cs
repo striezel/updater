@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017  Dirk Stolle
+    Copyright (C) 2017, 2024  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -42,7 +42,7 @@ namespace updater.utility
         /// Returns a string representation of the application type.
         /// </summary>
         /// <param name="appT">the application type</param>
-        /// <returns>Returns a string indicating the appliation type.</returns>
+        /// <returns>Returns a string indicating the application type.</returns>
         public static string appTypeToString(data.ApplicationType appT)
         {
             return appT switch
