@@ -57,7 +57,7 @@ namespace updater.software
         {
             return new AvailableSoftware("Graphviz",
                 "12.1.2",
-                "^Graphviz",
+                "^Graphviz$",
                 "^Graphviz$",
                 new InstallInfoExe(
                     "https://gitlab.com/api/v4/projects/4207231/packages/generic/graphviz-releases/12.1.2/windows_10_cmake_Release_graphviz-install-12.1.2-win32.exe",
