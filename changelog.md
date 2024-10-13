@@ -8,6 +8,7 @@ improvements may be omitted.)_
 
 __[new features]__
 
+* Update support for Inno Setup is added.
 * Update support for Stellarium is added.
 
 ## Version 2024.09.30.0

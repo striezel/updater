@@ -89,6 +89,7 @@ namespace updater.software
             result.Add(new HexChat(autoGetNewer));
             result.Add(new HeidiSQL(autoGetNewer));
             result.Add(new Inkscape(autoGetNewer));
+            result.Add(new InnoSetup(autoGetNewer));
             result.Add(new IrfanView(autoGetNewer));
             result.Add(new KeePass(autoGetNewer));
             result.Add(new LibreOffice(autoGetNewer));

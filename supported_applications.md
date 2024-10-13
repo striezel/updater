@@ -27,6 +27,7 @@ application.
 * HeidiSQL
 * HexChat
 * Inkscape
+* Inno Setup
 * IrfanView
 * KeePass 2
 * LibreOffice
