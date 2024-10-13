@@ -21,6 +21,7 @@ Compression=lzma
 SolidCompression=yes
 ; icon for installer
 ; SetupIconFile=todo.ico
+WizardStyle=modern
 
 [Languages]
 Name: "en"; MessagesFile: "compiler:Default.isl"
