@@ -53,6 +53,7 @@ namespace updater.software
         /// </summary>
         private const string currentVersion = "132.0b8";
 
+
         /// <summary>
         /// constructor with language code
         /// </summary>
@@ -78,6 +79,7 @@ namespace updater.software
             checksum32Bit = knownChecksums32Bit()[langCode];
             checksum64Bit = knownChecksums64Bit()[langCode];
         }
+
 
         /// <summary>
         /// Gets a dictionary with the known checksums for the installers (key: language, value: checksum).
@@ -193,6 +195,7 @@ namespace updater.software
                 { "zh-TW", "d6300251745851e5de918b64756fdf03b6bf3246294b6ef72adf94448f7ab59a2f5da99b659fa46cc570da419404b29006af014755f3082a3874e0e3f83abd0a" }
             };
         }
+
 
         /// <summary>
         /// Gets a dictionary with the known checksums for the installers (key: language, value: checksum).
@@ -513,6 +516,7 @@ namespace updater.software
                 }
             }
         }
+
 
         /// <summary>
         /// Determines whether the method searchForNewer() is implemented.
