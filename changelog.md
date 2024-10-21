@@ -11,6 +11,10 @@ __[new features]__
 * Update support for Inno Setup is added.
 * Update support for Stellarium is added.
 
+__[maintenance]__
+
+* Update certificate information for Eclipse Temurin JDK 21 LTS installers.
+
 ## Version 2024.09.30.0
 
 __[new features]__
