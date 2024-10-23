@@ -15,6 +15,11 @@ __[changes]__
 
 * Fix problem with search for newer versions of Eclipse Temurin JDK 21 LTS and
   Eclipse Temurin JRE 21 LTS.
+* Inkscape seems to have dropped support for 32-bit installers with version 1.4.
+  As a result, the updater will now cross-grade existing 32-bit installations of
+  Inkscape to 64-bit versions on 64-bit operating systems. On 32-bit operating
+  systems where that is not an option, Inkscape will not be updated beyond
+  version 1.3.2 which is the latest version that still had 32-bit installers.
 
 __[maintenance]__
 
