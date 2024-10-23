@@ -13,6 +13,7 @@ __[new features]__
 
 __[maintenance]__
 
+* Update certificate information for Eclipse Temurin JDK 8 LTS installers.
 * Update certificate information for Eclipse Temurin JDK 21 LTS installers.
 * Update certificate information for Eclipse Temurin JRE 21 LTS installers.
 
