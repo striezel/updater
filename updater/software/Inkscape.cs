@@ -60,16 +60,21 @@ namespace updater.software
             // To avoid any conflicts on older 32-bit OSes, the known info for
             // the last 32-bit build is returned in those cases.
             if (!Environment.Is64BitOperatingSystem)
+            {
+                logger.Warn("Inkscape does not provide 32-bit binaries from "
+                    + "version 1.4.0 onwards. Please consider switching to an "
+                    + "64-bit operating system to get newer Inkscape updates.");
                 return Last32BitBuildInformation();
+            }
 
             var info = new InstallInfoMsi(
-                "https://media.inkscape.org/dl/resources/file/inkscape-1.3.2_2023-11-25_091e20e-x64.msi",
+                "https://inkscape.org/gallery/item/53697/inkscape-1.4_2024-10-11_86a8ad7-x64.msi",
                 HashAlgorithm.SHA256,
-                "214263cb23d241134af0a22144c54ff1a1c0993d3a1c9ea7d76710f985a145df",
+                "5cbdadd86f5e1b102775ee41692745693bfb8300bc8141e726dae555f78196bf",
                 Signature.None,
                 "/qn /norestart");
             return new AvailableSoftware("Inkscape",
-                "1.3.2",
+                "1.4",
                 "^Inkscape( [0-9]\\.[0-9]+(\\.[0-9]+)?)?$",
                 "^Inkscape( [0-9]\\.[0-9]+(\\.[0-9]+)?)?$",
                 info,
@@ -329,6 +334,7 @@ namespace updater.software
                     "{454A87BE-0589-4AD2-8FA3-E6D1825D97DE}", // 1.3.1 MSI (x64)
                     "{6F4AB16B-1B62-468A-A7A9-0406CFFA68CC}", // 1.3.2 MSI (x86)
                     "{2AB0D298-5B41-4C70-BB32-46F153F7A1BF}", // 1.3.2 MSI (x64)
+                    "{4E9A1766-6BA4-4015-BA8D-05A268638587}", // 1.4.0 MSI (x64)
                 };
                 foreach (var id in guids)
                 {
