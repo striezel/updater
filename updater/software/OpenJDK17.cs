@@ -186,11 +186,6 @@ namespace updater.software
                     newInfo.install32Bit.downloadUrl = bin.installer.link;
                     hasBuild32 = true;
                 }
-                else
-                {
-                    logger.Error("Error: unknown architecture '" + bin.architecture + "' in AdoptOpenJDK API response!");
-                    return null;
-                }
             }
 
             // Do we have all the data we need?

@@ -197,11 +197,6 @@ namespace updater.software
                             hasBuild32 = true;
                         }
                     }
-                    else
-                    {
-                        logger.Error("Error: unknown architecture '" + bin.architecture + "' in AdoptOpenJDK API response!");
-                        return null;
-                    }
 
                     if (hasBuild32 && hasBuild64)
                         return newInfo;
