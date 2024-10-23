@@ -173,11 +173,7 @@ namespace updater.software
                     newInfo.install64Bit.checksum = bin.installer.checksum;
                     newInfo.install64Bit.downloadUrl = bin.installer.link;
                     hasBuild64 = true;
-                }
-                else
-                {
-                    logger.Error("Error: unknown architecture '" + bin.architecture + "' in AdoptOpenJDK API response!");
-                    return null;
+                    break;
                 }
             }
 

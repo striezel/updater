@@ -11,6 +11,11 @@ __[new features]__
 * Update support for Inno Setup is added.
 * Update support for Stellarium is added.
 
+__[changes]__
+
+* Fix problem with search for newer versions of Eclipse Temurin JDK 21 LTS and
+  Eclipse Temurin JRE 21 LTS.
+
 __[maintenance]__
 
 * Update certificate information for Eclipse Temurin JDK 8 LTS installers.
