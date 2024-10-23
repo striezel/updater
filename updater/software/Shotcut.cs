@@ -68,7 +68,7 @@ namespace updater.software
         /// details about the software.</returns>
         public override AvailableSoftware knownInfo()
         {
-            // Since v20.10.31, shotcut only provides 64-bit builds on Windows.
+            // Since v20.10.31, Shotcut only provides 64-bit builds on Windows.
             // Older 32-bit builds may still be installed, so we use the 64-bit build for
             // both 32-bit and 64-bit installations, effectively crossgrading 32-bit to
             // 64-bit installations.
