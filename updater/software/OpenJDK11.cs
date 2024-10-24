@@ -45,7 +45,7 @@ namespace updater.software
         /// <summary>
         /// expiration date for the publisher certificate
         /// </summary>
-        private static readonly DateTime certificateExpiration = new(2026, 6, 11, 23, 59, 59, DateTimeKind.Utc);
+        private static readonly DateTime certificateExpiration = new(2025, 7, 21, 23, 59, 59, DateTimeKind.Utc);
 
 
         /// <summary>
@@ -67,19 +67,19 @@ namespace updater.software
         {
             var signature = new Signature(publisherX509, certificateExpiration);
             return new AvailableSoftware("Eclipse Temurin JDK 11 with Hotspot",
-                "11.0.24.8",
+                "11.0.25.9",
                 "^(Eclipse Temurin JDK [a-z]+ Hotspot 11\\.[0-9]+\\.[0-9]+\\+[0-9]+(\\.[0-9]+)? \\(x86\\)|AdoptOpenJDK JDK [a-z]+ Hotspot 11\\.[0-9]+\\.[0-9]+\\+[0-9]+(\\.[0-9]+)? \\(x86\\))$",
                 "^(Eclipse Temurin JDK [a-z]+ Hotspot 11\\.[0-9]+\\.[0-9]+\\+[0-9]+(\\.[0-9]+)? \\(x64\\)|AdoptOpenJDK JDK [a-z]+ Hotspot 11\\.[0-9]+\\.[0-9]+\\+[0-9]+(\\.[0-9]+)? \\(x64\\))$",
                 new InstallInfoMsiNoLocation(
-                    "https://github.com/adoptium/temurin11-binaries/releases/download/jdk-11.0.24%2B8/OpenJDK11U-jdk_x86-32_windows_hotspot_11.0.24_8.msi",
+                    "https://github.com/adoptium/temurin11-binaries/releases/download/jdk-11.0.25%2B9/OpenJDK11U-jdk_x86-32_windows_hotspot_11.0.25_9.msi",
                     HashAlgorithm.SHA256,
-                    "907cbc90eaca71c86a6a0f4cac1fbe650de5f2c7ef754d2a4a4d25934e0e9ed7",
+                    "45a9eb9ac07e2f765a43de099657c73e33ae044c9c06d8af3ddb436463711280",
                     signature,
                     "INSTALLLEVEL=3 /qn /norestart"),
                 new InstallInfoMsiNoLocation(
-                    "https://github.com/adoptium/temurin11-binaries/releases/download/jdk-11.0.24%2B8/OpenJDK11U-jdk_x64_windows_hotspot_11.0.24_8.msi",
+                    "https://github.com/adoptium/temurin11-binaries/releases/download/jdk-11.0.25%2B9/OpenJDK11U-jdk_x64_windows_hotspot_11.0.25_9.msi",
                     HashAlgorithm.SHA256,
-                    "c6d15bff637a78d2033cd42c592e47c09fe87e7d028ae7d1fbf591c547848917",
+                    "497d6959470a72c443bb0cfb1af5d0a11689bab8dbe4c21c29f55f453d81d860",
                     signature,
                     "INSTALLLEVEL=3 /qn /norestart")
                     );
