@@ -48,13 +48,13 @@ namespace updater.software
         /// <summary>
         /// publisher of signed binaries
         /// </summary>
-        private const string publisherX509 = "E=winmergejp@gmail.com, CN=Takashi Sawanaka, O=Takashi Sawanaka, S=Chiba, C=JP";
+        private const string publisherX509 = "CN=Takashi Sawanaka, O=Takashi Sawanaka, L=Chiba, S=Chiba, C=JP";
 
 
         /// <summary>
         /// expiration date of certificate
         /// </summary>
-        private static readonly DateTime certificateExpiration = new(2024, 9, 9, 12, 15, 05, DateTimeKind.Utc);
+        private static readonly DateTime certificateExpiration = new(2027, 10, 18, 11, 02, 19, DateTimeKind.Utc);
 
 
         /// <summary>
@@ -66,19 +66,19 @@ namespace updater.software
         {
             var signature = new Signature(publisherX509, certificateExpiration);
             return new AvailableSoftware("WinMerge",
-                "2.16.42.1",
+                "2.16.44",
                 "^WinMerge [0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+$",
                 "^WinMerge [0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+ x64$",
                 new InstallInfoExe(
-                    "https://netcologne.dl.sourceforge.net/project/winmerge/stable/2.16.42.1/WinMerge-2.16.42.1-Setup.exe",
+                    "https://netcologne.dl.sourceforge.net/project/winmerge/stable/2.16.44/WinMerge-2.16.44-Setup.exe",
                     HashAlgorithm.SHA256,
-                    "0df72ad10ca01d21f15a0ee173a69bbd8f410f85a7c9738330b4d69628c1e3c1",
+                    "66fa368cd3dfeace9e3eaca26c5c94147269adeb7f3e5be03490d3cb155a1580",
                     signature,
                     "/VERYSILENT /NORESTART"),
                 new InstallInfoExe(
-                    "https://netcologne.dl.sourceforge.net/project/winmerge/stable/2.16.42.1/WinMerge-2.16.42.1-x64-Setup.exe",
+                    "https://netcologne.dl.sourceforge.net/project/winmerge/stable/2.16.44/WinMerge-2.16.44-x64-Setup.exe",
                     HashAlgorithm.SHA256,
-                    "5771f2a0553f53684b0e74161ed8749c4dda270f166edac253982366aee39bd3",
+                    "055e960261fc31723856082d2bf1aec2bcc2c71f1ae2d759efec3d766affeaec",
                     signature,
                     "/VERYSILENT /NORESTART")
                 );

@@ -4,6 +4,12 @@ _(Note: This changelog focuses on the major changes between the different
 versions. Therefore, it may not contain all changes. Especially smaller fixes or
 improvements may be omitted.)_
 
+## Next Version
+
+__[maintenance]__
+
+* Update certificate information for WinMerge installers.
+
 ## Version 2024.10.25.0
 
 __[new features]__
