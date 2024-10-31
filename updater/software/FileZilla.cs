@@ -202,8 +202,8 @@ namespace updater.software
                 {
                     // Looks like we have to add a user agent to get a valid response.
                     // Without user agent the server returns "403 Forbidden".
-                    // So let's pretend we are Firefox 115 ESR.
-                    client.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0");
+                    // So let's pretend we are Firefox 128 ESR.
+                    client.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:128.0) Gecko/20100101 Firefox/128.0");
                     // Without an Accept header the returned HTML code is
                     // different and does not contain the available versions.
                     client.DefaultRequestHeaders.Add("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8");
