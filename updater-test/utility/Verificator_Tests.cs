@@ -75,9 +75,9 @@ namespace updater_test.utility
         /// <summary>
         /// Downloads a signed MSI file that will be used during the tests.
         /// </summary>
-        /// <param name="testContext"></param>
+        /// <param name="_"></param>
         [ClassInitialize()]
-        public static void DownloadExampleFile(TestContext testContext)
+        public static void DownloadExampleFile(TestContext _)
         {
             downloadFileLocation = Download("https://download.documentfoundation.org/libreoffice/stable/24.8.2/win/x86_64/LibreOffice_24.8.2_Win_x86-64_helppack_de.msi");
         }

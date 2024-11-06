@@ -30,7 +30,7 @@ namespace updater.software
     /// <summary>
     /// Handles updates for Graphviz.
     /// </summary>
-    public class Graphviz: NoPreUpdateProcessSoftware
+    public class Graphviz : NoPreUpdateProcessSoftware
     {
         /// <summary>
         /// NLog.Logger for Graphviz class

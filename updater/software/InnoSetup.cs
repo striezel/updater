@@ -27,7 +27,7 @@ namespace updater.software
     /// <summary>
     /// Handles update of Inno Setup (Unicode version).
     /// </summary>
-    public class InnoSetup: AbstractSoftware
+    public class InnoSetup : AbstractSoftware
     {
         /// <summary>
         /// NLog.Logger for InnoSetup class

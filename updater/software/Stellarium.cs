@@ -26,7 +26,7 @@ namespace updater.software
     /// <summary>
     /// Handles updates of Stellarium.
     /// </summary>
-    public class Stellarium: NoPreUpdateProcessSoftware
+    public class Stellarium : NoPreUpdateProcessSoftware
     {
         /// <summary>
         /// NLog.Logger for Stellarium class

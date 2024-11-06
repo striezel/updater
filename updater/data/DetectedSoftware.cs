@@ -44,7 +44,7 @@ namespace updater.data
         /// Checks whether the entry contains some basic information.
         /// </summary>
         /// <returns>Returns true, if at least the name of the software is set.</returns>
-        public bool containsInformation()
+        public readonly bool containsInformation()
         {
             return !string.IsNullOrWhiteSpace(displayName);
         }
