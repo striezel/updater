@@ -31,9 +31,9 @@ namespace updater.utility
         {
             var asm = System.Reflection.Assembly.GetExecutingAssembly();
             var ver = asm.GetName().Version;
-            return string.Join(".", new string[]{ ver.Major.ToString(),
+            return string.Join(".", [ ver.Major.ToString(),
                 ver.Minor.ToString().PadLeft(2, '0'),
-                ver.Build.ToString().PadLeft(2, '0')});
+                ver.Build.ToString().PadLeft(2, '0')]);
         }
     } // class
 } // namespace

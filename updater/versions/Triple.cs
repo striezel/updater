@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017, 2022  Dirk Stolle
+    Copyright (C) 2017, 2022, 2024  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -50,7 +50,7 @@ namespace updater.versions
             major = 0;
             minor = 0;
             patch = 0;
-            string[] parts = value.Split(new char[] { '.' });
+            string[] parts = value.Split(['.']);
             // If there are not enough parts, we just use zero instead.
             if (parts.Length >= 1)
                 uint.TryParse(parts[0], out major);
@@ -72,13 +72,13 @@ namespace updater.versions
         }
 
 
-        public override string ToString()
+        public override readonly string ToString()
         {
             return full();
         }
 
 
-        public int CompareTo(Triple other)
+        public readonly int CompareTo(Triple other)
         {
             int c = major.CompareTo(other.major);
             if (c != 0)
@@ -90,20 +90,20 @@ namespace updater.versions
         }
 
 
-        public bool Equals(Triple other)
+        public readonly bool Equals(Triple other)
         {
             return ((major == other.major) && (minor == other.minor)
                 && (patch == other.patch));
         }
 
 
-        public override bool Equals(object obj)
+        public override readonly bool Equals(object obj)
         {
             return (obj is Triple t) && Equals(t);
         }
 
 
-        public override int GetHashCode()
+        public override readonly int GetHashCode()
         {
             return Convert.ToInt32((major ^ minor ^ patch) & 0x7FFFFFFFu);
         }

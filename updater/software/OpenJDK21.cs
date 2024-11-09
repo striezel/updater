@@ -87,7 +87,7 @@ namespace updater.software
         /// <returns>Returns a non-empty array of IDs, where at least one entry is unique to the software.</returns>
         public override string[] id()
         {
-            return new string[] { "openjdk-21-jdk", "openjdk-21", "openjdk-jdk", "openjdk", "jdk" };
+            return ["openjdk-21-jdk", "openjdk-21", "openjdk-jdk", "openjdk", "jdk"];
         }
 
 

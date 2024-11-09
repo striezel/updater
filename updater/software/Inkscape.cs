@@ -114,7 +114,7 @@ namespace updater.software
         /// <returns>Returns a non-empty array of IDs, where at least one entry is unique to the software.</returns>
         public override string[] id()
         {
-            return new string[] { "inkscape" };
+            return ["inkscape"];
         }
 
 
@@ -312,7 +312,7 @@ namespace updater.software
             else
             {
                 // MSI GUIDs to uninstall older MSI builds
-                string[] guids = {
+                string[] guids = [
                     "{81922150-317E-4BB0-A31D-FF1C14F707C5}", // 0.91 MSI (x86 and x64), 0.92 MSI
                     "{E56DDAE7-A35C-4A91-BB61-A90AD84A225A}", // 1.0 MSI (x86)
                     "{1E74336F-9E7A-4070-BAA7-716A504FB9B0}", // 1.0 MSI (x64)
@@ -339,7 +339,7 @@ namespace updater.software
                     "{6F4AB16B-1B62-468A-A7A9-0406CFFA68CC}", // 1.3.2 MSI (x86)
                     "{2AB0D298-5B41-4C70-BB32-46F153F7A1BF}", // 1.3.2 MSI (x64)
                     "{4E9A1766-6BA4-4015-BA8D-05A268638587}", // 1.4.0 MSI (x64)
-                };
+                ];
                 foreach (var id in guids)
                 {
                     var proc = new Process();

@@ -88,7 +88,7 @@ namespace updater.software
         /// <returns>Returns a non-empty array of IDs, where at least one entry is unique to the software.</returns>
         public override string[] id()
         {
-            return new string[] { "gimp" };
+            return ["gimp"];
         }
 
 
@@ -140,7 +140,7 @@ namespace updater.software
 
             // SHA-256 checksum is in a file like
             // https://download.gimp.org/pub/gimp/v2.8/windows/gimp-2.8.20-setup.exe.sha256
-            string shortVersion = string.Join(".", version.Split(new char[] { '.' }), 0, 2);
+            string shortVersion = string.Join(".", version.Split(['.']), 0, 2);
             htmlCode = null;
             using (var h_client = new HttpClient())
             {
@@ -190,7 +190,7 @@ namespace updater.software
             // construct new information
             var newInfo = knownInfo();
             string oldVersion = newInfo.newestVersion;
-            string oldShortVersion = string.Join(".", oldVersion.Split(new char[] { '.' }), 0, 2);
+            string oldShortVersion = string.Join(".", oldVersion.Split(['.']), 0, 2);
             newInfo.newestVersion = version;
             // 32-bit
             newInfo.install32Bit.downloadUrl = newInfo.install32Bit.downloadUrl.Replace(oldVersion, version).Replace(oldShortVersion, shortVersion);

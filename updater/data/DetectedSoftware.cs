@@ -1,6 +1,6 @@
 ﻿/*
     updater, command line interface
-    Copyright (C) 2016, 2022  Dirk Stolle
+    Copyright (C) 2016, 2022, 2024  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -57,7 +57,7 @@ namespace updater.data
         /// <returns>Returns zero, i both instances are equal.
         /// Returns a value less than zero, if this comes before other.
         /// Returns a value greater than zero, if this comes after other.</returns>
-        public int CompareTo(DetectedSoftware other)
+        public readonly int CompareTo(DetectedSoftware other)
         {
             // First compare by display name.
             if (null == displayName)
@@ -99,7 +99,7 @@ namespace updater.data
         /// Converts the struct into a string value, representing (parts of) its content.
         /// </summary>
         /// <returns>Returns a more readable string value.</returns>
-        public override string ToString()
+        public override readonly string ToString()
         {
             string result = displayName;
             if (!string.IsNullOrWhiteSpace(displayVersion))

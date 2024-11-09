@@ -70,7 +70,7 @@ namespace updater.versions
         /// <param name="value">string value containing a dot-separated version, e.g. "61.0b8"</param>
         public QuartetAurora(string value)
         {
-            string[] parts = value.Split(new char[] { '.' });
+            string[] parts = value.Split(['.']);
             // If there are not enough parts or parsing fails, we just assume zero.
             if (!uint.TryParse(parts[0], out major))
             {

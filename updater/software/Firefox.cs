@@ -361,7 +361,7 @@ namespace updater.software
         /// <returns>Returns a non-empty array of IDs, where at least one entry is unique to the software.</returns>
         public override string[] id()
         {
-            return new string[] { "firefox", "firefox-" + languageCode.ToLower() };
+            return ["firefox", "firefox-" + languageCode.ToLower()];
         }
 
 
@@ -450,7 +450,7 @@ namespace updater.software
             if (!matchChecksum64Bit.Success)
                 return null;
             // checksum is the first 128 characters of the match
-            return new string[] { matchChecksum32Bit.Value[..128], matchChecksum64Bit.Value[..128] };
+            return [matchChecksum32Bit.Value[..128], matchChecksum64Bit.Value[..128]];
         }
 
 

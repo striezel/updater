@@ -77,7 +77,7 @@ namespace updater.software
         /// <returns>Returns a non-empty array of IDs, where at least one entry is unique to the software.</returns>
         public override string[] id()
         {
-            return new string[] { "7zip", "7-zip", "sevenzip" };
+            return ["7zip", "7-zip", "sevenzip"];
         }
 
 

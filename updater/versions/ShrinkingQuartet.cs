@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2022  Dirk Stolle
+    Copyright (C) 2022, 2024  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -58,7 +58,7 @@ namespace updater.versions
             minor = 0;
             patch = 0;
             build = 0;
-            string[] parts = value.Split(new char[] { '.' });
+            string[] parts = value.Split(['.']);
             // If there are less than four parts, we just assume zero.
             uint.TryParse(parts[0], out major);
             if (parts.Length >= 2)
@@ -84,27 +84,27 @@ namespace updater.versions
         }
 
 
-        public override string ToString()
+        public override readonly string ToString()
         {
             return full();
         }
 
 
-        public bool Equals(ShrinkingQuartet other)
+        public readonly bool Equals(ShrinkingQuartet other)
         {
             return (major == other.major) && (minor == other.minor)
                 && (patch == other.patch) && (build == other.build);
         }
 
 
-        public bool Equals(Quartet other)
+        public readonly bool Equals(Quartet other)
         {
             return (major == other.major) && (minor == other.minor)
                && (patch == other.patch) && (build == other.build);
         }
 
 
-        public override bool Equals(object obj)
+        public override readonly bool Equals(object obj)
         {
             // There are two possible compatible types: ShrinkingQuartet and plain Quartet.
             if (obj is ShrinkingQuartet sq)
@@ -113,13 +113,13 @@ namespace updater.versions
         }
 
 
-        public override int GetHashCode()
+        public override readonly int GetHashCode()
         {
             return Convert.ToInt32((major ^ minor ^ patch ^ build) & 0x7FFFFFFFu);
         }
 
 
-        public int CompareTo(ShrinkingQuartet other)
+        public readonly int CompareTo(ShrinkingQuartet other)
         {
             int c = major.CompareTo(other.major);
             if (c != 0)
@@ -134,7 +134,7 @@ namespace updater.versions
         }
 
 
-        public int CompareTo(Quartet other)
+        public readonly int CompareTo(Quartet other)
         {
             int c = major.CompareTo(other.major);
             if (c != 0)

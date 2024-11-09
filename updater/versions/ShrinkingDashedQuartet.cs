@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2023  Dirk Stolle
+    Copyright (C) 2023, 2024  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -57,8 +57,8 @@ namespace updater.versions
             minor = 0;
             patch = 0;
             build = 0;
-            string[] dashed_parts = value.Split(new char[] { '-' });
-            string[] parts = dashed_parts[0].Split(new char[] { '.' });
+            string[] dashed_parts = value.Split(['-']);
+            string[] parts = dashed_parts[0].Split(['.']);
 
             // If there are less than three parts, we just assume zero.
             uint.TryParse(parts[0], out major);
@@ -86,27 +86,27 @@ namespace updater.versions
         }
 
 
-        public override string ToString()
+        public override readonly string ToString()
         {
             return full();
         }
 
 
-        public bool Equals(Quartet other)
+        public readonly bool Equals(Quartet other)
         {
             return (major == other.major) && (minor == other.minor)
                 && (patch == other.patch) && (build == other.build);
         }
 
 
-        public bool Equals(ShrinkingDashedQuartet other)
+        public readonly bool Equals(ShrinkingDashedQuartet other)
         {
             return (major == other.major) && (minor == other.minor)
                 && (patch == other.patch) && (build == other.build);
         }
 
 
-        public override bool Equals(object obj)
+        public override readonly bool Equals(object obj)
         {
             if (obj is Quartet q)
                 return Equals(q);
@@ -114,13 +114,13 @@ namespace updater.versions
         }
 
 
-        public override int GetHashCode()
+        public override readonly int GetHashCode()
         {
             return Convert.ToInt32((major ^ minor ^ patch ^ build) & 0x7FFFFFFFu);
         }
 
 
-        public int CompareTo(ShrinkingDashedQuartet other)
+        public readonly int CompareTo(ShrinkingDashedQuartet other)
         {
             int c = major.CompareTo(other.major);
             if (c != 0)

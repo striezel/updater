@@ -291,7 +291,7 @@ namespace updater.software
         /// <returns>Returns a non-empty array of IDs, where at least one entry is unique to the software.</returns>
         public override string[] id()
         {
-            return new string[] { "thunderbird-" + languageCode.ToLower(), "thunderbird" };
+            return ["thunderbird-" + languageCode.ToLower(), "thunderbird"];
         }
 
 
@@ -388,10 +388,10 @@ namespace updater.software
             if (!matchChecksum64Bit.Success)
                 return null;
             // Checksums are the first 128 characters of each match.
-            return new string[2] {
+            return [
                 matchChecksum32Bit.Value[..128],
                 matchChecksum64Bit.Value[..128]
-            };
+            ];
         }
 
 

@@ -361,7 +361,7 @@ namespace updater.software
         /// <returns>Returns a non-empty array of IDs, where at least one entry is unique to the software.</returns>
         public override string[] id()
         {
-            return new string[] { "firefox-aurora", "firefox-aurora-" + languageCode.ToLower() };
+            return ["firefox-aurora", "firefox-aurora-" + languageCode.ToLower()];
         }
 
 
@@ -462,10 +462,10 @@ namespace updater.software
                 }
                 if (cs64 != null && cs32 != null && cs32.ContainsKey(languageCode) && cs64.ContainsKey(languageCode))
                 {
-                    return new string[2] { cs32[languageCode], cs64[languageCode] };
+                    return [cs32[languageCode], cs64[languageCode]];
                 }
             }
-            var sums = new List<string>();
+            var sums = new List<string>(2);
             foreach (var bits in new string[] { "32", "64" })
             {
                 // look for line with the correct data
