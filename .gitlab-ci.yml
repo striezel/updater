@@ -1,6 +1,6 @@
 # Use the official .NET image, based on Debian.
 # See https://hub.docker.com/_/microsoft-dotnet-sdk/ for more info.
-image: mcr.microsoft.com/dotnet/sdk:6.0
+image: mcr.microsoft.com/dotnet/sdk:8.0
 
 build:
   stage: build

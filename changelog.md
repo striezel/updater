@@ -6,6 +6,16 @@ improvements may be omitted.)_
 
 ## Next Version
 
+__[breaking change]__
+
+The required version of the .NET is bumped from .NET 6 to .NET 8.
+If your system does not have .NET 8 yet, then you can download the .NET 8
+runtime at <https://dotnet.microsoft.com/en-us/download/dotnet/8.0/runtime>.
+Reason for that change is that Microsoft will end support for .NET 6 on
+12th November 2024. From that date onwards, .NET 6 will not receive any
+maintenance or security fixes, so this application is switching to .NET 8, the
+current Long Term Support release of .NET.
+
 __[maintenance]__
 
 * Update certificate information for WinMerge installers.

@@ -50,9 +50,9 @@ Name: "uk"; MessagesFile: "compiler:Languages\Ukrainian.isl"
 
 [Files]
 ;main executable
-Source: "..\updater\bin\Release\net6.0-windows\updater.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\updater\bin\Release\net6.0-windows\updater.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\updater\bin\Release\net6.0-windows\updater.runtimeconfig.json"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\updater\bin\Release\net8.0-windows7.0\updater.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\updater\bin\Release\net8.0-windows7.0\updater.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\updater\bin\Release\net8.0-windows7.0\updater.runtimeconfig.json"; DestDir: "{app}"; Flags: ignoreversion
 ; Newtonsoft.Json assembly (JSON deserialization)
 Source: "{#GetEnv('USERPROFILE')}\.nuget\packages\newtonsoft.json\13.0.3\lib\netstandard2.0\Newtonsoft.Json.dll"; DestDir: "{app}"; Flags: ignoreversion
 ; NLog main assembly (logging)
