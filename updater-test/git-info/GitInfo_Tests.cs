@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the test suite for the updater command line interface.
-    Copyright (C) 2017  Dirk Stolle
+    Copyright (C) 2017, 2024  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -76,8 +76,8 @@ namespace updater_test.git_info
         {
             string desc = updater.GitInfo.getDescription();
             var seven = new Regex("^[0-9a-f]{7}$");
-            var versionTag = new Regex("^v[0-9]{4}\\.[0-9]{2}\\.[0-9]{2}(\\.[0-9]+)?$");
-            var versionTagAndCommit = new Regex("^v[0-9]{4}\\.[0-9]{2}\\.[0-9]{2}(\\.[0-9]+)?\\-[0-9]+\\-g[0-9a-f]{7}$");
+            var versionTag = new Regex("^v[0-9]{4}\\.[0-9]{2}\\.[0-9]{2}(\\.[0-9]+)?(\\-rc[0-9]+)?$");
+            var versionTagAndCommit = new Regex("^v[0-9]{4}\\.[0-9]{2}\\.[0-9]{2}(\\.[0-9]+)?(\\-rc[0-9]+)?\\-[0-9]+\\-g[0-9a-f]{7}$");
             Assert.IsTrue(seven.IsMatch(desc) || versionTag.IsMatch(desc)
                 || versionTagAndCommit.IsMatch(desc), "Description is \""
                 + desc + "\" and does not match any of the regular expressions!");
