@@ -40,7 +40,9 @@ namespace moz_checksum_generator
         private void clearExistingData()
         {
             rtbBit32.Clear();
+            rtbBit32.ContextMenuStrip = null;
             rtbBit64.Clear();
+            rtbBit64.ContextMenuStrip = null;
             lblVersion.Text = "";
             lblNewLangCodes.Text = "unknown";
         }
@@ -139,6 +141,7 @@ namespace moz_checksum_generator
                 data.Add(language, matches[i].Value[..128]);
             }
             rtbBit32.Text = getChecksumCode(data);
+            rtbBit32.ContextMenuStrip = contextMenuStripChecksums32Bit;
 
             string new_langs = getNewLangCodes(updater.software.Firefox.validLanguageCodes(), data.Keys);
             lblNewLangCodes.Text = new_langs;
@@ -153,6 +156,7 @@ namespace moz_checksum_generator
                 data.Add(language, matches[i].Value[..128]);
             } //for
             rtbBit64.Text = getChecksumCode(data);
+            rtbBit64.ContextMenuStrip = contextMenuStripChecksums64Bit;
         }
 
 
@@ -205,6 +209,7 @@ namespace moz_checksum_generator
                 data.Add(language, matches[i].Value[..128]);
             }
             rtbBit32.Text = getChecksumCode(data);
+            rtbBit32.ContextMenuStrip = contextMenuStripChecksums32Bit;
 
             string new_langs = getNewLangCodes(updater.software.FirefoxAurora.validLanguageCodes(), data.Keys);
             lblNewLangCodes.Text = new_langs;
@@ -219,6 +224,7 @@ namespace moz_checksum_generator
                 data.Add(language, matches[i].Value[..128]);
             }
             rtbBit64.Text = getChecksumCode(data);
+            rtbBit64.ContextMenuStrip = contextMenuStripChecksums64Bit;
         }
 
 
@@ -272,6 +278,7 @@ namespace moz_checksum_generator
                 data.Add(language, matches[i].Value[..128]);
             }
             rtbBit32.Text = getChecksumCode(data);
+            rtbBit32.ContextMenuStrip = contextMenuStripChecksums32Bit;
 
             string new_langs = getNewLangCodes(updater.software.FirefoxESR.validLanguageCodes(), data.Keys);
             lblNewLangCodes.Text = new_langs;
@@ -286,6 +293,7 @@ namespace moz_checksum_generator
                 data.Add(language, matches[i].Value[..128]);
             }
             rtbBit64.Text = getChecksumCode(data);
+            rtbBit64.ContextMenuStrip = contextMenuStripChecksums64Bit;
         }
 
 
@@ -342,6 +350,7 @@ namespace moz_checksum_generator
                 data.Add(language, matches[i].Value[..128]);
             }
             rtbBit32.Text = getChecksumCode(data);
+            rtbBit32.ContextMenuStrip = contextMenuStripChecksums32Bit;
 
             string new_langs = getNewLangCodes(updater.software.SeaMonkey.validLanguageCodes(), data.Keys);
             lblNewLangCodes.Text = new_langs;
@@ -357,6 +366,7 @@ namespace moz_checksum_generator
                 data.Add(language, matches[i].Value[..128]);
             }
             rtbBit64.Text = getChecksumCode(data);
+            rtbBit64.ContextMenuStrip = contextMenuStripChecksums64Bit;
         }
 
 
@@ -410,6 +420,7 @@ namespace moz_checksum_generator
                 data.Add(language, matches[i].Value[..128]);
             }
             rtbBit32.Text = getChecksumCode(data);
+            rtbBit32.ContextMenuStrip = contextMenuStripChecksums32Bit;
 
             string new_langs = getNewLangCodes(updater.software.Thunderbird.validLanguageCodes(), data.Keys);
             lblNewLangCodes.Text = new_langs;
@@ -424,6 +435,7 @@ namespace moz_checksum_generator
                 data.Add(language, matches[i].Value[..128]);
             } //for
             rtbBit64.Text = getChecksumCode(data);
+            rtbBit64.ContextMenuStrip = contextMenuStripChecksums64Bit;
         }
 
         private static string getNewLangCodes(IEnumerable<string> oldLangCodes, IEnumerable<string> newLangCodes)
@@ -446,6 +458,26 @@ namespace moz_checksum_generator
                 return "none";
             }
             return newCodes.Remove(0, 2);
+        }
+
+        private void tsmiSelectAll32_Click(object sender, EventArgs e)
+        {
+            rtbBit32.SelectAll();
+        }
+
+        private void tsmiCopy32ToClipboard_Click(object sender, EventArgs e)
+        {
+            rtbBit32.Copy();
+        }
+
+        private void tsmiSelectAll64_Click(object sender, EventArgs e)
+        {
+            rtbBit64.SelectAll();
+        }
+
+        private void tsmiCopy64ToClipboard_Click(object sender, EventArgs e)
+        {
+            rtbBit64.Copy();
         }
     } // class
 } // namespace

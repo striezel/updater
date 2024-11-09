@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             gbProduct = new System.Windows.Forms.GroupBox();
             rbFirefoxAurora = new System.Windows.Forms.RadioButton();
             rbSeaMonkey = new System.Windows.Forms.RadioButton();
@@ -39,8 +40,14 @@
             gbChecksums = new System.Windows.Forms.GroupBox();
             splitContainer1 = new System.Windows.Forms.SplitContainer();
             rtbBit32 = new System.Windows.Forms.RichTextBox();
+            contextMenuStripChecksums32Bit = new System.Windows.Forms.ContextMenuStrip(components);
+            tsmiSelectAll32 = new System.Windows.Forms.ToolStripMenuItem();
+            tsmiCopy32ToClipboard = new System.Windows.Forms.ToolStripMenuItem();
             lblBit32 = new System.Windows.Forms.Label();
             rtbBit64 = new System.Windows.Forms.RichTextBox();
+            contextMenuStripChecksums64Bit = new System.Windows.Forms.ContextMenuStrip(components);
+            tsmiSelectAll64 = new System.Windows.Forms.ToolStripMenuItem();
+            tsmiCopy64ToClipboard = new System.Windows.Forms.ToolStripMenuItem();
             lblBit64 = new System.Windows.Forms.Label();
             lblNewLangs = new System.Windows.Forms.Label();
             lblNewLangCodes = new System.Windows.Forms.Label();
@@ -50,6 +57,8 @@
             splitContainer1.Panel1.SuspendLayout();
             splitContainer1.Panel2.SuspendLayout();
             splitContainer1.SuspendLayout();
+            contextMenuStripChecksums32Bit.SuspendLayout();
+            contextMenuStripChecksums64Bit.SuspendLayout();
             SuspendLayout();
             // 
             // gbProduct
@@ -193,6 +202,7 @@
             // rtbBit32
             // 
             rtbBit32.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            rtbBit32.ContextMenuStrip = contextMenuStripChecksums32Bit;
             rtbBit32.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             rtbBit32.Location = new System.Drawing.Point(3, 18);
             rtbBit32.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
@@ -201,6 +211,26 @@
             rtbBit32.Size = new System.Drawing.Size(292, 147);
             rtbBit32.TabIndex = 1;
             rtbBit32.Text = "";
+            // 
+            // contextMenuStripChecksums32Bit
+            // 
+            contextMenuStripChecksums32Bit.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmiSelectAll32, tsmiCopy32ToClipboard });
+            contextMenuStripChecksums32Bit.Name = "contextMenuStripChecksums";
+            contextMenuStripChecksums32Bit.Size = new System.Drawing.Size(170, 48);
+            // 
+            // tsmiSelectAll32
+            // 
+            tsmiSelectAll32.Name = "tsmiSelectAll32";
+            tsmiSelectAll32.Size = new System.Drawing.Size(169, 22);
+            tsmiSelectAll32.Text = "Select all";
+            tsmiSelectAll32.Click += tsmiSelectAll32_Click;
+            // 
+            // tsmiCopy32ToClipboard
+            // 
+            tsmiCopy32ToClipboard.Name = "tsmiCopy32ToClipboard";
+            tsmiCopy32ToClipboard.Size = new System.Drawing.Size(169, 22);
+            tsmiCopy32ToClipboard.Text = "Copy to clipboard";
+            tsmiCopy32ToClipboard.Click += tsmiCopy32ToClipboard_Click;
             // 
             // lblBit32
             // 
@@ -215,6 +245,7 @@
             // rtbBit64
             // 
             rtbBit64.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            rtbBit64.ContextMenuStrip = contextMenuStripChecksums64Bit;
             rtbBit64.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             rtbBit64.Location = new System.Drawing.Point(6, 18);
             rtbBit64.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
@@ -223,6 +254,26 @@
             rtbBit64.Size = new System.Drawing.Size(352, 147);
             rtbBit64.TabIndex = 1;
             rtbBit64.Text = "";
+            // 
+            // contextMenuStripChecksums64Bit
+            // 
+            contextMenuStripChecksums64Bit.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { tsmiSelectAll64, tsmiCopy64ToClipboard });
+            contextMenuStripChecksums64Bit.Name = "contextMenuStripChecksums64Bit";
+            contextMenuStripChecksums64Bit.Size = new System.Drawing.Size(170, 48);
+            // 
+            // tsmiSelectAll64
+            // 
+            tsmiSelectAll64.Name = "tsmiSelectAll64";
+            tsmiSelectAll64.Size = new System.Drawing.Size(169, 22);
+            tsmiSelectAll64.Text = "Select all";
+            tsmiSelectAll64.Click += tsmiSelectAll64_Click;
+            // 
+            // tsmiCopy64ToClipboard
+            // 
+            tsmiCopy64ToClipboard.Name = "tsmiCopy64ToClipboard";
+            tsmiCopy64ToClipboard.Size = new System.Drawing.Size(169, 22);
+            tsmiCopy64ToClipboard.Text = "Copy to clipboard";
+            tsmiCopy64ToClipboard.Click += tsmiCopy64ToClipboard_Click;
             // 
             // lblBit64
             // 
@@ -272,6 +323,8 @@
             splitContainer1.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).EndInit();
             splitContainer1.ResumeLayout(false);
+            contextMenuStripChecksums32Bit.ResumeLayout(false);
+            contextMenuStripChecksums64Bit.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -293,6 +346,12 @@
         private System.Windows.Forms.RadioButton rbFirefoxAurora;
         private System.Windows.Forms.Label lblNewLangs;
         private System.Windows.Forms.Label lblNewLangCodes;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStripChecksums32Bit;
+        private System.Windows.Forms.ToolStripMenuItem tsmiSelectAll32;
+        private System.Windows.Forms.ToolStripMenuItem tsmiCopy32ToClipboard;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStripChecksums64Bit;
+        private System.Windows.Forms.ToolStripMenuItem tsmiSelectAll64;
+        private System.Windows.Forms.ToolStripMenuItem tsmiCopy64ToClipboard;
     }
 }
 
