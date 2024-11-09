@@ -84,7 +84,7 @@ namespace updater_test.software
         [TestMethod]
         public void Test_needsUpdate()
         {
-            string[] versions = { "1.0.1", "2.5", "2.9", "2.40" };
+            string[] versions = ["1.0.1", "2.5", "2.9", "2.40"];
 
             var sm = new SeaMonkey246("fi", false);
             var dect = new DetectedSoftware();

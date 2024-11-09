@@ -63,7 +63,7 @@ namespace updater.software
                 if (string.IsNullOrWhiteSpace(item.detected.installPath))
                     continue;
                 // Remove enclosing quotes.
-                if (item.detected.installPath.StartsWith("\"") && item.detected.installPath.EndsWith("\""))
+                if (item.detected.installPath.StartsWith('\"') && item.detected.installPath.EndsWith('\"'))
                 {
                     item.detected.installPath = item.detected.installPath[1..^1];
                 }

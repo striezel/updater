@@ -98,7 +98,7 @@ namespace updater_test.software
         [TestMethod]
         public void Test_needsUpdate()
         {
-            string[] versions = { "1.0.1", "2.5.1", "2.8.9", "2.40.3", "3.2.1", "3.4.1", "3.19.3", "3.19.11" };
+            string[] versions = ["1.0.1", "2.5.1", "2.8.9", "2.40.3", "3.2.1", "3.4.1", "3.19.3", "3.19.11"];
 
             var dect = new DetectedSoftware();
 

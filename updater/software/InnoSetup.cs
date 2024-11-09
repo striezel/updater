@@ -192,7 +192,7 @@ namespace updater.software
             }
 
             // Remove enclosing quotes, if any.
-            if (detected.installPath.StartsWith("\"") && detected.installPath.EndsWith("\""))
+            if (detected.installPath.StartsWith('\"') && detected.installPath.EndsWith('\"'))
             {
                 detected.installPath = detected.installPath[1..^1];
             }

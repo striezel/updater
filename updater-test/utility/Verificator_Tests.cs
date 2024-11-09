@@ -121,7 +121,7 @@ namespace updater_test.utility
                 using (Stream stream = File.Open(copyLocation, FileMode.Open))
                 {
                     stream.Position = 345;
-                    byte[] data = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 };
+                    byte[] data = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];
                     stream.Write(data, 0, data.Length);
                     stream.Close();
                 }

@@ -129,13 +129,13 @@ namespace updater_test.software
             Assert.IsFalse(fz.needsUpdate(det));
 
             // some older version numbers in ascending order
-            string[] older = { "3.0.0", "3.0.1", "3.0.2", "3.0.2.1",
+            string[] older = [ "3.0.0", "3.0.1", "3.0.2", "3.0.2.1",
                 "3.2.8", "3.2.8.1", "3.3.0", "3.3.0.1", "3.3.1", "3.3.2",
                 "3.3.2.1", "3.3.3",
                 "3.9.0", "3.9.0.1", "3.9.0.2", "3.9.0.3", "3.9.0.4", "3.9.0.5", "3.9.0.6",
                 "3.10.0", "3.10.0.1", "3.10.0.2", "3.10.1", "3.10.2", "3.10.3",
                 "3.11.0", "3.11.0.1", "3.11.0.2", "3.12.0", "3.12.0.1", "3.12.0.2",
-                "3.13.0" };
+                "3.13.0" ];
             // older versions should always need update
             foreach (string version in older)
             {

@@ -333,8 +333,10 @@ namespace updater.software
                             continue;
                         string path = obj.ToString().Trim();
                         // Remove enclosing quotes.
-                        if (path.StartsWith("\"") && path.EndsWith("\""))
+                        if (path.StartsWith('\"') && path.EndsWith('\"'))
+                        {
                             path = path[1..^1];
+                        }
                         if (File.Exists(path))
                         {
                             var proc = new Process();

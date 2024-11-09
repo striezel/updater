@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2022  Dirk Stolle
+    Copyright (C) 2022, 2024  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -28,8 +28,8 @@ namespace updater_test.software
     /// </summary>
     class HeidiVersionTest : HeidiSQL
     {
-        public HeidiVersionTest(bool autoNewer, string version)
-            : base(autoNewer)
+        public HeidiVersionTest(string version)
+            : base(false)
         {
             mVersion = version;
         }
@@ -140,21 +140,21 @@ namespace updater_test.software
         [TestMethod]
         public void Test_needsUpdate_when_older()
         {
-            var heidi = new HeidiVersionTest(false, "12.1.0.6537");
+            var heidi = new HeidiVersionTest("12.1.0.6537");
             var det = new DetectedSoftware()
             {
                 displayVersion = heidi.knownInfo().newestVersion
             };
 
             // older versions should always need update
-            string[] older = { "8.3.0.1234", "9.1", "10.2", "11.3" };
+            string[] older = ["8.3.0.1234", "9.1", "10.2", "11.3"];
             foreach (string version in older)
             {
                 det.displayVersion = version;
                 Assert.IsTrue(heidi.needsUpdate(det));
             }
             // Still holds for shorter version number.
-            heidi = new HeidiVersionTest(false, "12.1");
+            heidi = new HeidiVersionTest("12.1");
             foreach (string version in older)
             {
                 det.displayVersion = version;
@@ -169,21 +169,21 @@ namespace updater_test.software
         [TestMethod]
         public void Test_needsUpdate_same_point_release()
         {
-            var heidi = new HeidiVersionTest(false, "12.1.0.6537");
+            var heidi = new HeidiVersionTest("12.1.0.6537");
             var det = new DetectedSoftware()
             {
                 displayVersion = heidi.knownInfo().newestVersion
             };
 
             // Versions from same point release should never need update.
-            string[] same_point_release = { "12.1", "12.1.0", "12.1.0.0", "12.1.0.1234", "12.1.0.9999" };
+            string[] same_point_release = ["12.1", "12.1.0", "12.1.0.0", "12.1.0.1234", "12.1.0.9999"];
             foreach (string version in same_point_release)
             {
                 det.displayVersion = version;
                 Assert.IsFalse(heidi.needsUpdate(det));
             }
             // Still holds for shorter version number.
-            heidi = new HeidiVersionTest(false, "12.1");
+            heidi = new HeidiVersionTest("12.1");
             foreach (string version in same_point_release)
             {
                 det.displayVersion = version;
@@ -198,22 +198,22 @@ namespace updater_test.software
         [TestMethod]
         public void Test_needsUpdate_newer_point_release()
         {
-            var heidi = new HeidiVersionTest(false, "12.1.0.6537");
+            var heidi = new HeidiVersionTest("12.1.0.6537");
             var det = new DetectedSoftware()
             {
                 displayVersion = heidi.knownInfo().newestVersion
             };
 
             // Versions from a newer point release should never need update.
-            string[] same_point_release = { "12.2", "12.2.0", "12.2.0.0", "12.2.0.1234", "12.2.0.9999" };
-            foreach (string version in same_point_release)
+            string[] newer_point_release = ["12.2", "12.2.0", "12.2.0.0", "12.2.0.1234", "12.2.0.9999"];
+            foreach (string version in newer_point_release)
             {
                 det.displayVersion = version;
                 Assert.IsFalse(heidi.needsUpdate(det));
             }
             // Still holds for shorter version number.
-            heidi = new HeidiVersionTest(false, "12.1");
-            foreach (string version in same_point_release)
+            heidi = new HeidiVersionTest("12.1");
+            foreach (string version in newer_point_release)
             {
                 det.displayVersion = version;
                 Assert.IsFalse(heidi.needsUpdate(det));
@@ -227,22 +227,22 @@ namespace updater_test.software
         [TestMethod]
         public void Test_needsUpdate_newer_major_release()
         {
-            var heidi = new HeidiVersionTest(false, "12.1.0.6537");
+            var heidi = new HeidiVersionTest("12.1.0.6537");
             var det = new DetectedSoftware()
             {
                 displayVersion = heidi.knownInfo().newestVersion
             };
 
             // Versions from a newer point release should never need update.
-            string[] same_point_release = { "13.0", "13.0.0", "13.0.0.0", "13.0.0.1234", "13.0.0.9999" };
-            foreach (string version in same_point_release)
+            string[] newer_major_release = ["13.0", "13.0.0", "13.0.0.0", "13.0.0.1234", "13.0.0.9999"];
+            foreach (string version in newer_major_release)
             {
                 det.displayVersion = version;
                 Assert.IsFalse(heidi.needsUpdate(det));
             }
             // Still holds for shorter version number.
-            heidi = new HeidiVersionTest(false, "12.1");
-            foreach (string version in same_point_release)
+            heidi = new HeidiVersionTest("12.1");
+            foreach (string version in newer_major_release)
             {
                 det.displayVersion = version;
                 Assert.IsFalse(heidi.needsUpdate(det));

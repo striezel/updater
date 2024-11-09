@@ -126,7 +126,7 @@ namespace updater_test.utility
 
             // Create temporary file of zero bytes size.
             string fileName = Path.GetTempFileName();
-            byte[] data = new byte[] { 0x66, 0x6f, 0x6f, 0x62, 0x61, 0x72 }; // "foobar"
+            byte[] data = [0x66, 0x6f, 0x6f, 0x62, 0x61, 0x72]; // "foobar"
             File.WriteAllBytes(fileName, data);
             try
             {
@@ -150,9 +150,9 @@ namespace updater_test.utility
         public void Test_hashToString()
         {
             Assert.AreEqual<string>("deadbeef", Checksum.hashToString(
-                new byte[] { 0xde, 0xad, 0xbe, 0xef }));
+                [0xde, 0xad, 0xbe, 0xef]));
             Assert.AreEqual<string>("a61f9380255bb154f001cc15f27374ea30de1013", Checksum.hashToString(
-                new byte[] { 0xa6, 0x1f, 0x93, 0x80, 0x25, 0x5b, 0xb1, 0x54, 0xf0, 0x01, 0xcc, 0x15, 0xf2, 0x73, 0x74, 0xea, 0x30, 0xde, 0x10, 0x13 }));
+                [0xa6, 0x1f, 0x93, 0x80, 0x25, 0x5b, 0xb1, 0x54, 0xf0, 0x01, 0xcc, 0x15, 0xf2, 0x73, 0x74, 0xea, 0x30, 0xde, 0x10, 0x13]));
         }
 
 
@@ -163,7 +163,7 @@ namespace updater_test.utility
         public void Test_hashToString_NullEmpty()
         {
             Assert.IsNull(Checksum.hashToString(null));
-            Assert.IsNull(Checksum.hashToString(new byte[] { }));
+            Assert.IsNull(Checksum.hashToString([]));
         }
 
 

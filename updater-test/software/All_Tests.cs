@@ -38,7 +38,7 @@ namespace updater_test.software
             var opts = new Options
             {
                 autoGetNewer = false,
-                excluded = new List<string>(0) { }
+                excluded = []
             };
             var result = All.get(opts);
             Assert.IsNotNull(result);
@@ -66,7 +66,7 @@ namespace updater_test.software
             Assert.IsTrue(result.Count > 0);
 
             opts.autoGetNewer = false;
-            opts.excluded = new List<string>();
+            opts.excluded = [];
             var result2 = All.get(opts);
             Assert.IsNotNull(result2);
             Assert.IsTrue(result2.Count > 0);

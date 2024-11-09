@@ -41,7 +41,6 @@ namespace updater_test.utility
         [TestMethod]
         public void Test_BytesPerSecond()
         {
-
             var client = new ProgressReportingWebClient();
 
             // Since the BytesPerSecond() method uses the current time for its

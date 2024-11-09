@@ -85,7 +85,7 @@ namespace moz_checksum_generator
             {
                 result += Environment.NewLine + "                { \"" + item.Key + "\", \"" + item.Value + "\" },";
             }
-            if (result.EndsWith(","))
+            if (result.EndsWith(','))
                 result = result.Substring(0, result.Length - 1);
             return result + Environment.NewLine + "            };";
         }
@@ -345,7 +345,7 @@ namespace moz_checksum_generator
             MatchCollection matches = reChecksum.Matches(sha512SumsContent);
             for (int i = 0; i < matches.Count; i++)
             {
-                string[] parts = matches[i].Value.Split(new char[] { '.' });
+                string[] parts = matches[i].Value.Split(['.']);
                 string language = parts[parts.Length - 4];
                 data.Add(language, matches[i].Value[..128]);
             }
@@ -361,7 +361,7 @@ namespace moz_checksum_generator
             matches = reChecksum64Bit.Matches(sha512SumsContent);
             for (int i = 0; i < matches.Count; i++)
             {
-                string[] parts = matches[i].Value.Split(new char[] { '.' });
+                string[] parts = matches[i].Value.Split(['.']);
                 string language = parts[parts.Length - 4];
                 data.Add(language, matches[i].Value[..128]);
             }

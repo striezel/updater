@@ -84,7 +84,7 @@ namespace updater_test.algorithm
             // null
             Assert.IsNull(SoftwareStatus.toConsoleOutput(null));
             // empty
-            var data = SoftwareStatus.toConsoleOutput(new List<updater.data.QueryEntry>());
+            var data = SoftwareStatus.toConsoleOutput([]);
             Assert.IsNotNull(data);
             Assert.AreEqual<int>(1, data.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries).Length);
         }

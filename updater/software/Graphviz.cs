@@ -260,7 +260,7 @@ namespace updater.software
                 if (string.IsNullOrWhiteSpace(item.detected.uninstallString))
                     continue;
                 // Remove enclosing quotes.
-                if (item.detected.uninstallString.StartsWith("\"") && item.detected.uninstallString.EndsWith("\""))
+                if (item.detected.uninstallString.StartsWith('\"') && item.detected.uninstallString.EndsWith('\"'))
                 {
                     item.detected.uninstallString = item.detected.uninstallString[1..^1];
                 }
