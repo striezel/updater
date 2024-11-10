@@ -16,6 +16,11 @@ Reason for that change is that Microsoft will end support for .NET 6 on
 maintenance or security fixes, so this application is switching to .NET 8, the
 current Long Term Support release of .NET.
 
+__[changes]__
+
+* Node.js updates will now track Node.js 22.x, because Node.js 22.x has moved
+  into active Long Term Support (LTS).
+
 __[maintenance]__
 
 * Update certificate information for WinMerge installers.
