@@ -127,6 +127,7 @@ namespace updater.software
             }
 
             result.Add(new SevenZip(autoGetNewer));
+            result.Add(new ShareX(autoGetNewer));
             result.Add(new Shotcut(autoGetNewer));
             result.Add(new Stellarium(autoGetNewer));
             result.Add(new TeamSpeakClient(autoGetNewer));

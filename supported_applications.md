@@ -52,6 +52,7 @@ application.
 * PuTTY
 * Scribus
 * SeaMonkey
+* ShareX
 * Shotcut
 * Stellarium
 * TeamSpeak Client
