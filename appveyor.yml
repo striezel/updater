@@ -1,4 +1,4 @@
-version: 2024.11.09.{build}-rc1
+version: 2024.11.11.{build}
 skip_tags: true
 image: Visual Studio 2022
 configuration: Debug
