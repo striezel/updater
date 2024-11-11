@@ -227,7 +227,7 @@ namespace updater.software
         {
             // Technically, mumble.exe is a blocker, but the installer just closes it,
             // if it is running.
-            return new List<string>();
+            return [];
         }
 
         /// <summary>

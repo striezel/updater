@@ -468,7 +468,7 @@ namespace updater.software
         {
             // Firefox ESR can be updated, even while it is running, so there
             // is no need to list firefox.exe here.
-            return new List<string>();
+            return [];
         }
 
 

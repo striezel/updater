@@ -34,7 +34,7 @@ namespace updater.cli
             op = Operation.Unknown;
             autoGetNewer = true;
             timeout = Update.defaultTimeout;
-            excluded = new List<string>();
+            excluded = [];
             showDownloadProgress = false;
             pdf24autoUpdate = true;
             pdf24desktopIcons = true;

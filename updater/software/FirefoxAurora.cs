@@ -493,7 +493,7 @@ namespace updater.software
                 {
                     // look for lines with language code and version for 32-bit
                     var reChecksum32Bit = new Regex("[0-9a-f]{128}  win32/[a-z]{2,3}(\\-[A-Z]+)?/Firefox Setup " + Regex.Escape(currentVersion) + "\\.exe");
-                    cs32 = new SortedDictionary<string, string>();
+                    cs32 = [];
                     MatchCollection matches = reChecksum32Bit.Matches(checksumsText);
                     for (int i = 0; i < matches.Count; i++)
                     {
@@ -506,7 +506,7 @@ namespace updater.software
                 {
                     // look for line with the correct language code and version for 64-bit
                     var reChecksum64Bit = new Regex("[0-9a-f]{128}  win64/[a-z]{2,3}(\\-[A-Z]+)?/Firefox Setup " + Regex.Escape(currentVersion) + "\\.exe");
-                    cs64 = new SortedDictionary<string, string>();
+                    cs64 = [];
                     MatchCollection matches = reChecksum64Bit.Matches(checksumsText);
                     for (int i = 0; i < matches.Count; i++)
                     {
@@ -571,7 +571,7 @@ namespace updater.software
         /// <returns>Returns a list of process names that block the upgrade.</returns>
         public override List<string> blockerProcesses(DetectedSoftware detected)
         {
-            return new List<string>();
+            return [];
         }
 
 
