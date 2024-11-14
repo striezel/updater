@@ -460,9 +460,11 @@ namespace updater.software
                 {
                     fillChecksumDictionaries();
                 }
-                if (cs64 != null && cs32 != null && cs32.ContainsKey(languageCode) && cs64.ContainsKey(languageCode))
+                if (cs64 != null && cs32 != null
+                    && cs32.TryGetValue(languageCode, out string hash32)
+                    && cs64.TryGetValue(languageCode, out string hash64))
                 {
-                    return [cs32[languageCode], cs64[languageCode]];
+                    return [hash32, hash64];
                 }
             }
             var sums = new List<string>(2);

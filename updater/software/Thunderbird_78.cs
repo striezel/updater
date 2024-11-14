@@ -70,13 +70,11 @@ namespace updater.software
             languageCode = langCode.Trim();
             var d32 = knownChecksums32Bit();
             var d64 = knownChecksums64Bit();
-            if (!d32.ContainsKey(languageCode) || !d64.ContainsKey(languageCode))
+            if (!d32.TryGetValue(languageCode, out checksum32Bit) || !d64.TryGetValue(languageCode, out checksum64Bit))
             {
                 logger.Error("The string '" + langCode + "' does not represent a valid language code!");
                 throw new ArgumentOutOfRangeException(nameof(langCode), "The string '" + langCode + "' does not represent a valid language code!");
             }
-            checksum32Bit = d32[languageCode];
-            checksum64Bit = d64[languageCode];
         }
 
 

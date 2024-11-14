@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017, 2018, 2020, 2021  Dirk Stolle
+    Copyright (C) 2017, 2018, 2020, 2021, 2024  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -59,12 +59,11 @@ namespace updater.software
             }
             languageCode = langCode.Trim();
             var d = knownChecksums();
-            if (!d.ContainsKey(languageCode))
+            if (!d.TryGetValue(languageCode, out checksum))
             {
                 logger.Error("The string '" + langCode + "' does not represent a valid language code!");
                 throw new ArgumentOutOfRangeException(nameof(langCode), "The string '" + langCode + "' does not represent a valid language code!");
             }
-            checksum = d[languageCode];
         }
 
 
