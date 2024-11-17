@@ -222,11 +222,11 @@ namespace updater.software
         /// <returns>Returns a list of process names that block the upgrade.</returns>
         public override List<string> blockerProcesses(DetectedSoftware detected)
         {
-            return new List<string>(2)
-            {
+            return
+            [
                 "ts3client_win64",
                 "ts3client_win32"
-            };
+            ];
         }
 
 

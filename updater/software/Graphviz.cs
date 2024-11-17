@@ -209,8 +209,8 @@ namespace updater.software
         /// <returns>Returns a list of process names that block the upgrade.</returns>
         public override List<string> blockerProcesses(DetectedSoftware detected)
         {
-            return new List<string>(14)
-            {
+            return
+            [
                 "dot",
                 "dot2gxl",
                 "gml2gv",
@@ -225,7 +225,7 @@ namespace updater.software
                 "gxl2dot",
                 "gxl2gv",
                 "mm2gv"
-            };
+            ];
         }
 
 

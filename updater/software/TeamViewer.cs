@@ -158,13 +158,13 @@ namespace updater.software
         /// <returns>Returns a list of process names that block the upgrade.</returns>
         public override List<string> blockerProcesses(DetectedSoftware detected)
         {
-            return new List<string>(4)
-            {
+            return
+            [
                 "TeamViewer",
                 "TeamViewer_Desktop",
                 "tv_w32",
                 "tv_x64"
-            };
+            ];
         }
     }
 }
