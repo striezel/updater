@@ -4,6 +4,14 @@ _(Note: This changelog focuses on the major changes between the different
 versions. Therefore, it may not contain all changes. Especially smaller fixes or
 improvements may be omitted.)_
 
+## Next Version
+
+__[changes]__
+
+* Revision updates of GIMP are now detected, too, i. e. when a version like
+  for example 2.10.38 gets a minor update as version 2.10.38-1, the updater can
+  now detect such updates and will offer them.
+
 ## Version 2024.11.11.0
 
 __[breaking change]__

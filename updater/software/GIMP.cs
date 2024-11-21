@@ -74,8 +74,8 @@ namespace updater.software
 
             return new AvailableSoftware("The GIMP",
                 "2.10.38",
-                "^GIMP [0-9]+\\.[0-9]+\\.[0-9]+$",
-                "^GIMP [0-9]+\\.[0-9]+\\.[0-9]+$",
+                "^GIMP [0-9]+\\.[0-9]+\\.[0-9]+(\\-[0-9]+)?$",
+                "^GIMP [0-9]+\\.[0-9]+\\.[0-9]+(\\-[0-9]+)?$",
                 // The GIMP uses the same installer for 32 and 64-bit.
                 installer,
                 installer);
@@ -181,19 +181,40 @@ namespace updater.software
                 h_client.Dispose();
             } // using
 
-            var reChecksum = new Regex("[0-9a-f]{64}  gimp\\-" + Regex.Escape(version) + "\\-setup\\.exe");
-            Match m = reChecksum.Match(htmlCode);
-            if (!m.Success)
+            var reChecksum = new Regex("[0-9a-f]{64}  gimp\\-" + Regex.Escape(version) + "\\-setup(\\-[0-9]+)?\\.exe");
+            var matches = reChecksum.Matches(htmlCode);
+            if (matches.Count == 0)
                 return null;
-            string checksum = m.Value[..64];
+            string checksum = null;
+            int revision = -1;
+            foreach (Match match in matches)
+            {
+                int current_revision = -1;
+                if (match.Groups[1].Success)
+                {
+                    if (!int.TryParse(match.Groups[1].Value.AsSpan(1), out current_revision))
+                    {
+                        return null;
+                    }
+                }
+                else
+                {
+                    current_revision = 0;
+                }
+                if (current_revision > revision)
+                {
+                    checksum = match.Value[..64];
+                    revision = current_revision;
+                }
+            }
 
             // construct new information
             var newInfo = knownInfo();
-            string oldVersion = newInfo.newestVersion;
-            string oldShortVersion = string.Join(".", oldVersion.Split(['.']), 0, 2);
-            newInfo.newestVersion = version;
+            newInfo.newestVersion = revision <= 0 ? version : version + "." + revision.ToString();
             // 32-bit
-            newInfo.install32Bit.downloadUrl = newInfo.install32Bit.downloadUrl.Replace(oldVersion, version).Replace(oldShortVersion, shortVersion);
+            newInfo.install32Bit.downloadUrl = revision <= 0 ?
+                "https://download.gimp.org/pub/gimp/v" + shortVersion + "/windows/gimp-" + version + "-setup.exe"
+                : "https://download.gimp.org/pub/gimp/v" + shortVersion + "/windows/gimp-" + version + "-setup-" + revision.ToString() + ".exe";
             newInfo.install32Bit.checksum = checksum;
             // 64-bit - same installer, same checksum
             newInfo.install64Bit.downloadUrl = newInfo.install32Bit.downloadUrl;
@@ -211,6 +232,63 @@ namespace updater.software
         public override List<string> blockerProcesses(DetectedSoftware detected)
         {
             return [];
+        }
+
+
+        /// <summary>
+        /// Checks whether the software is in the list of detected software.
+        /// </summary>
+        /// <param name="detected">list of detected software on the system</param>
+        /// <param name="autoGetNew">whether to automatically get new software information</param>
+        /// <param name="result">query result where software will be added, if it is in the detection list</param>
+        public override void detectionQuery(List<DetectedSoftware> detected, bool autoGetNew, List<QueryEntry> result)
+        {
+            // Note: This is basically the default implementation of
+            // detectionQuery() from the AbstractSoftware class, but with a
+            // minor change to get the correct version including the possibly
+            // present revision number to ensure the revision number is
+            // detected, too.
+            var known = knownInfo();
+            if (Environment.Is64BitOperatingSystem && !string.IsNullOrWhiteSpace(known.match64Bit))
+            {
+                var regularExp = new Regex(known.match64Bit, RegexOptions.IgnoreCase);
+                int idx = detected.FindIndex(x => regularExp.IsMatch(x.displayName) && !string.IsNullOrWhiteSpace(x.displayVersion));
+                if ((idx >= 0) && (detected[idx].appType == ApplicationType.Bit64))
+                {
+                    // found it
+                    autoGetNewer(autoGetNew);
+                    DetectedSoftware detected_fixed = new(detected[idx].displayName, detected[idx].displayVersion, detected[idx].installPath, detected[idx].uninstallString, detected[idx].appType);
+                    var re = new Regex("^GIMP ([0-9]+\\.[0-9]+\\.[0-9]+(\\-[0-9]+)?)$");
+                    var match = re.Match(detected_fixed.displayName);
+                    if (match.Success)
+                    {
+                        string real_version = match.Groups[1].Value.Replace('-', '.');
+                        detected_fixed.displayVersion = real_version;
+                    }
+                    bool updatable = needsUpdate(detected_fixed);
+                    result.Add(new QueryEntry(this, detected_fixed, updatable, ApplicationType.Bit64));
+                } // if match was found
+            } // if 64-bit expression does exist and we are on a 64-bit system
+            if (!string.IsNullOrWhiteSpace(known.match32Bit))
+            {
+                var regularExp = new Regex(known.match32Bit, RegexOptions.IgnoreCase);
+                int idx = detected.FindIndex(x => regularExp.IsMatch(x.displayName) && !string.IsNullOrWhiteSpace(x.displayVersion));
+                if ((idx >= 0) && (detected[idx].appType == ApplicationType.Bit32))
+                {
+                    // found it
+                    autoGetNewer(autoGetNew);
+                    DetectedSoftware detected_fixed = new(detected[idx].displayName, detected[idx].displayVersion, detected[idx].installPath, detected[idx].uninstallString, detected[idx].appType);
+                    var re = new Regex("^GIMP ([0-9]+\\.[0-9]+\\.[0-9]+(\\-[0-9]+)?)$");
+                    var match = re.Match(detected_fixed.displayName);
+                    if (match.Success)
+                    {
+                        string real_version = match.Groups[1].Value.Replace('-', '.');
+                        detected_fixed.displayVersion = real_version;
+                    }
+                    bool updatable = needsUpdate(detected_fixed);
+                    result.Add(new QueryEntry(this, detected_fixed, updatable, ApplicationType.Bit32));
+                } // if match was found
+            } // if 32-bit expression does exist
         }
     } // class
 } // namespace
