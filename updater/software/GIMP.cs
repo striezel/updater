@@ -66,14 +66,14 @@ namespace updater.software
         public override AvailableSoftware knownInfo()
         {
             var installer = new InstallInfoExe(
-                "https://download.gimp.org/pub/gimp/v2.10/windows/gimp-2.10.38-setup.exe",
+                "https://download.gimp.org/pub/gimp/v2.10/windows/gimp-2.10.38-setup-1.exe",
                 HashAlgorithm.SHA256,
-                "e3515980c9012eed67cf78f1151d216725529e95676c16f5ff7478d46230ddab",
+                "bdcf059c7d4e1b0ab59f8dc5f199ebb60ae0445460bf67ff8e4e438a89cee3d8",
                 new Signature(publisherX509, certificateExpiration),
                 "/VERYSILENT /NORESTART");
 
             return new AvailableSoftware("The GIMP",
-                "2.10.38",
+                "2.10.38.1",
                 "^GIMP [0-9]+\\.[0-9]+\\.[0-9]+(\\-[0-9]+)?$",
                 "^GIMP [0-9]+\\.[0-9]+\\.[0-9]+(\\-[0-9]+)?$",
                 // The GIMP uses the same installer for 32 and 64-bit.
