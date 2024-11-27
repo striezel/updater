@@ -36,9 +36,9 @@ namespace updater_test.utility
 
 
         /// <summary>
-        /// subject in signature for LibreOffice Help Pack installer
+        /// subject in signature for PuTTY installer
         /// </summary>
-        private const string libreOfficePublisherX509 = "E=info@documentfoundation.org, CN=The Document Foundation, O=The Document Foundation, OU=LibreOffice Build Team, L=Berlin, S=Berlin, C=DE";
+        private const string puttyPublisherX509 = "CN=Simon Tatham, O=Simon Tatham, S=Cambridgeshire, C=GB";
 
 
         /// <summary>
@@ -79,7 +79,7 @@ namespace updater_test.utility
         [ClassInitialize()]
         public static void DownloadExampleFile(TestContext _)
         {
-            downloadFileLocation = Download("https://download.documentfoundation.org/libreoffice/stable/24.8.2/win/x86_64/LibreOffice_24.8.2_Win_x86-64_helppack_de.msi");
+            downloadFileLocation = Download("https://the.earth.li/~sgtatham/putty/0.82/w32/putty-0.82-installer.msi");
         }
 
 
@@ -126,7 +126,7 @@ namespace updater_test.utility
                     stream.Close();
                 }
                 // check signature
-                verified = updater.utility.Verificator.verifySignature(copyLocation, libreOfficePublisherX509);
+                verified = updater.utility.Verificator.verifySignature(copyLocation, puttyPublisherX509);
             }
             finally
             {
@@ -146,8 +146,8 @@ namespace updater_test.utility
         {
             Assert.IsNotNull(downloadFileLocation, "The test file was not downloaded!");
 
-            bool s = updater.utility.Verificator.verifySignature(downloadFileLocation, libreOfficePublisherX509);
-            // If this assertion fails and it is the 13th September 2026 or later,
+            bool s = updater.utility.Verificator.verifySignature(downloadFileLocation, puttyPublisherX509);
+            // If this assertion fails and it is the 28th September 2027 or later,
             // then this is because the certificate has expired.
             Assert.IsTrue(s);
         }
