@@ -56,7 +56,7 @@ namespace updater.software
         /// <summary>
         /// expiration date of certificate
         /// </summary>
-        private static readonly DateTime certificateExpiration = new(2024, 11, 5, 23, 59, 59, DateTimeKind.Utc);
+        private static readonly DateTime certificateExpiration = new(2027, 9, 27, 23, 59, 59, DateTimeKind.Utc);
 
 
         /// <summary>
@@ -68,21 +68,21 @@ namespace updater.software
         {
             var signature = new Signature(publisherX509, certificateExpiration);
             return new AvailableSoftware("PuTTY",
-                "0.81",
+                "0.82",
                 "^PuTTY release [0-9]\\.[0-9]+$",
                 "^PuTTY release [0-9]\\.[0-9]+ \\(64\\-bit\\)$",
                 // 32-bit installer
                 new InstallInfoMsi(
-                    "https://the.earth.li/~sgtatham/putty/0.81/w32/putty-0.81-installer.msi",
+                    "https://the.earth.li/~sgtatham/putty/0.82/w32/putty-0.82-installer.msi",
                     HashAlgorithm.SHA512,
-                    "30c0a65917548724fcc6138a8c0fa926cd1af629e9dafa04c96ae6c65c0fccababa81605a39a826686887e7392f37c6f2f349f2f59ca9d7a03a0968cdf1ac854",
+                    "0b7a84f08957d2a3e9f2d9486bc8de0df83eaafda825dfd7d5352e5f5ef39afaae25fc1347a19277a5b822f25ac6a314d9fc6a253131543edba43a794463cbb6",
                     signature,
                     "/qn /norestart"),
                 // 64-bit installer
                 new InstallInfoMsi(
-                    "https://the.earth.li/~sgtatham/putty/0.81/w64/putty-64bit-0.81-installer.msi",
+                    "https://the.earth.li/~sgtatham/putty/0.82/w64/putty-64bit-0.82-installer.msi",
                     HashAlgorithm.SHA512,
-                    "651b94172af7a414e8fe19e959034d7ed2f4d8ae375725d4b4ba1799b9d8003f39177c70b76f434618ea9fe4e1d74cb983d13475a74397c903c8db89346ffd35",
+                    "3a69468a992f9f42ff7258afecfe042bbd0226909fd3965f208eb0738c40bfd96a9befd5792a8201719c71e2a5262d654afebb81d7c2eda42b00233094890391",
                     signature,
                     "/qn /norestart")
                 );

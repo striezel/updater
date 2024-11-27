@@ -12,6 +12,10 @@ __[changes]__
   for example 2.10.38 gets a minor update as version 2.10.38-1, the updater can
   now detect such updates and will offer them.
 
+__[maintenance]__
+
+* Update certificate information for PuTTY installers.
+
 ## Version 2024.11.11.0
 
 __[breaking change]__
