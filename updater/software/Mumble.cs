@@ -56,7 +56,7 @@ namespace updater.software
         /// <summary>
         /// expiration date of certificate
         /// </summary>
-        private static readonly DateTime certificateExpiration = new(2024, 7, 12, 13, 14, 18, DateTimeKind.Utc);
+        private static readonly DateTime certificateExpiration = new(2026, 8, 4, 6, 50, 54, DateTimeKind.Utc);
 
 
         /// <summary>
@@ -74,13 +74,13 @@ namespace updater.software
             }
             var signature = new Signature(publisherX509, certificateExpiration);
             var installer = new InstallInfoMsi(
-                "https://github.com/mumble-voip/mumble/releases/download/v1.5.634/mumble_client-1.5.634.x64.msi",
+                "https://github.com/mumble-voip/mumble/releases/download/v1.5.735/mumble_client-1.5.735.x64.msi",
                 HashAlgorithm.SHA256,
-                "ad4a49d9ac08c0f281bb90f34742bc60887d969f91420cdcfab1f88c7d25ab3e",
+                "2778beac1a7970814372f6b688645cb67a831f52d79e008201461769fadc20bb",
                 signature,
                 "/qn /norestart");
             return new AvailableSoftware("Mumble Client",
-                "1.5.634",
+                "1.5.735",
                 "^(Mumble [0-9]\\.[0-9]+\\.[0-9]+|Mumble \\(client\\))$",
                 "^(Mumble [0-9]\\.[0-9]+\\.[0-9]+|Mumble \\(client\\))$",
                 // 32-bit installations will be uninstalled and switched to the

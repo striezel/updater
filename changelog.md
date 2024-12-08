@@ -14,6 +14,7 @@ __[changes]__
 
 __[maintenance]__
 
+* Update certificate information for Mumble installer.
 * Update certificate information for PuTTY installers.
 
 ## Version 2024.11.11.0
