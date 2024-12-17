@@ -24,6 +24,10 @@ using updater.data;
 
 namespace updater.software
 {
+    /// <summary>
+    /// Handles updates of Blender LTS version (currently 4.2.x, but that may
+    /// change when a newer LTS branch is released in the future).
+    /// </summary>
     public class BlenderLTS : AbstractSoftware
     {
         /// <summary>
@@ -62,7 +66,7 @@ namespace updater.software
         public override AvailableSoftware knownInfo()
         {
             return new AvailableSoftware("Blender LTS",
-                "4.2.4",
+                "4.2.5",
                 null,
                 "^blender$",
                 null,
@@ -72,9 +76,9 @@ namespace updater.software
                     // is not machine-friendly, i.e. uses JavaScript etc., so a
                     // mirror is the safe choice here.
                     // "https://ftp.nluug.nl/pub/graphics/blender/release/Blender3.6/blender-3.6.10-windows-x64.msi",
-                    "https://ftp.halifax.rwth-aachen.de/blender/release/Blender4.2/blender-4.2.4-windows-x64.msi",
+                    "https://ftp.halifax.rwth-aachen.de/blender/release/Blender4.2/blender-4.2.5-windows-x64.msi",
                     HashAlgorithm.SHA256,
-                    "5608e431926db64f58eb027ee3d52ce139029d2ae7c56d2fa45473fb7347eccd",
+                    "59865fabbb22823809063f407f1b8802ce7fd12361ac4cd01e266c7d62f3a492",
                     new Signature(publisherX509, certificateExpiration),
                     "/qn /norestart ALLUSERS=1")
                 );
