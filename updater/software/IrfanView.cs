@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2022, 2023, 2024  Dirk Stolle
+    Copyright (C) 2022, 2023, 2024, 2025  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -127,9 +127,9 @@ namespace updater.software
                 return null;
             }
 
-            // There's a link like '<a href="https://www.fosshub.com/IrfanView.html?dwl=iview460_x64_setup.exe" ...'
+            // There's a link like '<a href="https://www.irfanview.info/files/iview470_x64_setup.exe" ...'
             // on the download page.
-            var versionRegEx = new Regex("href=\"https://www\\.fosshub\\.com/IrfanView\\.html\\?dwl=iview([0-9]+)_x64_setup\\.exe\"");
+            var versionRegEx = new Regex("href=\"https://www\\.irfanview\\.info/files/iview([0-9]+)_x64_setup\\.exe\"");
             var versionMatch = versionRegEx.Match(htmlCode);
             if (!versionMatch.Success)
                 return null;
