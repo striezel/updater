@@ -7,7 +7,7 @@
     <Nullable>disable</Nullable>
     <AssemblyVersion>2024.12.10.0</AssemblyVersion>
     <FileVersion>2024.12.10.0</FileVersion>
-    <Copyright>Copyright © 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024 Dirk Stolle</Copyright>
+    <Copyright>Copyright © 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025 Dirk Stolle</Copyright>
     <Description>Finds / updates third party software that can be updated.</Description>
     <PackageLicenseExpression>GPL-3.0-or-later</PackageLicenseExpression>
   </PropertyGroup>
