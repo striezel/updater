@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2021, 2022, 2023, 2024  Dirk Stolle
+    Copyright (C) 2021, 2022, 2023, 2024, 2025  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -63,7 +63,7 @@ namespace updater.software
         /// details about the software.</returns>
         public override AvailableSoftware knownInfo()
         {
-            const string version = "22.12.0";
+            const string version = "22.13.0";
             var signature = new Signature(publisherX509, certificateExpiration);
             return new AvailableSoftware(
                 "Node.js",
@@ -73,13 +73,13 @@ namespace updater.software
                 new InstallInfoMsi(
                     "https://nodejs.org/download/release/v" + version + "/node-v" + version + "-x86.msi",
                     HashAlgorithm.SHA256,
-                    "97fd52500c6947d5886c616ce37c93d40f5b0b811a1f87f89783c25e0de345e3",
+                    "8c96b25e8b397d31319b0c0eacc564fa86e1fdae1d08246c4810a2281329ba91",
                     signature,
                     "/qn /norestart"),
                 new InstallInfoMsi(
                     "https://nodejs.org/download/release/v" + version + "/node-v" + version + "-x64.msi",
                     HashAlgorithm.SHA256,
-                    "5fa43604523be95f8e73c4c98337a5c2bf02450a6525ad25ec2926e464e6bcef",
+                    "5c5a0c9a1d2ca9fd342691312d859d26c78b83538720938c243a3269ce64b7af",
                     signature,
                     "/qn /norestart")
                     );
