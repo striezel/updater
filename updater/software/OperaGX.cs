@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2023, 2024  Dirk Stolle
+    Copyright (C) 2023, 2024, 2025  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -66,19 +66,19 @@ namespace updater.software
             const string silentOptions = "/silent /norestart /launchopera 0 /setdefaultbrowser 0 /enable-stats 0 /enable-installer-stats 0 /pintotaskbar 0 /pin-additional-shortcuts 0 /allusers";
             var signature = new Signature(publisherX509, certificateExpiration);
             return new AvailableSoftware("Opera GX",
-                "115.0.5322.124",
+                "115.0.5322.142",
                 "^Opera GX Stable [0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+$",
                 "^Opera GX Stable [0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+$",
                 new InstallInfoExe(
-                    "https://get.geo.opera.com/pub/opera_gx/115.0.5322.124/win/Opera_GX_115.0.5322.124_Setup.exe",
+                    "https://get.geo.opera.com/pub/opera_gx/115.0.5322.142/win/Opera_GX_115.0.5322.142_Setup.exe",
                     HashAlgorithm.SHA256,
-                    "62962ca5a9b960e9eb31d9a99123ec9280953e26dab0c7a61f7f26bbe32b229d",
+                    "5e7790ba5e91baa19cf4e7347bb256a0e4ecc592f895a4f9abc67ba9670e090c",
                     signature,
                     silentOptions),
                 new InstallInfoExe(
-                    "https://get.geo.opera.com/pub/opera_gx/115.0.5322.124/win/Opera_GX_115.0.5322.124_Setup_x64.exe",
+                    "https://get.geo.opera.com/pub/opera_gx/115.0.5322.142/win/Opera_GX_115.0.5322.142_Setup_x64.exe",
                     HashAlgorithm.SHA256,
-                    "8b25dc44cccc957c35e92d87deac9a89230e08c8f77991a810e323883fd34974",
+                    "3cd4173421e96d4e2861c22837316aa807f7d35c6b31e05c6388bda79281113d",
                     signature,
                     silentOptions)
                     );
