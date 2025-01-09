@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017, 2018, 2020, 2021, 2022, 2023, 2024  Dirk Stolle
+    Copyright (C) 2017, 2018, 2020, 2021, 2022, 2023, 2024, 2025  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -66,19 +66,19 @@ namespace updater.software
             const string silentOptions = "/silent /norestart /launchopera 0 /setdefaultbrowser 0 /enable-stats 0 /enable-installer-stats 0 /pintotaskbar 0 /pin-additional-shortcuts 0 /allusers";
             var signature = new Signature(publisherX509, certificateExpiration);
             return new AvailableSoftware("Opera",
-                "115.0.5322.119",
+                "116.0.5366.21",
                 "^Opera Stable [0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+$",
                 "^Opera Stable [0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+$",
                 new InstallInfoExe(
-                    "https://get.geo.opera.com/pub/opera/desktop/115.0.5322.119/win/Opera_115.0.5322.119_Setup.exe",
+                    "https://get.geo.opera.com/pub/opera/desktop/116.0.5366.21/win/Opera_116.0.5366.21_Setup.exe",
                     HashAlgorithm.SHA256,
-                    "44fd20b6b056a0a8809912005500ebb1fc75d3e20223f5226e28cc7dc9e82cbd",
+                    "b8905d6a0c5c0565b1c955ca2d2bbec709a4536eb60fbe5070c195948264861c",
                     signature,
                     silentOptions),
                 new InstallInfoExe(
-                    "https://get.geo.opera.com/pub/opera/desktop/115.0.5322.119/win/Opera_115.0.5322.119_Setup_x64.exe",
+                    "https://get.geo.opera.com/pub/opera/desktop/116.0.5366.21/win/Opera_116.0.5366.21_Setup_x64.exe",
                     HashAlgorithm.SHA256,
-                    "e62e4c93a17387c1e1c7edc8032cfcdc38b0376535a9c2d27782bd60561c5121",
+                    "f630001ad8783d87931400cd7a1153cf831d71c518035ad8078f7cd8bee265dd",
                     signature,
                     silentOptions)
                     );
