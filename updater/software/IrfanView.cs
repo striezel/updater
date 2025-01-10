@@ -128,12 +128,13 @@ namespace updater.software
             }
 
             // There's a link like '<a href="https://www.irfanview.info/files/iview470_x64_setup.exe" ...'
+            // or '<a href="https://www.fosshub.com/IrfanView.html?dwl=iview470_x64_setup.exe" ...'
             // on the download page.
-            var versionRegEx = new Regex("href=\"https://www\\.irfanview\\.info/files/iview([0-9]+)_x64_setup\\.exe\"");
+            var versionRegEx = new Regex("href=\"https://www\\.(irfanview\\.info/files/|fosshub\\.com/IrfanView\\.html\\?dwl=)iview([0-9]+)_x64_setup\\.exe\"");
             var versionMatch = versionRegEx.Match(htmlCode);
             if (!versionMatch.Success)
                 return null;
-            string version_digits = versionMatch.Groups[1].Value;
+            string version_digits = versionMatch.Groups[2].Value;
             string version = string.Concat(version_digits.AsSpan(0, version_digits.Length - 2), ".", version_digits.AsSpan(version_digits.Length - 2));
 
             // Get 64-bit installer's checksum.
