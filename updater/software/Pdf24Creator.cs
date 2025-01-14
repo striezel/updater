@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017, 2018, 2020, 2021, 2022, 2023, 2024  Dirk Stolle
+    Copyright (C) 2017, 2018, 2020, 2021, 2022, 2023, 2024, 2025  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -95,18 +95,18 @@ namespace updater.software
             var signature = new Signature(publisherX509, certificateExpiration);
 
             return new AvailableSoftware("PDF24 Creator",
-                "11.22.0",
+                "11.23.0",
                 "^PDF24 Creator$",
                 "^PDF24 Creator$", // 64-bit version uses same pattern as 32-bit.
                 new InstallInfoMsi(
-                    "https://download.pdf24.org/pdf24-creator-11.22.0-x86.msi",
+                    "https://download.pdf24.org/pdf24-creator-11.23.0-x86.msi",
                     HashAlgorithm.SHA256,
-                    "21E88A5DBB047D895117E6537E02EEF2126776292468AC23FFC33EA1414CF705",
+                    "86F63D19A586C3E46A54BCF9EF75A9565D070C02A7EFC3AEBCA08F99049D7F45",
                     signature, getOptions() + " /qn /norestart"),
                 new InstallInfoMsi(
-                    "https://download.pdf24.org/pdf24-creator-11.22.0-x64.msi",
+                    "https://download.pdf24.org/pdf24-creator-11.23.0-x64.msi",
                     HashAlgorithm.SHA256,
-                    "11386FEE6B8E1FB581FCDA067AEE1CC6E302BBBE285B76A2AB1E011515451C9C",
+                    "474F7DE6ABC32D99DA397356878268DC5B13257B6436E39C27FFF832FB082F46",
                     signature, getOptions() + " /qn /norestart")
                 );
         }
