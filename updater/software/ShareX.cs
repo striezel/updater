@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2024  Dirk Stolle
+    Copyright (C) 2024, 2025  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -52,13 +52,13 @@ namespace updater.software
         public override AvailableSoftware knownInfo()
         {
             var installer = new InstallInfoExe(
-                "https://github.com/ShareX/ShareX/releases/download/v16.1.0/ShareX-16.1.0-setup.exe",
+                "https://github.com/ShareX/ShareX/releases/download/v17.0.0/ShareX-17.0.0-setup.exe",
                 HashAlgorithm.SHA256,
-                "8F082B1939AF2894FEA681E6E807E577D15EA546FC0231F84720AC62867CA7F4",
+                "8B7BA685E7CB588356611F24FD06C0884678E53B49E6618E5D65412127C96E48",
                 Signature.None,
                 "/SP- /VERYSILENT /NORESTART /UPDATE /NORUN");
             return new AvailableSoftware("ShareX",
-                "16.1.0",
+                "17.0.0",
                 "^ShareX$",
                 "^ShareX$",
                 installer,
