@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2024  Dirk Stolle
+    Copyright (C) 2024, 2025  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -66,7 +66,7 @@ namespace updater.software
         public override AvailableSoftware knownInfo()
         {
             return new AvailableSoftware("Blender LTS",
-                "4.2.5",
+                "4.2.6",
                 null,
                 "^blender$",
                 null,
@@ -76,9 +76,9 @@ namespace updater.software
                     // is not machine-friendly, i.e. uses JavaScript etc., so a
                     // mirror is the safe choice here.
                     // "https://ftp.nluug.nl/pub/graphics/blender/release/Blender3.6/blender-3.6.10-windows-x64.msi",
-                    "https://ftp.halifax.rwth-aachen.de/blender/release/Blender4.2/blender-4.2.5-windows-x64.msi",
+                    "https://ftp.halifax.rwth-aachen.de/blender/release/Blender4.2/blender-4.2.6-windows-x64.msi",
                     HashAlgorithm.SHA256,
-                    "59865fabbb22823809063f407f1b8802ce7fd12361ac4cd01e266c7d62f3a492",
+                    "f43ee4ee3a5dd58c82bb3680f1358b1e0d72674725b199dbd4c6448d42a8729e",
                     new Signature(publisherX509, certificateExpiration),
                     "/qn /norestart ALLUSERS=1")
                 );
