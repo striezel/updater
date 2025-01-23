@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024  Dirk Stolle
+    Copyright (C) 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -36,7 +36,7 @@ namespace updater.software
 
 
         /// <summary>
-        /// Default constructor.
+        /// Constructor.
         /// </summary>
         /// <param name="autoGetNewer">whether to automatically get
         /// newer information about the software when calling the info() method</param>
@@ -48,13 +48,13 @@ namespace updater.software
         /// <summary>
         /// publisher of signed binaries
         /// </summary>
-        private const string publisherX509 = "CN=Gary Kramlich, O=Gary Kramlich, STREET=2653 N 54TH ST, L=MILWAUKEE, S=Wisconsin, PostalCode=53210, C=US";
+        private const string publisherX509 = "CN=Gary Kramlich, O=Gary Kramlich, S=Wisconsin, C=US";
 
 
         /// <summary>
         /// certificate expiration date
         /// </summary>
-        private static readonly DateTime certificateExpiration = new(2024, 3, 21, 23, 59, 59, DateTimeKind.Utc);
+        private static readonly DateTime certificateExpiration = new(2027, 3, 25, 23, 59, 59, DateTimeKind.Utc);
 
 
         /// <summary>
@@ -64,7 +64,7 @@ namespace updater.software
         /// details about the software.</returns>
         public override AvailableSoftware knownInfo()
         {
-            const string version = "2.14.13";
+            const string version = "2.14.14";
             return new AvailableSoftware("Pidgin",
                 version,
                 "^Pidgin$",
@@ -73,7 +73,7 @@ namespace updater.software
                 new InstallInfoPidgin(
                     "https://netcologne.dl.sourceforge.net/project/pidgin/Pidgin/" + version + "/pidgin-" + version + "-offline.exe",
                     HashAlgorithm.SHA256,
-                    "85b07dcddb160e0861aa4169527309a81e2ab449bf1bb019c7a21673d1c0c76b",
+                    "7551389982bd9a85991df7436ca1776e68bdc057374c03e8018173e95162bc84",
                     new Signature(publisherX509, certificateExpiration),
                     "/DS=1 /SMS=1 /S"),
                 null

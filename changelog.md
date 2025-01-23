@@ -10,6 +10,10 @@ __[changes]__
 
 * Fix problem with search for newer versions of IrfanView.
 
+__[maintenance]__
+
+* Update certificate information for Pidgin installer.
+
 ## Version 2024.12.10.0
 
 __[changes]__
