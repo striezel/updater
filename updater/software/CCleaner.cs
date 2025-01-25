@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024  Dirk Stolle
+    Copyright (C) 2017 - 2025  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -19,6 +19,7 @@
 using System;
 using System.Collections.Generic;
 using System.Net;
+using System.Net.Http;
 using System.Text.RegularExpressions;
 using updater.data;
 
@@ -113,31 +114,39 @@ namespace updater.software
         {
             logger.Info("Searching for newer version of CCleaner...");
             const string cdnUrl = "https://bits.avcdn.net/productfamily_CCLEANER/insttype_FREE/platform_WIN_PIR/installertype_ONLINE/build_RELEASE";
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(cdnUrl);
-            request.Method = WebRequestMethods.Http.Head;
-            request.AllowAutoRedirect = false;
-            request.Timeout = 30000; // 30_000 ms / 30 seconds
-            string contentDisposition;
+            var handler = new HttpClientHandler()
+            {
+                AllowAutoRedirect = false
+            };
+            using var client = new HttpClient(handler)
+            {
+                Timeout = TimeSpan.FromSeconds(30)
+            };
+            string fileName;
             try
             {
-                HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+                HttpRequestMessage msg = new(HttpMethod.Head, cdnUrl);
+                var task = client.SendAsync(msg);
+                task.Wait();
+                var response = task.Result;
                 if (response.StatusCode != HttpStatusCode.OK)
                     return null;
-                contentDisposition = response.Headers.Get("Content-Disposition");
-                if (contentDisposition == null)
+                if (response.Content.Headers.ContentDisposition == null)
                     return null;
-                request = null;
-                response.Dispose();
-                response = null;
+                fileName = response.Content.Headers.ContentDisposition.FileNameStar;
+                fileName ??= response.Content.Headers.ContentDisposition.FileName;
             }
             catch (Exception ex)
             {
-                logger.Error("Exception occurred while checking for newer version of CCleaner: " + ex.Message);
+                logger.Warn("Error while looking for newer version of CCleaner: " + ex.Message);
                 return null;
             }
 
-            var reVersion = new Regex("attachment; filename=\".*ccsetup([0-9]+)\\.exe.*\"");
-            Match matchVersion = reVersion.Match(contentDisposition);
+            if (string.IsNullOrEmpty(fileName))
+                return null;
+
+            var reVersion = new Regex("ccsetup([0-9]+)\\.exe");
+            Match matchVersion = reVersion.Match(fileName);
             if (!matchVersion.Success)
                 return null;
 
@@ -146,14 +155,15 @@ namespace updater.software
             if (newVersion.Length < 3)
                 return null;
             newVersion = string.Concat(newVersion.AsSpan(0, newVersion.Length - 2), ".", newVersion.AsSpan(newVersion.Length - 2));
-            if (newVersion == knownInfo().newestVersion)
-                return knownInfo();
+            var known = knownInfo();
+            if (newVersion == known.newestVersion)
+                return known;
             string newUrl = "https://download.ccleaner.com/ccsetup" + matchVersion.Groups[1].Value + ".exe";
 
             // No checksums are provided, but binary is signed.
 
             // construct new information
-            var newInfo = knownInfo();
+            var newInfo = known;
             newInfo.newestVersion = newVersion;
             // 32-bit
             newInfo.install32Bit.downloadUrl = newUrl;
