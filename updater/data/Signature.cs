@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2021, 2022  Dirk Stolle
+    Copyright (C) 2021, 2022, 2025  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -45,11 +45,11 @@ namespace updater.data
         /// <summary>
         /// Creates a new Signature information record with given publisher and expiration date.
         /// </summary>
-        /// <param name="_publisher">distinguished name of the publisher (certificate subject)</param>
+        /// <param name="publisherName">distinguished name of the publisher (certificate subject)</param>
         /// <param name="expiration">expiration date of the certificate</param>
-        public Signature(string _publisher, DateTime expiration)
+        public Signature(string publisherName, DateTime expiration)
         {
-            publisher = _publisher;
+            publisher = publisherName;
             expiresAt = expiration;
         }
 
