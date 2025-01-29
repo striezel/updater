@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2024  Dirk Stolle
+    Copyright (C) 2024, 2025  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -66,19 +66,19 @@ namespace updater.software
         {
             var signature = new Signature(publisherX509, certificateExpiration);
             return new AvailableSoftware("WinMerge",
-                "2.16.44",
+                "2.16.46",
                 "^WinMerge [0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+$",
                 "^WinMerge [0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+ x64$",
                 new InstallInfoExe(
-                    "https://netcologne.dl.sourceforge.net/project/winmerge/stable/2.16.44/WinMerge-2.16.44-Setup.exe",
+                    "https://netcologne.dl.sourceforge.net/project/winmerge/stable/2.16.46/WinMerge-2.16.46-Setup.exe",
                     HashAlgorithm.SHA256,
-                    "66fa368cd3dfeace9e3eaca26c5c94147269adeb7f3e5be03490d3cb155a1580",
+                    "42035dbe4c8eded3afb6f243eb54b35bed539b88c287a5f9d58fdea150f9f657",
                     signature,
                     "/VERYSILENT /NORESTART"),
                 new InstallInfoExe(
-                    "https://netcologne.dl.sourceforge.net/project/winmerge/stable/2.16.44/WinMerge-2.16.44-x64-Setup.exe",
+                    "https://netcologne.dl.sourceforge.net/project/winmerge/stable/2.16.46/WinMerge-2.16.46-x64-Setup.exe",
                     HashAlgorithm.SHA256,
-                    "055e960261fc31723856082d2bf1aec2bcc2c71f1ae2d759efec3d766affeaec",
+                    "fc3d0dcff92afd185cd34e4863badd9284f228810777bf0f46acaf6a6e34a3a9",
                     signature,
                     "/VERYSILENT /NORESTART")
                 );
