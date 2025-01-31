@@ -32,7 +32,7 @@ The updater is a command-line program, there is no graphical user interface yet
 Operations or commands define the main action of the program. Only one of
 these may be specified. Valid operations are:
 
-* **check** - displays which installed software can be updated, but does not
+* **check** - Displays which installed software can be updated, but does not
   actually perform the updates. This will display something like
 
   ```
@@ -63,7 +63,7 @@ these may be specified. Valid operations are:
   +-------------------------------------+--------+--------------+--------------+---------+
   ```
 
-* **update** - updates every software that can be updated, i.e. downloads and
+* **update** - Updates every software that can be updated, i.e. downloads and
                installs new versions / updates. Possible output could be:
 
   ```
@@ -86,10 +86,10 @@ these may be specified. Valid operations are:
   2022-11-08 19:13:34 - 2 applications were updated.
   ```
 
-* **help** - shows a help message.
-* **version** - shows version of the program.
-* **license** - shows license information for the program.
-* **list-id** - prints a list of software IDs to the standard output. These IDs
+* **help** - Shows a help message.
+* **version** - Shows the version of the program.
+* **license** - Shows license information for the program.
+* **list-id** - Prints a list of software IDs to the standard output. These IDs
                 can be used to exclude certain software from updates. See the
                 option `--exclude` below for more information.
 
@@ -97,7 +97,7 @@ these may be specified. Valid operations are:
 Options can change behaviour of the update process. Available options are:
 
     --auto-get-newer | --newer | -n
-        automatically tries to get information about newer versions of the soft-
+        Automatically tries to get information about newer versions of the soft-
         ware from the internet. The updater has a list of known newest software
         versions, but that information can get outdated quickly. That is why
         this option exists - it helps to get the latest software version.
@@ -112,7 +112,7 @@ Options can change behaviour of the update process. Available options are:
         default timeout is 1800 seconds.
     --exclude ID | --except ID | -e ID
         Excludes the software with the given ID from the update process. To get
-        the ID for a specific software, run the program with the --list-id
+        the ID for a specific software, run the program with the list-id
         option which lists all software IDs. You can use this option several
         times to exclude more than one software from the update process.
     --show-progress | --progress | -p
