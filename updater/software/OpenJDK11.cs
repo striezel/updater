@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2021, 2022, 2023, 2024  Dirk Stolle
+    Copyright (C) 2021, 2022, 2023, 2024, 2025  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -67,19 +67,19 @@ namespace updater.software
         {
             var signature = new Signature(publisherX509, certificateExpiration);
             return new AvailableSoftware("Eclipse Temurin JDK 11 with Hotspot",
-                "11.0.25.9",
+                "11.0.26.4",
                 "^(Eclipse Temurin JDK [a-z]+ Hotspot 11\\.[0-9]+\\.[0-9]+\\+[0-9]+(\\.[0-9]+)? \\(x86\\)|AdoptOpenJDK JDK [a-z]+ Hotspot 11\\.[0-9]+\\.[0-9]+\\+[0-9]+(\\.[0-9]+)? \\(x86\\))$",
                 "^(Eclipse Temurin JDK [a-z]+ Hotspot 11\\.[0-9]+\\.[0-9]+\\+[0-9]+(\\.[0-9]+)? \\(x64\\)|AdoptOpenJDK JDK [a-z]+ Hotspot 11\\.[0-9]+\\.[0-9]+\\+[0-9]+(\\.[0-9]+)? \\(x64\\))$",
                 new InstallInfoMsiNoLocation(
-                    "https://github.com/adoptium/temurin11-binaries/releases/download/jdk-11.0.25%2B9/OpenJDK11U-jdk_x86-32_windows_hotspot_11.0.25_9.msi",
+                    "https://github.com/adoptium/temurin11-binaries/releases/download/jdk-11.0.26%2B4/OpenJDK11U-jdk_x86-32_windows_hotspot_11.0.26_4.msi",
                     HashAlgorithm.SHA256,
-                    "45a9eb9ac07e2f765a43de099657c73e33ae044c9c06d8af3ddb436463711280",
+                    "6f6b397f51dd90055857fe63337bc89b544235a2fa25edad548358b8b514b43d",
                     signature,
                     "INSTALLLEVEL=3 /qn /norestart"),
                 new InstallInfoMsiNoLocation(
-                    "https://github.com/adoptium/temurin11-binaries/releases/download/jdk-11.0.25%2B9/OpenJDK11U-jdk_x64_windows_hotspot_11.0.25_9.msi",
+                    "https://github.com/adoptium/temurin11-binaries/releases/download/jdk-11.0.26%2B4/OpenJDK11U-jdk_x64_windows_hotspot_11.0.26_4.msi",
                     HashAlgorithm.SHA256,
-                    "497d6959470a72c443bb0cfb1af5d0a11689bab8dbe4c21c29f55f453d81d860",
+                    "25bc11bd05e4dad95ebefde017bd5eb29dfe8624bbd46beeca8eba4b4d77fae1",
                     signature,
                     "INSTALLLEVEL=3 /qn /norestart")
                     );
