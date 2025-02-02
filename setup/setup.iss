@@ -56,7 +56,7 @@ Source: "..\updater\bin\Release\net8.0-windows7.0\updater.runtimeconfig.json"; D
 ; Newtonsoft.Json assembly (JSON deserialization)
 Source: "{#GetEnv('USERPROFILE')}\.nuget\packages\newtonsoft.json\13.0.3\lib\netstandard2.0\Newtonsoft.Json.dll"; DestDir: "{app}"; Flags: ignoreversion
 ; NLog main assembly (logging)
-Source: "{#GetEnv('USERPROFILE')}\.nuget\packages\nlog\5.3.4\lib\netstandard2.0\NLog.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "{#GetEnv('USERPROFILE')}\.nuget\packages\nlog\5.4.0\lib\netstandard2.0\NLog.dll"; DestDir: "{app}"; Flags: ignoreversion
 ; GPL 3 license text
 Source: "..\LICENSE"; DestDir: "{app}"; Flags: ignoreversion
 ; documentation files
