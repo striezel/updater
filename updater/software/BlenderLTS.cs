@@ -39,13 +39,13 @@ namespace updater.software
         /// <summary>
         /// publisher name for signed installers of Blender LTS
         /// </summary>
-        private const string publisherX509 = "CN=Stichting Blender Foundation, O=Stichting Blender Foundation, L=Amsterdam, S=Noord-Holland, C=NL";
+        private const string publisherX509 = "CN=Blender Foundation, O=Blender Foundation, L=Amsterdam, S=Noord-Holland, C=NL";
 
 
         /// <summary>
         /// expiration date of certificate
         /// </summary>
-        private static readonly DateTime certificateExpiration = new(2026, 9, 24, 17, 31, 56, DateTimeKind.Utc);
+        private static readonly DateTime certificateExpiration = new(2025, 2, 21, 8, 7, 21, DateTimeKind.Utc);
 
 
         /// <summary>
@@ -66,7 +66,7 @@ namespace updater.software
         public override AvailableSoftware knownInfo()
         {
             return new AvailableSoftware("Blender LTS",
-                "4.2.6",
+                "4.2.7",
                 null,
                 "^blender$",
                 null,
@@ -76,9 +76,9 @@ namespace updater.software
                     // is not machine-friendly, i.e. uses JavaScript etc., so a
                     // mirror is the safe choice here.
                     // "https://ftp.nluug.nl/pub/graphics/blender/release/Blender4.2/blender-4.2.7-windows-x64.msi",
-                    "https://ftp.halifax.rwth-aachen.de/blender/release/Blender4.2/blender-4.2.6-windows-x64.msi",
+                    "https://ftp.halifax.rwth-aachen.de/blender/release/Blender4.2/blender-4.2.7-windows-x64.msi",
                     HashAlgorithm.SHA256,
-                    "f43ee4ee3a5dd58c82bb3680f1358b1e0d72674725b199dbd4c6448d42a8729e",
+                    "665227f2d8d6b174df36b5c633aba01698b16da2e39ebee132073ed1feffbeb1",
                     new Signature(publisherX509, certificateExpiration),
                     "/qn /norestart ALLUSERS=1")
                 );
