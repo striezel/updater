@@ -75,7 +75,7 @@ namespace updater.software
                     // website will redirect to a mirror site, and this redirect
                     // is not machine-friendly, i.e. uses JavaScript etc., so a
                     // mirror is the safe choice here.
-                    // "https://ftp.nluug.nl/pub/graphics/blender/release/Blender3.6/blender-3.6.10-windows-x64.msi",
+                    // "https://ftp.nluug.nl/pub/graphics/blender/release/Blender4.2/blender-4.2.7-windows-x64.msi",
                     "https://ftp.halifax.rwth-aachen.de/blender/release/Blender4.2/blender-4.2.6-windows-x64.msi",
                     HashAlgorithm.SHA256,
                     "f43ee4ee3a5dd58c82bb3680f1358b1e0d72674725b199dbd4c6448d42a8729e",
@@ -122,7 +122,7 @@ namespace updater.software
                 var task = client.GetStringAsync("https://www.blender.org/download/lts/4-2/");
                 task.Wait();
                 var html = task.Result;
-                // Installer will be something like "https://www.blender.org/download/release/Blender3.6/blender-3.6.8-windows-x64.msi".
+                // Installer will be something like "https://www.blender.org/download/release/Blender4.2/blender-4.2.7-windows-x64.msi".
                 var reVersion = new Regex("blender\\-([0-9]+\\.[0-9]+\\.[0-9]+)\\-windows\\-x64\\.msi");
                 Match matchVersion = reVersion.Match(html);
                 if (!matchVersion.Success)
@@ -135,7 +135,7 @@ namespace updater.software
                 return null;
             }
 
-            // Download checksum file, e.g. "https://download.blender.org/release/Blender3.6/blender-3.6.8.sha256".
+            // Download checksum file, e.g. "https://download.blender.org/release/Blender4.2/blender-4.2.7.sha256".
             string checksum;
             try
             {
