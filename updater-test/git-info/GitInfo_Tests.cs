@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the test suite for the updater command line interface.
-    Copyright (C) 2017, 2024  Dirk Stolle
+    Copyright (C) 2017, 2024, 2025  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -75,9 +75,9 @@ namespace updater_test.git_info
         public void Test_getDescription()
         {
             string desc = updater.GitInfo.getDescription();
-            var seven = new Regex("^[0-9a-f]{7}$");
+            var seven = new Regex("^[0-9a-f]{7,40}$");
             var versionTag = new Regex("^v[0-9]{4}\\.[0-9]{2}\\.[0-9]{2}(\\.[0-9]+)?(\\-rc[0-9]+)?$");
-            var versionTagAndCommit = new Regex("^v[0-9]{4}\\.[0-9]{2}\\.[0-9]{2}(\\.[0-9]+)?(\\-rc[0-9]+)?\\-[0-9]+\\-g[0-9a-f]{7}$");
+            var versionTagAndCommit = new Regex("^v[0-9]{4}\\.[0-9]{2}\\.[0-9]{2}(\\.[0-9]+)?(\\-rc[0-9]+)?\\-[0-9]+\\-g[0-9a-f]{7,40}$");
             Assert.IsTrue(seven.IsMatch(desc) || versionTag.IsMatch(desc)
                 || versionTagAndCommit.IsMatch(desc), "Description is \""
                 + desc + "\" and does not match any of the regular expressions!");
@@ -91,8 +91,10 @@ namespace updater_test.git_info
         public void Test_getShortHash()
         {
             string shorty = updater.GitInfo.getShortHash();
-            // Start of commit hash, i.e. seven hex digits.
-            var seven = new Regex("^[0-9a-f]{7}$");
+            // Start of commit hash, i.e. usually seven hex digits, but it can
+            // be more or less, depending on the value of core.abbrev in the
+            // Git configuration.
+            var seven = new Regex("^[0-9a-f]{7,40}$");
             Assert.IsTrue(seven.IsMatch(shorty));
         }
     } // class
