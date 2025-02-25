@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2022, 2023, 2024  Dirk Stolle
+    Copyright (C) 2022, 2023, 2024, 2025  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -115,7 +115,7 @@ namespace updater.software
             // The request hangs and times out without an User-Agent header,
             // so let's provide a simple curl User-Agent here.
             var client = new HttpClient();
-            client.DefaultRequestHeaders.Add("User-Agent", "curl/8.11.1");
+            client.DefaultRequestHeaders.Add("User-Agent", "curl/8.12.1");
             try
             {
                 var task = client.GetStringAsync("https://helpx.adobe.com/acrobat/release-note/release-notes-acrobat-reader.html");

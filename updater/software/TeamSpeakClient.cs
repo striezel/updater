@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2021, 2023, 2024  Dirk Stolle
+    Copyright (C) 2021, 2023, 2024, 2025  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -170,7 +170,7 @@ namespace updater.software
             {
                 // Looks like we have to add a user agent to get a valid response.
                 // Without user agent the server returns "403 Forbidden".
-                client.DefaultRequestHeaders.Add("User-Agent", "curl/8.11.1");
+                client.DefaultRequestHeaders.Add("User-Agent", "curl/8.12.1");
                 try
                 {
                     var task = client.GetStringAsync("https://teamspeak.com/en/downloads/");
