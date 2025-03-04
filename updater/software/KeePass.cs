@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024  Dirk Stolle
+    Copyright (C) 2017 - 2025  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -53,7 +53,7 @@ namespace updater.software
         /// <summary>
         /// expiration date of certificate
         /// </summary>
-        private static readonly DateTime certificateExpiration = new(2025, 2, 6, 15, 2, 0, DateTimeKind.Utc);
+        private static readonly DateTime certificateExpiration = new(2026, 2, 7, 16, 17, 44, DateTimeKind.Utc);
 
 
         /// <summary>
@@ -65,13 +65,13 @@ namespace updater.software
         {
             var signature = new Signature(publisherX509, certificateExpiration);
             return new AvailableSoftware("KeePass",
-                "2.57.1",
+                "2.58",
                 "^KeePass Password Safe [2-9]\\.[0-9]{2}(\\.[0-9]+)?$",
                 null,
                 new InstallInfoExe(
-                    "https://netcologne.dl.sourceforge.net/project/keepass/KeePass%202.x/2.57.1/KeePass-2.57.1-Setup.exe",
+                    "https://netcologne.dl.sourceforge.net/project/keepass/KeePass%202.x/2.58/KeePass-2.58-Setup.exe",
                     HashAlgorithm.SHA256,
-                    "96B4FCA5 E148B44A F908C5B0 D98DAA52 6CB4106C 68950EAC 1C2CE3E4 0EB44C9C",
+                    "D1FB8A8E 9837FD91 033F930B 52FA2F2B 0A83CD2A 49FBC00B A9815391 1B0A7715",
                     signature,
                     "/VERYSILENT"),
                 // There is no 64-bit installer yet.
