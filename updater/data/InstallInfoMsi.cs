@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017, 2018, 2021  Dirk Stolle
+    Copyright (C) 2017, 2018, 2021, 2025  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -80,5 +80,18 @@ namespace updater.data
         /// <remarks>See https://msdn.microsoft.com/en-us/library/windows/desktop/aa376931(v=vs.85).aspx
         /// for more exit codes of MsiExec.exe.</remarks>
         public const int successRebootRequired = 3010;
+
+
+        /// <summary>
+        /// Checks whether a given non-zero exit code indicates successful
+        /// update, but a reboot is required to finish the update.
+        /// </summary>
+        /// <param name="exitCode">the non-zero exit code to check</param>
+        /// <returns>Returns true, if according to the exit code the update was
+        /// successful, but a reboot is required.</returns>
+        public override bool ExitCodeIsSuccessButRequiresReboot(int exitCode)
+        {
+            return exitCode == successRebootRequired;
+        }
     } // class
 } // namespace

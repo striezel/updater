@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2023  Dirk Stolle
+    Copyright (C) 2023, 2025  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -79,6 +79,20 @@ namespace updater_test.data
 #pragma warning disable IDE0150
             Assert.IsTrue(info is InstallInfoMsi);
 #pragma warning restore IDE0150
+        }
+
+
+        [TestMethod]
+        public void ExitCodeIsSuccessButRequiresReboot()
+        {
+            var sig = new Signature("CN=foo, OU=bar", DateTime.Now.AddDays(3.0));
+            var info = new InstallInfoLibO("https://example.org/foo/bar.msi", HashAlgorithm.Unknown, null, sig, "/qn /norestart");
+
+            Assert.IsFalse(info.ExitCodeIsSuccessButRequiresReboot(0));
+            Assert.IsFalse(info.ExitCodeIsSuccessButRequiresReboot(1));
+            Assert.IsFalse(info.ExitCodeIsSuccessButRequiresReboot(2));
+
+            Assert.IsTrue(info.ExitCodeIsSuccessButRequiresReboot(InstallInfoMsi.successRebootRequired));
         }
     } // class
 } // namespace

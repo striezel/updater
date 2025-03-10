@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017, 2021, 2024  Dirk Stolle
+    Copyright (C) 2017, 2021, 2024, 2025  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -317,7 +317,7 @@ namespace updater.operations
                         // the update succeeded, but a reboot is required.
                         bool success = proc.HasExited
                             && ((proc.ExitCode == 0)
-                            || ((proc.ExitCode == InstallInfoMsi.successRebootRequired) && (instInfo is InstallInfoMsi)));
+                            || instInfo.ExitCodeIsSuccessButRequiresReboot(proc.ExitCode));
                         // Kill it, if it is not done yet.
                         if (!proc.HasExited)
                         {
@@ -328,7 +328,7 @@ namespace updater.operations
                         {
                             logger.Info("Info: Update of " + entry.software.info().Name + " was successful.");
                             ++updatedApplications;
-                            if ((instInfo is InstallInfoMsi) && (proc.ExitCode == InstallInfoMsi.successRebootRequired))
+                            if (instInfo.ExitCodeIsSuccessButRequiresReboot(proc.ExitCode))
                             {
                                 logger.Warn("Warning: A reboot is required to"
                                     + " finish the update of " + entry.software.info().Name + ".");

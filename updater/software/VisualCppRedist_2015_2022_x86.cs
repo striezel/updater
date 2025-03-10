@@ -43,7 +43,7 @@ namespace updater.software
         public override AvailableSoftware knownInfo()
         {
             var signature = new Signature(publisherX509, certificateExpiration);
-            var installer = new InstallInfoExe(
+            var installer = new InstallInfoExe_VCRedist(
                 "https://aka.ms/vs/17/release/vc_redist.x86.exe",
                 HashAlgorithm.Unknown,
                 null,

@@ -102,6 +102,16 @@ namespace updater.data
 
 
         /// <summary>
+        /// Checks whether a given non-zero exit code indicates successful
+        /// update, but a reboot is required to finish the update.
+        /// </summary>
+        /// <param name="exitCode">the non-zero exit code to check</param>
+        /// <returns>Returns true, if according to the exit code the update was
+        /// successful, but a reboot is required.</returns>
+        public abstract bool ExitCodeIsSuccessButRequiresReboot(int exitCode);
+
+
+        /// <summary>
         /// URL where the installer can be downloaded
         /// </summary>
         public string downloadUrl;

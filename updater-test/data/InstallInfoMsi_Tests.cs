@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2023  Dirk Stolle
+    Copyright (C) 2023, 2025  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -69,6 +69,20 @@ namespace updater_test.data
 
             proc = info.createInstallProccess("       ", new DetectedSoftware());
             Assert.IsNull(proc);
+        }
+
+
+        [TestMethod]
+        public void ExitCodeIsSuccessButRequiresReboot()
+        {
+            var sig = new Signature("CN=foo, OU=bar", DateTime.Now.AddDays(3.0));
+            var info = new InstallInfoMsi("https://example.org/foo/bar.msi", HashAlgorithm.Unknown, null, sig, "/qn /norestart");
+
+            Assert.IsFalse(info.ExitCodeIsSuccessButRequiresReboot(0));
+            Assert.IsFalse(info.ExitCodeIsSuccessButRequiresReboot(1));
+            Assert.IsFalse(info.ExitCodeIsSuccessButRequiresReboot(2));
+
+            Assert.IsTrue(info.ExitCodeIsSuccessButRequiresReboot(InstallInfoMsi.successRebootRequired));
         }
     } // class
 } // namespace

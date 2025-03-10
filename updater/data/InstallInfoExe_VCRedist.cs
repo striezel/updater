@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017, 2018, 2021, 2025  Dirk Stolle
+    Copyright (C) 2025  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -16,19 +16,17 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-using System.Diagnostics;
-
 namespace updater.data
 {
     /// <summary>
-    /// Holds information about an .exe installer.
+    /// Holds information about an .exe installer for MSVC++ Redistributable.
     /// </summary>
-    public class InstallInfoExe : InstallInfo
+    public class InstallInfoExe_VCRedist : InstallInfoExe
     {
         /// <summary>
         /// Default constructor.
         /// </summary>
-        public InstallInfoExe()
+        public InstallInfoExe_VCRedist()
             : base()
         {
             // Base class constructor does initialization.
@@ -43,29 +41,10 @@ namespace updater.data
         /// <param name="_check">checksum for the installer - hexadecimal representation</param>
         /// <param name="_sig">common name of publisher and expiration date, if file is signed</param>
         /// <param name="_silent">switches for silent installation</param>
-        public InstallInfoExe(string _downloadUrl, HashAlgorithm _algo, string _check, Signature _sig, string _silent)
+        public InstallInfoExe_VCRedist(string _downloadUrl, HashAlgorithm _algo, string _check, Signature _sig, string _silent)
             : base(_downloadUrl, _algo, _check, _sig, _silent)
         {
             // Base class constructor does initialization.
-        }
-
-
-        /// <summary>
-        /// Creates a process instance that can be used to perform the update.
-        /// </summary>
-        /// <param name="downloadedFile">path to the downloaded installer file</param>
-        /// <param name="detected">info about the detected software</param>
-        /// <returns>Returns a process instance ready to start, if successful.
-        /// Returns null, if an error occurred.</returns>
-        public override Process createInstallProccess(string downloadedFile, DetectedSoftware detected)
-        {
-            if (string.IsNullOrWhiteSpace(downloadedFile))
-                return null;
-
-            var proc = new Process();
-            proc.StartInfo.FileName = downloadedFile;
-            proc.StartInfo.Arguments = silentSwitches;
-            return proc;
         }
 
 
@@ -78,8 +57,8 @@ namespace updater.data
         /// successful, but a reboot is required.</returns>
         public override bool ExitCodeIsSuccessButRequiresReboot(int exitCode)
         {
-            // Non-zero exit code always means failure.
-            return false;
+            // VCRedist updates use MSI internally, so the same condition applies.
+            return exitCode == InstallInfoMsi.successRebootRequired;
         }
     } // class
 } // namespace
