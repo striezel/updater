@@ -6,6 +6,10 @@ improvements may be omitted.)_
 
 ## Next Version
 
+__[new features]__
+
+* Update support for Microsoft Visual C++ 2015-2022 Redistributable is added.
+
 __[maintenance]__
 
 * Update certificate information for Blender LTS installer.
