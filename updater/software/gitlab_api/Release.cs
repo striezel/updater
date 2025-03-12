@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2023  Dirk Stolle
+    Copyright (C) 2023, 2025  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -16,6 +16,8 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+using System.Text.Json.Serialization;
+
 namespace updater.software.gitlab_api
 {
     /// <summary>
@@ -26,13 +28,15 @@ namespace updater.software.gitlab_api
         /// <summary>
         /// name of the release, e.g. "118.0-1"
         /// </summary>
-        public string name { get; set; }
+        [JsonPropertyName("name")]
+        public string Name { get; set; }
 
 
         /// <summary>
         /// tag of the release (usually identical to name)
         /// </summary>
-        public string tag_name { get; set; }
+        [JsonPropertyName("tag_name")]
+        public string TagName { get; set; }
 
 
         /// <summary>
@@ -40,8 +44,8 @@ namespace updater.software.gitlab_api
         /// </summary>
         public Release()
         {
-            name = null;
-            tag_name = null;
+            Name = null;
+            TagName = null;
         }
     }
 }

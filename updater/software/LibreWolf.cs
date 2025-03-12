@@ -16,10 +16,10 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
+using System.Text.Json;
 using System.Text.RegularExpressions;
 using updater.data;
 using updater.software.gitlab_api;
@@ -118,10 +118,10 @@ namespace updater.software
                 var task = client.GetStringAsync(url);
                 task.Wait();
                 var response = task.Result;
-                var releases = JsonConvert.DeserializeObject<IList<Release>>(response);
+                var releases = JsonSerializer.Deserialize<IList<Release>>(response);
                 if (releases != null && releases.Count > 0)
                 {
-                    return new ShrinkingDashedQuartet(releases[0].name);
+                    return new ShrinkingDashedQuartet(releases[0].Name);
                 }
 
                 return new ShrinkingDashedQuartet();
