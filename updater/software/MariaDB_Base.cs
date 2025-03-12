@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2022, 2024  Dirk Stolle
+    Copyright (C) 2022, 2024, 2025  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -16,9 +16,9 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Text.Json;
 using updater.data;
 using updater.software.mariadb_api;
 using updater.versions;
@@ -117,7 +117,7 @@ namespace updater.software
             Release_Wrapper wrapper = null;
             try
             {
-                wrapper = JsonConvert.DeserializeObject<Release_Wrapper>(json);
+                wrapper = JsonSerializer.Deserialize<Release_Wrapper>(json);
             }
             catch (Exception ex)
             {
@@ -130,7 +130,7 @@ namespace updater.software
                 logger.Error("Error: Could not deserialize MariaDB API response!");
                 return null;
             }
-            if ((wrapper.releases == null) || (wrapper.releases.Count == 0))
+            if ((wrapper.Releases == null) || (wrapper.Releases.Count == 0))
             {
                 logger.Error("Error: MariaDB API returned empty response!");
                 return null;
@@ -141,7 +141,7 @@ namespace updater.software
             do
             {
                 var maxVersion = new Triple("0.0.0");
-                foreach (var item in wrapper.releases.Keys)
+                foreach (var item in wrapper.Releases.Keys)
                 {
                     var version = new Triple(item);
                     if (version > maxVersion)
@@ -150,30 +150,30 @@ namespace updater.software
                     }
                 }
 
-                release = wrapper.releases[maxVersion.full()];
+                release = wrapper.Releases[maxVersion.full()];
                 // There should be several files for download.
-                if ((release.files == null) || (release.files.Count == 0))
+                if ((release.Files == null) || (release.Files.Count == 0))
                 {
-                    logger.Error("Error: MariaDB API returned empty file list for release " + release.release_name + "!");
+                    logger.Error("Error: MariaDB API returned empty file list for release " + release.ReleaseName + "!");
                     return null;
                 }
                 // Find the appropriate download for 64-bit Windows.
-                idx = release.files.FindIndex(x => x.os == "Windows" && x.package_type == "MSI Package" && x.cpu == "x86_64");
+                idx = release.Files.FindIndex(x => x.OS == "Windows" && x.PackageType == "MSI Package" && x.CPU == "x86_64");
                 if (idx == -1)
                 {
                     logger.Warn("Info: There seems to be no matching installer for MariaDB "
                         + maxVersion.full() + " on Windows. Trying next newest version instead.");
-                    wrapper.releases.Remove(maxVersion.full());
+                    wrapper.Releases.Remove(maxVersion.full());
                     continue;
                 }
-                if (string.IsNullOrEmpty(release.release_id)
-                    || string.IsNullOrEmpty(release.files[idx].file_download_url)
-                    || string.IsNullOrEmpty(release.files[idx].checksum.sha256sum))
+                if (string.IsNullOrEmpty(release.ReleaseId)
+                    || string.IsNullOrEmpty(release.Files[idx].FileDownloadURL)
+                    || string.IsNullOrEmpty(release.Files[idx].Checksum.SHA256Sum))
                 {
                     logger.Error("Error: MariaDB API response does not contain enough information for installer download!");
                     return null;
                 }
-            } while (wrapper.releases.Count > 0 && idx == -1);
+            } while (wrapper.Releases.Count > 0 && idx == -1);
             if ((idx == -1) || (release == null))
             {
                 logger.Error("Error: There is no matching installer for MariaDB " + branch + " on Windows!");
@@ -182,14 +182,14 @@ namespace updater.software
 
             // construct new version information
             var newInfo = knownInfo();
-            newInfo.newestVersion = release.release_id;
-            newInfo.install64Bit.downloadUrl = release.files[idx].file_download_url;
+            newInfo.newestVersion = release.ReleaseId;
+            newInfo.install64Bit.downloadUrl = release.Files[idx].FileDownloadURL;
             if (!newInfo.install64Bit.downloadUrl.StartsWith("https://"))
             {
                 // Always use HTTPS, download server of MariaDB supports that.
                 newInfo.install64Bit.downloadUrl = newInfo.install64Bit.downloadUrl.Replace("http://", "https://");
             }
-            newInfo.install64Bit.checksum = release.files[idx].checksum.sha256sum;
+            newInfo.install64Bit.checksum = release.Files[idx].Checksum.SHA256Sum;
             newInfo.install64Bit.algorithm = HashAlgorithm.SHA256;
             return newInfo;
         }

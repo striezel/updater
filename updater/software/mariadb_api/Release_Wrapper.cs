@@ -1,6 +1,6 @@
 ﻿/*>
     This file is part of the updater command line interface.
-    Copyright (C) 2021  Dirk Stolle
+    Copyright (C) 2021, 2025  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -17,6 +17,7 @@
 */
 
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace updater.software.mariadb_api
 {
@@ -25,6 +26,7 @@ namespace updater.software.mariadb_api
         /// <summary>
         /// available releases: The key contains the version, the value contains the release data.
         /// </summary>
-        public IDictionary<string, Release> releases;
+        [JsonPropertyName("releases")]
+        public IDictionary<string, Release> Releases { get; set; }
     }
 }

@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2022  Dirk Stolle
+    Copyright (C) 2022, 2025  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -17,6 +17,7 @@
 */
 
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace updater.software.mariadb_api
 {
@@ -28,21 +29,25 @@ namespace updater.software.mariadb_api
         /// <summary>
         /// ID of the release, usually the version number, e.g. "10.5.16"
         /// </summary>
-        public string release_id { get; set; }
+        [JsonPropertyName("release_id")]
+        public string ReleaseId { get; set; }
 
         /// <summary>
         /// Name of the release, e.g. "MariaDB Server 10.5.16"
         /// </summary>
-        public string release_name { get; set; }
+        [JsonPropertyName("release_name")]
+        public string ReleaseName { get; set; }
 
         /// <summary>
-        /// Release data as string, e.g. "2022-05-21"
+        /// Release date as string, e.g. "2022-05-21"
         /// </summary>
-        public string data_of_release { get; set; }
+        [JsonPropertyName("date_of_release")]
+        public string DateOfRelease { get; set; }
 
         /// <summary>
         /// files for the given release
         /// </summary>
-        public List<File> files { get; set; }
+        [JsonPropertyName("files")]
+        public List<File> Files { get; set; }
     }
 }

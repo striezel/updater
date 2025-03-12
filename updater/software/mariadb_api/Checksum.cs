@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2022  Dirk Stolle
+    Copyright (C) 2022, 2025  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -16,6 +16,8 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+using System.Text.Json.Serialization;
+
 namespace updater.software.mariadb_api
 {
     /// <summary>
@@ -26,16 +28,19 @@ namespace updater.software.mariadb_api
         /// <summary>
         /// SHA-1 checksum of the file
         /// </summary>
-        public string sha1sum { get; set; }
+        [JsonPropertyName("sha1sum")]
+        public string SHA1Sum { get; set; }
 
         /// <summary>
         /// SHA-256 checksum of the file
         /// </summary>
-        public string sha256sum { get; set; }
+        [JsonPropertyName("sha256sum")]
+        public string SHA256Sum { get; set; }
 
         /// <summary>
         /// SHA-512 checksum of the file
         /// </summary>
-        public string sha512sum { get; set; }
+        [JsonPropertyName("sha512sum")]
+        public string SHA512Sum { get; set; }
     } // class
 } // namespace
