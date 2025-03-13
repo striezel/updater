@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2021  Dirk Stolle
+    Copyright (C) 2021, 2025  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -16,6 +16,8 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+using System.Text.Json.Serialization;
+
 namespace updater.software.openjdk_api
 {
     /// <summary>
@@ -26,24 +28,14 @@ namespace updater.software.openjdk_api
         /// <summary>
         /// architecture of the installer or package
         /// </summary>
-        public string architecture { get; set; }
+        [JsonPropertyName("architecture")]
+        public string Architecture { get; set; } = null;
 
 
         /// <summary>
         /// installer information
         /// </summary>
-        public Installer installer { get; set; }
-
-
-        /// <summary>
-        /// Constructor.
-        /// </summary>
-        /// <param name="arch">initial architecture value</param>
-        /// <param name="inst">initial installer value</param>
-        public Binary(string arch = null, Installer inst = null)
-        {
-            architecture = arch;
-            installer = inst;
-        }
+        [JsonPropertyName("installer")]
+        public Installer Installer { get; set; } = null;
     }
 }

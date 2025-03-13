@@ -16,10 +16,10 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
+using System.Text.Json;
 using updater.data;
 using updater.software.openjdk_api;
 
@@ -129,7 +129,7 @@ namespace updater.software
             }
 
 
-            var releases = JsonConvert.DeserializeObject<IList<Release>>(json);
+            var releases = JsonSerializer.Deserialize<IList<Release>>(json);
             if (releases == null)
             {
                 logger.Error("Error: Could not deserialize AdoptOpenJDK API response!");
@@ -142,11 +142,11 @@ namespace updater.software
             }
 
             var release = releases[0];
-            if (release.version_data == null
-                || release.version_data.major == VersionData.MissingBuildNumber
-                || release.version_data.minor == VersionData.MissingBuildNumber
-                || release.version_data.security == VersionData.MissingBuildNumber
-                || release.version_data.build == VersionData.MissingBuildNumber)
+            if (release.VersionData == null
+                || release.VersionData.Major == VersionData.MissingBuildNumber
+                || release.VersionData.Minor == VersionData.MissingBuildNumber
+                || release.VersionData.Security == VersionData.MissingBuildNumber
+                || release.VersionData.Build == VersionData.MissingBuildNumber)
             {
                 logger.Error("Error: AdoptOpenJDK API response does not contain complete version data!");
                 return null;
@@ -154,24 +154,24 @@ namespace updater.software
 
             // Construct new information.
             var newInfo = knownInfo();
-            newInfo.newestVersion = release.version_data.major.ToString() + "."
-                + release.version_data.minor.ToString() + "."
-                + release.version_data.security.ToString() + "."
-                + release.version_data.build.ToString();
+            newInfo.newestVersion = release.VersionData.Major.ToString() + "."
+                + release.VersionData.Minor.ToString() + "."
+                + release.VersionData.Security.ToString() + "."
+                + release.VersionData.Build.ToString();
             bool hasBuild64 = false;
 
-            foreach (Binary bin in release.binaries)
+            foreach (Binary bin in release.Binaries)
             {
-                if (string.IsNullOrEmpty(bin.architecture) || null == bin.installer
-                    || string.IsNullOrEmpty(bin.installer.link) || string.IsNullOrEmpty(bin.installer.checksum))
+                if (string.IsNullOrEmpty(bin.Architecture) || null == bin.Installer
+                    || string.IsNullOrEmpty(bin.Installer.Link) || string.IsNullOrEmpty(bin.Installer.Checksum))
                 {
                     logger.Error("Error: AdoptOpenJDK API response contains incomplete data!");
                     return null;
                 }
-                if (bin.architecture == "x64")
+                if (bin.Architecture == "x64")
                 {
-                    newInfo.install64Bit.checksum = bin.installer.checksum;
-                    newInfo.install64Bit.downloadUrl = bin.installer.link;
+                    newInfo.install64Bit.checksum = bin.Installer.Checksum;
+                    newInfo.install64Bit.downloadUrl = bin.Installer.Link;
                     hasBuild64 = true;
                     break;
                 }

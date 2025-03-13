@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2021  Dirk Stolle
+    Copyright (C) 2021, 2025  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -16,6 +16,8 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+using System.Text.Json.Serialization;
+
 namespace updater.software.openjdk_api
 {
     /// <summary>
@@ -26,28 +28,33 @@ namespace updater.software.openjdk_api
         /// <summary>
         /// major version number, e.g. the 8 in 8.0.292+10 or 8u292-b10
         /// </summary>
-        public int major { get; set; }
+        [JsonPropertyName("major")]
+        public int Major { get; set; }
 
         /// <summary>
         /// minor version number, e.g. the 0 (zero) in 8.0.292+10
         /// </summary>
-        public int minor { get; set; }
+        [JsonPropertyName("minor")]
+        public int Minor { get; set; }
 
         /// <summary>
         /// security patch level, e.g. the 292 in 8.0.292+10 or 8u292-b10
         /// </summary>
-        public int security { get; set; }
+        [JsonPropertyName("security")]
+        public int Security { get; set; }
 
         /// <summary>
         /// build number, e.g. the 10 in 8.0.292+10 or 8u292-b10
         /// </summary>
-        public int build { get; set; }
+        [JsonPropertyName("build")]
+        public int Build { get; set; }
 
 
         /// <summary>
         /// Semantic Versioning string, e.g. "8.0.292+10"
         /// </summary>
-        public string semver { get; set; }
+        [JsonPropertyName("semver")]
+        public string SemVer { get; set; }
 
 
         /// <summary>
@@ -61,11 +68,11 @@ namespace updater.software.openjdk_api
         /// </summary>
         public VersionData()
         {
-            major = MissingBuildNumber;
-            minor = MissingBuildNumber;
-            security = MissingBuildNumber;
-            build = MissingBuildNumber;
-            semver = null;
+            Major = MissingBuildNumber;
+            Minor = MissingBuildNumber;
+            Security = MissingBuildNumber;
+            Build = MissingBuildNumber;
+            SemVer = null;
         }
     } // class
 } // namespace

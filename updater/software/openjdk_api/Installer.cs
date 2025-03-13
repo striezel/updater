@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2021  Dirk Stolle
+    Copyright (C) 2021, 2025  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -16,6 +16,8 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+using System.Text.Json.Serialization;
+
 namespace updater.software.openjdk_api
 {
     /// <summary>
@@ -26,24 +28,14 @@ namespace updater.software.openjdk_api
         /// <summary>
         /// SHA-256 checksum of the installer
         /// </summary>
-        public string checksum { get; set; }
+        [JsonPropertyName("checksum")]
+        public string Checksum { get; set; } = null;
 
 
         /// <summary>
         /// download link for the installer
         /// </summary>
-        public string link { get; set; }
-
-
-        /// <summary>
-        /// Constructor.
-        /// </summary>
-        /// <param name="_chksum">initial value for checksum</param>
-        /// <param name="_link">initial value for link</param>
-        public Installer(string _chksum = null, string _link = null)
-        {
-            checksum = _chksum;
-            link = _link;
-        }
+        [JsonPropertyName("link")]
+        public string Link { get; set; } = null;
     }
 }
