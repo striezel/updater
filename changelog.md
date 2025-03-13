@@ -13,6 +13,7 @@ __[new features]__
 __[maintenance]__
 
 * Update certificate information for Blender LTS installer.
+* Update certificate information for Inno Setup installer.
 * Update certificate information for KeePass installers.
 * NLog library is updated from 5.3.4 to 5.4.0.
 
