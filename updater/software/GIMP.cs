@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017, 2018, 2020, 2021, 2022, 2023, 2024  Dirk Stolle
+    Copyright (C) 2017, 2018, 2020, 2021, 2022, 2023, 2024, 2025  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -18,17 +18,20 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Text.RegularExpressions;
 using updater.data;
+using updater.versions;
 
 namespace updater.software
 {
     /// <summary>
     /// Handles updates for the GNU Image Manipulation Program (GIMP).
     /// </summary>
-    public class GIMP : NoPreUpdateProcessSoftware
+    public class GIMP : AbstractSoftware
     {
         /// <summary>
         /// NLog.Logger for GIMP class
@@ -66,14 +69,14 @@ namespace updater.software
         public override AvailableSoftware knownInfo()
         {
             var installer = new InstallInfoExe(
-                "https://download.gimp.org/pub/gimp/v2.10/windows/gimp-2.10.38-setup-1.exe",
+                "https://download.gimp.org/pub/gimp/v3.0/windows/gimp-3.0.0-setup.exe",
                 HashAlgorithm.SHA256,
-                "bdcf059c7d4e1b0ab59f8dc5f199ebb60ae0445460bf67ff8e4e438a89cee3d8",
+                "ab6f9aa481120097f032c39f07cb70990929878fa65bf4ec6d1669d7a616770a",
                 new Signature(publisherX509, certificateExpiration),
-                "/VERYSILENT /NORESTART");
+                "/VERYSILENT /NORESTART /ALLUSERS");
 
             return new AvailableSoftware("The GIMP",
-                "2.10.38.1",
+                "3.0.0",
                 "^GIMP [0-9]+\\.[0-9]+\\.[0-9]+(\\-[0-9]+)?$",
                 "^GIMP [0-9]+\\.[0-9]+\\.[0-9]+(\\-[0-9]+)?$",
                 // The GIMP uses the same installer for 32 and 64-bit.
@@ -232,6 +235,86 @@ namespace updater.software
         public override List<string> blockerProcesses(DetectedSoftware detected)
         {
             return [];
+        }
+
+
+        /// <summary>
+        /// Checks whether a detected version is version 2.x or older.
+        /// </summary>
+        /// <param name="detected">currently installed / detected software version</param>
+        /// <returns>Returns true, if the detected version is version 2.x or
+        /// older. Returns false otherwise.
+        /// Also returns false, if the version is not set.</returns>
+        private static bool isVersion2OrLess(DetectedSoftware detected)
+        {
+            return !string.IsNullOrEmpty(detected.displayVersion)
+                && new Quartet(detected.displayVersion).major <= 2;
+        }
+
+
+        /// <summary>
+        /// Determines whether a separate process must be run before the update.
+        /// </summary>
+        /// <param name="detected">currently installed / detected software version</param>
+        /// <returns>Returns true, if a separate process returned by
+        /// preUpdateProcess() needs to run in preparation of the update.
+        /// Returns false, if not. Calling preUpdateProcess() may throw an
+        /// exception in the later case.</returns>
+        public override bool needsPreUpdateProcess(DetectedSoftware detected)
+        {
+            // When updating from GIMP 2.x (or older), the old version has to
+            // be uninstalled first. Otherwise we end up with two installed
+            // versions of GIMP.
+            return isVersion2OrLess(detected);
+        }
+
+
+        /// <summary>
+        /// Returns a list of processes that must be run before the update.
+        /// This may return an empty list, if no processes need to be run
+        /// before the update.
+        /// </summary>
+        /// <param name="detected">currently installed / detected software version</param>
+        /// <returns>Returns a Process ready to start that should be run before
+        /// the update. May return null or may throw, if needsPreUpdateProcess()
+        /// returned false.</returns>
+        public override List<Process> preUpdateProcess(DetectedSoftware detected)
+        {
+            if (!isVersion2OrLess(detected))
+            {
+                return null;
+            }
+
+            string uninstallerPath = detected.uninstallString;
+            if (string.IsNullOrEmpty(uninstallerPath))
+            {
+                // UninstallString is not set. Try to construct it from InstallLocation instead.
+                if (string.IsNullOrEmpty(detected.installPath))
+                {
+                    throw new ArgumentNullException("detected.uninstallString", "Neither UninstallString nor InstallLocation are set for GIMP in the registry.");
+                }
+                if (detected.installPath.StartsWith('\"') && detected.installPath.EndsWith('\"'))
+                {
+                    uninstallerPath = Path.Combine(detected.installPath[1..^1], "uninst", "unins000.exe");
+                }
+                else
+                {
+                    uninstallerPath = Path.Combine(detected.installPath, "uninst", "unins000.exe");
+                }
+            }
+
+            // Remove enclosing quotes, if any.
+            if (uninstallerPath.StartsWith('\"') && uninstallerPath.EndsWith('\"'))
+            {
+                uninstallerPath = uninstallerPath[1..^1];
+            }
+
+            var processes = new List<Process>(1);
+            var proc = new Process();
+            proc.StartInfo.FileName = uninstallerPath;
+            proc.StartInfo.Arguments = "/VERYSILENT /NORESTART";
+            processes.Add(proc);
+            return processes;
         }
 
 
