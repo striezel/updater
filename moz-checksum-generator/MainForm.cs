@@ -457,7 +457,7 @@ namespace moz_checksum_generator
             {
                 return "none";
             }
-            return newCodes.Remove(0, 2);
+            return newCodes[2..];
         }
 
         private void tsmiSelectAll32_Click(object sender, EventArgs e)

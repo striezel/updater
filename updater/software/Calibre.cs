@@ -197,7 +197,7 @@ namespace updater.software
             int idx = newVersion.IndexOf('/');
             if (idx < 0)
                 return null;
-            newVersion = newVersion.Remove(idx);
+            newVersion = newVersion[..idx];
 
             // FossHub does not seem to be updated anymore, so we cannot get a
             // SHA-256 hash for the installer file.

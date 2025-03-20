@@ -143,7 +143,7 @@ namespace updater.software
                 Match matchVersion = reVersion.Match(newLocation);
                 if (!matchVersion.Success)
                     return null;
-                currentVersion = matchVersion.Value.Remove(0, 1);
+                currentVersion = matchVersion.Value[1..];
             }
             catch (Exception ex)
             {

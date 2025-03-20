@@ -133,7 +133,7 @@ namespace updater.software
             int idx = htmlCode.IndexOf(stableRelease);
             if (idx < 0)
                 return null;
-            htmlCode = htmlCode.Remove(0, idx);
+            htmlCode = htmlCode[idx..];
 
             var reVersion = new Regex("[0-9]+\\.[0-9]+\\.[0-9]+");
             Match matchVersion = reVersion.Match(htmlCode);
