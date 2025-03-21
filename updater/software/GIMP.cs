@@ -69,7 +69,7 @@ namespace updater.software
         public override AvailableSoftware knownInfo()
         {
             var installer = new InstallInfoExe(
-                "https://download.gimp.org/pub/gimp/v3.0/windows/gimp-3.0.0-setup-1.exe",
+                "https://download.gimp.org/gimp/v3.0/windows/gimp-3.0.0-setup-1.exe",
                 HashAlgorithm.SHA256,
                 "c1101f6fe5103c2986bd39a8c4162b52ea915c1d8066c79a86497329afd01fe4",
                 new Signature(publisherX509, certificateExpiration),
@@ -142,14 +142,14 @@ namespace updater.software
             string version = matchVersion.Value;
 
             // SHA-256 checksum is in a file like
-            // https://download.gimp.org/pub/gimp/v2.8/windows/gimp-2.8.20-setup.exe.sha256
+            // https://download.gimp.org/gimp/v2.8/windows/gimp-2.8.20-setup.exe.sha256
             string shortVersion = string.Join(".", version.Split(['.']), 0, 2);
             htmlCode = null;
             using (var h_client = new HttpClient())
             {
                 try
                 {
-                    string sha256Url = "https://download.gimp.org/pub/gimp/v" + shortVersion + "/windows/gimp-" + version + "-setup.exe.sha256";
+                    string sha256Url = "https://download.gimp.org/gimp/v" + shortVersion + "/windows/gimp-" + version + "-setup.exe.sha256";
                     var task = h_client.GetStringAsync(sha256Url);
                     task.Wait();
                     htmlCode = task.Result;
@@ -162,7 +162,7 @@ namespace updater.software
                         // try SHA256 file for whole directory instead
                         try
                         {
-                            string sha256Url = "https://download.gimp.org/pub/gimp/v" + shortVersion + "/windows/SHA256SUMS";
+                            string sha256Url = "https://download.gimp.org/gimp/v" + shortVersion + "/windows/SHA256SUMS";
                             var task = h_client.GetStringAsync(sha256Url);
                             task.Wait();
                             htmlCode = task.Result;
@@ -216,8 +216,8 @@ namespace updater.software
             newInfo.newestVersion = revision <= 0 ? version : version + "." + revision.ToString();
             // 32-bit
             newInfo.install32Bit.downloadUrl = revision <= 0 ?
-                "https://download.gimp.org/pub/gimp/v" + shortVersion + "/windows/gimp-" + version + "-setup.exe"
-                : "https://download.gimp.org/pub/gimp/v" + shortVersion + "/windows/gimp-" + version + "-setup-" + revision.ToString() + ".exe";
+                "https://download.gimp.org/gimp/v" + shortVersion + "/windows/gimp-" + version + "-setup.exe"
+                : "https://download.gimp.org/gimp/v" + shortVersion + "/windows/gimp-" + version + "-setup-" + revision.ToString() + ".exe";
             newInfo.install32Bit.checksum = checksum;
             // 64-bit - same installer, same checksum
             newInfo.install64Bit.downloadUrl = newInfo.install32Bit.downloadUrl;
