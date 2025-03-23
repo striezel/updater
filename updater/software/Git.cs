@@ -18,6 +18,8 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using System.Text.RegularExpressions;
 using updater.data;
 
@@ -26,7 +28,7 @@ namespace updater.software
     /// <summary>
     /// Handles updates of Git for Windows.
     /// </summary>
-    public class Git : NoPreUpdateProcessSoftware
+    public class Git : AbstractSoftware
     {
         /// <summary>
         /// NLog.Logger for Git class
@@ -63,7 +65,39 @@ namespace updater.software
         /// details about the software.</returns>
         public override AvailableSoftware knownInfo()
         {
+            if (!Environment.Is64BitOperatingSystem)
+            {
+                logger.Warn("Git does not provide 32-bit binaries from version 2.49.0 onwards.");
+                logger.Warn("Please consider switching to an 64-bit operating system to get newer Git updates.");
+                return Last32BitVersion();
+            }
             var signature = new Signature(publisherX509, certificateExpiration);
+            var installer = new InstallInfoExe(
+                "https://github.com/git-for-windows/git/releases/download/v2.48.1.windows.1/Git-2.48.1-64-bit.exe",
+                HashAlgorithm.SHA256,
+                "ce45e23275049f4b36edd90d5fd986a1e230efb6c511e9260a90176ce8e825df",
+                signature,
+                "/VERYSILENT /NORESTART");
+            return new AvailableSoftware("Git",
+                "2.48.1",
+                "^(Git|Git version [0-9]+\\.[0-9]+\\.[0-9]+(\\.[0-9]+)?)$",
+                "^(Git|Git version [0-9]+\\.[0-9]+\\.[0-9]+(\\.[0-9]+)?)$",
+                installer,
+                installer);
+        }
+
+
+        /// <summary>
+        /// Gets information about the latest version of Git that still has
+        /// 32-bit builds.
+        /// </summary>
+        /// <returns>Returns an AvailableSoftware instance with the known
+        /// details about the software.</returns>
+        public static AvailableSoftware Last32BitVersion()
+        {
+            var signature = new Signature(
+                "CN=Johannes Schindelin, O=Johannes Schindelin, S=Nordrhein-Westfalen, C=DE",
+                new(2026, 5, 5, 23, 59, 59, DateTimeKind.Utc));
             return new AvailableSoftware("Git",
                 "2.48.1",
                 "^(Git|Git version [0-9]+\\.[0-9]+\\.[0-9]+(\\.[0-9]+)?)$",
@@ -79,8 +113,7 @@ namespace updater.software
                     HashAlgorithm.SHA256,
                     "ce45e23275049f4b36edd90d5fd986a1e230efb6c511e9260a90176ce8e825df",
                     signature,
-                    "/VERYSILENT /NORESTART")
-                    );
+                    "/VERYSILENT /NORESTART"));
         }
 
 
@@ -114,6 +147,11 @@ namespace updater.software
         public override AvailableSoftware searchForNewer()
         {
             logger.Info("Searching for newer version of Git for Windows...");
+            if (!Environment.Is64BitOperatingSystem)
+            {
+                logger.Warn("Git does not provide 32-bit binaries from version 2.49.0 onwards. Please consider switching to an 64-bit operating system to get newer Git updates.");
+                return Last32BitVersion();
+            }
             // Just getting the latest release does not work here, because that may also be a release candidate, and we do not want that.
             string html;
             var client = HttpClientProvider.Provide();
@@ -155,51 +193,39 @@ namespace updater.software
                     return null;
                 }
 
-                // find SHA256 hash for 32-bit installer
+                // find SHA256 hash for 64-bit installer
                 /* Hash is part of a HTML table, e.g. in
-                 * <td>Git-2.30.0-32-bit.exe</td>
-                 * <td>e41b7d0e1c88a023ecd42a1e7339c39a8e906cd51ea9ae9aefdb42c513103f57</td>
+                 * <td>Git-2.49.0-64-bit.exe</td>
+                 * <td>726056328967f242fe6e9afbfe7823903a928aff577dcf6f517f2fb6da6ce83c</td>
                  */
                 string escapedVersion = Regex.Escape(currentVersion);
                 bool needsFourthDigit = fourthDigit != "1";
                 Regex reHash = needsFourthDigit ?
-                    new Regex("<td>Git\\-" + escapedVersion + "\\." + fourthDigit + "\\-32\\-bit\\.exe</td>\r?\n<td>([a-f0-9]{64})</td>")
-                    : new Regex("<td>Git\\-" + escapedVersion + "\\-32\\-bit\\.exe</td>\r?\n<td>([a-f0-9]{64})</td>");
+                    new Regex("<td>Git\\-" + escapedVersion + "\\." + fourthDigit + "\\-64\\-bit\\.exe</td>\r?\n<td>([a-f0-9]{64})</td>")
+                    : new Regex("<td>Git\\-" + escapedVersion + "\\-64\\-bit\\.exe</td>\r?\n<td>([a-f0-9]{64})</td>");
                 Match matchHash = reHash.Match(htmlCode);
                 if (!matchHash.Success)
                 {
                     start = matchVersion.Index + 1;
                     continue;
                 }
-                string newHash32Bit = matchHash.Groups[1].Value;
-                // find SHA256 hash for 64-bit installer
-                reHash = needsFourthDigit ?
-                    new Regex("<td>Git\\-" + escapedVersion + "\\." + fourthDigit + "\\-64\\-bit\\.exe</td>\r?\n<td>([a-f0-9]{64})</td>")
-                    : new Regex("<td>Git\\-" + escapedVersion + "\\-64\\-bit\\.exe</td>\r?\n<td>([a-f0-9]{64})</td>");
-                matchHash = reHash.Match(htmlCode);
-                if (!matchHash.Success)
-                    return null;
-                string newHash64Bit = matchHash.Groups[1].Value;
+                string newHash = matchHash.Groups[1].Value;
                 // construct new information
                 var newInfo = knownInfo();
                 if (needsFourthDigit)
                 {
                     newInfo.newestVersion = currentVersion + "." + fourthDigit;
-                    // e.g. https://github.com/git-for-windows/git/releases/download/v2.32.0.windows.2/Git-2.32.0.2-32-bit.exe
-                    newInfo.install32Bit.downloadUrl = "https://github.com/git-for-windows/git/releases/download/" + tag + "/Git-" + currentVersion + "." + fourthDigit + "-32-bit.exe";
                     // e.g. https://github.com/git-for-windows/git/releases/download/v2.32.0.windows.2/Git-2.32.0.2-64-bit.exe
                     newInfo.install64Bit.downloadUrl = "https://github.com/git-for-windows/git/releases/download/" + tag + "/Git-" + currentVersion + "." + fourthDigit + "-64-bit.exe";
                 }
                 else
                 {
                     newInfo.newestVersion = currentVersion;
-                    // e.g. https://github.com/git-for-windows/git/releases/download/v2.30.0.windows.1/Git-2.30.0-32-bit.exe
-                    newInfo.install32Bit.downloadUrl = "https://github.com/git-for-windows/git/releases/download/" + tag + "/Git-" + currentVersion + "-32-bit.exe";
                     // e.g. https://github.com/git-for-windows/git/releases/download/v2.30.0.windows.1/Git-2.30.0-64-bit.exe
                     newInfo.install64Bit.downloadUrl = "https://github.com/git-for-windows/git/releases/download/" + tag + "/Git-" + currentVersion + "-64-bit.exe";
                 }
-                newInfo.install32Bit.checksum = newHash32Bit;
-                newInfo.install64Bit.checksum = newHash64Bit;
+                newInfo.install64Bit.checksum = newHash;
+                newInfo.install32Bit = newInfo.install64Bit;
                 return newInfo;
             } while (true);
         }
@@ -219,6 +245,79 @@ namespace updater.software
                 "bash", // Git Bash
                 "git-bash" // also Git Bash
             ];
+        }
+
+
+        /// <summary>
+        /// Determines whether a separate process must be run before the update.
+        /// </summary>
+        /// <param name="detected">currently installed / detected software version</param>
+        /// <returns>Returns true, if a separate process returned by
+        /// preUpdateProcess() needs to run in preparation of the update.
+        /// Returns false, if not. Calling preUpdateProcess() may throw an
+        /// exception in the later case.</returns>
+        public override bool needsPreUpdateProcess(DetectedSoftware detected)
+        {
+            // When updating from a 32-bit installation to a 64-bit installation,
+            // the old version has to be uninstalled first.
+            return detected.appType == ApplicationType.Bit32 && Environment.Is64BitOperatingSystem;
+        }
+
+
+        /// <summary>
+        /// Returns a list of processes that must be run before the update.
+        /// This may return an empty list, if no processes need to be run
+        /// before the update.
+        /// </summary>
+        /// <param name="detected">currently installed / detected software version</param>
+        /// <returns>Returns a Process ready to start that should be run before
+        /// the update. May return null or may throw, if needsPreUpdateProcess()
+        /// returned false.</returns>
+        public override List<Process> preUpdateProcess(DetectedSoftware detected)
+        {
+            if (detected.appType == ApplicationType.Bit64 || !Environment.Is64BitOperatingSystem)
+            {
+                return null;
+            }
+
+            string uninstallerPath = detected.uninstallString;
+            if (string.IsNullOrEmpty(uninstallerPath))
+            {
+                // UninstallString is not set. Try to construct it from InstallLocation instead.
+                if (string.IsNullOrEmpty(detected.installPath))
+                {
+                    throw new ArgumentNullException("detected.uninstallString", "Neither UninstallString nor InstallLocation are set for Git in the registry.");
+                }
+                if (detected.installPath.StartsWith('\"') && detected.installPath.EndsWith('\"'))
+                {
+                    uninstallerPath = Path.Combine(detected.installPath[1..^1], "uninst", "unins000.exe");
+                    if (!File.Exists(uninstallerPath))
+                    {
+                        uninstallerPath = Path.Combine(detected.installPath[1..^1], "uninst", "unins001.exe");
+                    }
+                }
+                else
+                {
+                    uninstallerPath = Path.Combine(detected.installPath, "uninst", "unins000.exe");
+                    if (!File.Exists(uninstallerPath))
+                    {
+                        uninstallerPath = Path.Combine(detected.installPath, "uninst", "unins001.exe");
+                    }
+                }
+            }
+
+            // Remove enclosing quotes, if any.
+            if (uninstallerPath.StartsWith('\"') && uninstallerPath.EndsWith('\"'))
+            {
+                uninstallerPath = uninstallerPath[1..^1];
+            }
+
+            var processes = new List<Process>(1);
+            var proc = new Process();
+            proc.StartInfo.FileName = uninstallerPath;
+            proc.StartInfo.Arguments = "/VERYSILENT /NORESTART";
+            processes.Add(proc);
+            return processes;
         }
     } // class
 } // namespace
