@@ -11,6 +11,9 @@ __[changes]__
 * Starting with Git 2.49.0, no more 32-bit builds for Git are provided.
   Therefore the updater will now update 32-bit installations of Git to 64-bit
   installations, if it runs on a 64-bit OS.
+* Starting with Stellarium 25.1, no more 32-bit builds for Stellarium are
+  provided. Therefore the updater will now update 32-bit installations of
+  Stellarium to 64-bit installations, if it runs on a 64-bit OS.
 
 ## Version 2025.03.20.0
 
