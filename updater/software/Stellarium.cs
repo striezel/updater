@@ -71,22 +71,18 @@ namespace updater.software
                 return Last32BitVersion();
             }
             var signature = new Signature(publisherX509, certificateExpiration);
+            var installer = new InstallInfoExe(
+                "https://github.com/Stellarium/stellarium/releases/download/v25.1/stellarium-25.1-qt6-win64.exe",
+                HashAlgorithm.SHA256,
+                "04cbbeccedee44b561521a12466dde630d636f9d5da04f7acd4028dd80f8dd84",
+                signature,
+                "/VERYSILENT /ALLUSERS /NORESTART");
             return new AvailableSoftware("Stellarium",
-                "24.4",
+                "25.1",
                 "^Stellarium [0-9]+\\.[0-9]+$",
                 "^Stellarium [0-9]+\\.[0-9]+$",
-                new InstallInfoExe(
-                    "https://github.com/Stellarium/stellarium/releases/download/v24.4/stellarium-24.4-qt5-win32.exe",
-                    HashAlgorithm.SHA256,
-                    "71b620f40b330af0444791181684942df7b8bd51c73b72a32b3e2c3d0109a127",
-                    signature,
-                    "/VERYSILENT /ALLUSERS /NORESTART"),
-                new InstallInfoExe(
-                    "https://github.com/Stellarium/stellarium/releases/download/v24.4/stellarium-24.4-qt6-win64.exe",
-                    HashAlgorithm.SHA256,
-                    "c52a7a2da4e0639457d1c4a2010d4bdbf47594710fac179fdfa69718d83bc36b",
-                    signature,
-                    "/VERYSILENT /ALLUSERS /NORESTART"));
+                installer,
+                installer);
         }
 
 
