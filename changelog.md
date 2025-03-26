@@ -15,6 +15,10 @@ __[changes]__
   provided. Therefore the updater will now update 32-bit installations of
   Stellarium to 64-bit installations, if it runs on a 64-bit OS.
 
+__[maintenance]__
+
+* Update certificate information for LibreOffice installers.
+
 ## Version 2025.03.20.0
 
 __[new features]__
