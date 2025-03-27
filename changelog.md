@@ -18,6 +18,7 @@ __[changes]__
 __[maintenance]__
 
 * Update certificate information for LibreOffice installers.
+* Update certificate information for Opera GX installers.
 
 ## Version 2025.03.20.0
 
