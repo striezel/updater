@@ -14,6 +14,8 @@ __[changes]__
 * Starting with Stellarium 25.1, no more 32-bit builds for Stellarium are
   provided. Therefore the updater will now update 32-bit installations of
   Stellarium to 64-bit installations, if it runs on a 64-bit OS.
+* The messages for download progress are adjusted for cases where the total
+  size of the downloaded installer files are unknown.
 
 __[maintenance]__
 

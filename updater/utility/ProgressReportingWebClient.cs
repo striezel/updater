@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2024  Dirk Stolle
+    Copyright (C) 2024, 2025  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -75,10 +75,24 @@ namespace updater.utility
             long bps = (sender as ProgressReportingWebClient).BytesPerSecond(e.BytesReceived);
             if (bps <= 0)
                 bps = 1;
-            long eta = Convert.ToInt64((e.TotalBytesToReceive - e.BytesReceived) / Convert.ToDouble(bps));
-            logger.Info("Progress: {0} of {1} downloaded ({2} %) @ {3}/s, {4}...",
-                new object[] { FormatBytes(e.BytesReceived), FormatBytes(e.TotalBytesToReceive),
-                    e.ProgressPercentage, FormatBytes(bps), FormatSeconds(eta) });
+            if (e.TotalBytesToReceive > 0)
+            {
+                // Download of known total size, show full data with estimate
+                // for the remaining time.
+                long eta = Convert.ToInt64((e.TotalBytesToReceive - e.BytesReceived) / Convert.ToDouble(bps));
+                logger.Info("Progress: {0} of {1} downloaded ({2} %) @ {3}/s, {4}...",
+                    [ FormatBytes(e.BytesReceived), FormatBytes(e.TotalBytesToReceive),
+                        e.ProgressPercentage, FormatBytes(bps), FormatSeconds(eta) ]);
+            }
+            else
+            {
+                // The value of TotalBytesToReceive can be -1, if the size of
+                // the download is unknown ahead of download completion.
+                // Therefore we can only provide limited information in such a
+                // case.
+                logger.Info("Progress: {0} of unknown-sized file downloaded @ {1}/s ...",
+                    [FormatBytes(e.BytesReceived), FormatBytes(bps)]);
+            }
         }
 
 
