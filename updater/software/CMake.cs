@@ -193,7 +193,7 @@ namespace updater.software
         /// <returns>Returns a list of process names that block the upgrade.</returns>
         public override List<string> blockerProcesses(DetectedSoftware detected)
         {
-            return new List<string>(3)
+            return new List<string>(4)
             {
                 "cmake",
                 "cmake-gui",
