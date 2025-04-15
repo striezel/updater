@@ -16,8 +16,8 @@ jobs:
     strategy:
       matrix:
         os:
-          # - windows-2019 - Visual Studio 2019 does not support .NET 6.
           - windows-2022
+          - windows-2025
     runs-on: ${{ matrix.os }}
 
     steps:
@@ -47,6 +47,15 @@ jobs:
     # InnoSetup 6.4.0 is already installed on the Windows 2022 image. See
     # <https://github.com/actions/runner-images/blob/main/images/windows/Windows2022-Readme.md>
     # for pre-installed software.
+    # However, it's not present on the Windows Server 2025 image, so it has to
+    # be installed there. See
+    # <https://github.com/actions/runner-images/blob/main/images/windows/Windows2025-Readme.md>
+    # for a (shorter) list of pre-installed software.
+
+    - name: Install InnoSetup
+      run: |
+        choco install innosetup
+      if: matrix.os != 'windows-2022'
 
     - name: Create installer
       working-directory: ${{env.GITHUB_WORKSPACE}}
@@ -85,6 +94,6 @@ jobs:
     - name: Upload zipped updater
       uses: actions/upload-artifact@v4
       with:
-        name: updater-zipped
+        name: updater-zipped-${{ matrix.os }}
         if-no-files-found: error
         path: updater*.zip
