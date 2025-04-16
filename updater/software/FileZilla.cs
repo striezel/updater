@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017, 2018, 2020, 2021, 2022, 2023, 2024  Dirk Stolle
+    Copyright (C) 2017, 2018, 2020, 2021, 2022, 2023, 2024, 2025  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -55,7 +55,7 @@ namespace updater.software
         /// <summary>
         /// certificate expiration date
         /// </summary>
-        private static readonly DateTime certificateExpiration = new(2025, 2, 17, 23, 59, 59, DateTimeKind.Utc);
+        private static readonly DateTime certificateExpiration = new(2028, 2, 11, 23, 59, 59, DateTimeKind.Utc);
 
 
         /// <summary>
@@ -72,19 +72,19 @@ namespace updater.software
             {
                 var signature = new Signature(publisherX509, certificateExpiration);
                 return new AvailableSoftware("FileZilla FTP Client",
-                    "3.68.1",
+                    "3.69.0",
                     "^FileZilla (Client )?[0-9]+\\.[0-9]+(\\.[0-9]+(\\.[0-9]+)?)?$",
                     "^FileZilla (Client )?[0-9]+\\.[0-9]+(\\.[0-9]+(\\.[0-9]+)?)?$",
                     new InstallInfoExe(
-                        "https://download.filezilla-project.org/client/FileZilla_3.68.1_win32-setup.exe",
+                        "https://download.filezilla-project.org/client/FileZilla_3.69.0_win32-setup.exe",
                         HashAlgorithm.SHA512,
-                        "a0e22217a2604e40e2284ee1c318914d93542bab8a9aa89322c3973e4e57ef74aca24297e945d3f2ae3e4981a5aac1414ad574e9ffe485fe61bc34c266db01db",
+                        "289c137b10006e9b844edf1d4c5bac9202ca2bf10e81685356b59a365ed516ad51e3fb77e6ed055282b344ffada2e0b5c0d66007b8bd5d9b333a2abb7a366810",
                         signature,
                         "/S"),
                     new InstallInfoExe(
-                        "https://download.filezilla-project.org/client/FileZilla_3.68.1_win64-setup.exe",
+                        "https://download.filezilla-project.org/client/FileZilla_3.69.0_win64-setup.exe",
                         HashAlgorithm.SHA512,
-                        "6588c86da07f0f48641b6707438f9c73226318507b94e579f3ecb4f0735cea147eb42cb048b4d18f9fb85aea297dcd0ead4789f507367d4e566b1bba9f5ecfbf",
+                        "7499904cd95d0641d58fe52222f4838bdd9072a22b65aa7e7e1a5aefde040eca0254862337118e2f2402edb22c41d2475ab0fdb6f34f12f4c73ddc1a502898cc",
                         signature,
                         "/S")
                     );

@@ -13,6 +13,7 @@ __[changes]__
 __[maintenance]__
 
 * Update certificate information for Blender LTS installer.
+* Update certificate information for FileZilla FTP Client installer.
 
 ## Version 2025.03.30.0
 
