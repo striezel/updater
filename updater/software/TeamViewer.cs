@@ -123,7 +123,7 @@ namespace updater.software
             {
                 try
                 {
-                    var task = client.GetStringAsync("https://www.teamviewer.com/en/download/windows/");
+                    var task = client.GetStringAsync("https://www.teamviewer.com/en/download/portal/windows/");
                     task.Wait();
                     html = task.Result;
                 }

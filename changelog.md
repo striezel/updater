@@ -6,6 +6,10 @@ improvements may be omitted.)_
 
 ## Next Version
 
+__[changes]__
+
+* Adjust search for newer version of TeamViewer for the modified website.
+
 __[maintenance]__
 
 * Update certificate information for Blender LTS installer.
