@@ -14,6 +14,7 @@ __[maintenance]__
 
 * Update certificate information for Blender LTS installer.
 * Update certificate information for FileZilla FTP Client installer.
+* Update certificate information for LibreOffice installers.
 
 ## Version 2025.03.30.0
 

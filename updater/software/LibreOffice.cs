@@ -43,7 +43,7 @@ namespace updater.software
         /// <summary>
         /// expiration date of the certificate
         /// </summary>
-        private static readonly DateTime certificateExpiration = new(2025, 6, 1, 5, 39, 27, DateTimeKind.Utc);
+        private static readonly DateTime certificateExpiration = new(2026, 9, 13, 12, 18, 28, DateTimeKind.Utc);
 
 
         /// <summary>
@@ -65,19 +65,19 @@ namespace updater.software
         {
             var signature = new Signature(publisherX509, certificateExpiration);
             return new AvailableSoftware("LibreOffice",
-                "25.2.2.2",
+                "25.2.3.2",
                 "^LibreOffice [0-9]+\\.[0-9]+\\.[0-9]\\.[0-9]$",
                 "^LibreOffice [0-9]+\\.[0-9]+\\.[0-9]\\.[0-9]$",
                 new InstallInfoLibO(
-                    "https://download.documentfoundation.org/libreoffice/stable/25.2.2/win/x86/LibreOffice_25.2.2_Win_x86.msi",
+                    "https://download.documentfoundation.org/libreoffice/stable/25.2.3/win/x86/LibreOffice_25.2.3_Win_x86.msi",
                     HashAlgorithm.SHA256,
-                    "680f8252e1dd2814d77526ebd2af834675b5e3ac254043c818ec90d0b576a45e",
+                    "57a0be78c512e4cdb3c0caf3b1cd6ca2251f056f6bc3de191ce0cc92238335e7",
                     signature,
                     "/qn /norestart"),
                 new InstallInfoLibO(
-                    "https://download.documentfoundation.org/libreoffice/stable/25.2.2/win/x86_64/LibreOffice_25.2.2_Win_x86-64.msi",
+                    "https://download.documentfoundation.org/libreoffice/stable/25.2.3/win/x86_64/LibreOffice_25.2.3_Win_x86-64.msi",
                     HashAlgorithm.SHA256,
-                    "6b98b12f2b2d69071a1c2704802b581bd35588e714fb3d1795d33cd07ce50e0a",
+                    "7434ebd983fa72057f5e64c58c86ef47d60005642de3d6c00a3122ae42fc1819",
                     signature,
                     "/qn /norestart")
                     );
