@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017, 2018, 2020, 2021, 2022, 2023, 2024  Dirk Stolle
+    Copyright (C) 2017, 2018, 2020, 2021, 2022, 2023, 2024, 2025  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -68,13 +68,13 @@ namespace updater.software
             }
 
             var info = new InstallInfoMsi(
-                "https://inkscape.org/gallery/item/53697/inkscape-1.4_2024-10-11_86a8ad7-x64.msi",
+                "https://inkscape.org/gallery/item/56340/inkscape-1.4.2_2025-05-08_ebf0e94-x64.msi",
                 HashAlgorithm.SHA256,
-                "5cbdadd86f5e1b102775ee41692745693bfb8300bc8141e726dae555f78196bf",
+                "437e9bd8c3a7169a0d2a7991c5907b82931cd9acd9e7af8b84f20b37f0f0b0ab",
                 Signature.None,
                 "/qn /norestart");
             return new AvailableSoftware("Inkscape",
-                "1.4",
+                "1.4.2",
                 "^Inkscape( [0-9]\\.[0-9]+(\\.[0-9]+)?)?$",
                 "^Inkscape( [0-9]\\.[0-9]+(\\.[0-9]+)?)?$",
                 info,
@@ -339,6 +339,7 @@ namespace updater.software
                     "{6F4AB16B-1B62-468A-A7A9-0406CFFA68CC}", // 1.3.2 MSI (x86)
                     "{2AB0D298-5B41-4C70-BB32-46F153F7A1BF}", // 1.3.2 MSI (x64)
                     "{4E9A1766-6BA4-4015-BA8D-05A268638587}", // 1.4.0 MSI (x64)
+                    "{00512908-13E3-4B23-9EC7-7EB30E0A904E}", // 1.4.2 MSI (x64)
                 ];
                 foreach (var id in guids)
                 {
