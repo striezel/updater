@@ -127,15 +127,14 @@ namespace updater.software
                 return null;
             }
 
-            // There's a link like '<a href="https://www.irfanview.info/files/iview470_x64_setup.exe" ...'
-            // or '<a href="https://www.fosshub.com/IrfanView.html?dwl=iview470_x64_setup.exe" ...'
+            // There's a text like 'Download IrfanView-64</a>&nbsp;English&nbsp;<strong>(Version 4.72, Self extracting EXE file...'
             // on the download page.
-            var versionRegEx = new Regex("href=\"https://www\\.(irfanview\\.info/files/|fosshub\\.com/IrfanView\\.html\\?dwl=)iview([0-9]+)_x64_setup\\.exe\"");
+            var versionRegEx = new Regex("Download IrfanView\\-64</a>&nbsp;English&nbsp;<strong>\\(Version ([0-9]+\\.[0-9]+), Self extracting EXE file");
             var versionMatch = versionRegEx.Match(htmlCode);
             if (!versionMatch.Success)
                 return null;
-            string version_digits = versionMatch.Groups[2].Value;
-            string version = string.Concat(version_digits.AsSpan(0, version_digits.Length - 2), ".", version_digits.AsSpan(version_digits.Length - 2));
+            string version = versionMatch.Groups[1].Value;
+            string version_digits = version.Replace(".", "");
 
             // Get 64-bit installer's checksum.
             var checksumRegEx = new Regex("[0-9a-f]{64}");

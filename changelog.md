@@ -4,6 +4,12 @@ _(Note: This changelog focuses on the major changes between the different
 versions. Therefore, it may not contain all changes. Especially smaller fixes or
 improvements may be omitted.)_
 
+## Next Version
+
+__[changes]__
+
+* Adjust search for newer version of IrfanView for the modified website.
+
 ## Version 2025.04.30.0
 
 __[changes]__
