@@ -75,8 +75,10 @@ namespace updater_test.software
         {
             Assert.IsNotNull(sw);
             if (!sw.implementsSearchForNewer())
+            {
                 Assert.Inconclusive("The check for up to date information was not performed, "
                     + "because this class indicates that it does not implement the searchForNewer() method.");
+            }
             var info = sw.info();
             var newerInfo = sw.searchForNewer();
             Assert.IsNotNull(newerInfo, "searchForNewer() returned null!");

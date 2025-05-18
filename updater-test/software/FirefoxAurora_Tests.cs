@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017, 2018  Dirk Stolle
+    Copyright (C) 2017, 2018, 2025  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -19,6 +19,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Text.RegularExpressions;
 using updater.software;
+using updater.versions;
 
 namespace updater_test.software
 {
@@ -111,7 +112,25 @@ namespace updater_test.software
         [TestMethod]
         public void Test_upToDate_info()
         {
-            _upToDate_info(new FirefoxAurora("de", false));
+            var fx = new FirefoxAurora("de", false);
+            Assert.IsNotNull(fx);
+            if (!fx.implementsSearchForNewer())
+            {
+                Assert.Inconclusive("The check for up to date information was not performed, "
+                    + "because this class indicates that it does not implement the searchForNewer() method.");
+            }
+            var info = fx.info();
+            var newerInfo = fx.searchForNewer();
+            Assert.IsNotNull(newerInfo, "searchForNewer() returned null!");
+            int comp = string.Compare(info.newestVersion, newerInfo.newestVersion);
+            var older = new QuartetAurora(info.newestVersion);
+            var newer = new QuartetAurora(newerInfo.newestVersion);
+            if (comp < 0 || older < newer)
+            {
+                Assert.Inconclusive(
+                    "Known newest version of " + info.Name + " is " + info.newestVersion
+                    + ", but the current newest version is " + newerInfo.newestVersion + "!");
+            }
         }
     } // class
 } // namespace
