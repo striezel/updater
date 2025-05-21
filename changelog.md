@@ -10,6 +10,10 @@ __[changes]__
 
 * Adjust search for newer version of IrfanView for the modified website.
 
+__[maintenance]__
+
+* Update certificate information for Blender LTS installer.
+
 ## Version 2025.04.30.0
 
 __[changes]__
