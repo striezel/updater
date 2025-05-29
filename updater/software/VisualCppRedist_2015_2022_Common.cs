@@ -59,7 +59,7 @@ namespace updater.software
         /// <summary>
         /// known current version of the MSVC++ 2015-2022 Redistributables
         /// </summary>
-        protected const string currentVersion = "14.44.35112.1";
+        protected const string currentVersion = "14.44.35208.0";
 
 
         /// <summary>
