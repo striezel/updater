@@ -13,6 +13,7 @@ __[changes]__
 __[maintenance]__
 
 * Update certificate information for Blender LTS installer.
+* NLog library is updated from 5.4.0 to 5.5.0.
 
 ## Version 2025.04.30.0
 
