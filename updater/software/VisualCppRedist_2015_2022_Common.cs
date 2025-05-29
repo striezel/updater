@@ -96,7 +96,7 @@ namespace updater.software
                 return null;
             }
 
-            var reMsi = new Regex("The latest version is <code>(14\\.[0-9]+\\.[0-9]+\\.[0-9]+)</code>");
+            var reMsi = new Regex("The latest version is <code>v?(14\\.[0-9]+\\.[0-9]+\\.[0-9]+)</code>");
             Match matchMsi = reMsi.Match(htmlCode);
             if (!matchMsi.Success)
                 return null;

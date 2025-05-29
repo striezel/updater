@@ -9,6 +9,8 @@ improvements may be omitted.)_
 __[changes]__
 
 * Adjust search for newer version of IrfanView for the modified website.
+* Adjust search for newer version of Microsoft Visual C++ 2015-2022
+  Redistributable.
 
 __[maintenance]__
 
