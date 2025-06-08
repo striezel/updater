@@ -243,7 +243,7 @@ namespace updater.software
             // uninstall string (path to Uninstall.exe of Graphviz) is used
             // instead.
             // Furthermore, the executable to check is not directly beneath the
-            // installation directory both one level further down inside the
+            // installation directory but one level further down inside the
             // "bin" directory.
 
             // 32-bit systems use normal detection.
