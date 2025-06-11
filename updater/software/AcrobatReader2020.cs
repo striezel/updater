@@ -152,7 +152,7 @@ namespace updater.software
 
             // Link to the *.msp file will look like this:
             // <a class="reference external" href="https://ardownload2.adobe.com/pub/adobe/reader/win/Acrobat2020/2000530381/AcroRdr2020Upd2000530381_MUI.msp">AcroRdr2020Upd2000530381_MUI.msp</a>
-            var reLink = new Regex("https://ardownload2\\.adobe\\.com/pub/adobe/reader/win/Acrobat2020/[0-9]+/AcroRdr2020Upd[0-9]+_MUI.msp");
+            var reLink = new Regex("https://ardownload[0-9]\\.adobe\\.com/pub/adobe/reader/win/Acrobat2020/[0-9]+/AcroRdr2020Upd[0-9]+_MUI.msp");
             match = reLink.Match(html);
             if (!match.Success)
                 return null;

@@ -6,6 +6,10 @@ improvements may be omitted.)_
 
 ## Next Version
 
+__[changes]__
+
+* Adjust search for newer version of Acrobat Reader 2020.
+
 __[maintenance]__
 
 * Update certificate information for HeidiSQL installer.
