@@ -204,6 +204,8 @@ namespace updater.software
                     // Without user agent the server returns "403 Forbidden".
                     // So let's pretend we are Firefox 128 ESR.
                     client.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:128.0) Gecko/20100101 Firefox/128.0");
+                    // Same goes for refer(r)er header.
+                    client.DefaultRequestHeaders.Referrer = new Uri("https://filezilla-project.org/download.php?type=client");
                     // Without an Accept header the returned HTML code is
                     // different and does not contain the available versions.
                     client.DefaultRequestHeaders.Add("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8");
