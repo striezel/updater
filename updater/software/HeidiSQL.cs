@@ -44,7 +44,7 @@ namespace updater.software
         /// <summary>
         /// expiration date of the certificate
         /// </summary>
-        private static readonly DateTime certificateExpiration = new(2025, 4, 9, 23, 59, 59, DateTimeKind.Utc);
+        private static readonly DateTime certificateExpiration = new(2028, 3, 16, 23, 59, 59, DateTimeKind.Utc);
 
 
         /// <summary>
@@ -65,13 +65,13 @@ namespace updater.software
         public override AvailableSoftware knownInfo()
         {
             var installer = new InstallInfoExe(
-                    "https://www.heidisql.com/installers/HeidiSQL_12.10.0.7000_Setup.exe",
+                    "https://www.heidisql.com/installers/HeidiSQL_12.11.0.7065_Setup.exe",
                     HashAlgorithm.SHA1,
-                    "d50d07273ab0393bbb373c8da84b00ca96783174",
+                    "5a3eba649eb654970574bdf91455b0cf2da9182f",
                     new Signature(publisherX509, certificateExpiration),
                     "/VERYSILENT /NORESTART");
             return new AvailableSoftware("HeidiSQL",
-                "12.10.0.7000",
+                "12.11.0.7065",
                 "^HeidiSQL [0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+$",
                 "^HeidiSQL [0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+$",
                 // 32-bit installer
