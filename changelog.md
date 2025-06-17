@@ -13,6 +13,7 @@ __[changes]__
 
 __[maintenance]__
 
+* Update certificate information for Blender LTS installer.
 * Update certificate information for HeidiSQL installer.
 * Update certificate information for SeaMonkey installers, because installers
   are no longer signed.
