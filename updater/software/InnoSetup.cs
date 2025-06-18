@@ -128,8 +128,22 @@ namespace updater.software
             if (!match.Success)
                 return null;
             string version = match.Groups[1].Value;
-            regEx = new Regex("<b>sha256 hash:</b> ([0-9a-f]{64})");
-            match = regEx.Match(response, match.Index);
+            string major_version = version.Split('.')[0];
+            // Checksum is available in a file like https://files.jrsoftware.org/is/6/innosetup-6.4.3.exe.issig.
+            try
+            {
+                var task = client.GetStringAsync("https://files.jrsoftware.org/is/" + major_version + "/innosetup-" + version + ".exe.issig");
+                task.Wait();
+                response = task.Result;
+            }
+            catch (Exception ex)
+            {
+                logger.Warn("Error while looking for newer Inno Setup version: " + ex.Message);
+                return null;
+            }
+            // Line with hash looks like "file-hash f3c42116542c4cc57263c5ba6c4feabfc49fe771f2f98a79d2f7628b8762723b".
+            regEx = new Regex("file\\-hash ([0-9a-f]{64})");
+            match = regEx.Match(response);
             if (!match.Success)
                 return null;
             var checksum = match.Groups[1].Value;

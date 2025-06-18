@@ -10,6 +10,7 @@ __[changes]__
 
 * Adjust search for newer version of Acrobat Reader 2020.
 * Fix failing search for newer versions of FileZilla Client.
+* Adjust search for newer version of Inno Setup.
 
 __[maintenance]__
 
