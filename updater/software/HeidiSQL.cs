@@ -127,7 +127,7 @@ namespace updater.software
             }
 
             // Checksum file is something like <a href="/installers/HeidiSQL_12.1.0.6537_Setup.sha1.txt"> in HTML.
-            var reVersion = new Regex("/installers/HeidiSQL_([0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+)_Setup.sha1.txt\"");
+            var reVersion = new Regex("/installers/HeidiSQL_([0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+)_Setup(\\.exe)?\\.sha1\\.txt\"");
             Match matchVersion = reVersion.Match(htmlCode);
             if (!matchVersion.Success)
                 return null;
