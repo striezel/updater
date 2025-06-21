@@ -19,6 +19,7 @@ __[maintenance]__
 * Update certificate information for HeidiSQL installer.
 * Update certificate information for SeaMonkey installers, because installers
   are no longer signed.
+* NLog library is updated from 5.5.0 to 6.0.0.
 
 ## Version 2025.05.31.0
 
