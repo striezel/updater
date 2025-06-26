@@ -49,13 +49,13 @@ namespace updater.software
         /// <summary>
         /// publisher name for signed executables
         /// </summary>
-        private const string publisherX509 = "CN=Gen Digital Inc., O=Gen Digital Inc., L=Tempe, S=Arizona, C=US";
+        private const string publisherX509 = "CN=Gen Digital Inc., O=Gen Digital Inc., S=Arizona, C=US";
 
 
         /// <summary>
         /// expiration date of certificate
         /// </summary>
-        private static readonly DateTime certificateExpiration = new(2027, 5, 21, 23, 59, 59, DateTimeKind.Utc);
+        private static readonly DateTime certificateExpiration = new(2028, 6, 10, 23, 59, 59, DateTimeKind.Utc);
 
 
         /// <summary>
@@ -67,13 +67,13 @@ namespace updater.software
         {
             var signature = new Signature(publisherX509, certificateExpiration);
             var installer = new InstallInfoExe(
-                "https://download.ccleaner.com/ccsetup636.exe",
+                "https://download.ccleaner.com/ccsetup637.exe",
                 HashAlgorithm.SHA256,
-                "57adcfb5e0b95146bce09d71452fd6269b1f61f37474dfe5a14e3603b568ca3d",
+                "3ebbe9f24887eeb6a4dcc8f33f26a70976d2acc1249d982de5649d7da0577505",
                 signature,
                 "/S");
             return new AvailableSoftware("CCleaner",
-                "6.36",
+                "6.37",
                 "^CCleaner+$",
                 "^CCleaner+$",
                 // CCleaner uses the same installer for 32 and 64-bit.
