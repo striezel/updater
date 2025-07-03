@@ -20,7 +20,9 @@ using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
+using System.Text;
 using System.Text.RegularExpressions;
+using System.Xml.Linq;
 using updater.data;
 
 namespace updater.software
@@ -223,6 +225,8 @@ namespace updater.software
                     client.Dispose();
                 } // using
 
+                htmlCode = transformEncodedData(htmlCode);
+
                 // find version number
                 var reVersion = new Regex("FileZilla_[0-9]+\\.[0-9]+(\\.[0-9]+(\\.[0-9]+)?)?_win64\\-setup\\.exe");
                 Match matchVersion = reVersion.Match(htmlCode);
@@ -298,6 +302,54 @@ namespace updater.software
             }
             // WinXP or older - you should really get an OS update.
             return LatestSupportedVersionWinXP();
+        }
+
+
+        /// <summary>
+        /// Transforms the encrypted base64-encoded and AES-encrypted data from
+        /// the FileZilla website containing the version and download links into
+        /// unencrypted HTML data.
+        /// </summary>
+        /// <param name="rawHtml">the raw HTML code containing the content wrapper element</param>
+        /// <returns>Returns the decoded HTML in case of success.
+        /// Returns null, if an error occurred.</returns>
+        private static string transformEncodedData(string rawHtml)
+        {
+            var document = XDocument.Parse(rawHtml.Replace("div hidden id=", "div id="));
+            var divs = document.Descendants();
+            foreach (var div in divs)
+            {
+                var id = div.Attribute("id");
+                // Search for the element with the id "contentwrapper".
+                if (id == null || id.Value != "contentwrapper")
+                {
+                    continue;
+                }
+
+                var v1 = div.Attribute("v1");
+                var v2 = div.Attribute("v2");
+                var v3 = div.Attribute("v3");
+                if (v1 == null || v2 == null || v3 == null)
+                {
+                    return null;
+                }
+
+                var raw_cyphertext = Convert.FromBase64String(div.Value);
+                var initialization_vector = Convert.FromBase64String(v1.Value);
+                var key = Convert.FromBase64String(v2.Value);
+                var algorithm = Encoding.UTF8.GetString(Convert.FromBase64String(v3.Value));
+                if (algorithm != "AES-CBC")
+                {
+                    logger.Warn("Error occurred while searching for new version of FileZilla: Decryption algorithm changed.");
+                    return null;
+                }
+                var aes = System.Security.Cryptography.Aes.Create();
+                aes.Key = key;
+                var decrypted = aes.DecryptCbc(raw_cyphertext, initialization_vector);
+                aes.Dispose();
+                return Encoding.UTF8.GetString(decrypted);
+            }
+            return null;
         }
 
 

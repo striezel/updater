@@ -4,6 +4,12 @@ _(Note: This changelog focuses on the major changes between the different
 versions. Therefore, it may not contain all changes. Especially smaller fixes or
 improvements may be omitted.)_
 
+## Next Version
+
+__[changes]__
+* Adjust search for newer versions of FileZilla Client to unwrap wrapped content
+  of the FileZilla website.
+
 ## Version 2025.06.29.0
 
 __[changes]__
