@@ -225,7 +225,22 @@ namespace updater.software
                     client.Dispose();
                 } // using
 
-                htmlCode = transformEncodedData(htmlCode);
+                if (htmlCode.Contains("contentwrapper"))
+                {
+                    try
+                    {
+                        var transformedCode = transformEncodedData(htmlCode);
+                        if (!string.IsNullOrEmpty(transformedCode))
+                        {
+                            htmlCode = transformedCode;
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        logger.Warn("Exception occurred while checking for newer version of FileZilla: " + ex.Message);
+                        return null;
+                    }
+                }
 
                 // find version number
                 var reVersion = new Regex("FileZilla_[0-9]+\\.[0-9]+(\\.[0-9]+(\\.[0-9]+)?)?_win64\\-setup\\.exe");
