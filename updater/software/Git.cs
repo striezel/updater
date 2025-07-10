@@ -67,19 +67,19 @@ namespace updater.software
         {
             if (!Environment.Is64BitOperatingSystem)
             {
-                logger.Warn("Git does not provide 32-bit binaries from version 2.49.0 onwards.");
+                logger.Warn("Git does not provide regular 32-bit binaries from version 2.49.0 onwards.");
                 logger.Warn("Please consider switching to an 64-bit operating system to get newer Git updates.");
                 return Last32BitVersion();
             }
             var signature = new Signature(publisherX509, certificateExpiration);
             var installer = new InstallInfoExe(
-                "https://github.com/git-for-windows/git/releases/download/v2.50.0.windows.2/Git-2.50.0.2-64-bit.exe",
+                "https://github.com/git-for-windows/git/releases/download/v2.50.1.windows.1/Git-2.50.1-64-bit.exe",
                 HashAlgorithm.SHA256,
-                "a22b0ddaaa6c698be63f8396b5e595c72a4ab2237bb8863c935752c02c1824b3",
+                "47fe1d46dbb7111f6693b04a8bd95fc869ce2062df7b4822b52849548fb457e4",
                 signature,
                 "/VERYSILENT /NORESTART");
             return new AvailableSoftware("Git",
-                "2.50.0.2",
+                "2.50.1",
                 "^(Git|Git version [0-9]+\\.[0-9]+\\.[0-9]+(\\.[0-9]+)?)$",
                 "^(Git|Git version [0-9]+\\.[0-9]+\\.[0-9]+(\\.[0-9]+)?)$",
                 installer,
@@ -99,19 +99,19 @@ namespace updater.software
                 "CN=Johannes Schindelin, O=Johannes Schindelin, S=Nordrhein-Westfalen, C=DE",
                 new(2026, 5, 5, 23, 59, 59, DateTimeKind.Utc));
             return new AvailableSoftware("Git",
-                "2.48.1",
+                "2.50.1",
                 "^(Git|Git version [0-9]+\\.[0-9]+\\.[0-9]+(\\.[0-9]+)?)$",
                 "^(Git|Git version [0-9]+\\.[0-9]+\\.[0-9]+(\\.[0-9]+)?)$",
                 new InstallInfoExe(
-                    "https://github.com/git-for-windows/git/releases/download/v2.48.1.windows.1/Git-2.48.1-32-bit.exe",
+                    "https://github.com/git-for-windows/git/releases/download/v2.50.1.windows.1/Git-2.50.1-32-bit.exe",
                     HashAlgorithm.SHA256,
-                    "fdf9be6795afd911b4ed87417f2d5ac547798b5b47441b9f71984cddef943c3a",
+                    "5191529725d9f0c1ffe6feb23f3d72b7abe585be84e09cb2e6b353adb280d35b",
                     signature,
                     "/VERYSILENT /NORESTART"),
                 new InstallInfoExe(
-                    "https://github.com/git-for-windows/git/releases/download/v2.48.1.windows.1/Git-2.48.1-64-bit.exe",
+                    "https://github.com/git-for-windows/git/releases/download/v2.50.1.windows.1/Git-2.50.1-64-bit.exe",
                     HashAlgorithm.SHA256,
-                    "ce45e23275049f4b36edd90d5fd986a1e230efb6c511e9260a90176ce8e825df",
+                    "47fe1d46dbb7111f6693b04a8bd95fc869ce2062df7b4822b52849548fb457e4",
                     signature,
                     "/VERYSILENT /NORESTART"));
         }
