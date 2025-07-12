@@ -9,6 +9,8 @@ improvements may be omitted.)_
 __[changes]__
 * Adjust search for newer versions of FileZilla Client to unwrap wrapped content
   of the FileZilla website.
+* Fix failing search for newer versions of HeidiSQL, again.
+  (Looks like the URL pattern for some files just keeps changing.)
 
 ## Version 2025.06.29.0
 

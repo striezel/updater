@@ -134,14 +134,25 @@ namespace updater.software
             string newVersion = matchVersion.Groups[1].Value;
             try
             {
-                var task = client.GetStringAsync("https://www.heidisql.com/installers/HeidiSQL_" + newVersion + "_Setup.sha1.txt");
+                var task = client.GetStringAsync("https://www.heidisql.com/downloads/installers/HeidiSQL_" + newVersion + "_Setup.sha1.txt");
                 task.Wait();
                 htmlCode = task.Result;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                logger.Error("Exception occurred while checking for newer version of HeidiSQL: " + ex.Message);
-                return null;
+                // Getting into this exception block usually means that the file was not found (HTTP 404).
+                // Sometimes the ".exe" part is included in the URL and sometimes not, so try this one, too.
+                try
+                {
+                    var task2 = client.GetStringAsync("https://www.heidisql.com/downloads/installers/HeidiSQL_" + newVersion + "_Setup.exe.sha1.txt");
+                    task2.Wait();
+                    htmlCode = task2.Result;
+                }
+                catch (Exception ex)
+                {
+                    logger.Error("Exception occurred while checking for newer version of HeidiSQL: " + ex.Message);
+                    return null;
+                }
             }
             var reHash = new Regex("[0-9a-f]{40}");
             Match matchHash = reHash.Match(htmlCode);
