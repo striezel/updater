@@ -9,6 +9,7 @@ improvements may be omitted.)_
 __[maintenance]__
 
 * Update certificate information for Blender LTS installer.
+* Update certificate information for Node.js installer.
 
 ## Version 2025.07.12.0
 
