@@ -66,16 +66,16 @@ namespace updater.software
         public override AvailableSoftware knownInfo()
         {
             var signature = new Signature(publisherX509, certificateExpiration);
-            const string version = "21.0.7.6";
+            const string version = "21.0.8.9";
             return new AvailableSoftware("Eclipse Temurin JRE 21 with Hotspot",
                 version,
                 null, // no 32-bit installer
                 "^Eclipse Temurin JRE [a-z]+ Hotspot 21\\.[0-9]+\\.[0-9]+(\\.[0-9]+)?\\+[0-9]+(\\.[0-9]+)? \\(x64\\)$",
                 null, // no 32-bit installer
                 new InstallInfoMsiNoLocation(
-                    "https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.7%2B6/OpenJDK21U-jre_x64_windows_hotspot_21.0.7_6.msi",
+                    "https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.8%2B9/OpenJDK21U-jre_x64_windows_hotspot_21.0.8_9.msi",
                     HashAlgorithm.SHA256,
-                    "7c75fbd2c99649580b7869b756effa5b6b30e6808fae1ebc7eeb63921aafd096",
+                    "9e38a94eed115fb834c2c4375bc493cef1a47e28c82bd83f623efe3fca017e7a",
                     signature,
                     "INSTALLLEVEL=3 /qn /norestart")
                     );
