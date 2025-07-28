@@ -10,6 +10,10 @@ __[new features]__
 
 * Update support for MariaDB 11.8 is added.
 
+__[changes]__
+* Adjust detection of WinMerge 64-bit installations of version 2.16.50.0 or
+  newer.
+
 __[maintenance]__
 
 * Update certificate information for Blender LTS installer.

@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2024  Dirk Stolle
+    Copyright (C) 2024, 2025  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -17,6 +17,7 @@
 */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Text.RegularExpressions;
 using updater.software;
 
 namespace updater_test.software
@@ -65,6 +66,30 @@ namespace updater_test.software
         public void Test_upToDate_info()
         {
             _upToDate_info(new WinMerge(false));
+        }
+
+
+        /// <summary>
+        /// Checks whether the regular expression for the software name matches known names.
+        /// </summary>
+        [TestMethod]
+        public void Test_regexMatches()
+        {
+            var info = new WinMerge(false).knownInfo();
+            Assert.IsNotNull(info, "knownInfo() returned null!");
+
+            var re64 = new Regex(info.match64Bit, RegexOptions.IgnoreCase);
+            // Match old WinMerge product names including version number.
+            Assert.IsTrue(re64.IsMatch("WinMerge 2.16.48.0 x64"), "Old product name (64-bit) does not match!");
+            Assert.IsTrue(re64.IsMatch("WinMerge 2.16.48.2 x64"), "Old product name (64-bit) does not match!");
+            // Match new WinMerge product name without version number (since version 2.16.50.0).
+            Assert.IsTrue(re64.IsMatch("WinMerge x64"), "New product name (64-bit) does not match!");
+
+            var re32 = new Regex(info.match32Bit, RegexOptions.IgnoreCase);
+            // Match old WinMerge product names including version number.
+            Assert.IsTrue(re32.IsMatch("WinMerge 2.16.48.2"), "Old product name (32-bit) does not match!");
+            // Product name pattern for 32-bit version has not changed.
+            Assert.IsTrue(re32.IsMatch("WinMerge 2.16.50.0"), "'New' product name (32-bit) does not match!");
         }
     } // class
 } // namespace
