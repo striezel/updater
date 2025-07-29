@@ -56,19 +56,19 @@ namespace updater.software
         public override AvailableSoftware knownInfo()
         {
             return new AvailableSoftware("LibreWolf",
-                "140.0.4-1",
+                "141.0-1",
                 "^LibreWolf$",
                 "^LibreWolf$",
                 new InstallInfoExe(
-                    "https://gitlab.com/api/v4/projects/44042130/packages/generic/librewolf/140.0.4-1/librewolf-140.0.4-1-windows-i686-setup.exe",
+                    "https://gitlab.com/api/v4/projects/44042130/packages/generic/librewolf/141.0-1/librewolf-141.0-1-windows-i686-setup.exe",
                     HashAlgorithm.SHA256,
-                    "46483cebc327ed90bbd34baa3a13135e174e251b1953fed04b84439d43e091a2",
+                    "5ef3b4202024068be79e1380ecb8828be41928fd62a3fbe5a6980484af2c87db",
                     Signature.None,
                     "/S"),
                 new InstallInfoExe(
-                    "https://gitlab.com/api/v4/projects/44042130/packages/generic/librewolf/140.0.4-1/librewolf-140.0.4-1-windows-x86_64-setup.exe",
+                    "https://gitlab.com/api/v4/projects/44042130/packages/generic/librewolf/141.0-1/librewolf-141.0-1-windows-x86_64-setup.exe",
                     HashAlgorithm.SHA256,
-                    "1041db48ed88df4dddf8c35faf9a76fb1bfc9b41ca2dba16416a7a6a45758328",
+                    "5c047ff28457303ceae790072742d4a394389fd8c4801f2a136606dd751b4054",
                     Signature.None,
                     "/S")
                 );
