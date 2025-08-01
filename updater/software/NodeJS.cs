@@ -53,7 +53,7 @@ namespace updater.software
         /// <summary>
         /// expiration date of certificate
         /// </summary>
-        private static readonly DateTime certificateExpiration = new(2025, 7, 18, 8, 44, 37, DateTimeKind.Utc);
+        private static readonly DateTime certificateExpiration = new(2025, 8, 3, 7, 37, 56, DateTimeKind.Utc);
 
 
         /// <summary>
@@ -63,7 +63,7 @@ namespace updater.software
         /// details about the software.</returns>
         public override AvailableSoftware knownInfo()
         {
-            const string version = "22.17.1";
+            const string version = "22.18.0";
             var signature = new Signature(publisherX509, certificateExpiration);
             return new AvailableSoftware(
                 "Node.js",
@@ -73,13 +73,13 @@ namespace updater.software
                 new InstallInfoMsi(
                     "https://nodejs.org/download/release/v" + version + "/node-v" + version + "-x86.msi",
                     HashAlgorithm.SHA256,
-                    "79ff602686c2ef16187c1624b9fb3bce3bc09e33716bcfab3168a6111832e87e",
+                    "81bc73f802094ee8306ebab9c73f9e1fccfa11c7f4d62f536bd3f3df3f7de947",
                     signature,
                     "/qn /norestart"),
                 new InstallInfoMsi(
                     "https://nodejs.org/download/release/v" + version + "/node-v" + version + "-x64.msi",
                     HashAlgorithm.SHA256,
-                    "29bf63d4be9e9ba53d8974086cd9ef2403317e6c237d98d6e498205da4d48753",
+                    "dffd8e34d8eb1a1a2e6f5e6f129c4b1b8a34aa54e02799007adc99d73efac75c",
                     signature,
                     "/qn /norestart")
                     );
