@@ -44,7 +44,7 @@ namespace updater.software
         /// <summary>
         /// expiration date for the publisher certificate
         /// </summary>
-        private static readonly DateTime certificateExpiration = new(2026, 3, 10, 23, 59, 59, DateTimeKind.Utc);
+        private static readonly DateTime certificateExpiration = new(2028, 3, 15, 23, 59, 59, DateTimeKind.Utc);
 
 
         /// <summary>
@@ -65,7 +65,7 @@ namespace updater.software
         public override AvailableSoftware knownInfo()
         {
             var signature = new Signature(publisherX509, certificateExpiration);
-            const string version = "4.0.3";
+            const string version = "4.1.0";
             return new AvailableSoftware("CMake",
                 version,
                 "^CMake$",
@@ -73,13 +73,13 @@ namespace updater.software
                 new InstallInfoMsi(
                     "https://github.com/Kitware/CMake/releases/download/v" + version + "/cmake-" + version + "-windows-i386.msi",
                     HashAlgorithm.SHA256,
-                    "56f77f1d9ec51a109d17d07c73d3bb1269dcaf0ea2772c1623c6bd9a6b3760a5",
+                    "58dab64e73d7a9db463e8d7dec87102dc9c4cb97ee9833aac7909cfeb1422608",
                     signature,
                     "/qn /norestart"),
                 new InstallInfoMsi(
                     "https://github.com/Kitware/CMake/releases/download/v" + version + "/cmake-" + version + "-windows-x86_64.msi",
                     HashAlgorithm.SHA256,
-                    "589da314f09f2b7a28a79932ee33e95b388b0749a6799d887139189864f9798f",
+                    "10664a3a59daa9ee47bc04d183b16cafe91235310e728ee3d0c9ba418f0a7bd7",
                     signature,
                     "/qn /norestart")
                     );
