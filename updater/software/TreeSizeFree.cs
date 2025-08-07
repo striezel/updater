@@ -115,7 +115,7 @@ namespace updater.software
             var client = HttpClientProvider.Provide();
             try
             {
-                var task = client.GetStringAsync("https://customers.jam-software.de/downloadTrial.php?language=DE&article_no=80");
+                var task = client.GetStringAsync("https://www.jam-software.de/treesize_free/changes.shtml");
                 task.Wait();
                 html = task.Result;
             }
@@ -125,24 +125,12 @@ namespace updater.software
                 return null;
             }
 
-            // HTML text will contain something like "<b>TreeSize Free V4.42</b>"
-            // or "<b>TreeSize Free v4.63</b>".
-            var reVersion = new Regex("TreeSize Free [Vv]ersion ([0-9]+\\.[0-9]+)</span>");
+            // HTML text will contain something like "<h3 class="collapsed-item__ttl">Version 4.7.3</h3>".
+            var reVersion = new Regex(">[Vv]ersion ([0-9]+\\.[0-9]+\\.[0-9]+)</h3>");
             var matchVersion = reVersion.Match(html);
             if (!matchVersion.Success)
                 return null;
             string currentVersion = matchVersion.Groups[1].Value;
-            // The version number on the website is a bit weird, because a version "4.42" actually means
-            // version "4.4.2", so we have to split the second part manually here.
-            int dotIndex = currentVersion.IndexOf('.');
-            if (dotIndex >= 0)
-            {
-                string partTwo = currentVersion[(dotIndex + 1)..];
-                if (partTwo.Length == 2)
-                {
-                    currentVersion = currentVersion[..dotIndex] + '.' + partTwo[0] + '.' + partTwo[1];
-                }
-            }
 
             // construct new information
             var newInfo = knownInfo();
