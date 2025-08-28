@@ -66,19 +66,19 @@ namespace updater.software
         {
             var signature = new Signature(publisherX509, certificateExpiration);
             return new AvailableSoftware("WinMerge",
-                "2.16.50",
+                "2.16.50.2",
                 "^WinMerge [0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+?$",
                 "^WinMerge ([0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+ )?x64$",
                 new InstallInfoExe(
-                    "https://netcologne.dl.sourceforge.net/project/winmerge/stable/2.16.48.2/WinMerge-2.16.50-Setup.exe",
+                    "https://netcologne.dl.sourceforge.net/project/winmerge/stable/2.16.50.2/WinMerge-2.16.50.2-Setup.exe",
                     HashAlgorithm.SHA256,
-                    "73ced7fd301f037f69328d6d490306a1695eabe1a144c62beea0823cf986688a",
+                    "28feeb222a177386df65053740ab067ab99420df1651a433cd7bcd4eab6f4898",
                     signature,
                     "/VERYSILENT /NORESTART"),
                 new InstallInfoExe(
-                    "https://netcologne.dl.sourceforge.net/project/winmerge/stable/2.16.50/WinMerge-2.16.50-x64-Setup.exe",
+                    "https://netcologne.dl.sourceforge.net/project/winmerge/stable/2.16.50.2/WinMerge-2.16.50.2-x64-Setup.exe",
                     HashAlgorithm.SHA256,
-                    "1ed2819a990011a23838809d587891f52674c507e2ff63b8e97b4430e7484177",
+                    "49f7185f6253df66535356baf0e43a15f184efdafe9db7a25f6a579c63e86870",
                     signature,
                     "/VERYSILENT /NORESTART")
                 );
