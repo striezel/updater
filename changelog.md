@@ -6,6 +6,11 @@ improvements may be omitted.)_
 
 ## Next Version
 
+__[changes]__
+
+* Thunderbird updates are now following the 140.x ESR release series instead of
+  128.x ESR.
+
 __[maintenance]__
 
 * Update certificate information for Blender LTS installer.
