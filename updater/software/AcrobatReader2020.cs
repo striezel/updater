@@ -115,7 +115,7 @@ namespace updater.software
             // The request hangs and times out without an User-Agent header,
             // so let's provide a simple curl User-Agent here.
             var client = new HttpClient();
-            client.DefaultRequestHeaders.Add("User-Agent", "curl/8.14.0");
+            client.DefaultRequestHeaders.Add("User-Agent", "curl/8.15.0");
             try
             {
                 var task = client.GetStringAsync("https://helpx.adobe.com/acrobat/release-note/release-notes-acrobat-reader.html");
