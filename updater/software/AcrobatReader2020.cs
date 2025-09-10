@@ -21,6 +21,7 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Text.RegularExpressions;
 using updater.data;
+using updater.versions;
 
 namespace updater.software
 {
@@ -138,6 +139,14 @@ namespace updater.software
             var latestVersion = match.Groups[2].Value.Replace('x', '0');
             string notesLink = match.Groups[1].Value;
 
+            var latestInfo = knownInfo();
+            var knownTriple = new Triple(latestInfo.newestVersion);
+            var latestTriple = new Triple(latestVersion);
+            if (knownTriple.CompareTo(latestTriple) >= 0)
+            {
+                return latestInfo;
+            }
+
             try
             {
                 var task = client.GetStringAsync(notesLink);
@@ -157,7 +166,6 @@ namespace updater.software
             if (!match.Success)
                 return null;
 
-            var latestInfo = knownInfo();
             latestInfo.newestVersion = latestVersion;
             // Release notes do not provide any checksum.
             latestInfo.install32Bit.algorithm = HashAlgorithm.Unknown;
