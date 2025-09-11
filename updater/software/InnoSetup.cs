@@ -65,13 +65,13 @@ namespace updater.software
         public override AvailableSoftware knownInfo()
         {
             var installer = new InstallInfoExe(
-                "https://files.innosetup.nl/innosetup-6.5.2.exe",
+                "https://files.innosetup.nl/innosetup-6.5.3.exe",
                 HashAlgorithm.SHA256,
-                "8582879760b6e0e42e00f2e28ce904afac0d739941a130d3da3573c3cbf2d75b",
+                "9345ee029faa0b7aed0818c3d5b227699ef9a496cce79e20c19eb9d6ef2e2c2d",
                 new Signature(publisherX509, certificateExpiration),
                 "/ALLUSERS /VERYSILENT /NORESTART");
             return new AvailableSoftware("Inno Setup",
-                "6.5.2",
+                "6.5.3",
                 "^Inno Setup Version [0-9]+\\.[0-9]+\\.[0-9]+$",
                 "^Inno Setup Version [0-9]+\\.[0-9]+\\.[0-9]+$",
                 installer,
