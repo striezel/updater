@@ -83,7 +83,7 @@ jobs:
         copy updater\bin\Release\net8.0-windows7.0\updater.exe updater-%VERSION%
         copy updater\bin\Release\net8.0-windows7.0\updater.dll updater-%VERSION%
         copy updater\bin\Release\net8.0-windows7.0\updater.runtimeconfig.json updater-%VERSION%
-        copy "%USERPROFILE%\.nuget\packages\nlog\6.0.3\lib\netstandard2.1\NLog.dll" updater-%VERSION%
+        copy "%USERPROFILE%\.nuget\packages\nlog\6.0.4\lib\netstandard2.1\NLog.dll" updater-%VERSION%
         copy LICENSE updater-%VERSION%
         md updater-%VERSION%\documentation
         copy readme.md updater-%VERSION%\documentation
