@@ -170,7 +170,7 @@ namespace updater.software
             {
                 // Looks like we have to add a user agent to get a valid response.
                 // Without user agent the server returns "403 Forbidden".
-                client.DefaultRequestHeaders.Add("User-Agent", "curl/8.15.0");
+                client.DefaultRequestHeaders.Add("User-Agent", "curl/8.16.0");
                 try
                 {
                     var task = client.GetStringAsync("https://teamspeak.com/en/downloads/");
