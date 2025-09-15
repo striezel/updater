@@ -10,6 +10,7 @@ __[changes]__
 
 * Thunderbird updates are now following the 140.x ESR release series instead of
   128.x ESR.
+* Fix failing search for newer versions of HeidiSQL.
 
 __[maintenance]__
 
