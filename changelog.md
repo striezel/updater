@@ -8,6 +8,8 @@ improvements may be omitted.)_
 
 __[changes]__
 
+* Firefox ESR updates are now following the 140.x ESR release series instead of
+  128.x ESR.
 * Thunderbird updates are now following the 140.x ESR release series instead of
   128.x ESR.
 * Fix failing search for newer versions of HeidiSQL.
