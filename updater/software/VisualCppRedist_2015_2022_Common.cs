@@ -109,6 +109,11 @@ namespace updater.software
                 return newInfo;
             // Replace version number - and that's it.
             newInfo.newestVersion = newVersion;
+            // Remove checksums - they are outdated now.
+            newInfo.install32Bit.checksum = null;
+            newInfo.install32Bit.algorithm = HashAlgorithm.Unknown;
+            newInfo.install64Bit.checksum = null;
+            newInfo.install64Bit.algorithm = HashAlgorithm.Unknown;
             return newInfo;
         }
 

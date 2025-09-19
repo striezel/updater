@@ -45,8 +45,8 @@ namespace updater.software
             var signature = new Signature(publisherX509, certificateExpiration);
             var installer = new InstallInfoExe_VCRedist(
                 "https://aka.ms/vs/17/release/vc_redist.x86.exe",
-                HashAlgorithm.Unknown,
-                null,
+                HashAlgorithm.SHA256,
+                "0c09f2611660441084ce0df425c51c11e147e6447963c3690f97e0b25c55ed64",
                 signature,
                 "/quiet /norestart");
             return new AvailableSoftware(
