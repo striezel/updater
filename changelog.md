@@ -17,6 +17,7 @@ __[changes]__
 __[maintenance]__
 
 * Update certificate information for Blender LTS installer.
+* Update certificate information for Node.js installer.
 * NLog library is updated from 6.0.3 to 6.0.4.
 
 ## Version 2025.08.30.0
