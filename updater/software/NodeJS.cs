@@ -120,7 +120,7 @@ namespace updater.software
             var client = HttpClientProvider.Provide();
             try
             {
-                // Note: Changes this URL as soon as the next version enters LTS state.
+                // Note: Change this URL as soon as the next version enters LTS state.
                 var task = client.GetStringAsync("https://nodejs.org/dist/latest-v22.x/");
                 task.Wait();
                 htmlCode = task.Result;
