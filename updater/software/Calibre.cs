@@ -204,6 +204,10 @@ namespace updater.software
 
             // construct new version information
             var newInfo = knownInfo();
+            if (newVersion == newInfo.newestVersion)
+            {
+                return newInfo;
+            }
             // replace version number - both as newest version and in URL for download
             string oldVersion = newInfo.newestVersion;
             newInfo.newestVersion = newVersion;
