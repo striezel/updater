@@ -73,13 +73,13 @@ namespace updater.software
             }
             var signature = new Signature(publisherX509, certificateExpiration);
             var installer = new InstallInfoExe(
-                "https://github.com/git-for-windows/git/releases/download/v2.51.0.windows.1/Git-2.51.0-64-bit.exe",
+                "https://github.com/git-for-windows/git/releases/download/v2.51.0.windows.2/Git-2.51.0.2-64-bit.exe",
                 HashAlgorithm.SHA256,
-                "843037416371600a7f289be8fe2b2224afe1c1bb0736bbab7b3ff393e6a7aaf2",
+                "5cf583441ccd8d98d3492936235b6ee30c6847d1b3f49365d6a025b3432094ad",
                 signature,
                 "/VERYSILENT /NORESTART");
             return new AvailableSoftware("Git",
-                "2.51.0",
+                "2.51.0.2",
                 "^(Git|Git version [0-9]+\\.[0-9]+\\.[0-9]+(\\.[0-9]+)?)$",
                 "^(Git|Git version [0-9]+\\.[0-9]+\\.[0-9]+(\\.[0-9]+)?)$",
                 installer,
