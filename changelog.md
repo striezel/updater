@@ -15,6 +15,12 @@ __[breaking change]__
   that neither version detection nor verification of the downloaded installers
   is possible anymore.
 
+__[changes]__
+
+* Starting with HeidiSQL 12.12.0.7122, no more 32-bit builds for HeidiSQL are
+  provided. Therefore the updater will now update 32-bit installations of
+  HeidiSQL to 64-bit installations, if it runs on a 64-bit OS.
+
 ## Version 2025.09.30.0
 
 __[changes]__

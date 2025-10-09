@@ -18,6 +18,8 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using System.Text.RegularExpressions;
 using updater.data;
 using updater.versions;
@@ -27,7 +29,7 @@ namespace updater.software
     /// <summary>
     /// Handles updates of HeidiSQL.
     /// </summary>
-    public class HeidiSQL : NoPreUpdateProcessSoftware
+    public class HeidiSQL : AbstractSoftware
     {
         /// <summary>
         /// NLog.Logger for HeidiSQL class
@@ -64,11 +66,46 @@ namespace updater.software
         /// details about the software.</returns>
         public override AvailableSoftware knownInfo()
         {
+            // Existing 32-bit installations on 64-bit operating systems will
+            // effectively get "cross-graded" to 64-bit installations. So check
+            // that we are on an 64-bit OS before doing that.
+            if (!Environment.Is64BitOperatingSystem)
+            {
+                logger.Warn("HeidiSQL does not provide 32-bit binaries from version 12.12.0.7122 onwards.");
+                logger.Warn("Please consider switching to an 64-bit operating system to get newer HeidiSQL updates.");
+                return Last32BitVersion();
+            }
+            var installer = new InstallInfoExe(
+                    "https://www.heidisql.com/installers/HeidiSQL_12.12.0.7122_Setup.exe",
+                    HashAlgorithm.SHA1,
+                    "8be54fc44810a3ddb9b034d9c2962dd040ef6496",
+                    new Signature(publisherX509, certificateExpiration),
+                    "/VERYSILENT /NORESTART");
+            return new AvailableSoftware("HeidiSQL",
+                "12.12.0.7122",
+                "^HeidiSQL [0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+$",
+                "^HeidiSQL [0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+$",
+                // use 64-bit installer, too, to update 32-bit installations to 64-bit
+                installer,
+                // 64-bit installer
+                installer
+                );
+        }
+
+        /// <summary>
+        /// Gets the information about the latest HeidiSQL version that still
+        /// has 32-bit builds.
+        /// </summary>
+        /// <returns>Returns an AvailableSoftware instance with the known
+        /// details about the software.</returns>
+        public static AvailableSoftware Last32BitVersion()
+        {
             var installer = new InstallInfoExe(
                     "https://www.heidisql.com/installers/HeidiSQL_12.11.0.7065_Setup.exe",
                     HashAlgorithm.SHA1,
                     "5a3eba649eb654970574bdf91455b0cf2da9182f",
-                    new Signature(publisherX509, certificateExpiration),
+                    new Signature("CN=Ansgar Becker, O=Ansgar Becker, S=Nordrhein-Westfalen, C=DE",
+                                  new(2028, 3, 16, 23, 59, 59, DateTimeKind.Utc)),
                     "/VERYSILENT /NORESTART");
             return new AvailableSoftware("HeidiSQL",
                 "12.11.0.7065",
@@ -112,6 +149,12 @@ namespace updater.software
         public override AvailableSoftware searchForNewer()
         {
             logger.Info("Searching for newer version of HeidiSQL...");
+            if (!Environment.Is64BitOperatingSystem)
+            {
+                logger.Warn("HeidiSQL does not provide 32-bit binaries from version 12.12.0.7122 onwards.");
+                logger.Warn("Please consider switching to an 64-bit operating system to get newer HeidiSQL updates.");
+                return Last32BitVersion();
+            }
             var client = HttpClientProvider.Provide();
             string htmlCode;
             try
@@ -184,6 +227,67 @@ namespace updater.software
         public override List<string> blockerProcesses(DetectedSoftware detected)
         {
             return ["heidisql"];
+        }
+
+
+        /// <summary>
+        /// Determines whether a separate process must be run before the update.
+        /// </summary>
+        /// <param name="detected">currently installed / detected software version</param>
+        /// <returns>Returns true, if a separate process returned by
+        /// preUpdateProcess() needs to run in preparation of the update.
+        /// Returns false, if not. Calling preUpdateProcess() may throw an
+        /// exception in the later case.</returns>
+        public override bool needsPreUpdateProcess(DetectedSoftware detected)
+        {
+            return detected.appType == ApplicationType.Bit32;
+        }
+
+
+        /// <summary>
+        /// Returns a list of processes that must be run before the update.
+        /// This can be an empty list.
+        /// </summary>
+        /// <param name="detected">currently installed / detected software version</param>
+        /// <returns>Returns a Process ready to start that should be run before
+        /// the update. May return null or may throw, if needsPreUpdateProcess()
+        /// returned false.</returns>
+        public override List<Process> preUpdateProcess(DetectedSoftware detected)
+        {
+            if (detected.appType != ApplicationType.Bit32)
+            {
+                return null;
+            }
+
+            // Prepare clean uninstall of 32-bit version before updating to 64-bit version.
+            string uninstallerPath = null;
+            if (!string.IsNullOrWhiteSpace(detected.uninstallString))
+            {
+                uninstallerPath = detected.uninstallString;
+                // Remove enclosing quotes, if any.
+                if (uninstallerPath.StartsWith('\"') && uninstallerPath.EndsWith('\"'))
+                {
+                    uninstallerPath = uninstallerPath[1..^1];
+                }
+            }
+            if (string.IsNullOrWhiteSpace(uninstallerPath) && !string.IsNullOrWhiteSpace(detected.installPath))
+            {
+                uninstallerPath = detected.installPath;
+                // Remove enclosing quotes, if any.
+                if (uninstallerPath.StartsWith('\"') && uninstallerPath.EndsWith('\"'))
+                {
+                    uninstallerPath = uninstallerPath[1..^1];
+                    uninstallerPath = Path.Combine(uninstallerPath, "unins000.exe");
+                }
+            }
+
+            var proc = new Process();
+            proc.StartInfo.FileName = uninstallerPath;
+            proc.StartInfo.Arguments = "/VERYSILENT /NORESTART";
+            return
+            [
+                proc
+            ];
         }
 
 
