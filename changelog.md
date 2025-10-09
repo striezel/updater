@@ -4,6 +4,17 @@ _(Note: This changelog focuses on the major changes between the different
 versions. Therefore, it may not contain all changes. Especially smaller fixes or
 improvements may be omitted.)_
 
+## Next Version
+
+__[breaking change]__
+
+* Update support for Microsoft Visual C++ 2015-2022 Redistributable is removed.
+  Reason for the removal is that Microsoft does not provide an easy way to
+  determine the current newest version of the MSVC++ 2015-2022 Redistributable
+  anymore, and the code signing signature on the installers has expired. With
+  that neither version detection nor verification of the downloaded installers
+  is possible anymore.
+
 ## Version 2025.09.30.0
 
 __[changes]__

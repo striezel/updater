@@ -39,7 +39,6 @@ application.
 * MariaDB 10.11
 * MariaDB 11.4
 * MariaDB 11.8
-* Microsoft Visual C++ 2015-2022 Redistributable
 * Mozilla Firefox
 * Mozilla Firefox Developer Edition
 * Mozilla Firefox ESR
