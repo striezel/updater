@@ -37,13 +37,13 @@ namespace updater.software
         /// <summary>
         /// publisher name for signed executables of LibreOffice
         /// </summary>
-        private const string publisherX509 = "E=info@documentfoundation.org, CN=The Document Foundation, O=The Document Foundation, OU=LibreOffice Build Team, L=Berlin, S=Berlin, C=DE";
+        private const string publisherX509 = "CN=The Document Foundation, O=The Document Foundation, L=Berlin, S=Berlin, C=DE";
 
 
         /// <summary>
         /// expiration date of the certificate
         /// </summary>
-        private static readonly DateTime certificateExpiration = new(2026, 9, 13, 12, 18, 28, DateTimeKind.Utc);
+        private static readonly DateTime certificateExpiration = new(2028, 6, 8, 14, 28, 59, DateTimeKind.Utc);
 
 
         /// <summary>
@@ -65,19 +65,19 @@ namespace updater.software
         {
             var signature = new Signature(publisherX509, certificateExpiration);
             return new AvailableSoftware("LibreOffice Help Pack German",
-                "25.8.1.1",
+                "25.8.2.2",
                 "^LibreOffice [0-9]+\\.[0-9]+ Help Pack \\(German\\)$",
                 "^LibreOffice [0-9]+\\.[0-9]+ Help Pack \\(German\\)$",
                 new InstallInfoLibO(
-                    "https://download.documentfoundation.org/libreoffice/stable/25.8.1/win/x86/LibreOffice_25.8.1_Win_x86_helppack_de.msi",
+                    "https://download.documentfoundation.org/libreoffice/stable/25.8.2/win/x86/LibreOffice_25.8.2_Win_x86_helppack_de.msi",
                     HashAlgorithm.SHA256,
-                    "cb7dc5f26c3ef35e4618ddd36d00e4ad232dd874ff2503a872a64cdd459bcb07",
+                    "6108a7cc280069dbb33c017b770b8220280294f764167bd9c9bbbb42c96d1c25",
                     signature,
                     "/qn /norestart"),
                 new InstallInfoLibO(
-                    "https://download.documentfoundation.org/libreoffice/stable/25.8.1/win/x86_64/LibreOffice_25.8.1_Win_x86-64_helppack_de.msi",
+                    "https://download.documentfoundation.org/libreoffice/stable/25.8.2/win/x86_64/LibreOffice_25.8.2_Win_x86-64_helppack_de.msi",
                     HashAlgorithm.SHA256,
-                    "3a0832268d5f7457c64f08e6755f537097b3f3d82ebd206f7450f91724cd4d1a",
+                    "048b63b38b37dc99fcb5e3492180087eb26dafc95763d43b08ef3c7e883e8b01",
                     signature,
                     "/qn /norestart")
                     );

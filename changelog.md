@@ -24,6 +24,7 @@ __[changes]__
 __[maintenance]__
 
 * NLog library is updated from 6.0.4 to 6.0.5.
+* Update certificate information for LibreOffice installers.
 
 ## Version 2025.09.30.0
 
