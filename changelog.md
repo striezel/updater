@@ -21,6 +21,10 @@ __[changes]__
   provided. Therefore the updater will now update 32-bit installations of
   HeidiSQL to 64-bit installations, if it runs on a 64-bit OS.
 
+__[maintenance]__
+
+* NLog library is updated from 6.0.4 to 6.0.5.
+
 ## Version 2025.09.30.0
 
 __[changes]__
