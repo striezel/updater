@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017, 2021, 2022  Dirk Stolle
+    Copyright (C) 2017, 2021, 2022, 2025  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -43,7 +43,7 @@ namespace updater_test.software
                 Assert.IsFalse(string.IsNullOrWhiteSpace(item));
                 ++items;
             }
-            Assert.IsTrue(items > 50);
+            Assert.IsGreaterThan(50, items);
         }
 
 
@@ -105,13 +105,21 @@ namespace updater_test.software
             var re = new Regex(info.match64Bit);
             // match old style, including version number
             Assert.IsTrue(re.IsMatch("Mozilla Thunderbird 45.7.0 (x64 de)"));
+            // match old style, including version number, major and minor version only
+            Assert.IsTrue(re.IsMatch("Mozilla Thunderbird 45.7 (x64 de)"));
             // match new style, without version number
             Assert.IsTrue(re.IsMatch("Mozilla Thunderbird (x64 de)"));
+            // match new ESR style (no version number)
+            Assert.IsTrue(re.IsMatch("Mozilla Thunderbird ESR (x64 de)"));
             re = new Regex(info.match32Bit);
             // match old style, including version number
             Assert.IsTrue(re.IsMatch("Mozilla Thunderbird 45.7.0 (x86 de)"));
+            // match old style, including version number, major and minor version only
+            Assert.IsTrue(re.IsMatch("Mozilla Thunderbird 45.7 (x86 de)"));
             // match new style, without version number
             Assert.IsTrue(re.IsMatch("Mozilla Thunderbird (x86 de)"));
+            // match new ESR style (no version number)
+            Assert.IsTrue(re.IsMatch("Mozilla Thunderbird ESR (x86 de)"));
         }
 
 
@@ -127,8 +135,10 @@ namespace updater_test.software
 
             var re = new Regex(info.match64Bit);
             Assert.IsTrue(re.IsMatch("Mozilla Thunderbird 78.13.0 (x64 de)"));
+            Assert.IsTrue(re.IsMatch("Mozilla Thunderbird 78.13 (x64 de)"));
             re = new Regex(info.match32Bit);
             Assert.IsTrue(re.IsMatch("Mozilla Thunderbird 78.13.0 (x86 de)"));
+            Assert.IsTrue(re.IsMatch("Mozilla Thunderbird 78.13 (x86 de)"));
         }
     } // class
 } // namespace
