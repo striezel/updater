@@ -53,7 +53,7 @@ namespace updater.software
         /// <summary>
         /// expiration date of certificate
         /// </summary>
-        private static readonly DateTime certificateExpiration = new(2025, 10, 1, 23, 59, 59, DateTimeKind.Utc);
+        private static readonly DateTime certificateExpiration = new(2028, 9, 30, 23, 59, 59, DateTimeKind.Utc);
 
 
         /// <summary>
@@ -77,11 +77,11 @@ namespace updater.software
             }
 
             var signature = new Signature(publisherX509, certificateExpiration);
-            const string knownVersion = "8.12.0";
+            const string knownVersion = "8.13.0";
             InstallInfo info64 = new InstallInfoMsi(
                 "https://download.calibre-ebook.com/" + knownVersion + "/calibre-64bit-" + knownVersion + ".msi",
                 HashAlgorithm.SHA256,
-                "1557ad6e5877ae461d162fc078655e999a787cf56e9f73ea723e2025726aa357",
+                "081968d6e919c8a1e45de763378ce209da864de2b892dfb4ad5f7ebbe44c25c1",
                 signature,
                 "/qn /norestart"
                 );
