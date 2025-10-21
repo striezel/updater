@@ -9,6 +9,7 @@ improvements may be omitted.)_
 __[maintenance]__
 
 * Update certificate information for Calibre installer.
+* Update certificate information for Node.js installer.
 
 ## Version 2025.10.13.0
 
