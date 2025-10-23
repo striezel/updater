@@ -6,6 +6,10 @@ improvements may be omitted.)_
 
 ## Next Version
 
+__[changes]__
+
+* Fix failing search for newer versions of Blender LTS.
+
 __[maintenance]__
 
 * Update certificate information for Calibre installer.

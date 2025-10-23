@@ -21,6 +21,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text.RegularExpressions;
 using updater.data;
+using updater.versions;
 
 namespace updater.software
 {
@@ -119,15 +120,23 @@ namespace updater.software
             string currentVersion;
             try
             {
-                var task = client.GetStringAsync("https://www.blender.org/download/lts/4-2/");
+                var task = client.GetStringAsync("https://download.blender.org/release/Blender4.2/");
                 task.Wait();
                 var html = task.Result;
                 // Installer will be something like "https://www.blender.org/download/release/Blender4.2/blender-4.2.7-windows-x64.msi".
-                var reVersion = new Regex("blender\\-([0-9]+\\.[0-9]+\\.[0-9]+)\\-windows\\-x64\\.msi");
-                Match matchVersion = reVersion.Match(html);
-                if (!matchVersion.Success)
+                var reVersion = new Regex(">blender\\-([0-9]+\\.[0-9]+\\.[0-9]+)\\-windows\\-x64\\.msi<");
+                var matches = reVersion.Matches(html);
+                if (matches.Count == 0)
+                {
                     return null;
-                currentVersion = matchVersion.Groups[1].Value;
+                }
+                var list = new List<Triple>(25);
+                foreach (Match match in matches)
+                {
+                    list.Add(new Triple(match.Groups[1].Value));
+                }
+                list.Sort();
+                currentVersion = list[^1].full();
             }
             catch (Exception ex)
             {
