@@ -16,6 +16,7 @@ application.
 * Eclipse Temurin JDK 11 LTS (formerly AdoptOpenJDK JDK 11)
 * Eclipse Temurin JDK 17 LTS
 * Eclipse Temurin JDK 21 LTS
+* Eclipse Temurin JDK 25 LTS
 * Eclipse Temurin JRE 8 LTS (formerly AdoptOpenJDK JRE 8)
 * Eclipse Temurin JRE 11 LTS (formerly AdoptOpenJDK JRE 11)
 * Eclipse Temurin JRE 17 LTS

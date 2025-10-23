@@ -6,6 +6,10 @@ improvements may be omitted.)_
 
 ## Next Version
 
+__[new features]__
+
+* Update support for Eclipse Temurin JDK 25 LTS is added.
+
 __[changes]__
 
 * Fix failing search for newer versions of Blender LTS.
