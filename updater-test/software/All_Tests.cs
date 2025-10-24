@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017, 2018, 2024  Dirk Stolle
+    Copyright (C) 2017, 2018, 2024, 2025  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -42,7 +42,7 @@ namespace updater_test.software
             };
             var result = All.get(opts);
             Assert.IsNotNull(result);
-            Assert.IsTrue(result.Count > 0);
+            Assert.IsNotEmpty(result);
             for (int i = 0; i < result.Count; i++)
             {
                 Assert.IsNotNull(result[i]);

@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017, 2018  Dirk Stolle
+    Copyright (C) 2017, 2018, 2025  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -18,7 +18,6 @@
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using System.Collections.Generic;
 using updater.cli;
 using updater.operations;
 
@@ -43,7 +42,7 @@ namespace updater_test.algorithm
             };
             var q = SoftwareStatus.query(opts);
             Assert.IsNotNull(q);
-            Assert.IsTrue(q.Count >= 0);
+            Assert.IsGreaterThanOrEqualTo(0, q.Count);
 
             foreach (var item in q)
             {
@@ -66,7 +65,7 @@ namespace updater_test.algorithm
                 autoGetNewer = false
             };
             var q = SoftwareStatus.query(opts);
-            Assert.IsTrue(q.Count > 0);
+            Assert.IsNotEmpty(q);
 
             string data = SoftwareStatus.toConsoleOutput(q);
             Assert.IsNotNull(data);

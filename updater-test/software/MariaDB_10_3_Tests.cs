@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2022  Dirk Stolle
+    Copyright (C) 2022, 2025  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -40,9 +40,9 @@ namespace updater_test.software
             // name must be set
             Assert.IsFalse(string.IsNullOrWhiteSpace(info.Name));
             // 64-bit installation information instance should be present
-            Assert.IsTrue(info.install64Bit != null);
+            Assert.IsNotNull(info.install64Bit);
             // regex should be present
-            Assert.IsTrue(!string.IsNullOrWhiteSpace(info.match64Bit));
+            Assert.IsFalse(string.IsNullOrWhiteSpace(info.match64Bit));
             // 64-bit information should match
             Assert.AreEqual<bool>(info.install64Bit != null, !string.IsNullOrWhiteSpace(info.match64Bit));
             // checksums should always be present, or at least a signature for verification

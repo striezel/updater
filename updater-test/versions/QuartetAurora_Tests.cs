@@ -133,7 +133,7 @@ namespace updater_test.versions
             var quart = new QuartetAurora();
             int code = quart.GetHashCode();
             // 98 is the ASCII code for 'b'.
-            Assert.AreEqual(code, 98);
+            Assert.AreEqual(98, code);
 
             quart = new QuartetAurora()
             {
@@ -143,7 +143,7 @@ namespace updater_test.versions
                 build = 0
             };
             // 98 is the ASCII code for 'b'.
-            Assert.AreEqual(quart.GetHashCode(), int.MaxValue - 98);
+            Assert.AreEqual(int.MaxValue - 98, quart.GetHashCode());
         }
 
 
@@ -167,8 +167,8 @@ namespace updater_test.versions
             var quadOne = new QuartetAurora("12.3b4");
             var quadTwo = new QuartetAurora("9.6b1");
 
-            Assert.IsTrue(quadOne.CompareTo(quadTwo) > 0);
-            Assert.IsTrue(quadTwo.CompareTo(quadOne) < 0);
+            Assert.IsGreaterThan(0, quadOne.CompareTo(quadTwo));
+            Assert.IsLessThan(0, quadTwo.CompareTo(quadOne));
         }
 
 
@@ -178,8 +178,8 @@ namespace updater_test.versions
             var quadOne = new QuartetAurora("9.6b1");
             var quadTwo = new QuartetAurora("12.3b4");
 
-            Assert.IsTrue(quadOne.CompareTo(quadTwo) < 0);
-            Assert.IsTrue(quadTwo.CompareTo(quadOne) > 0);
+            Assert.IsLessThan(0, quadOne.CompareTo(quadTwo));
+            Assert.IsGreaterThan(0, quadTwo.CompareTo(quadOne));
         }
 
 

@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017, 2022  Dirk Stolle
+    Copyright (C) 2017, 2022, 2025  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -133,7 +133,7 @@ namespace updater_test.versions
                 build = 0
             };
             int code = quad.GetHashCode();
-            Assert.AreEqual(code, int.MaxValue);
+            Assert.AreEqual(int.MaxValue, code);
 
             quad = new Quartet()
             {
@@ -166,8 +166,8 @@ namespace updater_test.versions
             var quadOne = new Quartet("12.3.4.5");
             var quadTwo = new Quartet("9.6.3.1");
 
-            Assert.IsTrue(quadOne.CompareTo(quadTwo) > 0);
-            Assert.IsTrue(quadTwo.CompareTo(quadOne) < 0);
+            Assert.IsGreaterThan(0, quadOne.CompareTo(quadTwo));
+            Assert.IsLessThan(0, quadTwo.CompareTo(quadOne));
         }
 
 
@@ -177,8 +177,8 @@ namespace updater_test.versions
             var quadOne = new Quartet("9.6.3.1");
             var quadTwo = new Quartet("12.3.4.5");
 
-            Assert.IsTrue(quadOne.CompareTo(quadTwo) < 0);
-            Assert.IsTrue(quadTwo.CompareTo(quadOne) > 0);
+            Assert.IsLessThan(0, quadOne.CompareTo(quadTwo));
+            Assert.IsGreaterThan(0, quadTwo.CompareTo(quadOne));
         }
 
 
