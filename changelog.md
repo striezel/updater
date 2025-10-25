@@ -9,6 +9,7 @@ improvements may be omitted.)_
 __[new features]__
 
 * Update support for Eclipse Temurin JDK 25 LTS is added.
+* Update support for Eclipse Temurin JRE 25 LTS is added.
 
 __[changes]__
 
