@@ -122,7 +122,7 @@ namespace updater_test.versions
                 patch = 0
             };
             int code = trip.GetHashCode();
-            Assert.AreEqual(code, int.MaxValue);
+            Assert.AreEqual(int.MaxValue, code);
 
             trip = new Triple()
             {
@@ -154,8 +154,8 @@ namespace updater_test.versions
             var tripOne = new Triple("12.3.4");
             var tripTwo = new Triple("9.6.3");
 
-            Assert.IsTrue(tripOne.CompareTo(tripTwo) > 0);
-            Assert.IsTrue(tripTwo.CompareTo(tripOne) < 0);
+            Assert.IsGreaterThan(0, tripOne.CompareTo(tripTwo));
+            Assert.IsLessThan(0, tripTwo.CompareTo(tripOne));
         }
 
 
@@ -165,8 +165,8 @@ namespace updater_test.versions
             var tripOne = new Triple("9.6.3");
             var tripTwo = new Triple("12.3.4");
 
-            Assert.IsTrue(tripOne.CompareTo(tripTwo) < 0);
-            Assert.IsTrue(tripTwo.CompareTo(tripOne) > 0);
+            Assert.IsLessThan(0, tripOne.CompareTo(tripTwo));
+            Assert.IsGreaterThan(0, tripTwo.CompareTo(tripOne));
         }
 
 

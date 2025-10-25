@@ -38,8 +38,8 @@ namespace updater_test.software
             var mdb_10_3 = new MariaDB_10_3(false);
             var signature = mdb_10_3.knownInfo().install64Bit.signature;
             Assert.IsTrue(signature.ContainsData());
-            Assert.IsTrue(signature.publisher.Contains("MariaDB Corporation Ab"));
-            Assert.IsTrue(signature.publisher.Contains("Espoo"));
+            Assert.Contains("MariaDB Corporation Ab", signature.publisher);
+            Assert.Contains("Espoo", signature.publisher);
             Assert.IsTrue(signature.HasExpired());
         }
 
@@ -53,8 +53,8 @@ namespace updater_test.software
             var mdb_10_4 = new MariaDB_10_4(false);
             var signature = mdb_10_4.knownInfo().install64Bit.signature;
             Assert.IsTrue(signature.ContainsData());
-            Assert.IsTrue(signature.publisher.Contains("MariaDB USA, Inc."));
-            Assert.IsTrue(signature.publisher.Contains("Redwood City"));
+            Assert.Contains("MariaDB USA, Inc.", signature.publisher);
+            Assert.Contains("Redwood City", signature.publisher);
             Assert.IsFalse(signature.HasExpired()); // Note: Change to IsTrue() after 2026-03-21.
         }
 
@@ -76,8 +76,8 @@ namespace updater_test.software
             foreach (var signature in signatures)
             {
                 Assert.IsTrue(signature.ContainsData());
-                Assert.IsTrue(signature.publisher.Contains("MariaDB USA, Inc."));
-                Assert.IsTrue(signature.publisher.Contains("Redwood City"));
+                Assert.Contains("MariaDB USA, Inc.", signature.publisher);
+                Assert.Contains("Redwood City", signature.publisher);
                 Assert.IsTrue(signature.expiresAt > new System.DateTime(2024, 2, 1, 0, 0, 0, System.DateTimeKind.Utc));
             }
         }

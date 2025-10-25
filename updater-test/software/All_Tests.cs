@@ -63,13 +63,13 @@ namespace updater_test.software
             };
             var result = All.get(opts);
             Assert.IsNotNull(result);
-            Assert.IsTrue(result.Count > 0);
+            Assert.IsNotEmpty(result);
 
             opts.autoGetNewer = false;
             opts.excluded = [];
             var result2 = All.get(opts);
             Assert.IsNotNull(result2);
-            Assert.IsTrue(result2.Count > 0);
+            Assert.IsNotEmpty(result2);
 
             // count should be equal
             Assert.AreEqual<int>(result.Count, result2.Count);
@@ -90,7 +90,7 @@ namespace updater_test.software
 
             var result = All.get(opts);
             Assert.IsNotNull(result);
-            Assert.IsTrue(result.Count > 0);
+            Assert.IsNotEmpty(result);
 
 
             var excluded = new List<string>()
@@ -103,7 +103,7 @@ namespace updater_test.software
 
             var result2 = All.get(opts);
             Assert.IsNotNull(result2);
-            Assert.IsTrue(result2.Count > 0);
+            Assert.IsNotEmpty(result2);
 
             // count should not be equal
             Assert.AreNotEqual<int>(result.Count, result2.Count);
@@ -124,7 +124,7 @@ namespace updater_test.software
             };
             var result = All.get(opts);
             Assert.IsNotNull(result);
-            Assert.IsTrue(result.Count > 0);
+            Assert.IsNotEmpty(result);
 
             HashSet<string> uniqueIds = new(result.Count);
             foreach (var software in result)

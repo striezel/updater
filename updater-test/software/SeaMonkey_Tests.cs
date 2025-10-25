@@ -43,7 +43,7 @@ namespace updater_test.software
                 Assert.IsFalse(string.IsNullOrWhiteSpace(item));
                 ++items;
             }
-            Assert.IsTrue(items > 15);
+            Assert.IsGreaterThan(15, items);
         }
 
 
