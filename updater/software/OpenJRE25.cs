@@ -68,16 +68,16 @@ namespace updater.software
         public override AvailableSoftware knownInfo()
         {
             var signature = new Signature(publisherX509, certificateExpiration);
-            const string version = "25.0.0.36";
+            const string version = "25.0.1.8";
             return new AvailableSoftware("Eclipse Temurin JRE 25 with Hotspot",
                 version,
                 null, // no 32-bit installer
-                "^Eclipse Temurin JRE [a-z]+ Hotspot 25\\+[0-9]+ \\(x64\\)$",
+                "^Eclipse Temurin JRE [a-z]+ Hotspot 25(\\.[0-9]+\\.[0-9]+)?\\+[0-9]+ \\(x64\\)$",
                 null, // no 32-bit installer
                 new InstallInfoMsiNoLocation(
-                    "https://github.com/adoptium/temurin25-binaries/releases/download/jdk-25%2B36/OpenJDK25U-jre_x64_windows_hotspot_25_36.msi",
+                    "https://github.com/adoptium/temurin25-binaries/releases/download/jdk-25.0.1%2B8/OpenJDK25U-jre_x64_windows_hotspot_25.0.1_8.msi",
                     HashAlgorithm.SHA256,
-                    "eeae2fb19dc8d778a324d9b5c879f7afe9732487516807b75584436b01e0d8c3",
+                    "54593f49cff797827dc5d51c3257feb828decba9b70bb270f6c6d5bba91efd56",
                     signature,
                     "ALLUSERS=1 INSTALLLEVEL=3 /qn /norestart")
                     );
