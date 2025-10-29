@@ -352,9 +352,6 @@ namespace moz_checksum_generator
             rtbBit32.Text = getChecksumCode(data);
             rtbBit32.ContextMenuStrip = contextMenuStripChecksums32Bit;
 
-            string new_langs = getNewLangCodes(updater.software.SeaMonkey.validLanguageCodes(), data.Keys);
-            lblNewLangCodes.Text = new_langs;
-
             // look for line with the correct language code and version for 64-bit
             var reChecksum64Bit = new Regex("[0-9a-f]{128} sha512 [0-9]+ .*seamonkey\\-" + Regex.Escape(version) + "\\.[a-z]{2,3}(\\-[A-Z]+)?\\.win64\\.installer\\.exe");
             data.Clear();
@@ -367,6 +364,9 @@ namespace moz_checksum_generator
             }
             rtbBit64.Text = getChecksumCode(data);
             rtbBit64.ContextMenuStrip = contextMenuStripChecksums64Bit;
+
+            string new_langs = getNewLangCodes(updater.software.SeaMonkey.validLanguageCodes(), data.Keys);
+            lblNewLangCodes.Text = new_langs;
         }
 
 
