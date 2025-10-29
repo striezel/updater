@@ -74,7 +74,7 @@ namespace updater_test.software
         /// Checks whether the regular expression for the software name matches known names.
         /// </summary>
         [TestMethod]
-        public void Test_regexMatches()
+        public void Test_regexMatches_shortVersion()
         {
             var info = new OpenJDK25(false).knownInfo();
             Assert.IsNotNull(info, "knownInfo() returned null!");
@@ -84,6 +84,24 @@ namespace updater_test.software
             Assert.IsTrue(re64.IsMatch("Eclipse Temurin JDK avec Hotspot 25+36 (x64)"), "French product name (64-bit) does not match!");
             Assert.IsTrue(re64.IsMatch("Eclipse Temurin JDK mit Hotspot 25+36 (x64)"), "German product name (64-bit) does not match!");
             Assert.IsTrue(re64.IsMatch("Eclipse Temurin JDK con Hotspot 25+36 (x64)"), "Spanish product name (64-bit) does not match!");
+        }
+
+
+        /// <summary>
+        /// Checks whether the regular expression for the software name matches
+        /// known names with minor version number and security patch version number.
+        /// </summary>
+        [TestMethod]
+        public void Test_regexMatches_extendedVersion()
+        {
+            var info = new OpenJDK25(false).knownInfo();
+            Assert.IsNotNull(info, "knownInfo() returned null!");
+
+            var re64 = new Regex(info.match64Bit, RegexOptions.IgnoreCase);
+            Assert.IsTrue(re64.IsMatch("Eclipse Temurin JDK with Hotspot 25.0.1+8 (x64)"), "English product name (64-bit) does not match!");
+            Assert.IsTrue(re64.IsMatch("Eclipse Temurin JDK avec Hotspot 25.0.1+8 (x64)"), "French product name (64-bit) does not match!");
+            Assert.IsTrue(re64.IsMatch("Eclipse Temurin JDK mit Hotspot 25.0.1+8 (x64)"), "German product name (64-bit) does not match!");
+            Assert.IsTrue(re64.IsMatch("Eclipse Temurin JDK con Hotspot 25.0.1+8 (x64)"), "Spanish product name (64-bit) does not match!");
         }
     } // class
 } // namespace

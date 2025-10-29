@@ -69,14 +69,14 @@ namespace updater.software
         {
             var signature = new Signature(publisherX509, certificateExpiration);
             return new AvailableSoftware("Eclipse Temurin JDK 25 with Hotspot",
-                "25.0.0.36",
+                "25.0.1.8",
                 null, // no 32-bit installer
-                "^Eclipse Temurin JDK [a-z]+ Hotspot 25\\+[0-9]+ \\(x64\\)$",
+                "^Eclipse Temurin JDK [a-z]+ Hotspot 25(\\.[0-9]+\\.[0-9]+)?\\+[0-9]+ \\(x64\\)$",
                 null, // no 32-bit installer
                 new InstallInfoMsiNoLocation(
-                    "https://github.com/adoptium/temurin25-binaries/releases/download/jdk-25%2B36/OpenJDK25U-jdk_x64_windows_hotspot_25_36.msi",
+                    "https://github.com/adoptium/temurin25-binaries/releases/download/jdk-25.0.1%2B8/OpenJDK25U-jdk_x64_windows_hotspot_25.0.1_8.msi",
                     HashAlgorithm.SHA256,
-                    "d899afd9c8160b8de9dcf2cced8da33702e00104068eac50e33dd1cbf1df5248",
+                    "c49e19ba5b47bf119402b1e0a0a71ce5b19ddd9e4ac3e038ea99fe648bd0b3f9",
                     signature,
                     "ALLUSERS=1 INSTALLLEVEL=3 /qn /norestart")
                     );
