@@ -235,7 +235,7 @@ namespace updater.software
         /// returned false.</returns>
         public override List<Process> preUpdateProcess(DetectedSoftware detected)
         {
-            // Uninstall the old version fisrt. See needsPreUpdateProcess() for
+            // Uninstall the old version first. See needsPreUpdateProcess() for
             // an explanation of why this is required.
             if (string.IsNullOrWhiteSpace(detected.uninstallString))
             {
