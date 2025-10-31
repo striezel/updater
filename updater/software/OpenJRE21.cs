@@ -45,7 +45,7 @@ namespace updater.software
         /// <summary>
         /// expiration date for the publisher certificate
         /// </summary>
-        private static readonly DateTime certificateExpiration = new(2025, 7, 21, 23, 59, 59, DateTimeKind.Utc);
+        private static readonly DateTime certificateExpiration = new(2026, 7, 16, 23, 59, 59, DateTimeKind.Utc);
 
 
         /// <summary>
@@ -66,16 +66,16 @@ namespace updater.software
         public override AvailableSoftware knownInfo()
         {
             var signature = new Signature(publisherX509, certificateExpiration);
-            const string version = "21.0.8.9";
+            const string version = "21.0.9.10";
             return new AvailableSoftware("Eclipse Temurin JRE 21 with Hotspot",
                 version,
                 null, // no 32-bit installer
                 "^Eclipse Temurin JRE [a-z]+ Hotspot 21\\.[0-9]+\\.[0-9]+(\\.[0-9]+)?\\+[0-9]+(\\.[0-9]+)? \\(x64\\)$",
                 null, // no 32-bit installer
                 new InstallInfoMsiNoLocation(
-                    "https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.8%2B9/OpenJDK21U-jre_x64_windows_hotspot_21.0.8_9.msi",
+                    "https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.9%2B10/OpenJDK21U-jre_x64_windows_hotspot_21.0.9_10.msi",
                     HashAlgorithm.SHA256,
-                    "9e38a94eed115fb834c2c4375bc493cef1a47e28c82bd83f623efe3fca017e7a",
+                    "56b167659821fe125ea3b2974b0da1bac725b886b77193629d8ef880d38517e1",
                     signature,
                     "INSTALLLEVEL=3 /qn /norestart")
                     );
