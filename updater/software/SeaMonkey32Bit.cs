@@ -22,19 +22,18 @@ using System.Diagnostics;
 using System.IO;
 using System.Text.RegularExpressions;
 using updater.data;
-using updater.versions;
 
 namespace updater.software
 {
     /// <summary>
     /// SeaMonkey localizations that are supported in version 2.48 and later.
     /// </summary>
-    public class SeaMonkey : AbstractSoftware
+    public class SeaMonkey32Bit : AbstractSoftware
     {
         /// <summary>
         /// NLog.Logger for SeaMonkey class
         /// </summary>
-        private static readonly NLog.Logger logger = NLog.LogManager.GetLogger(typeof(SeaMonkey).FullName);
+        private static readonly NLog.Logger logger = NLog.LogManager.GetLogger(typeof(SeaMonkey32Bit).FullName);
 
 
         /// <summary>
@@ -44,7 +43,7 @@ namespace updater.software
         /// e.g. "de" for German, "en-GB" for British English, "fr" for French, etc.</param>
         /// <param name="autoGetNewer">whether to automatically get
         /// newer information about the software when calling the info() method</param>
-        public SeaMonkey(string langCode, bool autoGetNewer)
+        public SeaMonkey32Bit(string langCode, bool autoGetNewer)
             : base(autoGetNewer)
         {
             if (string.IsNullOrWhiteSpace(langCode))
@@ -53,12 +52,50 @@ namespace updater.software
                 throw new ArgumentNullException(nameof(langCode), "The language code must not be null, empty or whitespace!");
             }
             languageCode = langCode.Trim();
+            var d32 = knownChecksums32Bit();
             var d64 = knownChecksums64Bit();
-            if (!d64.TryGetValue(languageCode, out checksum64Bit))
+            if (!d32.TryGetValue(languageCode, out checksum32Bit) || !d64.TryGetValue(languageCode, out checksum64Bit))
             {
                 logger.Error("The string '" + langCode + "' does not represent a valid language code for SeaMonkey!");
                 throw new ArgumentOutOfRangeException(nameof(langCode), "The string '" + langCode + "' does not represent a valid language code!");
             }
+        }
+
+
+        /// <summary>
+        /// Gets a dictionary with the known checksums for the 32-bit installers (key: language, value: checksum).
+        /// </summary>
+        /// <returns>Returns a dictionary where keys are the language codes and values are the associated checksums.</returns>
+        private static Dictionary<string, string> knownChecksums32Bit()
+        {
+            // These are the checksums for Windows 32-bit installers from
+            // https://archive.seamonkey-project.org/releases/2.53.21/SHA512SUMS.txt
+            return new Dictionary<string, string>(23)
+            {
+                { "cs", "392b9506fd2debf73c33dd1bebc11ce541d1442febf36deaa98d672b2bbd32c94c051a3ff560a5a8d851652e01de4f6f2347866406c4238399a430aa5d640299" },
+                { "de", "507da8769920845cd57d6c7af5419fd3c9a8d384c133b667167f8ed9faea004bad73a03ba938280a7baef1ab9e70cfabbbbeb1ea77aa4d75f83c3f64ab4154ee" },
+                { "el", "8baa721a32be471920ca91f900ee72cbbab9f40ecb54a1924bab955fe80370a1f617bd76762fb2600f7eb68bff2125d932253b777a08e2dc6ec7feec32f3e134" },
+                { "en-GB", "97c299d4ffa3abd23e05762ace3319343afca492be06b0df0867fe0588495d861070d719366d11bce13e15809a03e94b8253a996d35b300233ddf058263cd86f" },
+                { "en-US", "adc7b6bbdc15065c852eea98707202ba47ccd35074da1549e29c7f91e0a3a585eef5aa7ed6cb46c6ae8456d8fdd3a9b3ec684347fd26c29ae826c83955d25b6b" },
+                { "es-AR", "82a0e35b748d47a30fac062e995f691441e1c3a7a071d2313f5115eda099e8e2f8be484e4c639fe6350947babefe3c0b30093029200bfec35cccbd4eb5ba1d2b" },
+                { "es-ES", "8d82f643311ea59990161d298855d27f0015ccece76853af8f7e4bc19cadc93adf44412f3ef8582fb827e598ab84a9efc27d414fe864f3a36b7795f7c1282fd8" },
+                { "fi", "b58bbe85e0a2b9bcfc0d4a6800a39e6c1a112468004e0a8cde5ba38e15d9106b10131dee3cb27915d8d7d24a1bc541faea645bcdc6f7230432b1edf98532eddd" },
+                { "fr", "56ea79692f37189445f59d63d681f3b74e10eec0214f31a4d2776d6ff0e15ec6a45150f6700d190312749e6e856c21825362d96cdcf39c336217e71f7f002c68" },
+                { "hu", "b4bd42a2d4a9cdebd382efa4d8e0c1d388143d8c7fe41cc8055ac1165c9248ef64ca5d8629fc3b8fc0e498784c57109e52ccabc200f11834559cf6ad370eea45" },
+                { "it", "03ed43a614a8fb0369a0e82d2592544e0edf12965e86794c4e03d0bafc30cdf618cd29d3b60d5d350a9c454d73f9a45ec3948970dc5b51f478a8f97c737229c4" },
+                { "ja", "058a64ebf334cd3b0217b69df592c67482cf5d732082a77c4e7e0986a7d061cf495a37d820dbc0c0daadbbeb61aeaa35f790ecc9ca2a0bb2daf4df363541d36b" },
+                { "ka", "ed0827cdef443f23b6f21c2ffe12b66d344550105d31b04112da337ff7f91a019fc1c52ad3d6bf772604c322214e1964b6f2eb5862565867488275eba5b6eeef" },
+                { "nb-NO", "9a0ffe6e7b0e7ec90a2c0e9920734735e5ece8b245f22af87d3febcc46cc5d0e1f6c015826f2f95b9ad674147572a89c7c9b0dd195bd74305ef7ea188f2a9519" },
+                { "nl", "aabcf252ba6334bcd31b5400a2061fba80afe1dea129eb526ab6b3af312fac101c1c47756c0fa5b94980e4d53f14c18340ed3c334fa315ecfddf3de52e9268e8" },
+                { "pl", "c286de4f21f6f70f25f4ee2d0e97fd2d5f82b9c86405975cae2c3d95f58e6a24afeacdc0327fcab97aa6785e8e4bde303816010d8d46c1a339196e20b1d0f441" },
+                { "pt-BR", "bd89ff40f6b229459499490a6a8d72928438c53c24c0fa2d97b767ca8fc7759f50f3de1b3ed987e118517bae34401d9c8a1a44cbdfca341064d66d6d8f8dd714" },
+                { "pt-PT", "333408d71a884931565e085025451ec4b6814a63b35c6c4349e57f508d3e1bf598780fd462eab8af50367453e0e88526e5f3da232f6e4bf196c13d3dd8a156f0" },
+                { "ru", "eef943f3c7f4ba956383c18126bf3ac7cc7a62d4fe0b6bb088c3fbb5e83dd9bf8735bb93bd451beda579e8dfcc7bf59d5c40c8c298645afc37dbfe186561a1c1" },
+                { "sk", "8b514819279ed6e6bf141ff50871a6b4ae538d7abda6605af080ac5f17c4983ffead1678100de172aca25a9908f0390d4e73990bd28de87b103ff55c87458dfb" },
+                { "sv-SE", "94696c38ef5304a1a6f2703d2052cbdfaba5436ddab4b82a071a754459243340ac6efd1b05a5e1402e98506a24beb94f9c203d201399f36370387db5e63f7e08" },
+                { "zh-CN", "4a385446ed335aba863666e843ba0f0ff81c3e6d179f483b37d8dff0dd4aa6d2709a4c58c600255f3dcbe3d1acf2c2bf3dac4533f8454ee21be48fc44366ca27" },
+                { "zh-TW", "733c11d15ddd2d66a7801d92c9f125557a0ee8587fb433565d1711e51c62de2f087121879394790161ba7e55beb25e11ad70db2bafa4b4eda639dcf447cd5e0f" }
+            };
         }
 
 
@@ -105,7 +142,9 @@ namespace updater.software
         /// <returns>Returns an enumerable collection of valid language codes.</returns>
         public static IEnumerable<string> validLanguageCodes()
         {
-            var d = knownChecksums64Bit();
+            // Just go for the 32-bit installers here. We could also use the
+            // 64-bit installers, but they have the same languages anyway.
+            var d = knownChecksums32Bit();
             return d.Keys;
         }
 
@@ -118,18 +157,22 @@ namespace updater.software
         public override AvailableSoftware knownInfo()
         {
             const string knownVersion = "2.53.21";
-            var installer = new InstallInfoExe(
-                "https://archive.seamonkey-project.org/releases/" + knownVersion + "/win64/" + languageCode + "/seamonkey-" + knownVersion + "." + languageCode + ".win64.installer.exe",
-                HashAlgorithm.SHA512,
-                checksum64Bit,
-                Signature.None,
-                "-ms -ma");
             return new AvailableSoftware("SeaMonkey (" + languageCode + ")",
                 knownVersion,
                 "^SeaMonkey [0-9]+\\.[0-9]+(\\.[0-9]+(\\.[0-9]+)?)? \\(x86 " + Regex.Escape(languageCode) + "\\)$",
                 "^SeaMonkey [0-9]+\\.[0-9]+(\\.[0-9]+(\\.[0-9]+)?)? \\(x64 " + Regex.Escape(languageCode) + "\\)$",
-                installer,
-                installer);
+                new InstallInfoExe(
+                    "https://archive.seamonkey-project.org/releases/" + knownVersion + "/win32/" + languageCode + "/seamonkey-" + knownVersion + "." + languageCode + ".win32.installer.exe",
+                    HashAlgorithm.SHA512,
+                    checksum32Bit,
+                    Signature.None,
+                    "-ms -ma"),
+                new InstallInfoExe(
+                    "https://archive.seamonkey-project.org/releases/" + knownVersion + "/win64/" + languageCode + "/seamonkey-" + knownVersion + "." + languageCode + ".win64.installer.exe",
+                    HashAlgorithm.SHA512,
+                    checksum64Bit,
+                    Signature.None,
+                    "-ms -ma"));
         }
 
 
@@ -144,102 +187,6 @@ namespace updater.software
 
 
         /// <summary>
-        /// Tries to find the newest version number of SeaMonkey.
-        /// </summary>
-        /// <returns>Returns a string containing the newest version number on success.
-        /// Returns null, if an error occurred.</returns>
-        public static string determineNewestVersion()
-        {
-            string url = "https://archive.seamonkey-project.org/releases/";
-            string htmlCode;
-            var client = HttpClientProvider.Provide();
-            try
-            {
-                var task = client.GetStringAsync(url);
-                task.Wait();
-                htmlCode = task.Result;
-            }
-            catch (Exception ex)
-            {
-                logger.Warn("Exception occurred while checking for newer version of SeaMonkey: " + ex.Message);
-                return null;
-            }
-
-            var reVersion = new Regex(">[0-9]+\\.[0-9]+(\\.[0-9]+(\\.[0-9]+)?)?<");
-            MatchCollection matches = reVersion.Matches(htmlCode);
-            if (matches.Count <= 0)
-                return null;
-
-            var releaseList = new List<Quartet>();
-            foreach (Match item in matches)
-            {
-                var quart = new Quartet(item.Value[1..^1]);
-                releaseList.Add(quart);
-            }
-            releaseList.Sort();
-            var newest = releaseList[^1];
-
-            if (htmlCode.Contains(">" + newest.full() + "<"))
-                return newest.full();
-            var trip = new Triple(newest.full());
-            if (htmlCode.Contains(">" + trip.full() + "<"))
-                return trip.full();
-            else
-                return newest.major.ToString() + "." + newest.minor.ToString();
-        }
-
-
-        /// <summary>
-        /// Tries to get the checksum of the newer version.
-        /// </summary>
-        /// <returns>Returns a string containing the checksum for 64-bit installer, if successful.
-        /// Returns null, if an error occurred.</returns>
-        private string determineNewestChecksum(string newerVersion)
-        {
-            if (string.IsNullOrWhiteSpace(newerVersion))
-                return null;
-            /* Checksums are found in a file like
-             * https://archive.seamonkey-project.org/releases/2.53.18.1/SHA512SUMS.txt
-             * Common lines look like
-             * "be06...690f0 sha512 40284320 win32/en-GB/seamonkey-2.53.18.1.en-GB.win32.installer.exe"
-             * 
-             * Version 2.53.1 uses a new format. Common lines look like
-             * 7ccee70c54580c0c0949a9bc86737fbcb35c46ed sha1 38851663 win32/en-GB/seamonkey-2.53.6.en-GB.win32.installer.exe
-             * for the 32-bit installer, or like
-             * c6a9d874dcaa0dabdd01f242b610cb47565e91fc sha1 41802858 win64/en-GB/seamonkey-2.53.6.en-GB.win64.installer.exe
-             * for the 64-bit installer.
-             *
-             * Version 2.53.22 dropped the 32-bit installers.
-             */
-
-            string url = "https://archive.seamonkey-project.org/releases/" + newerVersion + "/SHA512SUMS.txt";
-            string sha1SumsContent;
-            var client = HttpClientProvider.Provide();
-            try
-            {
-                var task = client.GetStringAsync(url);
-                task.Wait();
-                sha1SumsContent = task.Result;
-            }
-            catch (Exception ex)
-            {
-                logger.Warn("Exception occurred while checking for newer version of SeaMonkey: " + ex.Message);
-                return null;
-            }
-
-            // look for line with the correct language code and version for 64-bit
-            // File name looks like seamonkey-2.53.1.de.win64.installer.exe now.
-            var reChecksum64Bit = new Regex("[0-9a-f]{128} sha512 [0-9]+ .*seamonkey\\-" + Regex.Escape(newerVersion)
-                + "\\." + languageCode.Replace("-", "\\-") + "\\.win64\\.installer\\.exe");
-            Match matchChecksum64Bit = reChecksum64Bit.Match(sha1SumsContent);
-            if (!matchChecksum64Bit.Success)
-                return null;
-            // Checksum is in the first 128 characters of the match.
-            return matchChecksum64Bit.Value[..128];
-        }
-
-
-        /// <summary>
         /// Determines whether the method searchForNewer() is implemented.
         /// </summary>
         /// <returns>Returns true, if searchForNewer() is implemented for that
@@ -247,7 +194,7 @@ namespace updater.software
         /// exception in the later case.</returns>
         public override bool implementsSearchForNewer()
         {
-            return true;
+            return false;
         }
 
 
@@ -258,25 +205,7 @@ namespace updater.software
         /// that was retrieved from the net.</returns>
         public override AvailableSoftware searchForNewer()
         {
-            logger.Info("Searching for newer version of SeaMonkey (" + languageCode + ")...");
-            string newerVersion = determineNewestVersion();
-            if (string.IsNullOrWhiteSpace(newerVersion))
-                return null;
-            var currentInfo = knownInfo();
-            if (newerVersion == currentInfo.newestVersion)
-                // fallback to known information
-                return currentInfo;
-            string newerChecksum = determineNewestChecksum(newerVersion);
-            if (string.IsNullOrWhiteSpace(newerChecksum))
-                return null;
-            // replace all stuff
-            string oldVersion = currentInfo.newestVersion;
-            currentInfo.newestVersion = newerVersion;
-            currentInfo.install64Bit.downloadUrl = currentInfo.install64Bit.downloadUrl.Replace(oldVersion, newerVersion);
-            currentInfo.install64Bit.checksum = newerChecksum;
-            // upgrade 32-bit installation to 64-bit installation
-            currentInfo.install32Bit = currentInfo.install64Bit;
-            return currentInfo;
+            return knownInfo();
         }
 
 
@@ -331,6 +260,12 @@ namespace updater.software
         /// language code for the SeaMonkey version
         /// </summary>
         private readonly string languageCode;
+
+
+        /// <summary>
+        /// checksum for the 32-bit installer
+        /// </summary>
+        private readonly string checksum32Bit;
 
 
         /// <summary>

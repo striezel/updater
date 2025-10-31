@@ -115,10 +115,21 @@ namespace updater.software
             result.Add(new Scribus(autoGetNewer));
 
             // SeaMonkey
-            languages = SeaMonkey.validLanguageCodes();
-            foreach (var lang in languages)
+            if (System.Environment.Is64BitOperatingSystem)
             {
-                result.Add(new SeaMonkey(lang, autoGetNewer));
+                languages = SeaMonkey.validLanguageCodes();
+                foreach (var lang in languages)
+                {
+                    result.Add(new SeaMonkey(lang, autoGetNewer));
+                }
+            }
+            else
+            {
+                languages = SeaMonkey32Bit.validLanguageCodes();
+                foreach (var lang in languages)
+                {
+                    result.Add(new SeaMonkey32Bit(lang, autoGetNewer));
+                }
             }
 
             // old SeaMonkey languages (available until SeaMonkey 2.46 and

@@ -14,6 +14,9 @@ __[new features]__
 __[changes]__
 
 * Fix failing search for newer versions of Blender LTS.
+* Starting with SeaMonkey 2.53.22, no more 32-bit builds for SeaMonkey are
+  provided. Therefore the updater will now update 32-bit installations of
+  SeaMonkey to 64-bit installations, if it runs on a 64-bit OS.
 
 __[maintenance]__
 
