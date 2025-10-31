@@ -69,32 +69,33 @@ namespace updater.software
         private static Dictionary<string, string> knownChecksums64Bit()
         {
             // These are the checksums for Windows 64-bit installers from
-            // https://archive.seamonkey-project.org/releases/2.53.21/SHA512SUMS.txt
-            return new Dictionary<string, string>(23)
+            // https://archive.seamonkey-project.org/releases/2.53.22/SHA512SUMS.txt
+            return new Dictionary<string, string>(24)
             {
-                { "cs", "3845f9adb9b5a13a5cddce1ad51a60aacce7de194d963ff9b4eb130c5800d8afbe83a1b5310014a3dfc1527c644271349e12de91491defd0f7f369af0a049e71" },
-                { "de", "1aa934fdb4a7f22449867dc67178b5dfddd756f5768123b3bdf98d47e2051223e5fa9453ae316474ef674b92f35c83e1b4f5c60de80175c1a61025927fec4dfe" },
-                { "el", "fdf41d6542164f72a963a15bf6bcd73f9c159346fcca3ce86a92372722322e6d7fce26ef67e27a79cc3654b88b92147429ee0382b5af355764ddb0184d9f3273" },
-                { "en-GB", "4004bd06d317107346c4caa82d642c78515625972d151454038a6a2526db8169b8fdd8ed03424e58e8cf7754d4ae86c73e4d92798b33a69f7cfad3c6991034fc" },
-                { "en-US", "26ecd7807db6cc6f192bc535602d05f3b46ac18768213ecc318dc5226e71fdaade6619b6173b9cbf36f60b4cce0250e48fe16ac3e1f48f773dbaa758317636f6" },
-                { "es-AR", "aa817dd83e42dc24513b6d8f9d6039e574fce58ece5cfdda388494a55430b5727623c1a60e9c48d4cfbf185d38eb08be6d73a8f332887c025a14ff202b94fd1a" },
-                { "es-ES", "c666faf93b5e5e8411a02005d1ba6f1585fe6627c4b67a329bab255b69aeab591d54f23fb6248b6962c86acb96b2a4748a67263dbc14106625385ad020740a7e" },
-                { "fi", "0083c540224698e6bc31708f1831ae1728dc50fa4e91e9dcf4d0ff85d61c9b488f806a6e0940f1df0c82bbbbbe07e802f1ef3d1e48573b63cfbaa42b551d4ea3" },
-                { "fr", "d138a05bcaddc661ac4255daa3c3f6caed5f82722b63e8422468b8c097e0009fb0c1897fa2359df03eee4140f612318a51c99b487a788eea741f1879e8093669" },
-                { "hu", "6594711f4ee529ea6d97ded970f1b75aabdc5c468586de16e550e7b08ba29454fa1ee8233f104cf1d3c76ad9c58b1b1e734b11261a78fd53d044b9246b348ded" },
-                { "it", "9f88d93c1b18b9fd2677643945a2949cf45e74beb47968be81b28df5c8e0586b0b6bfdd42fb2717f3a94e421cef330569a296d775bac010bd07e399308b92c40" },
-                { "ja", "6ac4e107945a9f765dde87142e4ee085d2d03d0f17b64a1d3edaaad5fa234b07c99b237d4858dfaec3f465029a3049cf8cc5b0c8c546774e256dc0161db9c601" },
-                { "ka", "7c3658306375764e015f2814fa353206868505f575cfdac75d69e53f9c579708505cb325bec17d2d4cce15b57c7b3863a7d8a645bbbce596e6ceb06786765e34" },
-                { "nb-NO", "929aa5f4bf558694213e3f0858b05aef73dd6a8621e3f060ea048ee425d37e28ca1848174ae0bfa75615560486478b79d55ef058f07bd8149de034df3904b41a" },
-                { "nl", "ac851ad3162c87af6fed70c4e7bab78f9a092065bcd17a6cb47e30ff3725d7ba6c4669f45b8496f88bf5e71617cfca75cf8d22da0eb5e88a646b2294e47b0b7e" },
-                { "pl", "26c6477afcd7eb11fc9c104b0f30bf97e75c127fb1d4a8ac7141e5573967673548853367b8e9694dbc7b50a81ca4e5c9ef2c463cf6af87e86b4a1b3245ba5ed8" },
-                { "pt-BR", "4f3d3e6559952b421938cb9121cc0d2767397b858c77250ba332c5b6b42e392425eed5827a968b0abdc03ad9152f64b0a8048ee7e387c69439ecfe831bfb1e50" },
-                { "pt-PT", "06e9ece555acc9ccc3d4cbf925f299b2adca36becb7da7a373e938b7f5aa33915a468be3f44b56f5d72dbda46eb7b2dc068cca55053fb8978d336525117c96df" },
-                { "ru", "4cbaeb93b7ce54e1efdb895ab0cadb961e4338666310897a5fd2af2c8a10ba9959cb5c56a89d705bfffb26de5329ad6276b18bb3746528bcedd331006ac02dea" },
-                { "sk", "f741bb72c199ce5702a6a7282c0f16d50f5b6fc8e630736d206d5aeba53e92d40c8cab753a1a496dd38630056428d57826976ad3851858d2276457d2196a5c92" },
-                { "sv-SE", "8a9650af94a029dd6647f4fed336103c26b0aab9a8e834c771b3a6ed28c08468dab0a62be594c4b2361de5f5a34316a1cf7a26b8c2ca36c3d399df3d8d31f7ea" },
-                { "zh-CN", "2df73b45b426fe8b6c33afd1aa2e594bc25e10457c97450cd4f79795d74e8c502fa4335ca7815cf570221b383908afddc4368b74c4a0a93f8b1e828108f4d522" },
-                { "zh-TW", "f43cba51d1dc556f396c2fbfac7fda1c6bed9b060a5c902014795bed0b48518c4ac4c45b063006092b125bc174d11a2de984c53c870133274163f81fabbfc851" }
+                { "cs", "51e8b6b4e3112e0333763c84a31508462d52e9af7b04a8574cc773973e7f43aeeddf5d79a64558725244c8c8fb6b55947e9aa1472dc9edf4da6a3b5943cffeb6" },
+                { "de", "1f996482b6b677a4cf77f4b9865642b236784bedcdda041e1688f19fc4ea4b5668a697b737d0551479e92f1e0ae2441ed2d6d9c3d74285fa8b9559262155d9d3" },
+                { "el", "662f0f9f10242fead6bc24dccd6b9e0961b9d89687ea963198ac18affffa089344157cc70f084b72123d4ff6a0c12872bd65e5640298efb0a0414fb05a792a16" },
+                { "en-GB", "049901d701d15accb0abcd9118851bfbd7df95db854eba25ed7f6b75c5557892106fe5ada59c7d038ee779eb44ddfc6568d3d4894e32f4191f6285338ea9a193" },
+                { "en-US", "33020ade01ef65dd45e8f019c60471c8ff33ccc4854d28e36553a694ea14f7512dc950bf23f6ab331fd9f13cc2a7a1a4029b7aa7c63ad7987793153dd2a8d097" },
+                { "es-AR", "6d7669b6c45c0a67828a3d3083dd1abb03493059ae1b1bf9951ec2e512f4c59f0c8116b2d5dfefc66ce530fb85b5fceb05aa058fc59136d5de0c6815ce639d91" },
+                { "es-ES", "cb3acf6473d18615ebebb58989eec6779f50b37a3978c61854d9560c4c138af66b31bcebcd7f414dfa1849ef606e2794013abf3d0063dc784275380ceb54b544" },
+                { "fi", "1ffa77d08dbad86d8fd5c816c70b0e28072d0e5bce828a4cc363a7a3418a02d29d6b191ecd95acf4ecc112480ea72d6bb154c8c1d99cda5da8ab6a80f2814fd8" },
+                { "fr", "e54b9edcc6c5d29ddbf2346ef23625bc0b7ef05b14adbb64b39242e507186c99fcf667e2074035e879fe8fed909059ed1a8d3f3bc0c4cccfca8d22cbbaeb398a" },
+                { "hu", "941d8b1cd2a6bc27b814270cc9f8269986e013206b4e223e30409f551c86d409ed94fd1cfb61a27353ed49dbe2426f662e96eaac226b045046d35b5e8bec558b" },
+                { "it", "5dd75747ae51e9b47d092455cb5227f8b56c70dfc3a6d7b531990a04f148537f7b6357edf2852649b3aab1325a12559eb3623b5fde20f1f1048232366510c69a" },
+                { "ja", "38abc992ecf10557c77153c535e386f864ccfbdfc9128ec7da1b8931b3bb7eb641136c5c3dce45cb707e934fe5ec67375a3277d97a81e2fa9145bb8168a457ec" },
+                { "ka", "b1846e2c1358f19ed590cb903b1b6781b39dab681b63df4d48c2f0dd776876b4fc3faddad9f2c4be247512788ff9563659d67d1a85db61ed0230a7e51eed26ea" },
+                { "nb-NO", "af8ddd06eb4c708407fff56153978bcfbf6beafd2a66458c24d334e8579fcf65c92b694d6e8ab6c2aec61f6bc88193af70be17a99e3a9f1fd19e1e2f7a7b5ad0" },
+                { "nl", "fd9b757c292dbdffe082d4b7ed6fa2b08ffd8a4823038abab38e475f219f18cc5966c728fbfc72a6b25adaba68605f591923330eddd30fe1f063984f58e2567d" },
+                { "pl", "5b5320989d1d9fe13dc37eddc7373e035a887411bae0c40d74e9a3dde8ea6b6bb7a7b5e3d7c856b1da11af2574ebeca68dc25085168906a9918f38466d5d544e" },
+                { "pt-BR", "aa48665d16bb9f5a78391013ec225ef6666b332367f7f66bbbc08e66a521e566514ecc4f31b558be279bde24f844fca3936916ffe691e057057bab552c6d40a9" },
+                { "pt-PT", "198dd3e348dfacc66cf0bc129bcb17d64cff4bade0b2000777243bbec9c33ebf6a168f63c47d1bde312d824d5223343b4b7b39c559f87db6d02b346828f1473b" },
+                { "ru", "5cb5af813a30eca9c782269d7e5d8190e12c674e20ac5f2b83791102d83f74f4fd827f116b6729fb05ff6f1d494317e14f1f3f89089521de017b53d503bb5baa" },
+                { "sk", "b74c01e9990e0acfcc25f984aa6537765735f562e1bda035386ed5ba3f5ade878d729664502e35140a2b1b8cd875049533bb4a501557ecc2ea1ae9de01ab14f2" },
+                { "sv-SE", "befb3972e4da5c01e503cfb539057e6e1da2af857c28a466352e07d712857b86ec80ed9a091c2ad42c2ad2f45e23d410b857e67fe25659138c7c60b5a20cd817" },
+                { "tr", "27e9c3dd7bec8a29b411e25089791d41ab5aba77c19f3fc0beaea8b3f6f1ce51a38b5c185242b4a26e8dc2f9a6f17330226ed2185b18d203a6f3febc07c24723" },
+                { "zh-CN", "7771c2d9e3cee721ada270c00b39662bf72de57351c532dbbb7a135d3edfb289c505cbf2ec8e86cdf382e562d89a4b6ad0922dba8d044b4421d22a1a5a1c358d" },
+                { "zh-TW", "44bb3fe4fd98d42256e6b2a743f79a4f12cf71513e3a073c72f92090dfc07c43a2266a5ae34b6331f44757267f695ba5f7f127bbbc98f570859d93d1d754ac7b" }
             };
         }
 
@@ -117,7 +118,7 @@ namespace updater.software
         /// details about the software.</returns>
         public override AvailableSoftware knownInfo()
         {
-            const string knownVersion = "2.53.21";
+            const string knownVersion = "2.53.22";
             var installer = new InstallInfoExe(
                 "https://archive.seamonkey-project.org/releases/" + knownVersion + "/win64/" + languageCode + "/seamonkey-" + knownVersion + "." + languageCode + ".win64.installer.exe",
                 HashAlgorithm.SHA512,

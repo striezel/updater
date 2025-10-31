@@ -156,6 +156,11 @@ namespace updater.software
         /// details about the software.</returns>
         public override AvailableSoftware knownInfo()
         {
+            if (!Environment.Is64BitOperatingSystem)
+            {
+                logger.Warn("SeaMonkey does not provide 32-bit binaries from version 2.53.22 onwards."
+                    + "Please consider switching to an 64-bit operating system to get newer SeaMonkey updates.");
+            }
             const string knownVersion = "2.53.21";
             return new AvailableSoftware("SeaMonkey (" + languageCode + ")",
                 knownVersion,
