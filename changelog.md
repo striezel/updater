@@ -17,6 +17,7 @@ __[changes]__
 * Starting with SeaMonkey 2.53.22, no more 32-bit builds for SeaMonkey are
   provided. Therefore the updater will now update 32-bit installations of
   SeaMonkey to 64-bit installations, if it runs on a 64-bit OS.
+* Adjust search for newer versions of Shotcut.
 
 __[maintenance]__
 

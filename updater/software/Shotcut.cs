@@ -221,7 +221,7 @@ namespace updater.software
             } // using
 
             // find SHA256 hash for 64-bit installer
-            var reHash = new Regex("[a-f0-9]{64}  shotcut\\-win64\\-[0-9]{6}.exe");
+            var reHash = new Regex("[a-f0-9]{64}  shotcut\\-win64\\-([0-9]{6}|[0-9]{2}\\.[0-9]{2}\\.[0-9]{2}).exe");
             Match matchHash = reHash.Match(htmlCode);
             if (!matchHash.Success)
                 return null;
@@ -229,8 +229,10 @@ namespace updater.software
             // construct new information
             var newInfo = knownInfo();
             newInfo.newestVersion = currentVersion;
-            // e.g. https://github.com/mltframework/shotcut/releases/download/v21.05.18/shotcut-win64-210518.exe
-            newInfo.install64Bit.downloadUrl = "https://github.com/mltframework/shotcut/releases/download/v" + currentVersion + "/shotcut-win64-" + currentVersion.Replace(".", "") + ".exe";
+            // e.g. https://github.com/mltframework/shotcut/releases/download/v21.05.18/shotcut-win64-210518.exe (without dots in version part)
+            // or https://github.com/mltframework/shotcut/releases/download/v25.10.31/shotcut-win64-25.10.31.exe (with dots in version part)
+            var versionPart = matchHash.Groups[1].Value;
+            newInfo.install64Bit.downloadUrl = "https://github.com/mltframework/shotcut/releases/download/v" + currentVersion + "/shotcut-win64-" + versionPart + ".exe";
             newInfo.install64Bit.checksum = newHash64Bit;
             // Use same information for 32-bit build.
             newInfo.install32Bit = newInfo.install64Bit;
