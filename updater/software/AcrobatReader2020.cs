@@ -119,7 +119,7 @@ namespace updater.software
             client.DefaultRequestHeaders.Add("User-Agent", "curl/8.16.0");
             try
             {
-                var task = client.GetStringAsync("https://helpx.adobe.com/acrobat/release-note/release-notes-acrobat-reader.html");
+                var task = client.GetStringAsync("https://www.adobe.com/devnet-docs/acrobatetk/tools/ReleaseNotesDC/index.html");
                 task.Wait();
                 html = task.Result;
             }
@@ -132,12 +132,13 @@ namespace updater.software
             // HTML text will contain links to both continuous track and classic
             // track, but we only want the classic stuff. Links will look like
             // '<a disablelinktracking="false" href="https://www.adobe.com/devnet-docs/acrobatetk/tools/ReleaseNotesDC/classic/dcclassic20.005aug2022.html#dc20-005augtwentytwentytwo">20.005.30381</a>'
-            var reVersion = new Regex("href=\"(https://www\\.adobe\\.com/devnet\\-docs/acrobatetk/tools/ReleaseNotesDC/classic/dcclassic20\\.[0-9]{3}[a-z]{3}[0-9]{4}.html)#dc20\\-[0-9]+[a-z]+\">(20\\.[0-9]+\\.[0-9x]+)</a>");
+            // or '<a class="reference internal" href="classic/dcclassic20.005sep2025.html#dc20-005septwentytwentyfive"><span class="std std-ref">20.005.3079x Planned update, Sep 9, 2025</span></a>'
+            var reVersion = new Regex("href=\"(classic/dcclassic20\\.[0-9]{3}[a-z]{3}[0-9]{4}.html)#dc20\\-[0-9]+[a-z]+\"><span class=\"std std\\-ref\">(20\\.[0-9]+\\.[0-9x]+) [A-Za-z0-9 ,]+</span></a>");
             var match = reVersion.Match(html);
             if (!match.Success)
                 return null;
             var latestVersion = match.Groups[2].Value.Replace('x', '0');
-            string notesLink = match.Groups[1].Value;
+            string notesLink = "https://www.adobe.com/devnet-docs/acrobatetk/tools/ReleaseNotesDC/" + match.Groups[1].Value;
 
             var latestInfo = knownInfo();
             var knownTriple = new Triple(latestInfo.newestVersion);
