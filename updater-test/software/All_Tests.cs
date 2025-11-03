@@ -72,7 +72,7 @@ namespace updater_test.software
             Assert.IsNotEmpty(result2);
 
             // count should be equal
-            Assert.AreEqual<int>(result.Count, result2.Count);
+            Assert.HasCount(result.Count, result2);
         }
 
 
@@ -107,7 +107,7 @@ namespace updater_test.software
 
             // count should not be equal
             Assert.AreNotEqual<int>(result.Count, result2.Count);
-            Assert.AreEqual<int>(result.Count - excluded.Count, result2.Count);
+            Assert.HasCount(result.Count - excluded.Count, result2);
         }
 
 

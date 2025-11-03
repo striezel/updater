@@ -69,7 +69,7 @@ namespace updater_test.algorithm
 
             string data = SoftwareStatus.toConsoleOutput(q);
             Assert.IsNotNull(data);
-            Assert.IsTrue(data.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries).Length > 5);
+            Assert.IsGreaterThan(5, data.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries).Length);
         }
 
 
