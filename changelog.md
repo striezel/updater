@@ -22,6 +22,7 @@ __[changes]__
 
 __[maintenance]__
 
+* NLog library is updated from 6.0.5 to 6.0.6.
 * Update certificate information for Blender LTS installer.
 * Update certificate information for Calibre installer.
 * Update certificate information for Eclipse Temurin JDK 21 LTS installers.
