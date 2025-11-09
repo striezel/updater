@@ -26,6 +26,7 @@ __[maintenance]__
 * Update certificate information for Blender LTS installer.
 * Update certificate information for Calibre installer.
 * Update certificate information for Eclipse Temurin JDK 11 LTS installers.
+* Update certificate information for Eclipse Temurin JRE 11 LTS installers.
 * Update certificate information for Eclipse Temurin JDK 21 LTS installers.
 * Update certificate information for Eclipse Temurin JRE 21 LTS installers.
 * Update certificate information for Node.js installer.
