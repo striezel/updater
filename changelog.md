@@ -19,6 +19,7 @@ __[changes]__
   provided. Therefore the updater will now update 32-bit installations of
   SeaMonkey to 64-bit installations, if it runs on a 64-bit OS.
 * Adjust search for newer versions of Shotcut.
+* Adjust search for newer versions of TreeSize Free.
 
 __[maintenance]__
 

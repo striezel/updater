@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2021, 2022, 2023, 2024  Dirk Stolle
+    Copyright (C) 2021, 2022, 2023, 2024, 2025  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -68,11 +68,11 @@ namespace updater.software
             var info = new InstallInfoExe(
                 "https://downloads.jam-software.de/treesize_free/TreeSizeFreeSetup.exe",
                 HashAlgorithm.SHA256,
-                "c685e16e86183d11c30407ee688dc5a6081e3ea1958d3b9b509bc36e3edbce07",
+                "d97fc83d0991ade3770c029f9a67c4cd8c0a9b7b783a8adcbdf85a0b556d21a5",
                 signature,
                 "/VERYSILENT /NORESTART");
             return new AvailableSoftware("TreeSize Free",
-                "4.7.3",
+                "4.8.0",
                 "^TreeSize Free V[0-9]+\\.[0-9]+(\\.[0-9]+)?$",
                 "^TreeSize Free V[0-9]+\\.[0-9]+(\\.[0-9]+)?( \\(64 bit\\)( \\(64 Bit\\))?)?$",
                 info,
@@ -125,8 +125,9 @@ namespace updater.software
                 return null;
             }
 
-            // HTML text will contain something like "<h3 class="collapsed-item__ttl">Version 4.7.3</h3>".
-            var reVersion = new Regex(">[Vv]ersion ([0-9]+\\.[0-9]+\\.[0-9]+)</h3>");
+            // HTML text will contain something like "<h3 class="collapsed-item__ttl">Version 4.7.3</h3>"
+            // or "<h3 class="collapsed-item__ttl">Version 4.8</h3>".
+            var reVersion = new Regex(">[Vv]ersion ([0-9]+\\.[0-9]+(\\.[0-9]+)?)</h3>");
             var matchVersion = reVersion.Match(html);
             if (!matchVersion.Success)
                 return null;
