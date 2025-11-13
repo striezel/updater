@@ -37,13 +37,13 @@ namespace updater.software
         /// <summary>
         /// publisher name for signed executables of LibreOffice
         /// </summary>
-        private const string publisherX509 = "CN=The Document Foundation, O=The Document Foundation, L=Berlin, S=Berlin, C=DE";
+        private const string publisherX509 = "E=info@documentfoundation.org, CN=The Document Foundation, O=The Document Foundation, OU=LibreOffice Build Team, L=Berlin, S=Berlin, C=DE";
 
 
         /// <summary>
         /// expiration date of the certificate
         /// </summary>
-        private static readonly DateTime certificateExpiration = new(2028, 6, 8, 14, 28, 59, DateTimeKind.Utc);
+        private static readonly DateTime certificateExpiration = new(2026, 9, 13, 12, 18, 28, DateTimeKind.Utc);
 
 
         /// <summary>
@@ -65,19 +65,19 @@ namespace updater.software
         {
             var signature = new Signature(publisherX509, certificateExpiration);
             return new AvailableSoftware("LibreOffice",
-                "25.8.2.2",
+                "25.8.3.2",
                 "^LibreOffice [0-9]+\\.[0-9]+\\.[0-9]\\.[0-9]$",
                 "^LibreOffice [0-9]+\\.[0-9]+\\.[0-9]\\.[0-9]$",
                 new InstallInfoLibO(
-                    "https://download.documentfoundation.org/libreoffice/stable/25.8.2/win/x86/LibreOffice_25.8.2_Win_x86.msi",
+                    "https://download.documentfoundation.org/libreoffice/stable/25.8.3/win/x86/LibreOffice_25.8.3_Win_x86.msi",
                     HashAlgorithm.SHA256,
-                    "65e5f998eff55e8a82c143fee2fadf6abb2b5210fd8c33b0b406cd814af27805",
+                    "d65b2c45a0776f250f71d3a6ac54ad29c5b5fc0e33e581e6acf7eeb7cb51fffd",
                     signature,
                     "/qn /norestart"),
                 new InstallInfoLibO(
-                    "https://download.documentfoundation.org/libreoffice/stable/25.8.2/win/x86_64/LibreOffice_25.8.2_Win_x86-64.msi",
+                    "https://download.documentfoundation.org/libreoffice/stable/25.8.3/win/x86_64/LibreOffice_25.8.3_Win_x86-64.msi",
                     HashAlgorithm.SHA256,
-                    "5e8cfdcacffaa779c14362897579385d4722f1d582d9c5bc1bbf473a21628403",
+                    "0db4e53a99129abaa867bc504dfcd3264a622b27a63ade3e5c5fd92185d0408b",
                     signature,
                     "/qn /norestart")
                     );
