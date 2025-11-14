@@ -18,8 +18,10 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Net.Http;
 using System.Text.Json;
+using System.Text.RegularExpressions;
 using updater.data;
 using updater.software.openjdk_api;
 
@@ -28,7 +30,7 @@ namespace updater.software
     /// <summary>
     /// Handles updates of Eclipse Temurin JRE 17 with Hotspot JVM.
     /// </summary>
-    public class OpenJRE17 : NoPreUpdateProcessSoftware
+    public class OpenJRE17 : AbstractSoftware
     {
         /// <summary>
         /// NLog.Logger for OpenJRE17 class
@@ -65,7 +67,41 @@ namespace updater.software
         /// details about the software.</returns>
         public override AvailableSoftware knownInfo()
         {
+            if (!Environment.Is64BitOperatingSystem)
+            {
+                logger.Warn("Eclipse Temurin JRE 17 does not provide 32-bit binaries from version 17.0.17+10 onwards."
+                    + "Please consider switching to an 64-bit operating system to get newer updates.");
+                return Last32BitBuild();
+            }
             var signature = new Signature(publisherX509, certificateExpiration);
+            var install64Bit = new InstallInfoMsiNoLocation(
+                "https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.16%2B8/OpenJDK17U-jre_x64_windows_hotspot_17.0.16_8.msi",
+                HashAlgorithm.SHA256,
+                "9937d754d7157dcdb7ec70a83a5e6238ce093c71316435b4dd07ae38880980d2",
+                signature,
+                "INSTALLLEVEL=3 /qn /norestart");
+            return new AvailableSoftware("Eclipse Temurin JRE 17 with Hotspot",
+                "17.0.16.8",
+                "^Eclipse Temurin JRE [a-z]+ Hotspot 17\\.[0-9]+\\.[0-9]+(\\.[0-9]+)?\\+[0-9]+(\\.[0-9]+)? \\(x86\\)$",
+                "^Eclipse Temurin JRE [a-z]+ Hotspot 17\\.[0-9]+\\.[0-9]+(\\.[0-9]+)?\\+[0-9]+(\\.[0-9]+)? \\(x64\\)$",
+                // Use 64-bit installer on 32-bit installations for cross-grading.
+                install64Bit,
+                // 64-bit installation
+                install64Bit
+                );
+        }
+
+
+        /// <summary>
+        /// Gets the currently known information about the software.
+        /// </summary>
+        /// <returns>Returns an AvailableSoftware instance with the known
+        /// details about the software.</returns>
+        public static AvailableSoftware Last32BitBuild()
+        {
+            const string publisherX509_32 = "CN=\"Eclipse.org Foundation, Inc.\", O=\"Eclipse.org Foundation, Inc.\", L=Ottawa, S=Ontario, C=CA";
+            DateTime certificateExpiration_32 = new(2025, 7, 21, 23, 59, 59, DateTimeKind.Utc);
+            var signature = new Signature(publisherX509_32, certificateExpiration_32);
             const string version = "17.0.16.8";
             return new AvailableSoftware("Eclipse Temurin JRE 17 with Hotspot",
                 version,
@@ -117,6 +153,12 @@ namespace updater.software
         public override AvailableSoftware searchForNewer()
         {
             logger.Info("Searching for newer version of Eclipse Temurin 17 JRE...");
+            if (!Environment.Is64BitOperatingSystem)
+            {
+                logger.Warn("Eclipse Temurin JRE 17 does not provide 32-bit binaries from version 17.0.17+10 onwards."
+                    + "Please consider switching to an 64-bit operating system to get newer updates.");
+                return Last32BitBuild();
+            }
             string json;
             using (var client = new HttpClient() { Timeout = TimeSpan.FromSeconds(25) })
             {
@@ -189,10 +231,15 @@ namespace updater.software
             }
 
             // Do we have all the data we need?
-            if (!hasBuild32 || !hasBuild64)
+            if (!hasBuild64)
             {
-                logger.Error("Either 32-bit build or 64-bit build information of Eclipse Temurin JRE was not found!");
+                logger.Error("The 64-bit build information of Eclipse Temurin JRE was not found!");
                 return null;
+            }
+            if (!hasBuild32)
+            {
+                // Use information of 64 bit version to perform cross-grade.
+                newInfo.install32Bit = newInfo.install64Bit;
             }
             return newInfo;
         }
@@ -212,6 +259,57 @@ namespace updater.software
                 "java",
                 "javaw"
             ];
+        }
+
+
+        /// <summary>
+        /// Determines whether a separate process must be run before the update.
+        /// </summary>
+        /// <param name="detected">currently installed / detected software version</param>
+        /// <returns>Returns true, if a separate process returned by
+        /// preUpdateProcess() needs to run in preparation of the update.
+        /// Returns false, if not. Calling preUpdateProcess() may throw an
+        /// exception in the later case.</returns>
+        public override bool needsPreUpdateProcess(DetectedSoftware detected)
+        {
+            // If it's a 32-bit installation, we need to uninstall it to perform
+            // a cross-grade to the 64-bit version.
+            return detected.appType == ApplicationType.Bit32;
+        }
+
+
+        /// <summary>
+        /// Returns a process that must be run before the update.
+        /// </summary>
+        /// <param name="detected">currently installed / detected software version</param>
+        /// <returns>Returns a Process ready to start that should be run before
+        /// the update. May return null or may throw, if needsPreUpdateProcess()
+        /// returned false.</returns>
+        public override List<Process> preUpdateProcess(DetectedSoftware detected)
+        {
+            // Only 32-bit installations need a pre-update process.
+            if (detected.appType != ApplicationType.Bit32)
+            {
+                return null;
+            }
+
+            if (string.IsNullOrWhiteSpace(detected.uninstallString))
+            {
+                logger.Error("There is not enough information to uninstall the old 32-bit Eclipse Temurin JRE 17 version.");
+                return null;
+            }
+
+            var re = new Regex("\\{[0-9A-F]{8}\\-[0-9A-F]{4}\\-[0-9A-F]{4}\\-[0-9A-F]{4}\\-[0-9A-F]{12}\\}", RegexOptions.IgnoreCase);
+            Match m = re.Match(detected.uninstallString);
+            if (!m.Success)
+            {
+                logger.Error("Could not extract GUID of old Eclipse Temurin JRE 17 version for pre-update process.");
+                return null;
+            }
+            var proc = new Process();
+            proc.StartInfo.FileName = "msiexec.exe";
+            proc.StartInfo.Arguments = "/X" + m.Value + " /qn /norestart";
+            return [proc];
         }
     } // class
 } // namespace

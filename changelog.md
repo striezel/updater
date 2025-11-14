@@ -11,6 +11,16 @@ __[new features]__
 * Update support for Eclipse Temurin JDK 25 LTS is added.
 * Update support for Eclipse Temurin JRE 25 LTS is added.
 
+__[breaking change]__
+
+* Starting with version 17.0.17+10, no more 32-bit builds for Eclipse Temurin 17
+  JDK and JRE are provided. Therefore the updater will now update 32-bit
+  installations of Eclipse Temurin 17 JDK and JRE to 64-bit installations, if
+  it runs on a 64-bit OS.
+
+  This is a breaking change for 32-bit Java applications relying on a 32-bit
+  Java Runtime Environment.
+
 __[changes]__
 
 * Adjust search for newer version of Acrobat Reader 2020.
