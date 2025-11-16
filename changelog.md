@@ -25,6 +25,7 @@ __[changes]__
 
 * Adjust search for newer version of Acrobat Reader 2020.
 * Fix failing search for newer versions of Blender LTS.
+* Adjust search for newer versions of HeidiSQL to not include nightly builds.
 * Starting with SeaMonkey 2.53.22, no more 32-bit builds for SeaMonkey are
   provided. Therefore the updater will now update 32-bit installations of
   SeaMonkey to 64-bit installations, if it runs on a 64-bit OS.

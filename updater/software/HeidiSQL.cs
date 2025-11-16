@@ -169,15 +169,16 @@ namespace updater.software
                 return null;
             }
 
-            // Installer file is something like <a href="/downloads/installers/HeidiSQL_12.1.0.6537_Setup.exe"> in HTML.
-            var reVersion = new Regex("/installers/HeidiSQL_([0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+)_Setup\\.exe\"");
+            // Installer file was something like <a href="/downloads/installers/HeidiSQL_12.1.0.6537_Setup.exe"> in HTML.
+            // Now it's a link to the release like <a href="https://github.com/HeidiSQL/HeidiSQL/releases/tag/v12.13.0.7147">.
+            var reVersion = new Regex("HeidiSQL/releases/tag/v([0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+)\">");
             Match matchVersion = reVersion.Match(htmlCode);
             if (!matchVersion.Success)
                 return null;
             string newVersion = matchVersion.Groups[1].Value;
             try
             {
-                var task = client.GetStringAsync("https://www.heidisql.com/downloads/installers/HeidiSQL_" + newVersion + "_Setup.sha1.txt");
+                var task = client.GetStringAsync("https://www.heidisql.com/downloads/installers/HeidiSQL_" + newVersion + "_Setup.exe.sha1.txt");
                 task.Wait();
                 htmlCode = task.Result;
             }
@@ -187,7 +188,7 @@ namespace updater.software
                 // Sometimes the ".exe" part is included in the URL and sometimes not, so try this one, too.
                 try
                 {
-                    var task2 = client.GetStringAsync("https://www.heidisql.com/downloads/installers/HeidiSQL_" + newVersion + "_Setup.exe.sha1.txt");
+                    var task2 = client.GetStringAsync("https://www.heidisql.com/downloads/installers/HeidiSQL_" + newVersion + "_Setup.sha1.txt");
                     task2.Wait();
                     htmlCode = task2.Result;
                 }
