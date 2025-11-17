@@ -118,7 +118,7 @@ namespace updater_test.utility
                 // copy original file
                 File.Copy(downloadFileLocation, copyLocation);
                 // modify some bytes in the copied file
-                using (Stream stream = File.Open(copyLocation, FileMode.Open))
+                using (FileStream stream = File.Open(copyLocation, FileMode.Open))
                 {
                     stream.Position = 345;
                     byte[] data = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];

@@ -61,13 +61,13 @@ namespace updater.versions
             string[] parts = dashed_parts[0].Split(['.']);
 
             // If there are less than three parts, we just assume zero.
-            uint.TryParse(parts[0], out major);
+            _ = uint.TryParse(parts[0], out major);
             if (parts.Length >= 2)
-                uint.TryParse(parts[1], out minor);
+                _ = uint.TryParse(parts[1], out minor);
             if (parts.Length >= 3)
-                uint.TryParse(parts[2], out patch);
+                _ = uint.TryParse(parts[2], out patch);
             if (dashed_parts.Length >= 2)
-                uint.TryParse(dashed_parts[1], out build);
+                _ = uint.TryParse(dashed_parts[1], out build);
         }
 
 

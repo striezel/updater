@@ -122,7 +122,7 @@ namespace updater.software
 
             string version = matchVersion.Value.Replace("<A href=\"a/7z", "")
                 .Replace(".exe\">Download</A>", "").Trim();
-            version = version[..2] + "." + version.Substring(2, 2);
+            version = string.Concat(version.AsSpan()[..2], ".", version.AsSpan(2, 2));
 
             // construct new information
             var newInfo = knownInfo();

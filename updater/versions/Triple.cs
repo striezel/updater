@@ -53,11 +53,11 @@ namespace updater.versions
             string[] parts = value.Split(['.']);
             // If there are not enough parts, we just use zero instead.
             if (parts.Length >= 1)
-                uint.TryParse(parts[0], out major);
+                _ = uint.TryParse(parts[0], out major);
             if (parts.Length >= 2)
-                uint.TryParse(parts[1], out minor);
+                _ = uint.TryParse(parts[1], out minor);
             if (parts.Length >= 3)
-                uint.TryParse(parts[2], out patch);
+                _ = uint.TryParse(parts[2], out patch);
         }
 
 

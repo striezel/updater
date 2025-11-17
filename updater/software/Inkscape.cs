@@ -174,7 +174,6 @@ namespace updater.software
             // https://inkscape.org/release/inkscape-0.92.4/windows/32-bit/msi/dl/
             // 64-bit version is at a URL like
             // https://inkscape.org/release/inkscape-0.92.4/windows/64-bit/msi/dl/
-            htmlCode = null;
             try
             {
                 var task = client.GetStringAsync("https://inkscape.org/release/inkscape-" + newVersion + "/windows/64-bit/msi/dl/");
@@ -190,7 +189,7 @@ namespace updater.software
             // Search for URL part like '<a href="/gallery/item/33463/inkscape-1.2_2022-05-15_dc2aedaf03-x64_5iRsplS.msi">'
             //    or without bogus like '<a href="/gallery/item/37366/inkscape-1.2.2_2022-12-09_732a01da63-x64.msi">'.
             const string arch = "x64";
-            string dateAndHash = null;
+            string dateAndHash;
             {
                 var reUrl = new Regex("<a href=\"([a-zA-Z0-9\\/]+)/inkscape\\-" + Regex.Escape(newVersion) + "(_2[0-9]{3}\\-[0-9]{2}\\-[0-9]{2}_[0-9a-f]+)\\-" + arch + "(_[a-zA-Z0-9]+)?\\.msi\">");
                 Match matchUrl = reUrl.Match(htmlCode);
