@@ -46,7 +46,7 @@ namespace updater_test.algorithm
 
             foreach (var item in q)
             {
-                Assert.IsNotNull(item.detected);
+                Assert.IsTrue(item.detected.GetType().IsValueType);
                 Assert.IsNotNull(item.software);
                 Assert.IsNotNull(item.needsUpdate);
             }
@@ -69,7 +69,7 @@ namespace updater_test.algorithm
 
             string data = SoftwareStatus.toConsoleOutput(q);
             Assert.IsNotNull(data);
-            Assert.IsGreaterThan(5, data.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries).Length);
+            Assert.IsGreaterThan(5, data.Split([Environment.NewLine], StringSplitOptions.RemoveEmptyEntries).Length);
         }
 
 
@@ -85,7 +85,7 @@ namespace updater_test.algorithm
             // empty
             var data = SoftwareStatus.toConsoleOutput([]);
             Assert.IsNotNull(data);
-            Assert.AreEqual<int>(1, data.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries).Length);
+            Assert.AreEqual<int>(1, data.Split([Environment.NewLine], StringSplitOptions.RemoveEmptyEntries).Length);
         }
 
     } // class
