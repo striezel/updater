@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017, 2018, 2020, 2021, 2022, 2024  Dirk Stolle
+    Copyright (C) 2017, 2018, 2020, 2021, 2022, 2024, 2025  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -73,14 +73,14 @@ namespace updater.software
                 return LastSupported32BitVersion();
             }
             var signature = new Signature(publisherX509, certificateExpiration);
-            var installer = new InstallInfoMsi(
-                "https://github.com/mumble-voip/mumble/releases/download/v1.5.735/mumble_client-1.5.735.x64.msi",
+            var installer = new InstallInfoExe(
+                "https://github.com/mumble-voip/mumble/releases/download/v1.5.857/mumble_client-1.5.857.x64.exe",
                 HashAlgorithm.SHA256,
-                "2778beac1a7970814372f6b688645cb67a831f52d79e008201461769fadc20bb",
+                "ae42369b95a9aa9cd6fde8fbee29b70503a25028ec4f14abcecab41f5e23fe06",
                 signature,
-                "/qn /norestart");
+                "/S");
             return new AvailableSoftware("Mumble Client",
-                "1.5.735",
+                "1.5.857",
                 "^(Mumble [0-9]\\.[0-9]+\\.[0-9]+|Mumble \\(client\\))$",
                 "^(Mumble [0-9]\\.[0-9]+\\.[0-9]+|Mumble \\(client\\))$",
                 // 32-bit installations will be uninstalled and switched to the
