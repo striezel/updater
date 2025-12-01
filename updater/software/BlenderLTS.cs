@@ -26,7 +26,7 @@ using updater.versions;
 namespace updater.software
 {
     /// <summary>
-    /// Handles updates of Blender LTS version (currently 4.2.x, but that may
+    /// Handles updates of Blender LTS version (currently 4.5.x, but that may
     /// change when a newer LTS branch is released in the future).
     /// </summary>
     public class BlenderLTS : AbstractSoftware
@@ -67,7 +67,7 @@ namespace updater.software
         public override AvailableSoftware knownInfo()
         {
             return new AvailableSoftware("Blender LTS",
-                "4.2.16",
+                "4.5.5",
                 null,
                 "^blender$",
                 null,
@@ -76,10 +76,10 @@ namespace updater.software
                     // website will redirect to a mirror site, and this redirect
                     // is not machine-friendly, i.e. uses JavaScript etc., so a
                     // mirror is the safe choice here.
-                    // "https://ftp.nluug.nl/pub/graphics/blender/release/Blender4.2/blender-4.2.16-windows-x64.msi",
-                    "https://ftp.halifax.rwth-aachen.de/blender/release/Blender4.2/blender-4.2.16-windows-x64.msi",
+                    // "https://ftp.nluug.nl/pub/graphics/blender/release/Blender4.5/blender-4.5.5-windows-x64.msi",
+                    "https://ftp.halifax.rwth-aachen.de/blender/release/Blender4.5/blender-4.5.5-windows-x64.msi",
                     HashAlgorithm.SHA256,
-                    "7ee1b8e376563d4ec6c1fc02dcd762527c3a80b9d58bc6a3eeaff1831ca96910",
+                    "59926028b85cc280139f18e1b9e2b150731df801ca61e3c4e24f62f099669fcb",
                     new Signature(publisherX509, certificateExpiration),
                     "/qn /norestart ALLUSERS=1")
                 );
@@ -120,10 +120,10 @@ namespace updater.software
             string currentVersion;
             try
             {
-                var task = client.GetStringAsync("https://download.blender.org/release/Blender4.2/");
+                var task = client.GetStringAsync("https://download.blender.org/release/Blender4.5/");
                 task.Wait();
                 var html = task.Result;
-                // Installer will be something like "https://www.blender.org/download/release/Blender4.2/blender-4.2.7-windows-x64.msi".
+                // Installer will be something like "https://www.blender.org/download/release/Blender4.5/blender-4.5.5-windows-x64.msi".
                 var reVersion = new Regex(">blender\\-([0-9]+\\.[0-9]+\\.[0-9]+)\\-windows\\-x64\\.msi<");
                 var matches = reVersion.Matches(html);
                 if (matches.Count == 0)
@@ -144,11 +144,11 @@ namespace updater.software
                 return null;
             }
 
-            // Download checksum file, e.g. "https://download.blender.org/release/Blender4.2/blender-4.2.7.sha256".
+            // Download checksum file, e.g. "https://download.blender.org/release/Blender4.5/blender-4.5.5.sha256".
             string checksum;
             try
             {
-                var task = client.GetStringAsync("https://download.blender.org/release/Blender4.2/blender-" + currentVersion + ".sha256");
+                var task = client.GetStringAsync("https://download.blender.org/release/Blender4.5/blender-" + currentVersion + ".sha256");
                 task.Wait();
                 var html = task.Result;
 
