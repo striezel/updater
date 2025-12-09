@@ -45,7 +45,7 @@ namespace updater.software
         /// <summary>
         /// expiration date for the publisher certificate
         /// </summary>
-        private static readonly DateTime certificateExpiration = new(2025, 11, 4, 23, 59, 59, DateTimeKind.Utc);
+        private static readonly DateTime certificateExpiration = new(2027, 10, 5, 23, 59, 59, DateTimeKind.Utc);
 
 
         /// <summary>
@@ -65,11 +65,11 @@ namespace updater.software
         /// details about the software.</returns>
         public override AvailableSoftware knownInfo()
         {
-            const string version = "20.005.30793";
+            const string version = "20.005.30838";
             var installer = new InstallInfoMsiPatch(
-                "https://ardownload3.adobe.com/pub/adobe/reader/win/Acrobat2020/2000530793/AcroRdr2020Upd2000530793_MUI.msp",
+                "https://ardownload3.adobe.com/pub/adobe/reader/win/Acrobat2020/2000530838/AcroRdr2020Upd2000530838_MUI.msp",
                 HashAlgorithm.SHA256,
-                "70cb09a4f8db563f68d3d0729a11ffebefe62c7b0c0f9d3fc4cb9cf1860bb664",
+                "988e793a79801ea2c7f1126c029a51425b8b6746a7fb9ff7892d55dbfd617640",
                 new Signature(publisherX509, certificateExpiration),
                 "/qn /norestart"
                 );
