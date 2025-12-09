@@ -11,6 +11,10 @@ __[changes]__
 * Blender updates will now use the newer 4.5 LTS release series, switching away
   from the previously used Blender 4.2 LTS series.
 
+__[maintenance]__
+
+* NLog library is updated from 6.0.6 to 6.0.7.
+
 ## Version 2025.11.30.0
 
 __[new features]__
