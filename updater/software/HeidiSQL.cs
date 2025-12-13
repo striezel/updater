@@ -176,6 +176,14 @@ namespace updater.software
             if (!matchVersion.Success)
                 return null;
             string newVersion = matchVersion.Groups[1].Value;
+            var currentInfo = knownInfo();
+            var currentQuartet = new Quartet(currentInfo.newestVersion);
+            var newQuartet = new Quartet(newVersion);
+            if (newQuartet < currentQuartet || currentQuartet.Equals(newQuartet))
+            {
+                // Known information is equal or newer, no need to get more new stuff.
+                return currentInfo;
+            }
             try
             {
                 var task = client.GetStringAsync("https://www.heidisql.com/downloads/installers/HeidiSQL_" + newVersion + "_Setup.exe.sha1.txt");
@@ -205,17 +213,16 @@ namespace updater.software
             string hash = matchHash.Value;
 
             // construct new version information
-            var newInfo = knownInfo();
             // replace version number - both as newest version and in URL for download
-            string oldVersion = newInfo.newestVersion;
-            newInfo.newestVersion = newVersion;
-            newInfo.install32Bit.downloadUrl = newInfo.install32Bit.downloadUrl.Replace(oldVersion, newVersion);
-            newInfo.install32Bit.checksum = hash;
-            newInfo.install32Bit.algorithm = HashAlgorithm.SHA1;
-            newInfo.install64Bit.downloadUrl = newInfo.install64Bit.downloadUrl.Replace(oldVersion, newVersion);
-            newInfo.install64Bit.checksum = hash;
-            newInfo.install64Bit.algorithm = HashAlgorithm.SHA1;
-            return newInfo;
+            string oldVersion = currentInfo.newestVersion;
+            currentInfo.newestVersion = newVersion;
+            currentInfo.install32Bit.downloadUrl = currentInfo.install32Bit.downloadUrl.Replace(oldVersion, newVersion);
+            currentInfo.install32Bit.checksum = hash;
+            currentInfo.install32Bit.algorithm = HashAlgorithm.SHA1;
+            currentInfo.install64Bit.downloadUrl = currentInfo.install64Bit.downloadUrl.Replace(oldVersion, newVersion);
+            currentInfo.install64Bit.checksum = hash;
+            currentInfo.install64Bit.algorithm = HashAlgorithm.SHA1;
+            return currentInfo;
         }
 
 
