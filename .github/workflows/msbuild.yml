@@ -68,7 +68,7 @@ jobs:
         move output\updater_setup.exe output\updater_setup_%VERSION%.exe
 
     - name: Upload artifact
-      uses: actions/upload-artifact@v5
+      uses: actions/upload-artifact@v6
       with:
         name: installer-${{ matrix.os }}
         path: output\*.exe
@@ -93,7 +93,7 @@ jobs:
         "C:\Program Files\7-Zip\7z.exe" a -r updater_%VERSION%.zip updater-%VERSION%
 
     - name: Upload zipped updater
-      uses: actions/upload-artifact@v5
+      uses: actions/upload-artifact@v6
       with:
         name: updater-zipped-${{ matrix.os }}
         if-no-files-found: error
