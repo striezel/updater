@@ -22,7 +22,6 @@ using System.Diagnostics;
 using System.IO;
 using System.Text.RegularExpressions;
 using updater.data;
-using updater.versions;
 
 namespace updater.software
 {
@@ -151,7 +150,7 @@ namespace updater.software
         /// Returns null, if an error occurred.</returns>
         public static string determineNewestVersion()
         {
-            string url = "https://archive.seamonkey-project.org/releases/";
+            string url = "https://www.seamonkey-project.org/releases/";
             string htmlCode;
             var client = HttpClientProvider.Provide();
             try
@@ -166,27 +165,15 @@ namespace updater.software
                 return null;
             }
 
-            var reVersion = new Regex(">[0-9]+\\.[0-9]+(\\.[0-9]+(\\.[0-9]+)?)?<");
-            MatchCollection matches = reVersion.Matches(htmlCode);
-            if (matches.Count <= 0)
+            // Page contains links like
+            // "https://archive.seamonkey-project.org/releases/2.53.22/win64/en-GB/seamonkey-2.53.22.en-GB.win64.installer.exe",
+            // so let's find that.
+            var reVersion = new Regex("releases/[0-9]+\\.[0-9]+(\\.[0-9]+(\\.[0-9]+)?)?/win64/");
+            Match match = reVersion.Match(htmlCode);
+            if (!match.Success)
                 return null;
 
-            var releaseList = new List<Quartet>();
-            foreach (Match item in matches)
-            {
-                var quart = new Quartet(item.Value[1..^1]);
-                releaseList.Add(quart);
-            }
-            releaseList.Sort();
-            var newest = releaseList[^1];
-
-            if (htmlCode.Contains(">" + newest.full() + "<"))
-                return newest.full();
-            var trip = new Triple(newest.full());
-            if (htmlCode.Contains(">" + trip.full() + "<"))
-                return trip.full();
-            else
-                return newest.major.ToString() + "." + newest.minor.ToString();
+            return match.Value[9..^7];
         }
 
 
@@ -338,6 +325,5 @@ namespace updater.software
         /// checksum for the 64-bit installer
         /// </summary>
         private readonly string checksum64Bit;
-
     } // class
 } // namespace

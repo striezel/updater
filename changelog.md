@@ -10,6 +10,7 @@ __[changes]__
 
 * Blender updates will now use the newer 4.5 LTS release series, switching away
   from the previously used Blender 4.2 LTS series.
+* Adjust search for newer versions of SeaMonkey to the changed website.
 
 __[maintenance]__
 
