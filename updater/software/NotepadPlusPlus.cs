@@ -49,13 +49,13 @@ namespace updater.software
         /// <summary>
         /// publisher name for signed binaries
         /// </summary>
-        private const string publisherX509 = "CN=\"Notepad++\", O=\"Notepad++\", L=Saint Cloud, S=Ile-de-France, C=FR";
+        private const string publisherX509 = "E=don.h@free.fr, CN=\"NOTEPAD++\", O=\"NOTEPAD++\", L=Paris, S=Île-de-France, C=FR";
 
 
         /// <summary>
         /// expiration date of certificate
         /// </summary>
-        private static readonly DateTime certificateExpiration = new(2025, 5, 14, 23, 59, 59, DateTimeKind.Utc);
+        private static readonly DateTime certificateExpiration = new(2028, 10, 9, 9, 38, 55, DateTimeKind.Utc);
 
 
         /// <summary>
@@ -67,8 +67,8 @@ namespace updater.software
         {
             var signature = new Signature(publisherX509, certificateExpiration);
             // Both version and tag are usually the same, except for major releases like 8.0.
-            const string version = "8.8.9";
-            const string tag = "8.8.9";
+            const string version = "8.9";
+            const string tag = "8.9";
             return new AvailableSoftware("Notepad++",
                 version,
                 "^Notepad\\+\\+ \\(32\\-bit x86\\)$|^Notepad\\+\\+$",
@@ -76,13 +76,13 @@ namespace updater.software
                 new InstallInfoExe(
                     "https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v" + tag + "/npp." + version + ".Installer.exe",
                     HashAlgorithm.SHA256,
-                    "71431fa7b66f8132453e18e3a5f8ef0af3ca079a7793f828df06fdb5d7bd915d",
+                    "73c5902a9eace229d519ec6362dbb8e39b44ffc9078584f535671be6d368981f",
                     signature,
                     "/S"),
                 new InstallInfoExe(
                     "https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v" + tag + "/npp." + version + ".Installer.x64.exe",
                     HashAlgorithm.SHA256,
-                    "2dd5473736ef51e4340cae005e3fc8cdf0e42ec649bc6ed186484a79be409928",
+                    "8e22725756fa567c86170d3601228bbe623b9c5b0c4846c546318efd2ac8a6e3",
                     signature,
                     "/S")
                 );
