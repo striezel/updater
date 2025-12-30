@@ -72,13 +72,13 @@ namespace updater.software
             }
             var signature = new Signature(publisherX509, certificateExpiration);
             var installer = new InstallInfoExe(
-                "https://github.com/Stellarium/stellarium/releases/download/v25.3/stellarium-25.3-qt6-win64.exe",
+                "https://github.com/Stellarium/stellarium/releases/download/v25.4/stellarium-25.4-qt6-win64.exe",
                 HashAlgorithm.SHA256,
-                "fd7ebd2f3bf1a068a9932fe61a087dbad84ba15d0bc6ccf015440f4a61d7f310",
+                "7628a371c88d74ff56980b00f100beef60a18aced23db5ca8cd7ce7679c3dc9f",
                 signature,
                 "/VERYSILENT /ALLUSERS /NORESTART");
             return new AvailableSoftware("Stellarium",
-                "25.3",
+                "25.4",
                 "^Stellarium [0-9]+\\.[0-9]+$",
                 "^Stellarium [0-9]+\\.[0-9]+$",
                 installer,
