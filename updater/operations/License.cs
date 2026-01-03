@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017, 2020, 2021, 2023, 2025  Dirk Stolle
+    Copyright (C) 2017, 2020, 2021, 2023, 2025, 2026  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -41,7 +41,7 @@ namespace updater.operations
         public int perform()
         {
             Console.WriteLine("updater, a command-line tool to keep software up to date");
-            Console.WriteLine("Copyright (C) 2017-2025  Dirk Stolle");
+            Console.WriteLine("Copyright (C) 2017-2026  Dirk Stolle");
             Console.WriteLine();
             // show license information
             Console.Write(gpl3Info);
