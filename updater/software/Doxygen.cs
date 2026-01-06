@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2024, 2025  Dirk Stolle
+    Copyright (C) 2024, 2025, 2026  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -52,15 +52,15 @@ namespace updater.software
         public override AvailableSoftware knownInfo()
         {
             InstallInfo info = new InstallInfoExe(
-                "https://www.doxygen.nl/files/doxygen-1.15.0-setup.exe",
+                "https://www.doxygen.nl/files/doxygen-1.16.0-setup.exe",
                 HashAlgorithm.SHA256,
-                "9cffa650bbc7f728271972fb5a18a38fa79a5def225a8c0e4156d0b0d3b1d7b5",
+                "7f9749be5e541f1065f1ba55b2a66a8f666050448929a4430536023cb164fd07",
                 Signature.None,
                 "/VERYSILENT /NORESTART"
                 );
 
             return new AvailableSoftware("Doxygen",
-                "1.15.0",
+                "1.16.0",
                 "^doxygen [0-9]+\\.[0-9]+\\.[0-9]+$",
                 "^doxygen [0-9]+\\.[0-9]+\\.[0-9]+$",
                 info,
