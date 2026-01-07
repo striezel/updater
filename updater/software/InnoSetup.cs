@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2024, 2025  Dirk Stolle
+    Copyright (C) 2024, 2025, 2026  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -65,13 +65,13 @@ namespace updater.software
         public override AvailableSoftware knownInfo()
         {
             var installer = new InstallInfoExe(
-                "https://files.innosetup.nl/innosetup-6.6.1.exe",
+                "https://files.innosetup.nl/innosetup-6.7.0.exe",
                 HashAlgorithm.SHA256,
-                "d243ce440c02705530699554fb9612b9b2bd7a2a90629cdb7f41e66f5faeb91f",
+                "f45c7d68d1e660cf13877ec36738a5179ce72a33414f9959d35e99b68c52a697",
                 new Signature(publisherX509, certificateExpiration),
                 "/ALLUSERS /VERYSILENT /NORESTART");
             return new AvailableSoftware("Inno Setup",
-                "6.6.1",
+                "6.7.0",
                 "^Inno Setup Version [0-9]+\\.[0-9]+\\.[0-9]+$",
                 "^Inno Setup Version [0-9]+\\.[0-9]+\\.[0-9]+$",
                 installer,
