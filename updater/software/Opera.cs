@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017, 2018, 2020, 2021, 2022, 2023, 2024, 2025  Dirk Stolle
+    Copyright (C) 2017, 2018, 2020 - 2026  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -66,19 +66,19 @@ namespace updater.software
             const string silentOptions = "/silent /norestart /launchopera 0 /setdefaultbrowser 0 /enable-stats 0 /enable-installer-stats 0 /pintotaskbar 0 /pin-additional-shortcuts 0 /allusers";
             var signature = new Signature(publisherX509, certificateExpiration);
             return new AvailableSoftware("Opera",
-                "125.0.5729.49",
+                "126.0.5750.18",
                 "^Opera Stable [0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+$",
                 "^Opera Stable [0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+$",
                 new InstallInfoExe(
-                    "https://get.geo.opera.com/pub/opera/desktop/125.0.5729.49/win/Opera_125.0.5729.49_Setup.exe",
+                    "https://get.geo.opera.com/pub/opera/desktop/126.0.5750.18/win/Opera_126.0.5750.18_Setup.exe",
                     HashAlgorithm.SHA256,
-                    "20ee0a58d03b0edb517f8a14011480fed2cb71f9059f37bd5ef41056ef083534",
+                    "3727e8d9651139f74d7b1970d3e853de423d546605b0577fdb18678086ce57ce",
                     signature,
                     silentOptions),
                 new InstallInfoExe(
-                    "https://get.geo.opera.com/pub/opera/desktop/125.0.5729.49/win/Opera_125.0.5729.49_Setup_x64.exe",
+                    "https://get.geo.opera.com/pub/opera/desktop/126.0.5750.18/win/Opera_126.0.5750.18_Setup_x64.exe",
                     HashAlgorithm.SHA256,
-                    "37476581b9bdf1845875cdd27bfc9672a056d6218612597f1ed836f047d9e829",
+                    "467b9cc15979927ebc8bca4dfbe31f1c15f239a12af9113fe9f3ba4ea5091efd",
                     signature,
                     silentOptions)
                     );
