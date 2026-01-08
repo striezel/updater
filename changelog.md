@@ -9,6 +9,10 @@ improvements may be omitted.)_
 __[maintenance]__
 * Update certificate information for Notepad++ installer.
 
+__[changes]__
+* The search for newer versions of Inkscape has been adjusted to handle changes
+  in the URL of MSI installer packages.
+
 ## Version 2025.12.24.0
 
 __[changes]__

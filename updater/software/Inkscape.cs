@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017, 2018, 2020, 2021, 2022, 2023, 2024, 2025  Dirk Stolle
+    Copyright (C) 2017, 2018, 2020 - 2026  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -193,27 +193,65 @@ namespace updater.software
             {
                 var reUrl = new Regex("<a href=\"([a-zA-Z0-9\\/]+)/inkscape\\-" + Regex.Escape(newVersion) + "(_2[0-9]{3}\\-[0-9]{2}\\-[0-9]{2}_[0-9a-f]+)\\-" + arch + "(_[a-zA-Z0-9]+)?\\.msi\">");
                 Match matchUrl = reUrl.Match(htmlCode);
-                if (!matchUrl.Success)
-                    return null;
-                dateAndHash = matchUrl.Groups[2].Value;
-                string bogus = matchUrl.Groups[3].Success ? matchUrl.Groups[3].Value : "";
-                newInfo.install64Bit.downloadUrl = "https://inkscape.org/" + matchUrl.Groups[1].Value + "inkscape-" + newVersion + dateAndHash + "-x64" + bogus + ".msi";
+                if (matchUrl.Success)
+                {
+                    dateAndHash = matchUrl.Groups[2].Value;
+                    string bogus = matchUrl.Groups[3].Success ? matchUrl.Groups[3].Value : "";
+                    newInfo.install64Bit.downloadUrl = "https://inkscape.org/" + matchUrl.Groups[1].Value + "/inkscape-" + newVersion + dateAndHash + "-x64" + bogus + ".msi";
+                }
+                else
+                {
+                    // Try simple URL instead (used in Inkscape 1.4.3).
+                    reUrl = new Regex("<a href=\"([a-zA-Z0-9\\/]+)/inkscape\\-" + Regex.Escape(newVersion) + "\\.msi\">");
+                    matchUrl = reUrl.Match(htmlCode);
+                    if (!matchUrl.Success)
+                        return null;
+                    newInfo.install64Bit.downloadUrl = "https://inkscape.org/" + matchUrl.Groups[1].Value + "/inkscape-" + newVersion + ".msi";
+                    dateAndHash = null;
+                }
             }
 
-            // Signature files are given in HTML elements like
-            // <a href="https://media.inkscape.org/media/resources/sigs/inkscape-1.2_2022-05-15_dc2aedaf03-x64.msi_p22hkKC.sha256"> or
-            // <a href="https://media.inkscape.org/media/resources/sigs/inkscape-1.2.2_2022-12-09_732a01da63-x64.msi.sha256"> (no bogus).
+            if (!string.IsNullOrEmpty(dateAndHash))
             {
-                var reUrl = new Regex("<a href=\"https://media\\.inkscape\\.org/media/resources/sigs/inkscape\\-"
-                    + Regex.Escape(newVersion + dateAndHash) + "\\-" + arch + "\\.msi(_[a-zA-Z0-9]+)?\\.sha256\">");
-                Match matchUrl = reUrl.Match(htmlCode);
-                if (!matchUrl.Success)
-                    return null;
-                string bogus = matchUrl.Groups[1].Success ? matchUrl.Groups[1].Value : "";
-                string signatureUrl = "https://media.inkscape.org/media/resources/sigs/inkscape-"
-                    + newVersion + dateAndHash + "-" + arch + ".msi" + bogus + ".sha256";
+                // Signature files are given in HTML elements like
+                // <a href="https://media.inkscape.org/media/resources/sigs/inkscape-1.2_2022-05-15_dc2aedaf03-x64.msi_p22hkKC.sha256"> or
+                // <a href="https://media.inkscape.org/media/resources/sigs/inkscape-1.2.2_2022-12-09_732a01da63-x64.msi.sha256"> (no bogus).
+                {
+                    var reUrl = new Regex("<a href=\"https://media\\.inkscape\\.org/media/resources/sigs/inkscape\\-"
+                        + Regex.Escape(newVersion + dateAndHash) + "\\-" + arch + "\\.msi(_[a-zA-Z0-9]+)?\\.sha256\">");
+                    Match matchUrl = reUrl.Match(htmlCode);
+                    if (!matchUrl.Success)
+                        return null;
+                    string bogus = matchUrl.Groups[1].Success ? matchUrl.Groups[1].Value : "";
+                    string signatureUrl = "https://media.inkscape.org/media/resources/sigs/inkscape-"
+                        + newVersion + dateAndHash + "-" + arch + ".msi" + bogus + ".sha256";
 
-                htmlCode = null;
+                    htmlCode = null;
+                    try
+                    {
+                        var task = client.GetStringAsync(signatureUrl);
+                        task.Wait();
+                        htmlCode = task.Result;
+                    }
+                    catch (Exception ex)
+                    {
+                        logger.Warn("Exception occurred while checking for newer version of Inkscape: " + ex.Message);
+                        return null;
+                    }
+                }
+
+                var reHash = new Regex("[0-9a-f]{64} [ \\*]inkscape\\-" + Regex.Escape(newVersion + dateAndHash) + "\\-" + arch + "\\.msi");
+                Match matchHash = reHash.Match(htmlCode);
+                if (!matchHash.Success)
+                    return null;
+                string newHash = matchHash.Value[..64]; // SHA256 is 64 characters in hex.
+
+                newInfo.install64Bit.checksum = newHash;
+                newInfo.install64Bit.algorithm = HashAlgorithm.SHA256;
+            }
+            else if (newVersion == "1.4.3")
+            {
+                string signatureUrl = "https://media.inkscape.org/media/resources/sigs/inkscape-signed.msi.sha256";
                 try
                 {
                     var task = client.GetStringAsync(signatureUrl);
@@ -225,16 +263,19 @@ namespace updater.software
                     logger.Warn("Exception occurred while checking for newer version of Inkscape: " + ex.Message);
                     return null;
                 }
+                var reHash = new Regex("[0-9a-f]{64} [ \\*]inkscape\\-signed\\.msi");
+                Match matchHash = reHash.Match(htmlCode);
+                if (!matchHash.Success)
+                    return null;
+                string newHash = matchHash.Value[..64]; // SHA256 is 64 characters in hex.
+
+                newInfo.install64Bit.checksum = newHash;
+                newInfo.install64Bit.algorithm = HashAlgorithm.SHA256;
             }
-
-            var reHash = new Regex("[0-9a-f]{64} [ \\*]inkscape\\-" + Regex.Escape(newVersion + dateAndHash) + "\\-" + arch + "\\.msi");
-            Match matchHash = reHash.Match(htmlCode);
-            if (!matchHash.Success)
+            else
+            {
                 return null;
-            string newHash = matchHash.Value[..64]; // SHA256 is 64 characters in hex.
-
-            newInfo.install64Bit.checksum = newHash;
-            newInfo.install64Bit.algorithm = HashAlgorithm.SHA256;
+            }
 
             return newInfo;
         }
