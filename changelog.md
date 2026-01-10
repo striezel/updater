@@ -6,6 +6,10 @@ improvements may be omitted.)_
 
 ## Next Version
 
+__[new features]__
+
+* Update support for KeePassXC is added.
+
 __[maintenance]__
 * Update certificate information for Notepad++ installer.
 

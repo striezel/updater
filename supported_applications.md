@@ -32,6 +32,7 @@ application.
 * Inno Setup
 * IrfanView
 * KeePass 2
+* KeePassXC
 * LibreOffice
 * LibreWolf
 * MariaDB 10.3 _(reached end of support on 25th May 2023)_

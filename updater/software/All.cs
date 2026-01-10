@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017, 2018, 2019, 2021, 2022, 2023, 2024, 2025  Dirk Stolle
+    Copyright (C) 2017, 2018, 2019, 2021 - 2026  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -94,6 +94,7 @@ namespace updater.software
             result.Add(new InnoSetup(autoGetNewer));
             result.Add(new IrfanView(autoGetNewer));
             result.Add(new KeePass(autoGetNewer));
+            result.Add(new KeePassXC(autoGetNewer));
             result.Add(new LibreOffice(autoGetNewer));
             result.Add(new LibreOfficeHelpPackGerman(autoGetNewer));
             result.Add(new LibreWolf(autoGetNewer));
