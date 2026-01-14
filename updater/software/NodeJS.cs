@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2021, 2022, 2023, 2024, 2025  Dirk Stolle
+    Copyright (C) 2021, 2022, 2023, 2024, 2025, 2026  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -53,7 +53,7 @@ namespace updater.software
         /// <summary>
         /// expiration date of certificate
         /// </summary>
-        private static readonly DateTime certificateExpiration = new(2025, 10, 30, 2, 50, 30, DateTimeKind.Utc);
+        private static readonly DateTime certificateExpiration = new(2026, 1, 14, 23, 36, 44, DateTimeKind.Utc);
 
 
         /// <summary>
@@ -63,7 +63,7 @@ namespace updater.software
         /// details about the software.</returns>
         public override AvailableSoftware knownInfo()
         {
-            const string version = "22.21.1";
+            const string version = "22.22.0";
             var signature = new Signature(publisherX509, certificateExpiration);
             return new AvailableSoftware(
                 "Node.js",
@@ -73,13 +73,13 @@ namespace updater.software
                 new InstallInfoMsi(
                     "https://nodejs.org/download/release/v" + version + "/node-v" + version + "-x86.msi",
                     HashAlgorithm.SHA256,
-                    "b0bf4ad9f5c6afc6d5bbc354554abb34c378764682fb878996c5061abb448d80",
+                    "ec3eeb357dbb980aea936afb8ce8b279f12cf0bec03fd7781ddcfad44f01cba6",
                     signature,
                     "/qn /norestart"),
                 new InstallInfoMsi(
                     "https://nodejs.org/download/release/v" + version + "/node-v" + version + "-x64.msi",
                     HashAlgorithm.SHA256,
-                    "fd7a63fec3a54a665851e2d3d93e07cfead2ffb4521675ffdbceb1bb5ac009bb",
+                    "b10f88c6ded24ca487839b3eccb8870a08d7f9fc2b9bb3b463fc72a3a40bcdb1",
                     signature,
                     "/qn /norestart")
                     );

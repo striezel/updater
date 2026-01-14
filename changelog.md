@@ -11,6 +11,7 @@ __[new features]__
 * Update support for KeePassXC is added.
 
 __[maintenance]__
+* Update certificate information for Node.js installer.
 * Update certificate information for Notepad++ installer.
 
 __[changes]__
