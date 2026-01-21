@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2021, 2022, 2023, 2024, 2025  Dirk Stolle
+    Copyright (C) 2021, 2022, 2023, 2024, 2025, 2026  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -65,7 +65,7 @@ namespace updater.software
         public override AvailableSoftware knownInfo()
         {
             var signature = new Signature(publisherX509, certificateExpiration);
-            const string version = "4.2.1";
+            const string version = "4.2.2";
             return new AvailableSoftware("CMake",
                 version,
                 "^CMake$",
@@ -73,13 +73,13 @@ namespace updater.software
                 new InstallInfoMsi(
                     "https://github.com/Kitware/CMake/releases/download/v" + version + "/cmake-" + version + "-windows-i386.msi",
                     HashAlgorithm.SHA256,
-                    "27407844b603d0249440777270f4d0bc3961542866918c5a8772009363d08a2f",
+                    "d3b686f1a113cfff553bdf44b65c8101bdd185b773fc578c40d36dfbaf3f9aa2",
                     signature,
                     "/qn /norestart"),
                 new InstallInfoMsi(
                     "https://github.com/Kitware/CMake/releases/download/v" + version + "/cmake-" + version + "-windows-x86_64.msi",
                     HashAlgorithm.SHA256,
-                    "bd13c641e2492e06f105c62cf7e4b58c54c0f0042577cecb2470ab30c4144155",
+                    "5f021b6735dfcedc38a05ec56853683e0e94867d2ab5e021501c26e701ce0b52",
                     signature,
                     "/qn /norestart")
                     );
