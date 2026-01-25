@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2024, 2025  Dirk Stolle
+    Copyright (C) 2024, 2025, 2026  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -56,19 +56,19 @@ namespace updater.software
         public override AvailableSoftware knownInfo()
         {
             return new AvailableSoftware("Graphviz",
-                "14.1.1",
+                "14.1.2",
                 "^Graphviz$",
                 "^Graphviz$",
                 new InstallInfoExe(
-                    "https://gitlab.com/api/v4/projects/4207231/packages/generic/graphviz-releases/14.1.1/windows_10_cmake_Release_graphviz-install-14.1.1-win32.exe",
+                    "https://gitlab.com/api/v4/projects/4207231/packages/generic/graphviz-releases/14.1.2/windows_10_cmake_Release_graphviz-install-14.1.2-win32.exe",
                     HashAlgorithm.SHA256,
-                    "a6ef46eb9fa1123676535c37b3c018515b09bbac191535b566629af940a0698b",
+                    "ce401bd39179d6af50072dad5e54cb8f6454e4d5ff28102b394543486790a396",
                     Signature.None,
                     "/S"),
                 new InstallInfoExe(
-                    "https://gitlab.com/api/v4/projects/4207231/packages/generic/graphviz-releases/14.1.1/windows_10_cmake_Release_graphviz-install-14.1.1-win64.exe",
+                    "https://gitlab.com/api/v4/projects/4207231/packages/generic/graphviz-releases/14.1.2/windows_10_cmake_Release_graphviz-install-14.1.2-win64.exe",
                     HashAlgorithm.SHA256,
-                    "3668fa606422f0ee158e9ac548a1e92a5cead7e253a139de89cc72a9f22a39d0",
+                    "811001195cf62aa74146eb10db4055e5a066811cde245b87a18bb7b132ba2dcc",
                     Signature.None,
                     "/S")
                 );
