@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017, 2018, 2020, 2021, 2022, 2023, 2024, 2025  Dirk Stolle
+    Copyright (C) 2017, 2018, 2020 - 2026  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -69,14 +69,14 @@ namespace updater.software
         public override AvailableSoftware knownInfo()
         {
             var installer = new InstallInfoExe(
-                "https://download.gimp.org/gimp/v3.0/windows/gimp-3.0.6-setup-1.exe",
+                "https://download.gimp.org/gimp/v3.0/windows/gimp-3.0.8-setup.exe",
                 HashAlgorithm.SHA256,
-                "1521ae318ff176d3d428279d52ff5abdf328ddf8644b48de75684e55e1057167",
+                "6cda0c1283ab3bc84c687fb3cf0896e61760a213ff9fb496a5a2851c040927c8",
                 new Signature(publisherX509, certificateExpiration),
                 "/VERYSILENT /NORESTART /ALLUSERS");
 
             return new AvailableSoftware("The GIMP",
-                "3.0.6.1",
+                "3.0.8",
                 "^GIMP [0-9]+\\.[0-9]+\\.[0-9]+(\\-[0-9]+)?$",
                 "^GIMP [0-9]+\\.[0-9]+\\.[0-9]+(\\-[0-9]+)?$",
                 // The GIMP uses the same installer for 32 and 64-bit.
