@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2024, 2025  Dirk Stolle
+    Copyright (C) 2024, 2025, 2026  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -66,21 +66,21 @@ namespace updater.software
         {
             var signature = new Signature(publisherX509, certificateExpiration);
             return new AvailableSoftware("WinMerge",
-                "2.16.52.2",
+                "2.16.54",
                 "^WinMerge [0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+?$",
                 "^WinMerge ([0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+ )?x64$",
                 new InstallInfoExe(
-                    "https://netcologne.dl.sourceforge.net/project/winmerge/stable/2.16.52.2/WinMerge-2.16.52.2-Setup.exe",
+                    "https://deac-fra.dl.sourceforge.net/project/winmerge/stable/2.16.54/WinMerge-2.16.54-Setup.exe",
                     HashAlgorithm.SHA256,
-                    "074d9f175a8cf13d8117b3c75180ce978a47f10efc8c34888ee5380b6dbfd334",
+                    "a67220e5a8c5eb6da1791792939a5186bb474541ea9d5531abacc0713c4895b2",
                     signature,
-                    "/VERYSILENT /NORESTART"),
+                    "/SP- /VERYSILENT /NORESTART /SUPPRESSMSGBOXES"),
                 new InstallInfoExe(
-                    "https://netcologne.dl.sourceforge.net/project/winmerge/stable/2.16.52.2/WinMerge-2.16.52.2-x64-Setup.exe",
+                    "https://deac-fra.dl.sourceforge.net/project/winmerge/stable/2.16.54/WinMerge-2.16.54-x64-Setup.exe",
                     HashAlgorithm.SHA256,
-                    "f0b8094da0df8f3b6ed02ddda01b8c6264a48d7db0d1ccafb09a16e9090cbe8a",
+                    "a63baed8eac4f5670ddd101e590fa9ab8ec53709948cbc470a0d14a156dc5632",
                     signature,
-                    "/VERYSILENT /NORESTART")
+                    "/SP- /VERYSILENT /NORESTART /SUPPRESSMSGBOXES")
                 );
         }
 
