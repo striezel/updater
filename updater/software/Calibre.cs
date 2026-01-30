@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017, 2018, 2019, 2021, 2022, 2023, 2024, 2025  Dirk Stolle
+    Copyright (C) 2017, 2018, 2019, 2021 - 2026  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -77,11 +77,11 @@ namespace updater.software
             }
 
             var signature = new Signature(publisherX509, certificateExpiration);
-            const string knownVersion = "8.16.2";
+            const string knownVersion = "9.0.0";
             InstallInfo info64 = new InstallInfoMsi(
                 "https://download.calibre-ebook.com/" + knownVersion + "/calibre-64bit-" + knownVersion + ".msi",
                 HashAlgorithm.SHA256,
-                "7f052a6027d2331ce214cd4cbf7d8b12125b39a420309745cc6974cf3a000d50",
+                "af7c10ceb1558fbc686bf72894e10903e31851306bbf7052113b0a887299bbaf",
                 signature,
                 "/qn /norestart"
                 );
