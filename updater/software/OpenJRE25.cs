@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2025  Dirk Stolle
+    Copyright (C) 2025, 2026  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -68,16 +68,16 @@ namespace updater.software
         public override AvailableSoftware knownInfo()
         {
             var signature = new Signature(publisherX509, certificateExpiration);
-            const string version = "25.0.1.8";
+            const string version = "25.0.2.10";
             return new AvailableSoftware("Eclipse Temurin JRE 25 with Hotspot",
                 version,
                 null, // no 32-bit installer
                 "^Eclipse Temurin JRE [a-z]+ Hotspot 25(\\.[0-9]+\\.[0-9]+)?\\+[0-9]+ \\(x64\\)$",
                 null, // no 32-bit installer
                 new InstallInfoMsiNoLocation(
-                    "https://github.com/adoptium/temurin25-binaries/releases/download/jdk-25.0.1%2B8/OpenJDK25U-jre_x64_windows_hotspot_25.0.1_8.msi",
+                    "https://github.com/adoptium/temurin25-binaries/releases/download/jdk-25.0.2%2B10/OpenJDK25U-jre_x64_windows_hotspot_25.0.2_10.msi",
                     HashAlgorithm.SHA256,
-                    "54593f49cff797827dc5d51c3257feb828decba9b70bb270f6c6d5bba91efd56",
+                    "8344bfe9d2e161276f4956f6e8444dec444b631ca5d80c36657d9df4ba5643a2",
                     signature,
                     "ALLUSERS=1 INSTALLLEVEL=3 /qn /norestart")
                     );
