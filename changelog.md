@@ -17,6 +17,7 @@ __[maintenance]__
 
 __[changes]__
 * Adjust search for newer versions of Graphviz.
+* Adjust search for newer versions of HeidiSQL.
 * The search for newer versions of Inkscape has been adjusted to handle changes
   in the URL of MSI installer packages.
 
