@@ -144,7 +144,8 @@ namespace updater.software
             var newerVersion = determineNewestRelease();
             var known = knownInfo();
             var knownVersion = new Triple(known.newestVersion);
-            if (knownVersion > newerVersion)
+            // There's no >= operator for Triple yet, so we use > and ! < instead.
+            if ((knownVersion > newerVersion) || !(knownVersion < newerVersion))
                 return known;
 
             // Checksums are available under URLs like

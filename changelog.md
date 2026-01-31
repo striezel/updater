@@ -16,6 +16,7 @@ __[maintenance]__
 * Update certificate information for Notepad++ installer.
 
 __[changes]__
+* Adjust search for newer versions of Graphviz.
 * The search for newer versions of Inkscape has been adjusted to handle changes
   in the URL of MSI installer packages.
 
