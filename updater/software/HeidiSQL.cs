@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2022, 2023, 2024, 2025  Dirk Stolle
+    Copyright (C) 2022, 2023, 2024, 2025, 2026  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -76,13 +76,13 @@ namespace updater.software
                 return Last32BitVersion();
             }
             var installer = new InstallInfoExe(
-                    "https://www.heidisql.com/downloads/installers/HeidiSQL_12.14.0.7165_Setup.exe",
+                    "https://www.heidisql.com/downloads/installers/HeidiSQL_12.15.0.7171_Setup.exe",
                     HashAlgorithm.SHA1,
-                    "fbb31096c4e0a562cec3710827ed940f150345dd",
+                    "763139a107fe8475616f552ff60a07285dc729b3",
                     new Signature(publisherX509, certificateExpiration),
                     "/VERYSILENT /NORESTART");
             return new AvailableSoftware("HeidiSQL",
-                "12.14.0.7165",
+                "12.15.0.7171",
                 "^HeidiSQL [0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+$",
                 "^HeidiSQL [0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+$",
                 // use 64-bit installer, too, to update 32-bit installations to 64-bit
