@@ -6,6 +6,9 @@ improvements may be omitted.)_
 
 ## Next Version
 
+__[changes]__
+* Adjust search for newer versions of Shotcut.
+
 __[maintenance]__
 
 * NLog library is updated from 6.0.7 to 6.1.0.

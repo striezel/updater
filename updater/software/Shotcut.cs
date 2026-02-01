@@ -221,7 +221,7 @@ namespace updater.software
             } // using
 
             // find SHA256 hash for 64-bit installer
-            var reHash = new Regex("[a-f0-9]{64}  shotcut\\-win64\\-([0-9]{6}|[0-9]{2}\\.[0-9]{2}\\.[0-9]{2}).exe");
+            var reHash = new Regex("[a-f0-9]{64}  shotcut\\-win64\\-([0-9]{6}|[0-9]{2}\\.[0-9]{1,2}\\.[0-9]{2}).exe");
             Match matchHash = reHash.Match(htmlCode);
             if (!matchHash.Success)
                 return null;
