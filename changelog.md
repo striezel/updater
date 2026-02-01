@@ -4,6 +4,12 @@ _(Note: This changelog focuses on the major changes between the different
 versions. Therefore, it may not contain all changes. Especially smaller fixes or
 improvements may be omitted.)_
 
+## Next Version
+
+__[maintenance]__
+
+* NLog library is updated from 6.0.7 to 6.1.0.
+
 ## Version 2026.01.31.0
 
 __[new features]__
