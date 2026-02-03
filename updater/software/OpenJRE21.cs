@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2023, 2024, 2025  Dirk Stolle
+    Copyright (C) 2023, 2024, 2025, 2026  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -66,16 +66,16 @@ namespace updater.software
         public override AvailableSoftware knownInfo()
         {
             var signature = new Signature(publisherX509, certificateExpiration);
-            const string version = "21.0.9.10";
+            const string version = "21.0.10.7";
             return new AvailableSoftware("Eclipse Temurin JRE 21 with Hotspot",
                 version,
                 null, // no 32-bit installer
                 "^Eclipse Temurin JRE [a-z]+ Hotspot 21\\.[0-9]+\\.[0-9]+(\\.[0-9]+)?\\+[0-9]+(\\.[0-9]+)? \\(x64\\)$",
                 null, // no 32-bit installer
                 new InstallInfoMsiNoLocation(
-                    "https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.9%2B10/OpenJDK21U-jre_x64_windows_hotspot_21.0.9_10.msi",
+                    "https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.10%2B7/OpenJDK21U-jre_x64_windows_hotspot_21.0.10_7.msi",
                     HashAlgorithm.SHA256,
-                    "56b167659821fe125ea3b2974b0da1bac725b886b77193629d8ef880d38517e1",
+                    "a841118d4959b6b6eb6156fa1f2487f112afaecd124b1eb5bba203d5556efd32",
                     signature,
                     "INSTALLLEVEL=3 /qn /norestart")
                     );
