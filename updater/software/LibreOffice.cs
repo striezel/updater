@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017 - 2025  Dirk Stolle
+    Copyright (C) 2017 - 2026  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -65,19 +65,19 @@ namespace updater.software
         {
             var signature = new Signature(publisherX509, certificateExpiration);
             return new AvailableSoftware("LibreOffice",
-                "25.8.4.2",
+                "26.2.0.3",
                 "^LibreOffice [0-9]+\\.[0-9]+\\.[0-9]\\.[0-9]$",
                 "^LibreOffice [0-9]+\\.[0-9]+\\.[0-9]\\.[0-9]$",
                 new InstallInfoLibO(
-                    "https://download.documentfoundation.org/libreoffice/stable/25.8.4/win/x86/LibreOffice_25.8.4_Win_x86.msi",
+                    "https://download.documentfoundation.org/libreoffice/stable/26.2.0/win/x86/LibreOffice_26.2.0_Win_x86.msi",
                     HashAlgorithm.SHA256,
-                    "ef5ffe6f2a362019da3893f8974d47ce120d44096c2c576bfefd472dbb40a78e",
+                    "ef306a4df84eaa8e2bb70c48afaa47f71a1ead37e0a4c8a8ef2a10862e0962f0",
                     signature,
                     "/qn /norestart"),
                 new InstallInfoLibO(
-                    "https://download.documentfoundation.org/libreoffice/stable/25.8.4/win/x86_64/LibreOffice_25.8.4_Win_x86-64.msi",
+                    "https://download.documentfoundation.org/libreoffice/stable/26.2.0/win/x86_64/LibreOffice_26.2.0_Win_x86-64.msi",
                     HashAlgorithm.SHA256,
-                    "b2b23d91bda5ad6e97b38008b082060a55d2a3c7c269b2c0e78daca865133d48",
+                    "efdf4696a7f8d94c749efe260acb2fd1d29d0dd30cb1e3c5104fde2b503e9a64",
                     signature,
                     "/qn /norestart")
                     );
