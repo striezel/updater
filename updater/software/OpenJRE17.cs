@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2022, 2023, 2024, 2025  Dirk Stolle
+    Copyright (C) 2022, 2023, 2024, 2025, 2026  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -75,13 +75,13 @@ namespace updater.software
             }
             var signature = new Signature(publisherX509, certificateExpiration);
             var install64Bit = new InstallInfoMsiNoLocation(
-                "https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.17%2B10/OpenJDK17U-jre_x64_windows_hotspot_17.0.17_10.msi",
+                "https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.18%2B8/OpenJDK17U-jre_x64_windows_hotspot_17.0.18_8.msi",
                 HashAlgorithm.SHA256,
-                "23eea3080b9545915b5af64807fd310ee7227688a179b33859530912cca4c1e6",
+                "fa15e3d32633795979395d4f42446b0fc41c8dcf4b4995d063ae4352d882ca26",
                 signature,
                 "INSTALLLEVEL=3 /qn /norestart");
             return new AvailableSoftware("Eclipse Temurin JRE 17 with Hotspot",
-                "17.0.17.10",
+                "17.0.18.8",
                 "^Eclipse Temurin JRE [a-z]+ Hotspot 17\\.[0-9]+\\.[0-9]+(\\.[0-9]+)?\\+[0-9]+(\\.[0-9]+)? \\(x86\\)$",
                 "^Eclipse Temurin JRE [a-z]+ Hotspot 17\\.[0-9]+\\.[0-9]+(\\.[0-9]+)?\\+[0-9]+(\\.[0-9]+)? \\(x64\\)$",
                 // Use 64-bit installer on 32-bit installations for cross-grading.
