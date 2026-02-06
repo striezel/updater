@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2023, 2024, 2025  Dirk Stolle
+    Copyright (C) 2023, 2024, 2025, 2026  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -43,7 +43,7 @@ namespace updater.software
         /// details about the software.</returns>
         public override AvailableSoftware knownInfo()
         {
-            const string version = "10.11.15";
+            const string version = "10.11.16";
             var signature = new Signature(publisherX509, certificateExpiration);
             return new AvailableSoftware("MariaDB Server 10.11",
                 version,
@@ -53,7 +53,7 @@ namespace updater.software
                 new InstallInfoMsi(
                     "https://downloads.mariadb.org/rest-api/mariadb/" + version + "/mariadb-" + version + "-winx64.msi",
                     HashAlgorithm.SHA256,
-                    "7a2502de1c4f5ae22d7fcfc1b6718b91e77bfded46ed825a97543f1b2934c1fa",
+                    "19897ace8afd2927a25481e9b4e9272bcb69818d6203f92b3851574bab748395",
                     signature,
                     "/qn /norestart")
                 );
