@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017, 2018, 2019, 2021, 2022, 2023, 2024  Dirk Stolle
+    Copyright (C) 2017, 2018, 2019, 2021 - 2026  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -52,19 +52,19 @@ namespace updater.software
         public override AvailableSoftware knownInfo()
         {
             return new AvailableSoftware("7-Zip",
-                "25.01",
+                "26.00",
                 "^7\\-Zip [0-9]+\\.[0-9]{2}$",
                 "^7\\-Zip [0-9]+\\.[0-9]{2} \\(x64\\)$",
                 new InstallInfoExe(
-                    "https://www.7-zip.org/a/7z2501.exe",
+                    "https://www.7-zip.org/a/7z2600.exe",
                     HashAlgorithm.SHA256,
-                    "b96831eec5928384f0543d6b57c1f802952a0f2668e662882c0a785a2b52fb3b",
+                    "d605eb609aa67796dca7cfe26d7e28792090bb8048302d6e05ede16e8e33145c",
                     Signature.None,
                     "/S"),
                 new InstallInfoExe(
-                    "https://www.7-zip.org/a/7z2501-x64.exe",
+                    "https://www.7-zip.org/a/7z2600-x64.exe",
                     HashAlgorithm.SHA256,
-                    "78afa2a1c773caf3cf7edf62f857d2a8a5da55fb0fff5da416074c0d28b2b55f",
+                    "6fe18d5b3080e39678cabfa6cef12cfb25086377389b803a36a3c43236a8a82c",
                     Signature.None,
                     "/S")
                 );
