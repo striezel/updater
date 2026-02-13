@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017, 2018, 2020, 2021, 2022, 2023, 2024, 2025  Dirk Stolle
+    Copyright (C) 2017, 2018, 2020 - 2026  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -74,19 +74,19 @@ namespace updater.software
             {
                 var signature = new Signature(publisherX509, certificateExpiration);
                 return new AvailableSoftware("FileZilla FTP Client",
-                    "3.69.5",
+                    "3.69.6",
                     "^FileZilla (Client )?[0-9]+\\.[0-9]+(\\.[0-9]+(\\.[0-9]+)?)?$",
                     "^FileZilla (Client )?[0-9]+\\.[0-9]+(\\.[0-9]+(\\.[0-9]+)?)?$",
                     new InstallInfoExe(
-                        "https://download.filezilla-project.org/client/FileZilla_3.69.5_win32-setup.exe",
+                        "https://download.filezilla-project.org/client/FileZilla_3.69.6_win32-setup.exe",
                         HashAlgorithm.SHA512,
-                        "8b5c0e24971cad34f743cc86255a5ab45813d0fbdade47f0cb58c6ae88edb941c99c29a485c4fac8f34f617abbcd28e807737312c39f3408651d90d1fb884aea",
+                        "731ded39a00e3cf44d114ba30de3f0bbc25d839baff9243c4eb0d7a55c67f7d52edd9d996fd92e1993a28278f33fa5a26ae43a223d1828c8bc591a70779fa0bb",
                         signature,
                         "/S"),
                     new InstallInfoExe(
-                        "https://download.filezilla-project.org/client/FileZilla_3.69.5_win64-setup.exe",
+                        "https://download.filezilla-project.org/client/FileZilla_3.69.6_win64-setup.exe",
                         HashAlgorithm.SHA512,
-                        "9cad4cb5ea15f98cc1bd1015de9ec20216281e6493e2c8f0081719b37b1a34c65e73922f6943e9d5e9031a09bf29cc78c2a546603f4579dcccd1c056ddff9f70",
+                        "06d5ccefbfe628e25f106ba8a851a0e1b193e59697bac07e4c11092b21c0e7c5cb992db00e7ecc248dee635c564fef9641a9657c453fbb7adc8366c070beaf25",
                         signature,
                         "/S")
                     );
