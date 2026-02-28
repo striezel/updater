@@ -11,7 +11,7 @@ __[changes]__
 
 __[maintenance]__
 
-* NLog library is updated from 6.0.7 to 6.1.0.
+* NLog library is updated from 6.0.7 to 6.1.1.
 * Update certificate information for Blender LTS installer.
 
 ## Version 2026.01.31.0
