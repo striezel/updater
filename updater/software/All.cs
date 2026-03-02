@@ -57,6 +57,7 @@ namespace updater.software
                 new OpenJDK21(autoGetNewer),
                 new OpenJDK25(autoGetNewer),
                 new OpenJRE8(autoGetNewer),
+                new OpenJRE8_32Bit(autoGetNewer),
                 new OpenJRE11(autoGetNewer),
                 new OpenJRE17(autoGetNewer),
                 new OpenJRE21(autoGetNewer),
