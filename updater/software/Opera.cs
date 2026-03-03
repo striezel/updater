@@ -66,19 +66,19 @@ namespace updater.software
             const string silentOptions = "/silent /norestart /launchopera 0 /setdefaultbrowser 0 /enable-stats 0 /enable-installer-stats 0 /pintotaskbar 0 /pin-additional-shortcuts 0 /allusers";
             var signature = new Signature(publisherX509, certificateExpiration);
             return new AvailableSoftware("Opera",
-                "128.0.5807.25",
+                "128.0.5807.37",
                 "^Opera Stable [0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+$",
                 "^Opera Stable [0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+$",
                 new InstallInfoExe(
-                    "https://get.geo.opera.com/pub/opera/desktop/128.0.5807.25/win/Opera_128.0.5807.25_Setup.exe",
+                    "https://get.geo.opera.com/pub/opera/desktop/128.0.5807.37/win/Opera_128.0.5807.37_Setup.exe",
                     HashAlgorithm.SHA256,
-                    "385713bbba8255b6c93a1b60010fa0a6899b6ec7e0dc3936ab07807f89aa18eb",
+                    "1424d01ddd4931ed8f00f39901a1cefba182079b995b0ee64d443fd12ffc817e",
                     signature,
                     silentOptions),
                 new InstallInfoExe(
-                    "https://get.geo.opera.com/pub/opera/desktop/128.0.5807.25/win/Opera_128.0.5807.25_Setup_x64.exe",
+                    "https://get.geo.opera.com/pub/opera/desktop/128.0.5807.37/win/Opera_128.0.5807.37_Setup_x64.exe",
                     HashAlgorithm.SHA256,
-                    "cbfd86ee51c15f0219dbaaca80632431580404c103438474fe98caecd667b16e",
+                    "6af566bc38389704e97d5ff718b5af972a3efd8bc51ee58700c5e433b16ea780",
                     signature,
                     silentOptions)
                     );
