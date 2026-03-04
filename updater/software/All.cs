@@ -53,6 +53,7 @@ namespace updater.software
                 new Doxygen(autoGetNewer),
                 new OpenJDK8(autoGetNewer),
                 new OpenJDK11(autoGetNewer),
+                new OpenJDK11_32Bit(autoGetNewer),
                 new OpenJDK17(autoGetNewer),
                 new OpenJDK21(autoGetNewer),
                 new OpenJDK25(autoGetNewer),

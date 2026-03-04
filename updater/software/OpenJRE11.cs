@@ -158,7 +158,6 @@ namespace updater.software
                 + release.VersionData.Minor.ToString() + "."
                 + release.VersionData.Security.ToString() + "."
                 + release.VersionData.Build.ToString();
-            bool hasBuild32 = false;
             bool hasBuild64 = false;
 
             foreach (Binary bin in release.Binaries)

@@ -24,10 +24,10 @@ using updater.software;
 namespace updater_test.software
 {
     /// <summary>
-    /// Contains tests for OpenJDK11 class.
+    /// Contains tests for OpenJDK11_32Bit class.
     /// </summary>
     [TestClass]
-    public class OpenJDK11_Tests : BasicSoftwareTests
+    public class OpenJDK11_32Bit_Tests : BasicSoftwareTests
     {
         /// <summary>
         /// Checks whether info() returns some meaningful data.
@@ -35,7 +35,7 @@ namespace updater_test.software
         [TestMethod]
         public void Test_info()
         {
-            _info(new OpenJDK11(false));
+            _info(new OpenJDK11_32Bit(false));
         }
 
 
@@ -45,7 +45,7 @@ namespace updater_test.software
         [TestMethod]
         public void Test_implementsSearchForNewer()
         {
-            var jdk = new OpenJDK11(false);
+            var jdk = new OpenJDK11_32Bit(false);
             Assert.IsTrue(jdk.implementsSearchForNewer());
         }
 
@@ -56,7 +56,7 @@ namespace updater_test.software
         [TestMethod]
         public void Test_searchForNewer()
         {
-            _searchForNewer(new OpenJDK11(false));
+            _searchForNewer(new OpenJDK11_32Bit(false));
         }
 
 
@@ -66,7 +66,7 @@ namespace updater_test.software
         [TestMethod]
         public void Test_upToDate_info()
         {
-            _upToDate_info(new OpenJDK11(false));
+            _upToDate_info(new OpenJDK11_32Bit(false));
         }
 
 
@@ -76,20 +76,20 @@ namespace updater_test.software
         [TestMethod]
         public void Test_regexMatches()
         {
-            var info = new OpenJDK11(false).knownInfo();
+            var info = new OpenJDK11_32Bit(false).knownInfo();
             Assert.IsNotNull(info, "knownInfo() returned null!");
 
-            var re64 = new Regex(info.match64Bit, RegexOptions.IgnoreCase);
+            var re32 = new Regex(info.match32Bit, RegexOptions.IgnoreCase);
             // Match old AdoptOpenJDK product names.
-            Assert.IsTrue(re64.IsMatch("AdoptOpenJDK JDK with Hotspot 11.0.10+9 (x64)"), "English product name (64-bit) does not match!");
-            Assert.IsTrue(re64.IsMatch("AdoptOpenJDK JDK avec Hotspot 11.0.10+9 (x64)"), "French product name (64-bit) does not match!");
-            Assert.IsTrue(re64.IsMatch("AdoptOpenJDK JDK mit Hotspot 11.0.10+9 (x64)"), "German product name (64-bit) does not match!");
-            Assert.IsTrue(re64.IsMatch("AdoptOpenJDK JDK con Hotspot 11.0.10+9 (x64)"), "Spanish product name (64-bit) does not match!");
+            Assert.IsTrue(re32.IsMatch("AdoptOpenJDK JDK with Hotspot 11.0.10+9 (x86)"), "English product name (32-bit) does not match!");
+            Assert.IsTrue(re32.IsMatch("AdoptOpenJDK JDK avec Hotspot 11.0.10+9 (x86)"), "French product name (32-bit) does not match!");
+            Assert.IsTrue(re32.IsMatch("AdoptOpenJDK JDK mit Hotspot 11.0.10+9 (x86)"), "German product name (32-bit) does not match!");
+            Assert.IsTrue(re32.IsMatch("AdoptOpenJDK JDK con Hotspot 11.0.10+9 (x86)"), "Spanish product name (32-bit) does not match!");
             // Match new Eclipse Temurin product names.
-            Assert.IsTrue(re64.IsMatch("Eclipse Temurin JDK with Hotspot 11.0.12+7 (x64)"), "English product name (64-bit) does not match!");
-            Assert.IsTrue(re64.IsMatch("Eclipse Temurin JDK avec Hotspot 11.0.12+7 (x64)"), "French product name (64-bit) does not match!");
-            Assert.IsTrue(re64.IsMatch("Eclipse Temurin JDK mit Hotspot 11.0.12+7 (x64)"), "German product name (64-bit) does not match!");
-            Assert.IsTrue(re64.IsMatch("Eclipse Temurin JDK con Hotspot 11.0.12+7 (x64)"), "Spanish product name (64-bit) does not match!");
+            Assert.IsTrue(re32.IsMatch("Eclipse Temurin JDK with Hotspot 11.0.12+7 (x86)"), "English product name (32-bit) does not match!");
+            Assert.IsTrue(re32.IsMatch("Eclipse Temurin JDK avec Hotspot 11.0.12+7 (x86)"), "French product name (32-bit) does not match!");
+            Assert.IsTrue(re32.IsMatch("Eclipse Temurin JDK mit Hotspot 11.0.12+7 (x86)"), "German product name (32-bit) does not match!");
+            Assert.IsTrue(re32.IsMatch("Eclipse Temurin JDK con Hotspot 11.0.12+7 (x86)"), "Spanish product name (32-bit) does not match!");
         }
     } // class
 } // namespace

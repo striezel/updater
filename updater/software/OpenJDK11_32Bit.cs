@@ -26,14 +26,15 @@ using updater.software.openjdk_api;
 namespace updater.software
 {
     /// <summary>
-    /// Handles updates of Eclipse Temurin (formerly AdoptOpenJDK) JDK 11 with Hotspot JVM.
+    /// Handles updates of Eclipse Temurin (formerly AdoptOpenJDK) JDK 11 with
+    /// Hotspot JVM, but only for the 32 bit variant.
     /// </summary>
-    public class OpenJDK11 : NoPreUpdateProcessSoftware
+    public class OpenJDK11_32Bit : NoPreUpdateProcessSoftware
     {
         /// <summary>
-        /// NLog.Logger for OpenJDK11 class
+        /// NLog.Logger for OpenJDK11_32Bit class
         /// </summary>
-        private static readonly NLog.Logger logger = NLog.LogManager.GetLogger(typeof(OpenJDK11).FullName);
+        private static readonly NLog.Logger logger = NLog.LogManager.GetLogger(typeof(OpenJDK11_32Bit).FullName);
 
 
         /// <summary>
@@ -53,7 +54,7 @@ namespace updater.software
         /// </summary>
         /// <param name="autoGetNewer">whether to automatically get newer
         /// information about the software when calling the info() method</param>
-        public OpenJDK11(bool autoGetNewer)
+        public OpenJDK11_32Bit(bool autoGetNewer)
             : base(autoGetNewer)
         { }
 
@@ -68,16 +69,15 @@ namespace updater.software
             var signature = new Signature(publisherX509, certificateExpiration);
             return new AvailableSoftware("Eclipse Temurin JDK 11 with Hotspot",
                 "11.0.29.7",
-                null,
-                "^(Eclipse Temurin JDK [a-z]+ Hotspot 11\\.[0-9]+\\.[0-9]+\\+[0-9]+(\\.[0-9]+)? \\(x64\\)|AdoptOpenJDK JDK [a-z]+ Hotspot 11\\.[0-9]+\\.[0-9]+\\+[0-9]+(\\.[0-9]+)? \\(x64\\))$",
-                null,
+                "^(Eclipse Temurin JDK [a-z]+ Hotspot 11\\.[0-9]+\\.[0-9]+\\+[0-9]+(\\.[0-9]+)? \\(x86\\)|AdoptOpenJDK JDK [a-z]+ Hotspot 11\\.[0-9]+\\.[0-9]+\\+[0-9]+(\\.[0-9]+)? \\(x86\\))$",
+                null, // 64 bit variant is handled in another class
                 new InstallInfoMsiNoLocation(
-                    "https://github.com/adoptium/temurin11-binaries/releases/download/jdk-11.0.29%2B7/OpenJDK11U-jdk_x64_windows_hotspot_11.0.29_7.msi",
+                    "https://github.com/adoptium/temurin11-binaries/releases/download/jdk-11.0.29%2B7/OpenJDK11U-jdk_x86-32_windows_hotspot_11.0.29_7.msi",
                     HashAlgorithm.SHA256,
-                    "219e88a862ccdde521c42d8ebc001cc711279cdef79157b568ec2ae16b3abde0",
+                    "0b2e49c16d02659e3232a8d3ed4936df8a12af1ff34a87204430da8c3de4ac31",
                     signature,
-                    "INSTALLLEVEL=3 /qn /norestart")
-                    );
+                    "INSTALLLEVEL=3 /qn /norestart"),
+                null);
         }
 
 
@@ -87,7 +87,7 @@ namespace updater.software
         /// <returns>Returns a non-empty array of IDs, where at least one entry is unique to the software.</returns>
         public override string[] id()
         {
-            return ["openjdk-11-jdk", "openjdk-11", "openjdk-jdk", "openjdk", "jdk"];
+            return ["openjdk-11-jdk-32bit", "openjdk-11-jdk", "openjdk-11", "openjdk-jdk", "openjdk", "jdk"];
         }
 
 
@@ -117,7 +117,7 @@ namespace updater.software
             {
                 try
                 {
-                    var task = client.GetStringAsync("https://api.adoptopenjdk.net/v3/assets/feature_releases/11/ga?heap_size=normal&image_type=jdk&jvm_impl=hotspot&os=windows&page=0&page_size=1&project=jdk&sort_method=DEFAULT&sort_order=DESC&vendor=adoptopenjdk");
+                    var task = client.GetStringAsync("https://api.adoptopenjdk.net/v3/assets/feature_releases/11/ga?heap_size=normal&image_type=jdk&jvm_impl=hotspot&os=windows&page=0&page_size=1&project=jdk&sort_method=DEFAULT&sort_order=DESC&vendor=adoptopenjdk&architecture=x86");
                     task.Wait();
                     json = task.Result;
                 }
@@ -158,7 +158,7 @@ namespace updater.software
                 + release.VersionData.Minor.ToString() + "."
                 + release.VersionData.Security.ToString() + "."
                 + release.VersionData.Build.ToString();
-            bool hasBuild64 = false;
+            bool hasBuild32 = false;
 
             foreach (Binary bin in release.Binaries)
             {
@@ -168,18 +168,18 @@ namespace updater.software
                     logger.Error("Error: AdoptOpenJDK API response contains incomplete data!");
                     return null;
                 }
-                if (bin.Architecture == "x64")
+                if (bin.Architecture == "x32")
                 {
-                    newInfo.install64Bit.checksum = bin.Installer.Checksum;
-                    newInfo.install64Bit.downloadUrl = bin.Installer.Link;
-                    hasBuild64 = true;
+                    newInfo.install32Bit.checksum = bin.Installer.Checksum;
+                    newInfo.install32Bit.downloadUrl = bin.Installer.Link;
+                    hasBuild32 = true;
                 }
             }
 
             // Do we have all the data we need?
-            if (!hasBuild64)
+            if (!hasBuild32)
             {
-                logger.Error("The 64-bit build information of Eclipse Temurin JDK 11 was not found!");
+                logger.Error("The 32-bit build information of Eclipse Temurin JDK 11 was not found!");
                 return null;
             }
             return newInfo;
