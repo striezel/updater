@@ -26,14 +26,15 @@ using updater.software.openjdk_api;
 namespace updater.software
 {
     /// <summary>
-    /// Handles updates of Eclipse Temurin (formerly AdoptOpenJDK) JRE 11 with Hotspot JVM.
+    /// Handles updates of Eclipse Temurin (formerly AdoptOpenJDK) JRE 11 with
+    /// Hotspot JVM, but only for the 32 bit variant.
     /// </summary>
-    public class OpenJRE11 : NoPreUpdateProcessSoftware
+    public class OpenJRE11_32Bit : NoPreUpdateProcessSoftware
     {
         /// <summary>
-        /// NLog.Logger for OpenJRE11 class
+        /// NLog.Logger for OpenJRE11_32Bit class
         /// </summary>
-        private static readonly NLog.Logger logger = NLog.LogManager.GetLogger(typeof(OpenJRE11).FullName);
+        private static readonly NLog.Logger logger = NLog.LogManager.GetLogger(typeof(OpenJRE11_32Bit).FullName);
 
 
         /// <summary>
@@ -53,7 +54,7 @@ namespace updater.software
         /// </summary>
         /// <param name="autoGetNewer">whether to automatically get newer
         /// information about the software when calling the info() method</param>
-        public OpenJRE11(bool autoGetNewer)
+        public OpenJRE11_32Bit(bool autoGetNewer)
             : base(autoGetNewer)
         { }
 
@@ -69,16 +70,15 @@ namespace updater.software
             const string version = "11.0.29.7";
             return new AvailableSoftware("Eclipse Temurin JRE 11 with Hotspot",
                 version,
-                null,
-                "^(Eclipse Temurin|AdoptOpenJDK) JRE [a-z]+ Hotspot 11\\.[0-9]+\\.[0-9]+(\\.[0-9]+)?\\+[0-9]+(\\.[0-9]+)? \\(x64\\)$",
-                null,
+                "^(Eclipse Temurin|AdoptOpenJDK) JRE [a-z]+ Hotspot 11\\.[0-9]+\\.[0-9]+(\\.[0-9]+)?\\+[0-9]+(\\.[0-9]+)? \\(x86\\)$",
+                null, // 64 bit variant is handled in another class
                 new InstallInfoMsiNoLocation(
-                    "https://github.com/adoptium/temurin11-binaries/releases/download/jdk-11.0.29%2B7/OpenJDK11U-jre_x64_windows_hotspot_11.0.29_7.msi",
+                    "https://github.com/adoptium/temurin11-binaries/releases/download/jdk-11.0.29%2B7/OpenJDK11U-jre_x86-32_windows_hotspot_11.0.29_7.msi",
                     HashAlgorithm.SHA256,
-                    "2113628e4feb65cc5e399c34bd1a070f8c8b931ef2899b8a7f7ac3179a3d24ce",
+                    "dec292e1d6e90944d0c4592e3df26d19072025ed34657d67d3456281f7f3026a",
                     signature,
-                    "INSTALLLEVEL=3 /qn /norestart")
-                    );
+                    "INSTALLLEVEL=3 /qn /norestart"),
+                null);
         }
 
 
@@ -88,7 +88,7 @@ namespace updater.software
         /// <returns>Returns a non-empty array of IDs, where at least one entry is unique to the software.</returns>
         public override string[] id()
         {
-            return ["openjdk-11-jre", "openjre-11", "openjdk-jre", "openjre", "jre"];
+            return ["openjdk-11-jre-32bit", "openjdk-11-jre", "openjre-11", "openjdk-jre", "openjre", "jre"];
         }
 
 
@@ -111,19 +111,21 @@ namespace updater.software
         /// that was retrieved from the net.</returns>
         public override AvailableSoftware searchForNewer()
         {
-            logger.Info("Searching for newer version of Eclipse Temurin 11 JRE...");
+            logger.Info("Searching for newer version of Eclipse Temurin 11 JRE (32 bit) ...");
+            logger.Warn("The 32 bit variant of Eclipse Temurin 1 JRE does not get regular updates anymore."
+                + " Consider switching to the 64 bit variant instead.");
             string json;
             using (var client = new HttpClient() { Timeout = TimeSpan.FromSeconds(25) })
             {
                 try
                 {
-                    var task = client.GetStringAsync("https://api.adoptopenjdk.net/v3/assets/feature_releases/11/ga?heap_size=normal&image_type=jre&jvm_impl=hotspot&os=windows&page=0&page_size=1&project=jdk&sort_method=DEFAULT&sort_order=DESC&vendor=adoptopenjdk");
+                    var task = client.GetStringAsync("https://api.adoptopenjdk.net/v3/assets/feature_releases/11/ga?heap_size=normal&image_type=jre&jvm_impl=hotspot&os=windows&page=0&page_size=1&project=jdk&sort_method=DEFAULT&sort_order=DESC&vendor=adoptopenjdk&architecture=x86");
                     task.Wait();
                     json = task.Result;
                 }
                 catch (Exception ex)
                 {
-                    logger.Warn("Exception occurred while checking for newer version of Eclipse Temurin 11 JRE: " + ex.Message);
+                    logger.Warn("Exception occurred while checking for newer version of Eclipse Temurin 11 JRE (32 bit): " + ex.Message);
                     return null;
                 }
             }
@@ -159,7 +161,6 @@ namespace updater.software
                 + release.VersionData.Security.ToString() + "."
                 + release.VersionData.Build.ToString();
             bool hasBuild32 = false;
-            bool hasBuild64 = false;
 
             foreach (Binary bin in release.Binaries)
             {
@@ -169,18 +170,18 @@ namespace updater.software
                     logger.Error("Error: AdoptOpenJDK API response contains incomplete data!");
                     return null;
                 }
-                if (bin.Architecture == "x64")
+                if (bin.Architecture == "x32")
                 {
-                    newInfo.install64Bit.checksum = bin.Installer.Checksum;
-                    newInfo.install64Bit.downloadUrl = bin.Installer.Link;
-                    hasBuild64 = true;
+                    newInfo.install32Bit.checksum = bin.Installer.Checksum;
+                    newInfo.install32Bit.downloadUrl = bin.Installer.Link;
+                    hasBuild32 = true;
                 }
             }
 
             // Do we have all the data we need?
-            if (!hasBuild64)
+            if (!hasBuild32)
             {
-                logger.Error("The 64-bit build information of Eclipse Temurin JRE 11 was not found!");
+                logger.Error("The 32-bit build information of Eclipse Temurin JRE was not found!");
                 return null;
             }
             return newInfo;
