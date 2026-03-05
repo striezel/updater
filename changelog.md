@@ -13,6 +13,7 @@ __[maintenance]__
 
 * NLog library is updated from 6.0.7 to 6.1.1.
 * Update certificate information for Blender LTS installer.
+* Update certificate information for KeePass 2 installer.
 
 ## Version 2026.01.31.0
 
