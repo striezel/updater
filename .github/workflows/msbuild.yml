@@ -67,6 +67,14 @@ jobs:
         echo Version is %VERSION%.
         move output\updater_setup.exe output\updater_setup_%VERSION%.exe
 
+    - name: Rename installer to avoid duplicate name (Windows 2025 only)
+      working-directory: ${{env.GITHUB_WORKSPACE}}
+      shell: cmd
+      run: |
+        for /f %%i IN ('git describe --always') do set "VERSION=%%i"
+        move output\updater_setup_%VERSION%.exe output\updater_setup_%VERSION%_windows-2025.exe
+      if: matrix.os == 'windows-2025'
+
     - name: Upload artifact
       uses: actions/upload-artifact@v7
       with:
@@ -92,6 +100,14 @@ jobs:
         copy faq.md updater-%VERSION%\documentation
         copy supported_applications.md updater-%VERSION%\documentation
         "C:\Program Files\7-Zip\7z.exe" a -r updater_%VERSION%.zip updater-%VERSION%
+
+    - name: Move ZIP file to avoid duplicate name (Windows 2025 only)
+      working-directory: ${{env.GITHUB_WORKSPACE}}
+      shell: cmd
+      run: |
+        for /f %%i IN ('git describe --always') do set "VERSION=%%i"
+        move updater_%VERSION%.zip updater_%VERSION%_windows_2025.zip
+      if: matrix.os == 'windows-2025'
 
     - name: Upload zipped updater
       uses: actions/upload-artifact@v7
