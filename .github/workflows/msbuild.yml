@@ -71,6 +71,7 @@ jobs:
       uses: actions/upload-artifact@v7
       with:
         name: installer-${{ matrix.os }}
+        archive: false
         path: output\*.exe
 
     - name: Create ZIP file
@@ -97,4 +98,5 @@ jobs:
       with:
         name: updater-zipped-${{ matrix.os }}
         if-no-files-found: error
+        archive: false
         path: updater*.zip
