@@ -65,15 +65,15 @@ namespace updater.software
         {
             var signature = new Signature(publisherX509, certificateExpiration);
             return new AvailableSoftware("KeePassXC",
-                "2.7.11",
+                "2.7.12",
                 null,
                 "^KeePassXC$",
                 // There is no 32-bit installer.
                 null,
                 new InstallInfoMsi(
-                    "https://github.com/keepassxreboot/keepassxc/releases/download/2.7.11/KeePassXC-2.7.11-Win64.msi",
+                    "https://github.com/keepassxreboot/keepassxc/releases/download/2.7.12/KeePassXC-2.7.12-Win64.msi",
                     HashAlgorithm.SHA256,
-                    "74abea9e12282cc2b0feb51ebc6db65299eb4ef0086e89cfad8dcaafc94a6f67",
+                    "feee096c1d5d0d7bb7b36b18174818f7bac889be7668c550ff0e5ef9206ea9a5",
                     signature,
                     "/qn /norestart"));
         }
