@@ -76,13 +76,13 @@ namespace updater.software
                 return Last32BitVersion();
             }
             var installer = new InstallInfoExe(
-                    "https://www.heidisql.com/downloads/installers/HeidiSQL_12.15.0.7171_Setup.exe",
+                    "https://www.heidisql.com/downloads/installers/HeidiSQL_12.16.0.7229_Setup.exe",
                     HashAlgorithm.SHA1,
-                    "763139a107fe8475616f552ff60a07285dc729b3",
+                    "40e9c904e3167abc2ef8a7f586c887a8ff57f5e7",
                     new Signature(publisherX509, certificateExpiration),
                     "/VERYSILENT /NORESTART");
             return new AvailableSoftware("HeidiSQL",
-                "12.15.0.7171",
+                "12.16.0.7229",
                 "^HeidiSQL [0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+$",
                 "^HeidiSQL [0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+$",
                 // use 64-bit installer, too, to update 32-bit installations to 64-bit
