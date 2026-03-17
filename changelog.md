@@ -10,6 +10,10 @@ __[changes]__
 
 * Adjust search for newer versions of HeidiSQL.
 
+__[maintenance]__
+
+* Update certificate information for Blender LTS installer.
+
 ## Version 2026.03.08.0
 
 __[changes]__
