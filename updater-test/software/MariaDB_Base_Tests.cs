@@ -55,7 +55,7 @@ namespace updater_test.software
             Assert.IsTrue(signature.ContainsData());
             Assert.Contains("MariaDB USA, Inc.", signature.publisher);
             Assert.Contains("Redwood City", signature.publisher);
-            Assert.IsFalse(signature.HasExpired()); // Note: Change to IsTrue() after 2026-03-21.
+            Assert.IsTrue(signature.HasExpired()); // Note: Change to IsTrue() after 2026-03-21.
         }
 
 
