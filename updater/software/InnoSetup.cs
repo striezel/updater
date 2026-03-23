@@ -65,7 +65,7 @@ namespace updater.software
         public override AvailableSoftware knownInfo()
         {
             var installer = new InstallInfoExe(
-                "https://files.innosetup.nl/innosetup-6.7.1.exe",
+                "https://github.com/jrsoftware/issrc/releases/download/is-6_7_1/innosetup-6.7.1.exe",
                 HashAlgorithm.SHA256,
                 "4d11e8050b6185e0d49bd9e8cc661a7a59f44959a621d31d11033124c4e8a7b0",
                 new Signature(publisherX509, certificateExpiration),
@@ -128,11 +128,11 @@ namespace updater.software
             if (!match.Success)
                 return null;
             string version = match.Groups[1].Value;
-            string major_version = version.Split('.')[0];
-            // Checksum is available in a file like https://files.jrsoftware.org/is/6/innosetup-6.4.3.exe.issig.
+            string underscore_version = version.Replace('.', '_');
+            // Checksum is available in a file like https://github.com/jrsoftware/issrc/releases/download/is-6_7_1/innosetup-6.7.1.exe.issig.
             try
             {
-                var task = client.GetStringAsync("https://files.jrsoftware.org/is/" + major_version + "/innosetup-" + version + ".exe.issig");
+                var task = client.GetStringAsync("https://github.com/jrsoftware/issrc/releases/download/is-" + underscore_version + "/innosetup-" + version + ".exe.issig");
                 task.Wait();
                 response = task.Result;
             }
@@ -149,10 +149,15 @@ namespace updater.software
             var checksum = match.Groups[1].Value;
 
             var info = knownInfo();
+            string old_underscore_version = info.newestVersion.Replace('.', '_');
             info.install32Bit.checksum = checksum;
-            info.install32Bit.downloadUrl = info.install32Bit.downloadUrl.Replace(info.newestVersion, version);
+            info.install32Bit.downloadUrl = info.install32Bit.downloadUrl
+                .Replace(info.newestVersion, version)
+                .Replace(old_underscore_version, underscore_version);
             info.install64Bit.checksum = checksum;
-            info.install64Bit.downloadUrl = info.install64Bit.downloadUrl.Replace(info.newestVersion, version);
+            info.install64Bit.downloadUrl = info.install64Bit.downloadUrl
+                .Replace(info.newestVersion, version)
+                .Replace(old_underscore_version, underscore_version);
             info.newestVersion = version;
             return info;
         }

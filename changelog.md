@@ -9,6 +9,7 @@ improvements may be omitted.)_
 __[changes]__
 
 * Adjust search for newer versions of HeidiSQL.
+* Adjust search for newer versions of Inno Setup.
 
 __[maintenance]__
 
