@@ -15,6 +15,7 @@ __[maintenance]__
 
 * Update certificate information for Blender LTS installer.
 * Update certificate information for Node.js installer.
+* Update certificate information for WinSCP installers.
 
 ## Version 2026.03.08.0
 

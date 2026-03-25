@@ -36,12 +36,12 @@ namespace updater.software
         /// <summary>
         /// publisher of signed binaries
         /// </summary>
-        private const string publisherX509 = "CN=Martin Prikryl, O=Martin Prikryl, L=Prague, C=CZ, SERIALNUMBER=87331519, OID.2.5.4.15=Private Organization, OID.1.3.6.1.4.1.311.60.2.1.3=CZ";
+        private const string publisherX509 = "CN=Martin Přikryl, O=Martin Přikryl, L=Praha, C=CZ, SERIALNUMBER=87331519, OID.2.5.4.15=Private Organization, OID.1.3.6.1.4.1.311.60.2.1.3=CZ";
 
         /// <summary>
         /// expiration date of certificate in signature of binary installer
         /// </summary>
-        private static readonly DateTime certificateExpiration = new(2026, 2, 17, 23, 59, 59, DateTimeKind.Utc);
+        private static readonly DateTime certificateExpiration = new(2029, 3, 4, 23, 59, 59, DateTimeKind.Utc);
 
 
         /// <summary>
@@ -62,12 +62,12 @@ namespace updater.software
         public override AvailableSoftware knownInfo()
         {
             return new AvailableSoftware("WinSCP",
-                "6.5.5",
+                "6.5.6",
                 "^WinSCP [1-9]+\\.[0-9]+(\\.[0-9]+)?$", null,
                 new InstallInfoExe(
-                    "https://unlimited.dl.sourceforge.net/project/winscp/WinSCP/6.5.5/WinSCP-6.5.5-Setup.exe",
+                    "https://unlimited.dl.sourceforge.net/project/winscp/WinSCP/6.5.6/WinSCP-6.5.6-Setup.exe",
                     HashAlgorithm.SHA256,
-                    "8c223402d933df4430f2c6e3cad17ed1db17710abfd13d62acc707ea480a092f",
+                    "4488c493bafca6af4e7ae54ed39cb71479e65dc192c4d1a471647bf9cb9d6db0",
                     new Signature(publisherX509, certificateExpiration),
                     "/VERYSILENT /NORESTART"),
                 // There is no 64-bit installer yet.
