@@ -115,14 +115,12 @@ namespace updater.software
                 return null;
             }
 
-            var reVersion = new Regex("<A href=\"a/7z[0-9]{4}.exe\">Download</A>", RegexOptions.IgnoreCase);
+            var reVersion = new Regex("<a href=\"https://github\\.com/ip7z/7zip/releases/download/([0-9]{2}\\.[0-9]{2})/7z[0-9]{4}.exe\">Download</a>", RegexOptions.IgnoreCase);
             Match matchVersion = reVersion.Match(htmlCode);
             if (!matchVersion.Success)
                 return null;
 
-            string version = matchVersion.Value.Replace("<A href=\"a/7z", "")
-                .Replace(".exe\">Download</A>", "").Trim();
-            version = string.Concat(version.AsSpan()[..2], ".", version.AsSpan(2, 2));
+            string version = matchVersion.Groups[1].Value;
 
             // construct new information
             var newInfo = knownInfo();

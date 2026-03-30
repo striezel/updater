@@ -10,6 +10,7 @@ __[changes]__
 
 * Adjust search for newer versions of HeidiSQL.
 * Adjust search for newer versions of Inno Setup.
+* Adjust search for newer versions of 7-Zip.
 
 __[maintenance]__
 
