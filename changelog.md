@@ -14,6 +14,7 @@ __[changes]__
 
 __[maintenance]__
 
+* NLog library is updated from 6.1.1 to 6.1.2.
 * Update certificate information for Blender LTS installer.
 * Update certificate information for Node.js installer.
 * Update certificate information for WinSCP installers.
