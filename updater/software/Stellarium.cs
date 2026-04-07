@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2024, 2025  Dirk Stolle
+    Copyright (C) 2024, 2025, 2026  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -45,7 +45,7 @@ namespace updater.software
         /// <summary>
         /// expiration date of certificate
         /// </summary>
-        private static readonly DateTime certificateExpiration = new(2026, 2, 9, 10, 48, 49, DateTimeKind.Utc);
+        private static readonly DateTime certificateExpiration = new(2027, 9, 7, 17, 23, 55, DateTimeKind.Utc);
 
 
         /// <summary>
@@ -72,13 +72,13 @@ namespace updater.software
             }
             var signature = new Signature(publisherX509, certificateExpiration);
             var installer = new InstallInfoExe(
-                "https://github.com/Stellarium/stellarium/releases/download/v25.4/stellarium-25.4-qt6-win64.exe",
+                "https://github.com/Stellarium/stellarium/releases/download/v26.1/stellarium-26.1-qt6-win64.exe",
                 HashAlgorithm.SHA256,
-                "7628a371c88d74ff56980b00f100beef60a18aced23db5ca8cd7ce7679c3dc9f",
+                "f48d9ccc850e4143da4f8442c14b328c111294f6fcd4f1bf6a0a81801849c48b",
                 signature,
                 "/VERYSILENT /ALLUSERS /NORESTART");
             return new AvailableSoftware("Stellarium",
-                "25.4",
+                "26.1",
                 "^Stellarium [0-9]+\\.[0-9]+$",
                 "^Stellarium [0-9]+\\.[0-9]+$",
                 installer,
