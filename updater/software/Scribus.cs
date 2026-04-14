@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2024, 2025  Dirk Stolle
+    Copyright (C) 2024, 2025, 2026  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -54,19 +54,19 @@ namespace updater.software
         public override AvailableSoftware knownInfo()
         {
             return new AvailableSoftware("Scribus",
-                "1.6.5",
+                "1.6.6",
                 "^Scribus [0-9]+\\.[0-9]+\\.[0-9]+$",
                 "^Scribus [0-9]+\\.[0-9]+\\.[0-9]+ \\(64bit\\)$",
                 new InstallInfoExe(
-                    "https://netcologne.dl.sourceforge.net/project/scribus/scribus/1.6.5/scribus-1.6.5-windows.exe",
+                    "https://netcologne.dl.sourceforge.net/project/scribus/scribus/1.6.6/scribus-1.6.6-windows.exe",
                     HashAlgorithm.SHA256,
-                    "628141c2aa601f3cafb3484bd8ddd09cd9570ba5d45f85d95f38ef6e49c10004",
+                    "b63cdc1c5ac39240d5c320b636854901316cdbd1f5d4c9f557c8866ffad6cbfc",
                     Signature.None,
                     "/S"),
                 new InstallInfoExe(
-                    "https://netcologne.dl.sourceforge.net/project/scribus/scribus/1.6.5/scribus-1.6.5-windows-x64.exe",
+                    "https://netcologne.dl.sourceforge.net/project/scribus/scribus/1.6.6/scribus-1.6.6-windows-x64.exe",
                     HashAlgorithm.SHA256,
-                    "3456bda1d8aef11904e4f8a2e16c94bd0595cb7d71a7a72fcc974d5ca95e6748",
+                    "4c7313da22b8daa025dab0a2d57e82e8b1827c8a46a02db1d4e78b6037b40264",
                     Signature.None,
                     "/S")
                 );
