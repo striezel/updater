@@ -173,7 +173,8 @@ namespace updater.software
             // Then it was a link to the release like <a href="https://github.com/HeidiSQL/HeidiSQL/releases/download/v12.15.1.1/HeidiSQL_12.15.0.7171_Setup.exe">.
             // Now it's a link to the release like <a href="https://github.com/HeidiSQL/HeidiSQL/releases/download/v12.16/HeidiSQL_12.16.0.7229_Setup.exe">
             // Version of the tag and version of the downloadable .exe file do not necessarily match anymore.
-            var reVersion = new Regex("HeidiSQL/releases/download/v[0-9]+\\.[0-9]+(\\.[0-9]+\\.[0-9]+)?/HeidiSQL_([0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+)_Setup\\.exe\">");
+            // Sometimes the v is missing in the tag name.
+            var reVersion = new Regex("HeidiSQL/releases/download/v?[0-9]+\\.[0-9]+(\\.[0-9]+\\.[0-9]+)?/HeidiSQL_([0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+)_Setup\\.exe\">");
             Match matchVersion = reVersion.Match(htmlCode);
             if (!matchVersion.Success)
                 return null;
