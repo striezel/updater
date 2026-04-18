@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017, 2018, 2024, 2025  Dirk Stolle
+    Copyright (C) 2017, 2018, 2024, 2025, 2026  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -96,7 +96,6 @@ namespace updater_test.software
             var excluded = new List<string>()
             {
                 new CCleaner(false).id()[0],
-                new CDBurnerXP(false).id()[0],
                 new Pidgin(false).id()[0]
             };
             opts.excluded = excluded;

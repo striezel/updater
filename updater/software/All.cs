@@ -48,7 +48,6 @@ namespace updater.software
                 new BlenderLTS(autoGetNewer),
                 new Calibre(autoGetNewer),
                 new CCleaner(autoGetNewer),
-                new CDBurnerXP(autoGetNewer),
                 new CMake(autoGetNewer),
                 new Doxygen(autoGetNewer),
                 new OpenJDK8(autoGetNewer),

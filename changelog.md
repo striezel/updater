@@ -6,6 +6,15 @@ improvements may be omitted.)_
 
 ## Next Version
 
+__[breaking change]__
+
+* Update support for CDBurnerXP is removed.
+  CDBurnerXP has not had any updates for more than five years and the company
+  that developed it, Canneverbe Limited, has been legally dissolved on 25th
+  March 2025. Now the CDBurnerXP website is also abandoned and no installers for
+  CDBurnerXP can be downloaded anymore. Therefore, removing support for
+  CDBurnerXP is the only viable option left.
+
 __[changes]__
 
 * Adjust search for newer versions of HeidiSQL. (Twice.)

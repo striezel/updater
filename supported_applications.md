@@ -9,7 +9,6 @@ application.
 * Blender 4.5 LTS
 * Calibre
 * CCleaner
-* CDBurnerXP
 * CMake
 * Doxygen
 * Eclipse Temurin JDK 8 LTS (formerly AdoptOpenJDK JDK 8)
