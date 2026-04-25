@@ -209,23 +209,23 @@ namespace updater.software
         /// returned false.</returns>
         public override List<Process> preUpdateProcess(DetectedSoftware detected)
         {
-            if (!string.IsNullOrWhiteSpace(detected.uninstallString))
+            if (string.IsNullOrWhiteSpace(detected.uninstallString))
             {
-                var re = new Regex("\\{[0-9A-F]{8}\\-[0-9A-F]{4}\\-[0-9A-F]{4}\\-[0-9A-F]{4}\\-[0-9A-F]{12}\\}", RegexOptions.IgnoreCase);
-                Match m = re.Match(detected.uninstallString);
-                if (!m.Success)
-                {
-                    logger.Error("Could not extract GUID of old Blender version for pre-update process.");
-                    return null;
-                }
-                var proc = new Process();
-                proc.StartInfo.FileName = "msiexec.exe";
-                proc.StartInfo.Arguments = "/X" + m.Value + " /qn /norestart";
-                return new List<Process>(1) { proc };
+                logger.Error("There is not enough information to uninstall the old Blender version.");
+                return null;
             }
 
-            logger.Error("There is not enough information to uninstall the old Blender version.");
-            return null;
+            var re = new Regex("\\{[0-9A-F]{8}\\-[0-9A-F]{4}\\-[0-9A-F]{4}\\-[0-9A-F]{4}\\-[0-9A-F]{12}\\}", RegexOptions.IgnoreCase);
+            Match m = re.Match(detected.uninstallString);
+            if (!m.Success)
+            {
+                logger.Error("Could not extract GUID of old Blender version for pre-update process.");
+                return null;
+            }
+            var proc = new Process();
+            proc.StartInfo.FileName = "msiexec.exe";
+            proc.StartInfo.Arguments = "/X" + m.Value + " /qn /norestart";
+            return [proc];
         }
     } // class
 } // namespace
