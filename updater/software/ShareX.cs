@@ -52,13 +52,13 @@ namespace updater.software
         public override AvailableSoftware knownInfo()
         {
             var installer = new InstallInfoExe(
-                "https://github.com/ShareX/ShareX/releases/download/v19.0.2/ShareX-19.0.2-setup.exe",
+                "https://github.com/ShareX/ShareX/releases/download/v20.0.4/ShareX-20.0.4-setup-x64.exe",
                 HashAlgorithm.SHA256,
-                "30A3172FA3C8D8F998A3D21180CE0FAC7761C74E78B701577FE028902B014D1B",
+                "C456718C80BD940233F7B7E1A36DD25146BB99444207293F3D76626900D23F01",
                 Signature.None,
                 "/SP- /VERYSILENT /NORESTART /UPDATE /NORUN");
             return new AvailableSoftware("ShareX",
-                "19.0.2",
+                "20.0.4",
                 "^ShareX$",
                 "^ShareX$",
                 installer,
@@ -120,14 +120,17 @@ namespace updater.software
             /* Checksum is in HTML part that looks like
              * <td>ShareX-16.1.0-setup.exe</td>
              * <td><code>8F082B1939AF2894FEA681E6E807E577D15EA546FC0231F84720AC62867CA7F4</code></td>
+             * or
+             * <td>ShareX-20.0.4-setup-x64.exe</td>
+             * <td><code>C456718C80BD940233F7B7E1A36DD25146BB99444207293F3D76626900D23F01</code></td>
              */
-            int idx = html.IndexOf("ShareX-" + newVersion + "-setup.exe");
+            int idx = html.IndexOf("ShareX-" + newVersion + "-setup-x64.exe");
             if (idx < 0)
             {
                 return null;
             }
             string escapedVersion = Regex.Escape(newVersion);
-            Regex reHash = new("<td>ShareX\\-" + escapedVersion + "\\-setup\\.exe</td>\r?\n<td><code>([a-fA-F0-9]{64})</code></td>");
+            Regex reHash = new("<td>ShareX\\-" + escapedVersion + "\\-setup\\-x64\\.exe</td>\r?\n<td><code>([a-fA-F0-9]{64})</code></td>");
             Match matchHash = reHash.Match(html);
             if (!matchHash.Success)
             {
