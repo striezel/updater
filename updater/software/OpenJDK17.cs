@@ -75,13 +75,13 @@ namespace updater.software
             }
             var signature = new Signature(publisherX509, certificateExpiration);
             var installer64Bit = new InstallInfoMsiNoLocation(
-                "https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.18%2B8/OpenJDK17U-jdk_x64_windows_hotspot_17.0.18_8.msi",
+                "https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.19%2B10/OpenJDK17U-jdk_x64_windows_hotspot_17.0.19_10.msi",
                 HashAlgorithm.SHA256,
-                "bd169b6b8439e1d715eff789e355029e222ce6152994cefc3e666783ade8ff44",
+                "ccd97a7e313381a84e3567ffe10ad562884e399cc1fb1b4c5fa417de49efac78",
                 signature,
                 "INSTALLLEVEL=3 /qn /norestart");
             return new AvailableSoftware("Eclipse Temurin JDK 17 with Hotspot",
-                "17.0.18.8",
+                "17.0.19.10",
                 "^Eclipse Temurin JDK [a-z]+ Hotspot 17\\.[0-9]+\\.[0-9]+\\+[0-9]+(\\.[0-9]+)? \\(x86\\)$",
                 "^Eclipse Temurin JDK [a-z]+ Hotspot 17\\.[0-9]+\\.[0-9]+\\+[0-9]+(\\.[0-9]+)? \\(x64\\)$",
                 // Use 64-bit installer on 32-bit installations for cross-grading.
