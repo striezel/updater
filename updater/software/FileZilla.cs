@@ -74,19 +74,19 @@ namespace updater.software
             {
                 var signature = new Signature(publisherX509, certificateExpiration);
                 return new AvailableSoftware("FileZilla FTP Client",
-                    "3.70.4",
+                    "3.70.5",
                     "^FileZilla (Client )?[0-9]+\\.[0-9]+(\\.[0-9]+(\\.[0-9]+)?)?$",
                     "^FileZilla (Client )?[0-9]+\\.[0-9]+(\\.[0-9]+(\\.[0-9]+)?)?$",
                     new InstallInfoExe(
-                        "https://download.filezilla-project.org/client/FileZilla_3.70.4_win32-setup.exe",
+                        "https://download.filezilla-project.org/client/FileZilla_3.70.5_win32-setup.exe",
                         HashAlgorithm.SHA512,
-                        "4b037ec38f1d3a0679f40ac10985ab5db34744292bb1192b125c50cda94e16d09870c818b93e5e126032acbb1ffcf13016ecc5d6089604e9345bb5d9daec4fdd",
+                        "62f0df373cbfe12e593bb518c736f8c194676f1eab2be1c68b7d460880fc7dc1b74f3c72c857bcf58af977d45e563dced8c54de9aef34e0fdedf41d2c8428262",
                         signature,
                         "/S"),
                     new InstallInfoExe(
-                        "https://download.filezilla-project.org/client/FileZilla_3.70.4_win64-setup.exe",
+                        "https://download.filezilla-project.org/client/FileZilla_3.70.5_win64-setup.exe",
                         HashAlgorithm.SHA512,
-                        "26d0efdbc9a15efa0b9e22a5e33e68c77bee26e4aff6d624a305653bbe6a8bb969cbab838895c778a2af61769d823b81e39e3cde3bd1127432468c9c37f6ee41",
+                        "72305480bc0ebc8f8e937f6dfa4f1ae1103b95354930701d500c7e5a4b25471b66e203dfb16b8548e0440952f048a29cc55a5904048c9639f12921c3b88cbd98",
                         signature,
                         "/S")
                     );
