@@ -129,7 +129,7 @@ namespace updater.software
                 }
                 catch (Exception ex)
                 {
-                    logger.Warn("Exception occurred while checking for newer version of Git for Windows: " + ex.Message);
+                    logger.Warn("Exception occurred while checking for newer version of TeamViewer: " + ex.Message);
                     return null;
                 }
             }
