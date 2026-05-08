@@ -71,14 +71,14 @@ namespace updater.software
                 "^TeamViewer$",
                 new InstallInfoExe(
                     "https://download.teamviewer.com/download/TeamViewer_Setup.exe",
-                    HashAlgorithm.Unknown,
-                    null,
+                    HashAlgorithm.SHA256,
+                    "8c7629082a83c252ab01167bc502f338584247c917fe9bfa9121b0a83e146525",
                     signature,
                     "/S /norestart"),
                 new InstallInfoExe(
                     "https://download.teamviewer.com/download/TeamViewer_Setup_x64.exe",
-                    HashAlgorithm.Unknown,
-                    null,
+                    HashAlgorithm.SHA256,
+                    "bf0bcb76042f9c5c65b187248a5398d4beac8584464ddf49655d3df43fa75bed",
                     signature,
                     "/S /norestart")
                 );
@@ -145,7 +145,15 @@ namespace updater.software
 
             // construct new information
             var newInfo = knownInfo();
+            if (currentVersion == newInfo.newestVersion)
+            {
+                return newInfo;
+            }
             newInfo.newestVersion = currentVersion;
+            newInfo.install32Bit.algorithm = HashAlgorithm.Unknown;
+            newInfo.install32Bit.checksum = null;
+            newInfo.install64Bit.algorithm = HashAlgorithm.Unknown;
+            newInfo.install64Bit.checksum = null;
             return newInfo;
         }
 
