@@ -14,6 +14,7 @@ __[changes]__
 __[maintenance]__
 
 * NLog library is updated from 6.1.2 to 6.1.3.
+* Update certificate information for Node.js installer.
 
 ## Version 2026.05.03.0
 
