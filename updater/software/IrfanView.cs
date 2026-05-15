@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2022, 2023, 2024, 2025  Dirk Stolle
+    Copyright (C) 2022, 2023, 2024, 2025, 2026  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -64,19 +64,19 @@ namespace updater.software
         {
             var signature = new Signature(publisherX509, certificateExpiration);
             return new AvailableSoftware("IrfanView",
-                "4.73",
+                "4.75",
                 "^(IrfanView [0-9]+\\.[0-9]+ \\(32\\-bit\\)|IrfanView \\(remove only\\))$",
                 "^(IrfanView [0-9]+\\.[0-9]+ \\(64\\-bit\\)|IrfanView 64 \\(remove only\\))$",
                 new InstallInfoExe(
-                    "https://www.irfanview.info/files/iview473_setup.exe",
+                    "https://www.irfanview.info/files/iview475_setup.exe",
                     HashAlgorithm.SHA256,
-                    "0a43505ce79ae9401324af304f0bde22d1dd4d00f27dff0cccf62cb7022b770d ",
+                    "e5dc5357bdda7410feb1893fa24a5c14b2ee1c003e4eaf35c24d2cbcc077eb24  ",
                     signature,
                     "/silent /desktop=1 /group=1 /allusers=1 /assoc=1"),
                 new InstallInfoExe(
-                    "https://www.irfanview.info/files/iview473_x64_setup.exe",
+                    "https://www.irfanview.info/files/iview475_x64_setup.exe",
                     HashAlgorithm.SHA256,
-                    "724e0a7aa97d10ad76843552ddf648521f60f2809398f7ca9ad4ae4726010e08",
+                    "6b7e36c089194347be1bea5fea08dc97316f2181e40427e7e2867ad7ba3906a0",
                     signature,
                     "/silent /desktop=1 /group=1 /allusers=1 /assoc=1")
                     );
