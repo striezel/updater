@@ -46,7 +46,7 @@ namespace updater.software
         /// <summary>
         /// expiration date of certificate
         /// </summary>
-        private static readonly DateTime certificateExpiration = new(2026, 4, 23, 13, 38, 21, DateTimeKind.Utc);
+        private static readonly DateTime certificateExpiration = new(2026, 5, 21, 13, 21, 30, DateTimeKind.Utc);
 
 
         /// <summary>
@@ -67,7 +67,7 @@ namespace updater.software
         public override AvailableSoftware knownInfo()
         {
             return new AvailableSoftware("Blender LTS",
-                "4.5.9",
+                "4.5.10",
                 null,
                 "^blender$",
                 null,
@@ -76,10 +76,10 @@ namespace updater.software
                     // website will redirect to a mirror site, and this redirect
                     // is not machine-friendly, i.e. uses JavaScript etc., so a
                     // mirror is the safe choice here.
-                    // "https://ftp.nluug.nl/pub/graphics/blender/release/Blender4.5/blender-4.5.9-windows-x64.msi",
-                    "https://ftp.halifax.rwth-aachen.de/blender/release/Blender4.5/blender-4.5.9-windows-x64.msi",
+                    // "https://ftp.nluug.nl/pub/graphics/blender/release/Blender4.5/blender-4.5.10-windows-x64.msi",
+                    "https://ftp.halifax.rwth-aachen.de/blender/release/Blender4.5/blender-4.5.10-windows-x64.msi",
                     HashAlgorithm.SHA256,
-                    "65d9fd64fa58d5ec25a2e315cac68ba7d3584d4c8c2757947e993c47f2fa085f",
+                    "38a3f6eed2da970ed14721f8312a8187487a35bb69a1f88bffaadb4e0612c957",
                     new Signature(publisherX509, certificateExpiration),
                     "/qn /norestart ALLUSERS=1")
                 );
