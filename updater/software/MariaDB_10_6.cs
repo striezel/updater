@@ -27,6 +27,18 @@ namespace updater.software
     public sealed class MariaDB_10_6 : MariaDB_Base
     {
         /// <summary>
+        /// publisher of signed binaries for MariaDB 10.6
+        /// </summary>
+        private new const string publisherX509 = "CN=\"MariaDB USA, Inc.\", O=\"MariaDB USA, Inc.\", L=Milpitas, S=California, C=US";
+
+
+        /// <summary>
+        /// expiration date of the certificate for MariaDB 10.6
+        /// </summary>
+        private new static readonly DateTime certificateExpiration = new(2029, 2, 6, 23, 59, 59, DateTimeKind.Utc);
+
+
+        /// <summary>
         /// Default constructor.
         /// </summary>
         /// <param name="autoGetNewer">whether to automatically get newer
@@ -43,7 +55,7 @@ namespace updater.software
         /// details about the software.</returns>
         public override AvailableSoftware knownInfo()
         {
-            const string version = "10.6.25";
+            const string version = "10.6.26";
             var signature = new Signature(publisherX509, certificateExpiration);
             return new AvailableSoftware("MariaDB Server 10.6",
                 version,
@@ -53,7 +65,7 @@ namespace updater.software
                 new InstallInfoMsi(
                     "https://downloads.mariadb.org/rest-api/mariadb/" + version + "/mariadb-" + version + "-winx64.msi",
                     HashAlgorithm.SHA256,
-                    "1316352f3de5d3769b4a4ae5a69995286f30be02d966cb0e82f0d506f3ed4960",
+                    "8d021c6e36b144bbaf37852b25d887d3f1ee9ef5b923d31677255ac224bf065a",
                     signature,
                     "/qn /norestart")
                 );
