@@ -27,6 +27,18 @@ namespace updater.software
     public sealed class MariaDB_10_11 : MariaDB_Base
     {
         /// <summary>
+        /// publisher of signed binaries for MariaDB 10.11
+        /// </summary>
+        private new const string publisherX509 = "CN=\"MariaDB USA, Inc.\", O=\"MariaDB USA, Inc.\", L=Milpitas, S=California, C=US";
+
+
+        /// <summary>
+        /// expiration date of the certificate for MariaDB 10.11
+        /// </summary>
+        private new static readonly DateTime certificateExpiration = new(2029, 2, 6, 23, 59, 59, DateTimeKind.Utc);
+
+
+        /// <summary>
         /// Default constructor.
         /// </summary>
         /// <param name="autoGetNewer">whether to automatically get newer
@@ -43,7 +55,7 @@ namespace updater.software
         /// details about the software.</returns>
         public override AvailableSoftware knownInfo()
         {
-            const string version = "10.11.16";
+            const string version = "10.11.17";
             var signature = new Signature(publisherX509, certificateExpiration);
             return new AvailableSoftware("MariaDB Server 10.11",
                 version,
@@ -53,7 +65,7 @@ namespace updater.software
                 new InstallInfoMsi(
                     "https://downloads.mariadb.org/rest-api/mariadb/" + version + "/mariadb-" + version + "-winx64.msi",
                     HashAlgorithm.SHA256,
-                    "19897ace8afd2927a25481e9b4e9272bcb69818d6203f92b3851574bab748395",
+                    "c8714fb26e41fcceda0cb4fb52335189494cf5711bd4143e1934049af49be947",
                     signature,
                     "/qn /norestart")
                 );

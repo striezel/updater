@@ -16,6 +16,7 @@ __[maintenance]__
 * NLog library is updated from 6.1.2 to 6.1.3.
 * Update certificate information for Blender LTS installer.
 * Update certificate information for MariaDB 10.6 installer.
+* Update certificate information for MariaDB 10.11 installer.
 * Update certificate information for Node.js installer.
 
 ## Version 2026.05.03.0
