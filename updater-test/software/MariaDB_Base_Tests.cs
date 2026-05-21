@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2024  Dirk Stolle
+    Copyright (C) 2024, 2026  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -55,7 +55,21 @@ namespace updater_test.software
             Assert.IsTrue(signature.ContainsData());
             Assert.Contains("MariaDB USA, Inc.", signature.publisher);
             Assert.Contains("Redwood City", signature.publisher);
-            Assert.IsTrue(signature.HasExpired()); // Note: Change to IsTrue() after 2026-03-21.
+            Assert.IsTrue(signature.HasExpired());
+        }
+
+        /// <summary>
+        /// Checks whether MariaDB 10.5 release still uses the old certificate data.
+        /// </summary>
+        [TestMethod]
+        public void Test_certificate_10_5()
+        {
+            var mdb_10_5 = new MariaDB_10_5(false);
+            var signature = mdb_10_5.knownInfo().install64Bit.signature;
+            Assert.IsTrue(signature.ContainsData());
+            Assert.Contains("MariaDB USA, Inc.", signature.publisher);
+            Assert.Contains("Redwood City", signature.publisher);
+            Assert.IsTrue(signature.HasExpired());
         }
 
 
@@ -67,10 +81,22 @@ namespace updater_test.software
         {
             var signatures = new List<Signature>
             {
-                new MariaDB_10_5(false).knownInfo().install64Bit.signature,
                 new MariaDB_10_6(false).knownInfo().install64Bit.signature,
                 new MariaDB_10_11(false).knownInfo().install64Bit.signature,
-                new MariaDB_11_4(false).knownInfo().install64Bit.signature
+            };
+
+            foreach (var signature in signatures)
+            {
+                Assert.IsTrue(signature.ContainsData());
+                Assert.Contains("MariaDB USA, Inc.", signature.publisher);
+                Assert.Contains("Milpitas", signature.publisher);
+                Assert.IsTrue(signature.expiresAt > new System.DateTime(2026, 5, 21, 0, 0, 0, System.DateTimeKind.Utc));
+            }
+
+            signatures = new List<Signature>
+            {
+                new MariaDB_11_4(false).knownInfo().install64Bit.signature,
+                new MariaDB_11_8(false).knownInfo().install64Bit.signature
             };
 
             foreach (var signature in signatures)
@@ -95,12 +121,19 @@ namespace updater_test.software
             var mdb_10_6 = new MariaDB_10_6(false);
             var mdb_10_11 = new MariaDB_10_11(false);
             var mdb_11_4 = new MariaDB_11_4(false);
+            var mdb_11_8 = new MariaDB_11_8(false);
 
             Assert.IsTrue(mdb_10_3.EndOfLife() < mdb_10_4.EndOfLife());
             Assert.IsTrue(mdb_10_4.EndOfLife() < mdb_10_5.EndOfLife());
             Assert.IsTrue(mdb_10_5.EndOfLife() < mdb_10_6.EndOfLife());
             Assert.IsTrue(mdb_10_6.EndOfLife() < mdb_10_11.EndOfLife());
             Assert.IsTrue(mdb_10_11.EndOfLife() < mdb_11_4.EndOfLife());
+
+            // MariaDB 11.8 is the first LTS release with only three years of
+            // support. Previous LTS releases had five years. So it reaches its
+            // end of life before the older MariaDB 11.4, but after MariaDB 10.11.
+            Assert.IsTrue(mdb_10_11.EndOfLife() < mdb_11_8.EndOfLife());
+            Assert.IsTrue(mdb_11_8.EndOfLife() < mdb_11_4.EndOfLife());
         }
     }
 }
