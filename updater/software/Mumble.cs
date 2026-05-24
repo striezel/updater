@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017, 2018, 2020, 2021, 2022, 2024, 2025  Dirk Stolle
+    Copyright (C) 2017, 2018, 2020, 2021, 2022, 2024, 2025, 2026  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -287,7 +287,7 @@ namespace updater.software
             if (string.IsNullOrEmpty(guid))
             {
                 logger.Warn("Warning: Updating from Mumble versions older than "
-                    + "version 1.2.3 to version 1.4.230 or newer is not supported."
+                    + "version 1.2.3 to version 1.4.230 or newer is not supported. "
                     + "Please uninstall your old Mumble version manually and then "
                     + "download and install the current version from https://www.mumble.info/.");
                 return null;
@@ -309,8 +309,20 @@ namespace updater.software
         /// Returns null otherwise.</returns>
         private static string GetGuid(DetectedSoftware detected)
         {
-            var guids = new Dictionary<string, Dictionary<ApplicationType, string>>(25)
+            var guids = new Dictionary<string, Dictionary<ApplicationType, string>>(26)
             {
+                { "1.5.735",
+                    new Dictionary<ApplicationType, string>(1)
+                    {
+                        { ApplicationType.Bit64, "{757A3637-D6EE-4621-B2C6-3943980DAE6B}" },
+                    }
+                },
+                { "1.5.634",
+                    new Dictionary<ApplicationType, string>(1)
+                    {
+                        { ApplicationType.Bit64, "{1A0D4969-28F8-44D0-8DF6-45D2FCB2B6C5}" },
+                    }
+                },
                 { "1.4.287",
                     new Dictionary<ApplicationType, string>(2)
                     {
