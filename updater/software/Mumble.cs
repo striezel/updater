@@ -74,13 +74,13 @@ namespace updater.software
             }
             var signature = new Signature(publisherX509, certificateExpiration);
             var installer = new InstallInfoExe(
-                "https://github.com/mumble-voip/mumble/releases/download/v1.5.857/mumble_client-1.5.857.x64.exe",
+                "https://github.com/mumble-voip/mumble/releases/download/v1.5.901/mumble_client-1.5.901.x64.exe",
                 HashAlgorithm.SHA256,
-                "ae42369b95a9aa9cd6fde8fbee29b70503a25028ec4f14abcecab41f5e23fe06",
+                "5b173f69a0ec83d9c261d967ddfcf3beaf1e4044c957addb7bd4b3ba14ead81b",
                 signature,
                 "/S");
             return new AvailableSoftware("Mumble Client",
-                "1.5.857",
+                "1.5.901",
                 "^(Mumble [0-9]\\.[0-9]+\\.[0-9]+|Mumble \\(client\\))$",
                 "^(Mumble [0-9]\\.[0-9]+\\.[0-9]+|Mumble \\(client\\))$",
                 // 32-bit installations will be uninstalled and switched to the
