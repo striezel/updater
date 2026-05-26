@@ -38,13 +38,13 @@ namespace updater.software
         /// <summary>
         /// publisher name for signed installers
         /// </summary>
-        private const string publisherX509 = "CN=TeamViewer Germany GmbH, O=TeamViewer Germany GmbH, L=Göppingen, S=Baden-Württemberg, C=DE";
+        private const string publisherX509 = "CN=TeamViewer Germany GmbH, O=TeamViewer Germany GmbH, L=Göppingen, C=DE";
 
 
         /// <summary>
         /// expiration date for the publisher certificate
         /// </summary>
-        private static readonly DateTime certificateExpiration = new(2026, 5, 6, 23, 59, 59, DateTimeKind.Utc);
+        private static readonly DateTime certificateExpiration = new(2027, 5, 6, 23, 59, 59, DateTimeKind.Utc);
 
 
         /// <summary>
@@ -66,19 +66,19 @@ namespace updater.software
         {
             var signature = new Signature(publisherX509, certificateExpiration);
             return new AvailableSoftware("TeamViewer",
-                "15.76.6",
+                "15.78.3",
                 "^TeamViewer$",
                 "^TeamViewer$",
                 new InstallInfoExe(
                     "https://download.teamviewer.com/download/TeamViewer_Setup.exe",
-                    HashAlgorithm.SHA256,
-                    "8c7629082a83c252ab01167bc502f338584247c917fe9bfa9121b0a83e146525",
+                    HashAlgorithm.Unknown,
+                    null,
                     signature,
                     "/S /norestart"),
                 new InstallInfoExe(
                     "https://download.teamviewer.com/download/TeamViewer_Setup_x64.exe",
                     HashAlgorithm.SHA256,
-                    "bf0bcb76042f9c5c65b187248a5398d4beac8584464ddf49655d3df43fa75bed",
+                    "6fdcf012632e09a1ea9df6f8175a3122025c4be6f7abf940d72405c189001f9d",
                     signature,
                     "/S /norestart")
                 );

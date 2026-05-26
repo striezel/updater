@@ -9,7 +9,8 @@ improvements may be omitted.)_
 __[changes]__
 
 * Add temporary workaround for expired signature on TeamViewer installers by
-  adding the checksums of the latest known release.
+  adding the checksums of the latest known release. (Now obsolete due to
+  signature update.)
 
 __[maintenance]__
 
@@ -18,6 +19,7 @@ __[maintenance]__
 * Update certificate information for MariaDB 10.6 installer.
 * Update certificate information for MariaDB 10.11 installer.
 * Update certificate information for Node.js installer.
+* Update certificate information for TeamViewer installer.
 
 ## Version 2026.05.03.0
 
