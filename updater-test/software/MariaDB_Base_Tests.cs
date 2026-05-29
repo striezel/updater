@@ -84,6 +84,7 @@ namespace updater_test.software
                 new MariaDB_10_6(false).knownInfo().install64Bit.signature,
                 new MariaDB_10_11(false).knownInfo().install64Bit.signature,
                 new MariaDB_11_4(false).knownInfo().install64Bit.signature,
+                new MariaDB_11_8(false).knownInfo().install64Bit.signature
             };
 
             foreach (var signature in signatures)
@@ -92,19 +93,6 @@ namespace updater_test.software
                 Assert.Contains("MariaDB USA, Inc.", signature.publisher);
                 Assert.Contains("Milpitas", signature.publisher);
                 Assert.IsTrue(signature.expiresAt > new System.DateTime(2026, 5, 21, 0, 0, 0, System.DateTimeKind.Utc));
-            }
-
-            signatures = new List<Signature>
-            {
-                new MariaDB_11_8(false).knownInfo().install64Bit.signature
-            };
-
-            foreach (var signature in signatures)
-            {
-                Assert.IsTrue(signature.ContainsData());
-                Assert.Contains("MariaDB USA, Inc.", signature.publisher);
-                Assert.Contains("Redwood City", signature.publisher);
-                Assert.IsTrue(signature.expiresAt > new System.DateTime(2024, 2, 1, 0, 0, 0, System.DateTimeKind.Utc));
             }
         }
 
