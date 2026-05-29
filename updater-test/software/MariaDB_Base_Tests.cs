@@ -83,6 +83,7 @@ namespace updater_test.software
             {
                 new MariaDB_10_6(false).knownInfo().install64Bit.signature,
                 new MariaDB_10_11(false).knownInfo().install64Bit.signature,
+                new MariaDB_11_4(false).knownInfo().install64Bit.signature,
             };
 
             foreach (var signature in signatures)
@@ -95,7 +96,6 @@ namespace updater_test.software
 
             signatures = new List<Signature>
             {
-                new MariaDB_11_4(false).knownInfo().install64Bit.signature,
                 new MariaDB_11_8(false).knownInfo().install64Bit.signature
             };
 
