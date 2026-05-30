@@ -77,8 +77,8 @@ namespace updater.software
                     "/S /norestart"),
                 new InstallInfoExe(
                     "https://download.teamviewer.com/download/TeamViewer_Setup_x64.exe",
-                    HashAlgorithm.SHA256,
-                    "6fdcf012632e09a1ea9df6f8175a3122025c4be6f7abf940d72405c189001f9d",
+                    HashAlgorithm.Unknown,
+                    null,
                     signature,
                     "/S /norestart")
                 );

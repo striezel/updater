@@ -6,12 +6,6 @@ improvements may be omitted.)_
 
 ## Next Version
 
-__[changes]__
-
-* Add temporary workaround for expired signature on TeamViewer installers by
-  adding the checksums of the latest known release. (Now obsolete due to
-  signature update.)
-
 __[maintenance]__
 
 * NLog library is updated from 6.1.2 to 6.1.3.
