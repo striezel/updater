@@ -17,6 +17,7 @@ __[maintenance]__
 * Update certificate information for Node.js installer.
 * Update certificate information for Opera installer.
 * Update certificate information for TeamViewer installer.
+* Update certificate information for Transmission installer.
 
 ## Version 2026.05.03.0
 

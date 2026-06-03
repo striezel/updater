@@ -43,7 +43,7 @@ namespace updater.software
         /// <summary>
         /// expiration date for the publisher certificate
         /// </summary>
-        private readonly DateTime certificateExpiration = new(2026, 5, 7, 12, 21, 25, DateTimeKind.Utc);
+        private readonly DateTime certificateExpiration = new(2027, 8, 8, 6, 2, 53, DateTimeKind.Utc);
 
 
         /// <summary>
@@ -65,19 +65,19 @@ namespace updater.software
         {
             var signature = new Signature(publisherX509, certificateExpiration);
             return new AvailableSoftware("Transmission",
-                "4.1.1",
+                "4.1.2",
                 "^Transmission [0-9]+\\.[0-9]+(\\.[0-9]+)? \\([0-9a-f]+\\)$",
                 "^Transmission [0-9]+\\.[0-9]+(\\.[0-9]+)? \\([0-9a-f]+\\) \\(x64\\)$",
                 new InstallInfoMsi(
-                    "https://github.com/transmission/transmission/releases/download/4.1.1/transmission-4.1.1-x86.msi",
+                    "https://github.com/transmission/transmission/releases/download/4.1.2/transmission-4.1.2-x86.msi",
                     HashAlgorithm.SHA256,
-                    "ac43a305da0cd41d91b87c0e698a7c691a403ac9f5553faff687cdd3622da7dc",
+                    "eeafc800a804da5d2bfba7418fdd6d3f18cc403d9090369cc5400b803f87070c",
                     signature,
                     "/qn /norestart"),
                 new InstallInfoMsi(
-                    "https://github.com/transmission/transmission/releases/download/4.1.1/transmission-4.1.1-x64.msi",
+                    "https://github.com/transmission/transmission/releases/download/4.1.2/transmission-4.1.2-x64.msi",
                     HashAlgorithm.SHA256,
-                    "f3d2c0164adb38086710ed6c3297ef9f9c8d7d674bab898f9d71c3ecfdd0d4e6",
+                    "f36fd9c245f3c298597ac238b319c86f00eacfd1984881aa8eca3a0943f53008",
                     signature,
                     "/qn /norestart")
                     );
