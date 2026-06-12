@@ -55,22 +55,18 @@ namespace updater.software
         /// details about the software.</returns>
         public override AvailableSoftware knownInfo()
         {
+            var installer = new InstallInfoExe(
+                "https://dl.librewolf.net/librewolf/151.0.4-1/librewolf-151.0.4-1-windows-x86_64-setup.exe",
+                HashAlgorithm.SHA256,
+                "4af7d5a2208045657ec7ed3766836c92a911cf676c48f75d2c2842dcef9cdc06",
+                Signature.None,
+                "/S");
             return new AvailableSoftware("LibreWolf",
-                "146.0.1-1",
+                "151.0.4-1",
                 "^LibreWolf$",
                 "^LibreWolf$",
-                new InstallInfoExe(
-                    "https://gitlab.com/api/v4/projects/44042130/packages/generic/librewolf/146.0.1-1/librewolf-146.0.1-1-windows-i686-setup.exe",
-                    HashAlgorithm.SHA256,
-                    "8b26232a18ed482137dd9ec73ea77b547754446febbd54ebd0f53a02174e271e",
-                    Signature.None,
-                    "/S"),
-                new InstallInfoExe(
-                    "https://gitlab.com/api/v4/projects/44042130/packages/generic/librewolf/146.0.1-1/librewolf-146.0.1-1-windows-x86_64-setup.exe",
-                    HashAlgorithm.SHA256,
-                    "8efed3b18f47f285ef400e760bf3693bcf028df548a8e8cd72bcf7dab2c444c0",
-                    Signature.None,
-                    "/S")
+                installer,
+                installer
                 );
         }
 
@@ -104,7 +100,7 @@ namespace updater.software
         /// Returns 0.0.0-0, if an error occurred.</returns>
         private static ShrinkingDashedQuartet determineNewestRelease()
         {
-            string url = "https://gitlab.com/api/v4/projects/44042130/releases/";
+            string url = "https://codeberg.org/api/v1/repos/librewolf/bsys6/releases";
             var handler = new HttpClientHandler()
             {
                 AllowAutoRedirect = false
@@ -147,13 +143,13 @@ namespace updater.software
             if (knownVersion > newerVersion)
                 return known;
 
-            // Checksums are available under an URL like https://gitlab.com/api/v4/projects/44042130/packages/generic/librewolf/119.0-7/sha256sums.txt.
+            // Checksums are available under an URL like https://dl.librewolf.net/librewolf/151.0.4-1/librewolf-151.0.4-1-windows-x86_64-setup.exe.sha256sum.
             var client = HttpClientProvider.Provide();
             string full_version = newerVersion.full();
             string response;
             try
             {
-                var task = client.GetStringAsync("https://gitlab.com/api/v4/projects/44042130/packages/generic/librewolf/" + full_version + "/sha256sums.txt");
+                var task = client.GetStringAsync("https://dl.librewolf.net/librewolf/" + full_version + "/librewolf-" + full_version + "-windows-x86_64-setup.exe.sha256sum");
                 task.Wait();
                 response = task.Result;
             }
@@ -163,20 +159,9 @@ namespace updater.software
                 return null;
             }
 
-            // Find checksums.
-            // The 32-bit installer checksum is listed in a line like
-            // "068650cc45da848ac31500e0525063de00068f5a09bebc59d1f36d34e5a8851a  librewolf-119.0-6-windows-i686-setup.exe".
-            var regEx = new Regex("[0-9a-f]{64}  librewolf\\-" + Regex.Escape(full_version) + "\\-windows\\-i686\\-setup.exe");
-            Match match = regEx.Match(response);
-            if (!match.Success)
-                return null;
-            known.install32Bit.checksum = match.Value[..64];
-            known.install32Bit.downloadUrl = known.install32Bit.downloadUrl.Replace(known.newestVersion, full_version);
-
-            // The 64-bit installer checksum is listed in a line like
-            // "b9a241ead1c8ce53785087081a2b2b69af0222515cb99fb3a38b6cefd9fff812  librewolf-119.0-6-windows-x86_64-setup.exe"
-            regEx = new Regex("[0-9a-f]{64}  librewolf\\-" + Regex.Escape(full_version) + "\\-windows\\-x86_64\\-setup.exe");
-            match = regEx.Match(response);
+            // Find checksum.
+            var regEx = new Regex("[0-9a-f]{64}");
+            var match = regEx.Match(response);
             if (!match.Success)
                 return null;
             known.install64Bit.checksum = match.Value[..64];
