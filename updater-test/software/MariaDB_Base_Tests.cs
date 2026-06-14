@@ -84,7 +84,8 @@ namespace updater_test.software
                 new MariaDB_10_6(false).knownInfo().install64Bit.signature,
                 new MariaDB_10_11(false).knownInfo().install64Bit.signature,
                 new MariaDB_11_4(false).knownInfo().install64Bit.signature,
-                new MariaDB_11_8(false).knownInfo().install64Bit.signature
+                new MariaDB_11_8(false).knownInfo().install64Bit.signature,
+                new MariaDB_12_3(false).knownInfo().install64Bit.signature
             };
 
             foreach (var signature in signatures)
@@ -110,6 +111,7 @@ namespace updater_test.software
             var mdb_10_11 = new MariaDB_10_11(false);
             var mdb_11_4 = new MariaDB_11_4(false);
             var mdb_11_8 = new MariaDB_11_8(false);
+            var mdb_12_3 = new MariaDB_12_3(false);
 
             Assert.IsTrue(mdb_10_3.EndOfLife() < mdb_10_4.EndOfLife());
             Assert.IsTrue(mdb_10_4.EndOfLife() < mdb_10_5.EndOfLife());
@@ -122,6 +124,8 @@ namespace updater_test.software
             // end of life before the older MariaDB 11.4, but after MariaDB 10.11.
             Assert.IsTrue(mdb_10_11.EndOfLife() < mdb_11_8.EndOfLife());
             Assert.IsTrue(mdb_11_8.EndOfLife() < mdb_11_4.EndOfLife());
+
+            Assert.IsTrue(mdb_11_8.EndOfLife() < mdb_12_3.EndOfLife());
         }
     }
 }

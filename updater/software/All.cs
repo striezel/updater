@@ -107,6 +107,7 @@ namespace updater.software
             result.Add(new MariaDB_10_11(autoGetNewer));
             result.Add(new MariaDB_11_4(autoGetNewer));
             result.Add(new MariaDB_11_8(autoGetNewer));
+            result.Add(new MariaDB_12_3(autoGetNewer));
             result.Add(new Mumble(autoGetNewer));
             result.Add(new NodeJS(autoGetNewer));
             result.Add(new NotepadPlusPlus(autoGetNewer));
