@@ -10,6 +10,10 @@ __[new features]__
 
 * Update support for MariaDB 12.3 is added.
 
+__[changes]__
+
+* Adjust search for newer versions of LibreWolf.
+
 __[maintenance]__
 
 * NLog library is updated from 6.1.2 to 6.1.3.
