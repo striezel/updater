@@ -12,6 +12,7 @@ __[new features]__
 
 __[changes]__
 
+* Adjust search for newer versions of Inkscape.
 * Adjust search for newer versions of LibreWolf.
 
 __[maintenance]__

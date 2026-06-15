@@ -187,11 +187,12 @@ namespace updater.software
             }
 
             // Search for URL part like '<a href="/gallery/item/33463/inkscape-1.2_2022-05-15_dc2aedaf03-x64_5iRsplS.msi">'
-            //    or without bogus like '<a href="/gallery/item/37366/inkscape-1.2.2_2022-12-09_732a01da63-x64.msi">'.
+            //    or without bogus like '<a href="/gallery/item/37366/inkscape-1.2.2_2022-12-09_732a01da63-x64.msi">',
+            //                  or like '<a href="/gallery/item/59504/inkscape-1.4.4_2026-05-05_dcaf3e7-x64.signed_xMx7DJV.msi">'.
             const string arch = "x64";
             string dateAndHash;
             {
-                var reUrl = new Regex("<a href=\"([a-zA-Z0-9\\/]+)/inkscape\\-" + Regex.Escape(newVersion) + "(_2[0-9]{3}\\-[0-9]{2}\\-[0-9]{2}_[0-9a-f]+)\\-" + arch + "(_[a-zA-Z0-9]+)?\\.msi\">");
+                var reUrl = new Regex("<a href=\"([a-zA-Z0-9\\/]+)/inkscape\\-" + Regex.Escape(newVersion) + "(_2[0-9]{3}\\-[0-9]{2}\\-[0-9]{2}_[0-9a-f]+)\\-" + arch + "(_[a-zA-Z0-9]+|\\.signed_[a-zA-Z0-9]+)?\\.msi\">");
                 Match matchUrl = reUrl.Match(htmlCode);
                 if (matchUrl.Success)
                 {
@@ -215,16 +216,18 @@ namespace updater.software
             {
                 // Signature files are given in HTML elements like
                 // <a href="https://media.inkscape.org/media/resources/sigs/inkscape-1.2_2022-05-15_dc2aedaf03-x64.msi_p22hkKC.sha256"> or
-                // <a href="https://media.inkscape.org/media/resources/sigs/inkscape-1.2.2_2022-12-09_732a01da63-x64.msi.sha256"> (no bogus).
+                // <a href="https://media.inkscape.org/media/resources/sigs/inkscape-1.2.2_2022-12-09_732a01da63-x64.msi.sha256"> (no bogus), or
+                // <a href="https://media.inkscape.org/media/resources/sigs/inkscape-1.4.4_2026-05-05_dcaf3e7-x64.signed.msi_PujJ1ID.sha256">
                 {
                     var reUrl = new Regex("<a href=\"https://media\\.inkscape\\.org/media/resources/sigs/inkscape\\-"
-                        + Regex.Escape(newVersion + dateAndHash) + "\\-" + arch + "\\.msi(_[a-zA-Z0-9]+)?\\.sha256\">");
+                        + Regex.Escape(newVersion + dateAndHash) + "\\-" + arch + "(\\.signed)\\.msi(_[a-zA-Z0-9]+)?\\.sha256\">");
                     Match matchUrl = reUrl.Match(htmlCode);
                     if (!matchUrl.Success)
                         return null;
-                    string bogus = matchUrl.Groups[1].Success ? matchUrl.Groups[1].Value : "";
+                    string signed = matchUrl.Groups[1].Success ? matchUrl.Groups[1].Value : "";
+                    string bogus = matchUrl.Groups[2].Success ? matchUrl.Groups[2].Value : "";
                     string signatureUrl = "https://media.inkscape.org/media/resources/sigs/inkscape-"
-                        + newVersion + dateAndHash + "-" + arch + ".msi" + bogus + ".sha256";
+                        + newVersion + dateAndHash + "-" + arch + signed + ".msi" + bogus + ".sha256";
 
                     htmlCode = null;
                     try
@@ -240,7 +243,7 @@ namespace updater.software
                     }
                 }
 
-                var reHash = new Regex("[0-9a-f]{64} [ \\*]inkscape\\-" + Regex.Escape(newVersion + dateAndHash) + "\\-" + arch + "\\.msi");
+                var reHash = new Regex("[0-9a-f]{64} [ \\*]inkscape\\-" + Regex.Escape(newVersion + dateAndHash) + "\\-" + arch + "(\\.signed)?\\.msi");
                 Match matchHash = reHash.Match(htmlCode);
                 if (!matchHash.Success)
                     return null;
