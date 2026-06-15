@@ -68,13 +68,13 @@ namespace updater.software
             }
 
             var info = new InstallInfoMsi(
-                "https://inkscape.org/gallery/item/58917/inkscape-1.4.3.msi",
+                "https://media.inkscape.org/dl/resources/file/inkscape-1.4.4_2026-05-05_dcaf3e7-x64.signed_xMx7DJV.msi",
                 HashAlgorithm.SHA256,
-                "d80842f349bec6505129e48a56495c6f337884693e5a18e505dbbc5d7afc2266",
+                "2fa033e95113ae83d6430b2479e7e63e4266d0632a5b03f99ee3db9360e3b8b8",
                 Signature.None,
                 "/qn /norestart");
             return new AvailableSoftware("Inkscape",
-                "1.4.3",
+                "1.4.4",
                 "^Inkscape( [0-9]\\.[0-9]+(\\.[0-9]+)?)?$",
                 "^Inkscape( [0-9]\\.[0-9]+(\\.[0-9]+)?)?$",
                 info,
@@ -384,6 +384,7 @@ namespace updater.software
                     "{4E9A1766-6BA4-4015-BA8D-05A268638587}", // 1.4.0 MSI (x64)
                     "{00512908-13E3-4B23-9EC7-7EB30E0A904E}", // 1.4.2 MSI (x64)
                     "{C653D4A8-392F-476F-A1B5-C64F217938D7}", // 1.4.3 MSI (x64)
+                    "{15D8477C-2591-49DF-B5E9-A69E1CDE95AD}", // 1.4.4 MSI (x64)
                 ];
                 foreach (var id in guids)
                 {
