@@ -866,8 +866,8 @@ The required version of the .NET Framework is bumped from 4.0 Client Profile to
 
 __[changes]__
 
-* Integrity checks for downloads of Inkspace will now use SHA-256 instead of MD5
-  checksums, because Inkspace provides those starting with version 1.0.
+* Integrity checks for downloads of Inkscape will now use SHA-256 instead of MD5
+  checksums, because Inkscape provides those starting with version 1.0.
 
 __[maintenance]__
 
