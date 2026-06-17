@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2023, 2024, 2025  Dirk Stolle
+    Copyright (C) 2023, 2024, 2025, 2026  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -56,13 +56,13 @@ namespace updater.software
         public override AvailableSoftware knownInfo()
         {
             var installer = new InstallInfoExe(
-                "https://dl.librewolf.net/librewolf/151.0.4-1/librewolf-151.0.4-1-windows-x86_64-setup.exe",
+                "https://dl.librewolf.net/librewolf/152.0-1/librewolf-152.0-1-windows-x86_64-setup.exe",
                 HashAlgorithm.SHA256,
-                "4af7d5a2208045657ec7ed3766836c92a911cf676c48f75d2c2842dcef9cdc06",
+                "e6728ea0edbdd8cc2c5c194d18d7feaf1bd1ab187c26599905270160031d57f5",
                 Signature.None,
                 "/S");
             return new AvailableSoftware("LibreWolf",
-                "151.0.4-1",
+                "152.0-1",
                 "^LibreWolf$",
                 "^LibreWolf$",
                 installer,
