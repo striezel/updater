@@ -56,19 +56,19 @@ namespace updater.software
         public override AvailableSoftware knownInfo()
         {
             return new AvailableSoftware("Graphviz",
-                "15.0.0",
+                "15.1.0",
                 "^Graphviz$",
                 "^Graphviz$",
                 new InstallInfoExe(
-                    "https://gitlab.com/api/v4/projects/4207231/packages/generic/graphviz-releases/15.0.0/windows_10_cmake_Release_graphviz-install-15.0.0-win32.exe",
+                    "https://gitlab.com/api/v4/projects/4207231/packages/generic/graphviz-releases/15.1.0/windows_10_cmake_Release_graphviz-install-15.1.0-win32.exe",
                     HashAlgorithm.SHA256,
-                    "ed1d8c2da586921be4249992787ca9070a9c0c26bbfb79cb20233d428e99bd1c",
+                    "3de925b003321ad395f35c65440263256141c8bf09ae4c2ef5f2a8aa2f4edfe6",
                     Signature.None,
                     "/S"),
                 new InstallInfoExe(
-                    "https://gitlab.com/api/v4/projects/4207231/packages/generic/graphviz-releases/15.0.0/windows_10_cmake_Release_graphviz-install-15.0.0-win64.exe",
+                    "https://gitlab.com/api/v4/projects/4207231/packages/generic/graphviz-releases/15.1.0/windows_10_cmake_Release_graphviz-install-15.1.0-win64.exe",
                     HashAlgorithm.SHA256,
-                    "c7a03df3526c317b6988c5195cc92aaacf5183d63e81f27da501efb87969761f",
+                    "45f20128e6b86e54eb3c2f0ac94d4232d33b9c8a7a81ac171c3d393b8d19bcdc",
                     Signature.None,
                     "/S")
                 );
