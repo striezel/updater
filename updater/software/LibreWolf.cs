@@ -56,13 +56,13 @@ namespace updater.software
         public override AvailableSoftware knownInfo()
         {
             var installer = new InstallInfoExe(
-                "https://dl.librewolf.net/librewolf/152.0-1/librewolf-152.0-1-windows-x86_64-setup.exe",
+                "https://dl.librewolf.net/librewolf/152.0.1-2/librewolf-152.0.1-2-windows-x86_64-setup.exe",
                 HashAlgorithm.SHA256,
-                "e6728ea0edbdd8cc2c5c194d18d7feaf1bd1ab187c26599905270160031d57f5",
+                "b16e8b8b88f3ba1d397e1c5b9323bcc9d691a15c0346e8511fb58963a6c15bb4",
                 Signature.None,
                 "/S");
             return new AvailableSoftware("LibreWolf",
-                "152.0-1",
+                "152.0.1-2",
                 "^LibreWolf$",
                 "^LibreWolf$",
                 installer,
