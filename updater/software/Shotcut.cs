@@ -48,7 +48,7 @@ namespace updater.software
         /// <summary>
         /// expiration date of certificate
         /// </summary>
-        private static readonly DateTime certificateExpiration = new(2026, 5, 6, 23, 59, 59, DateTimeKind.Utc);
+        private static readonly DateTime certificateExpiration = new(2027, 5, 29, 23, 59, 59, DateTimeKind.Utc);
 
 
         /// <summary>
@@ -79,13 +79,13 @@ namespace updater.software
 
             var signature = new Signature(publisherX509, certificateExpiration);
             var info = new InstallInfoExe(
-                "https://github.com/mltframework/shotcut/releases/download/v26.4.30/shotcut-win64-26.4.30.exe",
+                "https://github.com/mltframework/shotcut/releases/download/v26.6.25/shotcut-win64-26.6.25.exe",
                 HashAlgorithm.SHA256,
-                "7a710c3e7ac14bbab91bc2c96c54b5f906e2183f5264f4cbd65411a1a7943b22",
+                "94daad5ffca5d54cdb62b320c19e8fec05e5e5f7572ed287340135c6416843f3",
                 signature,
                 "/VERYSILENT /ALLUSERS /NORESTART");
             return new AvailableSoftware("Shotcut",
-                "26.4.30",
+                "26.6.25",
                 "^Shotcut$",
                 "^Shotcut$",
                 info,

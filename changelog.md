@@ -25,6 +25,7 @@ __[maintenance]__
 * Update certificate information for MariaDB 11.8 installer.
 * Update certificate information for Node.js installer.
 * Update certificate information for Opera installer.
+* Update certificate information for Shotcut installer.
 * Update certificate information for TeamViewer installer.
 * Update certificate information for Transmission installer.
 
