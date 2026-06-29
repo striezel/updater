@@ -39,13 +39,13 @@ namespace updater.software
         /// <summary>
         /// publisher name for signed installers of Git for Windows
         /// </summary>
-        private const string publisherX509 = "CN=Johannes Schindelin, O=Johannes Schindelin, S=Nordrhein-Westfalen, C=DE";
+        private const string publisherX509 = "CN=Johannes Schindelin, O=Johannes Schindelin, L=Bruehl, C=DE";
 
 
         /// <summary>
         /// expiration date for the publisher certificate
         /// </summary>
-        private static readonly DateTime certificateExpiration = new(2026, 5, 5, 23, 59, 59, DateTimeKind.Utc);
+        private static readonly DateTime certificateExpiration = new(2026, 7, 1, 2, 52, 48, DateTimeKind.Utc);
 
 
         /// <summary>
@@ -73,13 +73,13 @@ namespace updater.software
             }
             var signature = new Signature(publisherX509, certificateExpiration);
             var installer = new InstallInfoExe(
-                "https://github.com/git-for-windows/git/releases/download/v2.54.0.windows.1/Git-2.54.0-64-bit.exe",
+                "https://github.com/git-for-windows/git/releases/download/v2.55.0.windows.1/Git-2.55.0-64-bit.exe",
                 HashAlgorithm.SHA256,
-                "2b96e7854f0520f0f6b709c21041d9801b1be44d5e1a0d9fa621b2fbc40f1983",
+                "0c66e4a5875da5a74f9754386de7555ba301503b03bbdcdbafa69dc6464e548d",
                 signature,
                 "/VERYSILENT /NORESTART");
             return new AvailableSoftware("Git",
-                "2.54.0",
+                "2.55.0",
                 "^(Git|Git version [0-9]+\\.[0-9]+\\.[0-9]+(\\.[0-9]+)?)$",
                 "^(Git|Git version [0-9]+\\.[0-9]+\\.[0-9]+(\\.[0-9]+)?)$",
                 installer,
