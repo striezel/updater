@@ -50,6 +50,10 @@ namespace updater_test.utility
         private static string Download(string url)
         {
             string localFile = Path.Combine(Path.GetTempPath(), "test_original.msi");
+            if (File.Exists(localFile))
+            {
+                File.Delete(localFile);
+            }
             using (var client = new HttpClient())
             {
                 try
