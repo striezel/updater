@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2021, 2023, 2024, 2025  Dirk Stolle
+    Copyright (C) 2021, 2023, 2024, 2025, 2026  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -198,13 +198,13 @@ namespace updater.software
             info.install64Bit.downloadUrl = info.install64Bit.downloadUrl.Replace(info.newestVersion, newVersion);
             info.newestVersion = newVersion;
 
-            int idx64 = htmlCode.IndexOf("Client 64-bit");
+            int idx64 = htmlCode.LastIndexOf("data-checksum=\"", match.Index);
             if (idx64 == -1)
             {
                 return null;
             }
 
-            var reHash = new Regex("SHA256\\: ([0-9a-f]{64})");
+            var reHash = new Regex("data-checksum=\"([0-9a-f]{64})\"");
             match = reHash.Match(htmlCode[idx64..]);
             if (!match.Success)
                 return null;
