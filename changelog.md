@@ -14,6 +14,7 @@ __[changes]__
 
 * Adjust search for newer versions of Inkscape.
 * Adjust search for newer versions of LibreWolf.
+* Adjust search for newer versions of Transmission.
 
 __[maintenance]__
 
