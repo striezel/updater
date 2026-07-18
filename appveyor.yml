@@ -1,4 +1,4 @@
-version: 2026.05.03.{build}
+version: 2026.07.18.{build}
 skip_tags: true
 image: Visual Studio 2022
 configuration: Debug
