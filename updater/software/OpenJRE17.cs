@@ -41,13 +41,13 @@ namespace updater.software
         /// <summary>
         /// publisher of signed binaries
         /// </summary>
-        private const string publisherX509 = "CN=\"Eclipse.org Foundation, Inc.\", O=\"Eclipse.org Foundation, Inc.\", L=Ottawa, S=Ontario, C=CA";
+        private const string publisherX509 = "CN=Eclipse Foundation, O=Eclipse Foundation, L=Bruxelles, C=BE";
 
 
         /// <summary>
         /// expiration date for the publisher certificate
         /// </summary>
-        private static readonly DateTime certificateExpiration = new(2026, 7, 16, 23, 59, 59, DateTimeKind.Utc);
+        private static readonly DateTime certificateExpiration = new(2027, 7, 1, 23, 59, 59, DateTimeKind.Utc);
 
 
         /// <summary>
@@ -75,13 +75,13 @@ namespace updater.software
             }
             var signature = new Signature(publisherX509, certificateExpiration);
             var install64Bit = new InstallInfoMsiNoLocation(
-                "https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.19%2B10/OpenJDK17U-jre_x64_windows_hotspot_17.0.19_10.msi",
+                "https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.20%2B8/OpenJDK17U-jre_x64_windows_hotspot_17.0.20_8.msi",
                 HashAlgorithm.SHA256,
-                "ead2ed434bee9493b08ba68c8778775e18fa050bb9a8a2ae72498e4efb75e95f",
+                "45ca8db42fb8bbfbf35b68121cf74e1f9fe36ba982b59d38f0da7802902fbace",
                 signature,
                 "INSTALLLEVEL=3 /qn /norestart");
             return new AvailableSoftware("Eclipse Temurin JRE 17 with Hotspot",
-                "17.0.19.10",
+                "17.0.20.8",
                 "^Eclipse Temurin JRE [a-z]+ Hotspot 17\\.[0-9]+\\.[0-9]+(\\.[0-9]+)?\\+[0-9]+(\\.[0-9]+)? \\(x86\\)$",
                 "^Eclipse Temurin JRE [a-z]+ Hotspot 17\\.[0-9]+\\.[0-9]+(\\.[0-9]+)?\\+[0-9]+(\\.[0-9]+)? \\(x64\\)$",
                 // Use 64-bit installer on 32-bit installations for cross-grading.
