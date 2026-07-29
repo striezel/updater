@@ -11,6 +11,7 @@ __[maintenance]__
 * Update certificate information for Blender LTS installer.
 * Update certificate information for Eclipse Temurin JDK 11 LTS installer.
 * Update certificate information for Eclipse Temurin JRE 11 LTS installer.
+* Update certificate information for Eclipse Temurin JDK 17 LTS installer.
 
 ## Version 2026.07.18.0
 
