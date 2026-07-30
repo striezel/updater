@@ -41,13 +41,13 @@ namespace updater.software
         /// <summary>
         /// publisher of signed binaries
         /// </summary>
-        private const string publisherX509 = "CN=\"Eclipse.org Foundation, Inc.\", O=\"Eclipse.org Foundation, Inc.\", L=Ottawa, S=Ontario, C=CA";
+        private const string publisherX509 = "CN=Eclipse Foundation, O=Eclipse Foundation, L=Bruxelles, C=BE";
 
 
         /// <summary>
         /// expiration date for the publisher certificate
         /// </summary>
-        private static readonly DateTime certificateExpiration = new(2026, 7, 16, 23, 59, 59, DateTimeKind.Utc);
+        private static readonly DateTime certificateExpiration = new(2027, 7, 1, 23, 59, 59, DateTimeKind.Utc);
 
 
         /// <summary>
@@ -69,14 +69,14 @@ namespace updater.software
         {
             var signature = new Signature(publisherX509, certificateExpiration);
             return new AvailableSoftware("Eclipse Temurin JDK 25 with Hotspot",
-                "25.0.3.9",
+                "25.0.4.7",
                 null, // no 32-bit installer
                 "^Eclipse Temurin JDK [a-z]+ Hotspot 25(\\.[0-9]+\\.[0-9]+)?\\+[0-9]+ \\(x64\\)$",
                 null, // no 32-bit installer
                 new InstallInfoMsiNoLocation(
-                    "https://github.com/adoptium/temurin25-binaries/releases/download/jdk-25.0.3%2B9/OpenJDK25U-jdk_x64_windows_hotspot_25.0.3_9.msi",
+                    "https://github.com/adoptium/temurin25-binaries/releases/download/jdk-25.0.4%2B7/OpenJDK25U-jdk_x64_windows_hotspot_25.0.4_7.msi",
                     HashAlgorithm.SHA256,
-                    "4027451a84f7871a07a5e1d07b77914ca5d6bac91ca9f7026c1b1553701a0876",
+                    "6e9d08f214b0b284c2d8a58a980761d976c6588145af9e3c75b22fc2982b6636",
                     signature,
                     "ALLUSERS=1 INSTALLLEVEL=3 /qn /norestart")
                     );
