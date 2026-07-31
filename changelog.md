@@ -9,6 +9,7 @@ improvements may be omitted.)_
 __[maintenance]__
 
 * Update certificate information for Blender LTS installer.
+* Update certificate information for Eclipse Temurin JRE 8 LTS installer.
 * Update certificate information for Eclipse Temurin JDK 11 LTS installer.
 * Update certificate information for Eclipse Temurin JRE 11 LTS installer.
 * Update certificate information for Eclipse Temurin JDK 17 LTS installer.
