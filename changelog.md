@@ -19,6 +19,10 @@ __[maintenance]__
 * Update certificate information for Eclipse Temurin JDK 25 LTS installer.
 * Update certificate information for Eclipse Temurin JRE 25 LTS installer.
 
+__[changes]__
+
+* Adjust search for newer versions of Shotcut.
+
 ## Version 2026.07.18.0
 
 __[new features]__
