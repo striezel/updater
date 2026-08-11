@@ -45,7 +45,7 @@ namespace updater.software
         /// <summary>
         /// expiration date for the publisher certificate
         /// </summary>
-        private static readonly DateTime certificateExpiration = new(2026, 7, 12, 2, 0, 34, DateTimeKind.Utc);
+        private static readonly DateTime certificateExpiration = new(2026, 7, 24, 1, 12, 48, DateTimeKind.Utc);
 
 
         /// <summary>
@@ -73,13 +73,13 @@ namespace updater.software
             }
             var signature = new Signature(publisherX509, certificateExpiration);
             var installer = new InstallInfoExe(
-                "https://github.com/git-for-windows/git/releases/download/v2.55.0.windows.3/Git-2.55.0.3-64-bit.exe",
+                "https://github.com/git-for-windows/git/releases/download/v2.55.0.windows.4/Git-2.55.0.4-64-bit.exe",
                 HashAlgorithm.SHA256,
-                "af12577d0fdff74243a5988197aa49b957d5044edc17004f6ddf0768996f1dca",
+                "0cbc0b34a74b3aff3ace0910328549155a770e228331b19cb1498218a120e7ff",
                 signature,
                 "/VERYSILENT /NORESTART");
             return new AvailableSoftware("Git",
-                "2.55.0.3",
+                "2.55.0.4",
                 "^(Git|Git version [0-9]+\\.[0-9]+\\.[0-9]+(\\.[0-9]+)?)$",
                 "^(Git|Git version [0-9]+\\.[0-9]+\\.[0-9]+(\\.[0-9]+)?)$",
                 installer,
