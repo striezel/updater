@@ -52,15 +52,15 @@ namespace updater.software
         public override AvailableSoftware knownInfo()
         {
             InstallInfo info = new InstallInfoExe(
-                "https://www.doxygen.nl/files/doxygen-1.17.0-setup.exe",
+                "https://www.doxygen.nl/files/doxygen-1.18.0-setup.exe",
                 HashAlgorithm.SHA256,
-                "e9f5a4ddce7d0204ffcd35c0f40c29ddf769dd9b36dee3055f8f71106e04752f",
+                "d322c96ec74547bf6e77e9c538537540ccfd4ada06f1b05df06e713f668cf3c7",
                 Signature.None,
                 "/VERYSILENT /NORESTART"
                 );
 
             return new AvailableSoftware("Doxygen",
-                "1.17.0",
+                "1.18.0",
                 "^doxygen [0-9]+\\.[0-9]+\\.[0-9]+$",
                 "^doxygen [0-9]+\\.[0-9]+\\.[0-9]+$",
                 info,
