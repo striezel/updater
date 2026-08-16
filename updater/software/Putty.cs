@@ -68,21 +68,21 @@ namespace updater.software
         {
             var signature = new Signature(publisherX509, certificateExpiration);
             return new AvailableSoftware("PuTTY",
-                "0.84",
+                "0.85",
                 "^PuTTY release [0-9]\\.[0-9]+$",
                 "^PuTTY release [0-9]\\.[0-9]+ \\(64\\-bit\\)$",
                 // 32-bit installer
                 new InstallInfoMsi(
-                    "https://the.earth.li/~sgtatham/putty/0.84/w32/putty-0.84-installer.msi",
+                    "https://the.earth.li/~sgtatham/putty/0.85/w32/putty-0.85-installer.msi",
                     HashAlgorithm.SHA512,
-                    "e2afc62ab9dc1bad4c473497dca32576e00aba4abd34b7e2b14f9e9afc14dcd363eb8785db2562006e22b4921d564d0fb29d68f5f966ff5d26b023fb9a95ba2e",
+                    "36da9bfd848c2084e719d75be1fc36a5c23f460b21f308207ac759d16c04771493d227cbff793f694c20cc3052aeeecb7c03acbbd46a4d06b6a23138658564a6",
                     signature,
                     "/qn /norestart"),
                 // 64-bit installer
                 new InstallInfoMsi(
-                    "https://the.earth.li/~sgtatham/putty/0.84/w64/putty-64bit-0.84-installer.msi",
+                    "https://the.earth.li/~sgtatham/putty/0.85/w64/putty-64bit-0.85-installer.msi",
                     HashAlgorithm.SHA512,
-                    "edd36fab83d469765cc88546e0a91175fa80884ad79216d1673a907ee4438e5094ba6db828c01d413b6cf6c87f38aa5e65df54565f46de49d294e6cc6a5e85a6",
+                    "1e40310bff2912c05c096c99dc11db7d5480aeee63a7e58d512b43b0633cbf1a0638f2f9ab2d0c7d57c2384121b51eeeb8c57f60f2522f871d445253f86624d5",
                     signature,
                     "/qn /norestart")
                 );
