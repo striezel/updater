@@ -8,6 +8,7 @@ improvements may be omitted.)_
 
 __[maintenance]__
 
+* NLog library is updated from 6.1.4 to 6.2.0.
 * Update certificate information for Blender LTS installer.
 * Update certificate information for Eclipse Temurin JRE 8 LTS installer.
 * Update certificate information for Eclipse Temurin JDK 11 LTS installer.
