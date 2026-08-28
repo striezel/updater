@@ -66,19 +66,19 @@ namespace updater.software
         {
             var signature = new Signature(publisherX509, certificateExpiration);
             return new AvailableSoftware("WinMerge",
-                "2.16.58",
+                "2.16.58.2",
                 "^WinMerge [0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+?$",
                 "^WinMerge ([0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+ )?x64$",
                 new InstallInfoExe(
-                    "https://deac-fra.dl.sourceforge.net/project/winmerge/stable/2.16.58/WinMerge-2.16.58-Setup.exe",
+                    "https://deac-fra.dl.sourceforge.net/project/winmerge/stable/2.16.58.2/WinMerge-2.16.58.2-Setup.exe",
                     HashAlgorithm.SHA256,
-                    "41e7ca58694f64196691304ca24b96e07598ef205053896d06038ca7f1d5f304",
+                    "6bb69e48757307c7b258e381c3578dc0523fe71f677b536cb7eb6be726bbf2b2",
                     signature,
                     "/SP- /VERYSILENT /NORESTART /SUPPRESSMSGBOXES"),
                 new InstallInfoExe(
-                    "https://deac-fra.dl.sourceforge.net/project/winmerge/stable/2.16.58/WinMerge-2.16.58-x64-Setup.exe",
+                    "https://deac-fra.dl.sourceforge.net/project/winmerge/stable/2.16.58.2/WinMerge-2.16.58.2-x64-Setup.exe",
                     HashAlgorithm.SHA256,
-                    "af00357fdbbfef71a31a350974cec98e3cb0548cfa6fd54a3cd3a0cce28f2ab3",
+                    "26f794838bc4e545d7b9f36dc8beeb5a65a12bd4627fa3b4fe87068abef925b0",
                     signature,
                     "/SP- /VERYSILENT /NORESTART /SUPPRESSMSGBOXES")
                 );
