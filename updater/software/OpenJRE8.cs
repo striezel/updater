@@ -66,16 +66,16 @@ namespace updater.software
         public override AvailableSoftware knownInfo()
         {
             var signature = new Signature(publisherX509, certificateExpiration);
-            const string version = "8.0.502.7";
+            const string version = "8.0.504.1";
             return new AvailableSoftware("Eclipse Temurin JRE 8 with Hotspot",
                 version,
                 null, // 32 bit version is handled in separate class
                 "^(Eclipse Temurin|AdoptOpenJDK) JRE [a-z]+ Hotspot 8u[0-9]+\\-b[0-9]+ \\(x64\\)$",
                 null,
                 new InstallInfoMsiNoLocation(
-                    "https://github.com/adoptium/temurin8-binaries/releases/download/jdk8u502-b07/OpenJDK8U-jre_x64_windows_hotspot_8u502b07.msi",
+                    "https://github.com/adoptium/temurin8-binaries/releases/download/jdk8u504-b01/OpenJDK8U-jre_x64_windows_hotspot_8u504b01.msi",
                     HashAlgorithm.SHA256,
-                    "d10ea23f35e10be60775bdff2ea858f4d56fd59e2d7b2c75b61412465fea1fe6",
+                    "087a67240cd659a35dd894ee1201ec1f989e244cbe29500f4fc0f00443850d09",
                     signature,
                     "INSTALLLEVEL=3 /qn /norestart")
                     );
