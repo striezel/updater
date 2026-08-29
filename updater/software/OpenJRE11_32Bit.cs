@@ -112,7 +112,7 @@ namespace updater.software
         public override AvailableSoftware searchForNewer()
         {
             logger.Info("Searching for newer version of Eclipse Temurin 11 JRE (32 bit) ...");
-            logger.Warn("The 32 bit variant of Eclipse Temurin 1 JRE does not get regular updates anymore."
+            logger.Warn("The 32 bit variant of Eclipse Temurin 11 JRE does not get regular updates anymore."
                 + " Consider switching to the 64 bit variant instead.");
             string json;
             using (var client = new HttpClient() { Timeout = TimeSpan.FromSeconds(25) })
