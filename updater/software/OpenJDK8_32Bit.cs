@@ -26,14 +26,15 @@ using updater.software.openjdk_api;
 namespace updater.software
 {
     /// <summary>
-    /// Handles updates of Eclipse Temurin (formerly AdoptOpenJDK) JDK 8 with Hotspot JVM.
+    /// Handles updates of Eclipse Temurin (formerly AdoptOpenJDK) JDK 8 with
+    /// Hotspot JVM, but only for the 32 bit variant.
     /// </summary>
-    public class OpenJDK8 : NoPreUpdateProcessSoftware
+    public class OpenJDK8_32Bit : NoPreUpdateProcessSoftware
     {
         /// <summary>
-        /// NLog.Logger for OpenJDK8 class
+        /// NLog.Logger for OpenJDK8_32Bit class
         /// </summary>
-        private static readonly NLog.Logger logger = NLog.LogManager.GetLogger(typeof(OpenJDK8).FullName);
+        private static readonly NLog.Logger logger = NLog.LogManager.GetLogger(typeof(OpenJDK8_32Bit).FullName);
 
 
         /// <summary>
@@ -53,7 +54,7 @@ namespace updater.software
         /// </summary>
         /// <param name="autoGetNewer">whether to automatically get newer
         /// information about the software when calling the info() method</param>
-        public OpenJDK8(bool autoGetNewer)
+        public OpenJDK8_32Bit(bool autoGetNewer)
             : base(autoGetNewer)
         { }
 
@@ -69,16 +70,15 @@ namespace updater.software
             const string version = "8.0.472.8";
             return new AvailableSoftware("Eclipse Temurin JDK 8 with Hotspot",
                 version,
-                null,
-                "^(Eclipse Temurin JDK [a-z]+ Hotspot 8u[0-9]+\\-b[0-9]+ \\(x64\\)|AdoptOpenJDK JDK [a-z]+ Hotspot 8u[0-9]+\\-b[0-9]+ \\(x64\\))$",
-                null,
+                "^(Eclipse Temurin JDK [a-z]+ Hotspot 8u[0-9]+\\-b[0-9]+ \\(x86\\)|AdoptOpenJDK JDK [a-z]+ Hotspot 8u[0-9]+\\-b[0-9]+ \\(x86\\))$",
+                null, // 64 bit variant is handled separately
                 new InstallInfoMsiNoLocation(
-                    "https://github.com/adoptium/temurin8-binaries/releases/download/jdk8u472-b08/OpenJDK8U-jdk_x64_windows_hotspot_8u472b08.msi",
+                    "https://github.com/adoptium/temurin8-binaries/releases/download/jdk8u472-b08/OpenJDK8U-jdk_x86-32_windows_hotspot_8u472b08.msi",
                     HashAlgorithm.SHA256,
-                    "810c04469e75c2f1cf83091e9dc78497b84e48ad21269291d9b7ff59b5cbb404",
+                    "daff0b3a7892ec99635f54554070ede99c175c157f683bc99c6d9008e81dfe4f",
                     signature,
-                    "INSTALLLEVEL=3 /qn /norestart")
-                );
+                    "INSTALLLEVEL=3 /qn /norestart"),
+                null);
         }
 
 
@@ -88,7 +88,7 @@ namespace updater.software
         /// <returns>Returns a non-empty array of IDs, where at least one entry is unique to the software.</returns>
         public override string[] id()
         {
-            return ["openjdk-8-jdk", "openjdk-8", "openjdk-jdk", "openjdk", "jdk"];
+            return ["openjdk-8-jdk-32bit", "openjdk-8-jdk", "openjdk-8", "openjdk-jdk", "openjdk", "jdk"];
         }
 
 
@@ -112,13 +112,18 @@ namespace updater.software
         public override AvailableSoftware searchForNewer()
         {
             logger.Info("Searching for newer version of Eclipse Temurin 8 JDK...");
+            if (Environment.Is64BitOperatingSystem)
+            {
+                logger.Warn("The 32 bit variant of Eclipse Temurin 8 JDK does not get regular updates anymore."
+                    + " Consider switching to the 64 bit variant instead.");
+            }
             // Just getting the latest release does not work here, because that may also be a release candidate, and we do not want that.
             string json;
             using (var client = new HttpClient() { Timeout = TimeSpan.FromSeconds(25) })
             {
                 try
                 {
-                    var task = client.GetStringAsync("https://api.adoptopenjdk.net/v3/assets/feature_releases/8/ga?heap_size=normal&image_type=jdk&jvm_impl=hotspot&os=windows&page=0&page_size=5&project=jdk&sort_method=DEFAULT&sort_order=DESC&vendor=adoptopenjdk");
+                    var task = client.GetStringAsync("https://api.adoptopenjdk.net/v3/assets/feature_releases/8/ga?heap_size=normal&image_type=jdk&jvm_impl=hotspot&os=windows&page=0&page_size=5&project=jdk&sort_method=DEFAULT&sort_order=DESC&vendor=adoptopenjdk&architecture=x86");
                     task.Wait();
                     json = task.Result;
                 }
@@ -144,7 +149,7 @@ namespace updater.software
 
             // Construct new information.
             var newInfo = knownInfo();
-            bool hasBuild64 = false;
+            bool hasBuild32 = false;
             foreach (var release in releases)
             {
                 if (release.VersionData == null
@@ -169,25 +174,25 @@ namespace updater.software
                         logger.Error("Error: AdoptOpenJDK API response contains incomplete data!");
                         continue;
                     }
-                    if (bin.Architecture == "x64")
+                    if (bin.Architecture == "x32")
                     {
-                        if (!hasBuild64)
+                        if (!hasBuild32)
                         {
-                            newInfo.install64Bit.checksum = bin.Installer.Checksum;
-                            newInfo.install64Bit.downloadUrl = bin.Installer.Link;
-                            hasBuild64 = true;
+                            newInfo.install32Bit.checksum = bin.Installer.Checksum;
+                            newInfo.install32Bit.downloadUrl = bin.Installer.Link;
+                            hasBuild32 = true;
                         }
                     }
 
-                    if (hasBuild64)
+                    if (hasBuild32)
                         return newInfo;
                 }
             }
 
             // Do we have all the data we need?
-            if (!hasBuild64)
+            if (!hasBuild32)
             {
-                logger.Error("The 64-bit build information of Eclipse Temurin 8 JDK was not found!");
+                logger.Error("The 32-bit build information of Eclipse Temurin 8 JDK was not found!");
                 return null;
             }
 

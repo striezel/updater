@@ -51,6 +51,7 @@ namespace updater.software
                 new CMake(autoGetNewer),
                 new Doxygen(autoGetNewer),
                 new OpenJDK8(autoGetNewer),
+                new OpenJDK8_32Bit(autoGetNewer),
                 new OpenJDK11(autoGetNewer),
                 new OpenJDK11_32Bit(autoGetNewer),
                 new OpenJDK17(autoGetNewer),
