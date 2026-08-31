@@ -11,7 +11,11 @@ __[breaking change]__
 * Update support for Inkscape is removed.
   The Inkscape website is often slow to respond, times out or returns errors
   which makes it hard to reliably check for updates or download updates.
-  Therefore, removing Inkscape seems like the best option at the moment.
+  Therefore, removing Inkscape support seems like the best option at the moment.
+
+__[changes]__
+
+* Adjust search for newer versions of Shotcut.
 
 __[maintenance]__
 
@@ -27,10 +31,6 @@ __[maintenance]__
 * Update certificate information for Eclipse Temurin JRE 21 LTS installer.
 * Update certificate information for Eclipse Temurin JDK 25 LTS installer.
 * Update certificate information for Eclipse Temurin JRE 25 LTS installer.
-
-__[changes]__
-
-* Adjust search for newer versions of Shotcut.
 
 ## Version 2026.07.18.0
 
