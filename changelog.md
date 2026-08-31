@@ -6,6 +6,13 @@ improvements may be omitted.)_
 
 ## Next Version
 
+__[breaking change]__
+
+* Update support for Inkscape is removed.
+  The Inkscape website is often slow to respond, times out or returns errors
+  which makes it hard to reliably check for updates or download updates.
+  Therefore, removing Inkscape seems like the best option at the moment.
+
 __[maintenance]__
 
 * NLog library is updated from 6.1.4 to 6.2.0.
