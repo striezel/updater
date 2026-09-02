@@ -316,7 +316,7 @@ namespace updater.software
                 var response = task.Result;
                 if (response.StatusCode != HttpStatusCode.Found)
                     return null;
-                string newLocation = response.Headers.Location?.ToString();
+                string newLocation = (response.Headers.Location?.ToString()) ?? "";
                 response = null;
                 task = null;
                 var reVersion = new Regex("[0-9]+\\.[0-9]+(\\.[0-9]+)?");
