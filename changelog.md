@@ -9,6 +9,7 @@ improvements may be omitted.)_
 __[maintenance]__
 
 * NLog library is updated from 6.2.0 to 6.2.1.
+* Update certificate information for IrfanView installer.
 
 ## Version 2026.08.31.0
 

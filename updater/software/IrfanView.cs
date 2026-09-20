@@ -37,13 +37,13 @@ namespace updater.software
         /// <summary>
         /// publisher name for signed executables of IrfanView
         /// </summary>
-        private const string publisherX509 = "CN=Irfan Skiljan, O=Irfan Skiljan, S=Lower Austria, C=AT";
+        private const string publisherX509 = "CN=Irfan Skiljan, O=Irfan Skiljan, L=Muthmannsdorf, S=Lower Austria, C=AT";
 
 
         /// <summary>
         /// expiration date of certificate
         /// </summary>
-        private static readonly DateTime certificateExpiration = new(2026, 8, 1, 9, 46, 7, DateTimeKind.Utc);
+        private static readonly DateTime certificateExpiration = new(2027, 11, 1, 7, 21, 29, DateTimeKind.Utc);
 
 
         /// <summary>
@@ -64,19 +64,19 @@ namespace updater.software
         {
             var signature = new Signature(publisherX509, certificateExpiration);
             return new AvailableSoftware("IrfanView",
-                "4.75",
+                "4.76",
                 "^(IrfanView [0-9]+\\.[0-9]+ \\(32\\-bit\\)|IrfanView \\(remove only\\))$",
                 "^(IrfanView [0-9]+\\.[0-9]+ \\(64\\-bit\\)|IrfanView 64 \\(remove only\\))$",
                 new InstallInfoExe(
-                    "https://www.irfanview.info/files/iview475_setup.exe",
+                    "https://www.irfanview.info/files/iview476_setup.exe",
                     HashAlgorithm.SHA256,
-                    "e5dc5357bdda7410feb1893fa24a5c14b2ee1c003e4eaf35c24d2cbcc077eb24  ",
+                    "a24777e393397e5488872d9a26ae4567f55c42c924da97694de9d791d6826479   ",
                     signature,
                     "/silent /desktop=1 /group=1 /allusers=1 /assoc=1"),
                 new InstallInfoExe(
-                    "https://www.irfanview.info/files/iview475_x64_setup.exe",
+                    "https://www.irfanview.info/files/iview476_x64_setup.exe",
                     HashAlgorithm.SHA256,
-                    "6b7e36c089194347be1bea5fea08dc97316f2181e40427e7e2867ad7ba3906a0",
+                    "a2fd831e3962222c6ccb9db0d0de301c976a71df49763d82b9d82282480befb1",
                     signature,
                     "/silent /desktop=1 /group=1 /allusers=1 /assoc=1")
                     );
