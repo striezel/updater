@@ -41,7 +41,7 @@ namespace updater.software
         /// <summary>
         /// certificate expiration date
         /// </summary>
-        private static readonly DateTime certificateExpiration = new(2026, 9, 24, 23, 59, 59, DateTimeKind.Utc);
+        private static readonly DateTime certificateExpiration = new(2029, 2, 3, 23, 59, 59, DateTimeKind.Utc);
 
 
         /// <summary>
@@ -95,18 +95,18 @@ namespace updater.software
             var signature = new Signature(publisherX509, certificateExpiration);
 
             return new AvailableSoftware("PDF24 Creator",
-                "11.30.1",
+                "11.31.0",
                 "^PDF24 Creator$",
                 "^PDF24 Creator$", // 64-bit version uses same pattern as 32-bit.
                 new InstallInfoMsi(
-                    "https://download.pdf24.org/pdf24-creator-11.30.1-x86.msi",
+                    "https://download.pdf24.org/pdf24-creator-11.31.0-x86.msi",
                     HashAlgorithm.SHA256,
-                    "B4059C2581663374816E27CAEF3F5C3117A1027AA87B763E4CF223CD2B578AD2",
+                    "75EECCD5F9A7336A086D148158C9672945050E7113A4275211BD021AB8935B28",
                     signature, getOptions() + " /qn /norestart"),
                 new InstallInfoMsi(
-                    "https://download.pdf24.org/pdf24-creator-11.30.1-x64.msi",
+                    "https://download.pdf24.org/pdf24-creator-11.31.0-x64.msi",
                     HashAlgorithm.SHA256,
-                    "E6CC23B3D7213DC7D74A90E92C1E7EAC06D4FD90EB93F1F154270AA764136F0F",
+                    "82C80F3B1ED1577824EFBEAAD8BC33821D0C9F8A48D096C41EE636C71B9F68CC",
                     signature, getOptions() + " /qn /norestart")
                 );
         }
