@@ -6,6 +6,11 @@ improvements may be omitted.)_
 
 ## Next Version
 
+__[changes]__
+
+* Add workaround for mirror issue with LibreOffice 26.8.1 to search for newer
+  versions of LibreOffice.
+
 __[maintenance]__
 
 * Update certificate information for PDF24 Creator installer.

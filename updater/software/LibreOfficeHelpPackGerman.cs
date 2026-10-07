@@ -131,6 +131,16 @@ namespace updater.software
             // Link is something like <a href="5.3.0/">5.3.0/</a>, no fourth digit.
             var reVersion = new Regex("<a href=\"[0-9]+\\.[0-9]+\\.[0-9]+/\">[0-9]+\\.[0-9]+\\.[0-9]+/</a>");
             Match matchVersion = reVersion.Match(htmlCode);
+
+            // Add temporary workaround for mirror issue with release 26.8.1
+            // by falling back to 26.8.0. See the note about the issue on the
+            // blog: https://blog.documentfoundation.org/blog/2026/10/02/libreoffice-26-8-1/
+            if (matchVersion.Success && matchVersion.Value.Contains("\"26.8.1/"))
+            {
+                // Match the next version after 26.8.1.
+                matchVersion = reVersion.Match(htmlCode, matchVersion.Index + 12);
+            }
+
             if (!matchVersion.Success)
                 return null;
             string newVersion = matchVersion.Value.Replace("<a href=\"", "");
