@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017  Dirk Stolle
+    Copyright (C) 2017, 2026  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -25,6 +25,7 @@ namespace updater_test.detection
     /// unit tests for detection.DetectorRegistry
     /// </summary>
     [TestClass]
+    [OSCondition(OperatingSystems.Windows)]
     public class DetectorRegistry_Tests
     {
         [TestMethod]
@@ -36,7 +37,7 @@ namespace updater_test.detection
             for (int i = 0; i < detected.Count; i++)
             {
                 Assert.IsNotNull(detected[i]);
-            } //for
+            }
         }
     }
 }
