@@ -13,6 +13,7 @@ __[changes]__
 
 __[maintenance]__
 
+* Update certificate information for Mumble installer.
 * Update certificate information for PDF24 Creator installer.
 
 ## Version 2026.09.20.0
