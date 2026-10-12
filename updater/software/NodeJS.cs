@@ -53,7 +53,7 @@ namespace updater.software
         /// <summary>
         /// expiration date of certificate
         /// </summary>
-        private static readonly DateTime certificateExpiration = new(2026, 5, 15, 22, 41, 19, DateTimeKind.Utc);
+        private static readonly DateTime certificateExpiration = new(2026, 9, 9, 2, 32, 34, DateTimeKind.Utc);
 
 
         /// <summary>
@@ -63,8 +63,42 @@ namespace updater.software
         /// details about the software.</returns>
         public override AvailableSoftware knownInfo()
         {
-            const string version = "22.23.3";
+            if (!Environment.Is64BitOperatingSystem)
+            {
+                logger.Warn("Node.js does not provide 32-bit binaries from version 24.0.0 onwards.");
+                logger.Warn("Please consider switching to an 64-bit operating system to get newer Node.js updates.");
+                return Last32BitBuild();
+            }
+
+            const string version = "24.21.0";
             var signature = new Signature(publisherX509, certificateExpiration);
+            return new AvailableSoftware(
+                "Node.js",
+                version,
+                null, // no 32-bit installer
+                "^Node\\.js$",
+                null, // no 32-bit installer
+                new InstallInfoMsi(
+                    "https://nodejs.org/download/release/v" + version + "/node-v" + version + "-x64.msi",
+                    HashAlgorithm.SHA256,
+                    "bb0eaee134f9357f22aea915ee793343e627aefc1e66488164bac6915bce2cac",
+                    signature,
+                    "/qn /norestart")
+                    );
+        }
+
+
+        /// <summary>
+        /// Gets the information about the latest Node.js version that still has 32-bit builds.
+        /// </summary>
+        /// <returns>Returns an AvailableSoftware instance with the known
+        /// details about the software.</returns>
+        public static AvailableSoftware Last32BitBuild()
+        {
+            const string version = "22.23.3";
+            var signature = new Signature(
+                "CN=OpenJS Foundation, O=OpenJS Foundation, L=San Francisco, S=California, C=US",
+                new(2026, 5, 15, 22, 41, 19, DateTimeKind.Utc));
             return new AvailableSoftware(
                 "Node.js",
                 version,
@@ -121,7 +155,7 @@ namespace updater.software
             try
             {
                 // Note: Change this URL as soon as the next version enters LTS state.
-                var task = client.GetStringAsync("https://nodejs.org/dist/latest-v22.x/");
+                var task = client.GetStringAsync("https://nodejs.org/dist/latest-v24.x/");
                 task.Wait();
                 htmlCode = task.Result;
             }
@@ -151,12 +185,7 @@ namespace updater.software
                 return null;
             }
 
-            // Line looks like "61d549ed39fc264df9978f824042f3f4cac90a866e933c5088384d5dedf283fe  node-v14.16.0-x86.msi".
             string escapedVersion = Regex.Escape(newVersion);
-            var reChecksum32 = new Regex("[0-9a-f]{64}  node\\-v" + escapedVersion + "\\-x86\\.msi");
-            Match match32 = reChecksum32.Match(htmlCode);
-            if (!match32.Success)
-                return null;
             // Line looks like "d9243c9d02f5e4801b8b3ab848f45ce0da2882b5fff448191548ca49af434066  node-v14.16.0-x64.msi".
             var reChecksum64 = new Regex("[0-9a-f]{64}  node\\-v" + escapedVersion + "\\-x64\\.msi");
             Match match64 = reChecksum64.Match(htmlCode);
@@ -171,8 +200,6 @@ namespace updater.software
             // replace version number - both as newest version and in URL for download
             string oldVersion = newInfo.newestVersion;
             newInfo.newestVersion = newVersion;
-            newInfo.install32Bit.downloadUrl = newInfo.install32Bit.downloadUrl.Replace(oldVersion, newVersion);
-            newInfo.install32Bit.checksum = match32.Value[..64];
             newInfo.install64Bit.downloadUrl = newInfo.install64Bit.downloadUrl.Replace(oldVersion, newVersion);
             newInfo.install64Bit.checksum = match64.Value[..64];
             return newInfo;

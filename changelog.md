@@ -6,6 +6,15 @@ improvements may be omitted.)_
 
 ## Next Version
 
+__[breaking change]__
+
+* Node.js updates will now track Node.js 24.x, because Node.js 24.x is the
+  current active Long Term Support (LTS) release line.
+  
+  Furthermore, Node.js 24 no longer provides 32-bit binaries for its releases.
+  So if you still use a 32-bit version of Node.js 22, consider switching to the
+  64-bit version to get newer updates.
+
 __[maintenance]__
 
 * Update certificate information for LibreOffice installers.
