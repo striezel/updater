@@ -8,6 +8,7 @@ improvements may be omitted.)_
 
 __[maintenance]__
 
+* Update certificate information for LibreOffice installers.
 * Update certificate information for Mumble installer.
 * Update certificate information for PDF24 Creator installer.
 
