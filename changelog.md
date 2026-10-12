@@ -13,7 +13,9 @@ __[breaking change]__
   
   Furthermore, Node.js 24 no longer provides 32-bit binaries for its releases.
   So if you still use a 32-bit version of Node.js 22, consider switching to the
-  64-bit version to get newer updates.
+  64-bit version to get newer updates. If it's running on a 64-bit operating
+  system, the updater will now upgrade 32-bit installations of Node.js to 64-bit
+  installations.
 
 __[maintenance]__
 

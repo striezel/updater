@@ -72,19 +72,19 @@ namespace updater.software
 
             const string version = "24.21.0";
             var signature = new Signature(publisherX509, certificateExpiration);
+            var installer = new InstallInfoMsi(
+                "https://nodejs.org/download/release/v" + version + "/node-v" + version + "-x64.msi",
+                HashAlgorithm.SHA256,
+                "bb0eaee134f9357f22aea915ee793343e627aefc1e66488164bac6915bce2cac",
+                signature,
+                "/qn /norestart");
             return new AvailableSoftware(
                 "Node.js",
                 version,
-                null, // no 32-bit installer
                 "^Node\\.js$",
-                null, // no 32-bit installer
-                new InstallInfoMsi(
-                    "https://nodejs.org/download/release/v" + version + "/node-v" + version + "-x64.msi",
-                    HashAlgorithm.SHA256,
-                    "bb0eaee134f9357f22aea915ee793343e627aefc1e66488164bac6915bce2cac",
-                    signature,
-                    "/qn /norestart")
-                    );
+                "^Node\\.js$",
+                installer, // cross-grade 32-bit installations to 64-bit
+                installer);
         }
 
 
