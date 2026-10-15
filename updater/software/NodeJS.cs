@@ -53,7 +53,7 @@ namespace updater.software
         /// <summary>
         /// expiration date of certificate
         /// </summary>
-        private static readonly DateTime certificateExpiration = new(2026, 9, 9, 2, 32, 34, DateTimeKind.Utc);
+        private static readonly DateTime certificateExpiration = new(2026, 10, 15, 22, 0, 57, DateTimeKind.Utc);
 
 
         /// <summary>
@@ -70,12 +70,12 @@ namespace updater.software
                 return Last32BitBuild();
             }
 
-            const string version = "24.21.0";
+            const string version = "24.22.0";
             var signature = new Signature(publisherX509, certificateExpiration);
             var installer = new InstallInfoMsi(
                 "https://nodejs.org/download/release/v" + version + "/node-v" + version + "-x64.msi",
                 HashAlgorithm.SHA256,
-                "bb0eaee134f9357f22aea915ee793343e627aefc1e66488164bac6915bce2cac",
+                "97ebad47ad35da4b59182a5fbe9fad2b1a1836f1042b4833ff5b4b9571175088",
                 signature,
                 "/qn /norestart");
             return new AvailableSoftware(
