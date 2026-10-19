@@ -58,6 +58,7 @@ namespace updater_test.software
             Assert.IsTrue(signature.HasExpired());
         }
 
+
         /// <summary>
         /// Checks whether MariaDB 10.5 release still uses the old certificate data.
         /// </summary>
@@ -74,14 +75,28 @@ namespace updater_test.software
 
 
         /// <summary>
-        /// Checks whether MariaDB 10.5 and newer releases use the current certificate data.
+        /// Checks whether MariaDB 10.6 release still uses the correct certificate data.
+        /// </summary>
+        [TestMethod]
+        public void Test_certificate_10_6()
+        {
+            var mdb_10_6 = new MariaDB_10_6(false);
+            var signature = mdb_10_6.knownInfo().install64Bit.signature;
+            Assert.IsTrue(signature.ContainsData());
+            Assert.Contains("MariaDB USA, Inc.", signature.publisher);
+            Assert.Contains("Milpitas", signature.publisher);
+            Assert.IsFalse(signature.HasExpired());
+        }
+
+
+        /// <summary>
+        /// Checks whether MariaDB 10.11 and newer releases use the current certificate data.
         /// </summary>
         [TestMethod]
         public void Test_certificates_newer()
         {
             var signatures = new List<Signature>
             {
-                new MariaDB_10_6(false).knownInfo().install64Bit.signature,
                 new MariaDB_10_11(false).knownInfo().install64Bit.signature,
                 new MariaDB_11_4(false).knownInfo().install64Bit.signature,
                 new MariaDB_11_8(false).knownInfo().install64Bit.signature,
@@ -93,7 +108,7 @@ namespace updater_test.software
                 Assert.IsTrue(signature.ContainsData());
                 Assert.Contains("MariaDB USA, Inc.", signature.publisher);
                 Assert.Contains("Milpitas", signature.publisher);
-                Assert.IsTrue(signature.expiresAt > new System.DateTime(2026, 5, 21, 0, 0, 0, System.DateTimeKind.Utc));
+                Assert.IsGreaterThan(new System.DateTime(2026, 5, 21, 0, 0, 0, System.DateTimeKind.Utc), signature.expiresAt);
             }
         }
 

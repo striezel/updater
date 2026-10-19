@@ -36,7 +36,7 @@ application.
 * MariaDB 10.3 _(reached end of support on 25th May 2023)_
 * MariaDB 10.4 _(reached end of support on 18th June 2024)_
 * MariaDB 10.5 _(reached end of support on 24th June 2025)_
-* MariaDB 10.6
+* MariaDB 10.6 _(reached end of support on 6th July 2026)_
 * MariaDB 10.11
 * MariaDB 11.4
 * MariaDB 11.8
