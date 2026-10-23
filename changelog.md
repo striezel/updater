@@ -6,6 +6,10 @@ improvements may be omitted.)_
 
 ## Next Version
 
+__[changes]__
+
+* Adjust search for newer versions of KeePassXC.
+
 __[maintenance]__
 
 * NLog library is updated from 6.2.1 to 6.2.2.

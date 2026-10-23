@@ -65,15 +65,15 @@ namespace updater.software
         {
             var signature = new Signature(publisherX509, certificateExpiration);
             return new AvailableSoftware("KeePassXC",
-                "2.7.12",
+                "2.8.0",
                 null,
                 "^KeePassXC$",
                 // There is no 32-bit installer.
                 null,
                 new InstallInfoMsi(
-                    "https://github.com/keepassxreboot/keepassxc/releases/download/2.7.12/KeePassXC-2.7.12-Win64.msi",
+                    "https://github.com/keepassxreboot/keepassxc/releases/download/2.8.0/KeePassXC-2.8.0-x64.msi",
                     HashAlgorithm.SHA256,
-                    "feee096c1d5d0d7bb7b36b18174818f7bac889be7668c550ff0e5ef9206ea9a5",
+                    "4f105af5ba780428718c8be5614cf95deceed5cb3b474a9bd624c5df81cec6e5",
                     signature,
                     "/qn /norestart"));
         }
@@ -123,14 +123,14 @@ namespace updater.software
                 return null;
             }
 
-            var regExp = new Regex("/KeePassXC-([0-9]+\\.[0-9]+\\.[0-9]+)-Win64.msi");
+            var regExp = new Regex("/KeePassXC-([0-9]+\\.[0-9]+\\.[0-9]+)-x64.msi");
             Match match = regExp.Match(htmlCode);
             if (!match.Success)
                 return null;
             string version = match.Groups[1].Value;
             try
             {
-                var task = client.GetStringAsync("https://github.com/keepassxreboot/keepassxc/releases/download/" + version + "/KeePassXC-" + version + "-Win64.msi.DIGEST");
+                var task = client.GetStringAsync("https://github.com/keepassxreboot/keepassxc/releases/download/" + version + "/KeePassXC-" + version + "-x64.msi.DIGEST");
                 task.Wait();
                 htmlCode = task.Result;
             }
@@ -140,7 +140,7 @@ namespace updater.software
                 return null;
             }
             // extract hash
-            var hash = new Regex("[0-9a-fA-F]{64}  KeePassXC-" + Regex.Escape(version) + "-Win64.msi");
+            var hash = new Regex("[0-9a-fA-F]{64}  KeePassXC-" + Regex.Escape(version) + "-x64.msi");
             Match matchHash = hash.Match(htmlCode);
             if (!matchHash.Success)
                 return null;
