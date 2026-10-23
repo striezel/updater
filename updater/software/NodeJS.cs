@@ -95,7 +95,7 @@ namespace updater.software
         /// details about the software.</returns>
         public static AvailableSoftware Last32BitBuild()
         {
-            const string version = "22.23.3";
+            const string version = "22.23.4";
             var signature = new Signature(
                 "CN=OpenJS Foundation, O=OpenJS Foundation, L=San Francisco, S=California, C=US",
                 new(2026, 5, 15, 22, 41, 19, DateTimeKind.Utc));
@@ -107,13 +107,13 @@ namespace updater.software
                 new InstallInfoMsi(
                     "https://nodejs.org/download/release/v" + version + "/node-v" + version + "-x86.msi",
                     HashAlgorithm.SHA256,
-                    "c71bbe31029c99d6f9cffa4841056ecc49dcd1fb09ef739b7e85dc7b207242b4",
+                    "c2a76d76eda52b7930b51fd490264c2fe34a094c04ae721bb71893f3fd6cd1d0",
                     signature,
                     "/qn /norestart"),
                 new InstallInfoMsi(
                     "https://nodejs.org/download/release/v" + version + "/node-v" + version + "-x64.msi",
                     HashAlgorithm.SHA256,
-                    "1c0efc8449987e7da5d184786a0a96da83ffa11d334421201e5c09b93017cb8d",
+                    "ca9303d3a12e8bec6de829fcb7812fc776930e0ce5c030328a24984ef928427e",
                     signature,
                     "/qn /norestart")
                     );
