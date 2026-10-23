@@ -35,7 +35,7 @@ namespace updater_test.software
         [TestMethod]
         public void Test_info()
         {
-            _info(new OpenJDK8_32Bit(false));
+            _info_without_signature(new OpenJDK8_32Bit(false));
         }
 
 

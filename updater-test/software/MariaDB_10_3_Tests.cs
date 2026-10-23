@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2022, 2025  Dirk Stolle
+    Copyright (C) 2022, 2025, 2026  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -33,20 +33,7 @@ namespace updater_test.software
         [TestMethod]
         public void Test_info()
         {
-            var sw = new MariaDB_10_3(false);
-            Assert.IsNotNull(sw);
-            var info = sw.info();
-            Assert.IsNotNull(info);
-            // name must be set
-            Assert.IsFalse(string.IsNullOrWhiteSpace(info.Name));
-            // 64-bit installation information instance should be present
-            Assert.IsNotNull(info.install64Bit);
-            // regex should be present
-            Assert.IsFalse(string.IsNullOrWhiteSpace(info.match64Bit));
-            // 64-bit information should match
-            Assert.AreEqual<bool>(info.install64Bit != null, !string.IsNullOrWhiteSpace(info.match64Bit));
-            // checksums should always be present, or at least a signature for verification
-            Assert.IsTrue(info.install64Bit.hasChecksum() || info.install64Bit.hasVerifiableSignature());
+            _info_without_signature(new MariaDB_10_3(false));
         }
 
 

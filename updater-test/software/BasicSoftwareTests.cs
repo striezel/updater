@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017, 2018, 2021  Dirk Stolle
+    Copyright (C) 2017, 2018, 2021, 2026  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -17,6 +17,7 @@
 */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using updater.data;
 using updater.software;
 using updater.versions;
 
@@ -27,10 +28,15 @@ namespace updater_test.software
     /// </summary>
     public class BasicSoftwareTests
     {
-        protected static void _info(ISoftware sw)
+        protected static void _info_without_signature(ISoftware sw)
         {
             Assert.IsNotNull(sw);
             var info = sw.info();
+            info_checks(info);
+        }
+
+        private static void info_checks(AvailableSoftware info)
+        {
             Assert.IsNotNull(info);
             // name must be set
             Assert.IsFalse(string.IsNullOrWhiteSpace(info.Name));
@@ -39,14 +45,21 @@ namespace updater_test.software
             // at least one regex should be present
             Assert.IsTrue(!string.IsNullOrWhiteSpace(info.match32Bit) || !string.IsNullOrWhiteSpace(info.match64Bit));
             // 32-bit information should match
-            Assert.AreEqual<bool>(info.install32Bit != null, !string.IsNullOrWhiteSpace(info.match32Bit));
+            Assert.AreEqual(info.install32Bit != null, !string.IsNullOrWhiteSpace(info.match32Bit));
             // 64-bit information should match
-            Assert.AreEqual<bool>(info.install64Bit != null, !string.IsNullOrWhiteSpace(info.match64Bit));
+            Assert.AreEqual(info.install64Bit != null, !string.IsNullOrWhiteSpace(info.match64Bit));
             // checksums should always be present, or at least a signature for verification
             if (null != info.install32Bit)
                 Assert.IsTrue(info.install32Bit.hasChecksum() || info.install32Bit.hasVerifiableSignature());
             if (null != info.install64Bit)
                 Assert.IsTrue(info.install64Bit.hasChecksum() || info.install64Bit.hasVerifiableSignature());
+        }
+
+        protected static void _info(ISoftware sw)
+        {
+            Assert.IsNotNull(sw);
+            var info = sw.info();
+            info_checks(info);
             // check whether signature data has expired
             // Expiration is not an error though, because some people publish signed binaries that expire the day after the release.
             if (null != info.install32Bit && info.install32Bit.signature.ContainsData() && info.install32Bit.signature.HasExpired())
