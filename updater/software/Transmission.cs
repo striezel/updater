@@ -65,19 +65,19 @@ namespace updater.software
         {
             var signature = new Signature(publisherX509, certificateExpiration);
             return new AvailableSoftware("Transmission",
-                "4.1.3",
+                "4.1.4",
                 "^Transmission [0-9]+\\.[0-9]+(\\.[0-9]+)? \\([0-9a-f]+\\)$",
                 "^Transmission [0-9]+\\.[0-9]+(\\.[0-9]+)? \\([0-9a-f]+\\) \\(x64\\)$",
                 new InstallInfoMsi(
-                    "https://github.com/transmission/transmission/releases/download/4.1.3/transmission-4.1.3-x86.msi",
+                    "https://github.com/transmission/transmission/releases/download/4.1.4/transmission-4.1.4-x86.msi",
                     HashAlgorithm.SHA256,
-                    "74485b7b5d494cf98549e9165fd8f64a8640f2990aeee5edb43fae529dc0ec29",
+                    "6721e8c8bc33e59e34bf6d2fd8abd608a2af826a4c96d4f02cf86542d582fbed",
                     signature,
                     "/qn /norestart"),
                 new InstallInfoMsi(
-                    "https://github.com/transmission/transmission/releases/download/4.1.3/transmission-4.1.3-x64.msi",
+                    "https://github.com/transmission/transmission/releases/download/4.1.4/transmission-4.1.4-x64.msi",
                     HashAlgorithm.SHA256,
-                    "c8ea492d8f46fadac26e0c05b244cabba556201d5fe348dfcf1cf036621741f8",
+                    "cf51e5772f39a3ead3c8f763b689399b9b4b8b016a4c0ca68ab5d6c634be2e1c",
                     signature,
                     "/qn /norestart")
                     );
