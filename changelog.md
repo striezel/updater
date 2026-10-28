@@ -4,6 +4,13 @@ _(Note: This changelog focuses on the major changes between the different
 versions. Therefore, it may not contain all changes. Especially smaller fixes or
 improvements may be omitted.)_
 
+## Next Version
+
+__[changes]__
+
+* Node.js updates will now track Node.js 26.x, because Node.js 26.x has moved
+  into active Long Term Support (LTS).
+
 ## Version 2026.10.23.0
 
 __[changes]__

@@ -53,7 +53,7 @@ namespace updater.software
         /// <summary>
         /// expiration date of certificate
         /// </summary>
-        private static readonly DateTime certificateExpiration = new(2026, 10, 21, 21, 46, 31, DateTimeKind.Utc);
+        private static readonly DateTime certificateExpiration = new(2026, 10, 29, 21, 24, 44, DateTimeKind.Utc);
 
 
         /// <summary>
@@ -70,12 +70,12 @@ namespace updater.software
                 return Last32BitBuild();
             }
 
-            const string version = "24.22.1";
+            const string version = "26.13.0";
             var signature = new Signature(publisherX509, certificateExpiration);
             var installer = new InstallInfoMsi(
                 "https://nodejs.org/download/release/v" + version + "/node-v" + version + "-x64.msi",
                 HashAlgorithm.SHA256,
-                "3bda4baf1ee709b33cf920dd633106ddb23951e322bff9c03ec9f64ab8981b01",
+                "0e5ee99c7cbf922887f04af268e3665990748945336a44956f47cc0df695b6df",
                 signature,
                 "/qn /norestart");
             return new AvailableSoftware(
@@ -155,7 +155,7 @@ namespace updater.software
             try
             {
                 // Note: Change this URL as soon as the next version enters LTS state.
-                var task = client.GetStringAsync("https://nodejs.org/dist/latest-v24.x/");
+                var task = client.GetStringAsync("https://nodejs.org/dist/latest-v26.x/");
                 task.Wait();
                 htmlCode = task.Result;
             }
