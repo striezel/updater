@@ -17,9 +17,9 @@ currently be updated with this application is available
 
 ## Prerequisites
 
-To run the `updater` program you need the .NET 8 runtime.
-The current .NET 8 runtime can be downloaded from
-<https://dotnet.microsoft.com/en-us/download/dotnet/8.0/runtime>.
+To run the `updater` program you need the .NET 10 runtime.
+The current .NET 10 runtime can be downloaded from
+<https://dotnet.microsoft.com/en-us/download/dotnet/10.0/runtime>.
 
 ## Usage
 

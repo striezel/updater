@@ -1,12 +1,12 @@
 # Use the official .NET image, based on Debian.
 # See https://hub.docker.com/_/microsoft-dotnet-sdk/ for more info.
-image: mcr.microsoft.com/dotnet/sdk:8.0
+image: mcr.microsoft.com/dotnet/sdk:10.0
 
 build:
   stage: build
   before_script:
     - apt-get update && apt-get -y install git
-  script: 
+  script:
     # Restore any NuGet packages.
     - dotnet restore ./updater/updater.csproj
     - dotnet restore ./updater-test/updater-test.csproj

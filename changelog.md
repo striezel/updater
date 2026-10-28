@@ -6,6 +6,16 @@ improvements may be omitted.)_
 
 ## Next Version
 
+__[breaking change]__
+
+The required version of the .NET is bumped from .NET 8 to .NET 10.
+If your system does not have .NET 10 yet, then you can download the .NET 10
+runtime at <https://dotnet.microsoft.com/en-us/download/dotnet/10.0/runtime>.
+Reason for that change is that Microsoft will end support for .NET 8 on
+10th November 2026. From that date onwards, .NET 8 will not receive any
+maintenance or security fixes, so this application is switching to .NET 10, the
+current Long Term Support release of .NET.
+
 __[changes]__
 
 * Node.js updates will now track Node.js 26.x, because Node.js 26.x has moved

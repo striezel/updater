@@ -50,9 +50,9 @@ Name: "uk"; MessagesFile: "compiler:Languages\Ukrainian.isl"
 
 [Files]
 ;main executable
-Source: "..\updater\bin\Release\net8.0-windows7.0\updater.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\updater\bin\Release\net8.0-windows7.0\updater.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\updater\bin\Release\net8.0-windows7.0\updater.runtimeconfig.json"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\updater\bin\Release\net10.0-windows10.0.17763.0\updater.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\updater\bin\Release\net10.0-windows10.0.17763.0\updater.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\updater\bin\Release\net10.0-windows10.0.17763.0\updater.runtimeconfig.json"; DestDir: "{app}"; Flags: ignoreversion
 ; NLog main assembly (logging)
 Source: "{#GetEnv('USERPROFILE')}\.nuget\packages\nlog\6.2.2\lib\netstandard2.1\NLog.dll"; DestDir: "{app}"; Flags: ignoreversion
 ; GPL 3 license text

@@ -30,7 +30,7 @@ jobs:
     - name: Install .NET
       uses: actions/setup-dotnet@v6
       with:
-        dotnet-version: 8.0.x
+        dotnet-version: 10.0.x
 
     - name: Add MSBuild to PATH
       uses: microsoft/setup-msbuild@v3
@@ -89,9 +89,9 @@ jobs:
         for /f %%i IN ('git describe --always') do set "VERSION=%%i"
         echo Version is %VERSION%.
         md updater-%VERSION%
-        copy updater\bin\Release\net8.0-windows7.0\updater.exe updater-%VERSION%
-        copy updater\bin\Release\net8.0-windows7.0\updater.dll updater-%VERSION%
-        copy updater\bin\Release\net8.0-windows7.0\updater.runtimeconfig.json updater-%VERSION%
+        copy updater\bin\Release\net10.0-windows10.0.17763.0\updater.exe updater-%VERSION%
+        copy updater\bin\Release\net10.0-windows10.0.17763.0\updater.dll updater-%VERSION%
+        copy updater\bin\Release\net10.0-windows10.0.17763.0\updater.runtimeconfig.json updater-%VERSION%
         copy "%USERPROFILE%\.nuget\packages\nlog\6.2.2\lib\netstandard2.1\NLog.dll" updater-%VERSION%
         copy LICENSE updater-%VERSION%
         md updater-%VERSION%\documentation
