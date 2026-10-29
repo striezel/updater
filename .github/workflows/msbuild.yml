@@ -16,8 +16,7 @@ jobs:
     strategy:
       matrix:
         os:
-          - windows-2022
-          - windows-2025
+          - windows-2025-vs2026
     runs-on: ${{ matrix.os }}
 
     steps:
@@ -45,18 +44,9 @@ jobs:
       # See https://docs.microsoft.com/visualstudio/msbuild/msbuild-command-line-reference
       run: msbuild /m /p:Configuration=${{env.BUILD_CONFIGURATION}} ${{env.SOLUTION_FILE_PATH}}
 
-    # InnoSetup 6.4.0 is already installed on the Windows 2022 image. See
-    # <https://github.com/actions/runner-images/blob/main/images/windows/Windows2022-Readme.md>
+    # InnoSetup 6.7.1 is already installed on the Windows 2025 VS 2026 image. See
+    # <https://github.com/actions/runner-images/blob/main/images/windows/Windows2025-VS2026-Readme.md>
     # for pre-installed software.
-    # However, it's not present on the Windows Server 2025 image, so it has to
-    # be installed there. See
-    # <https://github.com/actions/runner-images/blob/main/images/windows/Windows2025-Readme.md>
-    # for a (shorter) list of pre-installed software.
-
-    - name: Install InnoSetup
-      run: |
-        choco install innosetup
-      if: matrix.os != 'windows-2022'
 
     - name: Create installer
       working-directory: ${{env.GITHUB_WORKSPACE}}
@@ -66,14 +56,6 @@ jobs:
         for /f %%i IN ('git describe --always') do set "VERSION=%%i"
         echo Version is %VERSION%.
         move output\updater_setup.exe output\updater_setup_%VERSION%.exe
-
-    - name: Rename installer to avoid duplicate name (Windows 2025 only)
-      working-directory: ${{env.GITHUB_WORKSPACE}}
-      shell: cmd
-      run: |
-        for /f %%i IN ('git describe --always') do set "VERSION=%%i"
-        move output\updater_setup_%VERSION%.exe output\updater_setup_%VERSION%_windows-2025.exe
-      if: matrix.os == 'windows-2025'
 
     - name: Upload artifact
       uses: actions/upload-artifact@v7
@@ -100,14 +82,6 @@ jobs:
         copy faq.md updater-%VERSION%\documentation
         copy supported_applications.md updater-%VERSION%\documentation
         "C:\Program Files\7-Zip\7z.exe" a -r updater_%VERSION%.zip updater-%VERSION%
-
-    - name: Move ZIP file to avoid duplicate name (Windows 2025 only)
-      working-directory: ${{env.GITHUB_WORKSPACE}}
-      shell: cmd
-      run: |
-        for /f %%i IN ('git describe --always') do set "VERSION=%%i"
-        move updater_%VERSION%.zip updater_%VERSION%_windows_2025.zip
-      if: matrix.os == 'windows-2025'
 
     - name: Upload zipped updater
       uses: actions/upload-artifact@v7
