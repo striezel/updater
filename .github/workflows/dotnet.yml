@@ -22,10 +22,10 @@ jobs:
       - name: Build
         run: |
           cd $GITHUB_WORKSPACE && pwd && ls -lah
-          dotnet restore ./updater/updater.csproj
-          dotnet restore ./updater-test/updater-test.csproj
-          dotnet build ./updater/updater.csproj
-          dotnet build ./updater-test/updater-test.csproj
+          dotnet restore -p:EnableWindowsTargeting=true ./updater/updater.csproj
+          dotnet restore -p:EnableWindowsTargeting=true ./updater-test/updater-test.csproj
+          dotnet build -p:EnableWindowsTargeting=true ./updater/updater.csproj
+          dotnet build -p:EnableWindowsTargeting=true ./updater-test/updater-test.csproj
           # Unfortunately, WinForms applications cannot be built on Linux.
           # So ./moz-checksum-generator/moz-checksum-generator.csproj has to be
           # excluded from the build.
