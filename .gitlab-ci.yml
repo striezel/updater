@@ -8,10 +8,10 @@ build:
     - apt-get update && apt-get -y install git
   script:
     # Restore any NuGet packages.
-    - dotnet restore ./updater/updater.csproj
-    - dotnet restore ./updater-test/updater-test.csproj
+    - dotnet restore -p:EnableWindowsTargeting=true ./updater/updater.csproj
+    - dotnet restore -p:EnableWindowsTargeting=true ./updater-test/updater-test.csproj
     # Build updater and the test project.
-    - dotnet build ./updater/updater.csproj
-    - dotnet build ./updater-test/updater-test.csproj
+    - dotnet build -p:EnableWindowsTargeting=true ./updater/updater.csproj
+    - dotnet build -p:EnableWindowsTargeting=true ./updater-test/updater-test.csproj
     # Note: The moz-checksum-generator project cannot be built here, because it
     # uses Windows Forms and those need a Windows OS to build properly.
