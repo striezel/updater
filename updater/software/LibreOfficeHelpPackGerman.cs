@@ -65,19 +65,19 @@ namespace updater.software
         {
             var signature = new Signature(publisherX509, certificateExpiration);
             return new AvailableSoftware("LibreOffice Help Pack German",
-                "26.8.1.1",
+                "26.8.2.2",
                 "^LibreOffice [0-9]+\\.[0-9]+ Help Pack( \\(German\\)|: German)$",
                 "^LibreOffice [0-9]+\\.[0-9]+ Help Pack( \\(German\\)|: German)$",
                 new InstallInfoLibO(
-                    "https://download.documentfoundation.org/libreoffice/stable/26.8.1/win/x86/LibreOffice_26.8.1_Win_x86_helppack_de.msi",
+                    "https://download.documentfoundation.org/libreoffice/stable/26.8.2/win/x86/LibreOffice_26.8.2_Win_x86_helppack_de.msi",
                     HashAlgorithm.SHA256,
-                    "880b2143c208072866bf333168d18470c3a8dba74e184bf06c2555b677353291",
+                    "3c3a9632461462341e58591e8cddf23944caf106523398542bfae818f4b4c7bd",
                     signature,
                     "/qn /norestart"),
                 new InstallInfoLibO(
-                    "https://download.documentfoundation.org/libreoffice/stable/26.8.1/win/x86_64/LibreOffice_26.8.1_Win_x86-64_helppack_de.msi",
+                    "https://download.documentfoundation.org/libreoffice/stable/26.8.2/win/x86_64/LibreOffice_26.8.2_Win_x86-64_helppack_de.msi",
                     HashAlgorithm.SHA256,
-                    "d90c9f486c4146ddde5da6c72d3b358bef2b85ebb52451f59564a1842eaf2e1a",
+                    "536307a6fa5d96a5f0cdd735e0beb99ec70e9e6b802aea13aac3960462607a3b",
                     signature,
                     "/qn /norestart")
                     );
