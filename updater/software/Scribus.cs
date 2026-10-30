@@ -54,19 +54,19 @@ namespace updater.software
         public override AvailableSoftware knownInfo()
         {
             return new AvailableSoftware("Scribus",
-                "1.6.6",
+                "1.6.7",
                 "^Scribus [0-9]+\\.[0-9]+\\.[0-9]+$",
                 "^Scribus [0-9]+\\.[0-9]+\\.[0-9]+ \\(64bit\\)$",
                 new InstallInfoExe(
-                    "https://netcologne.dl.sourceforge.net/project/scribus/scribus/1.6.6/scribus-1.6.6-windows.exe",
+                    "https://netcologne.dl.sourceforge.net/project/scribus/scribus/1.6.7/scribus-1.6.7-windows.exe",
                     HashAlgorithm.SHA256,
-                    "b63cdc1c5ac39240d5c320b636854901316cdbd1f5d4c9f557c8866ffad6cbfc",
+                    "c3c9fb1d30d774c13c5df640d8a6b9634c6322a751caac050480557af598586d",
                     Signature.None,
                     "/S"),
                 new InstallInfoExe(
-                    "https://netcologne.dl.sourceforge.net/project/scribus/scribus/1.6.6/scribus-1.6.6-windows-x64.exe",
+                    "https://netcologne.dl.sourceforge.net/project/scribus/scribus/1.6.7/scribus-1.6.7-windows-x64.exe",
                     HashAlgorithm.SHA256,
-                    "4c7313da22b8daa025dab0a2d57e82e8b1827c8a46a02db1d4e78b6037b40264",
+                    "e16c0d5efbbc03e48bba0ef9add204b6a4cd65e5854bab9574af81a6b7026d5c",
                     Signature.None,
                     "/S")
                 );
