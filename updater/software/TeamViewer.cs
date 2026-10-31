@@ -134,8 +134,9 @@ namespace updater.software
                 }
             }
 
-            // HTML text will contain version in a paragraph like "Current version: <span data-dl-version-label>15.42.6</span>".
-            var reVersion = new Regex("Current version: <span data\\-dl\\-version\\-label>([0-9]+\\.[0-9]+\\.[0-9])</span>");
+            // HTML text will contain version in a paragraph like "Current version: <span data-dl-version-label>15.42.6</span>"
+            // or "<span class="text-desktop-body-sml leading-line-height-desktop-body-default text-black">Current version<!-- -->: <!-- -->15.83.3</span>".
+            var reVersion = new Regex("Current version<!\\-\\-\\s+\\-\\->:\\s*<!\\-\\-\\s+\\-\\->([0-9]+\\.[0-9]+\\.[0-9])</span>");
             var matchVersion = reVersion.Match(html);
             if (!matchVersion.Success)
                 return null;
@@ -145,7 +146,7 @@ namespace updater.software
 
             // construct new information
             var newInfo = knownInfo();
-            if (currentVersion == newInfo.newestVersion)
+            if (new versions.Triple(currentVersion).CompareTo(new versions.Triple(newInfo.newestVersion)) <= 0)
             {
                 return newInfo;
             }

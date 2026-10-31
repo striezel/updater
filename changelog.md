@@ -20,6 +20,7 @@ __[changes]__
 
 * Node.js updates will now track Node.js 26.x, because Node.js 26.x has moved
   into active Long Term Support (LTS).
+* Adjust search for newer versions of TeamViewer.
 
 ## Version 2026.10.23.0
 
