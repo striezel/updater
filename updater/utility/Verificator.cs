@@ -1,6 +1,6 @@
 ﻿/*
     This file is part of the updater command line interface.
-    Copyright (C) 2017, 2019  Dirk Stolle
+    Copyright (C) 2017, 2019, 2026  Dirk Stolle
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -41,7 +41,9 @@ namespace updater.utility
         public static bool verifySignature(string fileName, string publisher)
         {
             if (!trust.WinTrust.VerifyEmbeddedSignature(fileName))
+            {
                 return false;
+            }
 
             return verifiyPublisher(fileName, publisher);
         }
@@ -59,7 +61,13 @@ namespace updater.utility
             string sub;
             try
             {
+                // According to <https://github.com/dotnet/runtime/discussions/108740>
+                // the recommended way to get the Authenticode signer still
+                // involves X509Certificate2 and the supression of the warning
+                // about obsoletion.
+#pragma warning disable SYSLIB0057
                 var cert = new X509Certificate2(fileName);
+#pragma warning restore SYSLIB0057
                 var certChain = new X509Chain();
                 bool chainValid = certChain.Build(cert);
                 if (!chainValid)
@@ -77,7 +85,9 @@ namespace updater.utility
                     } // foreach
                 }
                 if (!cert.Verify())
+                {
                     return false;
+                }
                 sub = cert.Subject;
             }
             catch
