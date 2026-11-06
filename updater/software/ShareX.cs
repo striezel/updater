@@ -52,13 +52,13 @@ namespace updater.software
         public override AvailableSoftware knownInfo()
         {
             var installer = new InstallInfoExe(
-                "https://github.com/ShareX/ShareX/releases/download/v21.0.0/ShareX-21.0.0-setup-x64.exe",
+                "https://github.com/ShareX/ShareX/releases/download/v22.2.0/ShareX-22.2.0-setup-x64.exe",
                 HashAlgorithm.SHA256,
-                "F213ACA04D30E0E2DC7C43BC79ACAE8622BE291CEE6014A90962ED87EA5F10CC",
+                "CD16166D6DF2B45AF30BD80E8580DEC52F4450D41A1FD79DC441A1B5EA639822",
                 Signature.None,
                 "/SP- /VERYSILENT /NORESTART /UPDATE /NORUN");
             return new AvailableSoftware("ShareX",
-                "21.0.0",
+                "22.2.0",
                 "^ShareX$",
                 "^ShareX$",
                 installer,
