@@ -67,8 +67,8 @@ namespace updater.software
         {
             var signature = new Signature(publisherX509, certificateExpiration);
             // Both version and tag are usually the same, except for major releases like 8.0.
-            const string version = "8.9.8.1";
-            const string tag = "8.9.8.1";
+            const string version = "8.9.9";
+            const string tag = "8.9.9";
             return new AvailableSoftware("Notepad++",
                 version,
                 "^Notepad\\+\\+ \\(32\\-bit x86\\)$|^Notepad\\+\\+$",
@@ -76,13 +76,13 @@ namespace updater.software
                 new InstallInfoExe(
                     "https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v" + tag + "/npp." + version + ".Installer.exe",
                     HashAlgorithm.SHA256,
-                    "ee848aa54df153921678b343857a83861da81ce0c9dbb217b6f55a8780e60f5e",
+                    "747b73c3c92d63eaaee8160fe58ae84620d14820169498741a7c40e0651e5300",
                     signature,
                     "/S"),
                 new InstallInfoExe(
                     "https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v" + tag + "/npp." + version + ".Installer.x64.exe",
                     HashAlgorithm.SHA256,
-                    "26f3bcced788fadbac4e7e577b430ea2ce6060cf3bcad993ef4612ecd7d743da",
+                    "a18cfb33d616c8eecda0059604d40bdb9d607fbc4ede857c8be6e41986464367",
                     signature,
                     "/S")
                 );
