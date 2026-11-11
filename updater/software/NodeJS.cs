@@ -53,7 +53,7 @@ namespace updater.software
         /// <summary>
         /// expiration date of certificate
         /// </summary>
-        private static readonly DateTime certificateExpiration = new(2026, 10, 29, 21, 24, 44, DateTimeKind.Utc);
+        private static readonly DateTime certificateExpiration = new(2026, 11, 12, 21, 6, 54, DateTimeKind.Utc);
 
 
         /// <summary>
@@ -70,12 +70,12 @@ namespace updater.software
                 return Last32BitBuild();
             }
 
-            const string version = "26.13.0";
+            const string version = "26.13.1";
             var signature = new Signature(publisherX509, certificateExpiration);
             var installer = new InstallInfoMsi(
                 "https://nodejs.org/download/release/v" + version + "/node-v" + version + "-x64.msi",
                 HashAlgorithm.SHA256,
-                "0e5ee99c7cbf922887f04af268e3665990748945336a44956f47cc0df695b6df",
+                "0398ced8446e119478c724d1aa37c5afd6aa1a76fceab12787eb9714c5ed8b45",
                 signature,
                 "/qn /norestart");
             return new AvailableSoftware(
@@ -95,10 +95,10 @@ namespace updater.software
         /// details about the software.</returns>
         public static AvailableSoftware Last32BitBuild()
         {
-            const string version = "22.23.4";
+            const string version = "22.23.5";
             var signature = new Signature(
                 "CN=OpenJS Foundation, O=OpenJS Foundation, L=San Francisco, S=California, C=US",
-                new(2026, 5, 15, 22, 41, 19, DateTimeKind.Utc));
+                new(2026, 11, 12, 21, 06, 54, DateTimeKind.Utc));
             return new AvailableSoftware(
                 "Node.js",
                 version,
@@ -107,13 +107,13 @@ namespace updater.software
                 new InstallInfoMsi(
                     "https://nodejs.org/download/release/v" + version + "/node-v" + version + "-x86.msi",
                     HashAlgorithm.SHA256,
-                    "c2a76d76eda52b7930b51fd490264c2fe34a094c04ae721bb71893f3fd6cd1d0",
+                    "0118588f943cd620c66a688edca3d33231feeae2d0ae391cff0ef00e44d522e2",
                     signature,
                     "/qn /norestart"),
                 new InstallInfoMsi(
                     "https://nodejs.org/download/release/v" + version + "/node-v" + version + "-x64.msi",
                     HashAlgorithm.SHA256,
-                    "ca9303d3a12e8bec6de829fcb7812fc776930e0ce5c030328a24984ef928427e",
+                    "963a110509eca7e0d6cc009095ccb4117e26d59287876a056b79293ae3fef238",
                     signature,
                     "/qn /norestart")
                     );
